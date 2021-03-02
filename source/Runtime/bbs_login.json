@@ -1,0 +1,23 @@
+{
+	"captions":{
+		"form":"DeWeb : Delphi-Web solution",
+		"username":"用户名",
+		"password":"密码",
+		"usernameplaceholder":"请输入用户名",
+		"passwordplaceholder":"请输入密码",
+		"rememberme":"记住密码",
+		"login":"登录",
+		"invalid":"用户名或密码错误！请重新输入"
+	},
+	"logo":"media/images/delphibbs.png",
+	"rememberdays":30,
+	"successhref":"/bbs.dw",
+	"remember":true,
+	"database":{
+		"connectionstring":"Database=deweb.db;DriverID=SQLite",
+		"tablename":"bbs_user",
+		"usernamefield":"username",
+		"passwordfield":"password",
+		"saltfield":"salt"
+	}
+}

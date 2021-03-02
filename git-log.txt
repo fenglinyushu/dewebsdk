@@ -1,0 +1,818 @@
+commit 6f9f4205b542b52a6c66ff6b4721a1d20c5abfc2
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Sat Feb 20 17:19:49 2021 +0800
+
+    精简了
+
+commit 2d86ef2aaa3c1b8c37f751aa0cbd49bde8c46e4f
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Sat Feb 20 17:12:54 2021 +0800
+
+    精简了
+
+commit c06c0748d91cf52db49daea238c474a5298eb7d1
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Fri Feb 19 22:47:36 2021 +0800
+
+    推进了bbs的建设！重新编译了dewebserver1041.exe
+
+commit 1fbdd63ac28d1c7894a6cb3112141a9a185b549a
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Fri Feb 19 17:43:50 2021 +0800
+
+    增加一个函数
+    //计算TimeLine的高度(参考)
+    function dwGetTimeLineHeight(APageControl:TPageControl):Integer;
+
+commit 579b35dae6d150a98e1fbcfc44c4a7a5734c55d0
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Thu Feb 18 22:59:01 2021 +0800
+
+    增加了Form界面不够高时的自动滚动条
+
+commit fad3f437b05852852797722e378a7d506ae12cac
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Thu Feb 18 22:44:57 2021 +0800
+
+    PageControl做时间线时，增加了对TMemo的支持
+    
+    Signed-off-by: fenglinyushu <leebillows@gmail.com>
+
+commit 358230e5d170a5190b5b9ead53487dc4c8a92ffb
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Thu Feb 18 22:08:26 2021 +0800
+
+    1 TChart的横坐标支持Label了；2 消除了TButton的一个bug
+
+commit fd1de74407aea1d67c17b5bd5c054b674e3d2768
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Tue Feb 16 22:01:38 2021 +0800
+
+    dwVcls的dpr默认为64位编译， 改成32位了！！
+
+commit ad1a9ab5e503ce3759ded0998d186aba110bb57e
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Mon Feb 15 23:27:52 2021 +0800
+
+    开发论坛！
+
+commit cc9143e68906c535b3ab4386bd22cf8fdba3df82
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Mon Feb 15 22:07:24 2021 +0800
+
+    增加了Button的样式！https://delphibbs.com/button.dw
+    折腾了一圈64位，暂时无结果。还是先32位吧
+
+commit c46071573248a6c3806ae736384da3dbe37f9ccb
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Fri Feb 12 21:25:02 2021 +0800
+
+    支持验证码生成和验证！ 直接放一个Image，设置HelpKeyword='captcha'即可
+
+commit 81f081e1f1729bf467ba2c1acb54af4bacae3013
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Tue Feb 9 22:28:04 2021 +0800
+
+    完善了TSpeedButton的各种类型
+
+commit 0c0e163dd3f0615ebe3bbc7e76f420a3726953ee
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Tue Feb 9 16:18:29 2021 +0800
+
+    更新了开发文档
+
+commit c3c27a6861bf17d06ade9c162645f25eca9830a7
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Mon Feb 8 15:59:45 2021 +0800
+
+    增加了对MP3播放的支持！
+
+commit c16cf7c695f249fe89d6e83cc2f4741ed8611b10
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Mon Feb 8 11:02:49 2021 +0800
+
+    完成了DeWeb第2个通用化模块：主控模块。 手机/电脑自适应。通过修改配置文件即可实现进入不同模块
+
+commit e347055dea0f3e1e231c23565d8706731d6d002e
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Sun Feb 7 12:43:46 2021 +0800
+
+    消除了一个小bug
+
+commit d52e4e23c3959af2403d00f2f163a6fe204c6176
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Sun Feb 7 12:02:52 2021 +0800
+
+    实现了TEdit的圆角半径、边框宽度、边框样式和边框颜色 等设置
+
+commit 549e7768744a85d116c587cd48107fce6a67a096
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Sun Feb 7 09:44:06 2021 +0800
+
+    增加了对Delphi 10.4.1的支持！
+
+commit 43a14b8546242fdd523f74f7efbb551279c3aeaf
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Sat Feb 6 21:22:22 2021 +0800
+
+    完成了第一个通用模块：登录模块，仅需要修改一个配置文件即可实现登录功能
+
+commit 43bee84c1c899c21205975b3300e72578297bf49
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Fri Feb 5 22:31:39 2021 +0800
+
+    大富翁论坛建设又推进了一点。
+
+commit c7957d4568619b14020cc5a7cdb4266d68bc6740
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Thu Feb 4 17:09:40 2021 +0800
+
+    增加了TrackBar支持
+
+commit b34fa9ee95232d2d53b70d154be3aa46da57e04d
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Wed Feb 3 20:58:29 2021 +0800
+
+    上传文件完成后可以收到完成消息了。上传完成后自动激活OnEndDock事件
+
+commit 15a1b1a3bb944efff14f51be419df0e3f2f1af7f
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Wed Feb 3 10:50:42 2021 +0800
+
+    改进了上传机制。如存在同名文件，则自动重命名
+
+commit 211ec4844895135947bd6d9a8d0392b11a38bc11
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Sat Jan 30 21:46:07 2021 +0800
+
+    StringGrid 排序/筛选/多表头。还不太完善
+
+commit 0c26f86c35af4dc018a223edeebfb714641e1dc3
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Wed Jan 27 22:24:09 2021 +0800
+
+    增加了FAQs模块
+
+commit bffae083a6e159cc8e81b12ae9fa145a7589df2b
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Wed Jan 27 17:53:28 2021 +0800
+
+    增加了timeline(时间线)例程
+
+commit 4ade0a7cbd98245545dba16a984a2c76258dc22e
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Wed Jan 27 17:47:04 2021 +0800
+
+    测试提交
+
+commit 855da59286fa88806c2021bc60da5a8113ffad68
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jan 26 23:26:27 2021 +0800
+
+    增加了时间线功能，采用PageControl来做
+
+commit d99825e1b0f14523af81aeee39f0dfa05cc100a1
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jan 26 10:19:09 2021 +0800
+
+    2处简单的修改
+    1 仅支持10.3.3
+    2 网站更换为delphibbs.com
+
+commit ecfc25b1b1d15e508541441eaa772a296dc68532
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Jan 25 23:27:49 2021 +0800
+
+    上一版由于DeWebServer.exe不知名的原因提交不了，所以分成2次提交
+
+commit b49e4179363be38d4ed0499717490b6447273858
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Jan 25 23:25:56 2021 +0800
+
+    1 增加了物资流转管理系统
+
+commit 87dbcf0d28c32578335e775c69241e72a94bc361
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Jan 23 23:23:47 2021 +0800
+
+    增加了ToggleSwitch
+
+commit e778b71127dce97ac86420ab29cf5fbdcafd7a6e
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Jan 23 09:10:48 2021 +0800
+
+    增加了SpeedButton支持，https://delphibbs.com/speedbutton.dw
+
+commit 184e68622c352834c0682fe98dd1750b0c18b187
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Jan 22 23:58:21 2021 +0800
+
+    增加支持SpeedButton以显示图标按钮
+
+commit 26aae8de9b084292d5474c02cc838bb63c38f667
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Jan 22 11:15:53 2021 +0800
+
+    1 引入Vue EasyTable中，还未完全解决
+    2 增强ElementUI Table, 支持添加行和删除行了
+
+commit 36854f3278ecf750dd551b7a03d739c97b84093c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Jan 21 00:04:52 2021 +0800
+
+    增加了TButton和TPanel的BorderRadius属性，可以控制圆角值
+    后面拟扩展到TEdit等
+
+commit 6afd56b07b4054ca50387cce3ec9d7571c6b8eb9
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Jan 20 21:36:49 2021 +0800
+
+    临时增加网站：
+    http://www.delphibbs.com
+
+commit 0f81dc56ac369777fb54975902b2fd870197e837
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Jan 20 21:29:34 2021 +0800
+
+    增加了一个考勤系统的简单界面
+
+commit 6af3ef079bb20cf86e8db885d0896bc0124eeed8
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jan 19 17:21:41 2021 +0800
+
+    用deweb实现了网络流媒体播放，可以播放CCTV1台和2台
+    同时支持一个控件实现两个功能（通过HelpKeyword）区分
+
+commit 85073569381710e7f1a49cd9178162c2d8f7f65f
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Jan 18 09:15:33 2021 +0800
+
+    1 增加了TToggleSwitch支持
+    2 增加了TChart支持
+    3 增加了TProgressBar支持
+
+commit 0469b0dd1111153b5bc48af3e5b38c7dfc933cd9
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Jan 15 09:09:30 2021 +0800
+
+    1 消除了TEdit/TMemo输入较快时出现回跳的BUG
+    2 完成了QQ登录
+    3 增加了ScrollBox支持
+    4 增加了上传功能（采用TBitBtn控件）
+    5 消除了ComboBOx无Item时的一个BUG
+
+commit cd8a2d69f4e153b1caccca1fdfdbf00c52007ab2
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Jan 9 23:09:35 2021 +0800
+
+    进一步完善了控件DateTimePicker,ComboBox等
+    增加了一些demo
+
+commit f503214ccda336853637010f291761730b1096a8
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Dec 24 22:19:05 2020 +0800
+
+    仅更新了readme，目前用10.3.3开发
+
+commit 1058d22b8abea92b8dd4485a606be1414c2ed0c3
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Dec 24 22:14:43 2020 +0800
+
+    完成了一系列更新，增加了扫描二维码控件
+
+commit e136b83a366c7ed2bcbdd4a60104e6afe400eaf7
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Oct 13 21:23:28 2020 +0800
+
+    增加了读取cookie功能和打开新页函数
+
+commit f41605ca406acae5a795e7df26d65f36130b24ec
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Oct 5 16:24:29 2020 +0800
+
+    更新了新构架下的开发， 直接编译一个DLL即可
+
+commit 4df30e9a41a405354aa8ae4571ca6202d28eef6d
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Sep 21 15:03:15 2020 +0800
+
+    消除了StringGrid不能动态设置Width/Height的bug
+
+commit e3ea17d84c9693b996653afc2a0b08123c3f012c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Sep 16 23:05:05 2020 +0800
+
+    增加了adoconnection链接，又改造了几个DEMO，开发很快
+
+commit 641947ed1b1a457d4b79978f9c66e537a2341255
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Sep 15 11:32:27 2020 +0800
+
+    新版本创建应用更简洁了！基本完成了仿大富翁论坛改造，
+
+commit 8c8a379bfde50dd2472b0901f4eaf4394f9934fa
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Sep 15 09:03:41 2020 +0800
+
+    生成了采用zeos连接sqlite3的数据库， 生成了driver演示
+
+commit e2eff9b6d0beef1bcd6e8fce3cfe38da268be12f
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sun Sep 13 16:44:30 2020 +0800
+
+    1 消除了容器类控件不显示子控件的bug
+    2 增加了demos案例
+
+commit bfddb4586cc520f0f64b4bebeae36bb07f904272
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Sep 11 23:00:06 2020 +0800
+
+    将网页应用与服务器分开，以后网页应用可以单独编译了。
+    目前仅完成了http://127.0.0.1/hello.dw
+    后续准备研发一个通用的数据库连接DLL， 这样就O了
+
+commit 38d2bc8a18574c16bcf7f4329a6cb3ef07c053b3
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Aug 25 22:20:02 2020 +0800
+
+    基本完成了TreeView支持
+
+commit 9344ab56af8141410560ebfeb8a43af8631b27ab
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Aug 24 18:10:36 2020 +0800
+
+    1 解决了TComboBox不能新增的BUG(感谢:湛江伙计)
+
+commit e227d7bb081811a06c4e1fb58aa14b9a44c52d42
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sun Aug 23 22:56:33 2020 +0800
+
+    1 添加了TStringGrid支持；2 为TStaticText增加了图标
+
+commit 965a5663eb94b5c551d0a6defaf4c2a6378d13ac
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Aug 22 23:36:01 2020 +0800
+
+    1 更新Readme
+
+commit d453a0d182a736f419337f2636d3c4c9c02724ea
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Aug 22 23:30:18 2020 +0800
+
+    1 增加了DBCheckBox; 2 更新了Readme
+
+commit d1fc9ee553c7c1e424c7954b5c01c3f659946403
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Aug 22 22:24:43 2020 +0800
+
+    把所有控件DLL一次性载入, 大大提高了速度
+
+commit 57940dea8eb23d0a452e4dd5c176bb3fbf71ad8b
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Aug 22 17:36:47 2020 +0800
+
+    1 更新了readme; 2 更新了多版本支持文件
+
+commit 9cc93c036c91cb96d75ef2ee1d944f9d92de09e5
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Aug 22 17:29:27 2020 +0800
+
+    1 完善了TMainMenu的事件; 2 完善了TTimer的启/停
+
+commit 28dcf30e1920f28bd0e6e54b813393798f03cdd2
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 21 22:36:01 2020 +0800
+
+    完善了几个控件，特别是TMainMenu, 支持了图标。 效果图见pictures/MainMenu.png。使用方法见开发指南，例子见unit1.pas
+
+commit 0f2a0d394c45eddbd7f4dab122b85a8d71ee2a32
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 21 15:33:57 2020 +0800
+
+    1.更新了几个控件;2.更新了dcus中其他版本文件
+
+commit 738b84de793da00163c5b2eb75f9665f5c02911a
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 21 13:27:59 2020 +0800
+
+    将目前支持的控件改造完成(增加了一个函数)
+
+commit cfceadd36f5dcc7ebd5dce831ada757153f8b8b2
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 21 11:12:42 2020 +0800
+
+    完善了DBGrid,支持更改值了
+
+commit f5e212064678273a42a7fb5640d9d6291f362778
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Aug 20 23:02:44 2020 +0800
+
+    更新了TDBGrid支持,可以显示. 更新功能明天再研究
+
+commit 81bba66527df22e6fdea71380d0a7b116184cf2f
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Aug 20 15:45:08 2020 +0800
+
+    1 更新了控件机制V3, 增加了一个函数
+    2 删除了一些多余的文件,减小了体积
+
+commit fde1d62417dab3ba83b05d8f22280beae6ea9e8b
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 19 16:16:53 2020 +0800
+
+    增加了视频教程。 document/video/
+
+commit 32d0048b80bd8d7b4bd7612745790e595d986b08
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Aug 17 09:55:06 2020 +0800
+
+    完善了TTimer支持
+
+commit 7ed1ecc8b12f02accafa64db70fd5e287c716053
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Aug 17 08:04:47 2020 +0800
+
+    改动了一处可能导致内存泄漏的代码. 实际改动很少
+
+commit 6b859f71cc9ba31a221ced1841d100556724d26d
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sun Aug 16 10:38:37 2020 +0800
+
+    将重点调整到用D10.4研发! D7的UTF8处理太影响精力了
+
+commit 9a8045dfa7c38d2657b6f342bf14f4094a1b2e64
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Aug 15 22:21:08 2020 +0800
+
+    整理目前的应用
+
+commit 35c1f03ab2d9ac51c571df00764daac1b1971430
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 14 23:02:20 2020 +0800
+
+    1 增加了RadioButton 2 移除了所有access, 换成了SQLite
+
+commit b5a9d5a5cb1189b6b9739be866dbfc8d285d467d
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 14 11:28:20 2020 +0800
+
+    添加了一些文件, 以用于多版本(D7/D10)编译
+
+commit 158b4d21efc81cd6c697eb1c0e71a99751585b8a
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 14 11:10:06 2020 +0800
+
+    生成了10.1/10.2/10.3/10.4版本. 步骤:
+    1 重新编译dwVcls中的所有dpr
+    2 复制Dcus中的对应版本的文件到Source目录,并覆盖原文件
+    3 编译DelphiWeb.dpr
+    4 浏览器打开http://127.0.0.1/  应该可以看到hello,deweb!
+
+commit 7724eff050cb799d0ba70723707a458c92df724d
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Aug 13 23:56:16 2020 +0800
+
+    今天开始用D10.4编译, 基本成功! 注意:所有支持控件dpr(dwVcls中的)需要重新编译一下
+
+commit 50fdb32696e551ae28482f14cd2ff152b1a92d61
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Aug 13 15:22:26 2020 +0800
+
+    更新了TStaticText
+
+commit 0e83b8de497ae0207ce92d581d5889499e309c89
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 12 23:00:25 2020 +0800
+
+    进一步修改了GIT提交规则, 尽可能完全提交
+
+commit db08c08f7aaa854b812e192e6c4949c932a265aa
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 12 22:58:47 2020 +0800
+
+    修改了git提交规则, 原来的规则自动忽略了DLL文件, 造成不能正确显示
+
+commit 19e17a89263e9b82f4be865406a10051f9fe54ee
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 12 22:13:10 2020 +0800
+
+    竟然忘记了TLabel, 顺便做了一个Hello,DeWeb
+
+commit c791f640ed0989ce2d1b6101900f8f6c96ef923c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 12 21:47:41 2020 +0800
+
+    消除了添加子控件的BUG
+
+commit a846925b2724afca38daa3f54f206ab731c5b78e
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 12 11:56:19 2020 +0800
+
+    编写了DeWeb支持控件自行开发指南和示例代码
+
+commit e8ae73778fd75027d1ae11902582d986ad5096f0
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 12 09:51:06 2020 +0800
+
+    采用机制V3.0更新了TCheckBox/TComboBox/TEdit/TPageControl/TTabSheet/TPanel
+    新机制运行很好， 编译后即可使用，VERY GOOD！
+
+commit 751ba2643fe43b847ca58e0bb1f98db8b0b3b54c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Aug 11 23:36:15 2020 +0800
+
+    采用机制V3改造了TButton支持,目前运行正常. 如果一切顺利, 就开放控件拓展开发接口,这样大家就可以自己开发控件了
+
+commit ccbfd743565caa17957c5532a3fd3c771a3b487f
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Aug 11 00:16:04 2020 +0800
+
+    1 开始支持TChart, 2 增加了Pictures目录以保存demo图片
+
+commit 3232c22142fad057b440d0ffbdd7676da7ed3823
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Aug 10 21:05:31 2020 +0800
+
+    1 增加了论坛登录界面, 2 控件完善
+
+commit f42e7c339a27e318eda7ce9dca2217bf396f345d
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Aug 8 10:49:16 2020 +0800
+
+    1 增加了Label垂直居中;2 更新了移动端显示
+
+commit e7a5bd0eae8f74908d521a72e5dcf131817571d0
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Aug 7 23:18:38 2020 +0800
+
+    做了简单的移动端适配!
+
+commit 29750064cbccd25ccadaf1aa58111caeb740c564
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Aug 6 21:37:17 2020 +0800
+
+    换MySQL为SQLite, 基本完成了高仿大富翁论坛.wwww.web0000.com/dfw.dw
+
+commit b219e5d20dffd263f2b0a046455ec14b600f05f5
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Aug 6 11:45:33 2020 +0800
+
+    增加了TMainMenu支持
+
+commit 46d268ae20d80571784b5c49022a693fa540b26c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 5 22:39:55 2020 +0800
+
+    对异常进行了处理
+
+commit 05bbae875a9c1c263f1fc2f16c2b27eceded2518
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 5 17:20:56 2020 +0800
+
+    全部用Delphi完成的大富翁论坛基本成型!
+
+commit 1abefe34ae0a5bea36dbc1f3bb711b1fe31ad37e
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 5 11:47:16 2020 +0800
+
+    开始用Delphi来做网站了. 全部用D, 真香!
+
+commit a7a76f6eee2ed838a1cba181debd3af132b91a6c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Aug 5 00:06:40 2020 +0800
+
+    1 增加了TStaticText控件支持用于"链接"
+
+commit a49ea4b10ec1cff6f3d19ff31891b79cd71a055b
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Aug 4 16:43:20 2020 +0800
+
+    高仿大富翁论坛! http://web0000.com:8080/dfw.dw
+
+commit 746f9e1398f6f76e8ef9d75507f177935037f92e
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Aug 3 10:11:10 2020 +0800
+
+    采用最新的技术, 还原了大富翁论坛的界面http://web0000.com:8080/dfw.dw
+
+commit 1785f64cdce1f6c752ad0ce1b3d5a21c8dfcee96
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sun Aug 2 11:42:52 2020 +0800
+
+    1 完善了TreeView的事件
+    2 采用更简洁的dwShowMessage函数和可自定义的dwShowMsg函数
+
+commit 8f4ba330f2f7cba8e4ea02eb5ac61808b2353c19
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sun Aug 2 00:00:44 2020 +0800
+
+    1 加入了DBGrid,DBEdit,DBText支持
+    2 完善了StringGrid支持
+
+commit 0397eeac9bfc892c1b4aef71e4f46594601e54d6
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Jul 30 23:22:46 2020 +0800
+
+    DBGrid支持增加了滚动条! 这几天忙, 更新少
+
+commit 699a20a5172991b22aa385d5f1b112372377377d
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Jul 29 22:52:36 2020 +0800
+
+    1 解决了DBGrid表头超宽时换行的问题; 2 完善了DBGrid的各字段类型正确显示的问题.
+
+commit f4f4e5c66ffc5cdd5660a4c84b0bef125ee2024f
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jul 28 23:32:54 2020 +0800
+
+    初步改造了DBGrid, 测试链接：http://web0000.com:8080/test.dw
+
+commit 6d65e56f868040882c27a8bcd0d1d114ee1d59d2
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jul 28 19:48:53 2020 +0800
+
+    更新ReadMe!加入《驾校科目一测试系统》www.web0000.com:8080/driver.dw
+
+commit 1663b801c37712d7cd69e83284dfc5b2096c59b5
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jul 28 19:45:01 2020 +0800
+
+    更新了Readme.md, 加入了“驾校科目一测试系统”链接
+
+commit 4de132ebb6fca8c61254dda3efb354594aca5178
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jul 28 19:40:24 2020 +0800
+
+    重新设计了《驾校科目一测试系统》www.web0000.com:8080/driver.dw
+
+commit e003288561812abde738bed88e9426a588384841
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Tue Jul 28 08:51:55 2020 +0800
+
+    控件StringGrid, TreeView支持! 事件还不完善
+
+commit ca6fbfa78ea8e7e3bab7fd92f5d08143952a7b0c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Jul 27 18:13:23 2020 +0800
+
+    控件SpinEdit, StringGrid支持!
+
+commit 88f2fe4aa326398d59d86687be1a0363d40fc705
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sun Jul 26 23:53:33 2020 +0800
+
+    控件Image
+
+commit 1c330fc6a8063fc225fd0ac8848d33eea1a2a37c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sun Jul 26 17:53:59 2020 +0800
+
+    完善TEdit/TComboBox/TPageControl
+
+commit 19bc25861765ba1b84dcb055eddeb8576aaa975f
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Sat Jul 25 23:13:00 2020 +0800
+
+    更新了CheckBox,PageControl
+
+commit 8566cb4df179c9698127a22c37d7eb8c331defdd
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Jul 24 23:28:24 2020 +0800
+
+    又改了一些吧
+
+commit 861a16bc3a279e5020ee7859d3728e404f0fdd70
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Jul 24 22:13:49 2020 +0800
+
+    采用新框架修改了TButton,TEdit,TCheckBox,TPanel,运行正常! WZSTCMN!
+
+commit 20472e629ff4b7995fd980e543f5d43e4fb4e4b7
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Jul 24 08:41:44 2020 +0800
+
+    解决了新机制下TEdit与Server同步消息的问题.
+
+commit bb46c543b135a3a2e573d2d5ec30a7d9efbb8504
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Jul 23 23:15:52 2020 +0800
+
+    开启控件拓展新机制! 每控件一单元, 新增控件直接新增一个单元即可. 完成后可极速拓展第三方控件!
+    目前仅测试性开展TButton/TEdit
+    期待!
+
+commit 96ff842171b6b3bcd61564faef927555c40da9a8
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Jul 23 09:50:59 2020 +0800
+
+    readme增加了换行
+
+commit dd7a9db5efb55ad29edb6bdc4e5b7fb415cd332c
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Jul 23 09:46:24 2020 +0800
+
+    更新了Readme
+
+commit af5302db79e203e92966c9f8d0cdd65d5d769740
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Jul 23 09:40:48 2020 +0800
+
+    完成了对目前支持的所有控件进行了中文乱码检查, DEMO请见
+    http://web0000.com:8080/demos.dw
+
+commit 7f8f8ac6a23f053fb786dfce1b9c50c23cb20c0a
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Jul 22 23:32:36 2020 +0800
+
+    又根据最新的研究, 更新了TButton,TCheckBox,TLabel, 完美解决中文乱码.
+    其他控件后续再跟进
+
+commit 7ca70e7ba2bb5db476048067ee07ee195b49853f
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Jul 22 22:41:15 2020 +0800
+
+    终于解决了参数的中文乱码问题
+    主要是写了一个函数
+    function dwEncodeURIComponent(S:AnsiString):AnsiString;
+    与JS中的decodeURIComponent对应
+    --
+    函数如下:
+    function HTTPEncodeEx(const AStr: String): String;
+    const
+         NoConversion = ['A'..'Z','a'..'z','*','@','.','_','-','0'..'9','$','!','''','(',')'];
+    var
+         Sp, Rp: PChar;
+    begin
+         SetLength(Result, Length(AStr) * 3);
+         Sp := PChar(AStr);
+         Rp := PChar(Result);
+         while Sp^ <> #0 do begin
+              if Sp^ in NoConversion then begin
+                   Rp^ := Sp^
+              end else begin
+                   FormatBuf(Rp^, 3, '%%%.2x', 6, [Ord(Sp^)]);
+                   Inc(Rp,2);
+              end;
+              Inc(Rp);
+              Inc(Sp);
+         end;
+         SetLength(Result, Rp - PChar(Result));
+    end;
+    
+    function dwEncodeURIComponent(S:AnsiString):AnsiString;
+    begin
+         Result    := HTTPEncodeEx(AnsiToUtf8(S));
+    end;
+
+commit 02e88238bec8d24e96cf96f9c50f1bf25d9781f4
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Jul 22 11:41:44 2020 +0800
+
+    终于基本解决了D7的编码和JS编码的对应了!
+    差点为此放弃D7支持了
+    技术解决了, 工程还需要继续完善
+
+commit 04597163e8ae74f83541fe7853352ecd49ac71fc
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Mon Jul 20 23:19:09 2020 +0800
+
+    基本解决了URL传参的问题.url中的参数可以通过dwGetProp(Self,'params')得到
+    具体使用请参看Test.pas中例程.
+    目前使用中文URL还有点问题, 后面解决吧
+
+commit 7edddd817f0b366aed8521b456c31fef3b578de2
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Fri Jul 17 20:05:49 2020 +0800
+
+    解决了mormot设置中文的乱码问题, 原来是需要UTF8ToWideString()才能显示正确.
+    但部分控件还有乱码
+
+commit d112e571f26cd9e7642b72ace35f6a2b392ce083
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Thu Jul 16 15:39:09 2020 +0800
+
+    消除了因DataModule中数据库链接字符串写死的BUG
+
+commit a388c550dc6e5d3e61939e5f3381d02678c434e4
+Author: 13359289126 <fenglinyushu@163.com>
+Date:   Wed Jul 15 21:27:10 2020 +0800
+
+    Signed-off-by: fenglinyushu <leebillows@gmail.com>
+
+commit 4076bde6b0b125886376ab991a89bc62ad55ff9b
+Author: fenglinyushu <leebillows@gmail.com>
+Date:   Wed Jul 15 20:57:15 2020 +0800
+
+    支持D7了
+
+commit b3241cb162586a80ced93857320f36f43ab56599
+Author: 碧树西风 <6536433+fenglinyushu@user.noreply.gitee.com>
+Date:   Wed Jul 15 20:22:47 2020 +0800
+
+    add README.md.
+
+commit a4236d59113f7b1fb65c8fd684ed7dc65d5fc57c
+Author: 碧树西风 <6536433+fenglinyushu@user.noreply.gitee.com>
+Date:   Wed Jul 15 20:17:22 2020 +0800
+
+    Initial commit

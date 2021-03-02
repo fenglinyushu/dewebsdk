@@ -1,0 +1,101 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Hint = '{"type":"primary"}'
+  Caption = 'Form1'
+  ClientHeight = 525
+  ClientWidth = 534
+  Color = clWhite
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 20
+  object MediaPlayer1: TMediaPlayer
+    AlignWithMargins = True
+    Left = 3
+    Top = 52
+    Width = 523
+    Height = 321
+    Align = alTop
+    EnabledButtons = []
+    DoubleBuffered = True
+    FileName = '/media/video/ocean.mp4'
+    ParentDoubleBuffered = False
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 534
+    Height = 49
+    Align = alTop
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 1
+    object Button3: TButton
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 100
+      Height = 43
+      Hint = '{"type":"primary"}'
+      Align = alLeft
+      Caption = 'Play'
+      TabOrder = 0
+      OnClick = Button3Click
+    end
+    object Button2: TButton
+      AlignWithMargins = True
+      Left = 109
+      Top = 3
+      Width = 100
+      Height = 43
+      Hint = '{"type":"primary"}'
+      Align = alLeft
+      Caption = 'Switch'
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+    object Button1: TButton
+      AlignWithMargins = True
+      Left = 215
+      Top = 3
+      Width = 100
+      Height = 43
+      Hint = '{"type":"primary"}'
+      Align = alLeft
+      Caption = 'Pause'
+      TabOrder = 2
+      OnClick = Button1Click
+    end
+    object Button4: TButton
+      AlignWithMargins = True
+      Left = 321
+      Top = 3
+      Width = 100
+      Height = 43
+      Hint = '{"type":"primary"}'
+      Align = alLeft
+      Caption = 'Loop'
+      TabOrder = 3
+      OnClick = Button4Click
+    end
+    object Button5: TButton
+      AlignWithMargins = True
+      Left = 427
+      Top = 3
+      Width = 100
+      Height = 43
+      Hint = '{"type":"primary"}'
+      Align = alLeft
+      Caption = 'To 5s'
+      TabOrder = 4
+      OnClick = Button5Click
+    end
+  end
+end

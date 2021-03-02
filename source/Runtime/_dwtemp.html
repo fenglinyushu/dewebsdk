@@ -1,0 +1,414 @@
+<!DOCTYPE html>                                                                    
+<html lang="en">                                                                  
+                                                                                  
+<head>                                                                            
+    <meta charset="utf-8">                                                        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">                         
+    <title>DeWeb DataBase Base</title>                                                    
+</head>                                                                           
+
+<body style="background-color:#F0F0F0">
+    <script src="dist/vue.js" type="text/javascript"></script>          
+    <script src="dist/index.js" type="text/javascript"></script>        
+    <script src="dist/axios.min.js" type="text/javascript"></script>    
+    <link rel="icon" href="dist/webimages/TForm1.ico" type="image/x-icon">       
+    <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" /> 
+
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_1__top,width:Form1_1__wid,height:Form1_1__hei}" >
+        <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
+        	<el-form style="width:90%;padding-left:5%;">
+        		<el-form-item :label="input_query_inputname" >
+        			<el-input v-model="input_query_inputdefault" autocomplete="off"></el-input>
+        		</el-form-item>
+        	</el-form>
+        	<div slot="footer" class="dialog-footer">
+        		<el-button @click="input_query_visible=false">{{input_query_cancelcaption}}</el-button>
+        		<el-button type="primary" @click="processinputquery">{{input_query_okcaption}}</el-button>
+        	</div>
+        </el-dialog>
+		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
+        <el-main v-if="Panel_All__vis" :disabled="Panel_All__dis" :style="{backgroundColor:Panel_All__col,left:Panel_All__lef,top:Panel_All__top,width:Panel_All__wid,height:Panel_All__hei}" style="position:relative;overflow:hidden;">
+        <el-main v-if="Panel_Logo__vis" :disabled="Panel_Logo__dis" :style="{backgroundColor:Panel_Logo__col,left:Panel_Logo__lef,top:Panel_Logo__top,width:Panel_Logo__wid,height:Panel_Logo__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image1__src" fit="none" v-if="Image1__vis" :disabled="Image1__dis" :style="{left:Image1__lef,top:Image1__top,width:Image1__wid,height:Image1__hei}" style="position:absolute;">
+        </el-Image>
+        <div  v-html="Label6__cap" v-if="Label6__vis" :disabled="Label6__dis" :style="{left:Label6__lef,top:Label6__top,width:Label6__wid,height:Label6__hei}" style="position:absolute;color:#646464;font-family:'Verdana';font-size:18pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:48px;">{{Label6__cap}}
+        </div>
+        <div  v-html="Label_Demo__cap" v-if="Label_Demo__vis" :disabled="Label_Demo__dis" :style="{left:Label_Demo__lef,top:Label_Demo__top,width:Label_Demo__wid,height:Label_Demo__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:20pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:48px;">{{Label_Demo__cap}}
+        </div>
+        <el-input v-if="Edit_Keyword__vis" :disabled="Edit_Keyword__dis" v-model="Edit_Keyword__txt" :style="{left:Edit_Keyword__lef,top:Edit_Keyword__top,width:Edit_Keyword__wid,height:Edit_Keyword__hei}" style="position:absolute;border-radius:3px 0 0 3px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Keyword','(this.Edit_Keyword__txt)','onchange','')">
+        </el-input>
+        <el-button size=medium v-if="Button4__vis" :disabled="Button4__dis" type="success" :type="Button4__typ" icon="el-icon-search" :style="{left:Button4__lef,top:Button4__top,width:Button4__wid,height:Button4__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button4','0','onclick','')">{{Button4__cap}}
+        </el-button>
+        </el-main>
+        <el-main v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;">
+        <div  v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:35px;">{{Label2__cap}}
+        </div>
+        <div  v-html="Label3__cap" v-if="Label3__vis" :disabled="Label3__dis" :style="{left:Label3__lef,top:Label3__top,width:Label3__wid,height:Label3__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:35px;">{{Label3__cap}}
+        </div>
+        <div  v-html="Label4__cap" v-if="Label4__vis" :disabled="Label4__dis" :style="{left:Label4__lef,top:Label4__top,width:Label4__wid,height:Label4__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:35px;">{{Label4__cap}}
+        </div>
+        <div  v-html="Label5__cap" v-if="Label5__vis" :disabled="Label5__dis" :style="{left:Label5__lef,top:Label5__top,width:Label5__wid,height:Label5__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:35px;">{{Label5__cap}}
+        </div>
+        <el-input v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','(this.Edit1__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit2__vis" :disabled="Edit2__dis" v-model="Edit2__txt" :style="{left:Edit2__lef,top:Edit2__top,width:Edit2__wid,height:Edit2__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit2','(this.Edit2__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit3__vis" :disabled="Edit3__dis" v-model="Edit3__txt" :style="{left:Edit3__lef,top:Edit3__top,width:Edit3__wid,height:Edit3__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit3','(this.Edit3__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit4__vis" :disabled="Edit4__dis" v-model="Edit4__txt" :style="{left:Edit4__lef,top:Edit4__top,width:Edit4__wid,height:Edit4__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit4','(this.Edit4__txt)','onchange','')">
+        </el-input>
+        </el-main>
+        <el-main v-if="Panel2__vis" :disabled="Panel2__dis" :style="{backgroundColor:Panel2__col,left:Panel2__lef,top:Panel2__top,width:Panel2__wid,height:Panel2__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-main v-if="Panel_StringGrid__vis" :disabled="Panel_StringGrid__dis" :style="{backgroundColor:Panel_StringGrid__col,left:Panel_StringGrid__lef,top:Panel_StringGrid__top,width:Panel_StringGrid__wid,height:Panel_StringGrid__hei}" style="position:absolute;overflow:hidden;">
+        <div :style="{left:SG__lef,top:SG__top,width:SG__wid,height:SG__hei}" style="position:absolute;">
+            <el-table :data="SG__ces" highlight-current-row :row-style="{height:'48px'}" :header-row-style="{height:'48px'}" ref="SG" border v-if="SG__vis" :disabled="SG__dis" :height="SG__hei" style="width:100%" @row-click="dwevent($event,'SG','val.d0','onclick','')">
+                <el-table-column show-overflow-tooltip fixed v-if=false prop="d0" label="rowno" width="10"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="d1" align="right" :label="SG__col0" width="100"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="d2" align="center" :label="SG__col1" width="100"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="d3" align="right" :label="SG__col2" width="100"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="d4" align="center" :label="SG__col3" width="100"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="d5" align="right" :label="SG__col4" width="522"></el-table-column>
+            </el-table>
+        </div>
+        <el-main v-if="Panel3__vis" :disabled="Panel3__dis" :style="{backgroundColor:Panel3__col,left:Panel3__lef,top:Panel3__top,width:Panel3__wid,height:Panel3__hei}" style="position:absolute;overflow:hidden;">
+        <el-button size=medium v-if="Button10__vis" :disabled="Button10__dis" type="success" :type="Button10__typ" :style="{left:Button10__lef,top:Button10__top,width:Button10__wid,height:Button10__hei}" style="position:absolute;border-radius:0 3px 3px 0;">{{Button10__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button11__vis" :disabled="Button11__dis" type="success" :type="Button11__typ" :style="{left:Button11__lef,top:Button11__top,width:Button11__wid,height:Button11__hei}" style="position:absolute;border-radius:3px 0 0 3px;">{{Button11__cap}}
+        </el-button>
+        <el-input v-if="Edit5__vis" :disabled="Edit5__dis" v-model="Edit5__txt" :style="{left:Edit5__lef,top:Edit5__top,width:Edit5__wid,height:Edit5__hei}" style="position:absolute;border-radius:3px 0 0 3px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit5','(this.Edit5__txt)','onchange','')">
+        </el-input>
+        <el-button size=medium v-if="Button12__vis" :disabled="Button12__dis" type="success" :type="Button12__typ" :style="{left:Button12__lef,top:Button12__top,width:Button12__wid,height:Button12__hei}" style="position:absolute;border-radius:0 3px 3px 0;">{{Button12__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button1__vis" :disabled="Button1__dis" type="success" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;border-radius:3px 0 0 3px;" @click.native="dwevent($event,'Button1','0','onclick','')">{{Button1__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button2__vis" :disabled="Button2__dis" type="success" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;border-radius:0;" @click.native="dwevent($event,'Button2','0','onclick','')">{{Button2__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button3__vis" :disabled="Button3__dis" type="success" :type="Button3__typ" :style="{left:Button3__lef,top:Button3__top,width:Button3__wid,height:Button3__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button3','0','onclick','')">{{Button3__cap}}
+        </el-button>
+        </el-main>
+        </el-main>
+        </el-main>
+	 </div>
+    <script>
+       Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + expiredays);
+            document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()); 
+       },
+       Vue.prototype.dwgetcookie = function (name) {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
+            if(arr=document.cookie.match(reg))
+                 return unescape(arr[2]); 
+            else
+                 return '';
+       },
+	    Vue.prototype.procResp = function (data){
+		    resp = JSON.parse(decodeURIComponent(String(data))); 
+		    if (resp.mode === "update"){
+		        eval(String(resp.code));
+		    } else if (resp.mode === "showform"){
+		        document.open();document.write(String(resp.code));
+		    }
+	    } 
+        new Vue(
+			{
+				el: '#app',
+				data: function () {
+					return {
+					    Form1_1__top:"0px",
+					    Form1_1__wid:"925px",
+					    Form1_1__hei:"671px",
+                        Image1__lef:"18px",
+                        Image1__top:"3px",
+                        Image1__wid:"48px",
+                        Image1__hei:"48px",
+                        Image1__vis:true,
+                        Image1__dis:false,
+                        Image1__src:"/media/images/logo.png",
+                        Label6__lef:"69px",
+                        Label6__top:"3px",
+                        Label6__wid:"112px",
+                        Label6__hei:"48px",
+                        Label6__vis:true,
+                        Label6__dis:false,
+                        Label6__cap:"DeWeb -",
+                        Label_Demo__lef:"181px",
+                        Label_Demo__top:"3px",
+                        Label_Demo__wid:"324px",
+                        Label_Demo__hei:"48px",
+                        Label_Demo__vis:true,
+                        Label_Demo__dis:false,
+                        Label_Demo__cap:"数据库基本操作：增删改查",
+                        Edit_Keyword__lef:"752px",
+                        Edit_Keyword__top:"12px",
+                        Edit_Keyword__wid:"121px",
+                        Edit_Keyword__hei:"33px",
+                        Edit_Keyword__vis:true,
+                        Edit_Keyword__dis:false,
+                        Edit_Keyword__txt:"",
+                        Button4__lef:'873px',
+                        Button4__top:'12px',
+                        Button4__wid:'40px',
+                        Button4__hei:'35px',
+                        Button4__vis:true,
+                        Button4__dis:false,
+                        Button4__cap:'',
+                        Button4__typ:'success',
+                        Panel_Logo__lef:"3px",
+                        Panel_Logo__top:"3px",
+                        Panel_Logo__wid:"919px",
+                        Panel_Logo__hei:"54px",
+                        Panel_Logo__vis:true,
+                        Panel_Logo__dis:false,
+                        Panel_Logo__col:"#FFFFFF",
+                        Label2__lef:"3px",
+                        Label2__top:"3px",
+                        Label2__wid:"60px",
+                        Label2__hei:"35px",
+                        Label2__vis:true,
+                        Label2__dis:false,
+                        Label2__cap:"姓名",
+                        Label3__lef:"189px",
+                        Label3__top:"3px",
+                        Label3__wid:"60px",
+                        Label3__hei:"35px",
+                        Label3__vis:true,
+                        Label3__dis:false,
+                        Label3__cap:"性别",
+                        Label4__lef:"375px",
+                        Label4__top:"3px",
+                        Label4__wid:"60px",
+                        Label4__hei:"35px",
+                        Label4__vis:true,
+                        Label4__dis:false,
+                        Label4__cap:"民族",
+                        Label5__lef:"561px",
+                        Label5__top:"3px",
+                        Label5__wid:"60px",
+                        Label5__hei:"35px",
+                        Label5__vis:true,
+                        Label5__dis:false,
+                        Label5__cap:"籍贯",
+                        Edit1__lef:"66px",
+                        Edit1__top:"3px",
+                        Edit1__wid:"120px",
+                        Edit1__hei:"33px",
+                        Edit1__vis:true,
+                        Edit1__dis:false,
+                        Edit1__txt:"未命名",
+                        Edit2__lef:"252px",
+                        Edit2__top:"3px",
+                        Edit2__wid:"120px",
+                        Edit2__hei:"33px",
+                        Edit2__vis:true,
+                        Edit2__dis:false,
+                        Edit2__txt:"",
+                        Edit3__lef:"438px",
+                        Edit3__top:"3px",
+                        Edit3__wid:"120px",
+                        Edit3__hei:"33px",
+                        Edit3__vis:true,
+                        Edit3__dis:false,
+                        Edit3__txt:"",
+                        Edit4__lef:"624px",
+                        Edit4__top:"3px",
+                        Edit4__wid:"120px",
+                        Edit4__hei:"33px",
+                        Edit4__vis:true,
+                        Edit4__dis:false,
+                        Edit4__txt:"",
+                        Panel1__lef:"0px",
+                        Panel1__top:"588px",
+                        Panel1__wid:"925px",
+                        Panel1__hei:"41px",
+                        Panel1__vis:true,
+                        Panel1__dis:false,
+                        Panel1__col:"#FFFFFF",
+                        Panel2__lef:"0px",
+                        Panel2__top:"629px",
+                        Panel2__wid:"925px",
+                        Panel2__hei:"46px",
+                        Panel2__vis:true,
+                        Panel2__dis:false,
+                        Panel2__col:"#FFFFFF",
+                        SG__lef:"1px",
+                        SG__top:"1px",
+                        SG__wid:"923px",
+                        SG__hei:"481px",
+                        SG__vis:true,
+                        SG__dis:false,
+                        SG__col0:"姓名",
+                        SG__col1:"性别",
+                        SG__col2:"籍贯",
+                        SG__col3:"年龄",
+                        SG__col4:"地址",
+                        SG__ces:[{"d0":'1',"d1":'钟一鸣',"d2":'True',"d3":'广东',"d4":'37',"d5":'',},{"d0":'2',"d1":'马亮',"d2":'True',"d3":'海南',"d4":'22',"d5":'',},{"d0":'3',"d1":'西风',"d2":'True',"d3":'海南',"d4":'15',"d5":'',},{"d0":'4',"d1":'何泉',"d2":'False',"d3":'海南',"d4":'66',"d5":'',},{"d0":'5',"d1":'陆小方',"d2":'False',"d3":'四川',"d4":'18',"d5":'北京市三里屯250号路口38米',},{"d0":'6',"d1":'黄小剑',"d2":'False',"d3":'广东',"d4":'32',"d5":'',},{"d0":'7',"d1":'马云',"d2":'True',"d3":'浙江',"d4":'34',"d5":'杭州市西湖路1号',},{"d0":'8',"d1":'胡妮',"d2":'False',"d3":'湖北',"d4":'45',"d5":'西安长安区911号',},{"d0":'9',"d1":'李小琳',"d2":'True',"d3":'湖北',"d4":'31',"d5":'西安长安区911号',},],
+                        Button10__lef:'738px',
+                        Button10__top:'5px',
+                        Button10__wid:'80px',
+                        Button10__hei:'35px',
+                        Button10__vis:true,
+                        Button10__dis:false,
+                        Button10__cap:'下一页',
+                        Button10__typ:'success',
+                        Button11__lef:'657px',
+                        Button11__top:'5px',
+                        Button11__wid:'80px',
+                        Button11__hei:'35px',
+                        Button11__vis:true,
+                        Button11__dis:false,
+                        Button11__cap:'上一页',
+                        Button11__typ:'success',
+                        Edit5__lef:"824px",
+                        Edit5__top:"5px",
+                        Edit5__wid:"47px",
+                        Edit5__hei:"33px",
+                        Edit5__vis:true,
+                        Edit5__dis:false,
+                        Edit5__txt:"1",
+                        Button12__lef:'871px',
+                        Button12__top:'5px',
+                        Button12__wid:'40px',
+                        Button12__hei:'35px',
+                        Button12__vis:true,
+                        Button12__dis:false,
+                        Button12__cap:'GO',
+                        Button12__typ:'success',
+                        Button1__lef:'5px',
+                        Button1__top:'5px',
+                        Button1__wid:'80px',
+                        Button1__hei:'35px',
+                        Button1__vis:true,
+                        Button1__dis:false,
+                        Button1__cap:'Append',
+                        Button1__typ:'success',
+                        Button2__lef:'86px',
+                        Button2__top:'5px',
+                        Button2__wid:'80px',
+                        Button2__hei:'35px',
+                        Button2__vis:true,
+                        Button2__dis:false,
+                        Button2__cap:'Delete',
+                        Button2__typ:'success',
+                        Button3__lef:'167px',
+                        Button3__top:'5px',
+                        Button3__wid:'80px',
+                        Button3__hei:'35px',
+                        Button3__vis:true,
+                        Button3__dis:false,
+                        Button3__cap:'Edit',
+                        Button3__typ:'success',
+                        Panel3__lef:"1px",
+                        Panel3__top:"482px",
+                        Panel3__wid:"923px",
+                        Panel3__hei:"45px",
+                        Panel3__vis:true,
+                        Panel3__dis:false,
+                        Panel3__col:"#FFFFFF",
+                        Panel_StringGrid__lef:"0px",
+                        Panel_StringGrid__top:"60px",
+                        Panel_StringGrid__wid:"925px",
+                        Panel_StringGrid__hei:"528px",
+                        Panel_StringGrid__vis:true,
+                        Panel_StringGrid__dis:false,
+                        Panel_StringGrid__col:"#F0F0F0",
+                        Panel_All__lef:"0px",
+                        Panel_All__top:"0px",
+                        Panel_All__wid:"925px",
+                        Panel_All__hei:"670px",
+                        Panel_All__vis:true,
+                        Panel_All__dis:false,
+                        Panel_All__col:"#FFFFFF",
+					    input_query_visible:false,
+					    input_query_caption:"Input Query",
+					    input_query_inputname:"new",
+					    input_query_cancelcaption:"Cancel",
+					    input_query_okcaption:"OK",
+					    input_query_inputdefault:"",
+					    input_query_method:"processinputquery",
+					    input_query_visible:false,
+					    version__istrial:false,
+					    clientid:3410652,
+					    shuntflag:4234
+                    }
+                },
+                mounted() {
+                    let me=this;
+Timer1__tmr = window.setInterval(function() {
+axios.get('{"mode":"event","cid":3410652,"component":"Timer1"}',{headers:{shuntflag:4234}})
+.then(resp =>{me.procResp(resp.data);  })
+}, 1000);
+                    window.addEventListener(
+                        "onorientationchange" in window ? "orientationchange" : "resize",
+                        function() {
+                            axios.get('{"mode":"event","cid":3410652,"component":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:4234}})
+                            .then(resp =>{me.procResp(resp.data)});
+                        },
+                        false
+                    );
+                    let Form1_1hearttimer = window.setInterval(function() {
+                        axios.get('{"mode":"heart","cid":3410652}',{headers:{shuntflag:4234}})
+                        .then(resp =>{me.procResp(resp.data)})
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                    }, 590000);
+                },
+				methods: {
+                    ToWebsite (e,n) {
+                        var aTag = document.createElement('a'); 
+                        aTag.setAttribute('href', e);
+                        aTag.setAttribute('target', n);
+                        aTag.click();
+                    },
+                    dwInputClick (e) {
+                        document.getElementById(e).click();
+                    },
+                    dwInputChange (e) {
+                        this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
+                        var sget = '{"mode":"event","cid":3410652,"component":"'+e+'","event":"getfilename","value":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        axios.get(sget)
+                    },
+                    filterHandler(value, row, column) {
+                        const property = column['property'];
+                        return row[property] === value;
+                    },
+                    dwInputSubmit (ipname) {
+                        let me=this;let formData = new FormData();
+                        formData.append('file', document.getElementById(ipname+"__inp").files[0]);
+                        let config = {headers: {'Content-Type': 'multipart/form-data'}}
+                        axios.post('/upload', formData, config)
+                        .then(function (res) {
+                            var sget = '{"mode":"event","cid":3410652,"component":"'+ipname+'","event":"onenddock","value":"success"}';
+                            axios.get(sget)
+                            .then(resp =>{me.procResp(resp.data)});
+                        })
+                    },
+                    dwInputSubmit0 (ipname) {
+                        document.getElementById(ipname+"__frm").submit();
+                    },
+                    dwnotify(caption,text) {this.$notify.warning({ title: caption, message: text, duration: 0,showClose: false });},
+                    dwevent(val,compname,compvalue,compevent,reserved) {
+                        var jo={};
+                        jo.mode="event";
+                        jo.cid=this.clientid;
+                        jo.component=compname;
+                        jo.value=escape(eval(compvalue))
+                        jo.event=compevent;
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:4234}})
+                        .then(resp =>{this.procResp(resp.data)});
+                    },
+                    processinputquery(val) {
+                        this.input_query_visible = false;
+                        axios.get('{"mode":"interaction","cid":3410652,"class":"inputquery","method":"'+this.input_query_method+'","value":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:4234}})
+                        .then(resp =>{this.procResp(resp.data)});
+                    },
+                },
+                beforeDestroy() {
+                    clearInterval(hearttimer);
+                }
+            }
+        ); 
+    </script>
+</body>
+</html>

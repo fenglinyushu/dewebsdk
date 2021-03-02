@@ -1,0 +1,45 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Hint = '{"type":"primary"}'
+  BorderStyle = bsNone
+  BorderWidth = 5
+  Caption = 'DeWeb'
+  ClientHeight = 605
+  ClientWidth = 310
+  Color = clWhite
+  TransparentColor = True
+  TransparentColorValue = 16448250
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  PixelsPerInch = 96
+  TextHeight = 20
+  object Label1: TLabel
+    Left = 0
+    Top = 0
+    Width = 310
+    Height = 65
+    Align = alTop
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '...'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitWidth = 790
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 112
+    Top = 136
+  end
+end
