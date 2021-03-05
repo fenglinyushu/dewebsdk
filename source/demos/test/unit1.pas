@@ -22,6 +22,11 @@ uses
 type
   TForm1 = class(TForm)
     Button1: TButton;
+    Edit1: TEdit;
+    Panel_00_Title: TPanel;
+    Label1: TLabel;
+    Image1: TImage;
+    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
@@ -40,7 +45,8 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-     dwRunJS('alert("Ã· æƒ⁄»›!");self.location="login.dw";',self);      //
+
+     dwRunJS(Edit1.Text,self);      //
 
 end;
 

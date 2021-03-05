@@ -31,6 +31,9 @@ type
     Label12: TLabel;
     Label14: TLabel;
     Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
@@ -88,6 +91,10 @@ begin
      Label13.Caption     := 'AvailHeight    : '+dwGetProp(Self,'availheight');
      Label14.Caption     := 'BodyWidth     : '+dwGetProp(Self,'bodywidth');
      Label15.Caption     := 'BodyHeight    : '+dwGetProp(Self,'bodyheight');
+     Label16.Caption     := 'devicePixelRatio: '+dwGetProp(Self,'devicepixelratio');
+     //物理分辨率
+     Label17.Caption     := 'TrueWidth    : '+dwGetProp(Self,'truewidth');
+     Label18.Caption     := 'TrueHeight   : '+dwGetProp(Self,'trueheight');
 
 end;
 

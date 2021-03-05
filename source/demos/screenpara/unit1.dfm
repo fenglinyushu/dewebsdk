@@ -1,9 +1,10 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  VertScrollBar.Visible = False
   BorderStyle = bsNone
   Caption = 'Screen Parameters'
-  ClientHeight = 564
+  ClientHeight = 695
   ClientWidth = 320
   Color = clWhite
   Font.Charset = ANSI_CHARSET
@@ -283,6 +284,66 @@ object Form1: TForm1
     Layout = tlCenter
     ExplicitLeft = 13
     ExplicitTop = 476
+  end
+  object Label16: TLabel
+    AlignWithMargins = True
+    Left = 10
+    Top = 576
+    Width = 307
+    Height = 30
+    Margins.Left = 10
+    Align = alTop
+    AutoSize = False
+    Caption = 'Hello, DeWeb!'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitLeft = 13
+    ExplicitTop = 548
+  end
+  object Label17: TLabel
+    AlignWithMargins = True
+    Left = 10
+    Top = 612
+    Width = 307
+    Height = 30
+    Margins.Left = 10
+    Align = alTop
+    AutoSize = False
+    Caption = 'Hello, DeWeb!'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitLeft = 5
+    ExplicitTop = 635
+  end
+  object Label18: TLabel
+    AlignWithMargins = True
+    Left = 10
+    Top = 648
+    Width = 307
+    Height = 30
+    Margins.Left = 10
+    Align = alTop
+    AutoSize = False
+    Caption = 'Hello, DeWeb!'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitLeft = 13
+    ExplicitTop = 584
   end
   object Panel_00_Title: TPanel
     AlignWithMargins = True
