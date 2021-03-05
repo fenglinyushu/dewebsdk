@@ -1,4 +1,0 @@
-DeWeb默认使用Delphi 10.3.3 编译，
-如果需要采用10.4.2编译，请先打开dwVcls\dwDMs中的所有的dpr,编译后
-再编译demos中的例程.
-服务器程序请采用DeWebServer1042.exe

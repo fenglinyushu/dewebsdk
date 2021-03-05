@@ -77,8 +77,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
         <DCC_UnitSearchPath>..\_public;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <Debugger_HostApplication>..\..\Runtime\DeWebServer.exe</Debugger_HostApplication>
         <Debugger_CWD>..\..\Runtime\</Debugger_CWD>
+        <Debugger_HostApplication>..\..\Runtime\DeWebServer.exe</Debugger_HostApplication>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>

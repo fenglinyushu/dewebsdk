@@ -4,7 +4,7 @@ object Form1: TForm1
   Hint = '{"type":"primary"}'
   Caption = 'Hello,World!'
   ClientHeight = 525
-  ClientWidth = 314
+  ClientWidth = 382
   Color = clWhite
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object Form1: TForm1
   object Label1: TLabel
     Left = 0
     Top = 0
-    Width = 314
+    Width = 382
     Height = 177
     Align = alTop
     Alignment = taCenter
