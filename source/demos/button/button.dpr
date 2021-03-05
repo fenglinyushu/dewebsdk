@@ -9,6 +9,7 @@ uses
   Variants,
   Windows,
   Classes,
+  Dialogs,
   Data.Win.ADODB,
   unit1 in 'unit1.pas' {Form1};
 
