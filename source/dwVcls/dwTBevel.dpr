@@ -51,7 +51,7 @@ begin
      //
      //joData    := _Json(AData);
 
-     //if joData.event = 'onclick' then begin
+     //if joData.e = 'onclick' then begin
      //     if Assigned(TBevel(ACtrl).OnClick) then begin
      //          TBevel(ACtrl).OnClick(TBevel(ACtrl));
      //     end;

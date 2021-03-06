@@ -32,13 +32,13 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onchange' then begin
+     if joData.e = 'onchange' then begin
           //保存事件
           TComboBox(ACtrl).OnExit    := TComboBox(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TComboBox(ACtrl).OnChange  := nil;
           //更新值
-          TComboBox(ACtrl).Text    := dwUnescape(joData.value);
+          TComboBox(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TComboBox(ACtrl).OnChange  := TComboBox(ACtrl).OnExit;
 
@@ -49,12 +49,12 @@ begin
 
           //清空OnExit事件
           TComboBox(ACtrl).OnExit  := nil;
-     end else if joData.event = 'ondropdown' then begin
-          if joData.value = 'true' then begin
+     end else if joData.e = 'ondropdown' then begin
+          if joData.v = 'true' then begin
                if Assigned(TComboBox(ACtrl).OnDropDown) then begin
                     TComboBox(ACtrl).OnDropDown(TLabel(ACtrl));
                end;
-          end else if joData.value = 'false' then begin
+          end else if joData.v = 'false' then begin
                if Assigned(TComboBox(ACtrl).OnCloseUp) then begin
                     TComboBox(ACtrl).OnCloseUp(TLabel(ACtrl));
                end;

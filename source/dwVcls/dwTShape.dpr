@@ -52,7 +52,7 @@ begin
      joData    := _Json(AData);
 
      if joData.name = 'onenddock' then begin
-          TShape(ACtrl).HelpKeyword     := joData.value;
+          TShape(ACtrl).HelpKeyword     := joData.v;
           if Assigned(TShape(ACtrl).OnEndDock) then begin
                TShape(ACtrl).OnEndDock(TShape(ACtrl),nil,0,0);
           end;

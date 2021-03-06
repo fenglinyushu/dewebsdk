@@ -32,13 +32,13 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           //保存事件
           TCheckBox(ACtrl).OnExit := TCheckBox(ACtrl).OnClick;
           //清空事件,以防止自动执行
           TCheckBox(ACtrl).OnClick := nil;
           //更新值
-          TCheckBox(ACtrl).Checked := dwUnescape(joData.Value)='true';
+          TCheckBox(ACtrl).Checked := dwUnescape(joData.v)='true';
           //恢复事件
           TCheckBox(ACtrl).OnClick := TCheckBox(ACtrl).OnExit;
           //执行事件

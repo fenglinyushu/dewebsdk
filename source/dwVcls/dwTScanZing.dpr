@@ -66,7 +66,7 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           with TBitBtn(ACtrl) do begin
                HelpKeyword    := HelpKeyword + sJS;
           end;

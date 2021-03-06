@@ -45,7 +45,7 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onchange' then begin
+     if joData.e = 'onchange' then begin
           //保存事件
           TDBEdit(ACtrl).OnExit    := TDBEdit(ACtrl).OnChange;
           //清空事件,以防止自动执行
@@ -59,7 +59,7 @@ begin
           if Assigned(TDBEdit(ACtrl).OnChange) then begin
                TDBEdit(ACtrl).OnChange(TDBEdit(ACtrl));
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           //保存事件
           TDBEdit(ACtrl).OnExit    := TDBEdit(ACtrl).OnEnter;
           //清空事件,以防止自动执行

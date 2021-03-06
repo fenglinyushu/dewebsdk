@@ -276,7 +276,7 @@ const
 				+#13'	if (result) {'
 				//+#13'		alert(result);'
 				//+#13'		alert(decodeURI((result)));'
- 				+#13'		axios.get(''{"mode":"event","cid":%d,"component":"%s","name":"%s","value":"''+(escape(result))+''"}'').then(resp =>{this.procResp(resp.data);},resp => {console.log("err");});'
+ 				+#13'		axios.get(''{"m":"event","i":%d,"c":"%s","name":"%s","v":"''+(escape(result))+''"}'').then(resp =>{this.procResp(resp.data);},resp => {console.log("err");});'
 				+#13'	}'
 				+#13'})'
                     ;
@@ -354,7 +354,7 @@ var
      sHint     : String;
      joHint    : TJsonObject;
 const
-     sUpload   = 'axios.get(''{"mode":"event","cid":%d,"component":"_cookie","name":"%s","value":"''+res+''"}'');';
+     sUpload   = 'axios.get(''{"m":"event","i":%d,"c":"_cookie","name":"%s","v":"''+res+''"}'');';
           //+'.then(resp =>{'
           //+'this.procResp(resp.data);'
           //+'},resp => {'
@@ -568,7 +568,7 @@ procedure dwMessageDlg(AMsg,ACaption,confirmButtonCaption,cancelButtonCaption,AM
 var
      sMsgCode  : string;
 const
-     sConfirm  = 'axios.get(''{"mode":"interaction","cid":%d,"method":"%s","value":%d}'')'
+     sConfirm  = 'axios.get(''{"m":"interaction","i":%d,"t":"%s","v":%d}'')'
           +'.then(resp =>{'
           +'this.procResp(resp.data);'
           +'},resp => {'

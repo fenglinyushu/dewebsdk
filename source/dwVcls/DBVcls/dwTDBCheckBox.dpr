@@ -45,7 +45,7 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           //保存事件
           TDBCheckBox(ACtrl).OnExit    := TDBCheckBox(ACtrl).OnClick;
           //清空事件,以防止自动执行
@@ -59,7 +59,7 @@ begin
           if Assigned(TDBCheckBox(ACtrl).OnClick) then begin
                TDBCheckBox(ACtrl).OnClick(TDBCheckBox(ACtrl));
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
      end;
 
      //清空OnExit事件

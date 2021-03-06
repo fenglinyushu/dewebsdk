@@ -66,11 +66,11 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           TGroupBox(ACtrl).OnClick(TGroupBox(ACtrl));
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           TGroupBox(ACtrl).OnEnter(TGroupBox(ACtrl));
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           TGroupBox(ACtrl).OnExit(TGroupBox(ACtrl));
      end;
 end;

@@ -48,7 +48,7 @@ begin
      //清空事件,以防止自动执行
      TTreeView(ACtrl).OnClick  := nil;
      //更新值
-     TTreeView(ACtrl).Items[AData.Value-1].Selected := True;
+     TTreeView(ACtrl).Items[AData.v-1].Selected := True;
      //恢复事件
      TTreeView(ACtrl).OnClick  := TTreeView(ACtrl).OnExit;
 

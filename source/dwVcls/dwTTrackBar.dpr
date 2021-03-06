@@ -48,17 +48,17 @@ begin
      joData    := _Json(AData);
 
 
-     if joData.event = 'onenter' then begin
+     if joData.e = 'onenter' then begin
           if Assigned(TTrackBar(ACtrl).OnEnter) then begin
                TTrackBar(ACtrl).OnEnter(TTrackBar(ACtrl));
           end;
-     end else if joData.event = 'onchange' then begin
+     end else if joData.e = 'onchange' then begin
           //保存事件
           oChange   := TTrackBar(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TTrackBar(ACtrl).OnChange  := nil;
           //更新值
-          TTrackBar(ACtrl).Text    := dwUnescape(joData.value);
+          TTrackBar(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TTrackBar(ACtrl).OnChange  := oChange;
 
@@ -66,15 +66,15 @@ begin
           if Assigned(TTrackBar(ACtrl).OnChange) then begin
                TTrackBar(ACtrl).OnChange(TTrackBar(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TTrackBar(ACtrl).OnExit) then begin
                TTrackBar(ACtrl).OnExit(TTrackBar(ACtrl));
           end;
-     end else if joData.event = 'onmouseenter' then begin
+     end else if joData.e = 'onmouseenter' then begin
           if Assigned(TTrackBar(ACtrl).OnMouseEnter) then begin
                TTrackBar(ACtrl).OnMouseEnter(TTrackBar(ACtrl));
           end;
-     end else if joData.event = 'onmouseexit' then begin
+     end else if joData.e = 'onmouseexit' then begin
           if Assigned(TTrackBar(ACtrl).OnMouseLeave) then begin
                TTrackBar(ACtrl).OnMouseLeave(TTrackBar(ACtrl));
           end;

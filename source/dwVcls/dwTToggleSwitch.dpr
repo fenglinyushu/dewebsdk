@@ -34,8 +34,8 @@ begin
      joData    := _Json(AData);
 
      with TToggleSwitch(ACtrl) do begin
-          if joData.event = 'onclick' then begin
-               if joData.value = 'true' then begin
+          if joData.e = 'onclick' then begin
+               if joData.v = 'true' then begin
                     State     := tssON;
                end else begin
                     State     := tssOFF;
@@ -43,11 +43,11 @@ begin
                if Assigned(OnClick) then begin
                     OnClick(TToggleSwitch(ACtrl));
                end;
-          end else if joData.event = 'onenter' then begin
+          end else if joData.e = 'onenter' then begin
                if Assigned(OnEnter) then begin
                     OnEnter(TToggleSwitch(ACtrl));
                end;
-          end else if joData.event = 'onexit' then begin
+          end else if joData.e = 'onexit' then begin
                if Assigned(OnExit) then begin
                     OnExit(TToggleSwitch(ACtrl));
                end;

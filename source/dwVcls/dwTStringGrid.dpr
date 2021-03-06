@@ -93,13 +93,13 @@ begin
 
                //
                joData    := _Json(AData);
-               if joData.event = 'onclick' then begin
+               if joData.e = 'onclick' then begin
                     //保存事件
                     TStringGrid(ACtrl).OnExit    := TStringGrid(ACtrl).OnClick;
                     //清空事件,以防止自动执行
                     TStringGrid(ACtrl).OnClick  := nil;
                     //更新值
-                    TStringGrid(ACtrl).Row   := joData.value;
+                    TStringGrid(ACtrl).Row   := joData.v;
                     //恢复事件
                     TStringGrid(ACtrl).OnClick  := TStringGrid(ACtrl).OnExit;
 
@@ -107,7 +107,7 @@ begin
                     if Assigned(TStringGrid(ACtrl).OnClick) then begin
                          TStringGrid(ACtrl).OnClick(TStringGrid(ACtrl));
                     end;
-               end else if joData.event = 'onenter' then begin
+               end else if joData.e = 'onenter' then begin
                end;
 
                //清空OnExit事件

@@ -48,18 +48,18 @@ begin
      joData    := _Json(AData);
 
 
-     if joData.event = 'onenter' then begin
+     if joData.e = 'onenter' then begin
           if Assigned(TChart(ACtrl).OnEnter) then begin
                TChart(ACtrl).OnEnter(TChart(ACtrl));
           end;
-     end else if joData.event = 'onchange' then begin
+     end else if joData.e = 'onchange' then begin
           {
           //保存事件
           oChange   := TChart(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TChart(ACtrl).OnChange  := nil;
           //更新值
-          TChart(ACtrl).Text    := dwUnescape(joData.value);
+          TChart(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TChart(ACtrl).OnChange  := oChange;
 
@@ -68,15 +68,15 @@ begin
                TChart(ACtrl).OnChange(TChart(ACtrl));
           end;
           }
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TChart(ACtrl).OnExit) then begin
                TChart(ACtrl).OnExit(TChart(ACtrl));
           end;
-     end else if joData.event = 'onmouseenter' then begin
+     end else if joData.e = 'onmouseenter' then begin
           if Assigned(TChart(ACtrl).OnMouseEnter) then begin
                TChart(ACtrl).OnMouseEnter(TChart(ACtrl));
           end;
-     end else if joData.event = 'onmouseexit' then begin
+     end else if joData.e = 'onmouseexit' then begin
           if Assigned(TChart(ACtrl).OnMouseLeave) then begin
                TChart(ACtrl).OnMouseLeave(TChart(ACtrl));
           end;

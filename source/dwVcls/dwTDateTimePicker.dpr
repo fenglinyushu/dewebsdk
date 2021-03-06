@@ -45,16 +45,16 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onchange' then begin
+     if joData.e = 'onchange' then begin
           //保存事件
           TDateTimePicker(ACtrl).OnExit    := TDateTimePicker(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TDateTimePicker(ACtrl).OnChange  := nil;
           //更新值
           if TDateTimePicker(ACtrl).Kind = dtkDate then begin
-               TDateTimePicker(ACtrl).Date    := StrToDateDef(joData.value,Now);
+               TDateTimePicker(ACtrl).Date    := StrToDateDef(joData.v,Now);
           end else begin
-               TDateTimePicker(ACtrl).Time    := StrToTimeDef(StringReplace(joData.value,'%3A',':',[rfReplaceAll])+':00',Now);
+               TDateTimePicker(ACtrl).Time    := StrToTimeDef(StringReplace(joData.v,'%3A',':',[rfReplaceAll])+':00',Now);
           end;
           //恢复事件
           TDateTimePicker(ACtrl).OnChange  := TDateTimePicker(ACtrl).OnExit;
@@ -66,7 +66,7 @@ begin
 
           //清空OnExit事件
           TDateTimePicker(ACtrl).OnExit  := nil;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
      end;
 
 end;

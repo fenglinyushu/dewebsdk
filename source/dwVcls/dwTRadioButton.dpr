@@ -45,13 +45,13 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           //保存事件
           TRadioButton(ACtrl).OnExit := TRadioButton(ACtrl).OnClick;
           //清空事件,以防止自动执行
           TRadioButton(ACtrl).OnClick := nil;
           //更新值
-          TRadioButton(ACtrl).Checked := dwUnescape(joData.Value)='true';
+          TRadioButton(ACtrl).Checked := dwUnescape(joData.v)='true';
           //恢复事件
           TRadioButton(ACtrl).OnClick := TRadioButton(ACtrl).OnExit;
           //执行事件
@@ -60,7 +60,7 @@ begin
           end;
           //清空OnExit事件
           TRadioButton(ACtrl).OnExit := nil;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
      end;
 
      //清空OnExit事件

@@ -148,7 +148,7 @@ begin
           //
           joData    := _Json(AData);
 
-          if joData.event = 'onclick' then begin
+          if joData.e = 'onclick' then begin
                //重新生成验证码
                with TImage(ACtrl) do begin
                     _CreateCaptcha(Width,Height,sSrc,sCaptcha);
@@ -162,17 +162,17 @@ begin
           //
           joData    := _Json(AData);
 
-          if joData.event = 'onclick' then begin
+          if joData.e = 'onclick' then begin
                //
                if Assigned(TImage(ACtrl).OnClick) then begin
                     TImage(ACtrl).OnClick(TImage(ACtrl));
                end;
-          end else if joData.event = 'onenter' then begin
+          end else if joData.e = 'onenter' then begin
                //
                if Assigned(TImage(ACtrl).OnMouseEnter) then begin
                     TImage(ACtrl).OnMouseEnter(TImage(ACtrl));
                end;
-          end else if joData.event = 'onexit' then begin
+          end else if joData.e = 'onexit' then begin
                //
                if Assigned(TImage(ACtrl).OnMouseLeave) then begin
                     TImage(ACtrl).OnMouseLeave(TImage(ACtrl));

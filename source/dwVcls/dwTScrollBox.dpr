@@ -32,11 +32,11 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onenter' then begin
+     if joData.e = 'onenter' then begin
           if Assigned(TScrollBox(ACtrl).OnEnter) then begin
                TScrollBox(ACtrl).OnEnter(TScrollBox(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TScrollBox(ACtrl).OnExit) then begin
                TScrollBox(ACtrl).OnExit(TScrollBox(ACtrl));
           end;

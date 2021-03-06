@@ -48,17 +48,17 @@ begin
      joData    := _Json(AData);
 
 
-     if joData.event = 'onenter' then begin
+     if joData.e = 'onenter' then begin
           if Assigned(TProgressBar(ACtrl).OnEnter) then begin
                TProgressBar(ACtrl).OnEnter(TProgressBar(ACtrl));
           end;
-     end else if joData.event = 'onchange' then begin
+     end else if joData.e = 'onchange' then begin
           //保存事件
           oChange   := TProgressBar(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TProgressBar(ACtrl).OnChange  := nil;
           //更新值
-          TProgressBar(ACtrl).Text    := dwUnescape(joData.value);
+          TProgressBar(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TProgressBar(ACtrl).OnChange  := oChange;
 
@@ -66,15 +66,15 @@ begin
           if Assigned(TProgressBar(ACtrl).OnChange) then begin
                TProgressBar(ACtrl).OnChange(TProgressBar(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TProgressBar(ACtrl).OnExit) then begin
                TProgressBar(ACtrl).OnExit(TProgressBar(ACtrl));
           end;
-     end else if joData.event = 'onmouseenter' then begin
+     end else if joData.e = 'onmouseenter' then begin
           if Assigned(TProgressBar(ACtrl).OnMouseEnter) then begin
                TProgressBar(ACtrl).OnMouseEnter(TProgressBar(ACtrl));
           end;
-     end else if joData.event = 'onmouseexit' then begin
+     end else if joData.e = 'onmouseexit' then begin
           if Assigned(TProgressBar(ACtrl).OnMouseLeave) then begin
                TProgressBar(ACtrl).OnMouseLeave(TProgressBar(ACtrl));
           end;

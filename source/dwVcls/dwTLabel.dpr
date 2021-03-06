@@ -79,15 +79,15 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           if Assigned(TLabel(ACtrl).OnClick) then begin
                TLabel(ACtrl).OnClick(TLabel(ACtrl));
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           if Assigned(TLabel(ACtrl).OnMouseEnter) then begin
                TLabel(ACtrl).OnMouseEnter(TLabel(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TLabel(ACtrl).OnMouseLeave) then begin
                TLabel(ACtrl).OnMouseLeave(TLabel(ACtrl));
           end;

@@ -57,7 +57,7 @@ begin
                TPageControl(ACtrl).OnChange  := nil;
                //¸üÐÂÖµ
                for iTab := 0 to TPageControl(ACtrl).PageCount-1 do begin
-                    if TPageControl(ACtrl).Pages[iTab].Name = joData.value then begin
+                    if TPageControl(ACtrl).Pages[iTab].Name = joData.v then begin
                          TPageControl(ACtrl).ActivePageIndex     := iTab;
                          break;
                     end;

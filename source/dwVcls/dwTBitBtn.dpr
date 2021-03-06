@@ -33,20 +33,20 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onenddock' then begin
+     if joData.e = 'onenddock' then begin
           if Assigned(TBitBtn(ACtrl).OnEndDock) then begin
                TBitBtn(ACtrl).OnEndDock(TBitBtn(ACtrl),nil,0,0);
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           if Assigned(TBitBtn(ACtrl).OnEnter) then begin
                TBitBtn(ACtrl).OnEnter(TBitBtn(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TBitBtn(ACtrl).OnExit) then begin
                TBitBtn(ACtrl).OnExit(TBitBtn(ACtrl));
           end;
-     end else if joData.event = 'getfilename' then begin
-          TBitBtn(ACtrl).Caption   := dwUnescape(joData.value);
+     end else if joData.e = 'getfilename' then begin
+          TBitBtn(ACtrl).Caption   := dwUnescape(joData.v);
      end;
 end;
 

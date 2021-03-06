@@ -58,7 +58,7 @@ begin
      joData    := _json(AData);
 
      //先找到对应的菜单项
-     oMenuItem := dwGetMenuItem(TMainMenu(ACtrl),joData.value);
+     oMenuItem := dwGetMenuItem(TMainMenu(ACtrl),joData.v);
 
      //
      if oMenuItem = nil then begin

@@ -33,7 +33,7 @@ begin
      //清空事件,以防止自动执行
      TSpinEdit(ACtrl).OnChange  := nil;
      //更新值
-     TSpinEdit(ACtrl).Value        := (joData.value);
+     TSpinEdit(ACtrl).Value        := (joData.v);
      //恢复事件
      TSpinEdit(ACtrl).OnChange  := TSpinEdit(ACtrl).OnExit;
 

@@ -30,17 +30,17 @@ begin
      joData    := _Json(AData);
 
 
-     if joData.event = 'onenter' then begin
+     if joData.e = 'onenter' then begin
           if Assigned(TMemo(ACtrl).OnEnter) then begin
                TMemo(ACtrl).OnEnter(TMemo(ACtrl));
           end;
-     end else if joData.event = 'onchange' then begin
+     end else if joData.e = 'onchange' then begin
           //保存事件
           oChange   := TMemo(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TMemo(ACtrl).OnChange  := nil;
           //更新值
-          TMemo(ACtrl).Text    := dwUnescape(joData.value);
+          TMemo(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TMemo(ACtrl).OnChange  := oChange;
 
@@ -48,15 +48,15 @@ begin
           if Assigned(TMemo(ACtrl).OnChange) then begin
                TMemo(ACtrl).OnChange(TMemo(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TMemo(ACtrl).OnExit) then begin
                TMemo(ACtrl).OnExit(TMemo(ACtrl));
           end;
-     end else if joData.event = 'onmouseenter' then begin
+     end else if joData.e = 'onmouseenter' then begin
           if Assigned(TMemo(ACtrl).OnMouseEnter) then begin
                TMemo(ACtrl).OnMouseEnter(TMemo(ACtrl));
           end;
-     end else if joData.event = 'onmouseexit' then begin
+     end else if joData.e = 'onmouseexit' then begin
           if Assigned(TMemo(ACtrl).OnMouseLeave) then begin
                TMemo(ACtrl).OnMouseLeave(TMemo(ACtrl));
           end;

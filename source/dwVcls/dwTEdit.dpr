@@ -47,17 +47,17 @@ begin
      joData    := _Json(AData);
 
 
-     if joData.event = 'onenter' then begin
+     if joData.e = 'onenter' then begin
           if Assigned(TEdit(ACtrl).OnEnter) then begin
                TEdit(ACtrl).OnEnter(TEdit(ACtrl));
           end;
-     end else if joData.event = 'onchange' then begin
+     end else if joData.e = 'onchange' then begin
           //保存事件
           oChange   := TEdit(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TEdit(ACtrl).OnChange  := nil;
           //更新值
-          TEdit(ACtrl).Text    := dwUnescape(joData.value);
+          TEdit(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TEdit(ACtrl).OnChange  := oChange;
 
@@ -65,27 +65,27 @@ begin
           if Assigned(TEdit(ACtrl).OnChange) then begin
                TEdit(ACtrl).OnChange(TEdit(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TEdit(ACtrl).OnExit) then begin
                TEdit(ACtrl).OnExit(TEdit(ACtrl));
           end;
-     end else if joData.event = 'onmouseenter' then begin
+     end else if joData.e = 'onmouseenter' then begin
           if Assigned(TEdit(ACtrl).OnMouseEnter) then begin
                TEdit(ACtrl).OnMouseEnter(TEdit(ACtrl));
           end;
-     end else if joData.event = 'onmouseexit' then begin
+     end else if joData.e = 'onmouseexit' then begin
           if Assigned(TEdit(ACtrl).OnMouseLeave) then begin
                TEdit(ACtrl).OnMouseLeave(TEdit(ACtrl));
           end;
      end;
 {
-     if joData.event = 'onchange' then begin
+     if joData.e = 'onchange' then begin
           //保存事件
           TEdit(ACtrl).OnExit    := TEdit(ACtrl).OnChange;
           //清空事件,以防止自动执行
           TEdit(ACtrl).OnChange  := nil;
           //更新值
-          TEdit(ACtrl).Text    := dwUnescape(joData.value);
+          TEdit(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TEdit(ACtrl).OnChange  := TEdit(ACtrl).OnExit;
 
@@ -93,13 +93,13 @@ begin
           if Assigned(TEdit(ACtrl).OnChange) then begin
                TEdit(ACtrl).OnChange(TEdit(ACtrl));
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           //保存事件
           TEdit(ACtrl).OnExit    := TEdit(ACtrl).OnEnter;
           //清空事件,以防止自动执行
           TEdit(ACtrl).OnEnter  := nil;
           //更新值
-          TEdit(ACtrl).Text    := dwUnescape(joData.value);
+          TEdit(ACtrl).Text    := dwUnescape(joData.v);
           //恢复事件
           TEdit(ACtrl).OnEnter  := TEdit(ACtrl).OnExit;
 

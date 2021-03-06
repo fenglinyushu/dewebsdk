@@ -33,15 +33,15 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           if Assigned(TButton(ACtrl).OnClick) then begin
                TButton(ACtrl).OnClick(TButton(ACtrl));
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           if Assigned(TButton(ACtrl).OnEnter) then begin
                TButton(ACtrl).OnEnter(TButton(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           if Assigned(TButton(ACtrl).OnExit) then begin
                TButton(ACtrl).OnExit(TButton(ACtrl));
           end;

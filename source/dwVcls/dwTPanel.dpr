@@ -28,11 +28,11 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           TPanel(ACtrl).OnClick(TPanel(ACtrl));
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           TPanel(ACtrl).OnEnter(TPanel(ACtrl));
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           TPanel(ACtrl).OnExit(TPanel(ACtrl));
      end;
 end;

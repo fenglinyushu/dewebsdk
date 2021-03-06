@@ -34,7 +34,7 @@ begin
      //清空事件,以防止自动执行
      TListBox(ACtrl).OnClick  := nil;
      //更新值
-     sValue    := dwUnescape(joData.value);
+     sValue    := dwUnescape(joData.v);
      sValue    := ','+sValue+',';
      for iItem := 0 to TListBox(ACtrl).Items.Count-1 do begin
           TListBox(ACtrl).Selected[iItem]    := Pos(','+IntToStr(iItem)+',',sValue)>0;

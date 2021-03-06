@@ -44,17 +44,17 @@ begin
      //
      joData    := _Json(AData);
 
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           //
           if Assigned(TSpeedButton(ACtrl).OnClick) then begin
                TSpeedButton(ACtrl).OnClick(TSpeedButton(ACtrl));
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
           //
           if Assigned(TSpeedButton(ACtrl).OnMouseEnter) then begin
                TSpeedButton(ACtrl).OnMouseEnter(TSpeedButton(ACtrl));
           end;
-     end else if joData.event = 'onexit' then begin
+     end else if joData.e = 'onexit' then begin
           //
           if Assigned(TSpeedButton(ACtrl).OnMouseLeave) then begin
                TSpeedButton(ACtrl).OnMouseLeave(TSpeedButton(ACtrl));

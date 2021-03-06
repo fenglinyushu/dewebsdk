@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{B87449E5-7B6E-462B-AC8F-CC027672F3C2}</ProjectGuid>
+        <ProjectGuid>{916C7B29-94EA-4B8E-86BF-8C89E88560DC}</ProjectGuid>
         <MainSource>dwTPanel.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>

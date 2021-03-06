@@ -116,7 +116,7 @@ var
 begin
 {
                                    //先找到对应的节点
-                                   iItem     := StrToIntDef(joData.value,1)-1;
+                                   iItem     := StrToIntDef(joData.v,1)-1;
                                    oTreeNode := TTreeView(oComp).Items[iItem];
                                    oTreeNode.Selected  := True;
 
@@ -141,17 +141,17 @@ begin
      joData    := _Json(AData);
 
      //找到对应的节点,并选中
-     iItem     := StrToIntDef(joData.value,1)-1;
+     iItem     := StrToIntDef(joData.v,1)-1;
      oTreeNode := TTreeView(ACtrl).Items[iItem];
      oTreeNode.Selected  := True;
 
      //
-     if joData.event = 'onclick' then begin
+     if joData.e = 'onclick' then begin
           //执行事件
           if Assigned(TTreeView(ACtrl).OnClick) then begin
                TTreeView(ACtrl).OnClick(TTreeView(ACtrl));
           end;
-     end else if joData.event = 'onenter' then begin
+     end else if joData.e = 'onenter' then begin
      end;
 
 end;
