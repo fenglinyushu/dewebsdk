@@ -123,7 +123,7 @@ begin
                                    //如果有事件
                                    if Assigned(TTreeView(oComp).OnClick) then begin
                                         //标记CID, 以备后面dwCreateForm使用
-                                        TTreeView(oComp).Tag  := joData.cid;
+                                        TTreeView(oComp).Tag  := joData.i;
 
                                         //取得事件执行前控件信息
                                         jaBefore  := dwGetComponentInfos(oForm);

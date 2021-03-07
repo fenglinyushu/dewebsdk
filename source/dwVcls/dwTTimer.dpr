@@ -68,7 +68,7 @@ begin
      with TTimer(ACtrl) do begin
           if DesignInfo = 1 then begin   //创建定时器
                sCode     := Name+'__tmr = window.setInterval(function() {'
-                    +'axios.get(''{"mode":"event","cid":''+this.clientid+'',"component":"'+Name+'"}'')'
+                    +'axios.get(''{"m":"event","i":''+this.clientid+'',"c":"'+Name+'"}'')'
                     +'.then(resp =>{this.procResp(resp.data);  })'
                     +'}, '+IntToStr(Interval)+');';
 
@@ -93,7 +93,7 @@ begin
      with TTimer(ACtrl) do begin
           if DesignInfo = 1 then begin   //创建定时器
                sCode     := 'me=this;'+Name+'__tmr = window.setInterval(function() {'
-                    +'axios.get(''{"mode":"event","cid":'+IntToStr(TForm(Owner).Handle)+',"component":"'+Name+'"}'')'
+                    +'axios.get(''{"m":"event","i":'+IntToStr(TForm(Owner).Handle)+',"c":"'+Name+'"}'')'
                     +'.then(resp =>{me.procResp(resp.data);  })'
                     +'},'+IntToStr(Interval)+');';
 
