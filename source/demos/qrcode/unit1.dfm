@@ -62,7 +62,6 @@ object Form1: TForm1
     Caption = 'Start'
     TabOrder = 0
     OnClick = Button1Click
-    ExplicitTop = 216
   end
   object Button2: TButton
     AlignWithMargins = True
@@ -75,10 +74,9 @@ object Form1: TForm1
     Margins.Right = 10
     Margins.Bottom = 10
     Align = alTop
-    Caption = 'Open URL'
+    Caption = 'Open URL with qrcode'
     TabOrder = 1
     OnClick = Button2Click
-    ExplicitTop = 345
   end
   object Panel_01_Tile: TPanel
     Left = 0

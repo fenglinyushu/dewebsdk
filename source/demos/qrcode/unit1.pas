@@ -56,11 +56,14 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
+     dwOpenUrl(Self,'http://192.168.3.5:8090/hello.dw?'+Trim(Label1.Caption),'_self');
+     {
      if (lowercase(Copy(Label1.Caption,1,7))='http://') or (lowercase(Copy(Label1.Caption,1,8))='https://') then begin
           dwOpenUrl(Self,Label1.Caption,'_self');
      end else begin
           dwShowMessage('not a website!',self);
      end;
+     }
 end;
 
 procedure TForm1.FormMouseUp(Sender: TObject; Button: TMouseButton;
