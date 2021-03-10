@@ -23,7 +23,7 @@ object Form1: TForm1
     Top = 20
     Width = 320
     Height = 320
-    Hint = '{"radius":"5px"}'
+    Hint = '{"radius":"25px"}'
     Margins.Left = 20
     Margins.Top = 20
     Margins.Right = 20

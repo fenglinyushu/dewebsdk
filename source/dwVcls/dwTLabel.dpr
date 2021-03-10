@@ -100,42 +100,6 @@ end;
 
 
 
-function _GetFontVue(AFont:TFont):string;
-begin
-     Result    := 'color:'+dwColor(AFont.color)+';'
-               +'font-family:'''+AFont.name+''';'
-               +'font-size:'+IntToStr(AFont.size)+'pt;';
-
-     //粗体
-     if fsBold in AFont.Style then begin
-          Result    := Result+'font-weight:bold;';
-     end else begin
-          Result    := Result+'font-weight:normal;';
-     end;
-
-     //斜体
-     if fsItalic in AFont.Style then begin
-          Result    := Result+'font-style:italic;';
-     end else begin
-          Result    := Result+'font-style:normal;';
-     end;
-
-     //下划线
-     if fsUnderline in AFont.Style then begin
-          Result    := Result+'text-decoration:underline;';
-          //删除线
-          if fsStrikeout in AFont.Style then begin
-               Result    := Result+'text-decoration:line-through;';
-          end;
-     end else begin
-          //删除线
-          if fsStrikeout in AFont.Style then begin
-               Result    := Result+'text-decoration:line-through;';
-          end else begin
-               Result    := Result+'text-decoration:none;';
-          end;
-     end;
-end;
 
 function _GetAlignment(ACtrl:TControl):string;
 begin
@@ -166,6 +130,23 @@ begin
           if HelpKeyword = 'rich' then begin
                //用作可控Label控件----------------------------------------------
 
+
+               //
+               joData    := _Json(AData);
+
+               if joData.e = 'onclick' then begin
+                    if Assigned(TLabel(ACtrl).OnClick) then begin
+                         TLabel(ACtrl).OnClick(TLabel(ACtrl));
+                    end;
+               end else if joData.e = 'onenter' then begin
+                    if Assigned(TLabel(ACtrl).OnMouseEnter) then begin
+                         TLabel(ACtrl).OnMouseEnter(TLabel(ACtrl));
+                    end;
+               end else if joData.e = 'onexit' then begin
+                    if Assigned(TLabel(ACtrl).OnMouseLeave) then begin
+                         TLabel(ACtrl).OnMouseLeave(TLabel(ACtrl));
+                    end;
+               end;
           end else begin
                //用作普通Label控件----------------------------------------------
 
