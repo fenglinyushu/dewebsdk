@@ -23,6 +23,7 @@ type
   TForm1 = class(TForm)
     Label1: TLabel;
     Timer1: TTimer;
+    Button1: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
@@ -42,8 +43,13 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-     dwRunJS('alert("Ã· æƒ⁄»›!");self.location="login.dw";',self);      //
-
+     if Timer1.DesignInfo = 1 then begin
+          Button1.Caption     := 'Start';
+          Timer1.DesignInfo   := 0;
+     end else begin
+          Timer1.DesignInfo   := 1;
+          Button1.Caption     := 'Pause';
+     end;
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);

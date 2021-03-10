@@ -20295,11 +20295,11 @@
 }
 
 .el-tabs__item {
-	padding: 5px 30px 5px 20px;
+	padding: 5px 15px 5px 15px;
 	height: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	line-height: 40px;
+	line-height: 30px;
 	display: inline-block;
 	list-style: none;
 	font-size: 14px;

@@ -156,6 +156,12 @@ var
      slTxt     : TStringList;
      iItem     : Integer;
 begin
+     //
+     AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
+     //AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
+     //AText     := StringReplace(AText,'>','\>',[rfReplaceAll]);
+
+     //
      slTxt     := TStringList.Create;
      slTxt.Text     := AText;
      Result    := '';

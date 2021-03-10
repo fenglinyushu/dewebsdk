@@ -37,9 +37,19 @@ object Form1: TForm1
     Layout = tlCenter
     ExplicitWidth = 790
   end
+  object Button1: TButton
+    Left = 96
+    Top = 104
+    Width = 121
+    Height = 49
+    Hint = '{"type":"primary"}'
+    Caption = 'Pause'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 112
-    Top = 136
+    Left = 96
+    Top = 168
   end
 end

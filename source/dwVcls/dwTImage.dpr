@@ -257,16 +257,17 @@ begin
                end;
 
                if Proportional then begin
-                    joRes.Add('<el-image :src="'+Name+'__src" fit="contain"'
+                    joRes.Add('<el-image'
+                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
+                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
+                              +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
+                              +' :src="'+Name+'__src" fit="contain"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
                               +dwLTWH(TControl(ACtrl))
                               +sRadius
                               +dwIIF(Assigned(OnClick),'cursor: pointer;','')
                               +'"'
-                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                              +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
                               +'>');
                end else begin
                     if Stretch then begin

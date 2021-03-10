@@ -268,7 +268,11 @@ begin
                     joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
                     joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                     //
-                    joRes.Add(Name+'__apg:"'+ActivePage.Name+'",');
+                    if ActivePageIndex>=0 then begin
+                         joRes.Add(Name+'__apg:"'+ActivePage.Name+'",');
+                    end else begin
+                         joRes.Add(Name+'__apg:"'+''+'",');
+                    end;
                     //方向
                     if TabPosition =  (tpTop) then begin
                          joRes.Add(Name+'__tps:"top",');
@@ -318,7 +322,12 @@ begin
                     joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
                     joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
                     //
-                    joRes.Add('this.'+Name+'__apg="'+ActivePage.Name+'";');
+                    if ActivePageIndex>=0 then begin
+                         joRes.Add('this.'+Name+'__apg="'+ActivePage.Name+'";');
+                    end else begin
+                         joRes.Add('this.'+Name+'__apg="'+''+'";');
+                    end;
+
                     //方向
                     if TabPosition =  (tpTop) then begin
                          joRes.Add('this.'+Name+'__tps="top";');
