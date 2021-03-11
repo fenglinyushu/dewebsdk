@@ -249,12 +249,13 @@ begin
           joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
           joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
           joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
-          joRes.Add(Name+'__imh:"'+IntToStr(Height-Round(Font.Size*2))+'px",');
-          joRes.Add(Name+'__lbt:"'+IntToStr(Height-Round(Font.Size*_K))+'px",');
-          joRes.Add(Name+'__lbh:"'+IntToStr(Round(Font.Size*_K))+'px",');
           //
           joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
           joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          //
+          joRes.Add(Name+'__imh:"'+IntToStr(Height-Round(Font.Size*2))+'px",');
+          joRes.Add(Name+'__lbt:"'+IntToStr(Height-Round(Font.Size*_K))+'px",');
+          joRes.Add(Name+'__lbh:"'+IntToStr(Round(Font.Size*_K))+'px",');
           //
           joRes.Add(Name+'__tri:'+dwIIF(Layout = blGlyphRight,'true,','false,'));
           joRes.Add(Name+'__bdg:'+dwIIF(Layout = blGlyphTop,'true,','false,'));
@@ -288,11 +289,21 @@ begin
           joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
           joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          if dwGetProp(TControl(ACtrl),'src')='' then begin
-               joRes.Add('this.'+Name+'__src="dist/webimages/'+Name+'.jpg";');
-          end else begin
-               joRes.Add('this.'+Name+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
-          end;
+          joRes.Add('this.'+Name+'__imh="'+IntToStr(Height-Round(Font.Size*2))+'px";');
+          joRes.Add('this.'+Name+'__lbt="'+IntToStr(Height-Round(Font.Size*_K))+'px";');
+          joRes.Add('this.'+Name+'__lbh="'+IntToStr(Round(Font.Size*_K))+'px";');
+          //
+          joRes.Add('this.'+Name+'__tri='+dwIIF(Layout = blGlyphRight,'true;','false;'));
+          joRes.Add('this.'+Name+'__bdg='+dwIIF(Layout = blGlyphTop,'true;','false;'));
+          joRes.Add('this.'+Name+'__idt='+dwIIF(Layout = blGlyphBottom,'true;','false;'));
+          joRes.Add('this.'+Name+'__spc='+IntToStr(Spacing)+';');
+          joRes.Add('this.'+Name+'__max='+IntToStr(Margin)+';');
+          //
+          joRes.Add('this.'+Name+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
+          //
+          joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          //
+          joRes.Add('this.'+Name+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);

@@ -97,7 +97,7 @@ object Form1: TForm1
     Font.Style = []
     Layout = blGlyphRight
     ParentFont = False
-    OnClick = SBClick
+    OnClick = SpeedButton4Click
   end
   object SpeedButton5: TSpeedButton
     Left = 238

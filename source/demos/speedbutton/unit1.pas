@@ -28,6 +28,7 @@ type
     procedure SBClick(Sender: TObject);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,6 +54,11 @@ procedure TForm1.SBClick(Sender: TObject);
 begin
      //
      dwShowMessage(TSpeedButton(Sender).Caption,self);
+end;
+
+procedure TForm1.SpeedButton4Click(Sender: TObject);
+begin
+     SpeedButton7.Spacing     := Random(150);
 end;
 
 end.

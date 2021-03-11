@@ -1,4 +1,4 @@
-unit unit1;
+﻿unit unit1;
 
 interface
 
@@ -6,7 +6,7 @@ uses
      //
      dwBase,
 
-     //��¡�ؼ���Ԫ
+     //克隆控件单元
      CloneComponents,
 
      //
@@ -21,7 +21,6 @@ type
     Panel_00_Title: TPanel;
     Image_logo: TImage;
     Panel_99_Footer: TPanel;
-    Label4: TLabel;
     Image_Camera: TImage;
     Edit_Search: TEdit;
     PageControl: TPageControl;
@@ -48,10 +47,29 @@ type
     StaticText1: TStaticText;
     StaticText2: TStaticText;
     Image1: TImage;
+    ScrollBox2: TScrollBox;
+    Panel2: TPanel;
+    Panel_dm2: TPanel;
+    Image_DM2: TImage;
+    Panel_dm2c: TPanel;
+    StaticText6: TStaticText;
+    StaticText5: TStaticText;
+    Panel1: TPanel;
+    Label1: TLabel;
+    StaticText_DM2_Price: TStaticText;
+    Image2: TImage;
+    StaticText_DM2_Heart: TStaticText;
+    Panel3: TPanel;
+    Image_bottom0: TImage;
+    Image_bottom1: TImage;
+    Image_bottom3: TImage;
+    Image_bottom4: TImage;
+    Image_bottom2: TImage;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Label_Cate0Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Image_CameraClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,6 +91,7 @@ var
 begin
      //
      for I := 0 to 19 do begin
+          //<添加精品页
           oPanel    := TPanel(CloneComponent(Panel_Demo));
           //
           oPanel.Visible := True;
@@ -86,9 +105,27 @@ begin
           end;
           //
           TImage(FindComponent('Image_Demo'+IntToStr(I+1))).Hint   := '{"radius":"10px","src":"/media/images/app0/'+IntToStr(I mod 6)+'.jpg"}';
+          //>
+
+          //<添加礼物页
+          oPanel    := TPanel(CloneComponent(Panel_DM2));
+          //
+          oPanel.Top     := 9999;
+          oPanel.Visible := True;
+          //
+          TImage(FindComponent('Image_dm2'+IntToStr(I+1))).Hint   := '{"radius":"10px","src":"/media/images/app0/20'+IntToStr(I mod 3)+'.jpg"}';
+          TStaticText(FindComponent('StaticText_DM2_Price'+IntToStr(I+1))).Caption   := '¥'+Format('%.1f',[20+Random(5000)/10]);
+          TStaticText(FindComponent('StaticText_DM2_Heart'+IntToStr(I+1))).Caption   := Format('%d',[20+Random(500)]);
+          //>
+
+
+
      end;
      //
      Panel_Scroll1.Height     := 10 * 170 + 220;
+
+     //
+     PageControl.ActivePageIndex   := 0;
 
 end;
 
@@ -110,21 +147,29 @@ begin
      iInnerW   := StrToIntDef(dwGetProp(Self,'innerwidth'),X);
      iInnerH   := StrToIntDef(dwGetProp(Self,'innerheight'),Y);
 
-     //�õ�ʵ�ֿ��ø߶�
+     //得到实现可用高度
      Height    := Ceil(iInnerH*Y/iTrueH*iTrueW/iInnerW);
 
 
-     //
-     Panel_99_Footer.Top    := Height - Panel_99_Footer.Height;
-     Panel_99_Footer.Left   := 0;
-     Panel_99_Footer.Width  := Width;
+     //底部按钮栏
+     Panel_99_Footer.Top      := Height - Panel_99_Footer.Height-5;
+     Panel_99_Footer.Left     := 0;
+     Panel_99_Footer.Width    := Width;
+     //底部按钮栏的5个按钮
+
 
      //
      Panel_02_Pages.Height    := Panel_99_Footer.Top - Panel_02_Pages.Top;
+
      //
      for iCate := 0 to 5 do begin
-          TLabel(FindComponent('Label_Cate'+IntToStr(iCate))).Width   := Floor(X/6)-8;
+          TLabel(FindComponent('Label_Cate'+IntToStr(iCate))).Width   := Floor(Width/6)-8;
      end;
+end;
+
+procedure TForm1.Image_CameraClick(Sender: TObject);
+begin
+     dwOpenUrl(self,'/qrcode.dw','_self');
 end;
 
 procedure TForm1.Label_Cate0Click(Sender: TObject);
