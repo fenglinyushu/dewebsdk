@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb</title>
+<title>Hello,World!</title>
 </head>
 
 <body style="background-color:#FFFFFF">
@@ -14,7 +14,7 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_1__wid,height:Form1_1__hei}" >
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_12__wid,height:Form1_12__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,11 +27,15 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <el-input type="textarea" v-if="Memo1__vis" :disabled="Memo1__dis" v-model="Memo1__txt" :style="{left:Memo1__lef,top:Memo1__top,width:Memo1__wid,height:Memo1__hei}" style="position:absolute;" @input="dwevent($event,'Memo1','(this.Memo1__txt)','onchange','')">
+        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Verdana';font-size:28pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:177px;">{{Label1__cap}}
+        </div>
+        <el-input type="textarea" v-if="Memo1__vis" :disabled="Memo1__dis" v-model="Memo1__txt" :style="{left:Memo1__lef,top:Memo1__top,width:Memo1__wid,height:Memo1__hei}" style="position:absolute;" @input="dwevent($event,'Memo1','escape(this.Memo1__txt)','onchange','')">
+        </el-input>
+        <el-input type="textarea" v-if="Memo2__vis" :disabled="Memo2__dis" v-model="Memo2__txt" :style="{left:Memo2__lef,top:Memo2__top,width:Memo2__wid,height:Memo2__hei}" style="position:absolute;" @input="dwevent($event,'Memo2','escape(this.Memo2__txt)','onchange','')">
         </el-input>
         <el-button size=small v-if="Button1__vis" :disabled="Button1__dis" type="default" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','')">{{Button1__cap}}
         </el-button>
-        <el-input v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','(this.Edit1__txt)','onchange','')">
+        <el-input type="textarea" v-if="Memo3__vis" :disabled="Memo3__dis" v-model="Memo3__txt" :style="{left:Memo3__lef,top:Memo3__top,width:Memo3__wid,height:Memo3__hei}" style="position:absolute;" @input="dwevent($event,'Memo3','escape(this.Memo3__txt)','onchange','')">
         </el-input>
 	 </div>
     <script>
@@ -60,31 +64,45 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_1__top:"0px",
-					    Form1_1__wid:"522px",
-					    Form1_1__hei:"554px",
-                        Memo1__lef:"8px",
-                        Memo1__top:"8px",
-                        Memo1__wid:"185px",
-                        Memo1__hei:"353px",
+					    Form1_12__top:"0px",
+					    Form1_12__wid:"382px",
+					    Form1_12__hei:"525px",
+                        Label1__lef:"0px",
+                        Label1__top:"0px",
+                        Label1__wid:"382px",
+                        Label1__hei:"177px",
+                        Label1__vis:true,
+                        Label1__dis:false,
+                        Label1__cap:"Hello, DeWeb!",
+                        Memo1__lef:"32px",
+                        Memo1__top:"160px",
+                        Memo1__wid:"313px",
+                        Memo1__hei:"137px",
                         Memo1__vis:true,
                         Memo1__dis:false,
-                        Memo1__txt:"\"\n>\n<\n\",
-                        Button1__lef:'224px',
-                        Button1__top:'42px',
+                        Memo1__txt:'Memo1',
+                        Memo2__lef:"32px",
+                        Memo2__top:"344px",
+                        Memo2__wid:"313px",
+                        Memo2__hei:"153px",
+                        Memo2__vis:true,
+                        Memo2__dis:false,
+                        Memo2__txt:'Memo2',
+                        Button1__lef:'128px',
+                        Button1__top:'304px',
                         Button1__wid:'81px',
-                        Button1__hei:'33px',
+                        Button1__hei:'34px',
                         Button1__vis:true,
                         Button1__dis:false,
                         Button1__cap:'Button1',
                         Button1__typ:'',
-                        Edit1__lef:"224px",
-                        Edit1__top:"8px",
-                        Edit1__wid:"121px",
-                        Edit1__hei:"28px",
-                        Edit1__vis:true,
-                        Edit1__dis:false,
-                        Edit1__txt:">",
+                        Memo3__lef:"32px",
+                        Memo3__top:"40px",
+                        Memo3__wid:"313px",
+                        Memo3__hei:"105px",
+                        Memo3__vis:true,
+                        Memo3__dis:false,
+                        Memo3__txt:'复制我到下面得 memo1 然后点击 按钮\nMemo1\'''1234567890',
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -94,16 +112,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:1049986,
-					    shuntflag:3125
+					    clientid:527108,
+					    shuntflag:7171
                     }
                 },
                 mounted() {
                     let me=this;
-                    let Form1_1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":1049986}',{headers:{shuntflag:3125}})
+                    let Form1_12hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":527108}',{headers:{shuntflag:7171}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_12hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -118,7 +136,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":1049986,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":527108,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -131,7 +149,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":1049986,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":527108,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -147,12 +165,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:3125}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:7171}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":1049986,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:3125}})
+                        axios.get('{"m":"interaction","i":527108,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:7171}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

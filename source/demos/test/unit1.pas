@@ -21,11 +21,7 @@ uses
 
 type
   TForm1 = class(TForm)
-    Memo1: TMemo;
-    Button1: TButton;
-    Edit1: TEdit;
-    procedure Image1Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    LabeledEdit1: TLabeledEdit;
   private
     { Private declarations }
   public
@@ -40,15 +36,5 @@ implementation
 
 {$R *.dfm}
 
-
-procedure TForm1.Button1Click(Sender: TObject);
-begin
-     Memo1.Lines.Add(Edit1.Text);
-end;
-
-procedure TForm1.Image1Click(Sender: TObject);
-begin
-     dwShowMessage('OnClick!',self);
-end;
 
 end.

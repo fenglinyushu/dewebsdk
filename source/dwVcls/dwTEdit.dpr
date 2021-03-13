@@ -57,7 +57,7 @@ begin
           //清空事件,以防止自动执行
           TEdit(ACtrl).OnChange  := nil;
           //更新值
-          TEdit(ACtrl).Text    := dwUnescape(joData.v);
+          TEdit(ACtrl).Text    := dwUnescape(dwUnescape(joData.v));
           //恢复事件
           TEdit(ACtrl).OnChange  := oChange;
 
@@ -78,39 +78,6 @@ begin
                TEdit(ACtrl).OnMouseLeave(TEdit(ACtrl));
           end;
      end;
-{
-     if joData.e = 'onchange' then begin
-          //保存事件
-          TEdit(ACtrl).OnExit    := TEdit(ACtrl).OnChange;
-          //清空事件,以防止自动执行
-          TEdit(ACtrl).OnChange  := nil;
-          //更新值
-          TEdit(ACtrl).Text    := dwUnescape(joData.v);
-          //恢复事件
-          TEdit(ACtrl).OnChange  := TEdit(ACtrl).OnExit;
-
-          //执行事件
-          if Assigned(TEdit(ACtrl).OnChange) then begin
-               TEdit(ACtrl).OnChange(TEdit(ACtrl));
-          end;
-     end else if joData.e = 'onenter' then begin
-          //保存事件
-          TEdit(ACtrl).OnExit    := TEdit(ACtrl).OnEnter;
-          //清空事件,以防止自动执行
-          TEdit(ACtrl).OnEnter  := nil;
-          //更新值
-          TEdit(ACtrl).Text    := dwUnescape(joData.v);
-          //恢复事件
-          TEdit(ACtrl).OnEnter  := TEdit(ACtrl).OnExit;
-
-          //执行事件
-          if Assigned(TEdit(ACtrl).OnEnter) then begin
-               TEdit(ACtrl).OnEnter(TEdit(ACtrl));
-          end;
-     end;
-     //清空OnExit事件
-     TEdit(ACtrl).OnExit  := nil;
-}
 end;
 
 
@@ -141,7 +108,7 @@ begin
                     +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
                     +'overflow: hidden;'
                     +'"' // 封闭style
-                    +Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange','']) //绑定事件
+                    +Format(_DWEVENT,['input',Name,'escape(this.'+Name+'__txt)','onchange','']) //绑定事件
                     //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange','']),'')
                     +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter','']),'')
                     +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit','']),'')
@@ -185,7 +152,7 @@ begin
           joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
           joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__txt:"'+(Text)+'",');
+          joRes.Add(Name+'__txt:"'+dwChangeChar(Text)+'",');
      end;
      //
      Result    := (joRes);
@@ -207,7 +174,7 @@ begin
           joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
           joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__txt="'+(Text)+'";');
+          joRes.Add('this.'+Name+'__txt="'+dwChangeChar(Text)+'";');
      end;
      //
      Result    := (joRes);

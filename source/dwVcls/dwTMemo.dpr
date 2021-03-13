@@ -25,6 +25,7 @@ function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
      oChange   : Procedure(Sender:TObject) of Object;
+     sText     : string;
 begin
      //
      joData    := _Json(AData);
@@ -40,7 +41,11 @@ begin
           //清空事件,以防止自动执行
           TMemo(ACtrl).OnChange  := nil;
           //更新值
-          TMemo(ACtrl).Text    := dwUnescape(joData.v);
+          sText     := dwUnescape(joData.v);
+          sText     := dwUnescape(sText);
+          sText     := StringReplace(sText,'"','\"',[rfReplaceAll]);
+          TMemo(ACtrl).Text    := sText;
+
           //恢复事件
           TMemo(ACtrl).OnChange  := oChange;
 
@@ -93,25 +98,17 @@ begin
      with TMemo(ACtrl) do begin
           //
           sScroll   := '';
-          //if ScrollBars=ssBoth then begin
-          //     sScroll   := 'overflow:scroll;';
-          //end else if ScrollBars=ssHorizontal then begin
-          //     sScroll   := 'overflow-x:scroll;';
-          //end else if ScrollBars=ssVertical then begin
-          //     sScroll   := 'overflow-y:scroll;';
-          //end else begin
-          //     sScroll   := '';
-          //end;
-
 
           sCode     := '<el-input type="textarea"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +' v-model="'+Name+'__txt"'
+                    //style
                     +dwLTWH(TControl(ACtrl))
                     +sScroll
                     +'"' //style 封闭
-                    +Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange',''])
+                    //
+                    +Format(_DWEVENT,['input',Name,'escape(this.'+Name+'__txt)','onchange',''])
                     //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange','']),'')
                     +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter','']),'')
                     +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit','']),'')
@@ -156,10 +153,19 @@ var
      slTxt     : TStringList;
      iItem     : Integer;
 begin
-     //
+     //<转义可能出错的字符
+     AText     := StringReplace(AText,'\"','[!__!]',[rfReplaceAll]);
      AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
-     //AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
-     //AText     := StringReplace(AText,'>','\>',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\"',[rfReplaceAll]);
+
+     AText     := StringReplace(AText,'\>','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'>','\>',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\>',[rfReplaceAll]);
+
+     AText     := StringReplace(AText,'\<','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\<',[rfReplaceAll]);
+     //>
 
      //
      slTxt     := TStringList.Create;
@@ -173,6 +179,9 @@ begin
           end;
      end;
      slTxt.Destroy;
+     //
+     //Result    := StringReplace(Result,'''','\''''+''',[rfReplaceAll]);
+
 end;
 
 

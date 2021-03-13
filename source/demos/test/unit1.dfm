@@ -18,33 +18,15 @@ object Form1: TForm1
   Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 20
-  object Memo1: TMemo
-    Left = 8
-    Top = 8
-    Width = 185
-    Height = 353
-    Lines.Strings = (
-      '"'
-      '>'
-      '<'
-      '\')
-    TabOrder = 0
-  end
-  object Button1: TButton
-    Left = 224
-    Top = 42
-    Width = 81
-    Height = 33
-    Caption = 'Button1'
-    TabOrder = 1
-    OnClick = Button1Click
-  end
-  object Edit1: TEdit
-    Left = 224
-    Top = 8
+  object LabeledEdit1: TLabeledEdit
+    Left = 24
+    Top = 40
     Width = 121
-    Height = 28
-    TabOrder = 2
-    Text = '>'
+    Height = 21
+    EditLabel.Width = 23
+    EditLabel.Height = 20
+    EditLabel.Caption = 'My'
+    TabOrder = 0
+    TextHint = 'aaa'
   end
 end

@@ -106,6 +106,9 @@ function  dwDecode(AText:string):string;
 //
 function dwPHPToDate(ADate:Integer):TDateTime;
 
+//对可能造成问题的字符串进行转义处理
+function  dwChangeChar(AText:string):string;
+
 //
 function dwLongStr(AText:String):String;
 
@@ -744,6 +747,25 @@ function dwGetMD5(AStr:String):string;
 function dwGetDllName: string;
 
 implementation      //==============================================================================
+
+function  dwChangeChar(AText:String):String;
+begin
+     //<转义可能出错的字符
+     AText     := StringReplace(AText,'\"','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\"',[rfReplaceAll]);
+
+     AText     := StringReplace(AText,'\>','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'>','\>',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\>',[rfReplaceAll]);
+
+     AText     := StringReplace(AText,'\<','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\<',[rfReplaceAll]);
+     //>
+     //
+     Result    := AText;
+end;
 
 //取得DLL名称
 function dwGetDllName: string;
