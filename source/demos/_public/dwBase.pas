@@ -107,7 +107,31 @@ function dwIIF(ABool:Boolean;AYes,ANo:string):string;
 //计算TimeLine的高度(参考)
 function dwGetTimeLineHeight(APageControl:TPageControl):Integer;
 
+//<转义可能出错的字符
+function  dwChangeChar(AText:String):String;
+
+
 implementation  //==============================================================
+
+//<转义可能出错的字符
+function  dwChangeChar(AText:String):String;
+begin
+     AText     := StringReplace(AText,'\"','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\"',[rfReplaceAll]);
+
+     AText     := StringReplace(AText,'\>','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'>','\>',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\>',[rfReplaceAll]);
+
+     AText     := StringReplace(AText,'\<','[!__!]',[rfReplaceAll]);
+     AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
+     AText     := StringReplace(AText,'[!__!]','\<',[rfReplaceAll]);
+     //>
+     //
+     Result    := AText;
+end;
+
 
 //计算TimeLine的高度
 function dwGetTimeLineHeight(APageControl:TPageControl):Integer;
@@ -545,7 +569,8 @@ end;
 
 procedure dwShowMessage(AMsg:String;AForm:TForm);
 begin
-     dwShowMsg(AMsg,AForm.Caption,'OK',AForm);
+     AMsg := StringReplace(AMsg,'''','\''',[rfReplaceAll]);
+     dwShowMsg((AMsg),AForm.Caption,'OK',AForm);
 end;
 
 procedure dwShowMsg(AMsg,ACaption,AButtonCaption:String;AForm:TForm);

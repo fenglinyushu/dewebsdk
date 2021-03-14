@@ -1,1 +1,16 @@
-{"port":80,"resource":0,"third":"http://cdn.delphibbs.com","redir":[["mm","hello.dw"],["gg","login.dw"]],"connectionstring":"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=deweb.mdb"}
+{
+	"port": 80,
+	"resource": 0,
+	"third": "http://cdn.delphibbs.com",
+	"redir": [
+		[
+			"mm",
+			"hello.dw"
+		],
+		[
+			"gg",
+			"login.dw"
+		]
+	],
+	"connectionstring": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=deweb.mdb"
+}

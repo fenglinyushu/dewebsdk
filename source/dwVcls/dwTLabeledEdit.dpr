@@ -10,14 +10,110 @@ uses
      SynCommons,    //mormot用于解析JSON的单元
 
      //
-     SysUtils,
-     Classes,
-     Dialogs,
-     StdCtrls,
-     Windows,
-     Controls,
-     ExtCtrls,
-     Forms;
+     Messages, SysUtils, Variants, Classes, Graphics,
+     Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
+     StdCtrls, Windows;
+
+function _GetFont(AFont:TFont):string;
+begin
+     Result    := 'color:'+dwColor(AFont.color)+';'
+               +'font-family:'''+AFont.name+''';'
+               +'font-size:'+IntToStr(AFont.size)+'pt;';
+
+     //粗体
+     if fsBold in AFont.Style then begin
+          Result    := Result+'font-weight:bold;';
+     end else begin
+          Result    := Result+'font-weight:normal;';
+     end;
+
+     //斜体
+     if fsItalic in AFont.Style then begin
+          Result    := Result+'font-style:italic;';
+     end else begin
+          Result    := Result+'font-style:normal;';
+     end;
+
+     //下划线
+     if fsUnderline in AFont.Style then begin
+          Result    := Result+'text-decoration:underline;';
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end;
+     end else begin
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end else begin
+               Result    := Result+'text-decoration:none;';
+          end;
+     end;
+end;
+
+function _GetFontWeight(AFont:TFont):String;
+begin
+     if fsBold in AFont.Style then begin
+          Result    := 'bold';
+     end else begin
+          Result    := 'normal';
+     end;
+
+end;
+function _GetFontStyle(AFont:TFont):String;
+begin
+     if fsItalic in AFont.Style then begin
+          Result    := 'italic';
+     end else begin
+          Result    := 'normal';
+     end;
+end;
+function _GetTextDecoration(AFont:TFont):String;
+begin
+     if fsUnderline in AFont.Style then begin
+          Result    :='underline';
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := 'line-through';
+          end;
+     end else begin
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := 'line-through';
+          end else begin
+               Result    := 'none';
+          end;
+     end;
+end;
+function _GetTextAlignment(ACtrl:TControl):string;
+begin
+     Result    := '';
+     case TLabel(ACtrl).Alignment of
+          taRightJustify : begin
+               Result    := 'right';
+          end;
+          taCenter : begin
+               Result    := 'center';
+          end;
+     end;
+end;
+
+
+
+
+function _GetAlignment(ACtrl:TControl):string;
+begin
+     Result    := '';
+     case TLabel(ACtrl).Alignment of
+          taRightJustify : begin
+               Result    := 'text-align:right;';
+          end;
+          taCenter : begin
+               Result    := 'text-align:center;';
+          end;
+     end;
+end;
+
 
 //当前控件需要引入的第三方JS/CSS ,一般为不做改动,目前仅在TChart使用时需要用到
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
@@ -58,7 +154,7 @@ begin
           //清空事件,以防止自动执行
           TLabeledEdit(ACtrl).OnChange  := nil;
           //更新值
-          TLabeledEdit(ACtrl).Text    := dwUnescape(joData.v);
+          TLabeledEdit(ACtrl).Text    := dwUnescape(dwUnescape(joData.v));
           //恢复事件
           TLabeledEdit(ACtrl).OnChange  := oChange;
 
@@ -95,17 +191,21 @@ begin
      //取得HINT对象JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
      with TLabeledEdit(ACtrl) do begin
-          //外框
-          sCode     := '<div'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +' :style="{left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}"'
-                    +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';overflow:hidden;'
-                    +'"' //style 封闭
-                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
-                    +'>';
+          //添加标签
+          sCode     := '<div '
+                    +' v-html="'+Name+'__lbc"'
+
+                    //:style
+                    +' :style="{left:'+Name+'__lbl,top:'+Name+'__lbt,width:'+Name+'__lbw,height:'+Name+'__lbh}"'
+
+                    //style
+                    +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';'
+                    +_GetFont(TLabeledEdit(ACtrl).EditLabel.Font)
+                    +dwIIF(TLabeledEdit(ACtrl).EditLabel.Layout=tlCenter,'line-height:'+IntToStr(Height)+'px;','')
+                    +'"'
+
+                   +'>{{'+Name+'__lbc}}</div>';
+
           //添加到返回值数据
           joRes.Add(sCode);
 
@@ -118,19 +218,19 @@ begin
                     +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //前置Icon
                     +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //后置Icon
                     //+dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                    +' :style="{left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}"'
+                    +' :style="{left:'+Name+'__edl,top:'+Name+'__edt,width:'+Name+'__edw,height:'+Name+'__edh}"'
                     +' style="position:absolute;'
                          +dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
                          +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
                          +'overflow: hidden;'
                     +'"' // 封闭style
-                    +Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange','']) //绑定事件
+                    +Format(_DWEVENT,['input',Name,'escape(this.'+Name+'__txt)','onchange','']) //绑定事件
                     //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange','']),'')
                     +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter','']),'')
                     +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit','']),'')
                     +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',Name,'0','onenter','']),'')
                     +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',Name,'0','onexit','']),'')
-                    +'>';
+                    +'></el-input>';
           //添加到返回值数据
           joRes.Add(sCode);
      end;
@@ -145,9 +245,6 @@ var
 begin
      //生成返回值数组
      joRes    := _Json('[]');
-     //生成返回值数组
-     joRes.Add('</el-input>');          //此处需要和dwGetHead对应
-     joRes.Add('</div>');               //此处需要和dwGetHead对应
      //
      Result    := (joRes);
 end;
@@ -156,20 +253,48 @@ end;
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
+     //整个
+     iL,iT     : Integer;
+     iW,iH     : Integer;
+     //标签
+     iLbL,iLbT : Integer;
+     iLbW,iLbH : Integer;
+     //编辑框
+     iEdL,iEdT : Integer;
+     iEdW,iEdH : Integer;
+
 begin
+
      //生成返回值数组
      joRes    := _Json('[]');
      //
      with TLabeledEdit(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          //
+          //joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
+          //joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
+          //joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
+          //joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
           //
           joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
           joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__txt:"'+(Text)+'",');
+          joRes.Add(Name+'__txt:"'+dwChangeChar(Text)+'",');
+
+
+
+          //Label
+          joRes.Add(Name+'__lbl:"'+IntToStr(EditLabel.Left)+'px",');
+          joRes.Add(Name+'__lbt:"'+IntToStr(EditLabel.Top)+'px",');
+          joRes.Add(Name+'__lbw:"'+IntToStr(EditLabel.Width)+'px",');
+          joRes.Add(Name+'__lbh:"'+IntToStr(EditLabel.Height)+'px",');
+          joRes.Add(Name+'__lbc:"'+EditLabel.Caption+'",');
+
+          //Edit
+          joRes.Add(Name+'__edl:"'+IntToStr(Left)+'px",');
+          joRes.Add(Name+'__edt:"'+IntToStr(Top)+'px",');
+          joRes.Add(Name+'__edw:"'+IntToStr(Width)+'px",');
+          joRes.Add(Name+'__edh:"'+IntToStr(Height)+'px",');
+
      end;
      //
      Result    := (joRes);
@@ -183,15 +308,29 @@ begin
      joRes    := _Json('[]');
      //
      with TLabeledEdit(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          //
+          //joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
+          //joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
+          //joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
+          //joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
           //
           joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
           joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__txt="'+(Text)+'";');
+          joRes.Add('this.'+Name+'__txt="'+dwChangeChar(Text)+'";');
+
+          //Label
+          joRes.Add('this.'+Name+'__lbl="'+IntToStr(EditLabel.Left)+'px";');
+          joRes.Add('this.'+Name+'__lbt="'+IntToStr(EditLabel.Top)+'px";');
+          joRes.Add('this.'+Name+'__lbw="'+IntToStr(EditLabel.Width)+'px";');
+          joRes.Add('this.'+Name+'__lbh="'+IntToStr(EditLabel.Height)+'px";');
+          joRes.Add('this.'+Name+'__lbc="'+EditLabel.Caption+'";');
+
+          //Edit
+          joRes.Add('this.'+Name+'__edl="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+Name+'__edt="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+Name+'__edw="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+Name+'__edh="'+IntToStr(Height)+'px";');
      end;
      //
      Result    := (joRes);
