@@ -28,6 +28,8 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Panel2: TPanel;
+    Edit6: TEdit;
+    Edit7: TEdit;
   private
     { Private declarations }
   public

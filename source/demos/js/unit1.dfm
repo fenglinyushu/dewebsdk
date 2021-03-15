@@ -18,6 +18,7 @@ object Form1: TForm1
   OldCreateOrder = False
   Position = poDesigned
   OnMouseUp = FormMouseUp
+  OnStartDock = FormStartDock
   PixelsPerInch = 96
   TextHeight = 20
   object Label2: TLabel
@@ -76,7 +77,6 @@ object Form1: TForm1
     Caption = 'Run JavaScript'
     TabOrder = 0
     OnClick = Button1Click
-    ExplicitTop = 143
   end
   object Edit1: TEdit
     AlignWithMargins = True
@@ -91,7 +91,6 @@ object Form1: TForm1
     AutoSize = False
     TabOrder = 1
     Text = 'alert('#39'hello,world!'#39');'
-    ExplicitTop = 78
   end
   object Panel_00_Title: TPanel
     AlignWithMargins = True
@@ -126,8 +125,7 @@ object Form1: TForm1
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
-      ExplicitTop = 2
-      ExplicitWidth = 239
+      ExplicitTop = 5
     end
     object Image1: TImage
       AlignWithMargins = True

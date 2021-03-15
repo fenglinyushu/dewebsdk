@@ -5,7 +5,7 @@ object Form1: TForm1
   BorderStyle = bsNone
   BorderWidth = 5
   Caption = 'DeWeb - TChart'
-  ClientHeight = 530
+  ClientHeight = 670
   ClientWidth = 350
   Color = clWhite
   TransparentColor = True
@@ -203,5 +203,28 @@ object Form1: TForm1
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 6
+  end
+  object Edit6: TEdit
+    Left = 30
+    Top = 612
+    Width = 290
+    Height = 40
+    Hint = '{"borderradius":"15px"}'
+    AutoSize = False
+    BorderStyle = bsNone
+    Color = clBtnFace
+    TabOrder = 7
+    Text = '   '
+  end
+  object Edit7: TEdit
+    Left = 30
+    Top = 544
+    Width = 290
+    Height = 40
+    Hint = '{"borderradius":"10px"}'
+    AutoSize = False
+    Color = clBtnFace
+    TabOrder = 8
+    Text = 'Edit1'
   end
 end

@@ -183,7 +183,7 @@ end;
 
 
 exports
-     dwGetExtra,
+     //dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,

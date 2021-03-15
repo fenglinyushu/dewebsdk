@@ -25,12 +25,14 @@ type
     Image1: TImage;
     Label2: TLabel;
     Panel_bottomline: TPanel;
+    Button4: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure BitBtn1EndDock(Sender, Target: TObject; X, Y: Integer);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,6 +65,11 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 begin
      dwRunJS('this.dwInputSubmit("BitBtn3");',self);
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+     dwShowMessage(BitBtn1.Caption,self);
 end;
 
 procedure TForm1.FormMouseUp(Sender: TObject; Button: TMouseButton;

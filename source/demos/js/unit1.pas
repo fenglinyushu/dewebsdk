@@ -27,6 +27,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormStartDock(Sender: TObject; var DragObject: TDragDockObject);
   private
     { Private declarations }
   public
@@ -70,6 +71,14 @@ begin
      Panel_Footer.Top    := Height - Panel_Footer.Height;
      Panel_Footer.Left   := 0;
      Panel_Footer.Width  := Width;
+end;
+
+procedure TForm1.FormStartDock(Sender: TObject; var DragObject: TDragDockObject);
+var
+     sDat      : string;
+begin
+     sDat := dwGetProp(Self,'interactionmethod')+'  ---  '+ dwGetProp(Self,'interactionvalue');
+     dwShowMessage(sDat,Self);
 end;
 
 end.

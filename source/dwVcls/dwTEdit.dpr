@@ -87,12 +87,24 @@ var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
+     sBorder   : string;
 begin
      //生成返回值数组
      joRes    := _Json('[]');
 
      //取得HINT对象JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
+
+     //计算Border
+     if TEdit(ACtrl).BorderStyle = bsSingle then begin
+          sBorder   := dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
+                    +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
+     end else begin
+          sBorder   := 'border:0px;'+dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
+                    +dwGetHintStyle(joHint,'border','border','border:0px solid #DCDFE6;')   //border-radius
+     end;
+
+
      with TEdit(ACtrl) do begin
           sCode     := '<el-input'
                     +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
@@ -103,9 +115,8 @@ begin
                     +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //前置Icon
                     +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //后置Icon
                     //+dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                    +' :style="{left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}" style="position:absolute;'
-                    +dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
-                    +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
+                    +' :style="{backgroundColor:'+Name+'__col,left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}" style="position:absolute;'
+                    +sBorder
                     +'overflow: hidden;'
                     +'"' // 封闭style
                     +Format(_DWEVENT,['input',Name,'escape(this.'+Name+'__txt)','onchange','']) //绑定事件
@@ -153,6 +164,8 @@ begin
           joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
           joRes.Add(Name+'__txt:"'+dwChangeChar(Text)+'",');
+          //
+          joRes.Add(Name+'__col:"'+dwColor(Color)+'",');
      end;
      //
      Result    := (joRes);
@@ -175,6 +188,8 @@ begin
           joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
           joRes.Add('this.'+Name+'__txt="'+dwChangeChar(Text)+'";');
+          //
+          joRes.Add('this.'+Name+'__col="'+dwColor(Color)+'";');
      end;
      //
      Result    := (joRes);
@@ -182,7 +197,7 @@ end;
 
 
 exports
-     dwGetExtra,
+     //dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,

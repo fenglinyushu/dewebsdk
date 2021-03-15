@@ -5,16 +5,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb : Delphi-Web solution</title>
+<title>DeWeb</title>
 </head>
 
-<body style="background-color:#F0F0F0">
+<body style="background-color:#FFFFFF">
 <script src="dist/vue.js" type="text/javascript"></script>
 <script src="dist/index.js" type="text/javascript"></script>
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_1__top,width:Form1_1__wid,height:Form1_1__hei}" >
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1__wid,height:Form1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,22 +27,8 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <el-main v-if="Panel_Full__vis" :disabled="Panel_Full__dis" :style="{backgroundColor:Panel_Full__col,left:Panel_Full__lef,top:Panel_Full__top,width:Panel_Full__wid,height:Panel_Full__hei}" style="position:relative;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);">
-        <div  v-html="Label_User__cap" v-if="Label_User__vis" :disabled="Label_User__dis" :style="{left:Label_User__lef,top:Label_User__top,width:Label_User__wid,height:Label_User__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:20px;">{{Label_User__cap}}
-        </div>
-        <div  v-html="Label_Psd__cap" v-if="Label_Psd__vis" :disabled="Label_Psd__dis" :style="{left:Label_Psd__lef,top:Label_Psd__top,width:Label_Psd__wid,height:Label_Psd__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:20px;">{{Label_Psd__cap}}
-        </div>
-        <el-image :src="Image_logo__src" fit="none" v-if="Image_logo__vis" :disabled="Image_logo__dis" :style="{left:Image_logo__lef,top:Image_logo__top,width:Image_logo__wid,height:Image_logo__hei}" style="position:absolute;">
-        </el-Image>
-        <el-input v-if="Edit_User__vis" :disabled="Edit_User__dis" v-model="Edit_User__txt" placeholder="请输入用户名" suffix-icon="el-icon-user" :style="{left:Edit_User__lef,top:Edit_User__top,width:Edit_User__wid,height:Edit_User__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_User','escape(this.Edit_User__txt)','onchange','')">
+        <el-input v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','')">
         </el-input>
-        <el-input v-if="Edit_Psd__vis" :disabled="Edit_Psd__dis" show-password v-model="Edit_Psd__txt" placeholder="请输入用户名" :style="{left:Edit_Psd__lef,top:Edit_Psd__top,width:Edit_Psd__wid,height:Edit_Psd__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Psd','escape(this.Edit_Psd__txt)','onchange','')">
-        </el-input>
-        <el-button size=medium v-if="Button_Login__vis" :disabled="Button_Login__dis" type="primary" :type="Button_Login__typ" icon="el-icon-unlock" :style="{left:Button_Login__lef,top:Button_Login__top,width:Button_Login__wid,height:Button_Login__hei}" style="position:absolute;" @click.native="dwevent($event,'Button_Login','0','onclick','')">{{Button_Login__cap}}
-        </el-button>
-        <el-checkbox v-if="CheckBox_Remember__vis" :disabled="CheckBox_Remember__dis" v-model="CheckBox_Remember__chk" type="default" :style="{left:CheckBox_Remember__lef,top:CheckBox_Remember__top,width:CheckBox_Remember__wid,height:CheckBox_Remember__hei}" style="position:absolute;" @change="dwevent($event,'CheckBox_Remember','this.CheckBox_Remember__chk','onclick','')">{{CheckBox_Remember__cap}}
-        </el-checkbox>
-        </el-main>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -70,67 +56,17 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_1__top:"20px",
-					    Form1_1__wid:"360px",
-					    Form1_1__hei:"560px",
-                        Label_User__lef:"30px",
-                        Label_User__top:"203px",
-                        Label_User__wid:"290px",
-                        Label_User__hei:"20px",
-                        Label_User__vis:true,
-                        Label_User__dis:false,
-                        Label_User__cap:"用户名",
-                        Label_Psd__lef:"30px",
-                        Label_Psd__top:"292px",
-                        Label_Psd__wid:"290px",
-                        Label_Psd__hei:"20px",
-                        Label_Psd__vis:true,
-                        Label_Psd__dis:false,
-                        Label_Psd__cap:"密码",
-                        Image_logo__lef:"30px",
-                        Image_logo__top:"30px",
-                        Image_logo__wid:"290px",
-                        Image_logo__hei:"150px",
-                        Image_logo__vis:true,
-                        Image_logo__dis:false,
-                        Image_logo__src:"media/images/delphibbs.png",
-                        Edit_User__lef:"30px",
-                        Edit_User__top:"229px",
-                        Edit_User__wid:"290px",
-                        Edit_User__hei:"40px",
-                        Edit_User__vis:true,
-                        Edit_User__dis:false,
-                        Edit_User__txt:"",
-                        Edit_Psd__lef:"30px",
-                        Edit_Psd__top:"318px",
-                        Edit_Psd__wid:"290px",
-                        Edit_Psd__hei:"40px",
-                        Edit_Psd__vis:true,
-                        Edit_Psd__dis:false,
-                        Edit_Psd__txt:"",
-                        Button_Login__lef:'30px',
-                        Button_Login__top:'432px',
-                        Button_Login__wid:'290px',
-                        Button_Login__hei:'40px',
-                        Button_Login__vis:true,
-                        Button_Login__dis:false,
-                        Button_Login__cap:'登录',
-                        Button_Login__typ:'primary',
-                        CheckBox_Remember__lef:"30px",
-                        CheckBox_Remember__top:"376px",
-                        CheckBox_Remember__wid:"290px",
-                        CheckBox_Remember__hei:"40px",
-                        CheckBox_Remember__vis:true,
-                        CheckBox_Remember__dis:false,
-                        CheckBox_Remember__cap:"记住密码",
-                        CheckBox_Remember__chk:true,
-                        Panel_Full__lef:"3px",
-                        Panel_Full__top:"3px",
-                        Panel_Full__wid:"354px",
-                        Panel_Full__hei:"554px",
-                        Panel_Full__vis:true,
-                        Panel_Full__dis:false,
-                        Panel_Full__col:"#FFFFFF",
+					    Form1__top:"0px",
+					    Form1__wid:"628px",
+					    Form1__hei:"554px",
+                        Edit1__lef:"112px",
+                        Edit1__top:"56px",
+                        Edit1__wid:"145px",
+                        Edit1__hei:"41px",
+                        Edit1__vis:true,
+                        Edit1__dis:false,
+                        Edit1__txt:"Edit1",
+                        Edit1__col:"#C0C0C0",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -140,28 +76,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:2755706,
-					    shuntflag:5921
+					    clientid:1378512,
+					    shuntflag:6984
                     }
                 },
                 mounted() {
                     let me=this;
-Timer_GetCookie__tmr = window.setInterval(function() {
-axios.get('{"m":"event","i":2755706,"c":"Timer_GetCookie"}',{headers:{shuntflag:5921}})
-.then(resp =>{me.procResp(resp.data);  })
-}, 100);
-                    window.addEventListener(
-                        "onorientationchange" in window ? "orientationchange" : "resize",
-                        function() {
-                            axios.get('{"m":"event","i":2755706,"c":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:5921}})
-                            .then(resp =>{me.procResp(resp.data)});
-                        },
-                        false
-                    );
-                    let Form1_1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":2755706}',{headers:{shuntflag:5921}})
+                    let Form1hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":1378512}',{headers:{shuntflag:6984}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -176,7 +100,7 @@ axios.get('{"m":"event","i":2755706,"c":"Timer_GetCookie"}',{headers:{shuntflag:
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":2755706,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":1378512,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -189,7 +113,7 @@ axios.get('{"m":"event","i":2755706,"c":"Timer_GetCookie"}',{headers:{shuntflag:
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":2755706,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":1378512,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -205,12 +129,12 @@ axios.get('{"m":"event","i":2755706,"c":"Timer_GetCookie"}',{headers:{shuntflag:
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:5921}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:6984}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":2755706,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:5921}})
+                        axios.get('{"m":"interaction","i":1378512,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:6984}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },
