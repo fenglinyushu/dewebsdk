@@ -80,6 +80,7 @@ begin
           //
           sCode     := '<el-scrollbar'
                     +' style="height:100%;"'
+                    +dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll','']),'')
                     +'>';
           joRes.Add(sCode);
      end;

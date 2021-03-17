@@ -14,7 +14,7 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1__wid,height:Form1__hei}" >
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_1__wid,height:Form1_1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,8 +27,18 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <el-input v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','')">
+        <el-input v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:5px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','')">
         </el-input>
+        <el-input v-if="Edit2__vis" :disabled="Edit2__dis" v-model="Edit2__txt" :style="{backgroundColor:Edit2__col,left:Edit2__lef,top:Edit2__top,width:Edit2__wid,height:Edit2__hei}" style="position:absolute;border:0px;border-radius:15px;border:0px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit2','escape(this.Edit2__txt)','onchange','')">
+        </el-input>
+        <el-button size=small v-if="Button1__vis" :disabled="Button1__dis" type="default" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;">{{Button1__cap}}
+        </el-button>
+        <div v-if="ScrollBox1__vis" :disabled="ScrollBox1__dis" :style="{left:ScrollBox1__lef,top:ScrollBox1__top,width:ScrollBox1__wid,height:ScrollBox1__hei}" style="position:absolute;">
+        <el-scrollbar style="height:100%;" @scroll="dwevent($event,'ScrollBox1','0','onscroll','')">
+        <el-main v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:relative;overflow:hidden;">
+        </el-main>
+        </el-scrollbar>
+        </div>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -56,17 +66,47 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1__top:"0px",
-					    Form1__wid:"628px",
-					    Form1__hei:"554px",
+					    Form1_1__top:"0px",
+					    Form1_1__wid:"628px",
+					    Form1_1__hei:"554px",
                         Edit1__lef:"112px",
                         Edit1__top:"56px",
                         Edit1__wid:"145px",
-                        Edit1__hei:"41px",
+                        Edit1__hei:"30px",
                         Edit1__vis:true,
                         Edit1__dis:false,
                         Edit1__txt:"Edit1",
-                        Edit1__col:"#C0C0C0",
+                        Edit1__col:"#F0F0F0",
+                        Edit2__lef:"112px",
+                        Edit2__top:"104px",
+                        Edit2__wid:"145px",
+                        Edit2__hei:"30px",
+                        Edit2__vis:true,
+                        Edit2__dis:false,
+                        Edit2__txt:"Edit1",
+                        Edit2__col:"#F0F0F0",
+                        Button1__lef:'336px',
+                        Button1__top:'120px',
+                        Button1__wid:'75px',
+                        Button1__hei:'25px',
+                        Button1__vis:true,
+                        Button1__dis:false,
+                        Button1__cap:'Button1',
+                        Button1__typ:'',
+                        Panel1__lef:"72px",
+                        Panel1__top:"104px",
+                        Panel1__wid:"185px",
+                        Panel1__hei:"2000px",
+                        Panel1__vis:true,
+                        Panel1__dis:false,
+                        Panel1__col:"#F0F0F0",
+                        ScrollBox1__lef:"64px",
+                        ScrollBox1__top:"168px",
+                        ScrollBox1__wid:"412px",
+                        ScrollBox1__hei:"305px",
+                        ScrollBox1__vis:true,
+                        ScrollBox1__dis:false,
+                        ScrollBox1__typ:"",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -76,16 +116,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:1378512,
-					    shuntflag:6984
+					    clientid:397968,
+					    shuntflag:468
                     }
                 },
                 mounted() {
                     let me=this;
-                    let Form1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":1378512}',{headers:{shuntflag:6984}})
+                    let Form1_1hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":397968}',{headers:{shuntflag:468}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -100,7 +140,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":1378512,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":397968,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -113,7 +153,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":1378512,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":397968,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -129,12 +169,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:6984}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:468}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":1378512,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:6984}})
+                        axios.get('{"m":"interaction","i":397968,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:468}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

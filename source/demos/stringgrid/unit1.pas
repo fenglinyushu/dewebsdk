@@ -235,9 +235,9 @@ begin
           Cells[4,9]   := '综合演艺管理中心';
           //
           ColWidths[0]   := 100;
-          ColWidths[1]   := 120;
-          ColWidths[2]   := 120;
-          ColWidths[3]   := 120;
+          ColWidths[1]   := 220;
+          ColWidths[2]   := 220;
+          ColWidths[3]   := 220;
           ColWidths[4]   := 240;
      end;
 

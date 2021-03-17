@@ -178,6 +178,7 @@ var
 
                //组成列字符串
                joRes.Add('        <el-table-column'
+                         +dwIIF(AColID<ASG.FixedCols,' fixed="left"','')
                          +' show-overflow-tooltip'
                          +' prop="d'+IntToStr(AColID+1)+'"'
                          +sSort    //排序  sortable
@@ -304,6 +305,7 @@ begin
                          //===以下为正常表头的情况
                          for iItem := 0 to ColCount-1 do begin
                               joRes.Add('        <el-table-column'
+                                        +dwIIF(iItem<FixedCols,' fixed="left"','')
                                         +' show-overflow-tooltip'
                                         +' prop="d'+IntToStr(iItem+1)+'"'
                                         +_GetColAlign(Cells[iItem,0])

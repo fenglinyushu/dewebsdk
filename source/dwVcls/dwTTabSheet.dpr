@@ -158,100 +158,100 @@ end;
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
+     sKeyword  : String;
 begin
-     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-          if HelpKeyword = 'timeline' then begin
-               //用作时间线控件-------------------------------------------------
+     sKeyword  := TPageControl(TTabSheet(Actrl).PageControl).HelpKeyword;
+     if sKeyword = 'timeline' then begin
+          //用作时间线控件-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
+          //生成返回值数组
+          joRes    := _Json('[]');
+          //
+          with TTabSheet(ACtrl) do begin
+               joRes.Add(Name+'__lef:"'+IntToStr(0)+'px",');
+               joRes.Add(Name+'__top:"'+IntToStr(0)+'px",');
+               joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
+               joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
                //
-               with TTabSheet(ACtrl) do begin
-                    joRes.Add(Name+'__lef:"'+IntToStr(0)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(0)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-                    //
-                    joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-               end;
+               joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+               joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                //
-               Result    := (joRes);
-          end else if HelpKeyword = 'steps' then begin
-               //用作步骤条控件-------------------------------------------------
-
-          end else begin
-               //用作Tabs控件---------------------------------------------------
-
-               //生成返回值数组
-               joRes    := _Json('[]');
-               //
-               with TTabSheet(ACtrl) do begin
-                    joRes.Add(Name+'__lef:"'+IntToStr(0)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(0)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-                    //
-                    joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-               end;
-               //
-               Result    := (joRes);
+               joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
           end;
+          //
+          Result    := (joRes);
+     end else if sKeyword = 'steps' then begin
+          //用作步骤条控件-------------------------------------------------
+
+     end else begin
+          //用作Tabs控件---------------------------------------------------
+
+          //生成返回值数组
+          joRes    := _Json('[]');
+          //
+          with TTabSheet(ACtrl) do begin
+               joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
+               joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
+               joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
+               joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+               //
+               joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+               joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+               //
+               joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+          end;
+          //
+          Result    := (joRes);
      end;
 end;
 
 function dwGetMethod(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
+     sKeyword  : String;
 begin
-     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-          if HelpKeyword = 'timeline' then begin
-               //用作时间线控件-------------------------------------------------
+     sKeyword  := TPageControl(TTabSheet(Actrl).PageControl).HelpKeyword;
+     if sKeyword = 'timeline' then begin
+          //用作时间线控件-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
+          //生成返回值数组
+          joRes    := _Json('[]');
+          //
+          with TTabSheet(ACtrl) do begin
+               joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
+               joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
+               joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
+               joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
                //
-               with TTabSheet(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
-                    //
-                    joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-                    //
-                    joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-               end;
+               joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+               joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
                //
-               Result    := (joRes);
-          end else if HelpKeyword = 'steps' then begin
-               //用作步骤条控件-------------------------------------------------
-
-          end else begin
-               //用作Tabs控件---------------------------------------------------
-
-               //生成返回值数组
-               joRes    := _Json('[]');
-               //
-               with TTabSheet(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
-                    //
-                    joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-                    //
-                    joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-               end;
-               //
-               Result    := (joRes);
+               joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
           end;
+          //
+          Result    := (joRes);
+     end else if sKeyword = 'steps' then begin
+          //用作步骤条控件-------------------------------------------------
+
+     end else begin
+          //用作Tabs控件---------------------------------------------------
+
+          //生成返回值数组
+          joRes    := _Json('[]');
+          //
+          with TTabSheet(ACtrl) do begin
+               joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
+               joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
+               joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
+               joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+               //
+               joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+               joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+               //
+               joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          end;
+          //
+          Result    := (joRes);
      end;
 end;
 
@@ -263,7 +263,7 @@ exports
      dwGetTail,
      dwGetMethod,
      dwGetData;
-     
+
 begin
 end.
- 
+

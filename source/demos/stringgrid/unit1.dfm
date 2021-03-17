@@ -347,7 +347,7 @@ object Form1: TForm1
           ',{"caption":"'#22320#22336'","items":[{"caption":"'#30465#20221'","sort":1,"filters":["'#28246 +
           #21271'","'#36797#23425'"],"align":"left"},{"caption":"'#22478#24066'/'#21306'","sort":1,"align":"lef' +
           't"},{"caption":"'#22320#22336'","align":"left"}]}]}]}'
-        DefaultColWidth = 130
+        DefaultColWidth = 200
         DefaultRowHeight = 35
         RowCount = 10
         TabOrder = 0

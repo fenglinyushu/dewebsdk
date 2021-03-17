@@ -41,4 +41,23 @@ object Form1: TForm1
     TabOrder = 1
     Text = 'Edit1'
   end
+  object StringGrid1: TStringGrid
+    Left = 96
+    Top = 200
+    Width = 320
+    Height = 169
+    ColCount = 10
+    DefaultColWidth = 80
+    FixedCols = 2
+    TabOrder = 2
+  end
+  object Button1: TButton
+    Left = 336
+    Top = 120
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 3
+    OnClick = Button1Click
+  end
 end
