@@ -14,7 +14,9 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_1__wid,height:Form1_1__hei}" >
+<script src="dist/vue.js" type="text/javascript"></script>
+<script src="dist/index.js" type="text/javascript"></script>
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1__wid,height:Form1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -66,9 +68,9 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_1__top:"0px",
-					    Form1_1__wid:"628px",
-					    Form1_1__hei:"554px",
+					    Form1__top:"0px",
+					    Form1__wid:"628px",
+					    Form1__hei:"554px",
                         Edit1__lef:"112px",
                         Edit1__top:"56px",
                         Edit1__wid:"145px",
@@ -116,16 +118,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:397968,
-					    shuntflag:468
+					    clientid:1905488,
+					    shuntflag:7468
                     }
                 },
                 mounted() {
                     let me=this;
-                    let Form1_1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":397968}',{headers:{shuntflag:468}})
+                    let Form1hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":1905488}',{headers:{shuntflag:7468}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -140,7 +142,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":397968,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":1905488,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -153,7 +155,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":397968,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":1905488,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -169,12 +171,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:468}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:7468}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":397968,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:468}})
+                        axios.get('{"m":"interaction","i":1905488,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:7468}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },
