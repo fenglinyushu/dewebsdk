@@ -32,7 +32,6 @@ begin
 
      //
      AForm          := TForm1.Create(nil);
-     AForm.Hint     := AParams;
 
      //AForm.ADOQuery1.Connection   := AConnection;
 

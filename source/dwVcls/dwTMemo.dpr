@@ -43,6 +43,7 @@ begin
           //¸üÐÂÖµ
           sText     := dwUnescape(joData.v);
           sText     := dwUnescape(sText);
+          sText     := StringReplace(sText,#10,#13#10,[rfReplaceAll]);
           sText     := StringReplace(sText,'"','\"',[rfReplaceAll]);
           TMemo(ACtrl).Text    := sText;
 

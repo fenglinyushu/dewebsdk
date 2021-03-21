@@ -23,9 +23,6 @@ type
   TForm1 = class(TForm)
     Edit1: TEdit;
     Edit2: TEdit;
-    Button1: TButton;
-    ScrollBox1: TScrollBox;
-    Panel1: TPanel;
   private
     { Private declarations }
   public

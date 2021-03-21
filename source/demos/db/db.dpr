@@ -29,7 +29,6 @@ begin
 
      //
      AForm          := TForm1.Create(nil);
-     AForm.Hint     := AParams;
 
      //使用公用数据库连接
      AForm.ADOQuery.Connection     := AConnection;
