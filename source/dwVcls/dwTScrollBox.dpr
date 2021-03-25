@@ -40,6 +40,14 @@ begin
           if Assigned(TScrollBox(ACtrl).OnExit) then begin
                TScrollBox(ACtrl).OnExit(TScrollBox(ACtrl));
           end;
+     end else if joData.e = 'onenddock' then begin
+          if Assigned(TScrollBox(ACtrl).OnEndDock) then begin
+               if joData.v > 0 then begin
+                    TScrollBox(ACtrl).OnEndDock(TScrollBox(ACtrl),nil,joData.v,1);
+               end else begin
+                    TScrollBox(ACtrl).OnEndDock(TScrollBox(ACtrl),nil,abs(Integer(joData.v)),-1);
+               end;
+          end;
      end;
 end;
 
@@ -79,6 +87,7 @@ begin
           joRes.Add(sCode);
           //
           sCode     := '<el-scrollbar'
+                    +' ref="'+Name+'"'
                     +' style="height:100%;"'
                     +dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll','']),'')
                     +'>';
@@ -124,10 +133,13 @@ begin
           //joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
           //
           joRes.Add(Name+'__typ:"'+dwGetProp(TScrollBox(ACtrl),'type')+'",');
+          //保存oldscrolltop以确定滚动方向
+          joRes.Add(Name+'__ost:0,');
      end;
      //
      Result    := (joRes);
 end;
+
 
 //取得事件
 function dwGetMethod(ACtrl:TComponent):String;StdCall;
@@ -154,12 +166,42 @@ begin
      Result    := (joRes);
 end;
 
+//取得Mounted
+function dwGetMounted(ACtrl:TComponent):String;StdCall;
+var
+     joRes     : Variant;
+     sCode     : string;
+begin
+     //生成返回值数组
+     joRes    := _Json('[]');
+     //
+     with TScrollBox(ACtrl) do begin
+          if Assigned(OnEndDock) then begin
+               sCode     := 'let '+Name+'__scr = this.$refs.'+Name+'.wrap;'
+                    +Name+'__scr.onscroll = function() {'
+                         +'if (me.'+Name+'__ost<'+Name+'__scr.scrollTop) {'
+                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+Name+'","v":''+'+Name+'__scr.scrollTop+''}'')'
+                              +'.then(resp =>{me.procResp(resp.data);});'
+                         +'} else {'
+                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+Name+'","v":-''+'+Name+'__scr.scrollTop+''}'')'
+                              +'.then(resp =>{me.procResp(resp.data);});'
+                         +'};'
+                         +'me.'+Name+'__ost='+Name+'__scr.scrollTop;'
+                    +'};';
+               joRes.Add(sCode);
+          end;
+     end;
+     //
+     Result    := (joRes);
+end;
+
 exports
      //dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,
      dwGetMethod,
+     dwGetMounted,
      dwGetData;
      
 begin

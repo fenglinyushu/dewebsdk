@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{730CA0B7-B59B-409C-B748-24BD7911E4C7}</ProjectGuid>
+        <ProjectGuid>{A477546C-EBF2-4197-AEE7-27514F1527AC}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
         <Projects Include="dwTBevel.dproj">
@@ -30,10 +30,16 @@
         <Projects Include="dwTGroupBox.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTHeaderControl.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTImage.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTLabel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTLabeledEdit.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTListBox.dproj">
@@ -185,6 +191,15 @@
     <Target Name="dwTGroupBox:Make">
         <MSBuild Projects="dwTGroupBox.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTHeaderControl">
+        <MSBuild Projects="dwTHeaderControl.dproj"/>
+    </Target>
+    <Target Name="dwTHeaderControl:Clean">
+        <MSBuild Projects="dwTHeaderControl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTHeaderControl:Make">
+        <MSBuild Projects="dwTHeaderControl.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTImage">
         <MSBuild Projects="dwTImage.dproj"/>
     </Target>
@@ -202,6 +217,15 @@
     </Target>
     <Target Name="dwTLabel:Make">
         <MSBuild Projects="dwTLabel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTLabeledEdit">
+        <MSBuild Projects="dwTLabeledEdit.dproj"/>
+    </Target>
+    <Target Name="dwTLabeledEdit:Clean">
+        <MSBuild Projects="dwTLabeledEdit.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTLabeledEdit:Make">
+        <MSBuild Projects="dwTLabeledEdit.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTListBox">
         <MSBuild Projects="dwTListBox.dproj"/>
@@ -384,13 +408,13 @@
         <MSBuild Projects="dwTTreeView.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="dwTBevel;dwTBitBtn;dwTButton;dwTChart;dwTCheckBox;dwTComboBox;dwTDateTimePicker;dwTEdit;dwTGroupBox;dwTImage;dwTLabel;dwTListBox;dwTMainMenu;dwTMediaPlayer;dwTMemo;dwTPageControl;dwTPanel;dwTProgressBar;dwTRadioButton;dwTScanZing;dwTScrollBox;dwTShape;dwTSpeedButton;dwTSpinEdit;dwTStaticText;dwTStringGrid;dwTTabSheet;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTreeView"/>
+        <CallTarget Targets="dwTBevel;dwTBitBtn;dwTButton;dwTChart;dwTCheckBox;dwTComboBox;dwTDateTimePicker;dwTEdit;dwTGroupBox;dwTHeaderControl;dwTImage;dwTLabel;dwTLabeledEdit;dwTListBox;dwTMainMenu;dwTMediaPlayer;dwTMemo;dwTPageControl;dwTPanel;dwTProgressBar;dwTRadioButton;dwTScanZing;dwTScrollBox;dwTShape;dwTSpeedButton;dwTSpinEdit;dwTStaticText;dwTStringGrid;dwTTabSheet;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTreeView"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="dwTBevel:Clean;dwTBitBtn:Clean;dwTButton:Clean;dwTChart:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTGroupBox:Clean;dwTImage:Clean;dwTLabel:Clean;dwTListBox:Clean;dwTMainMenu:Clean;dwTMediaPlayer:Clean;dwTMemo:Clean;dwTPageControl:Clean;dwTPanel:Clean;dwTProgressBar:Clean;dwTRadioButton:Clean;dwTScanZing:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTStaticText:Clean;dwTStringGrid:Clean;dwTTabSheet:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTreeView:Clean"/>
+        <CallTarget Targets="dwTBevel:Clean;dwTBitBtn:Clean;dwTButton:Clean;dwTChart:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTGroupBox:Clean;dwTHeaderControl:Clean;dwTImage:Clean;dwTLabel:Clean;dwTLabeledEdit:Clean;dwTListBox:Clean;dwTMainMenu:Clean;dwTMediaPlayer:Clean;dwTMemo:Clean;dwTPageControl:Clean;dwTPanel:Clean;dwTProgressBar:Clean;dwTRadioButton:Clean;dwTScanZing:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTStaticText:Clean;dwTStringGrid:Clean;dwTTabSheet:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTreeView:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="dwTBevel:Make;dwTBitBtn:Make;dwTButton:Make;dwTChart:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTGroupBox:Make;dwTImage:Make;dwTLabel:Make;dwTListBox:Make;dwTMainMenu:Make;dwTMediaPlayer:Make;dwTMemo:Make;dwTPageControl:Make;dwTPanel:Make;dwTProgressBar:Make;dwTRadioButton:Make;dwTScanZing:Make;dwTScrollBox:Make;dwTShape:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTStaticText:Make;dwTStringGrid:Make;dwTTabSheet:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTreeView:Make"/>
+        <CallTarget Targets="dwTBevel:Make;dwTBitBtn:Make;dwTButton:Make;dwTChart:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTGroupBox:Make;dwTHeaderControl:Make;dwTImage:Make;dwTLabel:Make;dwTLabeledEdit:Make;dwTListBox:Make;dwTMainMenu:Make;dwTMediaPlayer:Make;dwTMemo:Make;dwTPageControl:Make;dwTPanel:Make;dwTProgressBar:Make;dwTRadioButton:Make;dwTScanZing:Make;dwTScrollBox:Make;dwTShape:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTStaticText:Make;dwTStringGrid:Make;dwTTabSheet:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTreeView:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

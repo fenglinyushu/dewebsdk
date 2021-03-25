@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{B87449E5-7B6E-462B-AC8F-CC027672F3C2}</ProjectGuid>
+        <ProjectGuid>{2AEBC534-7B58-46D1-BD71-32C0FFEDD1D0}</ProjectGuid>
         <MainSource>dwTHeaderControl.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>

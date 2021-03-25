@@ -41,6 +41,13 @@ end;
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
+     iYear     : Word;
+     iMonth    : Word;
+     iDay      : Word;
+     //
+     sDate     : string;
+     //
+     dtTmp     : TDateTime;
 begin
      //
      joData    := _Json(AData);
@@ -52,7 +59,12 @@ begin
           TDateTimePicker(ACtrl).OnChange  := nil;
           //¸üÐÂÖµ
           if TDateTimePicker(ACtrl).Kind = dtkDate then begin
-               TDateTimePicker(ACtrl).Date    := StrToDateDef(joData.v,Now);
+               sDate     := joData.v;
+               iYear     := StrToIntDef(Copy(sDate,1,4),1990);
+               iMonth    := StrToIntDef(Copy(sDate,6,2),1);
+               iDay      := StrToIntDef(Copy(sDate,9,2),1);
+
+               TDateTimePicker(ACtrl).Date    :=  EncodeDate(iYear,iMonth,iDay);//StrToDateDef(joData.v,Now);
           end else begin
                TDateTimePicker(ACtrl).Time    := StrToTimeDef(StringReplace(joData.v,'%3A',':',[rfReplaceAll])+':00',Now);
           end;
@@ -178,7 +190,7 @@ begin
           if kind =  dtkDate then begin
                joRes.Add('this.'+Name+'__val="'+FormatDateTime('yyyy-mm-dd',Date)+'";');
           end else begin
-               joRes.Add('this.'+Name+'__val="'+FormatDateTime('hh=MM=ss',Time)+'";');
+               joRes.Add('this.'+Name+'__val="'+FormatDateTime('hh:MM:ss',Time)+'";');
           end;
      end;
      //

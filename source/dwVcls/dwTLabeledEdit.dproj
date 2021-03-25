@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{1173FBD6-5DEE-4C96-81D7-8F13B334FFD1}</ProjectGuid>
+        <ProjectGuid>{298E9FB5-23F4-4CAE-B1C7-7964E5867701}</ProjectGuid>
         <MainSource>dwTLabeledEdit.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>

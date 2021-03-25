@@ -278,6 +278,22 @@ object Form1: TForm1
         Layout = tlCenter
         ExplicitHeight = 35
       end
+      object Edit_JS: TEdit
+        Left = 336
+        Top = 16
+        Width = 513
+        Height = 28
+        TabOrder = 0
+      end
+      object Button1: TButton
+        Left = 855
+        Top = 16
+        Width = 58
+        Height = 28
+        Caption = 'RunJS'
+        TabOrder = 1
+        OnClick = Button1Click
+      end
     end
     object Panel2: TPanel
       Left = 0

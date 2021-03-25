@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb</title>
+<title>Hello,World!</title>
 </head>
 
 <body style="background-color:#FFFFFF">
@@ -14,8 +14,6 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-<script src="dist/vue.js" type="text/javascript"></script>
-<script src="dist/index.js" type="text/javascript"></script>
     <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1__wid,height:Form1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
@@ -29,15 +27,13 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <el-input v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:5px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','')">
-        </el-input>
-        <el-input v-if="Edit2__vis" :disabled="Edit2__dis" v-model="Edit2__txt" :style="{backgroundColor:Edit2__col,left:Edit2__lef,top:Edit2__top,width:Edit2__wid,height:Edit2__hei}" style="position:absolute;border:0px;border-radius:15px;border:0px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit2','escape(this.Edit2__txt)','onchange','')">
-        </el-input>
-        <el-button size=small v-if="Button1__vis" :disabled="Button1__dis" type="default" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;">{{Button1__cap}}
-        </el-button>
+        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:20px;">{{Label1__cap}}
+        </div>
         <div v-if="ScrollBox1__vis" :disabled="ScrollBox1__dis" :style="{left:ScrollBox1__lef,top:ScrollBox1__top,width:ScrollBox1__wid,height:ScrollBox1__hei}" style="position:absolute;">
-        <el-scrollbar style="height:100%;" @scroll="dwevent($event,'ScrollBox1','0','onscroll','')">
+        <el-scrollbar ref="ScrollBox1" style="height:100%;" @scroll="dwevent($event,'ScrollBox1','0','onscroll','')">
         <el-main v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:relative;overflow:hidden;">
+        <el-button size=large v-if="Button1__vis" :disabled="Button1__dis" type="default" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;">{{Button1__cap}}
+        </el-button>
         </el-main>
         </el-scrollbar>
         </div>
@@ -69,43 +65,34 @@
 				data: function () {
 					return {
 					    Form1__top:"0px",
-					    Form1__wid:"628px",
-					    Form1__hei:"554px",
-                        Edit1__lef:"112px",
-                        Edit1__top:"56px",
-                        Edit1__wid:"145px",
-                        Edit1__hei:"30px",
-                        Edit1__vis:true,
-                        Edit1__dis:false,
-                        Edit1__txt:"Edit1",
-                        Edit1__col:"#F0F0F0",
-                        Edit2__lef:"112px",
-                        Edit2__top:"104px",
-                        Edit2__wid:"145px",
-                        Edit2__hei:"30px",
-                        Edit2__vis:true,
-                        Edit2__dis:false,
-                        Edit2__txt:"Edit1",
-                        Edit2__col:"#F0F0F0",
-                        Button1__lef:'336px',
-                        Button1__top:'120px',
+					    Form1__wid:"382px",
+					    Form1__hei:"525px",
+                        Label1__lef:"3px",
+                        Label1__top:"3px",
+                        Label1__wid:"376px",
+                        Label1__hei:"20px",
+                        Label1__vis:true,
+                        Label1__dis:false,
+                        Label1__cap:"Label1",
+                        Button1__lef:'72px',
+                        Button1__top:'56px',
                         Button1__wid:'75px',
-                        Button1__hei:'25px',
+                        Button1__hei:'169px',
                         Button1__vis:true,
                         Button1__dis:false,
                         Button1__cap:'Button1',
                         Button1__typ:'',
-                        Panel1__lef:"72px",
-                        Panel1__top:"104px",
-                        Panel1__wid:"185px",
-                        Panel1__hei:"2000px",
+                        Panel1__lef:"0px",
+                        Panel1__top:"0px",
+                        Panel1__wid:"378px",
+                        Panel1__hei:"1000px",
                         Panel1__vis:true,
                         Panel1__dis:false,
                         Panel1__col:"#F0F0F0",
-                        ScrollBox1__lef:"64px",
-                        ScrollBox1__top:"168px",
-                        ScrollBox1__wid:"412px",
-                        ScrollBox1__hei:"305px",
+                        ScrollBox1__lef:"0px",
+                        ScrollBox1__top:"26px",
+                        ScrollBox1__wid:"382px",
+                        ScrollBox1__hei:"369px",
                         ScrollBox1__vis:true,
                         ScrollBox1__dis:false,
                         ScrollBox1__typ:"",
@@ -118,14 +105,15 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:1905488,
-					    shuntflag:7468
+					    clientid:3540390,
+					    shuntflag:2296
                     }
                 },
                 mounted() {
                     let me=this;
+                        let ScrollBox1__scr = this.$refs.ScrollBox1.wrap;ScrollBox1__scr.onscroll = function() {axios.get('{"m":"event","i":'+me.clientid+',"e":"onenddock","c":"ScrollBox1","v":'+ScrollBox1__scr.scrollTop+'}').then(resp =>{this.procResp(resp.data);  })};
                     let Form1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":1905488}',{headers:{shuntflag:7468}})
+                        axios.get('{"m":"heart","i":3540390}',{headers:{shuntflag:2296}})
                         .then(resp =>{me.procResp(resp.data)})
                         .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
                     }, 590000);
@@ -142,7 +130,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":1905488,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":3540390,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -155,7 +143,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":1905488,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":3540390,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -171,12 +159,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:7468}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:2296}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":1905488,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:7468}})
+                        axios.get('{"m":"interaction","i":3540390,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:2296}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

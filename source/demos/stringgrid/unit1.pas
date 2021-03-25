@@ -38,6 +38,8 @@ type
     Button_SetRow: TButton;
     Button_AddRow: TButton;
     Button_DelRow: TButton;
+    Edit_JS: TEdit;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure StringGrid1Click(Sender: TObject);
     procedure Button_PositionClick(Sender: TObject);
@@ -52,6 +54,7 @@ type
     procedure Button_GetRowClick(Sender: TObject);
     procedure Button_AddRowClick(Sender: TObject);
     procedure Button_DelRowClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
   public
 
@@ -68,6 +71,11 @@ implementation
 
 
 
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+     dwRunJS(Edit_JS.Text,self);
+end;
 
 procedure TForm1.Button_AddRowClick(Sender: TObject);
 begin
@@ -136,6 +144,8 @@ end;
 procedure TForm1.Button_SetClick(Sender: TObject);
 begin
      StringGrid1.Cells[2,2]   := IntToStr(GetTickCount);
+     //StringGrid1.Cells[2,2] := 'AAA'#13#10'BBB';
+     //StringGrid1.Cells[2,2] := 'AAA\BBB';
 end;
 
 procedure TForm1.Button_SetRowClick(Sender: TObject);

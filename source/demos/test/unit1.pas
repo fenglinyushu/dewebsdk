@@ -23,6 +23,7 @@ type
   TForm1 = class(TForm)
     Edit1: TEdit;
     Edit2: TEdit;
+    DateTimePicker1: TDateTimePicker;
   private
     { Private declarations }
   public

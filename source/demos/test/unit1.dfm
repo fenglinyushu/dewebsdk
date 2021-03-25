@@ -1,7 +1,6 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Hint = '{"head":["AAAA","BBB"]}'
   BorderStyle = bsNone
   BorderWidth = 5
   Caption = 'DeWeb'
@@ -40,5 +39,14 @@ object Form1: TForm1
     Color = clBtnFace
     TabOrder = 1
     Text = 'Edit1'
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 112
+    Top = 168
+    Width = 145
+    Height = 28
+    Date = 44340.000000000000000000
+    Time = 0.364361412037396800
+    TabOrder = 2
   end
 end
