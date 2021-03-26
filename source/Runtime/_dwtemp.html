@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Hello,World!</title>
+<title>DeWeb - TChart</title>
 </head>
 
 <body style="background-color:#FFFFFF">
@@ -14,7 +14,7 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1__wid,height:Form1__hei}" >
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_2__top,width:Form1_2__wid,height:Form1_2__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,16 +27,38 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:20px;">{{Label1__cap}}
+        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:18pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:60px;">{{Label1__cap}}
         </div>
-        <div v-if="ScrollBox1__vis" :disabled="ScrollBox1__dis" :style="{left:ScrollBox1__lef,top:ScrollBox1__top,width:ScrollBox1__wid,height:ScrollBox1__hei}" style="position:absolute;">
-        <el-scrollbar ref="ScrollBox1" style="height:100%;" @scroll="dwevent($event,'ScrollBox1','0','onscroll','')">
-        <el-main v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:relative;overflow:hidden;">
-        <el-button size=large v-if="Button1__vis" :disabled="Button1__dis" type="default" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;">{{Button1__cap}}
-        </el-button>
+        <div  v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:20px;">{{Label2__cap}}
+        </div>
+        <div  v-html="Label4__cap" v-if="Label4__vis" :disabled="Label4__dis" :style="{left:Label4__lef,top:Label4__top,width:Label4__wid,height:Label4__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:20px;">{{Label4__cap}}
+        </div>
+        <div  v-html="Label5__cap" v-if="Label5__vis" :disabled="Label5__dis" :style="{left:Label5__lef,top:Label5__top,width:Label5__wid,height:Label5__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:20px;">{{Label5__cap}}
+        </div>
+        <div  v-html="Label6__cap" v-if="Label6__vis" :disabled="Label6__dis" :style="{left:Label6__lef,top:Label6__top,width:Label6__wid,height:Label6__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:20px;">{{Label6__cap}}
+        </div>
+        <div  v-html="Label7__cap" v-if="Label7__vis" :disabled="Label7__dis" :style="{left:Label7__lef,top:Label7__top,width:Label7__wid,height:Label7__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:20px;">{{Label7__cap}}
+        </div>
+        <el-input v-if="Edit2__vis" :disabled="Edit2__dis" v-model="Edit2__txt" :style="{backgroundColor:Edit2__col,left:Edit2__lef,top:Edit2__top,width:Edit2__wid,height:Edit2__hei}" style="position:absolute;border-radius:20px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit2','escape(this.Edit2__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit3__vis" :disabled="Edit3__dis" v-model="Edit3__txt" :style="{backgroundColor:Edit3__col,left:Edit3__lef,top:Edit3__top,width:Edit3__wid,height:Edit3__hei}" style="position:absolute;border-radius:4px;border:3px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit3','escape(this.Edit3__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit4__vis" :disabled="Edit4__dis" v-model="Edit4__txt" :style="{backgroundColor:Edit4__col,left:Edit4__lef,top:Edit4__top,width:Edit4__wid,height:Edit4__hei}" style="position:absolute;border-radius:4px;border:1px solid #88FF88;overflow: hidden;" @input="dwevent($event,'Edit4','escape(this.Edit4__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit5__vis" :disabled="Edit5__dis" v-model="Edit5__txt" :style="{backgroundColor:Edit5__col,left:Edit5__lef,top:Edit5__top,width:Edit5__wid,height:Edit5__hei}" style="position:absolute;border-radius:4px;border:0px solid #8888FF;overflow: hidden;" @input="dwevent($event,'Edit5','escape(this.Edit5__txt)','onchange','')">
+        </el-input>
+        <el-main v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;">
         </el-main>
-        </el-scrollbar>
-        </div>
+        <el-main v-if="Panel2__vis" :disabled="Panel2__dis" :style="{backgroundColor:Panel2__col,left:Panel2__lef,top:Panel2__top,width:Panel2__wid,height:Panel2__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-input v-if="Edit6__vis" :disabled="Edit6__dis" v-model="Edit6__txt" :style="{backgroundColor:Edit6__col,left:Edit6__lef,top:Edit6__top,width:Edit6__wid,height:Edit6__hei}" style="position:absolute;border:0px;border-radius:15px;border:0px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit6','escape(this.Edit6__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit7__vis" :disabled="Edit7__dis" v-model="Edit7__txt" :style="{backgroundColor:Edit7__col,left:Edit7__lef,top:Edit7__top,width:Edit7__wid,height:Edit7__hei}" style="position:absolute;border-radius:10px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit7','escape(this.Edit7__txt)','onchange','')">
+        </el-input>
+        <el-input v-if="Edit8__vis" :disabled="Edit8__dis" v-model="Edit8__txt" :style="{backgroundColor:Edit8__col,left:Edit8__lef,top:Edit8__top,width:Edit8__wid,height:Edit8__hei}" style="position:absolute;border-radius:4px;border:3px 0px 5px 8px;overflow: hidden;" @input="dwevent($event,'Edit8','escape(this.Edit8__txt)','onchange','')">
+        </el-input>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -64,38 +86,129 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1__top:"0px",
-					    Form1__wid:"382px",
-					    Form1__hei:"525px",
-                        Label1__lef:"3px",
-                        Label1__top:"3px",
-                        Label1__wid:"376px",
-                        Label1__hei:"20px",
+					    Form1_2__top:"0px",
+					    Form1_2__wid:"350px",
+					    Form1_2__hei:"788px",
+                        Label1__lef:"0px",
+                        Label1__top:"0px",
+                        Label1__wid:"350px",
+                        Label1__hei:"60px",
                         Label1__vis:true,
                         Label1__dis:false,
-                        Label1__cap:"Label1",
-                        Button1__lef:'72px',
-                        Button1__top:'56px',
-                        Button1__wid:'75px',
-                        Button1__hei:'169px',
-                        Button1__vis:true,
-                        Button1__dis:false,
-                        Button1__cap:'Button1',
-                        Button1__typ:'',
+                        Label1__cap:"Edit Style",
+                        Label2__lef:"30px",
+                        Label2__top:"81px",
+                        Label2__wid:"290px",
+                        Label2__hei:"20px",
+                        Label2__vis:true,
+                        Label2__dis:false,
+                        Label2__cap:"Normal",
+                        Label4__lef:"30px",
+                        Label4__top:"437px",
+                        Label4__wid:"290px",
+                        Label4__hei:"20px",
+                        Label4__vis:true,
+                        Label4__dis:false,
+                        Label4__cap:"NoBorder",
+                        Label5__lef:"30px",
+                        Label5__top:"348px",
+                        Label5__wid:"290px",
+                        Label5__hei:"20px",
+                        Label5__vis:true,
+                        Label5__dis:false,
+                        Label5__cap:"BorderColor",
+                        Label6__lef:"30px",
+                        Label6__top:"259px",
+                        Label6__wid:"290px",
+                        Label6__hei:"20px",
+                        Label6__vis:true,
+                        Label6__dis:false,
+                        Label6__cap:"BorderWidth",
+                        Label7__lef:"30px",
+                        Label7__top:"170px",
+                        Label7__wid:"290px",
+                        Label7__hei:"20px",
+                        Label7__vis:true,
+                        Label7__dis:false,
+                        Label7__cap:"Round",
+                        Edit2__lef:"30px",
+                        Edit2__top:"196px",
+                        Edit2__wid:"290px",
+                        Edit2__hei:"40px",
+                        Edit2__vis:true,
+                        Edit2__dis:false,
+                        Edit2__txt:"  Edit2",
+                        Edit2__col:"#FFFFFF",
+                        Edit1__lef:"30px",
+                        Edit1__top:"107px",
+                        Edit1__wid:"290px",
+                        Edit1__hei:"40px",
+                        Edit1__vis:true,
+                        Edit1__dis:false,
+                        Edit1__txt:"Edit1",
+                        Edit1__col:"#FFFFFF",
+                        Edit3__lef:"30px",
+                        Edit3__top:"285px",
+                        Edit3__wid:"290px",
+                        Edit3__hei:"40px",
+                        Edit3__vis:true,
+                        Edit3__dis:false,
+                        Edit3__txt:"Edit3",
+                        Edit3__col:"#FFFFFF",
+                        Edit4__lef:"30px",
+                        Edit4__top:"374px",
+                        Edit4__wid:"290px",
+                        Edit4__hei:"40px",
+                        Edit4__vis:true,
+                        Edit4__dis:false,
+                        Edit4__txt:"Edit4",
+                        Edit4__col:"#FFFFFF",
+                        Edit5__lef:"30px",
+                        Edit5__top:"463px",
+                        Edit5__wid:"290px",
+                        Edit5__hei:"40px",
+                        Edit5__vis:true,
+                        Edit5__dis:false,
+                        Edit5__txt:"Edit5",
+                        Edit5__col:"#FFFFFF",
                         Panel1__lef:"0px",
-                        Panel1__top:"0px",
-                        Panel1__wid:"378px",
-                        Panel1__hei:"1000px",
+                        Panel1__top:"60px",
+                        Panel1__wid:"350px",
+                        Panel1__hei:"1px",
                         Panel1__vis:true,
                         Panel1__dis:false,
                         Panel1__col:"#F0F0F0",
-                        ScrollBox1__lef:"0px",
-                        ScrollBox1__top:"26px",
-                        ScrollBox1__wid:"382px",
-                        ScrollBox1__hei:"369px",
-                        ScrollBox1__vis:true,
-                        ScrollBox1__dis:false,
-                        ScrollBox1__typ:"",
+                        Panel2__lef:"30px",
+                        Panel2__top:"503px",
+                        Panel2__wid:"290px",
+                        Panel2__hei:"1px",
+                        Panel2__vis:true,
+                        Panel2__dis:false,
+                        Panel2__col:"#F0F0F0",
+                        Edit6__lef:"30px",
+                        Edit6__top:"556px",
+                        Edit6__wid:"290px",
+                        Edit6__hei:"40px",
+                        Edit6__vis:true,
+                        Edit6__dis:false,
+                        Edit6__txt:"   ",
+                        Edit6__col:"#F0F0F0",
+                        Edit7__lef:"30px",
+                        Edit7__top:"510px",
+                        Edit7__wid:"290px",
+                        Edit7__hei:"40px",
+                        Edit7__vis:true,
+                        Edit7__dis:false,
+                        Edit7__txt:"Edit1",
+                        Edit7__col:"#F0F0F0",
+                        Edit8__lef:"30px",
+                        Edit8__top:"602px",
+                        Edit8__wid:"290px",
+                        Edit8__hei:"40px",
+                        Edit8__vis:true,
+                        Edit8__dis:false,
+                        Edit8__txt:"Edit3",
+                        Edit8__col:"#FFFFFF",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -105,17 +218,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:3540390,
-					    shuntflag:2296
+					    clientid:788964,
+					    shuntflag:5015
                     }
                 },
                 mounted() {
                     let me=this;
-                        let ScrollBox1__scr = this.$refs.ScrollBox1.wrap;ScrollBox1__scr.onscroll = function() {axios.get('{"m":"event","i":'+me.clientid+',"e":"onenddock","c":"ScrollBox1","v":'+ScrollBox1__scr.scrollTop+'}').then(resp =>{this.procResp(resp.data);  })};
-                    let Form1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":3540390}',{headers:{shuntflag:2296}})
+                    let Form1_2hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":788964}',{headers:{shuntflag:5015}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_2hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -130,7 +242,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":3540390,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":788964,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -143,7 +255,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":3540390,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":788964,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -159,12 +271,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:2296}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:5015}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":3540390,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:2296}})
+                        axios.get('{"m":"interaction","i":788964,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:5015}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

@@ -33,7 +33,6 @@ object Form1: TForm1
     Height = 153
     Hint = '{"src":"media/images/login/bottom.png"}'
     Align = alTop
-    AutoSize = True
     ExplicitTop = 389
     ExplicitWidth = 1083
   end
@@ -94,7 +93,6 @@ object Form1: TForm1
         Align = alTop
         Caption = 'Sign in'
         TabOrder = 0
-        ExplicitTop = 205
       end
       object Edit2: TEdit
         AlignWithMargins = True
@@ -112,9 +110,6 @@ object Form1: TForm1
         BorderStyle = bsNone
         Color = 16176619
         TabOrder = 1
-        ExplicitLeft = 56
-        ExplicitTop = 175
-        ExplicitWidth = 217
       end
       object Panel4: TPanel
         AlignWithMargins = True
@@ -131,7 +126,6 @@ object Form1: TForm1
         Color = 16752192
         ParentBackground = False
         TabOrder = 2
-        ExplicitTop = 122
       end
       object Edit1: TEdit
         AlignWithMargins = True
@@ -149,9 +143,6 @@ object Form1: TForm1
         BorderStyle = bsNone
         Color = 16176619
         TabOrder = 3
-        ExplicitLeft = 56
-        ExplicitTop = 175
-        ExplicitWidth = 217
       end
       object Panel5: TPanel
         AlignWithMargins = True
@@ -168,9 +159,6 @@ object Form1: TForm1
         Color = 16752192
         ParentBackground = False
         TabOrder = 4
-        ExplicitLeft = 1
-        ExplicitTop = 92
-        ExplicitWidth = 298
       end
     end
   end
