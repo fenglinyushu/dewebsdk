@@ -67,13 +67,13 @@ begin
 
      with TTimer(ACtrl) do begin
           if DesignInfo = 1 then begin   //创建定时器
-               sCode     := Name+'__tmr = window.setInterval(function() {'
-                    +'axios.get(''{"m":"event","i":''+this.clientid+'',"c":"'+Name+'"}'')'
+               sCode     := dwPrefix(Actrl)+Name+'__tmr = window.setInterval(function() {'
+                    +'axios.get(''{"m":"event","i":''+this.clientid+'',"c":"'+dwPrefix(Actrl)+Name+'"}'')'
                     +'.then(resp =>{this.procResp(resp.data);  })'
                     +'}, '+IntToStr(Interval)+');';
 
           end else begin                     //清除定时器
-               sCOde     := 'clearInterval('+Name+'__tmr);';
+               sCOde     := 'clearInterval('+dwPrefix(Actrl)+Name+'__tmr);';
           end;
           joRes.Add(sCode);
      end;
@@ -92,13 +92,13 @@ begin
 
      with TTimer(ACtrl) do begin
           if DesignInfo = 1 then begin   //创建定时器
-               sCode     := 'me=this;'+Name+'__tmr = window.setInterval(function() {'
-                    +'axios.get(''{"m":"event","i":'+IntToStr(TForm(Owner).Handle)+',"c":"'+Name+'"}'')'
+               sCode     := 'me=this;'+dwPrefix(Actrl)+Name+'__tmr = window.setInterval(function() {'
+                    +'axios.get(''{"m":"event","i":'+IntToStr(TForm(Owner).Handle)+',"c":"'+dwPrefix(Actrl)+Name+'"}'')'
                     +'.then(resp =>{me.procResp(resp.data);  })'
                     +'},'+IntToStr(Interval)+');';
 
           end else begin                     //清除定时器
-               sCode     := 'clearInterval('+Name+'__tmr);';
+               sCode     := 'clearInterval('+dwPrefix(Actrl)+Name+'__tmr);';
           end;
           joRes.Add(sCode);
      end;

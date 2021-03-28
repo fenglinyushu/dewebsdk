@@ -67,23 +67,23 @@ function _ImageLTWH(ACtrl:TControl):String;  //可以更新位置的用法
 begin
      //
      with ACtrl do begin
-          Result    := ' :style="{left:0,top:0,width:'+Name+'__wid,'
-                    +'height:'+Name+'__imh}" style="position:absolute;';
+          Result    := ' :style="{left:0,top:0,width:'+dwPrefix(Actrl)+Name+'__wid,'
+                    +'height:'+dwPrefix(Actrl)+Name+'__imh}" style="position:absolute;';
      end;
 end;
 function _LabelLTWH(ACtrl:TControl):String;  //可以更新位置的用法
 begin
      //
      with ACtrl do begin
-          Result    := ' :style="{left:0,top:'+Name+'__lbt,width:'+Name+'__wid,'
-                    +'height:'+Name+'__lbh}" style="position:absolute;';
+          Result    := ' :style="{left:0,top:'+dwPrefix(Actrl)+Name+'__lbt,width:'+dwPrefix(Actrl)+Name+'__wid,'
+                    +'height:'+dwPrefix(Actrl)+Name+'__lbh}" style="position:absolute;';
      end;
 end;
 
 function _GetFont(AFont:TFont):string;
 begin
      Result    := 'color:'+dwColor(AFont.color)+';'
-               +'font-family:'''+AFont.name+''';'
+               +'font-family:'''+AFont.Name+''';'
                +'font-size:'+IntToStr(AFont.size)+'pt;';
 
      //粗体
@@ -151,7 +151,7 @@ begin
           if Layout = blGlyphRight then begin
                iTri := Round(Width / 2.5);
                joRes.Add('<div'
-                         +' v-if="'+ACtrl.Name+'__tri"'
+                         +' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__tri"'
                          +' style="position:absolute;'
                          +'left:'+IntToStr(Round(Width-iTri*0.5))+'px;'
                          +'top:'+IntToStr(Round(-iTri*0.707))+'px;'
@@ -161,10 +161,10 @@ begin
           end else if Layout = blGlyphTop then begin
                iTri := Round(Width / 10);
                joRes.Add('<el-badge'
-                         +' v-if="'+ACtrl.Name+'__bdg"'
-                         +' :value="'+ACtrl.Name+'__spc"'
-                         +' :max="'+ACtrl.Name+'__max"'
-                         +' :type="'+Name+'__typ"'
+                         +' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__bdg"'
+                         +' :value="'+dwPrefix(Actrl)+ACtrl.Name+'__spc"'
+                         +' :max="'+dwPrefix(Actrl)+ACtrl.Name+'__max"'
+                         +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
                          +' class="item"'
                          +' style="position:absolute;'
                          +'left:'+IntToStr(Round(Width-iTri*3))+'px;'
@@ -177,7 +177,7 @@ begin
           end else if Layout = blGlyphBottom then begin
                iTri := Round(Width / 10);
                joRes.Add('<el-badge'
-                         +' v-if="'+ACtrl.Name+'__idt"'
+                         +' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__idt"'
                          +' is-dot'
                          +' class="item"'
                          +' style="position:absolute;'
@@ -190,19 +190,19 @@ begin
 
           //图标
           joRes.Add('<el-image'
-               +' :src="'+Name+'__src"'
+               +' :src="'+dwPrefix(Actrl)+Name+'__src"'
                +' fit="none"'
                +_ImageLTWH(TControl(ACtrl))
                +'cursor: pointer;'   //图片鼠标样式
                +'"'
-               +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-               +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-               +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
+               +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+               +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+               +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                +'></el-image>');
 
           //文本
           joRes.Add('<div'
-               +' v-html="'+Name+'__cap"'
+               +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
                +_LabelLTWH(TControl(ACtrl))
                +_GetFont(Font)
                //style
@@ -211,10 +211,10 @@ begin
                +'cursor: pointer;'   //图片鼠标样式
                +'"'
                //style 封闭
-               +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-               +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-               +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
-               +'>{{'+Name+'__cap}}</div>');
+               +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+               +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+               +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+               +'>{{'+dwPrefix(Actrl)+Name+'__cap}}</div>');
      end;
 
      //
@@ -245,29 +245,29 @@ begin
      joRes    := _Json('[]');
      //
      with TSpeedButton(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__imh:"'+IntToStr(Height-Round(Font.Size*2))+'px",');
-          joRes.Add(Name+'__lbt:"'+IntToStr(Height-Round(Font.Size*_K))+'px",');
-          joRes.Add(Name+'__lbh:"'+IntToStr(Round(Font.Size*_K))+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__imh:"'+IntToStr(Height-Round(Font.Size*2))+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lbt:"'+IntToStr(Height-Round(Font.Size*_K))+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lbh:"'+IntToStr(Round(Font.Size*_K))+'px",');
           //
-          joRes.Add(Name+'__tri:'+dwIIF(Layout = blGlyphRight,'true,','false,'));
-          joRes.Add(Name+'__bdg:'+dwIIF(Layout = blGlyphTop,'true,','false,'));
-          joRes.Add(Name+'__idt:'+dwIIF(Layout = blGlyphBottom,'true,','false,'));
-          joRes.Add(Name+'__spc:'+IntToStr(Spacing)+',');
-          joRes.Add(Name+'__max:'+IntToStr(Margin)+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__tri:'+dwIIF(Layout = blGlyphRight,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__bdg:'+dwIIF(Layout = blGlyphTop,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__idt:'+dwIIF(Layout = blGlyphBottom,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__spc:'+IntToStr(Spacing)+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__max:'+IntToStr(Margin)+',');
           //
-          joRes.Add(Name+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
           //
-          joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
           //
-          joRes.Add(Name+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
      end;
      //
      Result    := (joRes);
@@ -281,29 +281,29 @@ begin
      joRes    := _Json('[]');
      //
      with TSpeedButton(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__imh="'+IntToStr(Height-Round(Font.Size*2))+'px";');
-          joRes.Add('this.'+Name+'__lbt="'+IntToStr(Height-Round(Font.Size*_K))+'px";');
-          joRes.Add('this.'+Name+'__lbh="'+IntToStr(Round(Font.Size*_K))+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__imh="'+IntToStr(Height-Round(Font.Size*2))+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbt="'+IntToStr(Height-Round(Font.Size*_K))+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbh="'+IntToStr(Round(Font.Size*_K))+'px";');
           //
-          joRes.Add('this.'+Name+'__tri='+dwIIF(Layout = blGlyphRight,'true;','false;'));
-          joRes.Add('this.'+Name+'__bdg='+dwIIF(Layout = blGlyphTop,'true;','false;'));
-          joRes.Add('this.'+Name+'__idt='+dwIIF(Layout = blGlyphBottom,'true;','false;'));
-          joRes.Add('this.'+Name+'__spc='+IntToStr(Spacing)+';');
-          joRes.Add('this.'+Name+'__max='+IntToStr(Margin)+';');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tri='+dwIIF(Layout = blGlyphRight,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__bdg='+dwIIF(Layout = blGlyphTop,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__idt='+dwIIF(Layout = blGlyphBottom,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__spc='+IntToStr(Spacing)+';');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__max='+IntToStr(Margin)+';');
           //
-          joRes.Add('this.'+Name+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
           //
-          joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
           //
-          joRes.Add('this.'+Name+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);

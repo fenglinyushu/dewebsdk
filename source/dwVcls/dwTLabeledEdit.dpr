@@ -193,10 +193,10 @@ begin
      with TLabeledEdit(ACtrl) do begin
           //添加标签
           sCode     := '<div '
-                    +' v-html="'+Name+'__lbc"'
+                    +' v-html="'+dwPrefix(Actrl)+Name+'__lbc"'
 
                     //:style
-                    +' :style="{left:'+Name+'__lbl,top:'+Name+'__lbt,width:'+Name+'__lbw,height:'+Name+'__lbh}"'
+                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__lbl,top:'+dwPrefix(Actrl)+Name+'__lbt,width:'+dwPrefix(Actrl)+Name+'__lbw,height:'+dwPrefix(Actrl)+Name+'__lbh}"'
 
                     //style
                     +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';'
@@ -204,7 +204,7 @@ begin
                     +dwIIF(TLabeledEdit(ACtrl).EditLabel.Layout=tlCenter,'line-height:'+IntToStr(Height)+'px;','')
                     +'"'
 
-                   +'>{{'+Name+'__lbc}}</div>';
+                   +'>{{'+dwPrefix(Actrl)+Name+'__lbc}}</div>';
 
           //添加到返回值数据
           joRes.Add(sCode);
@@ -213,23 +213,23 @@ begin
                     +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                     +dwDisable(TControl(ACtrl))                            //用于控制可用性Enabled(部分控件不支持)
                     +dwIIF(PasswordChar=#0,'',' show-password')            //是否为密码
-                    +' v-model="'+Name+'__txt"'                            //前置
+                    +' v-model="'+dwPrefix(Actrl)+Name+'__txt"'                            //前置
                     +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,提示语
                     +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //前置Icon
                     +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //后置Icon
                     //+dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                    +' :style="{left:'+Name+'__edl,top:'+Name+'__edt,width:'+Name+'__edw,height:'+Name+'__edh}"'
+                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__edl,top:'+dwPrefix(Actrl)+Name+'__edt,width:'+dwPrefix(Actrl)+Name+'__edw,height:'+dwPrefix(Actrl)+Name+'__edh}"'
                     +' style="position:absolute;'
                          +dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
                          +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
                          +'overflow: hidden;'
                     +'"' // 封闭style
-                    +Format(_DWEVENT,['input',Name,'escape(this.'+Name+'__txt)','onchange','']) //绑定事件
-                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange','']),'')
-                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter','']),'')
-                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit','']),'')
-                    +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',Name,'0','onenter','']),'')
-                    +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',Name,'0','onexit','']),'')
+                    +Format(_DWEVENT,['input',Name,'escape(this.'+dwPrefix(Actrl)+Name+'__txt)','onchange',TForm(Owner).Handle]) //绑定事件
+                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+dwPrefix(Actrl)+Name+'__txt)','onchange',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'></el-input>';
           //添加到返回值数据
           joRes.Add(sCode);
@@ -270,30 +270,30 @@ begin
      //
      with TLabeledEdit(ACtrl) do begin
           //
-          //joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          //joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          //joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          //joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          //joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          //joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          //joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          //joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__txt:"'+dwChangeChar(Text)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__txt:"'+dwChangeChar(Text)+'",');
 
 
 
           //Label
-          joRes.Add(Name+'__lbl:"'+IntToStr(EditLabel.Left)+'px",');
-          joRes.Add(Name+'__lbt:"'+IntToStr(EditLabel.Top)+'px",');
-          joRes.Add(Name+'__lbw:"'+IntToStr(EditLabel.Width)+'px",');
-          joRes.Add(Name+'__lbh:"'+IntToStr(EditLabel.Height)+'px",');
-          joRes.Add(Name+'__lbc:"'+EditLabel.Caption+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lbl:"'+IntToStr(EditLabel.Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lbt:"'+IntToStr(EditLabel.Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lbw:"'+IntToStr(EditLabel.Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lbh:"'+IntToStr(EditLabel.Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lbc:"'+EditLabel.Caption+'",');
 
           //Edit
-          joRes.Add(Name+'__edl:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__edt:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__edw:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__edh:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__edl:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__edt:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__edw:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__edh:"'+IntToStr(Height)+'px",');
 
      end;
      //
@@ -309,28 +309,28 @@ begin
      //
      with TLabeledEdit(ACtrl) do begin
           //
-          //joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          //joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          //joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          //joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__txt="'+dwChangeChar(Text)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__txt="'+dwChangeChar(Text)+'";');
 
           //Label
-          joRes.Add('this.'+Name+'__lbl="'+IntToStr(EditLabel.Left)+'px";');
-          joRes.Add('this.'+Name+'__lbt="'+IntToStr(EditLabel.Top)+'px";');
-          joRes.Add('this.'+Name+'__lbw="'+IntToStr(EditLabel.Width)+'px";');
-          joRes.Add('this.'+Name+'__lbh="'+IntToStr(EditLabel.Height)+'px";');
-          joRes.Add('this.'+Name+'__lbc="'+EditLabel.Caption+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbl="'+IntToStr(EditLabel.Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbt="'+IntToStr(EditLabel.Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbw="'+IntToStr(EditLabel.Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbh="'+IntToStr(EditLabel.Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbc="'+EditLabel.Caption+'";');
 
           //Edit
-          joRes.Add('this.'+Name+'__edl="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__edt="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__edw="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__edh="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edl="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edt="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edw="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edh="'+IntToStr(Height)+'px";');
      end;
      //
      Result    := (joRes);

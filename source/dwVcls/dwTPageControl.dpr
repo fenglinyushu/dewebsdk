@@ -19,7 +19,7 @@ function dwLTWHTab(ACtrl:TControl):String;  //可以更新位置的用法
 begin
      //只有W，H
      with ACtrl do begin
-          Result    := ' :style="{width:'+Name+'__wid,height:'+Name+'__hei}"'
+          Result    := ' :style="{width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
                     +' style="position:absolute;left:0px;top:0px;';
      end;
 end;
@@ -147,19 +147,19 @@ begin
                     joRes.Add('<el-tabs'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
-                              +' v-model="'+Name+'__apg"'        //ActivePage
-                              +' :tab-position="'+Name+'__tps"'  //标题位置
+                              +' v-model="'+dwPrefix(Actrl)+Name+'__apg"'        //ActivePage
+                              +' :tab-position="'+dwPrefix(Actrl)+Name+'__tps"'  //标题位置
                               +dwIIF(ParentBiDiMode,dwIIF(ParentShowHint,' type="border-card"',' type="card"'),'')   //是否有外框
                               +dwLTWH(TControl(ACtrl))
                               +'"' //style 封闭
-                              +Format(_DWEVENT,['tab-click',Name,'this.'+Name+'__apg','onchange',''])
+                              +Format(_DWEVENT,['tab-click',Name,'this.'+dwPrefix(Actrl)+Name+'__apg','onchange',TForm(Owner).Handle])
                               +'>');
 
                     //添加选项卡
                     for iTab := 0 to PageCount-1 do begin
                          //
-                         joRes.Add('    <el-tab-pane'+' v-if="'+Pages[iTab].Name+'__tbv"'
-                                   +' :label="'+Pages[iTab].Name+'__cap" name="'+Pages[iTab].name+'">');
+                         joRes.Add('    <el-tab-pane'+' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv"'
+                                   +' :label="'+dwPrefix(Actrl)+Pages[iTab].Name+'__cap" name="'+dwPrefix(Actrl)+Pages[iTab].Name+'">');
                          //
                          joRes.Add('    </el-tab-pane>');
                     end;
@@ -224,28 +224,28 @@ begin
                joRes    := _Json('[]');
                //
                with TPageControl(ACtrl) do begin
-                    joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
                     //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                     //
-                    joRes.Add(Name+'__apg:"'+ActivePage.Name+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+dwPrefix(Actrl)+ActivePage.Name+'",');
                     //方向
                     if TabPosition =  (tpTop) then begin
-                         joRes.Add(Name+'__tps:"top",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"top",');
                     end else  if TabPosition =  (tpBottom) then begin
-                         joRes.Add(Name+'__tps:"bottom",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"bottom",');
                     end else  if TabPosition =  (tpLeft) then begin
-                         joRes.Add(Name+'__tps:"left",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"left",');
                     end else  if TabPosition =  (tpRight) then begin
-                         joRes.Add(Name+'__tps:"right",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"right",');
                     end;
                     //各页面可见性
                     for iTab := 0 to PageCount-1 do begin
-                         joRes.Add(Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
+                         joRes.Add(dwPrefix(Actrl)+Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
                     end;
                end;
                //
@@ -260,32 +260,32 @@ begin
                joRes    := _Json('[]');
                //
                with TPageControl(ACtrl) do begin
-                    joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
                     //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                     //
                     if ActivePageIndex>=0 then begin
-                         joRes.Add(Name+'__apg:"'+ActivePage.Name+'",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+dwPrefix(Actrl)+ActivePage.Name+'",');
                     end else begin
-                         joRes.Add(Name+'__apg:"'+''+'",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+''+'",');
                     end;
                     //方向
                     if TabPosition =  (tpTop) then begin
-                         joRes.Add(Name+'__tps:"top",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"top",');
                     end else  if TabPosition =  (tpBottom) then begin
-                         joRes.Add(Name+'__tps:"bottom",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"bottom",');
                     end else  if TabPosition =  (tpLeft) then begin
-                         joRes.Add(Name+'__tps:"left",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"left",');
                     end else  if TabPosition =  (tpRight) then begin
-                         joRes.Add(Name+'__tps:"right",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"right",');
                     end;
                     //各页面可见性
                     for iTab := 0 to PageCount-1 do begin
-                         joRes.Add(Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
+                         joRes.Add(dwPrefix(Actrl)+Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
                     end;
                end;
                //
@@ -314,33 +314,33 @@ begin
                //
                //
                with TPageControl(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
                     //
-                    joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
                     //
                     if ActivePageIndex>=0 then begin
-                         joRes.Add('this.'+Name+'__apg="'+ActivePage.Name+'";');
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__apg="'+dwPrefix(Actrl)+ActivePage.Name+'";');
                     end else begin
-                         joRes.Add('this.'+Name+'__apg="'+''+'";');
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__apg="'+''+'";');
                     end;
 
                     //方向
                     if TabPosition =  (tpTop) then begin
-                         joRes.Add('this.'+Name+'__tps="top";');
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tps="top";');
                     end else  if TabPosition =  (tpBottom) then begin
-                         joRes.Add('this.'+Name+'__tps="bottom";');
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tps="bottom";');
                     end else  if TabPosition =  (tpLeft) then begin
-                         joRes.Add('this.'+Name+'__tps="left";');
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tps="left";');
                     end else  if TabPosition =  (tpRight) then begin
-                         joRes.Add('this.'+Name+'__tps="right";');
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tps="right";');
                     end;
                     //各页面可见性
                     for iTab := 0 to PageCount-1 do begin
-                         joRes.Add('this.'+Pages[iTab].Name+'__tbv='+dwIIF(Pages[iTab].TabVisible,'true;','false;'));
+                         joRes.Add('this.'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv='+dwIIF(Pages[iTab].TabVisible,'true;','false;'));
                     end;
                end;
                //

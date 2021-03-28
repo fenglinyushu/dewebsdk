@@ -135,15 +135,15 @@ begin
           //Éú³É×Ö·û´® 
           Result.Add('<el-tree'
                     +' ref="tree"'
-                    +' :data="'+Name+'__dat"'
+                    +' :data="'+dwPrefix(Actrl)+Name+'__dat"'
                     +'  node-key="id"'
                     +' :default-expanded-keys="['+sExpanded+']"'
-                    +' :props="'+Name+'__dfp"'
+                    +' :props="'+dwPrefix(Actrl)+Name+'__dfp"'
                     +dwVisible(ACtrl)
                     +dwDisable(ACtrl)
                     +dwLTWH(ACtrl)
                     +'background-color:'+dwColor(Color)+';overflow:auto"'
-                    +Format(_DWEVENT,['node-click',Name,'val.$treeNodeId','onclick',''])
+                    +Format(_DWEVENT,['node-click',Name,'val.$treeNodeId','onclick',TForm(Owner).Handle])
                     +'>');
 
      end;
@@ -170,16 +170,16 @@ begin
      //
      with TTreeView(ACtrl) do begin
           //
-          Result.Add(Name+'__lef'+ASeparator+'"'+IntToStr(Left)+'px"');
-          Result.Add(Name+'__top'+ASeparator+'"'+IntToStr(Top)+'px"');
-          Result.Add(Name+'__wid'+ASeparator+'"'+IntToStr(Width)+'px"');
-          Result.Add(Name+'__hei'+ASeparator+'"'+IntToStr(Height)+'px"');
+          Result.Add(dwPrefix(Actrl)+Name+'__lef'+ASeparator+'"'+IntToStr(Left)+'px"');
+          Result.Add(dwPrefix(Actrl)+Name+'__top'+ASeparator+'"'+IntToStr(Top)+'px"');
+          Result.Add(dwPrefix(Actrl)+Name+'__wid'+ASeparator+'"'+IntToStr(Width)+'px"');
+          Result.Add(dwPrefix(Actrl)+Name+'__hei'+ASeparator+'"'+IntToStr(Height)+'px"');
           //
-          Result.Add(Name+'__vis'+ASeparator+''+dwIIF(Visible,'true','false'));
-          Result.Add(Name+'__dis'+ASeparator+''+dwIIF(Enabled,'false','true'));
+          Result.Add(dwPrefix(Actrl)+Name+'__vis'+ASeparator+''+dwIIF(Visible,'true','false'));
+          Result.Add(dwPrefix(Actrl)+Name+'__dis'+ASeparator+''+dwIIF(Enabled,'false','true'));
           //
-          Result.Add(Name+'__dat'+ASeparator+dwGetTreeViewData(TTreeView(ACtrl)));
-          Result.Add(Name+'__dfp'+ASeparator+'{children: ''children'',label: ''label''}');
+          Result.Add(dwPrefix(Actrl)+Name+'__dat'+ASeparator+dwGetTreeViewData(TTreeView(ACtrl)));
+          Result.Add(dwPrefix(Actrl)+Name+'__dfp'+ASeparator+'{children: ''children'',label: ''label''}');
      end;
 end;
 

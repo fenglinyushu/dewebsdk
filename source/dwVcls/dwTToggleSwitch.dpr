@@ -84,21 +84,21 @@ begin
           sCode     := '<el-switch'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+Name+'__sta"'
-                    +' :width="'+Name+'__stw"'
-                    +' :active-color="'+Name+'__acc"'
-                    +' :inactive-color="'+Name+'__inc"'
-                    +' :active-text="'+Name+'__act"'
-                    +' :inactive-text="'+Name+'__int"'
+                    +' v-model="'+dwPrefix(Actrl)+Name+'__sta"'
+                    +' :width="'+dwPrefix(Actrl)+Name+'__stw"'
+                    +' :active-color="'+dwPrefix(Actrl)+Name+'__acc"'
+                    +' :inactive-color="'+dwPrefix(Actrl)+Name+'__inc"'
+                    +' :active-text="'+dwPrefix(Actrl)+Name+'__act"'
+                    +' :inactive-text="'+dwPrefix(Actrl)+Name+'__int"'
                     //+dwGetHintValue(joHint,'type','type',' type="default"')         //sCheckBoxType
                     //+dwGetHintValue(joHint,'icon','icon','')         //CheckBoxIcon
                     //
                     +dwLTWH(TControl(ACtrl))
                     +'display: block;'
                     +'"' //style 封闭
-                    +Format(_DWEVENT,['change',Name,'this.'+Name+'__sta','onclick',''])
-                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
+                    +Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__sta','onclick',TForm(Owner).Handle])
+                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'>';
           //添加到返回值数据
           joRes.Add(sCode);
@@ -129,22 +129,22 @@ begin
      joRes    := _Json('[]');
      //
      with TToggleSwitch(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
 
           //
-          joRes.Add(Name+'__stw:'+IntToStr(SwitchWidth)+',');
-          joRes.Add(Name+'__sta:'+dwIIF(State = tssOn,'true,','false,'));
-          joRes.Add(Name+'__acc:"'+dwColor(ThumbColor)+'",');
-          joRes.Add(Name+'__inc:"'+dwColor(DisabledColor)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__stw:'+IntToStr(SwitchWidth)+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__sta:'+dwIIF(State = tssOn,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__acc:"'+dwColor(ThumbColor)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__inc:"'+dwColor(DisabledColor)+'",');
           //
-          joRes.Add(Name+'__act:"'+StateCaptions.CaptionOn+'",');
-          joRes.Add(Name+'__int:"'+StateCaptions.CaptionOff+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__act:"'+StateCaptions.CaptionOn+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__int:"'+StateCaptions.CaptionOff+'",');
      end;
      //
      Result    := (joRes);
@@ -159,22 +159,22 @@ begin
      joRes    := _Json('[]');
      //
      with TToggleSwitch(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
           //
-          joRes.Add('this.'+Name+'__stw='+IntToStr(SwitchWidth)+';');
-          joRes.Add('this.'+Name+'__sta='+dwIIF(State = tssOn,'true;','false;'));
-          joRes.Add('this.'+Name+'__acc="'+dwColor(ThumbColor)+'";');
-          joRes.Add('this.'+Name+'__inc="'+dwColor(DisabledColor)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__stw='+IntToStr(SwitchWidth)+';');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__sta='+dwIIF(State = tssOn,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__acc="'+dwColor(ThumbColor)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__inc="'+dwColor(DisabledColor)+'";');
           //
-          joRes.Add('this.'+Name+'__act="'+StateCaptions.CaptionOn+'";');
-          joRes.Add('this.'+Name+'__int="'+StateCaptions.CaptionOff+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__act="'+StateCaptions.CaptionOn+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__int="'+StateCaptions.CaptionOff+'";');
      end;
      //
      Result    := (joRes);

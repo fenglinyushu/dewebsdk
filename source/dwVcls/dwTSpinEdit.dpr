@@ -59,24 +59,24 @@ begin
      with TSpinEdit(ACtrl) do begin
           if ( maxvalue =  0 ) and  ( maxvalue =  0 ) then begin
                joRes.Add('<el-input-number'
-                         +' v-model="'+Name+'__val"'
+                         +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                          +dwIIF(Ctl3D,'',' controls-position="right"')
                          +dwVisible(TControl(ACtrl))
                          +dwDisable(TControl(ACtrl))
                          +dwLTWH(TControl(ACtrl))
                          +'"' //style ·â±Õ
-                         +Format(_DWEVENT,['change',Name,'(this.'+Name+'__val)','onchange',''])
+                         +Format(_DWEVENT,['change',Name,'(this.'+dwPrefix(Actrl)+Name+'__val)','onchange',TForm(Owner).Handle])
                          +'>');
           end else begin
                joRes.Add('<el-input-number'
-                         +' v-model="'+Name+'__val"'
-                         +' :min="'+Name+'__min" :max="'+Name+'__max"'
+                         +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
+                         +' :min="'+dwPrefix(Actrl)+Name+'__min" :max="'+dwPrefix(Actrl)+Name+'__max"'
                          +dwIIF(Ctl3D,'',' controls-position="right"')
                          +dwVisible(TControl(ACtrl))
                          +dwDisable(TControl(ACtrl))
                          +dwLTWH(TControl(ACtrl))
                          +'"' //style ·â±Õ
-                         +Format(_DWEVENT,['change',Name,'(this.'+Name+'__val)','onchange',''])
+                         +Format(_DWEVENT,['change',Name,'(this.'+dwPrefix(Actrl)+Name+'__val)','onchange',TForm(Owner).Handle])
                          +'>');
           end;
      end;
@@ -107,17 +107,17 @@ begin
      joRes    := _Json('[]');
      //
      with TSpinEdit(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__val:"'+IntToStr(Value)+'",');
-          joRes.Add(Name+'__min:"'+IntToStr(MinValue)+'",');
-          joRes.Add(Name+'__max:"'+IntToStr(MaxValue)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__val:"'+IntToStr(Value)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__min:"'+IntToStr(MinValue)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__max:"'+IntToStr(MaxValue)+'",');
      end;
      //
      Result    := (joRes);
@@ -131,17 +131,17 @@ begin
      joRes    := _Json('[]');
      //
      with TSpinEdit(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__val="'+IntToStr(Value)+'";');
-          joRes.Add('this.'+Name+'__min="'+IntToStr(MinValue)+'";');
-          joRes.Add('this.'+Name+'__max="'+IntToStr(MaxValue)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__val="'+IntToStr(Value)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__min="'+IntToStr(MinValue)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__max="'+IntToStr(MaxValue)+'";');
      end;
      //
      Result    := (joRes);

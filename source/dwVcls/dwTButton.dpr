@@ -68,8 +68,8 @@ begin
      //取得HINT对象JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 
-     //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
-     //参数依次为: JS事件名称, 控件名称,控件值,Delphi事件名称,备用
+     //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
+     //参数依次为: JS事件名称, 控件名称,控件值,Delphi事件名称,句柄
 
 
      //
@@ -88,17 +88,17 @@ begin
           //进入事件代码--------------------------------------------------------
           sEnter  := '';
           if joHint.Exists('onenter') then begin
-               sEnter  := joHint.onenter;
+               sEnter  := joHint.onenter;    //取得OnEnter的JS代码
           end;
           if sEnter='' then begin
                if Assigned(OnEnter) then begin
-                    sEnter    := Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']);
+                    sEnter    := Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]);
                end else begin
 
                end;
           end else begin
                if Assigned(OnEnter) then begin
-                    sEnter    := Format(_DWEVENTPlus,['mouseenter.native',sEnter,Name,'0','onenter',''])
+                    sEnter    := Format(_DWEVENTPlus,['mouseenter.native',sEnter,Name,'0','onenter',TForm(Owner).Handle])
                end else begin
                     sEnter    := ' @mouseenter.native="'+sEnter+'"';
                end;
@@ -118,7 +118,7 @@ begin
                end;
           end else begin
                if Assigned(OnExit) then begin
-                    sExit    := Format(_DWEVENTPlus,['mouseleave.native',sExit,Name,'0','onexit',''])
+                    sExit    := Format(_DWEVENTPlus,['mouseleave.native',sExit,Name,'0','onexit',TForm(Owner).Handle])
                end else begin
                     sExit    := ' @mouseleave.native="'+sExit+'"';
                end;
@@ -132,13 +132,13 @@ begin
           //
           if sClick='' then begin
                if Assigned(OnClick) then begin
-                    sClick    := Format(_DWEVENT,['click.native',Name,'0','onclick','']);
+                    sClick    := Format(_DWEVENT,['click.native',Name,'0','onclick',TForm(Owner).Handle]);
                end else begin
 
                end;
           end else begin
                if Assigned(OnClick) then begin
-                    sClick    := Format(_DWEVENTPlus,['click.native',sClick,Name,'0','onclick',''])
+                    sClick    := Format(_DWEVENTPlus,['click.native',sClick,Name,'0','onclick',TForm(Owner).Handle])
                end else begin
                     sClick    := ' @click.native="'+sClick+'"';
                end;
@@ -150,7 +150,7 @@ begin
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
-                    +' :type="'+Name+'__typ"'
+                    +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
                     +dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
                     +dwGetHintValue(joHint,'style','','')             //样式，空（默认）/plain/round/circle
                     +dwLTWH(TControl(ACtrl))
@@ -159,10 +159,10 @@ begin
                     +sClick
                     +sEnter
                     +sExit
-                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-                    //+dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                    //+dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
-                    +'>{{'+Name+'__cap}}';
+                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                    //+dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    //+dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                    +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
 
      end;
      joRes.Add(sCode);
@@ -195,17 +195,17 @@ begin
      joRes    := _Json('[]');
      //
      with TButton(ACtrl) do begin
-          joRes.Add(Name+'__lef:'''+IntToStr(Left)+'px'',');
-          joRes.Add(Name+'__top:'''+IntToStr(Top)+'px'',');
-          joRes.Add(Name+'__wid:'''+IntToStr(Width)+'px'',');
-          joRes.Add(Name+'__hei:'''+IntToStr(Height)+'px'',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:'''+IntToStr(Left)+'px'',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:'''+IntToStr(Top)+'px'',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:'''+IntToStr(Width)+'px'',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:'''+IntToStr(Height)+'px'',');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__cap:'''+dwProcessCaption(Caption)+''',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__cap:'''+dwProcessCaption(Caption)+''',');
           //
-          joRes.Add(Name+'__typ:'''+dwGetProp(TButton(ACtrl),'type')+''',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__typ:'''+dwGetProp(TButton(ACtrl),'type')+''',');
      end;
      //
      Result    := (joRes);
@@ -222,17 +222,17 @@ begin
      joRes    := _Json('[]');
      //
      with TButton(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height+2)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height+2)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
           //
-          joRes.Add('this.'+Name+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);

@@ -71,12 +71,12 @@ begin
                     +dwIIF(MultiSelect,' multiple','')
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+Name+'__val"'
+                    +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                     +dwLTWH(TControl(ACtrl))
                     +'"' //style 封闭
-                    +Format(_DWEVENT,['change',Name,'String(this.'+Name+'__val)','onchange',''])
+                    +Format(_DWEVENT,['change',Name,'String(this.'+dwPrefix(Actrl)+Name+'__val)','onchange',TForm(Owner).Handle])
                     +'>');
-          joRes.Add('    <option class="dwoption" v-for=''(item,index) in '+Name+'__its''  :value=item.value :key=''index''>{{ item.text }}</option>');
+          joRes.Add('    <option class="dwoption" v-for=''(item,index) in '+dwPrefix(Actrl)+Name+'__its''  :value=item.value :key=''index''>{{ item.text }}</option>');
 
      end;
 
@@ -109,15 +109,15 @@ begin
      //
      with TListBox(ACtrl) do begin
           //
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //添加选项
-          sCode     := Name+'__its:[';
+          sCode     := dwPrefix(Actrl)+Name+'__its:[';
           for iItem := 0 to Items.Count-1 do begin
                sCode     := sCode + '{text:'''+Items[iItem]+''',value:'''+IntToStr(iItem)+'''},';
           end;
@@ -134,7 +134,7 @@ begin
           if sCode<>'' then begin
                Delete(sCode,Length(sCode),1);
           end;
-          joRes.Add(Name+'__val:['+sCode+'],');
+          joRes.Add(dwPrefix(Actrl)+Name+'__val:['+sCode+'],');
      end;
      //
      Result    := (joRes);
@@ -151,15 +151,15 @@ begin
      //
      with TListBox(ACtrl) do begin
           //
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //添加选项
-          sCode     := 'this.'+Name+'__its=[';
+          sCode     := 'this.'+dwPrefix(Actrl)+Name+'__its=[';
           for iItem := 0 to Items.Count-1 do begin
                sCode     := sCode + '{text:'''+Items[iItem]+''',value:'''+IntToStr(iItem)+'''},';
           end;
@@ -176,7 +176,7 @@ begin
           if sCode<>'' then begin
                Delete(sCode,Length(sCode),1);
           end;
-          joRes.Add('this.'+Name+'__val=['+sCode+'];');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__val=['+sCode+'];');
      end;
      //
      Result    := (joRes);

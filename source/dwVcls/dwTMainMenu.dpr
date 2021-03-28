@@ -144,7 +144,7 @@ begin
 
      with TMainMenu(ACtrl) do begin
           sCode     := '<el-menu'
-                    +' :default-active="'+Name+'__act"'     //默认选中状态
+                    +' :default-active="'+dwPrefix(Actrl)+Name+'__act"'     //默认选中状态
                     +' class="el-menu-demo"'
                     +dwIIF(ownerDraw,'',' mode="horizontal"')
                     //+' background-color="#545c64"'
@@ -158,7 +158,7 @@ begin
                     +dwLTWHComp(ACtrl)
                     +dwIIF(ownerDraw,'line-height:30px;','line-height:'+IntToStr((Tag mod 10000)-22)+'px;')
                     +'"' //style 封闭
-                    +Format(_DWEVENT,['select',Name,'val','onclick',''])
+                    +Format(_DWEVENT,['select',Name,'val','onclick',TForm(Owner).Handle])
                     +'>';
           //添加
           joRes.Add(sCode);
@@ -225,27 +225,27 @@ begin
      with TMainMenu(ACtrl) do begin
           if Tag < 10000 then begin
                //如果没有设置当前菜单的LTWH,则为默认值
-               joRes.Add(Name+'__lef:"0px",');
-               joRes.Add(Name+'__top:"0px",');
-               joRes.Add(Name+'__wid:"600px",');
-               joRes.Add(Name+'__hei:"38px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__lef:"0px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__top:"0px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__wid:"600px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"38px",');
           end else begin
-               joRes.Add(Name+'__lef:"'+IntToStr(DesignInfo div 10000)+'px",');
-               joRes.Add(Name+'__top:"'+IntToStr(DesignInfo mod 10000)+'px",');
-               joRes.Add(Name+'__wid:"'+IntToStr(Tag div 10000)+'px",');
-               joRes.Add(Name+'__hei:"'+IntToStr(Tag mod 10000)+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(DesignInfo div 10000)+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(DesignInfo mod 10000)+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Tag div 10000)+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Tag mod 10000)+'px",');
           end;
 
           //当前菜单位置(保存在Items[0].Hint)
           if Items.Count>0 then begin
                sAction   := Items[1].Hint;// dwGetProp(TControl(Items[0]),'actionindex');
                if sAction<>'' then begin
-                    joRes.Add(Name+'__act:"'+sAction+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__act:"'+sAction+'",');
                end else begin
-                    joRes.Add(Name+'__act:"0",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__act:"0",');
                end;
           end else begin
-               joRes.Add(Name+'__act:"0",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__act:"0",');
           end;
      end;
      //
@@ -260,10 +260,10 @@ begin
      joRes    := _Json('[]');
      //
      with TMainMenu(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(DesignInfo div 10000)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(DesignInfo mod 10000)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Tag div 10000)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Tag mod 10000)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(DesignInfo div 10000)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(DesignInfo mod 10000)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Tag div 10000)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Tag mod 10000)+'px";');
      end;
      //
      Result    := (joRes);

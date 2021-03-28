@@ -179,15 +179,15 @@ begin
           joRes.Add('<el-tree'
                     +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                     +dwDisable(TControl(ACtrl))                            //用于控制可用性Enabled(部分控件不支持)
-                    +' :data="'+Name+'__dat"'
+                    +' :data="'+dwPrefix(Actrl)+Name+'__dat"'
                     +' node-key="id"'
                     +' :default-expanded-keys="['+sCode+']"'
-                    +' :props="'+Name+'__dps"'                             //defaultProps
+                    +' :props="'+dwPrefix(Actrl)+Name+'__dps"'                             //defaultProps
                     +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                     +'background-color:'+dwColor(Color)+';'
                     +'overflow:auto;'
                     +'"' // 封闭style
-                    +Format(_DWEVENT,['node-click',Name,'val.$treeNodeId','onclick','']) //绑定OnChange事件
+                    +Format(_DWEVENT,['node-click',Name,'val.$treeNodeId','onclick',TForm(Owner).Handle]) //绑定OnChange事件
                     +'>');
           joRes.Add('<span class="custom-tree-node" slot-scope="{ node, data }">'
                     +'<span>'
@@ -226,17 +226,17 @@ begin
      //
      with TTreeView(ACtrl) do begin
           //
-          joRes.Add(Name+'__dat:'+_GetTreeViewData(TTreeView(ACtrl))+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__dat:'+_GetTreeViewData(TTreeView(ACtrl))+',');
           //defaultProps
-          joRes.Add(Name+'__dps: {children: ''children'',label: ''label''},');
+          joRes.Add(dwPrefix(Actrl)+Name+'__dps: {children: ''children'',label: ''label''},');
           //
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
      end;
      //
      Result    := (joRes);
@@ -251,15 +251,15 @@ begin
      joRes    := _Json('[]');
      //
      with TTreeView(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__dat='+_GetTreeViewData(TTreeView(ACtrl))+';');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dat='+_GetTreeViewData(TTreeView(ACtrl))+';');
      end;
      //
      Result    := (joRes);

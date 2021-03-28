@@ -44,11 +44,11 @@ function dwGetHintStyle(AHint:Variant;AJsonName,AHtmlName,ADefault:String):Strin
 function dwIIF(ABool:Boolean;AYes,ANo:string):string;
 
 const
-     //参数依次为:JS事件名称 ---  控件名称,控件值,D事件名称,备用
-     _DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
+     //参数依次为:JS事件名称 ---  控件名称,控件值,D事件名称,句柄
+     _DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
 
-     //参数依次为:JS事件名称 ---本地jS代码，控件名称,控件值,D事件名称,备用
-     _DWEVENTPlus = ' @%s="%s;dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
+     //参数依次为:JS事件名称 ---本地jS代码，控件名称,控件值,D事件名称,句柄
+     _DWEVENTPlus = ' @%s="%s;dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
 
 //解密函数
 function dwDecryptKey (Src:String; Key:String):string;
@@ -746,7 +746,23 @@ function dwGetMD5(AStr:String):string;
 //取得DLL名称
 function dwGetDllName: string;
 
+//根据owner是否为TForm1, 来增加前缀，主要用于区分多个Form中的同名控件
+function  dwPrefix(ACtrl:TComponent):String;
+
 implementation      //==============================================================================
+
+//根据owner是否为TForm1, 来增加前缀，主要用于区分多个Form中的同名控件
+function  dwPrefix(ACtrl:TComponent):String;
+begin
+
+     //默认为空
+     Result    := '';
+     //
+     if lowerCase(ACtrl.Owner.ClassName) <> 'tform1' then begin
+          Result    := ACtrl.Owner.Name+'__';
+     end;
+end;
+
 
 function  dwChangeChar(AText:String):String;
 begin
@@ -1371,12 +1387,12 @@ end;
 
 function dwVisible(ACtrl:TControl):String;
 begin
-     Result    := ' v-if="'+ACtrl.Name+'__vis"';
+     Result    := ' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__vis"';
 end;
 
 function dwDisable(ACtrl:TControl):String;
 begin
-     Result    := ' :disabled="'+ACtrl.Name+'__dis"';
+     Result    := ' :disabled="'+dwPrefix(Actrl)+ACtrl.Name+'__dis"';
 end;
 
 function dwGetHintJson(ACtrl:TControl):Variant;
@@ -1397,17 +1413,25 @@ end;
 function dwLTWH(ACtrl:TControl):String;  //可以更新位置的用法
 begin
      with ACtrl do begin
-          Result    := ' :style="{left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,'
-                    +'height:'+Name+'__hei}" style="position:absolute;';
+          Result    := ' :style="{'
+                    +'left:'+dwPrefix(Actrl)+Name+'__lef,'
+                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
+                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
+                    +'height:'+dwPrefix(Actrl)+Name+'__hei'
+                    +'}"'
+                    +' style="position:absolute;';
      end;
 end;
 
 function dwLTWHComp(ACtrl:TComponent):String;  //可以更新位置的用法
 begin
-
      //
      with ACtrl do begin
-          Result    := ' :style=''{left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}'''
+          Result    := ' :style=''{'
+                    +'left:'+dwPrefix(Actrl)+Name+'__lef,'
+                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
+                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
+                    +'height:'+dwPrefix(Actrl)+Name+'__hei}'''
                     +' style="position:absolute;';
      end;
 end;

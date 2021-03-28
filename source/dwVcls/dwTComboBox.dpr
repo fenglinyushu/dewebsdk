@@ -79,7 +79,7 @@ begin
      with TComboBox(ACtrl) do begin
           //
           joRes.Add('<el-select'
-                    +' v-model="'+Name+'__txt"'
+                    +' v-model="'+dwPrefix(Actrl)+Name+'__txt"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +dwLTWH(TControl(ACtrl))
@@ -89,9 +89,9 @@ begin
                     +dwIIF(Assigned(OnDropDown) OR Assigned(OnCloseUp),
                          '@visible-change="dwevent($event,''ComboBox1'',$event,''ondropdown'','''')"',
                          '')
-                    +Format(_DWEVENT,['change',Name,'this.'+Name+'__txt','onchange',''])
+                    +Format(_DWEVENT,['change',Name,'this.'+Name+'__txt','onchange',TForm(Owner).Handle])
                     +'>');
-          joRes.Add('    <el-option v-for="item in '+Name+'__its" :key="item.value" :label="item.value" :value="item.value"/>');
+          joRes.Add('    <el-option v-for="item in '+dwPrefix(Actrl)+Name+'__its" :key="item.value" :label="item.value" :value="item.value"/>');
 
      end;
 
@@ -124,7 +124,7 @@ begin
      //
      with TComboBox(ACtrl) do begin
           //添加选项
-          sCode     := Name+'__its:[';
+          sCode     := dwPrefix(Actrl)+Name+'__its:[';
           for iItem := 0 to Items.Count-1 do begin
                sCode     := sCode + '{value:'''+Items[iItem]+'''},';
           end;
@@ -135,19 +135,19 @@ begin
           joRes.Add(sCode);
 
           //
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
           if dwGetProp(TControl(ACtrl),'height')='' then begin
-               joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           end else begin
-               joRes.Add(Name+'__hei:"'+dwGetProp(TControl(ACtrl),'height')+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+dwGetProp(TControl(ACtrl),'height')+'px",');
           end;
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__txt:"'+Text+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__txt:"'+Text+'",');
      end;
      //
      Result    := (joRes);
@@ -165,7 +165,7 @@ begin
      //
      with TComboBox(ACtrl) do begin
           //添加选项
-          sCode     := 'this.'+Name+'__its=[';
+          sCode     := 'this.'+dwPrefix(Actrl)+Name+'__its=[';
           for iItem := 0 to Items.Count-1 do begin
                sCode     := sCode + '{value:'''+Items[iItem]+'''},';
           end;
@@ -175,19 +175,19 @@ begin
           sCode     := sCode + '];';
           joRes.Add(sCode);
           //
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
           if dwGetProp(TControl(ACtrl),'height')='' then begin
-               joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           end else begin
-               joRes.Add('this.'+Name+'__hei="'+dwGetProp(TControl(ACtrl),'height')+'px";');
+               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+dwGetProp(TControl(ACtrl),'height')+'px";');
           end;
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__txt="'+Text+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__txt="'+Text+'";');
      end;
      //
      Result    := (joRes);

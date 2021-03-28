@@ -100,7 +100,7 @@ begin
      with TProgressBar(ACtrl) do begin
           //外框
           sCode     := '<div'
-                    +' :style="{left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}"'
+                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
                     +' style="position:absolute;'
                     +'"' //style 封闭
                     +'>';
@@ -109,12 +109,12 @@ begin
 
           //
           sCode     := '    <el-progress'
-                    +' :percentage="'+Name+'__pct"';    //百分比（必填）
+                    +' :percentage="'+dwPrefix(Actrl)+Name+'__pct"';    //百分比（必填）
           //type   进度条类型	string	line/circle/dashboard
           if State = pbsNormal then begin
                sCode     := sCode +' type="line"'
-                    +' :stroke-width="'+Name+'__stw"'  //进度条的宽度，单位 px	number	—	6
-                    +' :text-inside="'+Name+'__tid"'   //进度条显示文字内置在进度条内（只在 type=line 时可用）
+                    +' :stroke-width="'+dwPrefix(Actrl)+Name+'__stw"'  //进度条的宽度，单位 px	number	—	6
+                    +' :text-inside="'+dwPrefix(Actrl)+Name+'__tid"'   //进度条显示文字内置在进度条内（只在 type=line 时可用）
           end else if State = pbsError then begin
                sCode     := sCode +' type="circle"';
           end else begin
@@ -122,10 +122,10 @@ begin
           end;
 
           sCode     := sCode
-                    //+' :status="'+Name+'__stt"'
-                    +' :color="'+Name+'__clr"'
-                    +' :show-text="'+Name+'__swt"'
-                    //+' :stroke-linecap="'+Name+'__slc"'
+                    //+' :status="'+dwPrefix(Actrl)+Name+'__stt"'
+                    +' :color="'+dwPrefix(Actrl)+Name+'__clr"'
+                    +' :show-text="'+dwPrefix(Actrl)+Name+'__swt"'
+                    //+' :stroke-linecap="'+dwPrefix(Actrl)+Name+'__slc"'
                     +'>';
           //添加到返回值数据
           joRes.Add(sCode);
@@ -166,27 +166,27 @@ begin
      //
      with TProgressBar(ACtrl) do begin
           //基本数据
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
 
           //显示legend
           if (Max-Min)>0 then begin
-               joRes.Add(Name+'__pct:'+IntToStr(Round((Position-Min)*100/(Max-Min)))+',');
+               joRes.Add(dwPrefix(Actrl)+Name+'__pct:'+IntToStr(Round((Position-Min)*100/(Max-Min)))+',');
           end else begin
-               joRes.Add(Name+'__pct:'+IntToStr(Position)+',');
+               joRes.Add(dwPrefix(Actrl)+Name+'__pct:'+IntToStr(Position)+',');
           end;
           //显示文本
-          joRes.Add(Name+'__swt:'+dwIIF(ShowHint,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__swt:'+dwIIF(ShowHint,'true,','false,'));
           //高度
-          joRes.Add(Name+'__stw:'+IntToStr(Height)+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__stw:'+IntToStr(Height)+',');
           //在内显示文本
-          joRes.Add(Name+'__tid:'+dwIIF(SmoothReverse,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__tid:'+dwIIF(SmoothReverse,'true,','false,'));
           //Bar颜色
-          joRes.Add(Name+'__clr:"'+dwColor(BarColor)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__clr:"'+dwColor(BarColor)+'",');
           //>------
      end;
      //
@@ -207,27 +207,27 @@ begin
      joRes    := _Json('[]');
      //
      with TProgressBar(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
 
           //显示legend
           if (Max-Min)>0 then begin
-               joRes.Add('this.'+Name+'__pct='+IntToStr(Round((Position-Min)*100/(Max-Min)))+';');
+               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__pct='+IntToStr(Round((Position-Min)*100/(Max-Min)))+';');
           end else begin
-               joRes.Add('this.'+Name+'__pct='+IntToStr(Position)+';');
+               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__pct='+IntToStr(Position)+';');
           end;
           //显示文本
-          joRes.Add('this.'+Name+'__swt='+dwIIF(ShowHint,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__swt='+dwIIF(ShowHint,'true;','false;'));
           //高度
-          joRes.Add('this.'+Name+'__stw='+IntToStr(Height)+';');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__stw='+IntToStr(Height)+';');
           //在内显示文本
-          joRes.Add('this.'+Name+'__tid='+dwIIF(SmoothReverse,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tid='+dwIIF(SmoothReverse,'true;','false;'));
           //Bar颜色
-          joRes.Add('this.'+Name+'__clr="'+dwColor(BarColor)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__clr="'+dwColor(BarColor)+'";');
           //>------
      end;
      //

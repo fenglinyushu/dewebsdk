@@ -112,11 +112,11 @@ begin
           sCode     := '<div'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' :style="{left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}"'
+                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
                     +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';overflow:hidden;'
                     +'"' //style 封闭
-                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
+                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'>';
           //添加到返回值数据
           joRes.Add(sCode);
@@ -127,8 +127,8 @@ begin
                oSection  := Sections[iSect];
                //
                sCode     := '<div'
-                         +' v-html="'+Name+'__c'+sSect+'"'
-                         +' :style="{left:'+Name+'__l'+sSect+',top:0,width:'+Name+'__w'+sSect+'}"'
+                         +' v-html="'+dwPrefix(Actrl)+Name+'__c'+sSect+'"'
+                         +' :style="{left:'+dwPrefix(Actrl)+Name+'__l'+sSect+',top:0,width:'+dwPrefix(Actrl)+Name+'__w'+sSect+'}"'
                          +' style="position:absolute;'
                          +_GetFont(Font)
                          //style
@@ -136,7 +136,7 @@ begin
                          +'line-height:'+IntToStr(Height)+'px;'
                          +'"'
                          //style 封闭
-                         +'>{{'+Name+'__c'+sSect+'}}</div>';
+                         +'>{{'+dwPrefix(Actrl)+Name+'__c'+sSect+'}}</div>';
                //添加到返回值数据
                joRes.Add(sCode);
 
@@ -175,23 +175,23 @@ begin
      joRes    := _Json('[]');
      //
      with THeaderControl(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          //joRes.Add(Name+'__col:"'+dwColor(Color)+'",');
+          //joRes.Add(dwPrefix(Actrl)+Name+'__col:"'+dwColor(Color)+'",');
           iLeft     := 0;     //用于计算左边界
           for iSect := 0 to Sections.Count-1 do begin
                sSect     := Format('%.2d',[iSect]);
                oSection  := Sections[iSect];
                //
-               joRes.Add(Name+'__l'+sSect+':"'+IntToStr(iLeft)+'px",');
-               joRes.Add(Name+'__w'+sSect+':"'+IntToStr(oSection.Width)+'px",');
-               joRes.Add(Name+'__c'+sSect+':"'+oSection.Text+'",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__l'+sSect+':"'+IntToStr(iLeft)+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__w'+sSect+':"'+IntToStr(oSection.Width)+'px",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__c'+sSect+':"'+oSection.Text+'",');
                //
                iLeft     := iLeft + oSection.Width;
           end;
@@ -208,15 +208,15 @@ begin
      joRes    := _Json('[]');
      //
      with THeaderControl(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          //joRes.Add('this.'+Name+'__col="'+dwColor(Color)+'";');
+          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__col="'+dwColor(Color)+'";');
      end;
      //
      Result    := (joRes);

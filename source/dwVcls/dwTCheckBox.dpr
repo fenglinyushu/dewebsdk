@@ -68,12 +68,12 @@ begin
           sCode     := '<el-checkbox'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+Name+'__chk"'
+                    +' v-model="'+dwPrefix(Actrl)+Name+'__chk"'
                     +dwGetHintValue(joHint,'type','type',' type="default"')         //sCheckBoxType
                     +dwGetHintValue(joHint,'icon','icon','')         //CheckBoxIcon
                     +dwLTWH(TControl(ACtrl))
                     +'"' //style 封闭
-                    +Format(_DWEVENT,['change',Name,'this.'+Name+'__chk','onclick',''])
+                    +Format(_DWEVENT,['change',Name,'this.'+Name+'__chk','onclick',TForm(Owner).Handle])
                     +'>{{'+Name+'__cap}}';
           //添加到返回值数据
           joRes.Add(sCode);
@@ -104,16 +104,16 @@ begin
      joRes    := _Json('[]');
      //
      with TCheckBox(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          joRes.Add(Name+'__chk:'+dwIIF(Checked,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__chk:'+dwIIF(Checked,'true,','false,'));
      end;
      //
      Result    := (joRes);
@@ -128,16 +128,16 @@ begin
      joRes    := _Json('[]');
      //
      with TCheckBox(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-          joRes.Add('this.'+Name+'__chk='+dwIIF(Checked,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__chk='+dwIIF(Checked,'true;','false;'));
      end;
      //
      Result    := (joRes);

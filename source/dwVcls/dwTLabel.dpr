@@ -205,22 +205,22 @@ begin
 
                with TLabel(ACtrl) do begin
                     sCode     := '<div '
-                              +' v-html="'+Name+'__cap"'
+                              +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
                               //
                               +' :style="{'
-                                   +'color:'+Name+'__fcl,'
-                                   +'''font-size'':'+Name+'__fsz,'
-                                   +'''font-family'':'+Name+'__ffm,'
-                                   +'''font-weight'':'+Name+'__fwg,'
-                                   +'''font-style'':'+Name+'__fsl,'
-                                   +'''text-decoration'':'+Name+'__ftd,'
-                                   +'''text-align'':'+Name+'__fta,'
-                                   +'left:'+Name+'__lef,'
-                                   +'top:'+Name+'__top,'
-                                   +'width:'+Name+'__wid,'
-                                   +'height:'+Name+'__hei'
+                                   +'color:'+dwPrefix(Actrl)+Name+'__fcl,'
+                                   +'''font-size'':'+dwPrefix(Actrl)+Name+'__fsz,'
+                                   +'''font-family'':'+dwPrefix(Actrl)+Name+'__ffm,'
+                                   +'''font-weight'':'+dwPrefix(Actrl)+Name+'__fwg,'
+                                   +'''font-style'':'+dwPrefix(Actrl)+Name+'__fsl,'
+                                   +'''text-decoration'':'+dwPrefix(Actrl)+Name+'__ftd,'
+                                   +'''text-align'':'+dwPrefix(Actrl)+Name+'__fta,'
+                                   +'left:'+dwPrefix(Actrl)+Name+'__lef,'
+                                   +'top:'+dwPrefix(Actrl)+Name+'__top,'
+                                   +'width:'+dwPrefix(Actrl)+Name+'__wid,'
+                                   +'height:'+dwPrefix(Actrl)+Name+'__hei'
                                    +'}"'
                               //
                               +'style="position:absolute;'
@@ -231,10 +231,10 @@ begin
                               +'"'
                               //style 封闭
 
-                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                              +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
-                              +'>{{'+Name+'__cap}}';
+                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                              +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                              +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
                     //添加到返回值数据
                     joRes.Add(sCode);
                end;
@@ -264,7 +264,7 @@ begin
 
                with TLabel(ACtrl) do begin
                     sCode     := '<div '
-                              +' v-html="'+Name+'__cap"'
+                              +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
                               +dwLTWH(TControl(ACtrl))
@@ -275,10 +275,10 @@ begin
                               +'"'
                               //style 封闭
 
-                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                              +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
-                              +'>{{'+Name+'__cap}}';
+                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                              +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                              +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
                     //添加到返回值数据
                     joRes.Add(sCode);
                end;
@@ -366,23 +366,23 @@ begin
                joRes    := _Json('[]');
                //
                with TLabel(ACtrl) do begin
-                    joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
                     //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                     //
-                    joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
                     //
-                    joRes.Add(Name+'__fcl:"'+dwColor(Font.Color)+'",');
-                    joRes.Add(Name+'__fsz:"'+IntToStr(Font.size)+'pt",');
-                    joRes.Add(Name+'__ffm:"'+Font.name+'",');
-                    joRes.Add(Name+'__fwg:"'+_GetFontWeight(Font)+'",');
-                    joRes.Add(Name+'__fsl:"'+_GetFontStyle(Font)+'",');
-                    joRes.Add(Name+'__ftd:"'+_GetTextDecoration(Font)+'",');
-                    joRes.Add(Name+'__fta:"'+_GetTextAlignment(TLabel(ACtrl))+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__fcl:"'+dwColor(Font.Color)+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__fsz:"'+IntToStr(Font.size)+'pt",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__ffm:"'+Font.Name+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__fwg:"'+_GetFontWeight(Font)+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__fsl:"'+_GetFontStyle(Font)+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__ftd:"'+_GetTextDecoration(Font)+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__fta:"'+_GetTextAlignment(TLabel(ACtrl))+'",');
                end;
                //
                Result    := (joRes);
@@ -405,15 +405,15 @@ begin
                joRes    := _Json('[]');
                //
                with TLabel(ACtrl) do begin
-                    joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
                     //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                     //
-                    joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
                end;
                //
                Result    := (joRes);
@@ -446,23 +446,23 @@ begin
                joRes    := _Json('[]');
                //
                with TLabel(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
                     //
-                    joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
                     //
-                    joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
                     //
-                    joRes.Add('this.'+Name+'__fcl="'+dwColor(Font.Color)+'";');
-                    joRes.Add('this.'+Name+'__fsz="'+IntToStr(Font.size)+'pt";');
-                    joRes.Add('this.'+Name+'__ffm="'+Font.name+'";');
-                    joRes.Add('this.'+Name+'__fwg="'+_GetFontWeight(Font)+'";');
-                    joRes.Add('this.'+Name+'__fsl="'+_GetFontStyle(Font)+'";');
-                    joRes.Add('this.'+Name+'__ftd="'+_GetTextDecoration(Font)+'";');
-                    joRes.Add('this.'+Name+'__fta="'+_GetTextAlignment(TLabel(ACtrl))+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fcl="'+dwColor(Font.Color)+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fsz="'+IntToStr(Font.size)+'pt";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__ffm="'+Font.Name+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fwg="'+_GetFontWeight(Font)+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fsl="'+_GetFontStyle(Font)+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__ftd="'+_GetTextDecoration(Font)+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fta="'+_GetTextAlignment(TLabel(ACtrl))+'";');
                end;
                //
                Result    := (joRes);
@@ -485,15 +485,15 @@ begin
                joRes    := _Json('[]');
                //
                with TLabel(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
                     //
-                    joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
                     //
-                    joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
                end;
                //
                Result    := (joRes);

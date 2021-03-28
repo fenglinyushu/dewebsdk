@@ -4,8 +4,8 @@ object Form1: TForm1
   BorderStyle = bsNone
   BorderWidth = 5
   Caption = 'DeWeb'
-  ClientHeight = 700
-  ClientWidth = 1073
+  ClientHeight = 395
+  ClientWidth = 459
   Color = clWhite
   TransparentColorValue = 16448250
   Font.Charset = ANSI_CHARSET
@@ -17,190 +17,12 @@ object Form1: TForm1
   Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 20
-  object Image1: TImage
-    Left = 0
-    Top = 0
-    Width = 1073
-    Height = 150
-    Hint = '{"src":"media/images/login/top.png"}'
-    Align = alTop
-    Stretch = True
-  end
-  object Image2: TImage
-    Left = 0
-    Top = 530
-    Width = 1073
-    Height = 153
-    Hint = '{"src":"media/images/login/bottom.png"}'
-    Align = alTop
-    AutoSize = True
-    ExplicitTop = 389
-    ExplicitWidth = 1083
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 150
-    Width = 1073
-    Height = 380
-    Align = alTop
-    BevelOuter = bvNone
-    Color = 16176619
-    ParentBackground = False
+  object Button1: TButton
+    Left = 72
+    Top = 160
+    Width = 193
+    Height = 49
+    Caption = 'Show Modal Form2'
     TabOrder = 0
-    object Panel3: TPanel
-      Left = 364
-      Top = 96
-      Width = 300
-      Height = 254
-      Color = 16176619
-      ParentBackground = False
-      TabOrder = 0
-      object Label1: TLabel
-        AlignWithMargins = True
-        Left = 6
-        Top = 11
-        Width = 288
-        Height = 52
-        Margins.Left = 5
-        Margins.Top = 10
-        Margins.Right = 5
-        Margins.Bottom = 0
-        Align = alTop
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Sign in'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -27
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-        ExplicitLeft = 56
-        ExplicitTop = 112
-        ExplicitWidth = 217
-      end
-      object Button1: TButton
-        AlignWithMargins = True
-        Left = 6
-        Top = 195
-        Width = 288
-        Height = 40
-        Hint = '{"type":"primary"}'
-        Margins.Left = 5
-        Margins.Top = 10
-        Margins.Right = 5
-        Margins.Bottom = 10
-        Align = alTop
-        Caption = 'Sign in'
-        TabOrder = 0
-        ExplicitTop = 205
-      end
-      object Edit2: TEdit
-        AlignWithMargins = True
-        Left = 6
-        Top = 134
-        Width = 288
-        Height = 39
-        Hint = '{"border":"0","placeholder":"Password"}'
-        Margins.Left = 5
-        Margins.Top = 10
-        Margins.Right = 5
-        Margins.Bottom = 0
-        Align = alTop
-        AutoSize = False
-        BorderStyle = bsNone
-        Color = 16176619
-        TabOrder = 1
-        ExplicitLeft = 56
-        ExplicitTop = 175
-        ExplicitWidth = 217
-      end
-      object Panel4: TPanel
-        AlignWithMargins = True
-        Left = 6
-        Top = 112
-        Width = 288
-        Height = 2
-        Margins.Left = 5
-        Margins.Top = 0
-        Margins.Right = 5
-        Margins.Bottom = 10
-        Align = alTop
-        BevelOuter = bvNone
-        Color = 16752192
-        ParentBackground = False
-        TabOrder = 2
-        ExplicitTop = 122
-      end
-      object Edit1: TEdit
-        AlignWithMargins = True
-        Left = 6
-        Top = 73
-        Width = 288
-        Height = 39
-        Hint = '{"border":"0","placeholder":"Email"}'
-        Margins.Left = 5
-        Margins.Top = 10
-        Margins.Right = 5
-        Margins.Bottom = 0
-        Align = alTop
-        AutoSize = False
-        BorderStyle = bsNone
-        Color = 16176619
-        TabOrder = 3
-        ExplicitLeft = 56
-        ExplicitTop = 175
-        ExplicitWidth = 217
-      end
-      object Panel5: TPanel
-        AlignWithMargins = True
-        Left = 6
-        Top = 173
-        Width = 288
-        Height = 2
-        Margins.Left = 5
-        Margins.Top = 0
-        Margins.Right = 5
-        Margins.Bottom = 10
-        Align = alTop
-        BevelOuter = bvNone
-        Color = 16752192
-        ParentBackground = False
-        TabOrder = 4
-        ExplicitLeft = 1
-        ExplicitTop = 92
-        ExplicitWidth = 298
-      end
-    end
-  end
-  object Panel2: TPanel
-    Left = 448
-    Top = 88
-    Width = 128
-    Height = 128
-    Hint = '{"borderradius":"50%"}'
-    BevelOuter = bvNone
-    Color = clWhite
-    ParentBackground = False
-    TabOrder = 1
-    object Image3: TImage
-      AlignWithMargins = True
-      Left = 8
-      Top = 8
-      Width = 112
-      Height = 112
-      Hint = '{"src":"media/images/login/head.jpg","radius":"50%"}'
-      Margins.Left = 8
-      Margins.Top = 8
-      Margins.Right = 8
-      Margins.Bottom = 8
-      Align = alClient
-      Stretch = True
-      ExplicitLeft = 0
-      ExplicitTop = -22
-      ExplicitWidth = 128
-      ExplicitHeight = 150
-    end
   end
 end

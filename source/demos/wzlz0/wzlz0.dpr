@@ -19,8 +19,6 @@ var
      DLLScreen      : TScreen;
 
 function dwLoad(AParams:String;AConnection:TADOConnection;AApp:TApplication;AScreen:TScreen):TForm;stdcall;
-var
-     AForm     : TForm1;
 begin
      //
      Application    := AApp;
@@ -28,11 +26,11 @@ begin
      //
 
      //
-     AForm          := TForm1.Create(nil);
+     Form1          := TForm1.Create(nil);
 
-     //AForm.ADOQuery1.Connection   := AConnection;
+     //Form1.ADOQuery1.Connection   := AConnection;
 
-     Result         := AForm;
+     Result         := Form1;
 end;
 
 procedure DLLUnloadProc(dwReason: DWORD);

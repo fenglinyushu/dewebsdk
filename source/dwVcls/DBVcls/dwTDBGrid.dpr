@@ -79,16 +79,16 @@ begin
                     +'>');
           //添加主体
           joRes.Add('    <el-table'
-                    +' :data="'+Name+'__ces"'
+                    +' :data="'+dwPrefix(Actrl)+Name+'__ces"'
                     +' highlight-current-row'
-                    +' ref="'+Name+'"'
+                    +' ref="'+dwPrefix(Actrl)+Name+'"'
                     //+' stripe'
                     +dwIIF(Borderstyle<>bsNone,' border','')
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +' height="'+IntToStr(TControl(ACtrl).Height)+'"'
                     +' style="width:100%"'
-                    +Format(_DWEVENT,['row-click',Name,'val.d0','onchange',''])
+                    +Format(_DWEVENT,['row-click',Name,'val.d0','onchange',TForm(Owner).Handle])
                     +'>');
           //添加另外加的行号列, 用于表示行号
           joRes.Add('        <el-table-column  show-overflow-tooltip fixed v-if=false prop="d0" label="rowno" width="80"></el-table-column>');
@@ -162,17 +162,17 @@ begin
           oDataSet  := DataSource.DataSet;
 
           //
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
           if oDataSet <> nil then begin
                if not oDataSet.Active then begin
-                    sCode     := Name+'__ces:[],';
+                    sCode     := dwPrefix(Actrl)+Name+'__ces:[],';
                     joRes.Add(sCode);
                end else begin
                     //保存当前位置
@@ -187,7 +187,7 @@ begin
                     iRow := 0;
                     while not oDataSet.Eof do begin
                          if sCode = '' then begin
-                              sCode     := Name+'__ces:[{"d0":'''+IntToStr(iRow)+''',';
+                              sCode     := dwPrefix(Actrl)+Name+'__ces:[{"d0":'''+IntToStr(iRow)+''',';
                          end else begin
                               sCode     := '{"d0":'''+IntToStr(iRow)+''',';
                          end;

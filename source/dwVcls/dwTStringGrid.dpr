@@ -184,7 +184,7 @@ var
                          +sSort    //排序  sortable
                          +sAlign   //对齐，align="right"'
                          +sFilter  //过滤  :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]
-                         +' :label="'+ASG.Name+'__col'+IntToStr(AColID)+'"'
+                         +' :label="'+dwPrefix(Actrl)+ASG.Name+'__col'+IntToStr(AColID)+'"'
                          +' width="'+IntToStr(ASG.ColWidths[AColID])+'"></el-table-column>');
                //
                Inc(AColID);
@@ -216,8 +216,8 @@ begin
 
                     //添加主体
                     joRes.Add('    <v-table'
-                              +' :columns="'+Name+'__clm"'     //column
-                              +' :table-data="'+Name+'__tbd"'  //table-data
+                              +' :columns="'+dwPrefix(Actrl)+Name+'__clm"'     //column
+                              +' :table-data="'+dwPrefix(Actrl)+Name+'__tbd"'  //table-data
                               +' :show-vertical-border="false"'            //参考名?
                               +' row-hover-color="#eee"'
                               +' row-click-color="#edf7ff"'
@@ -226,9 +226,9 @@ begin
                               //+dwVisible(TControl(ACtrl))                  //是否可见
                               //+dwDisable(TControl(ACtrl))                  //是否可用
                               //+' height="'+IntToStr(TControl(ACtrl).Height)+'"' //高度, 有此值则显示滚动条
-                              //+' :height="'+Name+'__hei"' //高度, 有此值则显示滚动条
+                              //+' :height="'+dwPrefix(Actrl)+Name+'__hei"' //高度, 有此值则显示滚动条
                               //+' style="width:100%"'                            //宽度
-                              //+Format(_DWEVENT,['row-click',Name,'val.d0','onclick',''])
+                              //+Format(_DWEVENT,['row-click',Name,'val.d0','onclick',TForm(Owner).Handle])
                               +'>');
 
                end;
@@ -263,18 +263,18 @@ begin
                               +'>');
                     //添加主体
                     joRes.Add('    <el-table'
-                              +' :data="'+Name+'__ces"'     //行内数据
+                              +' :data="'+dwPrefix(Actrl)+Name+'__ces"'     //行内数据
                               +' highlight-current-row'     //当前行高亮
                               +sRowStyle
-                              +' ref="'+Name+'"'            //参考名?
+                              +' ref="'+dwPrefix(Actrl)+Name+'"'            //参考名?
                               //+' stripe'                  //斑马纹
                               +dwIIF(Borderstyle<>bsNone,' border','')     //是否边框
                               +dwVisible(TControl(ACtrl))                  //是否可见
                               +dwDisable(TControl(ACtrl))                  //是否可用
                               //+' height="'+IntToStr(TControl(ACtrl).Height)+'"' //高度, 有此值则显示滚动条
-                              +' :height="'+Name+'__hei"' //高度, 有此值则显示滚动条
+                              +' :height="'+dwPrefix(Actrl)+Name+'__hei"' //高度, 有此值则显示滚动条
                               +' style="width:100%"'                            //宽度
-                              +Format(_DWEVENT,['row-click',Name,'val.d0','onclick',''])
+                              +Format(_DWEVENT,['row-click',Name,'val.d0','onclick',TForm(Owner).Handle])
                               +'>');
 
                     //添加另外加的行号列, 用于表示行号
@@ -309,7 +309,7 @@ begin
                                         +' show-overflow-tooltip'
                                         +' prop="d'+IntToStr(iItem+1)+'"'
                                         +_GetColAlign(Cells[iItem,0])
-                                        +' :label="'+Name+'__col'+IntToStr(iItem)+'"'
+                                        +' :label="'+dwPrefix(Actrl)+Name+'__col'+IntToStr(iItem)+'"'
                                         +' width="'+IntToStr(ColWidths[iItem])+'"></el-table-column>');
                          end;
                     end;
@@ -417,20 +417,20 @@ begin
                with TStringGrid(ACtrl) do begin
 
                     //
-                    joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
                     //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
 
                     //tableData
-                    S := Name+'__tbd:'+_GetTableData(ACtrl)+','#13;
+                    S := dwPrefix(Actrl)+Name+'__tbd:'+_GetTableData(ACtrl)+','#13;
                     joRes.Add(S);
 
                     //columns
-                    S := Name+'__clm: [';
+                    S := dwPrefix(Actrl)+Name+'__clm: [';
                     for iCol := 0 to ColCount-1 do begin
                          S := S + '{field:''col'+IntToStr(iCol)+''','
                                    +'title:'''+Cells[iCol,0]+''','
@@ -457,21 +457,21 @@ begin
                with TStringGrid(ACtrl) do begin
 
                     //
-                    joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
                     //
-                    joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                     //列标题
                     for iCol := 0 to ColCount-1 do begin
-                         joRes.Add(Name+'__col'+IntToStr(iCol)+':"'+_GetColCaption(Cells[iCol,0])+'",');
+                         joRes.Add(dwPrefix(Actrl)+Name+'__col'+IntToStr(iCol)+':"'+_GetColCaption(Cells[iCol,0])+'",');
                     end;
 
 
                     //内容
-                    sCode     := Name+'__ces:[';
+                    sCode     := dwPrefix(Actrl)+Name+'__ces:[';
                     for iRow := 1 to RowCount-1 do begin
                          sCode     := sCode + '{"d0":'''+IntToStr(iRow)+''',';
                          for iCol := 0 to ColCount-1 do begin
@@ -509,16 +509,16 @@ begin
 
                //
                with TStringGrid(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
                     //
-                    joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
 
                     //tableData
-                    joRes.Add('this.'+Name+'__tbd='+_GetTableData(ACtrl)+';');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tbd='+_GetTableData(ACtrl)+';');
 
 
                end;
@@ -532,23 +532,23 @@ begin
 
                //
                with TStringGrid(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
                     //
-                    joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
 
                     //列标题
                     for iCol := 0 to ColCount-1 do begin
-                         joRes.Add('this.'+Name+'__col'+IntToStr(iCol)+'="'+Cells[iCol,0]+'";');
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__col'+IntToStr(iCol)+'="'+Cells[iCol,0]+'";');
                     end;
 
 
                     //内容
                     for iRow := 1 to RowCount-1 do begin
-                         sCode     := 'this.$set(this.'+TStringGrid(ACtrl).Name+'__ces,'+IntToStr(iRow-1)+',{d0:"'+IntToStr(iRow)+'",';
+                         sCode     := 'this.$set(this.'+dwPrefix(Actrl)+TStringGrid(ACtrl).Name+'__ces,'+IntToStr(iRow-1)+',{d0:"'+IntToStr(iRow)+'",';
                          for iCol := 0 to ColCount-2 do begin
                               sCode     := sCode +'d'+IntToStr(iCol+1)+':"'+Cells[iCol,iRow]+'",';
                          end;
@@ -556,7 +556,7 @@ begin
                          joRes.Add(sCode);
                     end;
                     //行号
-                    joRes.Add('this.$refs.'+Name+'.setCurrentRow(this.$refs.'+Name+'.data['+IntToStr(Row-1)+']);');
+                    joRes.Add('this.$refs.'+dwPrefix(Actrl)+Name+'.setCurrentRow(this.$refs.'+dwPrefix(Actrl)+Name+'.data['+IntToStr(Row-1)+']);');
                end;
                //
                Result    := (joRes);

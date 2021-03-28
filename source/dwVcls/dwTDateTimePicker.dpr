@@ -103,19 +103,19 @@ begin
                sCode     := '<el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd"'
                          +dwVisible(TControl(ACtrl))
                          +dwDisable(TControl(ACtrl))
-                         +' v-model="'+Name+'__val"'
+                         +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                          +dwLTWH(TControl(ACtrl))
                          +'"' //style ·â±Õ
-                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+Name+'__val','onchange',''])
+                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+Name+'__val','onchange',TForm(Owner).Handle])
                          +'>';
           end else begin
                sCode     := '<el-time-select :picker-options="{start: ''00:00'', step: ''00:01'', end: ''23:59''}" format="HH:mm" value-format="HH:mm"'
                          +dwVisible(TControl(ACtrl))
                          +dwDisable(TControl(ACtrl))
-                         +' v-model="'+Name+'__val"'
+                         +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                          +dwLTWH(TControl(ACtrl))
                          +'"' //style ·â±Õ
-                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+Name+'__val','onchange',''])
+                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+Name+'__val','onchange',TForm(Owner).Handle])
                          +'>';
           end;
           joRes.Add(sCode);
@@ -153,18 +153,18 @@ begin
      joRes    := _Json('[]');
      //
      with TDateTimePicker(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
           if kind = dtkDate then begin
-               joRes.Add(Name+'__val:"'+FormatDateTime('yyyy-mm-dd',Date)+'",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__val:"'+FormatDateTime('yyyy-mm-dd',Date)+'",');
           end else begin
-               joRes.Add(Name+'__val:"'+FormatDateTime('hh:MM:ss',Time)+'",');
+               joRes.Add(dwPrefix(Actrl)+Name+'__val:"'+FormatDateTime('hh:MM:ss',Time)+'",');
           end;
      end;
      //
@@ -179,18 +179,18 @@ begin
      joRes    := _Json('[]');
      //
      with TDateTimePicker(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
           if kind =  dtkDate then begin
-               joRes.Add('this.'+Name+'__val="'+FormatDateTime('yyyy-mm-dd',Date)+'";');
+               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__val="'+FormatDateTime('yyyy-mm-dd',Date)+'";');
           end else begin
-               joRes.Add('this.'+Name+'__val="'+FormatDateTime('hh:MM:ss',Time)+'";');
+               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__val="'+FormatDateTime('hh:MM:ss',Time)+'";');
           end;
      end;
      //
@@ -205,7 +205,7 @@ exports
      dwGetTail,
      dwGetMethod,
      dwGetData;
-     
+
 begin
 end.
- 
+

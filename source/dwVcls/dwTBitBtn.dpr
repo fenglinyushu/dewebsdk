@@ -75,7 +75,7 @@ begin
      with TBitBtn(ACtrl) do begin
           //添加Form
           joRes.Add('<form'
-                    +' id="'+Name+'__frm"'
+                    +' id="'+dwPrefix(Actrl)+Name+'__frm"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +dwLTWH(TControl(ACtrl))
@@ -87,7 +87,7 @@ begin
                     +'>');
 
           //添加Input
-		joRes.Add('<input id="'+Name+'__inp" type="FILE" name="file"'
+		joRes.Add('<input id="'+dwPrefix(Actrl)+Name+'__inp" type="FILE" name="file"'
                     +' style="display:none"'
                     +dwGetHintValue(joHint,'accept','accept','')
                     +dwGetHintValue(joHint,'capture','capture','')
@@ -107,23 +107,23 @@ begin
 
           //
           sCode     := '<el-button'
-                    +' id="'+Name+'__btn"'
+                    +' id="'+dwPrefix(Actrl)+Name+'__btn"'
                     +sSize
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
-                    +' :type="'+Name+'__typ"'
+                    +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
                     +dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
                     +dwGetHintValue(joHint,'style','','')             //样式，空（默认）/plain/round/circle
 
                     +' style="width:100%;height:100%;"'
                     //默认选择文件
-                    +' @click="dwInputClick('''+Name+'__inp'');"'
+                    +' @click="dwInputClick('''+dwPrefix(Actrl)+Name+'__inp'');"'
 
                     //其他事件
-                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
+                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'>{{'+Name+'__cap}}';
           //
           joRes.Add(sCode);
@@ -158,17 +158,17 @@ begin
      joRes    := _Json('[]');
      //
      with TBitBtn(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
           //
-          joRes.Add(Name+'__typ:"'+dwGetProp(TBitBtn(ACtrl),'type')+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TBitBtn(ACtrl),'type')+'",');
      end;
      //
      Result    := (joRes);
@@ -183,17 +183,17 @@ begin
      joRes    := _Json('[]');
      //
      with TBitBtn(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
           //
-          joRes.Add('this.'+Name+'__typ="'+dwGetProp(TBitBtn(ACtrl),'type')+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TBitBtn(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);

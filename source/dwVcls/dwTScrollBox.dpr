@@ -80,16 +80,16 @@ begin
                     +dwDisable(TControl(ACtrl))
                     +dwLTWH(TControl(ACtrl))
                     +'"' //style 封闭
-                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick','']),'')
-                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter','']),'')
-                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']),'')
+                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'>';
           joRes.Add(sCode);
           //
           sCode     := '<el-scrollbar'
-                    +' ref="'+Name+'"'
+                    +' ref="'+dwPrefix(Actrl)+Name+'"'
                     +' style="height:100%;"'
-                    +dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll','']),'')
+                    +dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll',TForm(Owner).Handle]),'')
                     +'>';
           joRes.Add(sCode);
      end;
@@ -122,19 +122,19 @@ begin
      joRes    := _Json('[]');
      //
      with TScrollBox(ACtrl) do begin
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          //joRes.Add(Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+          //joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
           //
-          joRes.Add(Name+'__typ:"'+dwGetProp(TScrollBox(ACtrl),'type')+'",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TScrollBox(ACtrl),'type')+'",');
           //保存oldscrolltop以确定滚动方向
-          joRes.Add(Name+'__ost:0,');
+          joRes.Add(dwPrefix(Actrl)+Name+'__ost:0,');
      end;
      //
      Result    := (joRes);
@@ -150,17 +150,17 @@ begin
      joRes    := _Json('[]');
      //
      with TScrollBox(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          //joRes.Add('this.'+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
           //
-          joRes.Add('this.'+Name+'__typ="'+dwGetProp(TScrollBox(ACtrl),'type')+'";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TScrollBox(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);
@@ -177,16 +177,16 @@ begin
      //
      with TScrollBox(ACtrl) do begin
           if Assigned(OnEndDock) then begin
-               sCode     := 'let '+Name+'__scr = this.$refs.'+Name+'.wrap;'
-                    +Name+'__scr.onscroll = function() {'
-                         +'if (me.'+Name+'__ost<'+Name+'__scr.scrollTop) {'
-                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+Name+'","v":''+'+Name+'__scr.scrollTop+''}'')'
+               sCode     := 'let '+dwPrefix(Actrl)+Name+'__scr = this.$refs.'+dwPrefix(Actrl)+Name+'.wrap;'
+                    +dwPrefix(Actrl)+Name+'__scr.onscroll = function() {'
+                         +'if (me.'+dwPrefix(Actrl)+Name+'__ost<'+dwPrefix(Actrl)+Name+'__scr.scrollTop) {'
+                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+dwPrefix(Actrl)+Name+'","v":''+'+dwPrefix(Actrl)+Name+'__scr.scrollTop+''}'')'
                               +'.then(resp =>{me.procResp(resp.data);});'
                          +'} else {'
-                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+Name+'","v":-''+'+Name+'__scr.scrollTop+''}'')'
+                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+dwPrefix(Actrl)+Name+'","v":-''+'+dwPrefix(Actrl)+Name+'__scr.scrollTop+''}'')'
                               +'.then(resp =>{me.procResp(resp.data);});'
                          +'};'
-                         +'me.'+Name+'__ost='+Name+'__scr.scrollTop;'
+                         +'me.'+dwPrefix(Actrl)+Name+'__ost='+dwPrefix(Actrl)+Name+'__scr.scrollTop;'
                     +'};';
                joRes.Add(sCode);
           end;

@@ -77,7 +77,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
         <DCC_UnitSearchPath>..\_public;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <Debugger_HostApplication>..\..\Runtime\DeWebServer104.exe </Debugger_HostApplication>
+        <Debugger_HostApplication>..\..\Runtime\DeWebServer.exe </Debugger_HostApplication>
         <Debugger_CWD>..\..\Runtime\</Debugger_CWD>
         <Debugger_RunParams>80</Debugger_RunParams>
     </PropertyGroup>

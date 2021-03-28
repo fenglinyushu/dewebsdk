@@ -125,16 +125,16 @@ begin
 
           //
           sCode     := '    <'+sType
-                    +' :legend="'+Name+'__lgd"'
-                    +' :legend-visible="'+Name+'__lgv"'
-                    +' :tooltip-visible="'+Name+'__sht"'
-                    //+' :extend="'+Name+'__ext"'
-                    +' :settings="'+Name+'__set"'
-                    +' :grid="'+Name+'__grd"'
-                    //+' :title='''+Name+'__tit'''  //没引入
-                    +' :height="'+Name+'__hei"'
+                    +' :legend="'+dwPrefix(Actrl)+Name+'__lgd"'
+                    +' :legend-visible="'+dwPrefix(Actrl)+Name+'__lgv"'
+                    +' :tooltip-visible="'+dwPrefix(Actrl)+Name+'__sht"'
+                    //+' :extend="'+dwPrefix(Actrl)+Name+'__ext"'
+                    +' :settings="'+dwPrefix(Actrl)+Name+'__set"'
+                    +' :grid="'+dwPrefix(Actrl)+Name+'__grd"'
+                    //+' :title='''+dwPrefix(Actrl)+Name+'__tit'''  //没引入
+                    +' :height="'+dwPrefix(Actrl)+Name+'__hei"'
                     +' :judge-width="true"'
-                    +' :data="'+Name+'__dat"'
+                    +' :data="'+dwPrefix(Actrl)+Name+'__dat"'
                     +'>';
           //添加到返回值数据
           joRes.Add(sCode);
@@ -189,19 +189,19 @@ begin
      //
      with TChart(ACtrl) do begin
           //基本数据
-          joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
 
           //显示legend
-          joRes.Add(Name+'__lgv:'+dwIIF(Legend.Visible,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__lgv:'+dwIIF(Legend.Visible,'true,','false,'));
           //显示hint
-          joRes.Add(Name+'__sht:'+dwIIF(ShowHint,'true,','false,'));
+          joRes.Add(dwPrefix(Actrl)+Name+'__sht:'+dwIIF(ShowHint,'true,','false,'));
           //显示Title
-          //joRes.Add(Name+'__tit:"'+Title.ToString+'",');
+          //joRes.Add(dwPrefix(Actrl)+Name+'__tit:"'+Title.ToString+'",');
           //背景色和边距
           if Legend.Visible then begin
                if Legend.Alignment = laLeft then begin
@@ -217,7 +217,7 @@ begin
                sGrid     := '{show:true, backgroundColor: "%s",  borderColor: "%s",x:10,x2:10,y:10,y2:10}';
           end;
           sGrid     := Format(sGrid,[dwColor(Color),dwColor(BackWall.Pen.Color)]);
-          joRes.Add(Name+'__grd:'+sGrid+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__grd:'+sGrid+',');
 
           //更新Title，以方便后面处理
           for iSeries := 0 to SeriesList.Count-1 do begin
@@ -231,7 +231,7 @@ begin
 
           //
           if SeriesList.Count = 0 then begin
-               joRes.Add(Name+'__set:{},');
+               joRes.Add(dwPrefix(Actrl)+Name+'__set:{},');
                //
                sDat      := '{columns: [''X'',''Value''],'#13;
                //添加rows
@@ -239,11 +239,11 @@ begin
           end else begin
                //Area面积堆叠效果
                if Series[0].ClassName = 'TAreaSeries' then begin
-                    joRes.Add(Name+'__set:{area:true},');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__set:{area:true},');
                end else if Series[0].ClassName = 'TPieSeries' then begin
-                    joRes.Add(Name+'__set:{radius:'+IntToStr(Min(Width,Height) div 4)+'},');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__set:{radius:'+IntToStr(Min(Width,Height) div 4)+'},');
                end else begin
-                    joRes.Add(Name+'__set:{},');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__set:{},');
                end;
 
                if Series[0].ClassName = 'TPieSeries' then begin
@@ -293,12 +293,12 @@ begin
                end;
           end;
           //
-          joRes.Add(Name+'__dat:'+sDat+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__dat:'+sDat+',');
           //>------
 
           //<------Legend
           if SeriesList.Count = 0 then begin
-               joRes.Add(Name+'__lgd:{},');
+               joRes.Add(dwPrefix(Actrl)+Name+'__lgd:{},');
           end else begin
                sDat      := '{';
                //文字方向
@@ -323,7 +323,7 @@ begin
                sDat := sDat + '}';
           end;
           //
-          joRes.Add(Name+'__lgd:'+sDat+',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lgd:'+sDat+',');
           //>------
      end;
      //
@@ -344,17 +344,17 @@ begin
      joRes    := _Json('[]');
      //
      with TChart(ACtrl) do begin
-          joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
 
           //显示legend
-          joRes.Add('this.'+Name+'__lgv='+dwIIF(Legend.Visible,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lgv='+dwIIF(Legend.Visible,'true;','false;'));
           //显示hint
-          joRes.Add('this.'+Name+'__sht='+dwIIF(ShowHint,'true;','false;'));
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__sht='+dwIIF(ShowHint,'true;','false;'));
           //显示Title
           //joRes.Add(Name+'__tit:"'+Title.ToString+'",');
           //背景色和边距
@@ -364,7 +364,7 @@ begin
                sGrid     := '{show:true, backgroundColor: "%s",  borderColor: "%s",x:10,x2:10,y:10,y2:10}';
           end;
           sGrid     := Format(sGrid,[dwColor(Color),dwColor(BackWall.Pen.Color)]);
-          joRes.Add('this.'+Name+'__grd='+sGrid+';');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__grd='+sGrid+';');
 
           //更新Title，以方便后面处理
           for iSeries := 0 to SeriesList.Count-1 do begin
@@ -374,7 +374,7 @@ begin
           end;
 
           if SeriesList.Count = 0 then begin
-               joRes.Add('this.'+Name+'__set={};');
+               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__set={};');
                //
                sDat      := '{columns: [''X'',''Value''],'#13;
                //添加rows
@@ -382,11 +382,11 @@ begin
           end else begin
                //Area面积堆叠效果
                if Series[0].ClassName = 'TAreaSeries' then begin
-                    joRes.Add('this.'+Name+'__set={area:true};');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__set={area:true};');
                end else if Series[0].ClassName = 'TPieSeries' then begin
-                    joRes.Add('this.'+Name+'__set={radius:'+IntToStr(Min(Width,Height) div 3)+'};');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__set={radius:'+IntToStr(Min(Width,Height) div 3)+'};');
                end else begin
-                    joRes.Add('this.'+Name+'__set={};');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__set={};');
                end;
 
                //<------Data
@@ -441,7 +441,7 @@ begin
                end;
           end;
           //
-          joRes.Add('this.'+Name+'__dat='+sDat+';');
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dat='+sDat+';');
           //>------
      end;
      //
@@ -459,4 +459,4 @@ exports
      
 begin
 end.
- 
+
