@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'DeWeb Check in'
-  ClientHeight = 289
-  ClientWidth = 554
+  ClientHeight = 347
+  ClientWidth = 304
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,24 +13,9 @@ object Form2: TForm2
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 20
-  object Label1: TLabel
-    Left = 24
-    Top = 8
-    Width = 233
-    Height = 33
-    AutoSize = False
-    Caption = 'DeWeb Passport'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clGray
-    Font.Height = -16
-    Font.Name = #24494#36719#38597#40657
-    Font.Style = [fsBold]
-    ParentFont = False
-    Layout = tlCenter
-  end
   object Label2: TLabel
     Left = 24
-    Top = 63
+    Top = 0
     Width = 100
     Height = 33
     AutoSize = False
@@ -39,7 +24,7 @@ object Form2: TForm2
   end
   object Label3: TLabel
     Left = 24
-    Top = 102
+    Top = 78
     Width = 100
     Height = 33
     AutoSize = False
@@ -48,7 +33,7 @@ object Form2: TForm2
   end
   object Label4: TLabel
     Left = 24
-    Top = 141
+    Top = 159
     Width = 100
     Height = 33
     AutoSize = False
@@ -56,27 +41,28 @@ object Form2: TForm2
     Layout = tlCenter
   end
   object Button1: TButton
-    Left = 24
-    Top = 208
-    Width = 249
+    Left = 80
+    Top = 265
+    Width = 145
     Height = 41
+    Hint = '{"type":"success"}'
     Caption = 'Check in'
     TabOrder = 0
     OnClick = Button1Click
   end
   object Edit1: TEdit
-    Left = 120
-    Top = 63
-    Width = 153
+    Left = 24
+    Top = 39
+    Width = 265
     Height = 33
     AutoSize = False
     TabOrder = 1
     Text = 'admin'
   end
   object Edit2: TEdit
-    Left = 120
-    Top = 102
-    Width = 153
+    Left = 24
+    Top = 117
+    Width = 265
     Height = 33
     AutoSize = False
     PasswordChar = '*'
@@ -84,9 +70,9 @@ object Form2: TForm2
     Text = '12345'
   end
   object Edit3: TEdit
-    Left = 120
-    Top = 141
-    Width = 153
+    Left = 24
+    Top = 198
+    Width = 265
     Height = 33
     AutoSize = False
     TabOrder = 3

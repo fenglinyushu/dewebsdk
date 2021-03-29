@@ -12,7 +12,6 @@ uses
 
 type
   TForm2 = class(TForm)
-    Label1: TLabel;
     Button1: TButton;
     Label2: TLabel;
     Edit1: TEdit;
@@ -39,8 +38,8 @@ uses
 
 procedure TForm2.Button1Click(Sender: TObject);
 begin
-     Form1.Button1.Caption    := IntToStr(GetTickCount);
      if (Edit1.Text = 'admin')and(Edit2.Text='12345') then begin
+          Form1.Button1.Caption    := 'User Checked';
           dwRunJS('this.Form2__vis=false;',self);
      end else begin
           dwShowMessage('User/Password invalid! admin/12345',self);

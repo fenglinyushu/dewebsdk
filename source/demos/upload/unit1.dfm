@@ -72,6 +72,7 @@ object Form1: TForm1
     Anchors = [akTop]
     Caption = 'Video'
     TabOrder = 4
+    OnEndDock = BitBtn3EndDock
   end
   object Button3: TButton
     Left = 40
@@ -90,15 +91,17 @@ object Form1: TForm1
     Width = 360
     Height = 66
     Align = alTop
+    BevelKind = bkSoft
+    BevelOuter = bvNone
     BorderWidth = 5
     Color = clWhite
     ParentBackground = False
     TabOrder = 6
     object Label1: TLabel
-      Left = 161
-      Top = 6
-      Width = 193
-      Height = 53
+      Left = 160
+      Top = 5
+      Width = 191
+      Height = 51
       Align = alClient
       AutoSize = False
       Caption = 'Upload'
@@ -111,13 +114,14 @@ object Form1: TForm1
       Layout = tlCenter
       ExplicitLeft = 167
       ExplicitTop = 4
+      ExplicitWidth = 193
       ExplicitHeight = 68
     end
     object Image1: TImage
-      Left = 6
-      Top = 6
+      Left = 5
+      Top = 5
       Width = 48
-      Height = 53
+      Height = 51
       Hint = '{"src":"/media/images/logo.png"}'
       Align = alLeft
       Center = True
@@ -317,10 +321,10 @@ object Form1: TForm1
       ExplicitHeight = 68
     end
     object Label2: TLabel
-      Left = 54
-      Top = 6
+      Left = 53
+      Top = 5
       Width = 107
-      Height = 53
+      Height = 51
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
@@ -332,25 +336,21 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       Layout = tlCenter
+      ExplicitLeft = 54
+      ExplicitTop = 6
       ExplicitHeight = 68
     end
     object Panel_bottomline: TPanel
-      Left = 6
-      Top = 59
-      Width = 348
+      Left = 5
+      Top = 56
+      Width = 346
       Height = 1
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitLeft = 6
+      ExplicitTop = 59
+      ExplicitWidth = 348
     end
-  end
-  object Button4: TButton
-    Left = 161
-    Top = 208
-    Width = 88
-    Height = 33
-    Caption = 'Button4'
-    TabOrder = 7
-    OnClick = Button4Click
   end
 end

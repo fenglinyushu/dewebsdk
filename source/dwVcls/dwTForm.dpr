@@ -112,7 +112,7 @@ begin
 
                //
                sCode     := '<el-form'
-                         +dwVisible(TControl(ACtrl))
+                         +' v-if="'+Name+'__vis"'
                          //+dwGetHintValue(joHint,'type','type',' type="default"')
                          //+dwGetHintValue(joHint,'icon','icon','')
                          +' :style="{'

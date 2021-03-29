@@ -32,10 +32,13 @@ begin
      Form1          := TForm1.Create(nil);
 
      //AForm.ADOQuery1.Connection   := AConnection;
-     //
-     Form2     := TForm2.Create(Form1);
-     Form2.Parent   := Form1;
 
+
+     //此处创建其他窗体
+     Form2     := TForm2.Create(Form1);
+     Form2.Parent   := Form1; //必须将新窗体的Parent设置为Form1
+
+     //
      Result         := Form1;
 end;
 

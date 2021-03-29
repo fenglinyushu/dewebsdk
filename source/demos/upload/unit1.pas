@@ -4,6 +4,10 @@ interface
 
 uses
      //
+     Unit2,
+
+
+     //
      dwBase,
 
      //
@@ -25,7 +29,6 @@ type
     Image1: TImage;
     Label2: TLabel;
     Panel_bottomline: TPanel;
-    Button4: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -33,6 +36,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure BitBtn1EndDock(Sender, Target: TObject; X, Y: Integer);
     procedure Button4Click(Sender: TObject);
+    procedure BitBtn3EndDock(Sender, Target: TObject; X, Y: Integer);
   private
     { Private declarations }
   public
@@ -51,6 +55,12 @@ begin
      BitBtn1.Caption     := 'Uploaded!';
 end;
 
+procedure TForm1.BitBtn3EndDock(Sender, Target: TObject; X, Y: Integer);
+begin
+     dwRunJS('this.'+Form2.Name+'__vis=false;',self);
+
+end;
+
 procedure TForm1.Button1Click(Sender: TObject);
 begin
      dwRunJS('this.dwInputSubmit("BitBtn1");',self);
@@ -64,7 +74,8 @@ end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
-     dwRunJS('this.dwInputSubmit("BitBtn3");',self);
+
+     dwRunJS('this.'+Form2.Name+'__vis=true;this.dwInputSubmit("BitBtn3");',self);
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);

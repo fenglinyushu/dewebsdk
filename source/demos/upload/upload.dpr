@@ -10,7 +10,8 @@ uses
   Windows,
   Classes,
   Data.Win.ADODB,
-  unit1 in 'unit1.pas' {Form1};
+  unit1 in 'unit1.pas' {Form1},
+  Unit2 in 'Unit2.pas' {Form2};
 
 {$R *.res}
 
@@ -28,6 +29,8 @@ begin
      //
      Form1          := TForm1.Create(nil);
 
+     Form2          := TForm2.Create(nil);
+     Form2.Parent   := Form1;
      //Form1.ADOQuery1.Connection   := AConnection;
 
      Result         := Form1;
