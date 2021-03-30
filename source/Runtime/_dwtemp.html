@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb</title>
+<title>QRCode by DeWeb</title>
 </head>
 
 <body style="background-color:#FFFFFF">
@@ -14,7 +14,11 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_1__wid,height:Form1_1__hei}" >
+    <script type="text/javascript" src="ZXing_files/librarylatest"></script>
+    <link rel="stylesheet" as="style" href="ZXing_files/css.css" />
+    <link rel="stylesheet" as="style" href="ZXing_files/normalize.css" />
+    <link rel="stylesheet" as="style" href="ZXing_files/milligram.css" />
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_2__wid,height:Form1_2__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,28 +31,20 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <el-button size=medium v-if="Button1__vis" :disabled="Button1__dis" type="default" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','7015768')">{{Button1__cap}}
+        <video id="Shape1" v-if="Shape1__vis" :disabled="Shape1__dis" :style="{left:Shape1__lef,top:Shape1__top,width:Shape1__wid,height:Shape1__hei}" style="position:absolute;position:absolute;border: 1px solid #00FFFF">
+        </video>
+        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label1__cap}}
+        </div>
+        <el-button size=medium v-if="Button1__vis" :disabled="Button1__dis" type="primary" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','2364324')">{{Button1__cap}}
         </el-button>
-        <el-dialog :title="Form2_1__cap" width="610px" :visible.sync="Form2_1__vis" :close-on-click-modal="false">
-        <el-form v-if="Form2_1__vis" :style="{left:Form2_1__lef,top:Form2_1__top,width:Form2_1__wid,height:Form2_1__hei}" style="position:relative;overflow:hidden;">
-        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#808080;font-family:'Î¢ÈíÑÅºÚ';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;line-height:33px;">{{Label1__cap}}
-        </div>
-        <div  v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:33px;">{{Label2__cap}}
-        </div>
-        <div  v-html="Label3__cap" v-if="Label3__vis" :disabled="Label3__dis" :style="{left:Label3__lef,top:Label3__top,width:Label3__wid,height:Label3__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:33px;">{{Label3__cap}}
-        </div>
-        <div  v-html="Label4__cap" v-if="Label4__vis" :disabled="Label4__dis" :style="{left:Label4__lef,top:Label4__top,width:Label4__wid,height:Label4__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:33px;">{{Label4__cap}}
-        </div>
-        <el-button size=medium v-if="Form2_1__Button1__vis" :disabled="Form2_1__Button1__dis" type="default" :type="Form2_1__Button1__typ" :style="{left:Form2_1__Button1__lef,top:Form2_1__Button1__top,width:Form2_1__Button1__wid,height:Form2_1__Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','5507474')">{{Form2_1__Button1__cap}}
+        <el-button size=medium v-if="Button2__vis" :disabled="Button2__dis" type="primary" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;" @click.native="dwevent($event,'Button2','0','onclick','2364324')">{{Button2__cap}}
         </el-button>
-        <el-input v-if="Form2_1__Edit1__vis" :disabled="Form2_1__Edit1__dis" v-model="Form2_1__Edit1__txt" :style="{backgroundColor:Form2_1__Edit1__col,left:Form2_1__Edit1__lef,top:Form2_1__Edit1__top,width:Form2_1__Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Form2_1__Edit1__txt)','onchange','5507474')">
-        </el-input>
-        <el-input v-if="Form2_1__Edit2__vis" :disabled="Form2_1__Edit2__dis" show-password v-model="Form2_1__Edit2__txt" :style="{backgroundColor:Form2_1__Edit2__col,left:Form2_1__Edit2__lef,top:Form2_1__Edit2__top,width:Form2_1__Edit2__wid,height:Edit2__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit2','escape(this.Form2_1__Edit2__txt)','onchange','5507474')">
-        </el-input>
-        <el-input v-if="Form2_1__Edit3__vis" :disabled="Form2_1__Edit3__dis" v-model="Form2_1__Edit3__txt" :style="{backgroundColor:Form2_1__Edit3__col,left:Form2_1__Edit3__lef,top:Form2_1__Edit3__top,width:Form2_1__Edit3__wid,height:Edit3__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit3','escape(this.Form2_1__Edit3__txt)','onchange','5507474')">
-        </el-input>
-        </el-form>
-        </el-dialog>
+        <el-main v-if="Panel_01_Tile__vis" :disabled="Panel_01_Tile__dis" :style="{backgroundColor:Panel_01_Tile__col,left:Panel_01_Tile__lef,top:Panel_01_Tile__top,width:Panel_01_Tile__wid,height:Panel_01_Tile__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image1__src" fit="none" v-if="Image1__vis" :disabled="Image1__dis" :style="{left:Image1__lef,top:Image1__top,width:Image1__wid,height:Image1__hei}" style="position:absolute;">
+        </el-Image>
+        <div  v-html="Label3__cap" v-if="Label3__vis" :disabled="Label3__dis" :style="{left:Label3__lef,top:Label3__top,width:Label3__wid,height:Label3__hei}" style="position:absolute;color:#323232;font-family:'Verdana';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:47px;">{{Label3__cap}}
+        </div>
+        </el-main>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -76,84 +72,59 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_1__top:"0px",
-					    Form1_1__wid:"459px",
-					    Form1_1__hei:"395px",
-                        Button1__lef:'72px',
-                        Button1__top:'144px',
-                        Button1__wid:'257px',
-                        Button1__hei:'49px',
-                        Button1__vis:true,
-                        Button1__dis:false,
-                        Button1__cap:'Show Modal Form2',
-                        Button1__typ:'',
-                        Label1__lef:"24px",
-                        Label1__top:"8px",
-                        Label1__wid:"233px",
-                        Label1__hei:"33px",
+					    Form1_2__top:"0px",
+					    Form1_2__wid:"384px",
+					    Form1_2__hei:"1011px",
+                        Shape1__lef:"10px",
+                        Shape1__top:"69px",
+                        Shape1__wid:"364px",
+                        Shape1__hei:"193px",
+                        Shape1__vis:true,
+                        Shape1__dis:false,
+                        Label1__lef:"10px",
+                        Label1__top:"329px",
+                        Label1__wid:"364px",
+                        Label1__hei:"62px",
                         Label1__vis:true,
                         Label1__dis:false,
-                        Label1__cap:"DeWeb Passport",
-                        Label2__lef:"24px",
-                        Label2__top:"63px",
-                        Label2__wid:"100px",
-                        Label2__hei:"33px",
-                        Label2__vis:true,
-                        Label2__dis:false,
-                        Label2__cap:"User",
-                        Label3__lef:"24px",
-                        Label3__top:"102px",
-                        Label3__wid:"100px",
-                        Label3__hei:"33px",
+                        Label1__cap:"waiting ...",
+                        Button1__lef:'10px',
+                        Button1__top:'275px',
+                        Button1__wid:'364px',
+                        Button1__hei:'41px',
+                        Button1__vis:true,
+                        Button1__dis:false,
+                        Button1__cap:'Start',
+                        Button1__typ:'primary',
+                        Button2__lef:'10px',
+                        Button2__top:'404px',
+                        Button2__wid:'364px',
+                        Button2__hei:'41px',
+                        Button2__vis:true,
+                        Button2__dis:false,
+                        Button2__cap:'Open URL with qrcode',
+                        Button2__typ:'primary',
+                        Image1__lef:"6px",
+                        Image1__top:"6px",
+                        Image1__wid:"48px",
+                        Image1__hei:"47px",
+                        Image1__vis:true,
+                        Image1__dis:false,
+                        Image1__src:"/media/images/logo.png",
+                        Label3__lef:"54px",
+                        Label3__top:"6px",
+                        Label3__wid:"227px",
+                        Label3__hei:"47px",
                         Label3__vis:true,
                         Label3__dis:false,
-                        Label3__cap:"Password",
-                        Label4__lef:"24px",
-                        Label4__top:"141px",
-                        Label4__wid:"100px",
-                        Label4__hei:"33px",
-                        Label4__vis:true,
-                        Label4__dis:false,
-                        Label4__cap:"Memo",
-                        Form2_1__Button1__lef:'24px',
-                        Form2_1__Button1__top:'208px',
-                        Form2_1__Button1__wid:'249px',
-                        Form2_1__Button1__hei:'41px',
-                        Form2_1__Button1__vis:true,
-                        Form2_1__Button1__dis:false,
-                        Form2_1__Button1__cap:'Check in',
-                        Form2_1__Button1__typ:'',
-                        Form2_1__Edit1__lef:"120px",
-                        Form2_1__Edit1__top:"63px",
-                        Form2_1__Edit1__wid:"153px",
-                        Form2_1__Edit1__hei:"33px",
-                        Form2_1__Edit1__vis:true,
-                        Form2_1__Edit1__dis:false,
-                        Form2_1__Edit1__txt:"admin",
-                        Form2_1__Edit1__col:"#FFFFFF",
-                        Form2_1__Edit2__lef:"120px",
-                        Form2_1__Edit2__top:"102px",
-                        Form2_1__Edit2__wid:"153px",
-                        Form2_1__Edit2__hei:"33px",
-                        Form2_1__Edit2__vis:true,
-                        Form2_1__Edit2__dis:false,
-                        Form2_1__Edit2__txt:"12345",
-                        Form2_1__Edit2__col:"#FFFFFF",
-                        Form2_1__Edit3__lef:"120px",
-                        Form2_1__Edit3__top:"141px",
-                        Form2_1__Edit3__wid:"153px",
-                        Form2_1__Edit3__hei:"33px",
-                        Form2_1__Edit3__vis:true,
-                        Form2_1__Edit3__dis:false,
-                        Form2_1__Edit3__txt:"",
-                        Form2_1__Edit3__col:"#FFFFFF",
-                        Form2_1__lef:"0px",
-                        Form2_1__top:"0px",
-                        Form2_1__wid:"554px",
-                        Form2_1__hei:"289px",
-                        Form2_1__col:"#F0F0F0",
-                        Form2_1__vis:false,
-                        Form2_1__cap:"DeWeb Check in",
+                        Label3__cap:"QRCode by DeWeb",
+                        Panel_01_Tile__lef:"0px",
+                        Panel_01_Tile__top:"0px",
+                        Panel_01_Tile__wid:"384px",
+                        Panel_01_Tile__hei:"59px",
+                        Panel_01_Tile__vis:true,
+                        Panel_01_Tile__dis:false,
+                        Panel_01_Tile__col:"#FFFFFF",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -163,16 +134,24 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:7015768,
-					    shuntflag:2500
+					    clientid:2364324,
+					    shuntflag:5656
                     }
                 },
                 mounted() {
                     let me=this;
-                    let Form1_1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":7015768}',{headers:{shuntflag:2500}})
+                    window.addEventListener(
+                        "onorientationchange" in window ? "orientationchange" : "resize",
+                        function() {
+                            axios.get('{"m":"event","i":2364324,"c":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:5656}})
+                            .then(resp =>{me.procResp(resp.data)});
+                        },
+                        false
+                    );
+                    let Form1_2hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":2364324}',{headers:{shuntflag:5656}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_2hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -187,7 +166,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":7015768,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":2364324,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -200,7 +179,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":7015768,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":2364324,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -216,12 +195,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:2500}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:5656}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":7015768,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:2500}})
+                        axios.get('{"m":"interaction","i":2364324,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:5656}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

@@ -25,9 +25,9 @@ function dwGetExtra(ACtrl:TComponent):String;stdCall;
 const
      ss : array[0..3] of string = (
           '<script type="text/javascript" src="ZXing_files/librarylatest"></script>',
-          '<link rel="stylesheet" as="style" href="ZXing_files/css.css">',
-          '<link rel="stylesheet" as="style" href="ZXing_files/normalize.css">',
-          '<link rel="stylesheet" as="style" href="ZXing_files/milligram.css">'
+          '<link rel="stylesheet" as="style" href="ZXing_files/css.css" />',
+          '<link rel="stylesheet" as="style" href="ZXing_files/normalize.css" />',
+          '<link rel="stylesheet" as="style" href="ZXing_files/milligram.css" />'
      );
 var
      joRes     : Variant;

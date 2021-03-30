@@ -40,7 +40,8 @@ procedure TForm2.Button1Click(Sender: TObject);
 begin
      if (Edit1.Text = 'admin')and(Edit2.Text='12345') then begin
           Form1.Button1.Caption    := 'User Checked';
-          dwRunJS('this.Form2__vis=false;',self);
+          dwRunJS('this.'+TForm(Button1.Owner).Name+'__vis=false;',self);
+          //dwCloseForm(Form1,
      end else begin
           dwShowMessage('User/Password invalid! admin/12345',self);
      end;

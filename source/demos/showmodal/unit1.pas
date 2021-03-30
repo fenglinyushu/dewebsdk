@@ -35,7 +35,8 @@ implementation
 procedure TForm1.Button1Click(Sender: TObject);
 begin
      Form2.Button1.Caption    := 'Changed';
-     dwRunJs('this.'+Form2.Name+'__vis=true;',self);
+     //dwRunJs('this.'+Form2.Name+'__vis=true;',self);
+     dwShowModal(self,Form2);
 end;
 
 end.

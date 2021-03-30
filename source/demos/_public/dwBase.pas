@@ -110,8 +110,48 @@ function dwGetTimeLineHeight(APageControl:TPageControl):Integer;
 //<转义可能出错的字符
 function  dwChangeChar(AText:String):String;
 
+//弹出窗体
+function  dwShowModal(AForm,ASWForm:TForm):Integer;
+function  dwCloseForm(AForm,ASWForm:TForm):Integer;
+
 
 implementation  //==============================================================
+
+//弹出窗体
+function  dwShowModal(AForm,ASWForm:TForm):Integer;
+var
+     sClass    : String;
+     iCtrl     : Integer;
+begin
+     for iCtrl :=0 to AForm.ControlCount-1 do begin
+          sClass    := LowerCase(AForm.Controls[iCtrl].ClassName);
+          //
+          if sClass = LowerCase(ASWForm.ClassName) then begin
+               dwRunJS('this.'+AForm.Controls[iCtrl].Name+'__vis=true;',AForm);
+               //
+               break;
+          end;
+     end;
+     Result    := 0;
+end;
+
+
+function  dwCloseForm(AForm,ASWForm:TForm):Integer;
+var
+     sClass    : String;
+     iCtrl     : Integer;
+begin
+     for iCtrl :=0 to AForm.ControlCount-1 do begin
+          sClass    := LowerCase(AForm.Controls[iCtrl].ClassName);
+          //
+          if sClass = LowerCase(ASWForm.ClassName) then begin
+               dwRunJS('this.'+AForm.Controls[iCtrl].Name+'__vis=false;',AForm);
+               //
+               break;
+          end;
+     end;
+     Result    := 0;
+end;
 
 //<转义可能出错的字符
 function  dwChangeChar(AText:String):String;
