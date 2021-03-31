@@ -18,7 +18,7 @@
     <link rel="stylesheet" as="style" href="ZXing_files/css.css" />
     <link rel="stylesheet" as="style" href="ZXing_files/normalize.css" />
     <link rel="stylesheet" as="style" href="ZXing_files/milligram.css" />
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_2__wid,height:Form1_2__hei}" >
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1__wid,height:Form1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -31,20 +31,6 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <video id="Shape1" v-if="Shape1__vis" :disabled="Shape1__dis" :style="{left:Shape1__lef,top:Shape1__top,width:Shape1__wid,height:Shape1__hei}" style="position:absolute;position:absolute;border: 1px solid #00FFFF">
-        </video>
-        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label1__cap}}
-        </div>
-        <el-button size=medium v-if="Button1__vis" :disabled="Button1__dis" type="primary" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','2364324')">{{Button1__cap}}
-        </el-button>
-        <el-button size=medium v-if="Button2__vis" :disabled="Button2__dis" type="primary" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;" @click.native="dwevent($event,'Button2','0','onclick','2364324')">{{Button2__cap}}
-        </el-button>
-        <el-main v-if="Panel_01_Tile__vis" :disabled="Panel_01_Tile__dis" :style="{backgroundColor:Panel_01_Tile__col,left:Panel_01_Tile__lef,top:Panel_01_Tile__top,width:Panel_01_Tile__wid,height:Panel_01_Tile__hei}" style="position:absolute;overflow:hidden;">
-        <el-image :src="Image1__src" fit="none" v-if="Image1__vis" :disabled="Image1__dis" :style="{left:Image1__lef,top:Image1__top,width:Image1__wid,height:Image1__hei}" style="position:absolute;">
-        </el-Image>
-        <div  v-html="Label3__cap" v-if="Label3__vis" :disabled="Label3__dis" :style="{left:Label3__lef,top:Label3__top,width:Label3__wid,height:Label3__hei}" style="position:absolute;color:#323232;font-family:'Verdana';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:47px;">{{Label3__cap}}
-        </div>
-        </el-main>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -72,59 +58,15 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_2__top:"0px",
-					    Form1_2__wid:"384px",
-					    Form1_2__hei:"1011px",
+					    Form1__top:"0px",
+					    Form1__wid:"304px",
+					    Form1__hei:"545px",
                         Shape1__lef:"10px",
-                        Shape1__top:"69px",
-                        Shape1__wid:"364px",
+                        Shape1__top:"10px",
+                        Shape1__wid:"284px",
                         Shape1__hei:"193px",
                         Shape1__vis:true,
                         Shape1__dis:false,
-                        Label1__lef:"10px",
-                        Label1__top:"329px",
-                        Label1__wid:"364px",
-                        Label1__hei:"62px",
-                        Label1__vis:true,
-                        Label1__dis:false,
-                        Label1__cap:"waiting ...",
-                        Button1__lef:'10px',
-                        Button1__top:'275px',
-                        Button1__wid:'364px',
-                        Button1__hei:'41px',
-                        Button1__vis:true,
-                        Button1__dis:false,
-                        Button1__cap:'Start',
-                        Button1__typ:'primary',
-                        Button2__lef:'10px',
-                        Button2__top:'404px',
-                        Button2__wid:'364px',
-                        Button2__hei:'41px',
-                        Button2__vis:true,
-                        Button2__dis:false,
-                        Button2__cap:'Open URL with qrcode',
-                        Button2__typ:'primary',
-                        Image1__lef:"6px",
-                        Image1__top:"6px",
-                        Image1__wid:"48px",
-                        Image1__hei:"47px",
-                        Image1__vis:true,
-                        Image1__dis:false,
-                        Image1__src:"/media/images/logo.png",
-                        Label3__lef:"54px",
-                        Label3__top:"6px",
-                        Label3__wid:"227px",
-                        Label3__hei:"47px",
-                        Label3__vis:true,
-                        Label3__dis:false,
-                        Label3__cap:"QRCode by DeWeb",
-                        Panel_01_Tile__lef:"0px",
-                        Panel_01_Tile__top:"0px",
-                        Panel_01_Tile__wid:"384px",
-                        Panel_01_Tile__hei:"59px",
-                        Panel_01_Tile__vis:true,
-                        Panel_01_Tile__dis:false,
-                        Panel_01_Tile__col:"#FFFFFF",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -134,24 +76,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:2364324,
-					    shuntflag:5656
+					    clientid:3606130,
+					    shuntflag:4593
                     }
                 },
                 mounted() {
                     let me=this;
-                    window.addEventListener(
-                        "onorientationchange" in window ? "orientationchange" : "resize",
-                        function() {
-                            axios.get('{"m":"event","i":2364324,"c":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:5656}})
-                            .then(resp =>{me.procResp(resp.data)});
-                        },
-                        false
-                    );
-                    let Form1_2hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":2364324}',{headers:{shuntflag:5656}})
+                    let Form1hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":3606130}',{headers:{shuntflag:4593}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_2hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -166,7 +100,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":2364324,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":3606130,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -179,7 +113,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":2364324,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":3606130,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -195,12 +129,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:5656}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:4593}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":2364324,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:5656}})
+                        axios.get('{"m":"interaction","i":3606130,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:4593}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

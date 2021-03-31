@@ -12,7 +12,20 @@ uses
 
 type
   TForm1 = class(TForm)
-    Button1: TButton;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    PageControl2: TPageControl;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    PageControl3: TPageControl;
+    TabSheet5: TTabSheet;
+    TabSheet6: TTabSheet;
+    PageControl4: TPageControl;
+    TabSheet7: TTabSheet;
+    TabSheet8: TTabSheet;
+    Timer1: TTimer;
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,5 +39,11 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+     Timer1.DesignInfo   := 0;
+     dwOpenUrl(self,'empty','_self');
+end;
 
 end.
