@@ -14,6 +14,7 @@ uses
 
 type
   TForm1 = class(TForm)
+    Shape1: TShape;
     procedure Button1Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
   private
@@ -36,6 +37,7 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
+     //Label1.Caption := 'Started!';
      //dwSetZXing(Shape1,0);
 end;
 

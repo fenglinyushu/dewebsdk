@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Hint = '{"type":"primary"}'
   Caption = 'QRCode by DeWeb'
-  ClientHeight = 545
+  ClientHeight = 501
   ClientWidth = 304
   Color = clWhite
   Font.Charset = ANSI_CHARSET
@@ -14,4 +14,20 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 20
+  object Shape1: TShape
+    AlignWithMargins = True
+    Left = 10
+    Top = 10
+    Width = 284
+    Height = 193
+    Margins.Left = 10
+    Margins.Top = 10
+    Margins.Right = 10
+    Margins.Bottom = 10
+    Align = alTop
+    Pen.Color = clAqua
+    ExplicitLeft = 8
+    ExplicitTop = 8
+    ExplicitWidth = 273
+  end
 end

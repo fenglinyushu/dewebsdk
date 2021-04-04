@@ -149,7 +149,7 @@ begin
                     +sSize
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
+                    //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
                     +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
                     +dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
                     +dwGetHintValue(joHint,'style','','')             //ÑùÊ½£¬¿Õ£¨Ä¬ÈÏ£©/plain/round/circle
@@ -195,17 +195,17 @@ begin
      joRes    := _Json('[]');
      //
      with TButton(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:'''+IntToStr(Left)+'px'',');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:'''+IntToStr(Top)+'px'',');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:'''+IntToStr(Width)+'px'',');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:'''+IntToStr(Height)+'px'',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
           //
           joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
           joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__cap:'''+dwProcessCaption(Caption)+''',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__typ:'''+dwGetProp(TButton(ACtrl),'type')+''',');
+          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
      end;
      //
      Result    := (joRes);

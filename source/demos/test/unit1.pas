@@ -8,24 +8,12 @@ uses
 
      //
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+     Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Grids;
 
 type
   TForm1 = class(TForm)
-    PageControl1: TPageControl;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    PageControl2: TPageControl;
-    TabSheet3: TTabSheet;
-    TabSheet4: TTabSheet;
-    PageControl3: TPageControl;
-    TabSheet5: TTabSheet;
-    TabSheet6: TTabSheet;
-    PageControl4: TPageControl;
-    TabSheet7: TTabSheet;
-    TabSheet8: TTabSheet;
-    Timer1: TTimer;
-    procedure Timer1Timer(Sender: TObject);
+    StringGrid1: TStringGrid;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,10 +28,10 @@ implementation
 {$R *.dfm}
 
 
-procedure TForm1.Timer1Timer(Sender: TObject);
+procedure TForm1.FormCreate(Sender: TObject);
 begin
-     Timer1.DesignInfo   := 0;
-     dwOpenUrl(self,'empty','_self');
+     StringGrid1.ColWidths[0] := 40;
+     StringGrid1.ColWidths[1] := 30;
 end;
 
 end.
