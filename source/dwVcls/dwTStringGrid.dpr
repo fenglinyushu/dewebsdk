@@ -218,9 +218,10 @@ begin
                     joRes.Add('    <v-table'
                               +' :columns="'+dwPrefix(Actrl)+Name+'__clm"'     //column
                               +' :table-data="'+dwPrefix(Actrl)+Name+'__tbd"'  //table-data
-                              +' :show-vertical-border="false"'            //参考名?
-                              +' row-hover-color="#eee"'
-                              +' row-click-color="#edf7ff"'
+                              //+' :show-vertical-border="false"'            //参考名?
+                              //+' row-hover-color="#eee"'
+                              //+' row-click-color="#edf7ff"'
+                              +' '+dwGetJsonAttr(joHint,'dwstyle')
                               //+' stripe'                  //斑马纹
                               //+dwIIF(Borderstyle<>bsNone,' border','')     //是否边框
                               //+dwVisible(TControl(ACtrl))                  //是否可见
@@ -267,8 +268,9 @@ begin
                               +' highlight-current-row'     //当前行高亮
                               +sRowStyle
                               +' ref="'+dwPrefix(Actrl)+Name+'"'            //参考名?
+                              +dwGetDWStyle(joHint)
                               //+' stripe'                  //斑马纹
-                              +dwIIF(Borderstyle<>bsNone,' border','')     //是否边框
+                              //+dwIIF(Borderstyle<>bsNone,' border','')     //是否边框
                               +dwVisible(TControl(ACtrl))                  //是否可见
                               +dwDisable(TControl(ACtrl))                  //是否可用
                               //+' height="'+IntToStr(TControl(ACtrl).Height)+'"' //高度, 有此值则显示滚动条

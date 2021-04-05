@@ -38,6 +38,9 @@ function dwGetHintValue(AHint:Variant;AJsonName,AHtmlName,ADefault:String):Strin
 
 function dwGetHintStyle(AHint:Variant;AJsonName,AHtmlName,ADefault:String):String;
 
+function dwGetDWStyle(AHint:Variant):String;
+
+
 //检查HINT的JOSN对象中如果存在在某属性,则返回字符串
 //如果存在 AJsonName 则 返回 AHtmlName:AJson.AJsonName;
 //                 否则 返回 ADefault
@@ -1115,6 +1118,7 @@ begin
      end;
 end;
 
+
 function dwGetJsonAttr(AJson:Variant;AAttr:String):String;
 var
      sHint     : String;
@@ -1470,6 +1474,15 @@ begin
      end;
 end;
 
+function dwGetDWStyle(AHint:Variant):String;
+begin
+     Result    := '';
+     if AHint<>null then begin
+          if AHint.Exists('dwstyle') then begin
+               Result    := ' '+AnsiString(AHint.dwstyle);
+          end;
+     end;
+end;
 
 
 end.

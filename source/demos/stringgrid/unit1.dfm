@@ -355,14 +355,13 @@ object Form1: TForm1
       object StringGrid1: TStringGrid
         Left = 1
         Top = 1
-        Width = 752
+        Width = 792
         Height = 481
         Hint = 
-          '{"background":"#f5f7fA","columns":[{"caption":"'#26085#26399'","align":"righ' +
-          't"},{"caption":"'#37197#36865#20449#24687'","items":[{"caption":"'#22995#21517'","align":"center"}' +
-          ',{"caption":"'#22320#22336'","items":[{"caption":"'#30465#20221'","sort":1,"filters":["'#28246 +
-          #21271'","'#36797#23425'"],"align":"left"},{"caption":"'#22478#24066'/'#21306'","sort":1,"align":"lef' +
-          't"},{"caption":"'#22320#22336'","align":"left"}]}]}]}'
+          '{"dwstyle":"stripe border","background":"#f5f7fA","columns":[{"c' +
+          'aption":"'#26085#26399'","align":"right"},{"caption":"'#22995#21517'","align":"center"},' +
+          '{"caption":"'#30465#20221'","align":"left"},{"caption":"'#22478#24066'/'#21306'","align":"left"' +
+          '}]}'
         DefaultColWidth = 200
         DefaultRowHeight = 35
         RowCount = 10

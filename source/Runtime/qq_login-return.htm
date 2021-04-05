@@ -1,0 +1,57 @@
+<html>
+     <head>
+        <title>QQ登录跳转</title>
+        <script src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+
+        //切割字符串转换参数表
+        function toParamMap(str){
+             var map = {};
+             var segs = str.split("&");
+             for(var i in segs){
+                 var seg = segs[i];
+                 var idx = seg.indexOf('=');
+                 if(idx < 0){
+                     continue;
+                 }
+                 var name = seg.substring(0, idx);
+                 var value = seg.substring(idx+1);
+                 map[name] = value;
+             }
+             return map;
+         }
+
+        //隐式获取url响应内容(JSONP)
+        function openImplict(url){
+            var script = document.createElement('script');
+            script.src = url;
+            document.body.appendChild(script);
+        }
+
+        //获得openid的回调
+        function callback(obj)
+        {
+           var openid = obj.openid;
+           $("#openid").text(openid);
+
+           //跳转服务端登录url
+           var resulturl = "@{openapi.QQs.login_result()}";
+           var accessToken = $("#accessToken").text();
+
+           //向服务端传输access_token及openid参数
+           document.location.href=resulturl + "?access_token=" + accessToken + "&openid=" + openid;
+        }
+
+        //获得openid的回调
+        function dwLoad(obj)
+        {
+			alert("url");
+        }
+
+        </script>
+     </head>
+
+    <body onload="dwLoad()">
+    </body>
+</html>
