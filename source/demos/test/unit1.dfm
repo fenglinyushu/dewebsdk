@@ -15,14 +15,15 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
-  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 20
-  object StringGrid1: TStringGrid
+  object Label1: TLabel
     Left = 72
-    Top = 88
+    Top = 352
     Width = 513
-    Height = 233
-    TabOrder = 0
+    Height = 20
+    AutoSize = False
+    Caption = 'Label1'
   end
 end

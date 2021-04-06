@@ -12,8 +12,8 @@ uses
 
 type
   TForm1 = class(TForm)
-    StringGrid1: TStringGrid;
-    procedure FormCreate(Sender: TObject);
+    Label1: TLabel;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,10 +28,11 @@ implementation
 {$R *.dfm}
 
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TForm1.FormShow(Sender: TObject);
 begin
-     StringGrid1.ColWidths[0] := 40;
-     StringGrid1.ColWidths[1] := 30;
+     //
+     Label1.Caption := dwGetProp(self,'ip');
+
 end;
 
 end.
