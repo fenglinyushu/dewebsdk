@@ -87,9 +87,9 @@ begin
                     +'border-radius:2px;'
                     +'"' //style ·â±Õ
                     +dwIIF(Assigned(OnDropDown) OR Assigned(OnCloseUp),
-                         '@visible-change="dwevent($event,''ComboBox1'',$event,''ondropdown'','''')"',
+                         '@visible-change="dwevent($event,'''+dwPrefix(Actrl)+Name+''',$event,''ondropdown'','''')"',
                          '')
-                    +Format(_DWEVENT,['change',Name,'this.'+Name+'__txt','onchange',TForm(Owner).Handle])
+                    +Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__txt','onchange',TForm(Owner).Handle])
                     +'>');
           joRes.Add('    <el-option v-for="item in '+dwPrefix(Actrl)+Name+'__its" :key="item.value" :label="item.value" :value="item.value"/>');
 

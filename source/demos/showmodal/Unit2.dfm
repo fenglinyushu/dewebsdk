@@ -2,7 +2,7 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'DeWeb Check in'
-  ClientHeight = 347
+  ClientHeight = 424
   ClientWidth = 304
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -40,13 +40,22 @@ object Form2: TForm2
     Caption = 'Memo'
     Layout = tlCenter
   end
+  object Label1: TLabel
+    Left = 24
+    Top = 239
+    Width = 100
+    Height = 33
+    AutoSize = False
+    Caption = 'Type'
+    Layout = tlCenter
+  end
   object Button1: TButton
     Left = 80
-    Top = 265
+    Top = 345
     Width = 145
     Height = 41
     Hint = '{"type":"success"}'
-    Caption = 'Check in'
+    Caption = 'Sign in'
     TabOrder = 0
     OnClick = Button1Click
   end
@@ -76,5 +85,26 @@ object Form2: TForm2
     Height = 33
     AutoSize = False
     TabOrder = 3
+  end
+  object ComboBox1: TComboBox
+    Left = 24
+    Top = 278
+    Width = 265
+    Height = 33
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ItemIndex = 0
+    ParentFont = False
+    TabOrder = 4
+    Text = #21271#20140
+    Items.Strings = (
+      #21271#20140
+      #19978#28023
+      #28145#22323
+      #35199#23433
+      #35140#38451)
   end
 end

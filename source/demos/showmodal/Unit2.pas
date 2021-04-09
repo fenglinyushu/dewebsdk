@@ -19,6 +19,8 @@ type
     Label3: TLabel;
     Edit3: TEdit;
     Label4: TLabel;
+    Label1: TLabel;
+    ComboBox1: TComboBox;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
