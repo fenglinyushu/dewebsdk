@@ -28,6 +28,14 @@ type
     Panel3: TPanel;
     Label3: TLabel;
     Label4: TLabel;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Panel10: TPanel;
     procedure Button6Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);

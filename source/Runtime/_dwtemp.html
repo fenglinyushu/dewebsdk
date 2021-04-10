@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb</title>
+<title>deweb</title>
 </head>
 
 <body style="background-color:#FFFFFF">
@@ -14,7 +14,7 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_4__wid,height:Form1_4__hei}" >
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_2__wid,height:Form1_2__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,33 +27,82 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <div  v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#808080;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;">{{Label1__cap}}
-        </div>
-        <el-button size=medium v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','7409664')">{{Button1__cap}}
+        <el-button size=medium v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" 
+			:style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" 
+			style="position:absolute;background-color: #FFC23A;">TEST
         </el-button>
-        <el-dialog :title="Form2_4__cap" width="360px" :visible.sync="Form2_4__vis" :close-on-click-modal="false">
-        <el-form v-if="Form2_4__vis" :style="{left:Form2_4__lef,top:Form2_4__top,width:Form2_4__wid,height:Form2_4__hei}" style="position:relative;overflow:hidden;">
-        <div  v-html="Form2_4__Label2__cap" v-if="Form2_4__Label2__vis" :disabled="Form2_4__Label2__dis" :style="{left:Form2_4__Label2__lef,top:Form2_4__Label2__top,width:Form2_4__Label2__wid,height:Form2_4__Label2__hei}" style="position:absolute;color:#000000;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:33px;">{{Form2_4__Label2__cap}}
-        </div>
-        <div  v-html="Form2_4__Label3__cap" v-if="Form2_4__Label3__vis" :disabled="Form2_4__Label3__dis" :style="{left:Form2_4__Label3__lef,top:Form2_4__Label3__top,width:Form2_4__Label3__wid,height:Form2_4__Label3__hei}" style="position:absolute;color:#000000;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:33px;">{{Form2_4__Label3__cap}}
-        </div>
-        <div  v-html="Form2_4__Label4__cap" v-if="Form2_4__Label4__vis" :disabled="Form2_4__Label4__dis" :style="{left:Form2_4__Label4__lef,top:Form2_4__Label4__top,width:Form2_4__Label4__wid,height:Form2_4__Label4__hei}" style="position:absolute;color:#000000;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:33px;">{{Form2_4__Label4__cap}}
-        </div>
-        <div  v-html="Form2_4__Label1__cap" v-if="Form2_4__Label1__vis" :disabled="Form2_4__Label1__dis" :style="{left:Form2_4__Label1__lef,top:Form2_4__Label1__top,width:Form2_4__Label1__wid,height:Form2_4__Label1__hei}" style="position:absolute;color:#000000;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:33px;">{{Form2_4__Label1__cap}}
-        </div>
-        <el-button size=medium v-if="Form2_4__Button1__vis" :disabled="Form2_4__Button1__dis" :type="Form2_4__Button1__typ" :style="{left:Form2_4__Button1__lef,top:Form2_4__Button1__top,width:Form2_4__Button1__wid,height:Form2_4__Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','2757012')">{{Form2_4__Button1__cap}}
+        <el-button size=medium v-if="Button2__vis" :disabled="Button2__dis" :type="Button2__typ" 
+			:style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" 
+			style="position:absolute;background-color: #0000FF;color:#222;font-size:24px">Button2
         </el-button>
-        <el-input v-if="Form2_4__Edit1__vis" :disabled="Form2_4__Edit1__dis" v-model="Form2_4__Edit1__txt" :style="{backgroundColor:Form2_4__Edit1__col,left:Form2_4__Edit1__lef,top:Form2_4__Edit1__top,width:Form2_4__Edit1__wid,height:Form2_4__Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Form2_4__Edit1__txt)','onchange','2757012')">
-        </el-input>
-        <el-input v-if="Form2_4__Edit2__vis" :disabled="Form2_4__Edit2__dis" show-password v-model="Form2_4__Edit2__txt" :style="{backgroundColor:Form2_4__Edit2__col,left:Form2_4__Edit2__lef,top:Form2_4__Edit2__top,width:Form2_4__Edit2__wid,height:Form2_4__Edit2__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit2','escape(this.Form2_4__Edit2__txt)','onchange','2757012')">
-        </el-input>
-        <el-input v-if="Form2_4__Edit3__vis" :disabled="Form2_4__Edit3__dis" v-model="Form2_4__Edit3__txt" :style="{backgroundColor:Form2_4__Edit3__col,left:Form2_4__Edit3__lef,top:Form2_4__Edit3__top,width:Form2_4__Edit3__wid,height:Form2_4__Edit3__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit3','escape(this.Form2_4__Edit3__txt)','onchange','2757012')">
-        </el-input>
-        <el-select v-model="Form2_4__ComboBox1__txt" v-if="Form2_4__ComboBox1__vis" :disabled="Form2_4__ComboBox1__dis" :style="{left:Form2_4__ComboBox1__lef,top:Form2_4__ComboBox1__top,width:Form2_4__ComboBox1__wid,height:Form2_4__ComboBox1__hei}" style="position:absolute;border:1px solid #DCDFF0;border-radius:2px;" @change="dwevent($event,'ComboBox1','this.ComboBox1__txt','onchange','2757012')">
-            <el-option v-for="item in Form2_4__ComboBox1__its" :key="item.value" :label="item.value" :value="item.value"/>
-        </el-select>
-        </el-form>
-        </el-dialog>
+        <el-button size=medium v-if="Button3__vis" :disabled="Button3__dis" :type="Button3__typ" :style="{left:Button3__lef,top:Button3__top,width:Button3__wid,height:Button3__hei}" style="position:absolute;">{{Button3__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button4__vis" :disabled="Button4__dis" :type="Button4__typ" :style="{left:Button4__lef,top:Button4__top,width:Button4__wid,height:Button4__hei}" style="position:absolute;">{{Button4__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button5__vis" :disabled="Button5__dis" :type="Button5__typ" :style="{left:Button5__lef,top:Button5__top,width:Button5__wid,height:Button5__hei}" style="position:absolute;">{{Button5__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button6__vis" :disabled="Button6__dis" :type="Button6__typ" :style="{left:Button6__lef,top:Button6__top,width:Button6__wid,height:Button6__hei}" style="position:absolute;">{{Button6__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button7__vis" :disabled="Button7__dis" :type="Button7__typ" :style="{left:Button7__lef,top:Button7__top,width:Button7__wid,height:Button7__hei}" style="position:absolute;">{{Button7__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button8__vis" :disabled="Button8__dis" :type="Button8__typ" plain :style="{left:Button8__lef,top:Button8__top,width:Button8__wid,height:Button8__hei}" style="position:absolute;">{{Button8__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button9__vis" :disabled="Button9__dis" :type="Button9__typ" plain :style="{left:Button9__lef,top:Button9__top,width:Button9__wid,height:Button9__hei}" style="position:absolute;">{{Button9__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button10__vis" :disabled="Button10__dis" :type="Button10__typ" plain :style="{left:Button10__lef,top:Button10__top,width:Button10__wid,height:Button10__hei}" style="position:absolute;">{{Button10__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button11__vis" :disabled="Button11__dis" :type="Button11__typ" plain :style="{left:Button11__lef,top:Button11__top,width:Button11__wid,height:Button11__hei}" style="position:absolute;">{{Button11__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button12__vis" :disabled="Button12__dis" :type="Button12__typ" plain :style="{left:Button12__lef,top:Button12__top,width:Button12__wid,height:Button12__hei}" style="position:absolute;">{{Button12__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button13__vis" :disabled="Button13__dis" :type="Button13__typ" round :style="{left:Button13__lef,top:Button13__top,width:Button13__wid,height:Button13__hei}" style="position:absolute;">{{Button13__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button14__vis" :disabled="Button14__dis" :type="Button14__typ" round :style="{left:Button14__lef,top:Button14__top,width:Button14__wid,height:Button14__hei}" style="position:absolute;">{{Button14__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button15__vis" :disabled="Button15__dis" :type="Button15__typ" round :style="{left:Button15__lef,top:Button15__top,width:Button15__wid,height:Button15__hei}" style="position:absolute;">{{Button15__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button16__vis" :disabled="Button16__dis" :type="Button16__typ" round :style="{left:Button16__lef,top:Button16__top,width:Button16__wid,height:Button16__hei}" style="position:absolute;">{{Button16__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button17__vis" :disabled="Button17__dis" :type="Button17__typ" round :style="{left:Button17__lef,top:Button17__top,width:Button17__wid,height:Button17__hei}" style="position:absolute;">{{Button17__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button18__vis" :disabled="Button18__dis" :type="Button18__typ" round :style="{left:Button18__lef,top:Button18__top,width:Button18__wid,height:Button18__hei}" style="position:absolute;">{{Button18__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button19__vis" :disabled="Button19__dis" :type="Button19__typ" icon="el-icon-search" circle :style="{left:Button19__lef,top:Button19__top,width:Button19__wid,height:Button19__hei}" style="position:absolute;">{{Button19__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button20__vis" :disabled="Button20__dis" :type="Button20__typ" icon="el-icon-edit" circle :style="{left:Button20__lef,top:Button20__top,width:Button20__wid,height:Button20__hei}" style="position:absolute;">{{Button20__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button21__vis" :disabled="Button21__dis" :type="Button21__typ" icon="el-icon-check" circle :style="{left:Button21__lef,top:Button21__top,width:Button21__wid,height:Button21__hei}" style="position:absolute;">{{Button21__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button22__vis" :disabled="Button22__dis" :type="Button22__typ" icon="el-icon-delete" circle :style="{left:Button22__lef,top:Button22__top,width:Button22__wid,height:Button22__hei}" style="position:absolute;">{{Button22__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button23__vis" :disabled="Button23__dis" :type="Button23__typ" icon="el-icon-star-off" circle :style="{left:Button23__lef,top:Button23__top,width:Button23__wid,height:Button23__hei}" style="position:absolute;">{{Button23__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button24__vis" :disabled="Button24__dis" :type="Button24__typ" icon="el-icon-message" circle :style="{left:Button24__lef,top:Button24__top,width:Button24__wid,height:Button24__hei}" style="position:absolute;">{{Button24__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button25__vis" :disabled="Button25__dis" :type="Button25__typ" :style="{left:Button25__lef,top:Button25__top,width:Button25__wid,height:Button25__hei}" style="position:absolute;">{{Button25__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button26__vis" :disabled="Button26__dis" :type="Button26__typ" :style="{left:Button26__lef,top:Button26__top,width:Button26__wid,height:Button26__hei}" style="position:absolute;">{{Button26__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button27__vis" :disabled="Button27__dis" :type="Button27__typ" :style="{left:Button27__lef,top:Button27__top,width:Button27__wid,height:Button27__hei}" style="position:absolute;">{{Button27__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button28__vis" :disabled="Button28__dis" :type="Button28__typ" :style="{left:Button28__lef,top:Button28__top,width:Button28__wid,height:Button28__hei}" style="position:absolute;">{{Button28__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button29__vis" :disabled="Button29__dis" :type="Button29__typ" :style="{left:Button29__lef,top:Button29__top,width:Button29__wid,height:Button29__hei}" style="position:absolute;">{{Button29__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button30__vis" :disabled="Button30__dis" :type="Button30__typ" :style="{left:Button30__lef,top:Button30__top,width:Button30__wid,height:Button30__hei}" style="position:absolute;">{{Button30__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button31__vis" :disabled="Button31__dis" :type="Button31__typ" :style="{left:Button31__lef,top:Button31__top,width:Button31__wid,height:Button31__hei}" style="position:absolute;">{{Button31__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button32__vis" :disabled="Button32__dis" :type="Button32__typ" :style="{left:Button32__lef,top:Button32__top,width:Button32__wid,height:Button32__hei}" style="position:absolute;">{{Button32__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button33__vis" :disabled="Button33__dis" :type="Button33__typ" icon="el-icon-search" :style="{left:Button33__lef,top:Button33__top,width:Button33__wid,height:Button33__hei}" style="position:absolute;">{{Button33__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button34__vis" :disabled="Button34__dis" :type="Button34__typ" :style="{left:Button34__lef,top:Button34__top,width:Button34__wid,height:Button34__hei}" style="position:absolute;border-radius:5px 0 0 5px;">{{Button34__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button35__vis" :disabled="Button35__dis" :type="Button35__typ" :style="{left:Button35__lef,top:Button35__top,width:Button35__wid,height:Button35__hei}" style="position:absolute;border-radius:0 0 0 0;">{{Button35__cap}}
+        </el-button>
+        <el-button size=medium v-if="Button36__vis" :disabled="Button36__dis" :type="Button36__typ" :style="{left:Button36__lef,top:Button36__top,width:Button36__wid,height:Button36__hei}" style="position:absolute;border-radius:0 5px 5px 0;">{{Button36__cap}}
+        </el-button>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -81,99 +130,297 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_4__top:"0px",
-					    Form1_4__wid:"310px",
-					    Form1_4__hei:"395px",
-                        Label1__lef:"24px",
-                        Label1__top:"64px",
-                        Label1__wid:"257px",
-                        Label1__hei:"33px",
-                        Label1__vis:true,
-                        Label1__dis:false,
-                        Label1__cap:"DeWeb Multi Forms",
-                        Button1__lef:"24px",
-                        Button1__top:"144px",
-                        Button1__wid:"257px",
-                        Button1__hei:"49px",
+					    Form1_2__top:"0px",
+					    Form1_2__wid:"360px",
+					    Form1_2__hei:"674px",
+                        Button1__lef:"15px",
+                        Button1__top:"16px",
+                        Button1__wid:"100px",
+                        Button1__hei:"40px",
                         Button1__vis:true,
                         Button1__dis:false,
-                        Button1__cap:"Show Modal Form2",
-                        Button1__typ:"success",
-                        Form2_4__Label2__lef:"24px",
-                        Form2_4__Label2__top:"0px",
-                        Form2_4__Label2__wid:"100px",
-                        Form2_4__Label2__hei:"33px",
-                        Form2_4__Label2__vis:true,
-                        Form2_4__Label2__dis:false,
-                        Form2_4__Label2__cap:"User",
-                        Form2_4__Label3__lef:"24px",
-                        Form2_4__Label3__top:"78px",
-                        Form2_4__Label3__wid:"100px",
-                        Form2_4__Label3__hei:"33px",
-                        Form2_4__Label3__vis:true,
-                        Form2_4__Label3__dis:false,
-                        Form2_4__Label3__cap:"Password",
-                        Form2_4__Label4__lef:"24px",
-                        Form2_4__Label4__top:"159px",
-                        Form2_4__Label4__wid:"100px",
-                        Form2_4__Label4__hei:"33px",
-                        Form2_4__Label4__vis:true,
-                        Form2_4__Label4__dis:false,
-                        Form2_4__Label4__cap:"Memo",
-                        Form2_4__Label1__lef:"24px",
-                        Form2_4__Label1__top:"239px",
-                        Form2_4__Label1__wid:"100px",
-                        Form2_4__Label1__hei:"33px",
-                        Form2_4__Label1__vis:true,
-                        Form2_4__Label1__dis:false,
-                        Form2_4__Label1__cap:"Type",
-                        Form2_4__Button1__lef:"80px",
-                        Form2_4__Button1__top:"345px",
-                        Form2_4__Button1__wid:"145px",
-                        Form2_4__Button1__hei:"41px",
-                        Form2_4__Button1__vis:true,
-                        Form2_4__Button1__dis:false,
-                        Form2_4__Button1__cap:"Sign in",
-                        Form2_4__Button1__typ:"success",
-                        Form2_4__Edit1__lef:"24px",
-                        Form2_4__Edit1__top:"39px",
-                        Form2_4__Edit1__wid:"265px",
-                        Form2_4__Edit1__hei:"33px",
-                        Form2_4__Edit1__vis:true,
-                        Form2_4__Edit1__dis:false,
-                        Form2_4__Edit1__txt:"admin",
-                        Form2_4__Edit1__col:"#FFFFFF",
-                        Form2_4__Edit2__lef:"24px",
-                        Form2_4__Edit2__top:"117px",
-                        Form2_4__Edit2__wid:"265px",
-                        Form2_4__Edit2__hei:"33px",
-                        Form2_4__Edit2__vis:true,
-                        Form2_4__Edit2__dis:false,
-                        Form2_4__Edit2__txt:"12345",
-                        Form2_4__Edit2__col:"#FFFFFF",
-                        Form2_4__Edit3__lef:"24px",
-                        Form2_4__Edit3__top:"198px",
-                        Form2_4__Edit3__wid:"265px",
-                        Form2_4__Edit3__hei:"33px",
-                        Form2_4__Edit3__vis:true,
-                        Form2_4__Edit3__dis:false,
-                        Form2_4__Edit3__txt:"",
-                        Form2_4__Edit3__col:"#FFFFFF",
-                        Form2_4__ComboBox1__its:[{value:'北京'},{value:'上海'},{value:'深圳'},{value:'西安'},{value:'襄阳'}],
-                        Form2_4__ComboBox1__lef:"24px",
-                        Form2_4__ComboBox1__top:"278px",
-                        Form2_4__ComboBox1__wid:"265px",
-                        Form2_4__ComboBox1__hei:"33px",
-                        Form2_4__ComboBox1__vis:true,
-                        Form2_4__ComboBox1__dis:false,
-                        Form2_4__ComboBox1__txt:"北京",
-                        Form2_4__lef:"0px",
-                        Form2_4__top:"0px",
-                        Form2_4__wid:"304px",
-                        Form2_4__hei:"424px",
-                        Form2_4__col:"#F0F0F0",
-                        Form2_4__vis:false,
-                        Form2_4__cap:"DeWeb Check in",
+                        Button1__cap:"默认按钮",
+                        Button1__typ:"",
+                        Button2__lef:"121px",
+                        Button2__top:"16px",
+                        Button2__wid:"100px",
+                        Button2__hei:"40px",
+                        Button2__vis:true,
+                        Button2__dis:false,
+                        Button2__cap:"主要按钮",
+                        Button2__typ:"primary",
+                        Button3__lef:"227px",
+                        Button3__top:"16px",
+                        Button3__wid:"100px",
+                        Button3__hei:"40px",
+                        Button3__vis:true,
+                        Button3__dis:false,
+                        Button3__cap:"成功按钮",
+                        Button3__typ:"success",
+                        Button4__lef:"227px",
+                        Button4__top:"62px",
+                        Button4__wid:"100px",
+                        Button4__hei:"40px",
+                        Button4__vis:true,
+                        Button4__dis:false,
+                        Button4__cap:"危险",
+                        Button4__typ:"danger",
+                        Button5__lef:"121px",
+                        Button5__top:"62px",
+                        Button5__wid:"100px",
+                        Button5__hei:"40px",
+                        Button5__vis:true,
+                        Button5__dis:false,
+                        Button5__cap:"警告按钮",
+                        Button5__typ:"warning",
+                        Button6__lef:"16px",
+                        Button6__top:"62px",
+                        Button6__wid:"100px",
+                        Button6__hei:"40px",
+                        Button6__vis:true,
+                        Button6__dis:false,
+                        Button6__cap:"信息按钮",
+                        Button6__typ:"information",
+                        Button7__lef:"16px",
+                        Button7__top:"136px",
+                        Button7__wid:"100px",
+                        Button7__hei:"40px",
+                        Button7__vis:true,
+                        Button7__dis:false,
+                        Button7__cap:"朴素按钮",
+                        Button7__typ:"",
+                        Button8__lef:"121px",
+                        Button8__top:"136px",
+                        Button8__wid:"100px",
+                        Button8__hei:"40px",
+                        Button8__vis:true,
+                        Button8__dis:false,
+                        Button8__cap:"主要按钮",
+                        Button8__typ:"primary",
+                        Button9__lef:"227px",
+                        Button9__top:"136px",
+                        Button9__wid:"100px",
+                        Button9__hei:"40px",
+                        Button9__vis:true,
+                        Button9__dis:false,
+                        Button9__cap:"成功按钮",
+                        Button9__typ:"success",
+                        Button10__lef:"227px",
+                        Button10__top:"182px",
+                        Button10__wid:"100px",
+                        Button10__hei:"40px",
+                        Button10__vis:true,
+                        Button10__dis:false,
+                        Button10__cap:"危险",
+                        Button10__typ:"danger",
+                        Button11__lef:"121px",
+                        Button11__top:"182px",
+                        Button11__wid:"100px",
+                        Button11__hei:"40px",
+                        Button11__vis:true,
+                        Button11__dis:false,
+                        Button11__cap:"警告按钮",
+                        Button11__typ:"warning",
+                        Button12__lef:"15px",
+                        Button12__top:"182px",
+                        Button12__wid:"100px",
+                        Button12__hei:"40px",
+                        Button12__vis:true,
+                        Button12__dis:false,
+                        Button12__cap:"信息按钮",
+                        Button12__typ:"information",
+                        Button13__lef:"16px",
+                        Button13__top:"256px",
+                        Button13__wid:"100px",
+                        Button13__hei:"40px",
+                        Button13__vis:true,
+                        Button13__dis:false,
+                        Button13__cap:"圆角按钮",
+                        Button13__typ:"",
+                        Button14__lef:"121px",
+                        Button14__top:"256px",
+                        Button14__wid:"100px",
+                        Button14__hei:"40px",
+                        Button14__vis:true,
+                        Button14__dis:false,
+                        Button14__cap:"主要按钮",
+                        Button14__typ:"primary",
+                        Button15__lef:"227px",
+                        Button15__top:"256px",
+                        Button15__wid:"100px",
+                        Button15__hei:"40px",
+                        Button15__vis:true,
+                        Button15__dis:false,
+                        Button15__cap:"成功按钮",
+                        Button15__typ:"success",
+                        Button16__lef:"227px",
+                        Button16__top:"302px",
+                        Button16__wid:"100px",
+                        Button16__hei:"40px",
+                        Button16__vis:true,
+                        Button16__dis:false,
+                        Button16__cap:"危险",
+                        Button16__typ:"danger",
+                        Button17__lef:"121px",
+                        Button17__top:"302px",
+                        Button17__wid:"100px",
+                        Button17__hei:"40px",
+                        Button17__vis:true,
+                        Button17__dis:false,
+                        Button17__cap:"警告按钮",
+                        Button17__typ:"warning",
+                        Button18__lef:"15px",
+                        Button18__top:"302px",
+                        Button18__wid:"100px",
+                        Button18__hei:"40px",
+                        Button18__vis:true,
+                        Button18__dis:false,
+                        Button18__cap:"信息按钮",
+                        Button18__typ:"information",
+                        Button19__lef:"16px",
+                        Button19__top:"376px",
+                        Button19__wid:"40px",
+                        Button19__hei:"40px",
+                        Button19__vis:true,
+                        Button19__dis:false,
+                        Button19__cap:"",
+                        Button19__typ:"",
+                        Button20__lef:"70px",
+                        Button20__top:"376px",
+                        Button20__wid:"40px",
+                        Button20__hei:"40px",
+                        Button20__vis:true,
+                        Button20__dis:false,
+                        Button20__cap:"",
+                        Button20__typ:"primary",
+                        Button21__lef:"124px",
+                        Button21__top:"376px",
+                        Button21__wid:"40px",
+                        Button21__hei:"40px",
+                        Button21__vis:true,
+                        Button21__dis:false,
+                        Button21__cap:"",
+                        Button21__typ:"success",
+                        Button22__lef:"286px",
+                        Button22__top:"376px",
+                        Button22__wid:"40px",
+                        Button22__hei:"40px",
+                        Button22__vis:true,
+                        Button22__dis:false,
+                        Button22__cap:"",
+                        Button22__typ:"danger",
+                        Button23__lef:"232px",
+                        Button23__top:"376px",
+                        Button23__wid:"40px",
+                        Button23__hei:"40px",
+                        Button23__vis:true,
+                        Button23__dis:false,
+                        Button23__cap:"",
+                        Button23__typ:"warning",
+                        Button24__lef:"178px",
+                        Button24__top:"376px",
+                        Button24__wid:"40px",
+                        Button24__hei:"40px",
+                        Button24__vis:true,
+                        Button24__dis:false,
+                        Button24__cap:"",
+                        Button24__typ:"info",
+                        Button25__lef:"16px",
+                        Button25__top:"448px",
+                        Button25__wid:"100px",
+                        Button25__hei:"40px",
+                        Button25__vis:true,
+                        Button25__dis:true,
+                        Button25__cap:"禁用按钮",
+                        Button25__typ:"",
+                        Button26__lef:"121px",
+                        Button26__top:"448px",
+                        Button26__wid:"100px",
+                        Button26__hei:"40px",
+                        Button26__vis:true,
+                        Button26__dis:true,
+                        Button26__cap:"主要按钮",
+                        Button26__typ:"primary",
+                        Button27__lef:"227px",
+                        Button27__top:"448px",
+                        Button27__wid:"100px",
+                        Button27__hei:"40px",
+                        Button27__vis:true,
+                        Button27__dis:true,
+                        Button27__cap:"成功按钮",
+                        Button27__typ:"success",
+                        Button28__lef:"227px",
+                        Button28__top:"494px",
+                        Button28__wid:"100px",
+                        Button28__hei:"40px",
+                        Button28__vis:true,
+                        Button28__dis:true,
+                        Button28__cap:"危险",
+                        Button28__typ:"danger",
+                        Button29__lef:"121px",
+                        Button29__top:"494px",
+                        Button29__wid:"100px",
+                        Button29__hei:"40px",
+                        Button29__vis:true,
+                        Button29__dis:true,
+                        Button29__cap:"警告按钮",
+                        Button29__typ:"warning",
+                        Button30__lef:"16px",
+                        Button30__top:"494px",
+                        Button30__wid:"100px",
+                        Button30__hei:"40px",
+                        Button30__vis:true,
+                        Button30__dis:true,
+                        Button30__cap:"信息按钮",
+                        Button30__typ:"information",
+                        Button31__lef:"16px",
+                        Button31__top:"560px",
+                        Button31__wid:"100px",
+                        Button31__hei:"40px",
+                        Button31__vis:true,
+                        Button31__dis:false,
+                        Button31__cap:"文字按钮",
+                        Button31__typ:"text",
+                        Button32__lef:"122px",
+                        Button32__top:"560px",
+                        Button32__wid:"100px",
+                        Button32__hei:"40px",
+                        Button32__vis:true,
+                        Button32__dis:true,
+                        Button32__cap:"文字按钮",
+                        Button32__typ:"text",
+                        Button33__lef:"227px",
+                        Button33__top:"560px",
+                        Button33__wid:"99px",
+                        Button33__hei:"40px",
+                        Button33__vis:true,
+                        Button33__dis:false,
+                        Button33__cap:"图标按钮",
+                        Button33__typ:"primary",
+                        Button34__lef:"14px",
+                        Button34__top:"634px",
+                        Button34__wid:"102px",
+                        Button34__hei:"40px",
+                        Button34__vis:true,
+                        Button34__dis:false,
+                        Button34__cap:"默认按钮",
+                        Button34__typ:"primary",
+                        Button35__lef:"117px",
+                        Button35__top:"634px",
+                        Button35__wid:"105px",
+                        Button35__hei:"40px",
+                        Button35__vis:true,
+                        Button35__dis:false,
+                        Button35__cap:"主要按钮",
+                        Button35__typ:"primary",
+                        Button36__lef:"223px",
+                        Button36__top:"634px",
+                        Button36__wid:"103px",
+                        Button36__hei:"40px",
+                        Button36__vis:true,
+                        Button36__dis:false,
+                        Button36__cap:"成功按钮",
+                        Button36__typ:"primary",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -183,16 +430,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:7409664,
-					    shuntflag:9296
+					    clientid:396672,
+					    shuntflag:5500
                     }
                 },
                 mounted() {
                     let me=this;
-                    let Form1_4hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":7409664}',{headers:{shuntflag:9296}})
+                    let Form1_2hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":396672}',{headers:{shuntflag:5500}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_4hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_2hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -207,7 +454,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":7409664,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":396672,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -220,7 +467,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":7409664,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":396672,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -236,12 +483,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:9296}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:5500}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":7409664,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:9296}})
+                        axios.get('{"m":"interaction","i":396672,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:5500}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

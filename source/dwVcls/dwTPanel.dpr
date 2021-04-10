@@ -14,11 +14,15 @@ uses
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
      StdCtrls, Windows;
 
+
+
 //当前控件需要引入的第三方JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
+
+
 
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
@@ -206,7 +210,7 @@ begin
                     joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
                     joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
                     //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__col:"'+dwColor(Color)+'",');
+                    joRes.Add(dwPrefix(Actrl)+Name+'__col:"'+dwAlphaColor(TPanel(ACtrl))+'",');
                end;
                //
                Result    := (joRes);
@@ -234,7 +238,7 @@ begin
                     joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
                     joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
                     //
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__col="'+dwColor(Color)+'";');
+                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__col="'+dwAlphaColor(TPanel(ACtrl))+'";');
                end;
                //
                Result    := (joRes);

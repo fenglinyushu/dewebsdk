@@ -153,8 +153,12 @@ begin
                     +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
                     +dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
                     +dwGetHintValue(joHint,'style','','')             //样式，空（默认）/plain/round/circle
+                    //Style
                     +dwLTWH(TControl(ACtrl))
                     +dwGetHintStyle(joHint,'borderradius','border-radius','')   //border-radius
+                    +dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //自定义背景色
+                    +dwGetHintStyle(joHint,'color','color','')             //自定义字体色
+                    +dwGetHintStyle(joHint,'fontsize','font-size','')      //自定义字体大小
                     +'"' //style 封闭
                     +sClick
                     +sEnter

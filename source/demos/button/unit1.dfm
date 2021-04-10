@@ -4,7 +4,7 @@ object Form1: TForm1
   Hint = '{"type":"primary"}'
   BorderStyle = bsNone
   Caption = 'deweb'
-  ClientHeight = 674
+  ClientHeight = 635
   ClientWidth = 360
   Color = clWhite
   Font.Charset = ANSI_CHARSET
@@ -70,7 +70,7 @@ object Form1: TForm1
   end
   object Button7: TButton
     Left = 16
-    Top = 136
+    Top = 112
     Width = 100
     Height = 40
     Caption = #26420#32032#25353#38062
@@ -78,7 +78,7 @@ object Form1: TForm1
   end
   object Button8: TButton
     Left = 121
-    Top = 136
+    Top = 112
     Width = 100
     Height = 40
     Hint = '{"type":"primary","style":"plain"}'
@@ -87,7 +87,7 @@ object Form1: TForm1
   end
   object Button9: TButton
     Left = 227
-    Top = 136
+    Top = 112
     Width = 100
     Height = 40
     Hint = '{"type":"success","style":"plain"}'
@@ -96,7 +96,7 @@ object Form1: TForm1
   end
   object Button10: TButton
     Left = 227
-    Top = 182
+    Top = 158
     Width = 100
     Height = 40
     Hint = '{"type":"danger","style":"plain"}'
@@ -105,7 +105,7 @@ object Form1: TForm1
   end
   object Button11: TButton
     Left = 121
-    Top = 182
+    Top = 158
     Width = 100
     Height = 40
     Hint = '{"type":"warning","style":"plain"}'
@@ -114,7 +114,7 @@ object Form1: TForm1
   end
   object Button12: TButton
     Left = 15
-    Top = 182
+    Top = 158
     Width = 100
     Height = 40
     Hint = '{"type":"information","style":"plain"}'
@@ -122,8 +122,8 @@ object Form1: TForm1
     TabOrder = 11
   end
   object Button13: TButton
-    Left = 16
-    Top = 256
+    Left = 15
+    Top = 208
     Width = 100
     Height = 40
     Hint = '{"style":"round"}'
@@ -131,8 +131,8 @@ object Form1: TForm1
     TabOrder = 12
   end
   object Button14: TButton
-    Left = 121
-    Top = 256
+    Left = 120
+    Top = 208
     Width = 100
     Height = 40
     Hint = '{"type":"primary","style":"round"}'
@@ -140,8 +140,8 @@ object Form1: TForm1
     TabOrder = 13
   end
   object Button15: TButton
-    Left = 227
-    Top = 256
+    Left = 226
+    Top = 208
     Width = 100
     Height = 40
     Hint = '{"type":"success","style":"round"}'
@@ -149,8 +149,8 @@ object Form1: TForm1
     TabOrder = 14
   end
   object Button16: TButton
-    Left = 227
-    Top = 302
+    Left = 226
+    Top = 254
     Width = 100
     Height = 40
     Hint = '{"type":"danger","style":"round"}'
@@ -158,8 +158,8 @@ object Form1: TForm1
     TabOrder = 15
   end
   object Button17: TButton
-    Left = 121
-    Top = 302
+    Left = 120
+    Top = 254
     Width = 100
     Height = 40
     Hint = '{"type":"warning","style":"round"}'
@@ -167,8 +167,8 @@ object Form1: TForm1
     TabOrder = 16
   end
   object Button18: TButton
-    Left = 15
-    Top = 302
+    Left = 14
+    Top = 254
     Width = 100
     Height = 40
     Hint = '{"type":"information","style":"round"}'
@@ -177,7 +177,7 @@ object Form1: TForm1
   end
   object Button19: TButton
     Left = 16
-    Top = 376
+    Top = 304
     Width = 40
     Height = 40
     Hint = '{"style":"circle","icon":"el-icon-search"}'
@@ -185,7 +185,7 @@ object Form1: TForm1
   end
   object Button20: TButton
     Left = 70
-    Top = 376
+    Top = 304
     Width = 40
     Height = 40
     Hint = '{"style":"circle","type":"primary","icon":"el-icon-edit"}'
@@ -193,7 +193,7 @@ object Form1: TForm1
   end
   object Button21: TButton
     Left = 124
-    Top = 376
+    Top = 304
     Width = 40
     Height = 40
     Hint = '{"style":"circle","type":"success","icon":"el-icon-check"}'
@@ -201,7 +201,7 @@ object Form1: TForm1
   end
   object Button22: TButton
     Left = 286
-    Top = 376
+    Top = 304
     Width = 40
     Height = 40
     Hint = '{"style":"circle","icon":"el-icon-delete","type":"danger"}'
@@ -209,7 +209,7 @@ object Form1: TForm1
   end
   object Button23: TButton
     Left = 232
-    Top = 376
+    Top = 304
     Width = 40
     Height = 40
     Hint = '{"style":"circle","icon":"el-icon-star-off","type":"warning"}'
@@ -217,7 +217,7 @@ object Form1: TForm1
   end
   object Button24: TButton
     Left = 178
-    Top = 376
+    Top = 304
     Width = 40
     Height = 40
     Hint = '{"style":"circle","type":"info","icon":"el-icon-message"}'
@@ -225,7 +225,7 @@ object Form1: TForm1
   end
   object Button25: TButton
     Left = 16
-    Top = 448
+    Top = 360
     Width = 100
     Height = 40
     Caption = #31105#29992#25353#38062
@@ -234,7 +234,7 @@ object Form1: TForm1
   end
   object Button26: TButton
     Left = 121
-    Top = 448
+    Top = 360
     Width = 100
     Height = 40
     Hint = '{"type":"primary"}'
@@ -244,7 +244,7 @@ object Form1: TForm1
   end
   object Button27: TButton
     Left = 227
-    Top = 448
+    Top = 360
     Width = 100
     Height = 40
     Hint = '{"type":"success"}'
@@ -254,7 +254,7 @@ object Form1: TForm1
   end
   object Button28: TButton
     Left = 227
-    Top = 494
+    Top = 406
     Width = 100
     Height = 40
     Hint = '{"type":"danger"}'
@@ -264,7 +264,7 @@ object Form1: TForm1
   end
   object Button29: TButton
     Left = 121
-    Top = 494
+    Top = 406
     Width = 100
     Height = 40
     Hint = '{"type":"warning"}'
@@ -274,7 +274,7 @@ object Form1: TForm1
   end
   object Button30: TButton
     Left = 16
-    Top = 494
+    Top = 406
     Width = 100
     Height = 40
     Hint = '{"type":"information"}'
@@ -284,7 +284,7 @@ object Form1: TForm1
   end
   object Button31: TButton
     Left = 16
-    Top = 560
+    Top = 456
     Width = 100
     Height = 40
     Hint = '{"type":"text"}'
@@ -293,7 +293,7 @@ object Form1: TForm1
   end
   object Button32: TButton
     Left = 122
-    Top = 560
+    Top = 456
     Width = 100
     Height = 40
     Hint = '{"type":"text"}'
@@ -303,7 +303,7 @@ object Form1: TForm1
   end
   object Button33: TButton
     Left = 227
-    Top = 560
+    Top = 456
     Width = 99
     Height = 40
     Hint = '{"icon":"el-icon-search","type":"primary"}'
@@ -311,8 +311,8 @@ object Form1: TForm1
     TabOrder = 32
   end
   object Button34: TButton
-    Left = 14
-    Top = 634
+    Left = 15
+    Top = 506
     Width = 102
     Height = 40
     Hint = '{"type":"primary","borderradius":"5px 0 0 5px"}'
@@ -320,8 +320,8 @@ object Form1: TForm1
     TabOrder = 33
   end
   object Button35: TButton
-    Left = 117
-    Top = 634
+    Left = 118
+    Top = 506
     Width = 105
     Height = 40
     Hint = '{"type":"primary","borderradius":"0 0 0 0"}'
@@ -329,12 +329,41 @@ object Form1: TForm1
     TabOrder = 34
   end
   object Button36: TButton
-    Left = 223
-    Top = 634
+    Left = 224
+    Top = 506
     Width = 103
     Height = 40
     Hint = '{"type":"primary","borderradius":"0 5px 5px 0"}'
     Caption = #25104#21151#25353#38062
     TabOrder = 35
+  end
+  object Button37: TButton
+    Left = 15
+    Top = 572
+    Width = 102
+    Height = 40
+    Hint = 
+      '{"backgroundcolor":"rgb(51,123,208)","color":"#D00","borderradiu' +
+      's":"5px 0 0 5px"}'
+    Caption = #33258#23450#20041#39068#33394' '
+    TabOrder = 36
+  end
+  object Button38: TButton
+    Left = 118
+    Top = 572
+    Width = 105
+    Height = 40
+    Hint = '{"type":"success","fontsize":"16px","borderradius":"0 0 0 0"}'
+    Caption = #23383#20307#22823#23567
+    TabOrder = 37
+  end
+  object Button39: TButton
+    Left = 224
+    Top = 572
+    Width = 103
+    Height = 40
+    Hint = '{"backgroundcolor":"#00f","borderradius":"0 5px 5px 0"}'
+    Caption = #33258#23450#20041#39068#33394' '
+    TabOrder = 38
   end
 end

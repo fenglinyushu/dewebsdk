@@ -59,6 +59,9 @@ function dwDecryptKey (Src:String; Key:String):string;
 //Delphi 颜色转HTML 颜色字符串
 function dwColor(AColor:Integer):string;
 
+//Delphi 颜色转HTML 颜色字符串,带透明度
+function dwAlphaColor(ACtrl:TPanel):string;
+
 //
 function dwEncodeURIComponent(S:AnsiString):AnsiString;
 
@@ -1342,6 +1345,26 @@ begin
      //Result := Format('#%.2x%.2x%.2x',[GetRValue(ColorToRGB(AColor)),GetGValue(ColorToRGB(AColor)),GetBValue(ColorToRGB(AColor))]);
 end;
 
+//Delphi 颜色转HTML 颜色字符串,带透明度
+function dwAlphaColor(ACtrl:TPanel):string;
+var
+     RGB: Integer;
+     iR,iG,iB  : Integer;
+     iA        : Integer;     //0:完全透明，1-9半透明，10：不透明
+begin
+     RGB  := ColorToRGB(ACtrl.Color);
+     iR   := GetRValue(RGB);
+     iG   := GetGValue(RGB);
+     iB   := GetBValue(RGB);
+     //用HelpContext来控制透明度
+     iA   := ACtrl.HelpContext;
+     if iA>10 then begin
+          iA   := 10;
+     end;
+     iA   := 10-iA;
+
+     Result    := Format('RGB(%d,%d,%d,%.1f)',[iR,iG,iB,iA/10]);
+end;
 
 
 //解密函数

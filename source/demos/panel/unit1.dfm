@@ -100,18 +100,25 @@ object Form1: TForm1
     ParentBackground = False
     TabOrder = 1
     object Label3: TLabel
-      Left = 528
-      Top = 144
+      Left = 429
+      Top = 176
       Width = 51
       Height = 20
       Caption = 'border'
     end
     object Label4: TLabel
-      Left = 800
-      Top = 143
+      Left = 736
+      Top = 175
       Width = 74
       Height = 20
       Caption = 'no border'
+    end
+    object Label5: TLabel
+      Left = 429
+      Top = 376
+      Width = 54
+      Height = 20
+      Caption = 'opacity'
     end
     object Panel1: TPanel
       Left = 46
@@ -127,8 +134,8 @@ object Form1: TForm1
       OnExit = Panel1Exit
     end
     object Panel2: TPanel
-      Left = 446
-      Top = 16
+      Left = 347
+      Top = 48
       Width = 227
       Height = 121
       BevelOuter = bvNone
@@ -141,8 +148,8 @@ object Form1: TForm1
       OnExit = Panel1Exit
     end
     object Panel3: TPanel
-      Left = 710
-      Top = 16
+      Left = 646
+      Top = 48
       Width = 227
       Height = 121
       BevelOuter = bvNone
@@ -152,6 +159,108 @@ object Form1: TForm1
       TabOrder = 2
       OnEnter = Panel1Enter
       OnExit = Panel1Exit
+    end
+    object Panel4: TPanel
+      Left = 46
+      Top = 232
+      Width = 827
+      Height = 121
+      BevelOuter = bvNone
+      BorderWidth = 1
+      Color = clRed
+      ParentBackground = False
+      TabOrder = 3
+      OnEnter = Panel1Enter
+      OnExit = Panel1Exit
+      object Panel5: TPanel
+        Left = 27
+        Top = 16
+        Width = 102
+        Height = 81
+        BevelOuter = bvNone
+        BorderWidth = 1
+        BorderStyle = bsSingle
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 0
+        OnEnter = Panel1Enter
+        OnExit = Panel1Exit
+      end
+      object Panel6: TPanel
+        Left = 161
+        Top = 16
+        Width = 102
+        Height = 81
+        HelpContext = 2
+        BevelOuter = bvNone
+        BorderWidth = 1
+        BorderStyle = bsSingle
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 1
+        OnEnter = Panel1Enter
+        OnExit = Panel1Exit
+      end
+      object Panel7: TPanel
+        Left = 295
+        Top = 16
+        Width = 102
+        Height = 81
+        HelpContext = 4
+        BevelOuter = bvNone
+        BorderWidth = 1
+        BorderStyle = bsSingle
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 2
+        OnEnter = Panel1Enter
+        OnExit = Panel1Exit
+      end
+      object Panel8: TPanel
+        Left = 430
+        Top = 16
+        Width = 102
+        Height = 81
+        HelpContext = 6
+        BevelOuter = bvNone
+        BorderWidth = 1
+        BorderStyle = bsSingle
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 3
+        OnEnter = Panel1Enter
+        OnExit = Panel1Exit
+      end
+      object Panel9: TPanel
+        Left = 564
+        Top = 16
+        Width = 102
+        Height = 81
+        HelpContext = 8
+        BevelOuter = bvNone
+        BorderWidth = 1
+        BorderStyle = bsSingle
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 4
+        OnEnter = Panel1Enter
+        OnExit = Panel1Exit
+      end
+      object Panel10: TPanel
+        Left = 699
+        Top = 16
+        Width = 102
+        Height = 81
+        HelpContext = 10
+        BevelOuter = bvNone
+        BorderWidth = 1
+        BorderStyle = bsSingle
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 5
+        OnEnter = Panel1Enter
+        OnExit = Panel1Exit
+      end
     end
   end
   object Panel_01_Tile: TPanel
