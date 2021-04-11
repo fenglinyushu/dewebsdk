@@ -23,13 +23,9 @@ type
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
-    N1: TMenuItem;
     N2: TMenuItem;
     N4: TMenuItem;
-    N5: TMenuItem;
-    N6: TMenuItem;
+    N1: TMenuItem;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -48,7 +44,7 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 begin
      dwSetCompLTWH(MainMenu,0,0,600,50);
-     dwSetCompLTWH(MainMenu1,0,60,200,600);
+     dwSetCompLTWH(MainMenu1,0,60,150,500);
 end;
 
 end.

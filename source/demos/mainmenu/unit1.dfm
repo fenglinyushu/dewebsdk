@@ -48,47 +48,31 @@ object Form1: TForm1
   object MainMenu1: TMainMenu
     AutoHotkeys = maManual
     OwnerDraw = True
-    Left = 397
-    Top = 205
-    object MenuItem1: TMenuItem
-      Caption = #25991#20214
-      ImageIndex = 1
-      object N1: TMenuItem
-        Caption = #26032#24314
-        ImageIndex = 10
-      end
-      object N2: TMenuItem
-        Caption = #25171#24320
-        ImageIndex = 11
-      end
-      object N4: TMenuItem
-        Caption = #21382#21490#35760#24405
-        ImageIndex = 12
-        object N5: TMenuItem
-          Caption = #25968#25454#19968
-          ImageIndex = 20
-        end
-        object N6: TMenuItem
-          Caption = #25968#25454#20108
-          ImageIndex = 21
-        end
-      end
-    end
+    Left = 85
+    Top = 117
     object MenuItem2: TMenuItem
-      Caption = #32534#36753
+      Caption = #31995#32479#21442#25968
       ImageIndex = 2
     end
+    object MenuItem1: TMenuItem
+      Caption = #24179#21488#25509#21475
+      ImageIndex = 1
+      object N2: TMenuItem
+        Caption = #25903#20184#23453#25509#21475
+        ImageIndex = 31
+      end
+      object N4: TMenuItem
+        Caption = #24494#20449#25509#21475
+        ImageIndex = 32
+      end
+      object N1: TMenuItem
+        Caption = #38134#34892#25509#21475
+        ImageIndex = 33
+      end
+    end
     object MenuItem3: TMenuItem
-      Caption = #21024#38500
-      ImageIndex = 3
-    end
-    object MenuItem4: TMenuItem
-      Caption = #20445#23384
-      ImageIndex = 4
-    end
-    object MenuItem5: TMenuItem
-      Caption = #21462#28040
-      ImageIndex = 5
+      Caption = #25968#25454#31649#29702
+      ImageIndex = 34
     end
   end
 end

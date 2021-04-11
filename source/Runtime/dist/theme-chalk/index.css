@@ -17199,7 +17199,8 @@
 	position: relative;
 	margin: 0;
 	padding-left: 0;
-	background-color: #FFF
+	background-color: #FFF;
+	overflow: hidden;
 }
 
 .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus,.el-menu--horizontal>.el-menu-item:not(.is-disabled):hover,.el-menu--horizontal>.el-submenu .el-submenu__title:hover {
