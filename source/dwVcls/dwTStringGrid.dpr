@@ -126,6 +126,8 @@ var
      iItem     : Integer;
      iColID    : Integer;
      //
+     bColed    : Boolean;     //已添加表头信息
+     //
      sRowStyle : string;
      sBack     : string;
      //
@@ -194,48 +196,6 @@ begin
      //
      with TStringGrid(ACtrl) do begin
           if HelpKeyword = 'easy' then begin
-               //Vue easy table-------------------------------------------------
-               (*
-                   <v-table
-                            :width="1000"
-                            :columns="columns"
-                            :table-data="tableData"
-                            :show-vertical-border="false"
-                   ></v-table>
-               *)
-               //生成返回值数组
-               joRes    := _Json('[]');
-
-               //取得HINT对象JSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
-
-               //
-               with TStringGrid(ACtrl) do begin
-                    //添加外框
-                    joRes.Add('<div' +dwLTWH(TControl(ACtrl))+'">');
-
-                    //添加主体
-                    joRes.Add('    <v-table'
-                              +' :columns="'+dwPrefix(Actrl)+Name+'__clm"'     //column
-                              +' :table-data="'+dwPrefix(Actrl)+Name+'__tbd"'  //table-data
-                              //+' :show-vertical-border="false"'            //参考名?
-                              //+' row-hover-color="#eee"'
-                              //+' row-click-color="#edf7ff"'
-                              +' '+dwGetJsonAttr(joHint,'dwstyle')
-                              //+' stripe'                  //斑马纹
-                              //+dwIIF(Borderstyle<>bsNone,' border','')     //是否边框
-                              //+dwVisible(TControl(ACtrl))                  //是否可见
-                              //+dwDisable(TControl(ACtrl))                  //是否可用
-                              //+' height="'+IntToStr(TControl(ACtrl).Height)+'"' //高度, 有此值则显示滚动条
-                              //+' :height="'+dwPrefix(Actrl)+Name+'__hei"' //高度, 有此值则显示滚动条
-                              //+' style="width:100%"'                            //宽度
-                              //+Format(_DWEVENT,['row-click',Name,'val.d0','onclick',TForm(Owner).Handle])
-                              +'>');
-
-               end;
-
-               //
-               Result    := (joRes);
 
           end else begin
                //Element table -------------------------------------------------
@@ -292,8 +252,11 @@ begin
 
 
                     //添加各列
+                    bColed    := False;
                     if (not dwIsNull(joHint)) then begin
                          if  joHint.Exists('columns') then begin
+                              bColed    := True;
+
                               //===以下为多表头的情况
                               joCols    := joHint.columns;
                               iColiD    := 0;
@@ -302,8 +265,9 @@ begin
                                    _AddChildCol(joCol,iColID,TStringGrid(ACtrl));
                               end;
                          end;
+                    end;
 
-                    end else begin
+                    if not bColed then begin
                          //===以下为正常表头的情况
                          for iItem := 0 to ColCount-1 do begin
                               joRes.Add('        <el-table-column'
@@ -333,15 +297,6 @@ begin
           if HelpKeyword = 'easy' then begin
                //Vue easy table-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
-
-               //生成返回值数组
-               joRes.Add('    </v-table>');
-               joRes.Add('</div>');
-
-               //
-               Result    := (joRes);
           end else begin
                //Element table -------------------------------------------------
 
@@ -394,62 +349,7 @@ begin
      //
      with TStringGrid(ACtrl) do begin
           if HelpKeyword = 'easy' then begin
-               //Vue easy table-------------------------------------------------
-               (*
-                       tableData: [
-                         { "name": "熊猫金币30g", "last": "156.1", "percent": "-1.76", "earning": "5.6" },
-                         { "name": "黄金9995", "last": "182.1", "percent": "1.06", "earning": "12.5" },
-                         { "name": "国际版黄金9999", "last": "161.0", "percent": "-0.76", "earning": "18.2" },
-                         { "name": "白银T+D", "last": "197.1", "percent": "1.26", "earning": "14.7" },
-                         { "name": "Mini黄金T+D", "last": "183.6", "percent": "2.76", "earning": "18.7" }
-                       ],
-                       columns: [
-                         { field: 'name', title: '名称', width: 50, titleAlign: 'left', columnAlign: 'left', titleCellClassName: 'title-cell-class-name', isResize: true },
-                         // formatter: function (rowData, rowIndex, pagingIndex, field) {
-                         //   return rowIndex < 3 ? '<span style="color:red;font-weight: bold;">' + (rowIndex + 1) + '</span>' : rowIndex + 1
-                         // }
-                         { field: 'last', title: '最新', width: 50, titleAlign: 'right', columnAlign: 'right', titleCellClassName: 'title-cell-class-name', isResize: true },
-                         { field: 'percent', title: '涨幅%', width: 50, titleAlign: 'right', columnAlign: 'right', titleCellClassName: 'title-cell-class-name', orderBy: 'desc', isResize: true },
-                         { field: 'earning', title: '涨跌', width: 50, titleAlign: 'right', columnAlign: 'right', titleCellClassName: 'title-cell-class-name', isResize: true }
-                       ]
-               *)
-               //生成返回值数组
-               joRes    := _Json('[]');
-               //
-               with TStringGrid(ACtrl) do begin
 
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-
-                    //tableData
-                    S := dwPrefix(Actrl)+Name+'__tbd:'+_GetTableData(ACtrl)+','#13;
-                    joRes.Add(S);
-
-                    //columns
-                    S := dwPrefix(Actrl)+Name+'__clm: [';
-                    for iCol := 0 to ColCount-1 do begin
-                         S := S + '{field:''col'+IntToStr(iCol)+''','
-                                   +'title:'''+Cells[iCol,0]+''','
-                                   +'width:'+IntToStr(ColWidths[iCol])+','
-                                   +'titleAlign: ''left'','
-                                   +'columnAlign: ''left'','
-                                   +'titleCellClassName: ''title-cell-class-name'','
-                                   +'isEdit:true,'
-                                   +'sResize:true},'#13;
-                    end;
-                    Delete(S,Length(S)-1,2);
-                    S := S + '],'#13;
-
-                    joRes.Add(S);
-               end;
-               //
-               Result    := (joRes);
           end else begin
                //Element table -------------------------------------------------
 
@@ -479,8 +379,10 @@ begin
                          for iCol := 0 to ColCount-1 do begin
                               sCode     := sCode + '"d'+IntToStr(iCol+1)+'":'''+Cells[iCol,iRow]+''',';
                          end;
+                         Delete(sCode,Length(sCode),1);
                          sCode     := sCode + '},';
                     end;
+                    Delete(sCode,Length(sCode),1);
                     sCode     := sCode + '],';
                     joRes.Add(sCode);
                     //joRes.Add('currentRow: 1,');
@@ -506,26 +408,6 @@ begin
           if HelpKeyword = 'easy' then begin
                //Vue easy table-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
-
-               //
-               with TStringGrid(ACtrl) do begin
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-                    //
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-
-                    //tableData
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tbd='+_GetTableData(ACtrl)+';');
-
-
-               end;
-               //
-               Result    := (joRes);
           end else begin
                //Element table -------------------------------------------------
 

@@ -13,23 +13,7 @@ uses
 
 type
   TForm1 = class(TForm)
-    MainMenu: TMainMenu;
-    MenuItem_Add: TMenuItem;
-    MenuItem_Edit: TMenuItem;
-    MenuItem_Delete: TMenuItem;
-    MenuItem_Save: TMenuItem;
-    MenuItem_Cancel: TMenuItem;
-    MainMenu1: TMainMenu;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
-    N1: TMenuItem;
-    N2: TMenuItem;
-    N4: TMenuItem;
-    N5: TMenuItem;
-    N6: TMenuItem;
+    StringGrid1: TStringGrid;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -46,9 +30,14 @@ implementation
 
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+     iR,iC     : Integer;
 begin
-     dwSetCompLTWH(MainMenu,0,0,600,50);
-     dwSetCompLTWH(MainMenu1,0,60,200,600);
+     for iR := 0 to StringGrid1.RowCount-1 do begin
+          for iC := 0 to StringGrid1.ColCount-1 do begin
+               StringGrid1.Cells[iC,iR] := 'A';
+          end;
+     end;
 end;
 
 end.

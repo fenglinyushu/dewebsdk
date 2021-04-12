@@ -158,8 +158,13 @@ begin
                     //Ìí¼ÓÑ¡Ïî¿¨
                     for iTab := 0 to PageCount-1 do begin
                          //
-                         joRes.Add('    <el-tab-pane'+' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv"'
+                         if (Pages[iTab].ImageIndex>0)and(Pages[iTab].ImageIndex<=280) then begin
+                              joRes.Add('    <el-tab-pane'+' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv" name="'+dwPrefix(Actrl)+Pages[iTab].Name+'">');
+                              joRes.Add('    <span slot="label"><i class="'+dwIcons[Pages[iTab].ImageIndex]+'"></i> {{'+dwPrefix(Actrl)+Pages[iTab].Name+'__cap}}</span>');
+                         end else begin
+                              joRes.Add('    <el-tab-pane'+' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv"'
                                    +' :label="'+dwPrefix(Actrl)+Pages[iTab].Name+'__cap" name="'+dwPrefix(Actrl)+Pages[iTab].Name+'">');
+                         end;
                          //
                          joRes.Add('    </el-tab-pane>');
                     end;
