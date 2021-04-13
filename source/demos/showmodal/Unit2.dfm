@@ -51,7 +51,7 @@ object Form2: TForm2
   end
   object Button1: TButton
     Left = 80
-    Top = 345
+    Top = 369
     Width = 145
     Height = 41
     Hint = '{"type":"success"}'
@@ -106,5 +106,14 @@ object Form2: TForm2
       #28145#22323
       #35199#23433
       #35140#38451)
+  end
+  object CheckBox1: TCheckBox
+    Left = 24
+    Top = 328
+    Width = 129
+    Height = 17
+    Caption = 'Remeber me'
+    TabOrder = 5
+    OnClick = CheckBox1Click
   end
 end

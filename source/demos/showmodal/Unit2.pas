@@ -21,7 +21,9 @@ type
     Label4: TLabel;
     Label1: TLabel;
     ComboBox1: TComboBox;
+    CheckBox1: TCheckBox;
     procedure Button1Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,6 +42,11 @@ uses
 
 procedure TForm2.Button1Click(Sender: TObject);
 begin
+     if CheckBox1.Checked then begin
+          Label4.Caption := 'True';
+     end else begin
+          Label4.Caption := 'False';
+     end;
      if (Edit1.Text = 'admin')and(Edit2.Text='12345') then begin
           Form1.Button1.Caption    := 'User Checked';
           dwRunJS('this.'+TForm(Button1.Owner).Name+'__vis=false;',self);
@@ -47,6 +54,16 @@ begin
      end else begin
           dwShowMessage('User/Password invalid! admin/12345',self);
      end;
+end;
+
+procedure TForm2.CheckBox1Click(Sender: TObject);
+begin
+     if CheckBox1.Checked then begin
+          Label1.Caption := 'A True';
+     end else begin
+          Label1.Caption := 'A False';
+     end;
+
 end;
 
 end.

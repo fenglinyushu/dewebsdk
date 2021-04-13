@@ -73,8 +73,8 @@ begin
                     +dwGetHintValue(joHint,'icon','icon','')         //CheckBoxIcon
                     +dwLTWH(TControl(ACtrl))
                     +'"' //style 封闭
-                    +Format(_DWEVENT,['change',Name,'this.'+Name+'__chk','onclick',TForm(Owner).Handle])
-                    +'>{{'+Name+'__cap}}';
+                    +Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__chk','onclick',TForm(Owner).Handle])
+                    +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
           //添加到返回值数据
           joRes.Add(sCode);
      end;
