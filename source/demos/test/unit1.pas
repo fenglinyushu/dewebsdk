@@ -13,8 +13,10 @@ uses
 
 type
   TForm1 = class(TForm)
-    StringGrid1: TStringGrid;
-    procedure FormCreate(Sender: TObject);
+    CheckBox1: TCheckBox;
+    Button1: TButton;
+    Label1: TLabel;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,14 +31,12 @@ implementation
 {$R *.dfm}
 
 
-procedure TForm1.FormCreate(Sender: TObject);
-var
-     iR,iC     : Integer;
+procedure TForm1.Button1Click(Sender: TObject);
 begin
-     for iR := 0 to StringGrid1.RowCount-1 do begin
-          for iC := 0 to StringGrid1.ColCount-1 do begin
-               StringGrid1.Cells[iC,iR] := 'A';
-          end;
+     if CheckBox1.Checked then begin
+          Label1.Caption := 'True';
+     end else begin
+          Label1.Caption := 'False';
      end;
 end;
 

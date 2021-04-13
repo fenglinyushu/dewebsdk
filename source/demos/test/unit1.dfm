@@ -17,15 +17,30 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 20
-  object StringGrid1: TStringGrid
+  object Label1: TLabel
+    Left = 24
+    Top = 88
+    Width = 48
+    Height = 20
+    Caption = 'Label1'
+  end
+  object CheckBox1: TCheckBox
     Left = 24
     Top = 48
-    Width = 320
-    Height = 120
-    Hint = '{"dwstyle":"border stripe"}'
+    Width = 97
+    Height = 17
+    Caption = 'CheckBox1'
     TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 24
+    Top = 136
+    Width = 75
+    Height = 33
+    Caption = 'Button1'
+    TabOrder = 1
+    OnClick = Button1Click
   end
 end
