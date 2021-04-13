@@ -60,6 +60,8 @@ implementation
 
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+     iRow : Integer;
 begin
      dwSetCompLTWH(MainMenu,0,60,250,500);
      //
@@ -70,11 +72,27 @@ begin
           Cells[3,0]     := '人员姓名';
           Cells[4,0]     := '身份证号';
           //
-          ColWidths[0]   := 80;
+          ColWidths[0]   := 60;
           ColWidths[1]   := 230;
-          ColWidths[2]   := 80;
+          ColWidths[2]   := 140;
           ColWidths[3]   := 80;
-          ColWidths[4]   := 255;
+          ColWidths[4]   := 215;
+          //
+          for iRow := 1 to 10 do begin
+               Cells[0,iRow]  := '  '+IntToStr(iRow);
+               if iRow mod 2 =1 then begin
+                    Cells[1,iRow]     := '西安迈华信息科技有限公司';
+                    Cells[2,iRow]     := 'MH001';
+                    Cells[3,iRow]     := '江远';
+                    Cells[4,iRow]     := '420621200001011234';
+               end else begin
+                    //
+                    Cells[1,iRow]     := '微软（中国）有限公司';
+                    Cells[2,iRow]     := 'MS3345003';
+                    Cells[3,iRow]     := '张比尔';
+                    Cells[4,iRow]     := '610111200001011234';
+               end;
+          end;
      end;
 end;
 
