@@ -146,7 +146,7 @@ begin
           sCode     := '<el-menu'
                     +' :default-active="'+dwPrefix(Actrl)+Name+'__act"'     //Ä¬ÈÏÑ¡ÖÐ×´Ì¬
                     +' class="el-menu-demo"'
-                    +dwIIF(ownerDraw,'',' mode="horizontal"')
+                    +dwIIF(ParentBiDiMode=False,'',' mode="horizontal"')
                     //+' background-color="#545c64"'
                     +dwGetHintValue(joHint,'background-color','background-color',' background-color="#545c64"')
                     //+' text-color="#fff"'
@@ -156,7 +156,7 @@ begin
                     //+dwVisible(ACtrl)
                     //+dwDisable(ACtrl)
                     +dwLTWHComp(ACtrl)
-                    +dwIIF(ownerDraw,'line-height:30px;','line-height:'+IntToStr((Tag mod 10000)-22)+'px;')
+                    +dwIIF(ParentBiDiMode=False,'line-height:30px;','line-height:'+IntToStr((Tag mod 10000)-22)+'px;')
                     +'"' //style ·â±Õ
                     +Format(_DWEVENT,['select',Name,'val','onclick',TForm(Owner).Handle])
                     +'>';

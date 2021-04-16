@@ -81,6 +81,7 @@ end;
 procedure TForm1.Panel1Click(Sender: TObject);
 begin
      Label_Event.Caption := 'OnClick';
+     dwShowMessage('OnClick',self);
 end;
 
 procedure TForm1.Panel1Enter(Sender: TObject);

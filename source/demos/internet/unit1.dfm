@@ -194,32 +194,21 @@ object Form1: TForm1
       object TabSheet2: TTabSheet
         Caption = #25253#21578#26597#35810
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
       object TabSheet3: TTabSheet
         Caption = #25253#21578#23548#20986
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
       object TabSheet4: TTabSheet
         Caption = #26426#26500#20449#24687
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end
   object MainMenu: TMainMenu
     AutoHotkeys = maManual
-    OwnerDraw = True
+    BiDiMode = bdLeftToRight
+    ParentBiDiMode = False
     Left = 85
     Top = 117
     object MenuItem2: TMenuItem

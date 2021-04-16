@@ -47,7 +47,8 @@ object Form1: TForm1
   end
   object MainMenu1: TMainMenu
     AutoHotkeys = maManual
-    OwnerDraw = True
+    BiDiMode = bdLeftToRight
+    ParentBiDiMode = False
     Left = 85
     Top = 117
     object MenuItem2: TMenuItem

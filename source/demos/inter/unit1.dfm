@@ -42,7 +42,6 @@ object Form1: TForm1
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 670
       DesignSize = (
         750
         580)
@@ -60,7 +59,6 @@ object Form1: TForm1
         RowCount = 10
         TabOrder = 0
         OnClick = SGClick
-        ExplicitLeft = 6
       end
       object Panel3: TPanel
         AlignWithMargins = True
@@ -89,8 +87,6 @@ object Form1: TForm1
           Caption = #19979#19968#39029
           TabOrder = 0
           OnClick = Button_NextPageClick
-          ExplicitLeft = 814
-          ExplicitHeight = 40
         end
         object Button_PrevPage: TButton
           AlignWithMargins = True
@@ -106,8 +102,6 @@ object Form1: TForm1
           Caption = #19978#19968#39029
           TabOrder = 1
           OnClick = Button_PrevPageClick
-          ExplicitLeft = 753
-          ExplicitHeight = 40
         end
         object Edit_Page: TEdit
           AlignWithMargins = True
@@ -124,8 +118,6 @@ object Form1: TForm1
           AutoSize = False
           TabOrder = 2
           Text = '1'
-          ExplicitLeft = 880
-          ExplicitHeight = 38
         end
         object Button_Go: TButton
           AlignWithMargins = True
@@ -142,8 +134,6 @@ object Form1: TForm1
           Caption = 'GO'
           TabOrder = 3
           OnClick = Button_GoClick
-          ExplicitLeft = 930
-          ExplicitHeight = 40
         end
         object Button_Append: TButton
           AlignWithMargins = True
@@ -202,8 +192,6 @@ object Form1: TForm1
         Color = clWhite
         ParentBackground = False
         TabOrder = 2
-        ExplicitTop = 353
-        ExplicitWidth = 998
         object Edit_Item0: TEdit
           AlignWithMargins = True
           Left = 3
@@ -218,7 +206,6 @@ object Form1: TForm1
           AutoSize = False
           TabOrder = 0
           OnChange = Edit_Item0Change
-          ExplicitLeft = 0
         end
         object Edit_Item1: TEdit
           AlignWithMargins = True
@@ -234,7 +221,6 @@ object Form1: TForm1
           Align = alLeft
           AutoSize = False
           TabOrder = 1
-          ExplicitLeft = 100
         end
         object Edit_Item2: TEdit
           AlignWithMargins = True
@@ -250,7 +236,6 @@ object Form1: TForm1
           Align = alLeft
           AutoSize = False
           TabOrder = 2
-          ExplicitLeft = 200
         end
         object Edit_Item3: TEdit
           AlignWithMargins = True
@@ -266,7 +251,6 @@ object Form1: TForm1
           Align = alLeft
           AutoSize = False
           TabOrder = 3
-          ExplicitLeft = 300
         end
         object Edit_Item4: TEdit
           AlignWithMargins = True
@@ -282,7 +266,6 @@ object Form1: TForm1
           Align = alLeft
           AutoSize = False
           TabOrder = 4
-          ExplicitLeft = 400
         end
       end
       object Panel4: TPanel
@@ -296,9 +279,6 @@ object Form1: TForm1
         Color = clWhite
         ParentBackground = False
         TabOrder = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 732
         DesignSize = (
           744
           96)
@@ -567,9 +547,6 @@ object Form1: TForm1
       Color = 3484198
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 1
-      ExplicitTop = 480
-      ExplicitHeight = 121
     end
   end
   object Panel1: TPanel
@@ -582,7 +559,6 @@ object Form1: TForm1
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = -5
     object Image2: TImage
       AlignWithMargins = True
       Left = 15
@@ -626,7 +602,6 @@ object Form1: TForm1
       Caption = #37325#32622
       TabOrder = 0
       OnClick = Button_ResetClick
-      ExplicitLeft = 696
     end
     object Edit_Keyword: TEdit
       AlignWithMargins = True
@@ -642,9 +617,6 @@ object Form1: TForm1
       AutoSize = False
       TabOrder = 1
       Visible = False
-      ExplicitLeft = 813
-      ExplicitTop = 23
-      ExplicitHeight = 38
     end
     object Button_Search: TButton
       AlignWithMargins = True
@@ -663,8 +635,6 @@ object Form1: TForm1
       TabOrder = 2
       Visible = False
       OnClick = Button_SearchClick
-      ExplicitLeft = 976
-      ExplicitTop = 10
     end
   end
   object ADOQuery: TADOQuery
@@ -674,7 +644,8 @@ object Form1: TForm1
   end
   object MainMenu: TMainMenu
     AutoHotkeys = maManual
-    OwnerDraw = True
+    BiDiMode = bdLeftToRight
+    ParentBiDiMode = False
     Left = 85
     Top = 117
     object MenuItem2: TMenuItem

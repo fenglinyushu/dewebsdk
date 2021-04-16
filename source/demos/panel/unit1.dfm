@@ -130,6 +130,7 @@ object Form1: TForm1
       Color = clSilver
       ParentBackground = False
       TabOrder = 0
+      OnClick = Panel1Click
       OnEnter = Panel1Enter
       OnExit = Panel1Exit
     end

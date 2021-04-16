@@ -70,6 +70,7 @@ begin
                joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
                joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
                }
+               joRes.Add('<script src="dist/ex/dwStringGrid.js"></script>');
 
                //
                Result    := joRes;
@@ -224,6 +225,7 @@ begin
                               +'>');
                     //添加主体
                     joRes.Add('    <el-table'
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
                               +' :data="'+dwPrefix(Actrl)+Name+'__ces"'     //行内数据
                               +' highlight-current-row'     //当前行高亮
                               +sRowStyle
@@ -239,7 +241,7 @@ begin
                               +Format(_DWEVENT,['row-click',Name,'val.d0','onclick',TForm(Owner).Handle])
                               +'>');
 
-                    //添加另外加的行号列, 用于表示行号
+                    //添加另外加的行号列, 用于表示行号,此行不显示，为隐藏状态
                     joRes.Add('        <el-table-column'
                          +' show-overflow-tooltip'
                          +' fixed'
@@ -255,9 +257,11 @@ begin
                     bColed    := False;
                     if (not dwIsNull(joHint)) then begin
                          if  joHint.Exists('columns') then begin
+                              //===以下为多表头的情况
+
+                              //标记已生成column数据
                               bColed    := True;
 
-                              //===以下为多表头的情况
                               joCols    := joHint.columns;
                               iColiD    := 0;
                               for iItem := 0 to joCols._Count-1 do begin
@@ -451,7 +455,7 @@ end;
 
 
 exports
-     //dwGetExtra,
+     dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,
