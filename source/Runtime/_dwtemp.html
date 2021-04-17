@@ -5,17 +5,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb-StringGrid</title>
+<title>DeWeb</title>
 </head>
 
-<body style="background-color:#F0F0F0">
+<body style="background-color:#FFFFFF">
 <script src="dist/vue.js" type="text/javascript"></script>
 <script src="dist/index.js" type="text/javascript"></script>
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <script src="dist/ex/dwStringGrid.js"></script>
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_1__top,width:Form1_1__wid,height:Form1_1__hei}" >
+    <div id="app" style="position:absolute;overflow:hidden;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_2__wid,height:Form1_2__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -28,31 +27,36 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <el-main v-if="Panel_All__vis" :disabled="Panel_All__dis" :style="{backgroundColor:Panel_All__col,left:Panel_All__lef,top:Panel_All__top,width:Panel_All__wid,height:Panel_All__hei}" style="position:relative;overflow:hidden;">
-        <el-main v-if="Panel_Logo__vis" :disabled="Panel_Logo__dis" :style="{backgroundColor:Panel_Logo__col,left:Panel_Logo__lef,top:Panel_Logo__top,width:Panel_Logo__wid,height:Panel_Logo__hei}" style="position:absolute;overflow:hidden;">
-        <el-image :src="Image1__src" fit="none" v-if="Image1__vis" :disabled="Image1__dis" :style="{left:Image1__lef,top:Image1__top,width:Image1__wid,height:Image1__hei}" style="position:absolute;">
-        </el-Image>
-        <div  v-html="Label6__cap" v-if="Label6__vis" :disabled="Label6__dis" :style="{left:Label6__lef,top:Label6__top,width:Label6__wid,height:Label6__hei}" style="position:absolute;color:#646464;font-family:'Verdana';font-size:18pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:48px;">{{Label6__cap}}
+        <el-main v-if="Panel_Header__vis" :disabled="Panel_Header__dis" :style="{backgroundColor:Panel_Header__col,left:Panel_Header__lef,top:Panel_Header__top,width:Panel_Header__wid,height:Panel_Header__hei}" style="position:absolute;overflow:hidden;">
+        <div  v-html="Label_Header__cap" v-if="Label_Header__vis" :disabled="Label_Header__dis" :style="{left:Label_Header__lef,top:Label_Header__top,width:Label_Header__wid,height:Label_Header__hei}" style="position:absolute;color:#FFFFFF;font-family:'Verdana';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;text-align:center;line-height:34px;">{{Label_Header__cap}}
         </div>
-        <div  v-html="Label_Demo__cap" v-if="Label_Demo__vis" :disabled="Label_Demo__dis" :style="{left:Label_Demo__lef,top:Label_Demo__top,width:Label_Demo__wid,height:Label_Demo__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:20pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:48px;">{{Label_Demo__cap}}
-        </div>
-        <el-input v-if="Edit_JS__vis" :disabled="Edit_JS__dis" v-model="Edit_JS__txt" :style="{backgroundColor:Edit_JS__col,left:Edit_JS__lef,top:Edit_JS__top,width:Edit_JS__wid,height:Edit_JS__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_JS','escape(this.Edit_JS__txt)','onchange','4327532')">
-        </el-input>
-        <el-button size=small v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','4327532')">{{Button1__cap}}
+        <el-button size=small v-if="Button_Return__vis" :disabled="Button_Return__dis" :type="Button_Return__typ" icon="el-icon-arrow-left" :style="{left:Button_Return__lef,top:Button_Return__top,width:Button_Return__wid,height:Button_Return__hei}" style="position:absolute;color:rgb(255,255,255);font-size:24px;">{{Button_Return__cap}}
+        </el-button>
+        <el-button size=small v-if="Button_Menu__vis" :disabled="Button_Menu__dis" :type="Button_Menu__typ" icon="el-icon-menu" :style="{left:Button_Menu__lef,top:Button_Menu__top,width:Button_Menu__wid,height:Button_Menu__hei}" style="position:absolute;color:rgb(255,255,255);font-size:24px;">{{Button_Menu__cap}}
         </el-button>
         </el-main>
-        <el-main v-if="Panel_StringGrid__vis" :disabled="Panel_StringGrid__dis" :style="{backgroundColor:Panel_StringGrid__col,left:Panel_StringGrid__lef,top:Panel_StringGrid__top,width:Panel_StringGrid__wid,height:Panel_StringGrid__hei}" style="position:absolute;overflow:hidden;">
-        <div :style="{left:StringGrid1__lef,top:StringGrid1__top,width:StringGrid1__wid,height:StringGrid1__hei}" style="position:absolute;">
-            <el-table id="StringGrid1" :data="StringGrid1__ces" highlight-current-row :row-style="{height:'35px'}" :header-row-style="{height:'35px'}" :header-cell-style="{background:'#f5f7fA'}" ref="StringGrid1" stripe border v-if="StringGrid1__vis" :disabled="StringGrid1__dis" :height="StringGrid1__hei" style="width:100%" @row-click="dwevent($event,'StringGrid1','val.d0','onclick','4327532')">
-                <el-table-column show-overflow-tooltip fixed v-if=false prop="d0" label="rowno" width="10"></el-table-column>
-                <el-table-column fixed="left" show-overflow-tooltip prop="d1" align="right" :label="StringGrid1__col0" width="100"></el-table-column>
-                <el-table-column show-overflow-tooltip prop="d2" align="center" :label="StringGrid1__col1" width="220"></el-table-column>
-                <el-table-column show-overflow-tooltip prop="d3" align="left" :label="StringGrid1__col2" width="220"></el-table-column>
-                <el-table-column show-overflow-tooltip prop="d4" align="left" :label="StringGrid1__col3" width="220"></el-table-column>
-            </el-table>
+        <el-main v-if="Panel_Footer__vis" :disabled="Panel_Footer__dis" :style="{backgroundColor:Panel_Footer__col,left:Panel_Footer__lef,top:Panel_Footer__top,width:Panel_Footer__wid,height:Panel_Footer__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_bottom0__src" fit="none" v-if="Image_bottom0__vis" :disabled="Image_bottom0__dis" :style="{left:Image_bottom0__lef,top:Image_bottom0__top,width:Image_bottom0__wid,height:Image_bottom0__hei}" style="position:absolute;">
+        </el-Image>
+        <el-image :src="Image_bottom1__src" fit="none" v-if="Image_bottom1__vis" :disabled="Image_bottom1__dis" :style="{left:Image_bottom1__lef,top:Image_bottom1__top,width:Image_bottom1__wid,height:Image_bottom1__hei}" style="position:absolute;">
+        </el-Image>
+        <el-image :src="Image_bottom2__src" fit="none" v-if="Image_bottom2__vis" :disabled="Image_bottom2__dis" :style="{left:Image_bottom2__lef,top:Image_bottom2__top,width:Image_bottom2__wid,height:Image_bottom2__hei}" style="position:absolute;border-radius:50%;">
+        </el-Image>
+        <el-image :src="Image_bottom3__src" fit="none" v-if="Image_bottom3__vis" :disabled="Image_bottom3__dis" :style="{left:Image_bottom3__lef,top:Image_bottom3__top,width:Image_bottom3__wid,height:Image_bottom3__hei}" style="position:absolute;">
+        </el-Image>
+        <el-image :src="Image_bottom4__src" fit="none" v-if="Image_bottom4__vis" :disabled="Image_bottom4__dis" :style="{left:Image_bottom4__lef,top:Image_bottom4__top,width:Image_bottom4__wid,height:Image_bottom4__hei}" style="position:absolute;">
+        </el-Image>
+        <el-main v-if="Panel_FooterTopLine__vis" :disabled="Panel_FooterTopLine__dis" :style="{backgroundColor:Panel_FooterTopLine__col,left:Panel_FooterTopLine__lef,top:Panel_FooterTopLine__top,width:Panel_FooterTopLine__wid,height:Panel_FooterTopLine__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-main v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        </el-main>
+        <div v-if="ScrollBox_Content__vis" :disabled="ScrollBox_Content__dis" :style="{left:ScrollBox_Content__lef,top:ScrollBox_Content__top,width:ScrollBox_Content__wid,height:ScrollBox_Content__hei}" style="position:absolute;">
+        <el-scrollbar ref="ScrollBox_Content" style="height:100%;" @scroll="dwevent($event,'ScrollBox_Content','0','onscroll','2885552')">
+        <el-main v-if="Panel_Content__vis" :disabled="Panel_Content__dis" :style="{backgroundColor:Panel_Content__col,left:Panel_Content__lef,top:Panel_Content__top,width:Panel_Content__wid,height:Panel_Content__hei}" style="position:relative;overflow:hidden;">
+        </el-main>
+        </el-scrollbar>
         </div>
-        </el-main>
-        </el-main>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -80,79 +84,110 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_1__top:"0px",
-					    Form1_1__wid:"925px",
-					    Form1_1__hei:"725px",
-                        Image1__lef:"18px",
-                        Image1__top:"3px",
-                        Image1__wid:"48px",
-                        Image1__hei:"48px",
-                        Image1__vis:true,
-                        Image1__dis:false,
-                        Image1__src:"/media/images/logo.png",
-                        Label6__lef:"69px",
-                        Label6__top:"3px",
-                        Label6__wid:"112px",
-                        Label6__hei:"48px",
-                        Label6__vis:true,
-                        Label6__dis:false,
-                        Label6__cap:"DeWeb -",
-                        Label_Demo__lef:"181px",
-                        Label_Demo__top:"3px",
-                        Label_Demo__wid:"131px",
-                        Label_Demo__hei:"48px",
-                        Label_Demo__vis:true,
-                        Label_Demo__dis:false,
-                        Label_Demo__cap:"StringGrid",
-                        Edit_JS__lef:"336px",
-                        Edit_JS__top:"16px",
-                        Edit_JS__wid:"513px",
-                        Edit_JS__hei:"28px",
-                        Edit_JS__vis:true,
-                        Edit_JS__dis:false,
-                        Edit_JS__txt:"",
-                        Edit_JS__col:"#FFFFFF",
-                        Button1__lef:"855px",
-                        Button1__top:"16px",
-                        Button1__wid:"58px",
-                        Button1__hei:"28px",
-                        Button1__vis:true,
-                        Button1__dis:false,
-                        Button1__cap:"RunJS",
-                        Button1__typ:"",
-                        Panel_Logo__lef:"3px",
-                        Panel_Logo__top:"3px",
-                        Panel_Logo__wid:"919px",
-                        Panel_Logo__hei:"54px",
-                        Panel_Logo__vis:true,
-                        Panel_Logo__dis:false,
-                        Panel_Logo__col:"RGB(255,255,255,1.0)",
-                        StringGrid1__lef:"1px",
-                        StringGrid1__top:"1px",
-                        StringGrid1__wid:"792px",
-                        StringGrid1__hei:"481px",
-                        StringGrid1__vis:true,
-                        StringGrid1__dis:false,
-                        StringGrid1__col0:"日期",
-                        StringGrid1__col1:"姓名",
-                        StringGrid1__col2:"省份",
-                        StringGrid1__col3:"城市",
-                        StringGrid1__col4:"详细地址",
-                        StringGrid1__ces:[{"d0":'1',"d1":'2000-01-01',"d2":'张云政',"d3":'湖北',"d4":'襄阳',"d5":'电力局办公室01001号'},{"d0":'2',"d1":'2001-07-01',"d2":'李景学',"d3":'北京',"d4":'朝阳区',"d5":'烟草公司驻外楼2901室'},{"d0":'3',"d1":'2002-12-01',"d2":'周子琴',"d3":'上海',"d4":'淞沪区',"d5":'外滩管理事务局管理处'},{"d0":'4',"d1":'2006-03-01',"d2":'谢玲芳',"d3":'辽宁',"d4":'沈阳',"d5":'民航管理中心监察室9901'},{"d0":'5',"d1":'2007-03-01',"d2":'张曼玉',"d3":'香港',"d4":'九龙',"d5":'无线集团'},{"d0":'6',"d1":'2008-03-01',"d2":'刘德华',"d3":'甘肃',"d4":'兰州',"d5":'房地产公司驻外楼1212室'},{"d0":'7',"d1":'2009-03-01',"d2":'梁朝伟',"d3":'山东',"d4":'济南',"d5":'数据中心'},{"d0":'8',"d1":'2010-03-01',"d2":'张益',"d3":'辽宁',"d4":'大连',"d5":'金融管理大队'},{"d0":'9',"d1":'2011-03-01',"d2":'贾玲',"d3":'湖北',"d4":'宜城',"d5":'综合演艺管理中心'}],
-                        Panel_StringGrid__lef:"0px",
-                        Panel_StringGrid__top:"60px",
-                        Panel_StringGrid__wid:"925px",
-                        Panel_StringGrid__hei:"1200px",
-                        Panel_StringGrid__vis:true,
-                        Panel_StringGrid__dis:false,
-                        Panel_StringGrid__col:"RGB(255,255,255,1.0)",
-                        Panel_All__lef:"0px",
-                        Panel_All__top:"0px",
-                        Panel_All__wid:"925px",
-                        Panel_All__hei:"670px",
-                        Panel_All__vis:true,
-                        Panel_All__dis:false,
-                        Panel_All__col:"RGB(255,255,255,1.0)",
+					    Form1_2__top:"0px",
+					    Form1_2__wid:"350px",
+					    Form1_2__hei:"631px",
+                        Label_Header__lef:"49px",
+                        Label_Header__top:"3px",
+                        Label_Header__wid:"255px",
+                        Label_Header__hei:"34px",
+                        Label_Header__vis:true,
+                        Label_Header__dis:false,
+                        Label_Header__cap:"Header",
+                        Button_Return__lef:"3px",
+                        Button_Return__top:"2px",
+                        Button_Return__wid:"40px",
+                        Button_Return__hei:"34px",
+                        Button_Return__vis:true,
+                        Button_Return__dis:false,
+                        Button_Return__cap:"",
+                        Button_Return__typ:"text",
+                        Button_Menu__lef:"310px",
+                        Button_Menu__top:"2px",
+                        Button_Menu__wid:"40px",
+                        Button_Menu__hei:"34px",
+                        Button_Menu__vis:true,
+                        Button_Menu__dis:false,
+                        Button_Menu__cap:"",
+                        Button_Menu__typ:"text",
+                        Panel_Header__lef:"0px",
+                        Panel_Header__top:"0px",
+                        Panel_Header__wid:"350px",
+                        Panel_Header__hei:"40px",
+                        Panel_Header__vis:true,
+                        Panel_Header__dis:false,
+                        Panel_Header__col:"RGB(36,197,22,1.0)",
+                        Image_bottom0__lef:"17px",
+                        Image_bottom0__top:"14px",
+                        Image_bottom0__wid:"24px",
+                        Image_bottom0__hei:"24px",
+                        Image_bottom0__vis:true,
+                        Image_bottom0__dis:false,
+                        Image_bottom0__src:"/media/images/app0/bottom0.jpg",
+                        Image_bottom1__lef:"91px",
+                        Image_bottom1__top:"14px",
+                        Image_bottom1__wid:"24px",
+                        Image_bottom1__hei:"24px",
+                        Image_bottom1__vis:true,
+                        Image_bottom1__dis:false,
+                        Image_bottom1__src:"/media/images/app0/bottom1.jpg",
+                        Image_bottom2__lef:"159px",
+                        Image_bottom2__top:"1px",
+                        Image_bottom2__wid:"40px",
+                        Image_bottom2__hei:"50px",
+                        Image_bottom2__vis:true,
+                        Image_bottom2__dis:false,
+                        Image_bottom2__src:"/media/images/app0/bottom2.jpg",
+                        Image_bottom3__lef:"244px",
+                        Image_bottom3__top:"14px",
+                        Image_bottom3__wid:"24px",
+                        Image_bottom3__hei:"24px",
+                        Image_bottom3__vis:true,
+                        Image_bottom3__dis:false,
+                        Image_bottom3__src:"/media/images/app0/bottom3.jpg",
+                        Image_bottom4__lef:"311px",
+                        Image_bottom4__top:"14px",
+                        Image_bottom4__wid:"24px",
+                        Image_bottom4__hei:"24px",
+                        Image_bottom4__vis:true,
+                        Image_bottom4__dis:false,
+                        Image_bottom4__src:"/media/images/app0/bottom4.jpg",
+                        Panel_FooterTopLine__lef:"0px",
+                        Panel_FooterTopLine__top:"0px",
+                        Panel_FooterTopLine__wid:"360px",
+                        Panel_FooterTopLine__hei:"1px",
+                        Panel_FooterTopLine__vis:true,
+                        Panel_FooterTopLine__dis:false,
+                        Panel_FooterTopLine__col:"RGB(240,240,240,1.0)",
+                        Panel1__lef:"0px",
+                        Panel1__top:"49px",
+                        Panel1__wid:"360px",
+                        Panel1__hei:"1px",
+                        Panel1__vis:true,
+                        Panel1__dis:false,
+                        Panel1__col:"RGB(0,0,128,1.0)",
+                        Panel_Footer__lef:"0px",
+                        Panel_Footer__top:"581px",
+                        Panel_Footer__wid:"360px",
+                        Panel_Footer__hei:"50px",
+                        Panel_Footer__vis:true,
+                        Panel_Footer__dis:false,
+                        Panel_Footer__col:"RGB(255,255,255,1.0)",
+                        Panel_Content__lef:"0px",
+                        Panel_Content__top:"0px",
+                        Panel_Content__wid:"350px",
+                        Panel_Content__hei:"1200px",
+                        Panel_Content__vis:true,
+                        Panel_Content__dis:false,
+                        Panel_Content__col:"RGB(255,255,255,1.0)",
+                        ScrollBox_Content__lef:"0px",
+                        ScrollBox_Content__top:"40px",
+                        ScrollBox_Content__wid:"350px",
+                        ScrollBox_Content__hei:"541px",
+                        ScrollBox_Content__vis:true,
+                        ScrollBox_Content__dis:false,
+                        ScrollBox_Content__typ:"",
+                        ScrollBox_Content__ost:0,
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -162,16 +197,24 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:4327532,
-					    shuntflag:9906
+					    clientid:2885552,
+					    shuntflag:7687
                     }
                 },
                 mounted() {
                     let me=this;
-                    let Form1_1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":4327532}',{headers:{shuntflag:9906}})
+                    window.addEventListener(
+                        "onorientationchange" in window ? "orientationchange" : "resize",
+                        function() {
+                            axios.get('{"m":"event","i":2885552,"c":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:7687}})
+                            .then(resp =>{me.procResp(resp.data)});
+                        },
+                        false
+                    );
+                    let Form1_2hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":2885552}',{headers:{shuntflag:7687}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_2hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -186,7 +229,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":4327532,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":2885552,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -199,7 +242,7 @@
                         let config = {headers: {'Content-Type': 'multipart/form-data'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":4327532,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":2885552,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -215,12 +258,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:9906}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:7687}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":4327532,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:9906}})
+                        axios.get('{"m":"interaction","i":2885552,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:7687}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },
