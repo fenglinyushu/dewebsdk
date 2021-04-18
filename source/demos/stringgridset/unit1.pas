@@ -25,18 +25,19 @@ type
     Panel_All: TPanel;
     Panel_StringGrid: TPanel;
     StringGrid1: TStringGrid;
-    Edit_JS: TEdit;
-    Button1: TButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
+    Button6: TButton;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
   public
 
@@ -56,7 +57,7 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-     dwRunJS(Edit_JS.Text,self);
+     StringGrid1.ColWidths[1] := StringGrid1.ColWidths[1] + 5;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -79,6 +80,15 @@ begin
      dwSGSetCol(StringGrid1,3,clGray,clBlue);
      //dwSGSetCol(StringGrid1,0,clGray,clBlue);
 
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+begin
+     if StringGrid1.ColWidths[2] < 0 then begin
+          StringGrid1.ColWidths[2] := 120;
+     end else begin
+          StringGrid1.ColWidths[2] := -1;
+     end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -151,10 +161,10 @@ begin
           Cells[4,9]   := '综合演艺管理中心';
           //
           ColWidths[0]   := 100;
-          ColWidths[1]   := 220;
-          ColWidths[2]   := 220;
-          ColWidths[3]   := 220;
-          ColWidths[4]   := 240;
+          ColWidths[1]   := 120;
+          ColWidths[2]   := 120;
+          ColWidths[3]   := 120;
+          ColWidths[4]   := 140;
      end;
 
 end;

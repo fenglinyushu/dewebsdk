@@ -276,11 +276,13 @@ begin
                          for iItem := 0 to ColCount-1 do begin
                               joRes.Add('        <el-table-column'
                                         +dwIIF(iItem<FixedCols,' fixed="left"','')
+                                        +' v-if="'+dwPrefix(Actrl)+Name+'__clv'+IntToStr(iItem)+'"'
                                         +' show-overflow-tooltip'
                                         +' prop="d'+IntToStr(iItem+1)+'"'
                                         +_GetColAlign(Cells[iItem,0])
                                         +' :label="'+dwPrefix(Actrl)+Name+'__col'+IntToStr(iItem)+'"'
-                                        +' width="'+IntToStr(ColWidths[iItem])+'"></el-table-column>');
+                                        +' :width="'+dwPrefix(Actrl)+Name+'__cws'+IntToStr(iItem)+'"'
+                                        +'></el-table-column>');
                          end;
                     end;
                end;
@@ -374,22 +376,49 @@ begin
                     for iCol := 0 to ColCount-1 do begin
                          joRes.Add(dwPrefix(Actrl)+Name+'__col'+IntToStr(iCol)+':"'+_GetColCaption(Cells[iCol,0])+'",');
                     end;
+                    //列宽
+                    for iCol := 0 to ColCount-1 do begin
+                         joRes.Add(dwPrefix(Actrl)+Name+'__cws'+IntToStr(iCol)+':"'+IntToStr(ColWidths[iCol])+'",');
+                    end;
+                    //列显隐
+                    for iCol := 0 to ColCount-1 do begin
+                         joRes.Add(dwPrefix(Actrl)+Name+'__clv'+IntToStr(iCol)+':true,');
+                    end;
 
 
                     //内容
                     sCode     := dwPrefix(Actrl)+Name+'__ces:[';
                     for iRow := 1 to RowCount-1 do begin
-                         sCode     := sCode + '{"d0":'''+IntToStr(iRow)+''',';
+                         sCode     := sCode + '{d0:'''+IntToStr(iRow)+''',';
                          for iCol := 0 to ColCount-1 do begin
-                              sCode     := sCode + '"d'+IntToStr(iCol+1)+'":'''+Cells[iCol,iRow]+''',';
+                              sCode     := sCode + 'd'+IntToStr(iCol+1)+':'''+Cells[iCol,iRow]+''',';
                          end;
                          Delete(sCode,Length(sCode),1);
                          sCode     := sCode + '},';
                     end;
-                    Delete(sCode,Length(sCode),1);
+                    if RowCount>1 then begin
+                         Delete(sCode,Length(sCode),1);
+                    end;
                     sCode     := sCode + '],';
                     joRes.Add(sCode);
-                    //joRes.Add('currentRow: 1,');
+(*
+                    joRes.Add(dwPrefix(Actrl)+Name+'__ces:[{');
+                    for iRow := 1 to RowCount-1 do begin
+                         joRes.Add('d0: '''+IntToStr(iRow)+''',');
+                         for iCol := 0 to ColCount-1 do begin
+                              if iCol < ColCount-1 then begin
+                                   joRes.Add('d'+IntToStr(iCol+1)+': '''+Cells[iCol,iRow]+''',');
+                              end else begin
+                                   joRes.Add('d'+IntToStr(iCol+1)+': '''+Cells[iCol,iRow]+'''');
+                              end;
+                         end;
+                         if iRow<RowCount-1 then begin
+                              joRes.Add('},{');
+                         end else begin
+                              joRes.Add('}],');
+                         end;
+                    end;
+*)
                end;
                //
                Result    := (joRes);
@@ -431,6 +460,14 @@ begin
                     //列标题
                     for iCol := 0 to ColCount-1 do begin
                          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__col'+IntToStr(iCol)+'="'+Cells[iCol,0]+'";');
+                    end;
+                    //列宽
+                    for iCol := 0 to ColCount-1 do begin
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cws'+IntToStr(iCol)+'="'+IntToStr(ColWidths[iCol])+'";');
+                    end;
+                    //列显隐
+                    for iCol := 0 to ColCount-1 do begin
+                         joRes.Add('this.'+dwPrefix(Actrl)+Name+'__clv'+IntToStr(iCol)+'='+dwIIF(ColWidths[iCol]>0,'true','false')+';');
                     end;
 
 

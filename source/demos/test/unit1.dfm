@@ -1,14 +1,14 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Hint = '{"dwstring":"border stripe"}'
   VertScrollBar.Visible = False
   BorderStyle = bsNone
   BorderWidth = 5
   Caption = 'DeWeb'
-  ClientHeight = 790
-  ClientWidth = 590
-  Color = clWhite
+  ClientHeight = 213
+  ClientWidth = 227
+  Color = clMedGray
+  TransparentColor = True
   TransparentColorValue = 16448250
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -21,21 +21,16 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 20
   object SG1: TStringGrid
-    Left = 16
+    Left = 24
     Top = 32
-    Width = 433
-    Height = 175
+    Width = 169
+    Height = 137
+    Hint = '{"dwstyle":"border stripe"}'
+    ColCount = 2
     DefaultRowHeight = 35
+    FixedCols = 0
+    RowCount = 3
+    FixedRows = 0
     TabOrder = 0
-  end
-  object SG2: TStringGrid
-    Left = 16
-    Top = 264
-    Width = 433
-    Height = 330
-    Hint = '{"dwstyle":"border stripe show-summary"}'
-    DefaultRowHeight = 30
-    RowCount = 10
-    TabOrder = 1
   end
 end

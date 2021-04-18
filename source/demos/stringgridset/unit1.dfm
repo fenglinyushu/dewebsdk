@@ -278,22 +278,6 @@ object Form1: TForm1
         Layout = tlCenter
         ExplicitHeight = 35
       end
-      object Edit_JS: TEdit
-        Left = 336
-        Top = 16
-        Width = 513
-        Height = 28
-        TabOrder = 0
-      end
-      object Button1: TButton
-        Left = 855
-        Top = 16
-        Width = 58
-        Height = 28
-        Caption = 'RunJS'
-        TabOrder = 1
-        OnClick = Button1Click
-      end
     end
     object Panel_StringGrid: TPanel
       Left = 0
@@ -311,11 +295,7 @@ object Form1: TForm1
         Top = 1
         Width = 792
         Height = 481
-        Hint = 
-          '{"dwstyle":"stripe border","background":"#f5f7fA","columns":[{"c' +
-          'aption":"'#26085#26399'","align":"right"},{"caption":"'#22995#21517'","align":"center"},' +
-          '{"caption":"'#30465#20221'","align":"left"},{"caption":"'#22478#24066'/'#21306'","align":"left"' +
-          '}]}'
+        Hint = '{"dwstyle":"stripe border"}'
         DefaultColWidth = 200
         DefaultRowHeight = 35
         FixedCols = 0
@@ -357,6 +337,24 @@ object Form1: TForm1
         Caption = #35774#32622#21015
         TabOrder = 4
         OnClick = Button5Click
+      end
+      object Button6: TButton
+        Left = 426
+        Top = 504
+        Width = 75
+        Height = 35
+        Caption = #26174#38544#21015
+        TabOrder = 5
+        OnClick = Button6Click
+      end
+      object Button1: TButton
+        Left = 507
+        Top = 504
+        Width = 75
+        Height = 35
+        Caption = #35774#32622#21015#23485
+        TabOrder = 6
+        OnClick = Button1Click
       end
     end
   end
