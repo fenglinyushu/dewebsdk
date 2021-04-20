@@ -144,20 +144,30 @@ begin
 
      with TMainMenu(ACtrl) do begin
           sCode     := '<el-menu'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +' :default-active="'+dwPrefix(Actrl)+Name+'__act"'     //默认选中状态
                     +' class="el-menu-demo"'
                     +dwIIF(ParentBiDiMode=False,'',' mode="horizontal"')
-                    //+' background-color="#545c64"'
+
+                    //+' background-color="#545c64"'  背景色
                     +dwGetHintValue(joHint,'background-color','background-color',' background-color="#545c64"')
-                    //+' text-color="#fff"'
+
+                    //+' text-color="#fff"'           //文本色
                     +dwGetHintValue(joHint,'text-color','text-color',' text-color="#fff"')
-                    //+' active-text-color="#ffd04b"'
+
+                    //+' active-text-color="#ffd04b"' //激活状态文本色
                     +dwGetHintValue(joHint,'active-text-color','active-text-color',' active-text-color="#ffd04b"')
+
+                    //:collapse="isCollapse"           //折叠
+                    +' :collapse="'+dwPrefix(Actrl)+Name+'__cps"'
+                    +' :collapse-transition="false"'
+
                     //+dwVisible(ACtrl)
                     //+dwDisable(ACtrl)
                     +dwLTWHComp(ACtrl)
                     +dwIIF(ParentBiDiMode=False,'line-height:30px;','line-height:'+IntToStr((Tag mod 10000)-22)+'px;')
                     +'"' //style 封闭
+
                     +Format(_DWEVENT,['select',Name,'val','onclick',TForm(Owner).Handle])
                     +'>';
           //添加
@@ -168,14 +178,16 @@ begin
 
           for iItem := 0 to Items.Count-1 do begin
                oItem     := Items[iItem];
-               if oItem.Count = 0 then begin
+               if oItem.Count = 0 then begin //无子菜单
+
+                    //根据有无图标判断
                     if (oItem.ImageIndex>0)and(oItem.ImageIndex<=High(dwIcons)) then begin
-                         joRes.Add('<el-menu-item index="'+IntToStr(iItem)+'">'
+                         joRes.Add('<el-menu-item index="'+IntToStr(iItem)+'" style="height:50px;line-height:35px">'
                               +'<i class="'+dwIcons[oItem.ImageIndex]+'"></i>'
                               +'<span slot="title">'+oItem.caption+'</span>'
                               +'</el-menu-item>');
                     end else begin
-                         joRes.Add('<el-menu-item index="'+IntToStr(iItem)+'">'+oItem.Caption+'</el-menu-item>');
+                         joRes.Add('<el-menu-item index="'+IntToStr(iItem)+'" style="height:50px;line-height:35px">'+oItem.Caption+'</el-menu-item>');
                     end;
 
                end else begin
@@ -223,6 +235,10 @@ begin
      joRes    := _Json('[]');
      //
      with TMainMenu(ACtrl) do begin
+
+          //折叠状态
+          joRes.Add(dwPrefix(Actrl)+Name+'__cps:'+dwIIF(AutoMerge,'true','false')+',');
+
           if Tag < 10000 then begin
                //如果没有设置当前菜单的LTWH,则为默认值
                joRes.Add(dwPrefix(Actrl)+Name+'__lef:"0px",');
@@ -236,7 +252,7 @@ begin
                joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Tag mod 10000)+'px",');
           end;
 
-          //当前菜单位置(保存在Items[0].Hint)
+          //当前激活菜单位置(保存在Items[0].Hint)
           if Items.Count>0 then begin
                sAction   := Items[1].Hint;// dwGetProp(TControl(Items[0]),'actionindex');
                if sAction<>'' then begin
@@ -264,7 +280,11 @@ begin
           joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(DesignInfo mod 10000)+'px";');
           joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Tag div 10000)+'px";');
           joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Tag mod 10000)+'px";');
+
+          //折叠状态
+          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cps='+dwIIF(AutoMerge,'true','false')+';');
      end;
+
      //
      Result    := (joRes);
 end;

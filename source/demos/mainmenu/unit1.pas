@@ -26,7 +26,19 @@ type
     N2: TMenuItem;
     N4: TMenuItem;
     N1: TMenuItem;
+    Button1: TButton;
+    N3: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    Button2: TButton;
+    Button3: TButton;
     procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,6 +52,31 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+     MainMenu1.AutoMerge := not MainMenu1.AutoMerge;
+     if MainMenu1.AutoMerge then begin
+          dwSetCompLTWH(MainMenu1,0,60,60,500);
+     end else begin
+          dwSetCompLTWH(MainMenu1,0,60,150,500);
+     end;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+     if MainMenu1.AutoMerge then begin
+          dwSetCompLTWH(MainMenu1,0,60,60,500);
+     end else begin
+          dwSetCompLTWH(MainMenu1,0,60,150,500);
+     end;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+     dwSetCompLTWH(MainMenu1,4000,60,150,500);
+
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
