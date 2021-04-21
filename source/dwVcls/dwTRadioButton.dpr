@@ -82,6 +82,7 @@ begin
      joHint    := dwGetHintJson(TControl(ACtrl));
      with TRadioButton(ACtrl) do begin
           sCode     := '<el-radio'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +' label="1"'       //Ñ¡ÖÐÖµ
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))

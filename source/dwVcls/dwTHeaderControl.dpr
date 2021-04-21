@@ -110,6 +110,7 @@ begin
      with THeaderControl(ACtrl) do begin
           //Íâ¿ò
           sCode     := '<div'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'

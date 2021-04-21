@@ -66,6 +66,7 @@ begin
 
      with TCheckBox(ACtrl) do begin
           sCode     := '<el-checkbox'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +' v-model="'+dwPrefix(Actrl)+Name+'__chk"'

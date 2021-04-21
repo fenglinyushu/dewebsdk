@@ -193,6 +193,7 @@ begin
      with TLabeledEdit(ACtrl) do begin
           //ÃÌº”±Í«©
           sCode     := '<div '
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +' v-html="'+dwPrefix(Actrl)+Name+'__lbc"'
 
                     //:style

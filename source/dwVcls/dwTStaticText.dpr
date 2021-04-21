@@ -96,6 +96,7 @@ begin
 
      with TStaticText(ACtrl) do begin
           sCode     := '<el-link'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +' :underline="false"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))

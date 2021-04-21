@@ -37,6 +37,7 @@ type
     procedure BitBtn1EndDock(Sender, Target: TObject; X, Y: Integer);
     procedure Button4Click(Sender: TObject);
     procedure BitBtn3EndDock(Sender, Target: TObject; X, Y: Integer);
+    procedure FormStartDock(Sender: TObject; var DragObject: TDragDockObject);
   private
     { Private declarations }
   public
@@ -45,14 +46,23 @@ type
 
 var
   Form1: TForm1;
+     gsLast     : string;
 
 implementation
 
 {$R *.dfm}
 
 procedure TForm1.BitBtn1EndDock(Sender, Target: TObject; X, Y: Integer);
+var
+     sLast     : string;
 begin
      BitBtn1.Caption     := 'Uploaded!';
+     sLast     := dwGetProp(self,'__upload');
+     //sLast     := ExtractFileName(sLast);
+     //sLast     := StringReplace(sLast,'\','',[rfReplaceAll]);
+     //sLast     := StringReplace(sLast,'.','',[rfReplaceAll]);
+     dwShowMessage(sLast,self);
+     //dwShowMessage(dwGetProp(self,'__upload'),self);
 end;
 
 procedure TForm1.BitBtn3EndDock(Sender, Target: TObject; X, Y: Integer);
@@ -92,6 +102,15 @@ begin
           Width     := X;
      end;
      //Height    := Y;
+end;
+
+procedure TForm1.FormStartDock(Sender: TObject; var DragObject: TDragDockObject);
+var
+     sLast     : string;
+begin
+     gsLast     := dwGetProp(self,'__upload');
+     //
+     //dwShowMessage(sLast,self);
 end;
 
 end.

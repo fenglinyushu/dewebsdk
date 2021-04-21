@@ -76,6 +76,7 @@ begin
 
           //
           sCode     := '<div'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +dwLTWH(TControl(ACtrl))

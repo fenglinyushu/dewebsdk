@@ -146,6 +146,7 @@ begin
 
           //
           sCode     := '<el-button'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +sSize
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))

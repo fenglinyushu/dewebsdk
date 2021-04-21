@@ -100,6 +100,7 @@ begin
      with TProgressBar(ACtrl) do begin
           //Íâ¿ò
           sCode     := '<div'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
                     +' style="position:absolute;'
                     +'"' //style ·â±Õ

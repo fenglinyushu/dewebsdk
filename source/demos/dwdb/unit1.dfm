@@ -286,56 +286,62 @@ object Form1: TForm1
       object Edit_Keyword: TEdit
         AlignWithMargins = True
         Left = 813
-        Top = 23
+        Top = 25
         Width = 121
-        Height = 38
+        Height = 33
         Hint = '{"placeholder":"'#35831#36755#20837#20851#38190#23383'","borderradius":"3px 0 0 3px"}'
-        Margins.Top = 20
+        Margins.Top = 22
         Margins.Right = 0
-        Margins.Bottom = 16
+        Margins.Bottom = 19
         Align = alRight
         AutoSize = False
         TabOrder = 0
+        ExplicitTop = 26
+        ExplicitHeight = 38
       end
       object Button_Search: TButton
         AlignWithMargins = True
         Left = 934
-        Top = 23
+        Top = 25
         Width = 40
-        Height = 40
+        Height = 35
         Hint = 
           '{"type":"primary","icon":"el-icon-search","borderradius":"0 3px ' +
           '3px 0"}'
         Margins.Left = 0
-        Margins.Top = 20
+        Margins.Top = 22
         Margins.Right = 20
-        Margins.Bottom = 14
+        Margins.Bottom = 17
         Align = alRight
         TabOrder = 1
         OnClick = Button_SearchClick
+        ExplicitTop = 23
+        ExplicitHeight = 40
       end
       object Button_Reset: TButton
         AlignWithMargins = True
         Left = 505
-        Top = 23
+        Top = 25
         Width = 100
-        Height = 40
+        Height = 35
         Hint = '{"type":"warning"}'
         Margins.Left = 0
-        Margins.Top = 20
+        Margins.Top = 22
         Margins.Right = 20
-        Margins.Bottom = 14
+        Margins.Bottom = 17
         Align = alLeft
         Caption = #37325#32622#25968#25454
         TabOrder = 2
         OnClick = Button_ResetClick
+        ExplicitTop = 23
+        ExplicitHeight = 40
       end
     end
     object Panel_StringGrid: TPanel
       Left = 0
       Top = 86
       Width = 1000
-      Height = 481
+      Height = 476
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
@@ -348,6 +354,7 @@ object Form1: TForm1
         Top = 1
         Width = 998
         Height = 351
+        Hint = '{"dwstyle":"border stripe"}'
         Align = alTop
         DefaultColWidth = 100
         DefaultRowHeight = 35
@@ -360,7 +367,7 @@ object Form1: TForm1
         Left = 4
         Top = 417
         Width = 992
-        Height = 60
+        Height = 55
         Margins.Top = 10
         Align = alTop
         BevelOuter = bvNone
@@ -373,7 +380,7 @@ object Form1: TForm1
           Left = 814
           Top = 10
           Width = 60
-          Height = 40
+          Height = 35
           Hint = '{"borderradius":"0 3px 3px 0","type":"primary"}'
           Margins.Left = 1
           Margins.Top = 8
@@ -382,13 +389,14 @@ object Form1: TForm1
           Caption = #19979#19968#39029
           TabOrder = 0
           OnClick = Button_NextPageClick
+          ExplicitHeight = 40
         end
         object Button_PrevPage: TButton
           AlignWithMargins = True
           Left = 753
           Top = 10
           Width = 60
-          Height = 40
+          Height = 35
           Hint = '{"borderradius":"3px 0 0 3px","type":"primary"}'
           Margins.Top = 8
           Margins.Right = 0
@@ -397,13 +405,14 @@ object Form1: TForm1
           Caption = #19978#19968#39029
           TabOrder = 1
           OnClick = Button_PrevPageClick
+          ExplicitHeight = 40
         end
         object Edit_Page: TEdit
           AlignWithMargins = True
           Left = 880
           Top = 10
           Width = 50
-          Height = 38
+          Height = 33
           Hint = '{"borderradius":"3px 0 0 3px"}'
           Margins.Top = 8
           Margins.Right = 0
@@ -413,13 +422,14 @@ object Form1: TForm1
           AutoSize = False
           TabOrder = 2
           Text = '1'
+          ExplicitHeight = 38
         end
         object Button_Go: TButton
           AlignWithMargins = True
           Left = 930
           Top = 10
           Width = 40
-          Height = 40
+          Height = 35
           Hint = '{"type":"primary","borderradius":"0 3px 3px 0"}'
           Margins.Left = 0
           Margins.Top = 8
@@ -429,13 +439,14 @@ object Form1: TForm1
           Caption = 'GO'
           TabOrder = 3
           OnClick = Button_GoClick
+          ExplicitHeight = 40
         end
         object Button_Append: TButton
           AlignWithMargins = True
           Left = 22
           Top = 10
           Width = 100
-          Height = 40
+          Height = 35
           Hint = '{"borderradius":"3px 0 0 3px","type":"primary"}'
           Margins.Left = 20
           Margins.Top = 8
@@ -445,13 +456,14 @@ object Form1: TForm1
           Caption = 'Append'
           TabOrder = 4
           OnClick = Button_AppendClick
+          ExplicitHeight = 40
         end
         object Button_Delete: TButton
           AlignWithMargins = True
           Left = 123
           Top = 10
           Width = 100
-          Height = 40
+          Height = 35
           Hint = '{"borderradius":"0","type":"primary"}'
           Margins.Left = 1
           Margins.Top = 8
@@ -461,13 +473,14 @@ object Form1: TForm1
           Caption = 'Delete'
           TabOrder = 5
           OnClick = Button_DeleteClick
+          ExplicitHeight = 40
         end
         object Button_Edit: TButton
           AlignWithMargins = True
           Left = 224
           Top = 10
           Width = 100
-          Height = 40
+          Height = 35
           Hint = '{"borderradius":"0 3px 3px 0","type":"primary"}'
           Margins.Left = 0
           Margins.Top = 8
@@ -476,6 +489,7 @@ object Form1: TForm1
           Caption = 'Save Edit'
           TabOrder = 6
           OnClick = Button_EditClick
+          ExplicitHeight = 40
         end
       end
       object Panel_Info: TPanel

@@ -82,6 +82,7 @@ begin
 *)
      with TToggleSwitch(ACtrl) do begin
           sCode     := '<el-switch'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +' v-model="'+dwPrefix(Actrl)+Name+'__sta"'

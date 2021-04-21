@@ -139,6 +139,7 @@ begin
      with TSpeedButton(ACtrl) do begin
           //Ìí¼ÓÍâ¿ò
           joRes.Add('<div'
+               +' id="'+dwPrefix(Actrl)+Name+'"'
                +dwVisible(TControl(ACtrl))
                +dwDisable(TControl(ACtrl))
                +dwLTWH(TControl(ACtrl))

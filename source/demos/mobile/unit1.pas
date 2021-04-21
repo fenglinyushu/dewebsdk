@@ -43,6 +43,7 @@ type
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
+    procedure Panel_dm2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,6 +107,11 @@ begin
 
      //
      ScrollBox_Content.Height := Panel_Footer.Top - ScrollBox_Content.Top;
+end;
+
+procedure TForm1.Panel_dm2Click(Sender: TObject);
+begin
+     dwShowMessage('OnClick',self);
 end;
 
 end.

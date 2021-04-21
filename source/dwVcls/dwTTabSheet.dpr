@@ -65,6 +65,7 @@ begin
 
                //
                joRes.Add('        <el-timeline-item '
+                         +' id="'+dwPrefix(Actrl)+Name+'"'
                          +dwIIF(TTabSheet(Actrl).ImageIndex>0,'icon="'+dwIcons[Max(1,TTabSheet(Actrl).ImageIndex)]+'"','')
                          //+dwGetHintValue(joHint,'type','type','')
                          +dwGetHintValue(joHint,'color','color','')
@@ -107,6 +108,7 @@ begin
 
                with TTabSheet(ACtrl) do begin
                     sCode     := '<el-main'
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
                               +' v-if="'+dwPrefix(Actrl)+PageControl.Name+'__apg=='''+dwPrefix(Actrl)+Name+'''"'
                               +dwDisable(TControl(ACtrl))
                               +dwGetHintValue(joHint,'icon','icon','')

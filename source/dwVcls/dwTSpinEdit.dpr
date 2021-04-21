@@ -59,6 +59,7 @@ begin
      with TSpinEdit(ACtrl) do begin
           if ( maxvalue =  0 ) and  ( maxvalue =  0 ) then begin
                joRes.Add('<el-input-number'
+                         +' id="'+dwPrefix(Actrl)+Name+'"'
                          +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                          +dwIIF(Ctl3D,'',' controls-position="right"')
                          +dwVisible(TControl(ACtrl))
@@ -69,6 +70,7 @@ begin
                          +'>');
           end else begin
                joRes.Add('<el-input-number'
+                         +' id="'+dwPrefix(Actrl)+Name+'"'
                          +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                          +' :min="'+dwPrefix(Actrl)+Name+'__min" :max="'+dwPrefix(Actrl)+Name+'__max"'
                          +dwIIF(Ctl3D,'',' controls-position="right"')

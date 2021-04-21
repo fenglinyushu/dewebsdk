@@ -205,6 +205,7 @@ begin
 
                with TLabel(ACtrl) do begin
                     sCode     := '<div '
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
                               +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
@@ -264,6 +265,7 @@ begin
 
                with TLabel(ACtrl) do begin
                     sCode     := '<div '
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
                               +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))

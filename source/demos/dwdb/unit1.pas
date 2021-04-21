@@ -190,10 +190,10 @@ begin
      //
      Top  := 0;
      //
-     SG.Cells[0,0]   := '姓名[center]';
-     SG.Cells[1,0]   := '性别[center]';
-     SG.Cells[2,0]   := '籍贯[center]';
-     SG.Cells[3,0]   := '年龄[right]';
+     SG.Cells[0,0]   := '姓名[*center*]';
+     SG.Cells[1,0]   := '性别[*center*]';
+     SG.Cells[2,0]   := '籍贯[*center*]';
+     SG.Cells[3,0]   := '年龄[*right*]';
      SG.Cells[4,0]   := '地址';
      //
      SG.ColWidths[0]     := 100;

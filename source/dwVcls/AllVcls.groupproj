@@ -66,9 +66,6 @@
         <Projects Include="dwTRadioButton.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTScanZing.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="dwTScrollBox.dproj">
             <Dependencies/>
         </Projects>
@@ -299,15 +296,6 @@
     <Target Name="dwTRadioButton:Make">
         <MSBuild Projects="dwTRadioButton.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dwTScanZing">
-        <MSBuild Projects="dwTScanZing.dproj"/>
-    </Target>
-    <Target Name="dwTScanZing:Clean">
-        <MSBuild Projects="dwTScanZing.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTScanZing:Make">
-        <MSBuild Projects="dwTScanZing.dproj" Targets="Make"/>
-    </Target>
     <Target Name="dwTScrollBox">
         <MSBuild Projects="dwTScrollBox.dproj"/>
     </Target>
@@ -408,13 +396,13 @@
         <MSBuild Projects="dwTTreeView.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="dwTBevel;dwTBitBtn;dwTButton;dwTChart;dwTCheckBox;dwTComboBox;dwTDateTimePicker;dwTEdit;dwTGroupBox;dwTHeaderControl;dwTImage;dwTLabel;dwTLabeledEdit;dwTListBox;dwTMainMenu;dwTMediaPlayer;dwTMemo;dwTPageControl;dwTPanel;dwTProgressBar;dwTRadioButton;dwTScanZing;dwTScrollBox;dwTShape;dwTSpeedButton;dwTSpinEdit;dwTStaticText;dwTStringGrid;dwTTabSheet;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTreeView"/>
+        <CallTarget Targets="dwTBevel;dwTBitBtn;dwTButton;dwTChart;dwTCheckBox;dwTComboBox;dwTDateTimePicker;dwTEdit;dwTGroupBox;dwTHeaderControl;dwTImage;dwTLabel;dwTLabeledEdit;dwTListBox;dwTMainMenu;dwTMediaPlayer;dwTMemo;dwTPageControl;dwTPanel;dwTProgressBar;dwTRadioButton;dwTScrollBox;dwTShape;dwTSpeedButton;dwTSpinEdit;dwTStaticText;dwTStringGrid;dwTTabSheet;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTreeView"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="dwTBevel:Clean;dwTBitBtn:Clean;dwTButton:Clean;dwTChart:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTGroupBox:Clean;dwTHeaderControl:Clean;dwTImage:Clean;dwTLabel:Clean;dwTLabeledEdit:Clean;dwTListBox:Clean;dwTMainMenu:Clean;dwTMediaPlayer:Clean;dwTMemo:Clean;dwTPageControl:Clean;dwTPanel:Clean;dwTProgressBar:Clean;dwTRadioButton:Clean;dwTScanZing:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTStaticText:Clean;dwTStringGrid:Clean;dwTTabSheet:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTreeView:Clean"/>
+        <CallTarget Targets="dwTBevel:Clean;dwTBitBtn:Clean;dwTButton:Clean;dwTChart:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTGroupBox:Clean;dwTHeaderControl:Clean;dwTImage:Clean;dwTLabel:Clean;dwTLabeledEdit:Clean;dwTListBox:Clean;dwTMainMenu:Clean;dwTMediaPlayer:Clean;dwTMemo:Clean;dwTPageControl:Clean;dwTPanel:Clean;dwTProgressBar:Clean;dwTRadioButton:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTStaticText:Clean;dwTStringGrid:Clean;dwTTabSheet:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTreeView:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="dwTBevel:Make;dwTBitBtn:Make;dwTButton:Make;dwTChart:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTGroupBox:Make;dwTHeaderControl:Make;dwTImage:Make;dwTLabel:Make;dwTLabeledEdit:Make;dwTListBox:Make;dwTMainMenu:Make;dwTMediaPlayer:Make;dwTMemo:Make;dwTPageControl:Make;dwTPanel:Make;dwTProgressBar:Make;dwTRadioButton:Make;dwTScanZing:Make;dwTScrollBox:Make;dwTShape:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTStaticText:Make;dwTStringGrid:Make;dwTTabSheet:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTreeView:Make"/>
+        <CallTarget Targets="dwTBevel:Make;dwTBitBtn:Make;dwTButton:Make;dwTChart:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTGroupBox:Make;dwTHeaderControl:Make;dwTImage:Make;dwTLabel:Make;dwTLabeledEdit:Make;dwTListBox:Make;dwTMainMenu:Make;dwTMediaPlayer:Make;dwTMemo:Make;dwTPageControl:Make;dwTPanel:Make;dwTProgressBar:Make;dwTRadioButton:Make;dwTScrollBox:Make;dwTShape:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTStaticText:Make;dwTStringGrid:Make;dwTTabSheet:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTreeView:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

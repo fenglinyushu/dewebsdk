@@ -177,6 +177,7 @@ begin
           end;
           //
           joRes.Add('<el-tree'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                     +dwDisable(TControl(ACtrl))                            //用于控制可用性Enabled(部分控件不支持)
                     +' :data="'+dwPrefix(Actrl)+Name+'__dat"'

@@ -22,18 +22,18 @@ uses
 function _GetColCaption(AText:String):String;
 begin
      Result    := AText;
-     Result    := StringReplace(Result,'[left]','',[]);
-     Result    := StringReplace(Result,'[center]','',[]);
-     Result    := StringReplace(Result,'[right]','',[]);
+     Result    := StringReplace(Result,'[*left*]','',[]);
+     Result    := StringReplace(Result,'[*center*]','',[]);
+     Result    := StringReplace(Result,'[*right*]','',[]);
 end;
 
 //从复合的标题（如：[center]籍贯） 得到标题
 function _GetColAlign(AText:String):String;
 begin
      Result    := '';
-     if Pos('[center]',AText)>0 then begin
+     if Pos('[*center*]',AText)>0 then begin
           Result    := ' align="center"';
-     end else if Pos('[right]',AText)>0 then begin
+     end else if Pos('[*right*]',AText)>0 then begin
           Result    := ' align="right"';
      end;
 end;
@@ -275,11 +275,11 @@ begin
                          //===以下为正常表头的情况
                          for iItem := 0 to ColCount-1 do begin
                               joRes.Add('        <el-table-column'
-                                        +dwIIF(iItem<FixedCols,' fixed="left"','')
+                                        +dwIIF(iItem<FixedCols,' fixed="left"','')   //固定列
                                         +' v-if="'+dwPrefix(Actrl)+Name+'__clv'+IntToStr(iItem)+'"'
                                         +' show-overflow-tooltip'
                                         +' prop="d'+IntToStr(iItem+1)+'"'
-                                        +_GetColAlign(Cells[iItem,0])
+                                        +_GetColAlign(Cells[iItem,0])      //根据文本,确定对齐方式
                                         +' :label="'+dwPrefix(Actrl)+Name+'__col'+IntToStr(iItem)+'"'
                                         +' :width="'+dwPrefix(Actrl)+Name+'__cws'+IntToStr(iItem)+'"'
                                         +'></el-table-column>');

@@ -34,7 +34,6 @@ object Form1: TForm1
     Color = 1492260
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 350
     object Label_Header: TLabel
       AlignWithMargins = True
       Left = 49
@@ -84,7 +83,6 @@ object Form1: TForm1
       Margins.Bottom = 4
       Align = alRight
       TabOrder = 1
-      ExplicitLeft = 310
     end
   end
   object Panel_Footer: TPanel
@@ -170,7 +168,6 @@ object Form1: TForm1
     Align = alTop
     BorderStyle = bsNone
     TabOrder = 2
-    ExplicitWidth = 350
     object Panel_Content: TPanel
       Left = 0
       Top = 0
@@ -181,7 +178,6 @@ object Form1: TForm1
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 350
       object Panel_dm2: TPanel
         AlignWithMargins = True
         Left = 5
@@ -198,7 +194,7 @@ object Form1: TForm1
         Color = 16775927
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 333
+        OnClick = Panel_dm2Click
         object Image_DM2: TImage
           AlignWithMargins = True
           Left = 10
@@ -284,8 +280,6 @@ object Form1: TForm1
           ParentBackground = False
           ParentColor = True
           TabOrder = 0
-          ExplicitLeft = 103
-          ExplicitWidth = 249
           DesignSize = (
             235
             80)
@@ -419,7 +413,6 @@ object Form1: TForm1
             Font.Style = []
             ParentFont = False
             TabOrder = 4
-            ExplicitLeft = 182
           end
         end
       end

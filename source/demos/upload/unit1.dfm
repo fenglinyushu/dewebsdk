@@ -15,6 +15,7 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   OnMouseUp = FormMouseUp
+  OnStartDock = FormStartDock
   DesignSize = (
     360
     556)
@@ -348,9 +349,6 @@ object Form1: TForm1
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 6
-      ExplicitTop = 59
-      ExplicitWidth = 348
     end
   end
 end

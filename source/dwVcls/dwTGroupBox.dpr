@@ -95,7 +95,7 @@ begin
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     //+dwGetHintValue(joHint,'type','type',' type="default"')
-                    //+dwGetHintValue(joHint,'icon','icon','')         
+                    //+dwGetHintValue(joHint,'icon','icon','')
                     +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
                     +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';overflow:hidden;'
                     +'"' //style ·â±Õ
@@ -108,6 +108,7 @@ begin
 
           //ÄÚ¿ò
           sCode     := '    <el-main'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     //+dwGetHintValue(joHint,'type','type',' type="default"')

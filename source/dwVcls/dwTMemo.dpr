@@ -101,6 +101,7 @@ begin
           sScroll   := '';
 
           sCode     := '<el-input type="textarea"'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +' v-model="'+dwPrefix(Actrl)+Name+'__txt"'

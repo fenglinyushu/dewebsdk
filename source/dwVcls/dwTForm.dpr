@@ -112,6 +112,7 @@ begin
 
                //
                sCode     := '<el-form'
+                         +' id="'+Name+'"'
                          +' v-if="'+Name+'__vis"'
                          //+dwGetHintValue(joHint,'type','type',' type="default"')
                          //+dwGetHintValue(joHint,'icon','icon','')

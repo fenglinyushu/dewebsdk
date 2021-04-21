@@ -68,6 +68,7 @@ begin
      with TListBox(ACtrl) do begin
           //
           joRes.Add('<select class="dwselect" size=2'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwIIF(MultiSelect,' multiple','')
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))

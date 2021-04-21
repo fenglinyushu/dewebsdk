@@ -115,6 +115,7 @@ begin
 
           //
           sCode     := '<div'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                     +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                     +'"' // 封闭style

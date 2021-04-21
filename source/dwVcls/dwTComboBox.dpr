@@ -79,6 +79,7 @@ begin
      with TComboBox(ACtrl) do begin
           //
           joRes.Add('<el-select'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +' v-model="'+dwPrefix(Actrl)+Name+'__txt"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))

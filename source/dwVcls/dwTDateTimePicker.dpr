@@ -101,6 +101,7 @@ begin
           if kind =  dtkDate then begin
                //日期  <el-date-picker v-model="value1"  type="date" placeholder="选择日期"></el-date-picker>
                sCode     := '<el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd"'
+                         +' id="'+dwPrefix(Actrl)+Name+'"'
                          +dwVisible(TControl(ACtrl))
                          +dwDisable(TControl(ACtrl))
                          +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
@@ -110,6 +111,7 @@ begin
                          +'>';
           end else begin
                sCode     := '<el-time-select :picker-options="{start: ''00:00'', step: ''00:01'', end: ''23:59''}" format="HH:mm" value-format="HH:mm"'
+                         +' id="'+dwPrefix(Actrl)+Name+'"'
                          +dwVisible(TControl(ACtrl))
                          +dwDisable(TControl(ACtrl))
                          +' v-model="'+dwPrefix(Actrl)+Name+'__val"'

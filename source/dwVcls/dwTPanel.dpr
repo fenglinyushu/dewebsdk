@@ -141,6 +141,7 @@ begin
 
                //
                sCode     := '<el-main'
+                         +' id="'+dwPrefix(Actrl)+Name+'"'
                          +dwVisible(TControl(ACtrl))
                          +dwDisable(TControl(ACtrl))
                          //+dwGetHintValue(joHint,'type','type',' type="default"')

@@ -107,6 +107,7 @@ begin
 
      with TEdit(ACtrl) do begin
           sCode     := '<el-input'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
                     +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                     +dwDisable(TControl(ACtrl))                            //用于控制可用性Enabled(部分控件不支持)
                     +dwIIF(PasswordChar=#0,'',' show-password')            //是否为密码

@@ -118,6 +118,7 @@ begin
                with TPageControl(ACtrl) do begin
                     //Íâ¿ò
                     joRes.Add('<div class="block"'
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
                               +dwLTWH(TControl(ACtrl))
@@ -145,6 +146,7 @@ begin
                with TPageControl(ACtrl) do begin
                     //Íâ¿ò
                     joRes.Add('<el-tabs'
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
                               +' v-model="'+dwPrefix(Actrl)+Name+'__apg"'        //ActivePage
