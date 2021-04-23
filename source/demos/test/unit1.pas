@@ -13,8 +13,9 @@ uses
 
 type
   TForm1 = class(TForm)
-    SG1: TStringGrid;
-    procedure FormCreate(Sender: TObject);
+    Panel1: TPanel;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,15 +30,17 @@ implementation
 {$R *.dfm}
 
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TForm1.Button1Click(Sender: TObject);
+var
+     oButton   : TButton;
 begin
-     SG1.Cells[0,0] := '0';
-     SG1.Cells[1,0] := '1';
-     SG1.Cells[0,1] := 'A';
-     SG1.Cells[1,1] := 'B';
-     SG1.Cells[0,2] := 'AA';
-     SG1.Cells[1,2] := 'BB';
-
+     oButton   := TButton.Create(self);
+     oButton.Parent := Panel1;
+     oButton.Left   := 20;
+     oButton.Top    := 20;
+     oButton.Name   := 'Button_'+IntToStr(GetTickCount);
+     //
+     Self.ParentFont     := True;
 end;
 
 end.

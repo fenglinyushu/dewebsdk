@@ -114,8 +114,34 @@ function  dwChangeChar(AText:String):String;
 function  dwShowModal(AForm,ASWForm:TForm):Integer;
 function  dwCloseForm(AForm,ASWForm:TForm):Integer;
 
+//计算手机可用高度
+function  dwGetMobileAvailHeight(AForm:TForm):Integer;
+
 
 implementation  //==============================================================
+
+//计算手机可用高度
+function  dwGetMobileAvailHeight(AForm:TForm):Integer;
+var
+     iX,iY     : Integer;
+     iTrueH    : Integer;
+     iInnerH   : Integer;
+     iTrueW    : Integer;
+     iInnerW   : Integer;
+begin
+     iX        := StrToIntDef(dwGetProp(AForm,'screenwidth'),360);
+     iY        := StrToIntDef(dwGetProp(AForm,'screenheight'),720);
+     //
+     iTrueW    := StrToIntDef(dwGetProp(AForm,'truewidth'),iX);
+     iTrueH    := StrToIntDef(dwGetProp(AForm,'trueheight'),iY);
+     iInnerW   := StrToIntDef(dwGetProp(AForm,'innerwidth'),iX);
+     iInnerH   := StrToIntDef(dwGetProp(AForm,'innerheight'),iY);
+
+     //
+     Result    := Ceil(iInnerH*iY/iTrueH*iTrueW/iInnerW);
+
+end;
+
 
 //弹出窗体
 function  dwShowModal(AForm,ASWForm:TForm):Integer;

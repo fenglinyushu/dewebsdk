@@ -83,23 +83,13 @@ begin
 end;
 
 procedure TForm1.FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-var
-     iTrueH    : Integer;
-     iInnerH   : Integer;
-     iTrueW    : Integer;
-     iInnerW   : Integer;
 begin
      //
      Width     := Min(480,X);
 
-     //
-     iTrueW    := StrToIntDef(dwGetProp(Self,'truewidth'),X);
-     iTrueH    := StrToIntDef(dwGetProp(Self,'trueheight'),Y);
-     iInnerW   := StrToIntDef(dwGetProp(Self,'innerwidth'),X);
-     iInnerH   := StrToIntDef(dwGetProp(Self,'innerheight'),Y);
+     //得到移动端实际可用高度
+     Height    := dwGetMobileAvailHeight(Self);
 
-     //
-     Height    := Ceil(iInnerH*Y/iTrueH*iTrueW/iInnerW);
      //
      Panel_Footer.Top    := Height - Panel_Footer.Height;
      Panel_Footer.Left   := 0;

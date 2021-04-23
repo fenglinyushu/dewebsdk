@@ -58,11 +58,7 @@ var
 begin
      BitBtn1.Caption     := 'Uploaded!';
      sLast     := dwGetProp(self,'__upload');
-     //sLast     := ExtractFileName(sLast);
-     //sLast     := StringReplace(sLast,'\','',[rfReplaceAll]);
-     //sLast     := StringReplace(sLast,'.','',[rfReplaceAll]);
      dwShowMessage(sLast,self);
-     //dwShowMessage(dwGetProp(self,'__upload'),self);
 end;
 
 procedure TForm1.BitBtn3EndDock(Sender, Target: TObject; X, Y: Integer);

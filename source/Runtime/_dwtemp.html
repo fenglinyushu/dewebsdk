@@ -5,16 +5,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb - Upload </title>
+<title>DeWeb</title>
 </head>
 
-<body style="background-color:#F0F0F0">
+<body style="background-color:#FAFAFA">
 <script src="dist/vue.js" type="text/javascript"></script>
 <script src="dist/index.js" type="text/javascript"></script>
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_1__top,width:Form1_1__wid,height:Form1_1__hei}" >
+    <div id="app" style="position:absolute;overflow:hidden;left:0;right:0;bottom:0;margin: 0 auto;background-color:#A0A0A4" :style="{top:Form1__top,width:Form1__wid,height:Form1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,43 +27,14 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <el-button id="Button1" size=medium v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','14161556')">{{Button1__cap}}
-        </el-button>
-        <form id="BitBtn1__frm" v-if="BitBtn1__vis" :disabled="BitBtn1__dis" :style="{left:BitBtn1__lef,top:BitBtn1__top,width:BitBtn1__wid,height:BitBtn1__hei}" style="position:absolute;" action="/dwupload" method="POST" enctype="multipart/form-data" target="upload_iframe">
-        <input id="BitBtn1__inp" type="FILE" name="file" style="display:none" @change=dwInputChange('BitBtn1');>
-        <el-button id="BitBtn1__btn" size=medium v-if="BitBtn1__vis" :disabled="BitBtn1__dis" :type="BitBtn1__typ" style="width:100%;height:100%;" @click="dwInputClick('BitBtn1__inp');">{{BitBtn1__cap}}
-        </el-button>
-        </form>
-        <form id="BitBtn2__frm" v-if="BitBtn2__vis" :disabled="BitBtn2__dis" :style="{left:BitBtn2__lef,top:BitBtn2__top,width:BitBtn2__wid,height:BitBtn2__hei}" style="position:absolute;" action="/dwupload" method="POST" enctype="multipart/form-data" target="upload_iframe">
-        <input id="BitBtn2__inp" type="FILE" name="file" style="display:none" accept="image/*" @change=dwInputChange('BitBtn2');>
-        <el-button id="BitBtn2__btn" size=medium v-if="BitBtn2__vis" :disabled="BitBtn2__dis" :type="BitBtn2__typ" style="width:100%;height:100%;" @click="dwInputClick('BitBtn2__inp');">{{BitBtn2__cap}}
-        </el-button>
-        </form>
-        <el-button id="Button2" size=medium v-if="Button2__vis" :disabled="Button2__dis" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;" @click.native="dwevent($event,'Button2','0','onclick','14161556')">{{Button2__cap}}
-        </el-button>
-        <form id="BitBtn3__frm" v-if="BitBtn3__vis" :disabled="BitBtn3__dis" :style="{left:BitBtn3__lef,top:BitBtn3__top,width:BitBtn3__wid,height:BitBtn3__hei}" style="position:absolute;" action="/dwupload" method="POST" enctype="multipart/form-data" target="upload_iframe">
-        <input id="BitBtn3__inp" type="FILE" name="file" style="display:none" accept="video/*" capture="camera" @change=dwInputChange('BitBtn3');>
-        <el-button id="BitBtn3__btn" size=medium v-if="BitBtn3__vis" :disabled="BitBtn3__dis" :type="BitBtn3__typ" style="width:100%;height:100%;" @click="dwInputClick('BitBtn3__inp');">{{BitBtn3__cap}}
-        </el-button>
-        </form>
-        <el-button id="Button3" size=medium v-if="Button3__vis" :disabled="Button3__dis" :type="Button3__typ" :style="{left:Button3__lef,top:Button3__top,width:Button3__wid,height:Button3__hei}" style="position:absolute;" @click.native="dwevent($event,'Button3','0','onclick','14161556')">{{Button3__cap}}
-        </el-button>
-        <el-main id="Panel_01_Tile" v-if="Panel_01_Tile__vis" :disabled="Panel_01_Tile__dis" :style="{backgroundColor:Panel_01_Tile__col,left:Panel_01_Tile__lef,top:Panel_01_Tile__top,width:Panel_01_Tile__wid,height:Panel_01_Tile__hei}" style="position:absolute;overflow:hidden;">
-        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#323232;font-family:'Verdana';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:51px;">{{Label1__cap}}
+        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label1__cap}}
         </div>
-        <el-image :src="Image1__src" fit="none" v-if="Image1__vis" :disabled="Image1__dis" :style="{left:Image1__lef,top:Image1__top,width:Image1__wid,height:Image1__hei}" style="position:absolute;">
-        </el-Image>
-        <div  id="Label2" v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#323232;font-family:'Verdana';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:51px;">{{Label2__cap}}
-        </div>
-        <el-main id="Panel_bottomline" v-if="Panel_bottomline__vis" :disabled="Panel_bottomline__dis" :style="{backgroundColor:Panel_bottomline__col,left:Panel_bottomline__lef,top:Panel_bottomline__top,width:Panel_bottomline__wid,height:Panel_bottomline__hei}" style="position:absolute;overflow:hidden;">
+        <el-main id="Panel1" v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;">
+        <el-input id="Edit1" v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','659312')">
+        </el-input>
         </el-main>
-        </el-main>
-        <el-dialog :title="Form2_1__cap" width="360px" :visible.sync="Form2_1__vis" :close-on-click-modal="false">
-        <el-form v-if="Form2_1__vis" :style="{left:Form2_1__lef,top:Form2_1__top,width:Form2_1__wid,height:Form2_1__hei}" style="position:relative;overflow:hidden;">
-        <div  id="Form2_1__Label1" v-html="Form2_1__Label1__cap" v-if="Form2_1__Label1__vis" :disabled="Form2_1__Label1__dis" :style="{left:Form2_1__Label1__lef,top:Form2_1__Label1__top,width:Form2_1__Label1__wid,height:Form2_1__Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;">{{Form2_1__Label1__cap}}
-        </div>
-        </el-form>
-        </el-dialog>
+        <el-button id="Button1" size=small v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','659312')">{{Button1__cap}}
+        </el-button>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -91,106 +62,39 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_1__top:"0px",
-					    Form1_1__wid:"480px",
-					    Form1_1__hei:"556px",
-                        Button1__lef:"99px",
-                        Button1__top:"151px",
-                        Button1__wid:"273px",
-                        Button1__hei:"41px",
-                        Button1__vis:true,
-                        Button1__dis:false,
-                        Button1__cap:"UPLOAD",
-                        Button1__typ:"success",
-                        BitBtn1__lef:"99px",
-                        BitBtn1__top:"88px",
-                        BitBtn1__wid:"273px",
-                        BitBtn1__hei:"41px",
-                        BitBtn1__vis:true,
-                        BitBtn1__dis:false,
-                        BitBtn1__cap:"File",
-                        BitBtn1__typ:"primary",
-                        BitBtn2__lef:"99px",
-                        BitBtn2__top:"256px",
-                        BitBtn2__wid:"273px",
-                        BitBtn2__hei:"41px",
-                        BitBtn2__vis:true,
-                        BitBtn2__dis:false,
-                        BitBtn2__cap:"Image",
-                        BitBtn2__typ:"primary",
-                        Button2__lef:"99px",
-                        Button2__top:"319px",
-                        Button2__wid:"273px",
-                        Button2__hei:"41px",
-                        Button2__vis:true,
-                        Button2__dis:false,
-                        Button2__cap:"UPLOAD",
-                        Button2__typ:"success",
-                        BitBtn3__lef:"99px",
-                        BitBtn3__top:"424px",
-                        BitBtn3__wid:"273px",
-                        BitBtn3__hei:"41px",
-                        BitBtn3__vis:true,
-                        BitBtn3__dis:false,
-                        BitBtn3__cap:"Video",
-                        BitBtn3__typ:"primary",
-                        Button3__lef:"99px",
-                        Button3__top:"487px",
-                        Button3__wid:"273px",
-                        Button3__hei:"41px",
-                        Button3__vis:true,
-                        Button3__dis:false,
-                        Button3__cap:"UPLOAD",
-                        Button3__typ:"success",
-                        Label1__lef:"160px",
-                        Label1__top:"5px",
-                        Label1__wid:"311px",
-                        Label1__hei:"51px",
+					    Form1__top:"0px",
+					    Form1__wid:"508px",
+					    Form1__hei:"495px",
+                        Label1__lef:"128px",
+                        Label1__top:"72px",
+                        Label1__wid:"48px",
+                        Label1__hei:"20px",
                         Label1__vis:true,
                         Label1__dis:false,
-                        Label1__cap:"Upload",
-                        Image1__lef:"5px",
-                        Image1__top:"5px",
-                        Image1__wid:"48px",
-                        Image1__hei:"51px",
-                        Image1__vis:true,
-                        Image1__dis:false,
-                        Image1__src:"/media/images/logo.png",
-                        Label2__lef:"53px",
-                        Label2__top:"5px",
-                        Label2__wid:"107px",
-                        Label2__hei:"51px",
-                        Label2__vis:true,
-                        Label2__dis:false,
-                        Label2__cap:"DeWeb -",
-                        Panel_bottomline__lef:"5px",
-                        Panel_bottomline__top:"56px",
-                        Panel_bottomline__wid:"466px",
-                        Panel_bottomline__hei:"1px",
-                        Panel_bottomline__vis:true,
-                        Panel_bottomline__dis:false,
-                        Panel_bottomline__col:"RGB(240,240,240,1.0)",
-                        Panel_01_Tile__lef:"0px",
-                        Panel_01_Tile__top:"0px",
-                        Panel_01_Tile__wid:"480px",
-                        Panel_01_Tile__hei:"66px",
-                        Panel_01_Tile__vis:true,
-                        Panel_01_Tile__dis:false,
-                        Panel_01_Tile__col:"RGB(255,255,255,1.0)",
-                        Form2_1__Label1__lef:"0px",
-                        Form2_1__Label1__top:"72px",
-                        Form2_1__Label1__wid:"320px",
-                        Form2_1__Label1__hei:"20px",
-                        Form2_1__Label1__vis:true,
-                        Form2_1__Label1__dis:false,
-                        Form2_1__Label1__cap:"ÕýÔÚÉÏ´«......",
-                        Form2_1__lef:"0px",
-                        Form2_1__top:"0px",
-                        Form2_1__wid:"320px",
-                        Form2_1__hei:"193px",
-                        Form2_1__col:"#F0F0F0",
-                        Form2_1__vis:false,
-                        Form2_1__cap:"upload",
+                        Label1__cap:"Label1",
+                        Edit1__lef:"32px",
+                        Edit1__top:"24px",
+                        Edit1__wid:"121px",
+                        Edit1__hei:"28px",
+                        Edit1__vis:true,
+                        Edit1__dis:false,
+                        Edit1__txt:"Edit1",
+                        Edit1__col:"#FFFFFF",
+                        Panel1__lef:"112px",
+                        Panel1__top:"136px",
+                        Panel1__wid:"185px",
+                        Panel1__hei:"225px",
+                        Panel1__vis:true,
+                        Panel1__dis:false,
+                        Panel1__col:"RGB(240,240,240,1.0)",
+                        Button1__lef:"112px",
+                        Button1__top:"384px",
+                        Button1__wid:"185px",
+                        Button1__hei:"33px",
+                        Button1__vis:true,
+                        Button1__dis:false,
+                        Button1__cap:"Button1",
+                        Button1__typ:"",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -200,24 +104,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:14161556,
-					    shuntflag:7687
+					    clientid:659312,
+					    shuntflag:8921
                     }
                 },
                 mounted() {
                     let me=this;
-                    window.addEventListener(
-                        "onorientationchange" in window ? "orientationchange" : "resize",
-                        function() {
-                            axios.get('{"m":"event","i":14161556,"c":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:7687}})
-                            .then(resp =>{me.procResp(resp.data)});
-                        },
-                        false
-                    );
-                    let Form1_1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":14161556}',{headers:{shuntflag:7687}})
+                    let Form1hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":659312}',{headers:{shuntflag:8921}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -232,7 +128,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":14161556,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":659312,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -242,10 +138,10 @@
                     dwInputSubmit (ipname) {
                         let me=this;let formData = new FormData();
                         formData.append('file', document.getElementById(ipname+"__inp").files[0]);
-                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '14161556'}}
+                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '659312'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":14161556,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":659312,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -261,12 +157,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:7687}})
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:8921}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":14161556,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:7687}})
+                        axios.get('{"m":"interaction","i":659312,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:8921}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

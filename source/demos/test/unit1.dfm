@@ -5,8 +5,8 @@ object Form1: TForm1
   BorderStyle = bsNone
   BorderWidth = 5
   Caption = 'DeWeb'
-  ClientHeight = 213
-  ClientWidth = 227
+  ClientHeight = 485
+  ClientWidth = 498
   Color = clMedGray
   TransparentColor = True
   TransparentColorValue = 16448250
@@ -17,20 +17,24 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 20
-  object SG1: TStringGrid
-    Left = 24
-    Top = 32
-    Width = 169
-    Height = 137
-    Hint = '{"dwstyle":"border stripe"}'
-    ColCount = 2
-    DefaultRowHeight = 35
-    FixedCols = 0
-    RowCount = 3
-    FixedRows = 0
+  object Panel1: TPanel
+    Left = 112
+    Top = 136
+    Width = 185
+    Height = 225
+    BevelKind = bkSoft
+    BevelOuter = bvNone
     TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 112
+    Top = 384
+    Width = 185
+    Height = 33
+    Caption = 'Button1'
+    TabOrder = 1
+    OnClick = Button1Click
   end
 end
