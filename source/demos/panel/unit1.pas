@@ -36,6 +36,9 @@ type
     Panel8: TPanel;
     Panel9: TPanel;
     Panel10: TPanel;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
     procedure Button6Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);

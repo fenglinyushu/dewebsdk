@@ -19,22 +19,30 @@ object Form1: TForm1
   Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 20
-  object Button1: TButton
-    Left = 16
-    Top = 8
-    Width = 474
-    Height = 33
-    Caption = 'Dynamic Create A Button'
+  object cbb: TComboBox
+    Left = 24
+    Top = 32
+    Width = 145
+    Height = 28
     TabOrder = 0
+    Text = 'cbb'
+  end
+  object Button1: TButton
+    Left = 24
+    Top = 80
+    Width = 145
+    Height = 33
+    Caption = 'Add Items'
+    TabOrder = 1
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 16
-    Top = 47
-    Width = 474
+    Left = 24
+    Top = 119
+    Width = 145
     Height = 33
-    Caption = 'Dynamic Delete A Button'
-    TabOrder = 1
+    Caption = 'Get Text'
+    TabOrder = 2
     OnClick = Button2Click
   end
 end

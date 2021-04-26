@@ -94,7 +94,7 @@ object Form1: TForm1
     Left = 0
     Top = 125
     Width = 1000
-    Height = 519
+    Height = 560
     Align = alTop
     Color = clWhite
     ParentBackground = False
@@ -115,10 +115,17 @@ object Form1: TForm1
     end
     object Label5: TLabel
       Left = 429
-      Top = 376
+      Top = 335
       Width = 54
       Height = 20
       Caption = 'opacity'
+    end
+    object Label6: TLabel
+      Left = 57
+      Top = 471
+      Width = 109
+      Height = 20
+      Caption = 'custom border'
     end
     object Panel1: TPanel
       Left = 46
@@ -163,9 +170,9 @@ object Form1: TForm1
     end
     object Panel4: TPanel
       Left = 46
-      Top = 232
+      Top = 212
       Width = 827
-      Height = 121
+      Height = 117
       BevelOuter = bvNone
       BorderWidth = 1
       Color = clRed
@@ -262,6 +269,34 @@ object Form1: TForm1
         OnEnter = Panel1Enter
         OnExit = Panel1Exit
       end
+    end
+    object Panel11: TPanel
+      Left = 46
+      Top = 376
+      Width = 129
+      Height = 81
+      Hint = '{"dwstyle":"border:solid 2px #AAA;"}'
+      BevelOuter = bvNone
+      BorderWidth = 1
+      Color = clAqua
+      ParentBackground = False
+      TabOrder = 4
+      OnEnter = Panel1Enter
+      OnExit = Panel1Exit
+    end
+    object Panel12: TPanel
+      Left = 207
+      Top = 376
+      Width = 129
+      Height = 81
+      Hint = '{"dwstyle":"border-bottom:solid 2px #aaa;"}'
+      BevelOuter = bvNone
+      BorderWidth = 1
+      Color = clAqua
+      ParentBackground = False
+      TabOrder = 5
+      OnEnter = Panel1Enter
+      OnExit = Panel1Exit
     end
   end
   object Panel_01_Tile: TPanel

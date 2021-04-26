@@ -7,7 +7,7 @@ object Form1: TForm1
   Caption = 'DeWeb'
   ClientHeight = 511
   ClientWidth = 360
-  Color = clWhite
+  Color = 16573887
   TransparentColorValue = 16448250
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -69,7 +69,6 @@ object Form1: TForm1
       Margins.Bottom = 4
       Align = alLeft
       TabOrder = 0
-      ExplicitHeight = 34
     end
     object Button_Menu: TButton
       AlignWithMargins = True
@@ -85,308 +84,12 @@ object Form1: TForm1
       Margins.Bottom = 4
       Align = alRight
       TabOrder = 1
-      ExplicitHeight = 34
-    end
-  end
-  object Panel_Content: TPanel
-    Left = 0
-    Top = 54
-    Width = 360
-    Height = 323
-    Align = alTop
-    BevelOuter = bvNone
-    BorderWidth = 5
-    Color = 16573887
-    ParentBackground = False
-    TabOrder = 2
-    ExplicitLeft = -8
-    ExplicitTop = 136
-    object Panel2: TPanel
-      Left = 5
-      Top = 5
-      Width = 350
-      Height = 50
-      Align = alTop
-      BevelOuter = bvNone
-      Color = 16573887
-      ParentBackground = False
-      TabOrder = 0
-      object Label1: TLabel
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 78
-        Height = 43
-        Align = alLeft
-        Alignment = taRightJustify
-        AutoSize = False
-        Caption = #20184#27454#26041#24335
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -16
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Panel3: TPanel
-        Left = 0
-        Top = 49
-        Width = 350
-        Height = 1
-        Align = alBottom
-        BevelOuter = bvNone
-        Color = clSilver
-        ParentBackground = False
-        TabOrder = 0
-        ExplicitTop = 0
-        ExplicitWidth = 360
-      end
-      object Button1: TButton
-        AlignWithMargins = True
-        Left = 84
-        Top = 2
-        Width = 22
-        Height = 43
-        Hint = 
-          '{"fontsize":"28px","color":"rgb(0,0,0)","icon":"el-icon-caret-bo' +
-          'ttom","type":"text"}'
-        Margins.Left = 0
-        Margins.Top = 2
-        Margins.Bottom = 4
-        Align = alLeft
-        TabOrder = 1
-        ExplicitLeft = 87
-        ExplicitHeight = 50
-      end
-      object Edit1: TEdit
-        AlignWithMargins = True
-        Left = 112
-        Top = 8
-        Width = 154
-        Height = 33
-        Hint = '{"placeholder":"'#25628#32034'","prefix-icon":"el-icon-search"}'
-        Margins.Top = 8
-        Margins.Bottom = 8
-        Align = alClient
-        TabOrder = 2
-        ExplicitLeft = 136
-        ExplicitTop = 16
-        ExplicitWidth = 121
-        ExplicitHeight = 28
-      end
-      object Button2: TButton
-        AlignWithMargins = True
-        Left = 272
-        Top = 8
-        Width = 75
-        Height = 35
-        Hint = '{"type":"success"}'
-        Margins.Top = 8
-        Margins.Bottom = 6
-        Align = alRight
-        Caption = #26597#35810
-        TabOrder = 3
-        ExplicitLeft = 288
-        ExplicitTop = 16
-        ExplicitHeight = 25
-      end
-    end
-    object Panel4: TPanel
-      AlignWithMargins = True
-      Left = 8
-      Top = 65
-      Width = 344
-      Height = 114
-      Margins.Top = 10
-      Margins.Bottom = 5
-      Align = alTop
-      Color = clWhite
-      ParentBackground = False
-      TabOrder = 1
-      ExplicitLeft = 11
-      ExplicitTop = 64
-      object Label2: TLabel
-        AlignWithMargins = True
-        Left = 137
-        Top = 39
-        Width = 192
-        Height = 40
-        AutoSize = False
-        Caption = #26680#65306#39532#24535#24378'Z            '#21547#40635
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -16
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label3: TLabel
-        AlignWithMargins = True
-        Left = 6
-        Top = 4
-        Width = 336
-        Height = 29
-        AutoSize = False
-        Caption = #20048#20141#22478#20851#36213#28113#20255#35786#25152' <9>'
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -16
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label4: TLabel
-        AlignWithMargins = True
-        Left = 31
-        Top = 39
-        Width = 98
-        Height = 40
-        AutoSize = False
-        Caption = #65509'60.3/0'
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -21
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label5: TLabel
-        AlignWithMargins = True
-        Left = 8
-        Top = 74
-        Width = 337
-        Height = 40
-        AutoSize = False
-        Caption = #36135#21040#20184#27454'    '#32447':'#28390#21335#20048#20141#21335', BH:XSGZDA002739'
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object CheckBox1: TCheckBox
-        Left = 6
-        Top = 51
-        Width = 19
-        Height = 17
-        TabOrder = 0
-      end
-    end
-    object Panel5: TPanel
-      AlignWithMargins = True
-      Left = 8
-      Top = 194
-      Width = 344
-      Height = 114
-      Margins.Top = 10
-      Margins.Bottom = 5
-      Align = alTop
-      Color = clWhite
-      ParentBackground = False
-      TabOrder = 2
-      ExplicitLeft = 11
-      ExplicitTop = 217
-      object Label6: TLabel
-        AlignWithMargins = True
-        Left = 137
-        Top = 39
-        Width = 192
-        Height = 40
-        AutoSize = False
-        Caption = #26680#65306#39532#24535#24378'Z            '#21547#40635
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -16
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label7: TLabel
-        AlignWithMargins = True
-        Left = 6
-        Top = 4
-        Width = 336
-        Height = 29
-        AutoSize = False
-        Caption = #21776#23665#28023#28207#24247#22797#20013#21307#35786#25152' <3>'
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -16
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label8: TLabel
-        AlignWithMargins = True
-        Left = 31
-        Top = 39
-        Width = 98
-        Height = 40
-        AutoSize = False
-        Caption = #65509'201/0'
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -21
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label9: TLabel
-        AlignWithMargins = True
-        Left = 8
-        Top = 74
-        Width = 337
-        Height = 40
-        AutoSize = False
-        Caption = #36135#21040#20184#27454'    '#32447':'#28390#21335#20048#20141#21335', BH:XSGZDA002740'
-        Color = 16752198
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = #24494#36719#38597#40657
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object CheckBox2: TCheckBox
-        Left = 6
-        Top = 51
-        Width = 19
-        Height = 17
-        TabOrder = 0
-      end
     end
   end
   object Panel_Footer: TPanel
-    Left = 16
-    Top = 322
-    Width = 300
+    Left = 0
+    Top = 368
+    Width = 360
     Height = 143
     BevelOuter = bvNone
     Color = 15701350
@@ -539,7 +242,7 @@ object Form1: TForm1
     object Panel_FooterTopLine: TPanel
       Left = 0
       Top = 0
-      Width = 300
+      Width = 360
       Height = 1
       Align = alTop
       BevelOuter = bvNone
@@ -549,14 +252,13 @@ object Form1: TForm1
     object Panel1: TPanel
       Left = 0
       Top = 1
-      Width = 300
+      Width = 360
       Height = 56
       Align = alTop
       BevelOuter = bvNone
       Color = 12543264
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 89
       object Label10: TLabel
         AlignWithMargins = True
         Left = 33
@@ -584,7 +286,7 @@ object Form1: TForm1
       end
     end
     object Button3: TButton
-      Left = 216
+      Left = 276
       Top = 57
       Width = 84
       Height = 86
@@ -592,6 +294,7 @@ object Form1: TForm1
       Align = alRight
       Caption = #25552#20132
       TabOrder = 2
+      OnClick = Button3Click
     end
     object Panel6: TPanel
       Left = 47
@@ -628,6 +331,203 @@ object Form1: TForm1
       Color = clWhite
       ParentBackground = False
       TabOrder = 6
+    end
+  end
+  object ScrollBox1: TScrollBox
+    Left = 0
+    Top = 104
+    Width = 360
+    Height = 264
+    VertScrollBar.Visible = False
+    Align = alTop
+    TabOrder = 2
+    object Panel_Content: TPanel
+      Left = 0
+      Top = 0
+      Width = 356
+      Height = 260
+      Align = alTop
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Color = 16573887
+      ParentBackground = False
+      TabOrder = 0
+      object Panel4: TPanel
+        AlignWithMargins = True
+        Left = 8
+        Top = 15
+        Width = 340
+        Height = 114
+        Margins.Top = 10
+        Margins.Bottom = 5
+        Align = alTop
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 0
+        object Label2: TLabel
+          AlignWithMargins = True
+          Left = 137
+          Top = 39
+          Width = 192
+          Height = 40
+          AutoSize = False
+          Caption = #26680#65306#39532#24535#24378'Z            '#21547#40635
+          Color = 16752198
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object Label3: TLabel
+          AlignWithMargins = True
+          Left = 6
+          Top = 4
+          Width = 336
+          Height = 29
+          AutoSize = False
+          Caption = #20048#20141#22478#20851#36213#28113#20255#35786#25152' <9>'
+          Color = 16752198
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object Label4: TLabel
+          AlignWithMargins = True
+          Left = 31
+          Top = 39
+          Width = 98
+          Height = 40
+          AutoSize = False
+          Caption = #65509'60.3/0'
+          Color = 16752198
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clRed
+          Font.Height = -21
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object Label5: TLabel
+          AlignWithMargins = True
+          Left = 8
+          Top = 74
+          Width = 337
+          Height = 40
+          AutoSize = False
+          Caption = #36135#21040#20184#27454'    '#32447':'#28390#21335#20048#20141#21335', BH:XSGZDA002739'
+          Color = 16752198
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object CheckBox_Proc: TCheckBox
+          Left = 6
+          Top = 51
+          Width = 19
+          Height = 17
+          TabOrder = 0
+        end
+      end
+    end
+  end
+  object Panel_Query: TPanel
+    Left = 0
+    Top = 54
+    Width = 360
+    Height = 50
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 16573887
+    ParentBackground = False
+    TabOrder = 3
+    object Label1: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 78
+      Height = 43
+      Align = alLeft
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = #20184#27454#26041#24335
+      Color = 16752198
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = #24494#36719#38597#40657
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Panel3: TPanel
+      Left = 0
+      Top = 49
+      Width = 360
+      Height = 1
+      Align = alBottom
+      BevelOuter = bvNone
+      Color = clSilver
+      ParentBackground = False
+      TabOrder = 0
+    end
+    object Button1: TButton
+      AlignWithMargins = True
+      Left = 84
+      Top = 2
+      Width = 22
+      Height = 43
+      Hint = 
+        '{"fontsize":"28px","color":"rgb(0,0,0)","icon":"el-icon-caret-bo' +
+        'ttom","type":"text"}'
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Bottom = 4
+      Align = alLeft
+      TabOrder = 1
+    end
+    object Edit1: TEdit
+      AlignWithMargins = True
+      Left = 112
+      Top = 8
+      Width = 164
+      Height = 33
+      Hint = '{"placeholder":"'#25628#32034'","prefix-icon":"el-icon-search"}'
+      Margins.Top = 8
+      Margins.Bottom = 8
+      Align = alClient
+      TabOrder = 2
+      ExplicitHeight = 28
+    end
+    object Button2: TButton
+      AlignWithMargins = True
+      Left = 282
+      Top = 8
+      Width = 75
+      Height = 35
+      Hint = '{"type":"success"}'
+      Margins.Top = 8
+      Margins.Bottom = 6
+      Align = alRight
+      Caption = #26597#35810
+      TabOrder = 3
+      OnClick = Button2Click
     end
   end
 end

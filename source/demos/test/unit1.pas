@@ -13,6 +13,7 @@ uses
 
 type
   TForm1 = class(TForm)
+    cbb: TComboBox;
     Button1: TButton;
     Button2: TButton;
     procedure Button1Click(Sender: TObject);
@@ -33,35 +34,22 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-     oButton   : TButton;
+     s,c  : String;
 begin
-     oButton   := TButton.Create(self);
-     oButton.Parent := self;
-     Randomize;
-     oButton.Width  := 100;
-     oButton.Left   := Random(Width-oButton.Width);
-     oButton.Top    := Random(Height-150)+100;
-     oButton.Name   := 'B_'+IntToStr(GetTickCount mod 1000000);
-     case GetTickCount mod 6 of
-          0 : oButton.Hint   := '{"type":"success"}';
-          1 : oButton.Hint   := '{"type":"primary"}';
-          2 : oButton.Hint   := '{"type":"info"}';
-          3 : oButton.Hint   := '{"type":"warning"}';
-          4 : oButton.Hint   := '{"type":"danger"}';
-     end;
-     //
-     oBUtton.OnClick     := Button1.OnClick;
-     //
-     Self.ParentFont     := True;
+     s    := '字符串';
+     cbb.Items.Add(s);
+     s    := '转char';
+     cbb.Items.Add(pchar(s));
+     c    := 'char';
+     cbb.Items.Add(c);
+     c    := 'char2';
+     cbb.Items.Add(c);
+     cbb.Items.Add('23111111');
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-     if (Self.Controls[Self.ControlCount-1] <> Button1) and (Self.Controls[Self.ControlCount-1] <> Button2) then begin
-          Self.Controls[Self.ControlCount-1].Destroy;
-     end;
-     //
-     Self.ParentFont     := True;
+     dwShowMessage(cbb.Text,self);
 end;
 
 end.
