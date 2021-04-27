@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>DeWeb DataBase</title>
+</head>
+
+<body style="background-color:#F0F0F0">
+<script src="dist/vue.js" type="text/javascript"></script>
+<script src="dist/index.js" type="text/javascript"></script>
+<script src="dist/axios.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
+
+    <script src="dist/_vcharts/echarts.min.js"></script>
+    <script src="dist/_vcharts/lib/index.min.js"></script>
+    <link rel="stylesheet" href="dist/_vcharts/lib/style.min.css">
+    <script src="dist/ex/dwStringGrid.js"></script>
+    <div id="app" style="position:absolute;overflow:hidden;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_1__top,width:Form1_1__wid,height:Form1_1__hei}" >
+        <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
+        	<el-form style="width:90%;padding-left:5%;">
+        		<el-form-item :label="input_query_inputname" >
+        			<el-input v-model="input_query_inputdefault" autocomplete="off"></el-input>
+        		</el-form-item>
+        	</el-form>
+        	<div slot="footer" class="dialog-footer">
+        		<el-button @click="input_query_visible=false">{{input_query_cancelcaption}}</el-button>
+        		<el-button type="primary" @click="processinputquery">{{input_query_okcaption}}</el-button>
+        	</div>
+        </el-dialog>
+		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
+        <el-main id="Panel1" v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image1__src" fit="fill" v-if="Image1__vis" :disabled="Image1__dis" :style="{left:Image1__lef,top:Image1__top,width:Image1__wid,height:Image1__hei}" style="position:absolute;">
+        </el-Image>
+        <el-main id="Panel4" v-if="Panel4__vis" :disabled="Panel4__dis" :style="{backgroundColor:Panel4__col,left:Panel4__lef,top:Panel4__top,width:Panel4__wid,height:Panel4__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image2__src" fit="none" v-if="Image2__vis" :disabled="Image2__dis" :style="{left:Image2__lef,top:Image2__top,width:Image2__wid,height:Image2__hei}" style="position:absolute;">
+        </el-Image>
+        <div  id="Label4" v-html="Label4__cap" v-if="Label4__vis" :disabled="Label4__dis" :style="{left:Label4__lef,top:Label4__top,width:Label4__wid,height:Label4__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label4__cap}}
+        </div>
+        </el-main>
+        </el-main>
+        <el-main id="Panel5" v-if="Panel5__vis" :disabled="Panel5__dis" :style="{backgroundColor:Panel5__col,left:Panel5__lef,top:Panel5__top,width:Panel5__wid,height:Panel5__hei}" style="position:absolute;overflow:hidden;">
+        <el-main id="Panel2" v-if="Panel2__vis" :disabled="Panel2__dis" :style="{backgroundColor:Panel2__col,left:Panel2__lef,top:Panel2__top,width:Panel2__wid,height:Panel2__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-tabs id="PageControl1" v-if="PageControl1__vis" :disabled="PageControl1__dis" v-model="PageControl1__apg" :tab-position="PageControl1__tps" type="border-card" :style="{left:PageControl1__lef,top:PageControl1__top,width:PageControl1__wid,height:PageControl1__hei}" style="position:absolute;" @tab-click="dwevent($event,'PageControl1','this.PageControl1__apg','onchange','399446')">
+            <el-tab-pane v-if="TabSheet4__tbv" :label="TabSheet4__cap" name="TabSheet4">
+            </el-tab-pane>
+            <el-tab-pane v-if="TabSheet5__tbv" name="TabSheet5">
+            <span slot="label"><i class="el-icon-platform-eleme"></i> {{TabSheet5__cap}}</span>
+            </el-tab-pane>
+            <el-tab-pane v-if="TabSheet6__tbv" name="TabSheet6">
+            <span slot="label"><i class="el-icon-eleme"></i> {{TabSheet6__cap}}</span>
+            </el-tab-pane>
+            <el-tab-pane v-if="TabSheet1__tbv" name="TabSheet1">
+            <span slot="label"><i class="el-icon-delete-solid"></i> {{TabSheet1__cap}}</span>
+            </el-tab-pane>
+        <div :style="{width:PageControl1__wid,height:PageControl1__hei}" style="position:absolute;left:0px;top:0px;">
+        <el-main id="TabSheet4" v-if="PageControl1__apg=='TabSheet4'" :disabled="TabSheet4__dis" :style="{left:TabSheet4__lef,top:TabSheet4__top,width:TabSheet4__wid,height:TabSheet4__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label13" v-html="Label13__cap" v-if="Label13__vis" :disabled="Label13__dis" :style="{left:Label13__lef,top:Label13__top,width:Label13__wid,height:Label13__hei}" style="position:absolute;color:#000000;font-family:'微软雅黑';font-size:18pt;font-weight:bold;font-style:normal;text-decoration:none;text-align:center;line-height:38px;">{{Label13__cap}}
+        </div>
+        <el-main id="Panel6" v-if="Panel6__vis" :disabled="Panel6__dis" :style="{backgroundColor:Panel6__col,left:Panel6__lef,top:Panel6__top,width:Panel6__wid,height:Panel6__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-main id="Panel7" v-if="Panel7__vis" :disabled="Panel7__dis" :style="{backgroundColor:Panel7__col,left:Panel7__lef,top:Panel7__top,width:Panel7__wid,height:Panel7__hei}" style="position:absolute;overflow:hidden;">
+        <el-input id="Edit_FNOTE" v-if="Edit_FNOTE__vis" :disabled="Edit_FNOTE__dis" v-model="Edit_FNOTE__txt" :style="{backgroundColor:Edit_FNOTE__col,left:Edit_FNOTE__lef,top:Edit_FNOTE__top,width:Edit_FNOTE__wid,height:Edit_FNOTE__hei}" style="position:absolute;border-radius:0;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_FNOTE','escape(this.Edit_FNOTE__txt)','onchange','399446')">
+        </el-input>
+        <el-main id="Panel9" v-if="Panel9__vis" :disabled="Panel9__dis" :style="{backgroundColor:Panel9__col,left:Panel9__lef,top:Panel9__top,width:Panel9__wid,height:Panel9__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label5" v-html="Label5__cap" v-if="Label5__vis" :disabled="Label5__dis" :style="{left:Label5__lef,top:Label5__top,width:Label5__wid,height:Label5__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label5__cap}}
+        </div>
+        <div  id="Label6" v-html="Label6__cap" v-if="Label6__vis" :disabled="Label6__dis" :style="{left:Label6__lef,top:Label6__top,width:Label6__wid,height:Label6__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label6__cap}}
+        </div>
+        <div  id="Label7" v-html="Label7__cap" v-if="Label7__vis" :disabled="Label7__dis" :style="{left:Label7__lef,top:Label7__top,width:Label7__wid,height:Label7__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label7__cap}}
+        </div>
+        <div  id="Label8" v-html="Label8__cap" v-if="Label8__vis" :disabled="Label8__dis" :style="{left:Label8__lef,top:Label8__top,width:Label8__wid,height:Label8__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label8__cap}}
+        </div>
+        <div  id="Label9" v-html="Label9__cap" v-if="Label9__vis" :disabled="Label9__dis" :style="{left:Label9__lef,top:Label9__top,width:Label9__wid,height:Label9__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label9__cap}}
+        </div>
+        <div  id="Label10" v-html="Label10__cap" v-if="Label10__vis" :disabled="Label10__dis" :style="{left:Label10__lef,top:Label10__top,width:Label10__wid,height:Label10__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label10__cap}}
+        </div>
+        <div  id="Label11" v-html="Label11__cap" v-if="Label11__vis" :disabled="Label11__dis" :style="{left:Label11__lef,top:Label11__top,width:Label11__wid,height:Label11__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label11__cap}}
+        </div>
+        <div  id="Label12" v-html="Label12__cap" v-if="Label12__vis" :disabled="Label12__dis" :style="{left:Label12__lef,top:Label12__top,width:Label12__wid,height:Label12__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label12__cap}}
+        </div>
+        <el-input id="Edit_fname" v-if="Edit_fname__vis" :disabled="Edit_fname__dis" v-model="Edit_fname__txt" :style="{backgroundColor:Edit_fname__col,left:Edit_fname__lef,top:Edit_fname__top,width:Edit_fname__wid,height:Edit_fname__hei}" style="position:absolute;border-radius:0;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_fname','escape(this.Edit_fname__txt)','onchange','399446')">
+        </el-input>
+        <el-input id="Edit_fqty" v-if="Edit_fqty__vis" :disabled="Edit_fqty__dis" v-model="Edit_fqty__txt" :style="{backgroundColor:Edit_fqty__col,left:Edit_fqty__lef,top:Edit_fqty__top,width:Edit_fqty__wid,height:Edit_fqty__hei}" style="position:absolute;border-radius:0;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_fqty','escape(this.Edit_fqty__txt)','onchange','399446')">
+        </el-input>
+        <el-input id="Edit_fprice" v-if="Edit_fprice__vis" :disabled="Edit_fprice__dis" v-model="Edit_fprice__txt" :style="{backgroundColor:Edit_fprice__col,left:Edit_fprice__lef,top:Edit_fprice__top,width:Edit_fprice__wid,height:Edit_fprice__hei}" style="position:absolute;border-radius:0;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_fprice','escape(this.Edit_fprice__txt)','onchange','399446')">
+        </el-input>
+        <el-input id="Edit_funit" v-if="Edit_funit__vis" :disabled="Edit_funit__dis" v-model="Edit_funit__txt" :style="{backgroundColor:Edit_funit__col,left:Edit_funit__lef,top:Edit_funit__top,width:Edit_funit__wid,height:Edit_funit__hei}" style="position:absolute;border-radius:0;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_funit','escape(this.Edit_funit__txt)','onchange','399446')">
+        </el-input>
+        <el-input id="Edit_fmoney" v-if="Edit_fmoney__vis" :disabled="Edit_fmoney__dis" v-model="Edit_fmoney__txt" :style="{backgroundColor:Edit_fmoney__col,left:Edit_fmoney__lef,top:Edit_fmoney__top,width:Edit_fmoney__wid,height:Edit_fmoney__hei}" style="position:absolute;border-radius:0;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_fmoney','escape(this.Edit_fmoney__txt)','onchange','399446')">
+        </el-input>
+        <el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" id="Edit_ddate" v-if="Edit_ddate__vis" :disabled="Edit_ddate__dis" v-model="Edit_ddate__val" :style="{left:Edit_ddate__lef,top:Edit_ddate__top,width:Edit_ddate__wid,height:Edit_ddate__hei}" style="position:absolute;" @change="dwevent($event,'Edit_ddate','this.Edit_ddate__val','onchange','399446')">
+        </el-date-picker>
+        <el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" id="Edit_edate" v-if="Edit_edate__vis" :disabled="Edit_edate__dis" v-model="Edit_edate__val" :style="{left:Edit_edate__lef,top:Edit_edate__top,width:Edit_edate__wid,height:Edit_edate__hei}" style="position:absolute;" @change="dwevent($event,'Edit_edate','this.Edit_edate__val','onchange','399446')">
+        </el-date-picker>
+        <el-time-select :picker-options="{start: '00:00', step: '00:01', end: '23:59'}" format="HH:mm" value-format="HH:mm" id="Edit_ddates" v-if="Edit_ddates__vis" :disabled="Edit_ddates__dis" v-model="Edit_ddates__val" :style="{left:Edit_ddates__lef,top:Edit_ddates__top,width:Edit_ddates__wid,height:Edit_ddates__hei}" style="position:absolute;" @change="dwevent($event,'Edit_ddates','this.Edit_ddates__val','onchange','399446')">
+        </el-time-select>
+        <el-time-select :picker-options="{start: '00:00', step: '00:01', end: '23:59'}" format="HH:mm" value-format="HH:mm" id="Edit_edates" v-if="Edit_edates__vis" :disabled="Edit_edates__dis" v-model="Edit_edates__val" :style="{left:Edit_edates__lef,top:Edit_edates__top,width:Edit_edates__wid,height:Edit_edates__hei}" style="position:absolute;" @change="dwevent($event,'Edit_edates','this.Edit_edates__val','onchange','399446')">
+        </el-time-select>
+        <form id="BitBtn1__frm" v-if="BitBtn1__vis" :disabled="BitBtn1__dis" :style="{left:BitBtn1__lef,top:BitBtn1__top,width:BitBtn1__wid,height:BitBtn1__hei}" style="position:absolute;" action="/dwupload" method="POST" enctype="multipart/form-data" target="upload_iframe">
+        <input id="BitBtn1__inp" type="FILE" name="file" style="display:none" @change=dwInputChange('BitBtn1');>
+        <el-button id="BitBtn1__btn" size=medium v-if="BitBtn1__vis" :disabled="BitBtn1__dis" :type="BitBtn1__typ" style="width:100%;height:100%;" @click="dwInputClick('BitBtn1__inp');">{{BitBtn1__cap}}
+        </el-button>
+        </form>
+        <el-button id="Button3" size=medium v-if="Button3__vis" :disabled="Button3__dis" :type="Button3__typ" :style="{left:Button3__lef,top:Button3__top,width:Button3__wid,height:Button3__hei}" style="position:absolute;" @click.native="dwevent($event,'Button3','0','onclick','399446')">{{Button3__cap}}
+        </el-button>
+        <el-input id="Edit1" v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:0;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','399446')">
+        </el-input>
+        </el-main>
+        </el-main>
+        <el-main id="Panel10" v-if="Panel10__vis" :disabled="Panel10__dis" :style="{backgroundColor:Panel10__col,left:Panel10__lef,top:Panel10__top,width:Panel10__wid,height:Panel10__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);">
+        <div  id="Label14" v-html="Label14__cap" v-if="Label14__vis" :disabled="Label14__dis" :style="{left:Label14__lef,top:Label14__top,width:Label14__wid,height:Label14__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:50px;">{{Label14__cap}}
+        </div>
+        <div  id="Label15" v-html="Label15__cap" v-if="Label15__vis" :disabled="Label15__dis" :style="{left:Label15__lef,top:Label15__top,width:Label15__wid,height:Label15__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:50px;">{{Label15__cap}}
+        </div>
+        <el-input id="Edit_Keyword2" v-if="Edit_Keyword2__vis" :disabled="Edit_Keyword2__dis" v-model="Edit_Keyword2__txt" placeholder="请输入关键字" :style="{backgroundColor:Edit_Keyword2__col,left:Edit_Keyword2__lef,top:Edit_Keyword2__top,width:Edit_Keyword2__wid,height:Edit_Keyword2__hei}" style="position:absolute;border-radius:3px 0 0 3px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Keyword2','escape(this.Edit_Keyword2__txt)','onchange','399446')">
+        </el-input>
+        <el-button id="Button_zhaobiao" size=medium v-if="Button_zhaobiao__vis" :disabled="Button_zhaobiao__dis" :type="Button_zhaobiao__typ" icon="el-icon-search" :style="{left:Button_zhaobiao__lef,top:Button_zhaobiao__top,width:Button_zhaobiao__wid,height:Button_zhaobiao__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button_zhaobiao','0','onclick','399446')">{{Button_zhaobiao__cap}}
+        </el-button>
+        <el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" id="dpt3" v-if="dpt3__vis" :disabled="dpt3__dis" v-model="dpt3__val" :style="{left:dpt3__lef,top:dpt3__top,width:dpt3__wid,height:dpt3__hei}" style="position:absolute;" @change="dwevent($event,'dpt3','this.dpt3__val','onchange','399446')">
+        </el-date-picker>
+        <el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" id="dpt4" v-if="dpt4__vis" :disabled="dpt4__dis" v-model="dpt4__val" :style="{left:dpt4__lef,top:dpt4__top,width:dpt4__wid,height:dpt4__hei}" style="position:absolute;" @change="dwevent($event,'dpt4','this.dpt4__val','onchange','399446')">
+        </el-date-picker>
+        </el-main>
+        <el-main id="Panel11" v-if="Panel11__vis" :disabled="Panel11__dis" :style="{backgroundColor:Panel11__col,left:Panel11__lef,top:Panel11__top,width:Panel11__wid,height:Panel11__hei}" style="position:absolute;overflow:hidden;">
+        <el-button id="Button5" size=medium v-if="Button5__vis" :disabled="Button5__dis" :type="Button5__typ" :style="{left:Button5__lef,top:Button5__top,width:Button5__wid,height:Button5__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button5','0','onclick','399446')">{{Button5__cap}}
+        </el-button>
+        <el-button id="Button6" size=medium v-if="Button6__vis" :disabled="Button6__dis" :type="Button6__typ" :style="{left:Button6__lef,top:Button6__top,width:Button6__wid,height:Button6__hei}" style="position:absolute;border-radius:3px 0 0 3px;" @click.native="dwevent($event,'Button6','0','onclick','399446')">{{Button6__cap}}
+        </el-button>
+        <el-input id="Edit2" v-if="Edit2__vis" :disabled="Edit2__dis" v-model="Edit2__txt" :style="{backgroundColor:Edit2__col,left:Edit2__lef,top:Edit2__top,width:Edit2__wid,height:Edit2__hei}" style="position:absolute;border-radius:3px 0 0 3px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit2','escape(this.Edit2__txt)','onchange','399446')">
+        </el-input>
+        <el-button id="Button7" size=medium v-if="Button7__vis" :disabled="Button7__dis" :type="Button7__typ" :style="{left:Button7__lef,top:Button7__top,width:Button7__wid,height:Button7__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button7','0','onclick','399446')">{{Button7__cap}}
+        </el-button>
+        <el-select id="ComboBox2" v-model="ComboBox2__txt" v-if="ComboBox2__vis" :disabled="ComboBox2__dis" :style="{left:ComboBox2__lef,top:ComboBox2__top,width:ComboBox2__wid,height:ComboBox2__hei}" style="position:absolute;border:1px solid #DCDFF0;border-radius:2px;" @change="dwevent($event,'ComboBox2','this.ComboBox2__txt','onchange','399446')">
+            <el-option v-for="item in ComboBox2__its" :key="item.value" :label="item.value" :value="item.value"/>
+        </el-select>
+        <el-main id="Panel8" v-if="Panel8__vis" :disabled="Panel8__dis" :style="{backgroundColor:Panel8__col,left:Panel8__lef,top:Panel8__top,width:Panel8__wid,height:Panel8__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);">
+        <el-button id="Button_Append" size=medium v-if="Button_Append__vis" :disabled="Button_Append__dis" :type="Button_Append__typ" :style="{left:Button_Append__lef,top:Button_Append__top,width:Button_Append__wid,height:Button_Append__hei}" style="position:absolute;border-radius:3px 0 0 3px;" @click.native="dwevent($event,'Button_Append','0','onclick','399446')">{{Button_Append__cap}}
+        </el-button>
+        <el-button id="Button_Delete" size=medium v-if="Button_Delete__vis" :disabled="Button_Delete__dis" :type="Button_Delete__typ" :style="{left:Button_Delete__lef,top:Button_Delete__top,width:Button_Delete__wid,height:Button_Delete__hei}" style="position:absolute;border-radius:0;" @click.native="dwevent($event,'Button_Delete','0','onclick','399446')">{{Button_Delete__cap}}
+        </el-button>
+        <el-button id="Button4" size=medium v-if="Button4__vis" :disabled="Button4__dis" :type="Button4__typ" :style="{left:Button4__lef,top:Button4__top,width:Button4__wid,height:Button4__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button4','0','onclick','399446')">{{Button4__cap}}
+        </el-button>
+        </el-main>
+        </el-main>
+        <el-main id="Panel12" v-if="Panel12__vis" :disabled="Panel12__dis" :style="{backgroundColor:Panel12__col,left:Panel12__lef,top:Panel12__top,width:Panel12__wid,height:Panel12__hei}" style="position:absolute;overflow:hidden;">
+        <div :style="{left:SG2__lef,top:SG2__top,width:SG2__wid,height:SG2__hei}" style="position:absolute;">
+            <el-table id="SG2" :data="SG2__ces" highlight-current-row :row-style="{height:'35px'}" :header-row-style="{height:'35px'}" ref="SG2" border stripe show-summary v-if="SG2__vis" :disabled="SG2__dis" :height="SG2__hei" style="width:100%" @row-click="dwevent($event,'SG2','val.d0','onclick','399446')">
+                <el-table-column show-overflow-tooltip fixed v-if=false prop="d0" label="rowno" width="10"></el-table-column>
+                <el-table-column fixed="left" v-if="SG2__clv0" show-overflow-tooltip prop="d1" :label="SG2__col0" :width="SG2__cws0"></el-table-column>
+                <el-table-column v-if="SG2__clv1" show-overflow-tooltip prop="d2" :label="SG2__col1" :width="SG2__cws1"></el-table-column>
+                <el-table-column v-if="SG2__clv2" show-overflow-tooltip prop="d3" :label="SG2__col2" :width="SG2__cws2"></el-table-column>
+                <el-table-column v-if="SG2__clv3" show-overflow-tooltip prop="d4" :label="SG2__col3" :width="SG2__cws3"></el-table-column>
+                <el-table-column v-if="SG2__clv4" show-overflow-tooltip prop="d5" :label="SG2__col4" :width="SG2__cws4"></el-table-column>
+                <el-table-column v-if="SG2__clv5" show-overflow-tooltip prop="d6" :label="SG2__col5" :width="SG2__cws5"></el-table-column>
+                <el-table-column v-if="SG2__clv6" show-overflow-tooltip prop="d7" :label="SG2__col6" :width="SG2__cws6"></el-table-column>
+                <el-table-column v-if="SG2__clv7" show-overflow-tooltip prop="d8" :label="SG2__col7" :width="SG2__cws7"></el-table-column>
+                <el-table-column v-if="SG2__clv8" show-overflow-tooltip prop="d9" :label="SG2__col8" :width="SG2__cws8"></el-table-column>
+                <el-table-column v-if="SG2__clv9" show-overflow-tooltip prop="d10" :label="SG2__col9" :width="SG2__cws9"></el-table-column>
+                <el-table-column v-if="SG2__clv10" show-overflow-tooltip prop="d11" :label="SG2__col10" :width="SG2__cws10"></el-table-column>
+            </el-table>
+        </div>
+        <el-link id="StaticText2" :underline="false" v-if="StaticText2__vis" :disabled="StaticText2__dis" type="primary" :href="StaticText2__hrf" target="_blank" :style="{left:StaticText2__lef,top:StaticText2__top,width:StaticText2__wid,height:StaticText2__hei}" style="position:absolute;">{{StaticText2__cap}}
+        </el-link>
+        <el-link id="StaticText3" :underline="false" v-if="StaticText3__vis" :disabled="StaticText3__dis" type="primary" :href="StaticText3__hrf" target="_blank" :style="{left:StaticText3__lef,top:StaticText3__top,width:StaticText3__wid,height:StaticText3__hei}" style="position:absolute;">{{StaticText3__cap}}
+        </el-link>
+        <el-link id="StaticText4" :underline="false" v-if="StaticText4__vis" :disabled="StaticText4__dis" type="primary" :href="StaticText4__hrf" target="_blank" :style="{left:StaticText4__lef,top:StaticText4__top,width:StaticText4__wid,height:StaticText4__hei}" style="position:absolute;">{{StaticText4__cap}}
+        </el-link>
+        <el-link id="StaticText5" :underline="false" v-if="StaticText5__vis" :disabled="StaticText5__dis" type="primary" :href="StaticText5__hrf" target="_blank" :style="{left:StaticText5__lef,top:StaticText5__top,width:StaticText5__wid,height:StaticText5__hei}" style="position:absolute;">{{StaticText5__cap}}
+        </el-link>
+        <el-link id="StaticText6" :underline="false" v-if="StaticText6__vis" :disabled="StaticText6__dis" type="primary" :href="StaticText6__hrf" target="_blank" :style="{left:StaticText6__lef,top:StaticText6__top,width:StaticText6__wid,height:StaticText6__hei}" style="position:absolute;">{{StaticText6__cap}}
+        </el-link>
+        <el-link id="StaticText7" :underline="false" v-if="StaticText7__vis" :disabled="StaticText7__dis" type="primary" :href="StaticText7__hrf" target="_blank" :style="{left:StaticText7__lef,top:StaticText7__top,width:StaticText7__wid,height:StaticText7__hei}" style="position:absolute;">{{StaticText7__cap}}
+        </el-link>
+        <el-link id="StaticText8" :underline="false" v-if="StaticText8__vis" :disabled="StaticText8__dis" type="primary" :href="StaticText8__hrf" target="_blank" :style="{left:StaticText8__lef,top:StaticText8__top,width:StaticText8__wid,height:StaticText8__hei}" style="position:absolute;">{{StaticText8__cap}}
+        </el-link>
+        <el-link id="StaticText9" :underline="false" v-if="StaticText9__vis" :disabled="StaticText9__dis" type="primary" :href="StaticText9__hrf" target="_blank" :style="{left:StaticText9__lef,top:StaticText9__top,width:StaticText9__wid,height:StaticText9__hei}" style="position:absolute;">{{StaticText9__cap}}
+        </el-link>
+        <el-link id="StaticText10" :underline="false" v-if="StaticText10__vis" :disabled="StaticText10__dis" type="primary" :href="StaticText10__hrf" target="_blank" :style="{left:StaticText10__lef,top:StaticText10__top,width:StaticText10__wid,height:StaticText10__hei}" style="position:absolute;">{{StaticText10__cap}}
+        </el-link>
+        <el-link id="StaticText11" :underline="false" v-if="StaticText11__vis" :disabled="StaticText11__dis" type="primary" :href="StaticText11__hrf" target="_blank" :style="{left:StaticText11__lef,top:StaticText11__top,width:StaticText11__wid,height:StaticText11__hei}" style="position:absolute;">{{StaticText11__cap}}
+        </el-link>
+        </el-main>
+        </el-main>
+        <el-main id="TabSheet5" v-if="PageControl1__apg=='TabSheet5'" :disabled="TabSheet5__dis" :style="{left:TabSheet5__lef,top:TabSheet5__top,width:TabSheet5__wid,height:TabSheet5__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label_User" v-html="Label_User__cap" v-if="Label_User__vis" :disabled="Label_User__dis" :style="{left:Label_User__lef,top:Label_User__top,width:Label_User__wid,height:Label_User__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label_User__cap}}
+        </div>
+        <div  id="Label_Psd" v-html="Label_Psd__cap" v-if="Label_Psd__vis" :disabled="Label_Psd__dis" :style="{left:Label_Psd__lef,top:Label_Psd__top,width:Label_Psd__wid,height:Label_Psd__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label_Psd__cap}}
+        </div>
+        <el-input id="Edit_Psd" v-if="Edit_Psd__vis" :disabled="Edit_Psd__dis" show-password v-model="Edit_Psd__txt" placeholder="请输入新密码" suffix-icon="el-icon-key" :style="{backgroundColor:Edit_Psd__col,left:Edit_Psd__lef,top:Edit_Psd__top,width:Edit_Psd__wid,height:Edit_Psd__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Psd','escape(this.Edit_Psd__txt)','onchange','399446')">
+        </el-input>
+        <el-input id="Edit_Confirm" v-if="Edit_Confirm__vis" :disabled="Edit_Confirm__dis" show-password v-model="Edit_Confirm__txt" placeholder="请再次输入新密码" suffix-icon="el-icon-key" :style="{backgroundColor:Edit_Confirm__col,left:Edit_Confirm__lef,top:Edit_Confirm__top,width:Edit_Confirm__wid,height:Edit_Confirm__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Confirm','escape(this.Edit_Confirm__txt)','onchange','399446')">
+        </el-input>
+        <el-button id="Button_OK" size=medium v-if="Button_OK__vis" :disabled="Button_OK__dis" :type="Button_OK__typ" icon="el-icon-unlock" :style="{left:Button_OK__lef,top:Button_OK__top,width:Button_OK__wid,height:Button_OK__hei}" style="position:absolute;" @click.native="dwevent($event,'Button_OK','0','onclick','399446')">{{Button_OK__cap}}
+        </el-button>
+        </el-main>
+        <el-main id="TabSheet1" v-if="PageControl1__apg=='TabSheet1'" :disabled="TabSheet1__dis" :style="{left:TabSheet1__lef,top:TabSheet1__top,width:TabSheet1__wid,height:TabSheet1__hei}" style="position:absolute;overflow:hidden;">
+        <div id="Chart1" v-if="Chart1__vis" :style="{left:Chart1__lef,top:Chart1__top,width:Chart1__wid,height:Chart1__hei}" style="position:absolute;">
+            <ve-histogram :legend="Chart1__lgd" :legend-visible="Chart1__lgv" :tooltip-visible="Chart1__sht" :settings="Chart1__set" :grid="Chart1__grd" :height="Chart1__hei" :judge-width="true" :data="Chart1__dat">
+            </ve-histogram>
+        </div>
+        </el-main>
+        <el-main id="TabSheet6" v-if="PageControl1__apg=='TabSheet6'" :disabled="TabSheet6__dis" :style="{left:TabSheet6__lef,top:TabSheet6__top,width:TabSheet6__wid,height:TabSheet6__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'微软雅黑';font-size:18pt;font-weight:bold;font-style:normal;text-decoration:none;text-align:center;line-height:38px;">{{Label1__cap}}
+        </div>
+        <el-main id="Panel3" v-if="Panel3__vis" :disabled="Panel3__dis" :style="{backgroundColor:Panel3__col,left:Panel3__lef,top:Panel3__top,width:Panel3__wid,height:Panel3__hei}" style="position:absolute;overflow:hidden;">
+        <el-button id="Button_NextPage" size=small v-if="Button_NextPage__vis" :disabled="Button_NextPage__dis" :type="Button_NextPage__typ" :style="{left:Button_NextPage__lef,top:Button_NextPage__top,width:Button_NextPage__wid,height:Button_NextPage__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button_NextPage','0','onclick','399446')">{{Button_NextPage__cap}}
+        </el-button>
+        <el-button id="Button_PrevPage" size=small v-if="Button_PrevPage__vis" :disabled="Button_PrevPage__dis" :type="Button_PrevPage__typ" :style="{left:Button_PrevPage__lef,top:Button_PrevPage__top,width:Button_PrevPage__wid,height:Button_PrevPage__hei}" style="position:absolute;border-radius:3px 0 0 3px;" @click.native="dwevent($event,'Button_PrevPage','0','onclick','399446')">{{Button_PrevPage__cap}}
+        </el-button>
+        <el-input id="Edit_Page" v-if="Edit_Page__vis" :disabled="Edit_Page__dis" v-model="Edit_Page__txt" :style="{backgroundColor:Edit_Page__col,left:Edit_Page__lef,top:Edit_Page__top,width:Edit_Page__wid,height:Edit_Page__hei}" style="position:absolute;border-radius:3px 0 0 3px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Page','escape(this.Edit_Page__txt)','onchange','399446')">
+        </el-input>
+        <el-button id="Button_Go" size=small v-if="Button_Go__vis" :disabled="Button_Go__dis" :type="Button_Go__typ" :style="{left:Button_Go__lef,top:Button_Go__top,width:Button_Go__wid,height:Button_Go__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button_Go','0','onclick','399446')">{{Button_Go__cap}}
+        </el-button>
+        <el-select id="ComboBox1" v-model="ComboBox1__txt" v-if="ComboBox1__vis" :disabled="ComboBox1__dis" :style="{left:ComboBox1__lef,top:ComboBox1__top,width:ComboBox1__wid,height:ComboBox1__hei}" style="position:absolute;border:1px solid #DCDFF0;border-radius:2px;" @change="dwevent($event,'ComboBox1','this.ComboBox1__txt','onchange','399446')">
+            <el-option v-for="item in ComboBox1__its" :key="item.value" :label="item.value" :value="item.value"/>
+        </el-select>
+        </el-main>
+        <el-main id="Panel_Logo" v-if="Panel_Logo__vis" :disabled="Panel_Logo__dis" :style="{backgroundColor:Panel_Logo__col,left:Panel_Logo__lef,top:Panel_Logo__top,width:Panel_Logo__wid,height:Panel_Logo__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);">
+        <div  id="Label2" v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:50px;">{{Label2__cap}}
+        </div>
+        <div  id="Label3" v-html="Label3__cap" v-if="Label3__vis" :disabled="Label3__dis" :style="{left:Label3__lef,top:Label3__top,width:Label3__wid,height:Label3__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:50px;">{{Label3__cap}}
+        </div>
+        <el-input id="Edit_Keyword" v-if="Edit_Keyword__vis" :disabled="Edit_Keyword__dis" v-model="Edit_Keyword__txt" placeholder="请输入关键字" :style="{backgroundColor:Edit_Keyword__col,left:Edit_Keyword__lef,top:Edit_Keyword__top,width:Edit_Keyword__wid,height:Edit_Keyword__hei}" style="position:absolute;border-radius:3px 0 0 3px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Keyword','escape(this.Edit_Keyword__txt)','onchange','399446')">
+        </el-input>
+        <el-button id="Button_Search" size=medium v-if="Button_Search__vis" :disabled="Button_Search__dis" :type="Button_Search__typ" icon="el-icon-search" :style="{left:Button_Search__lef,top:Button_Search__top,width:Button_Search__wid,height:Button_Search__hei}" style="position:absolute;border-radius:0 3px 3px 0;" @click.native="dwevent($event,'Button_Search','0','onclick','399446')">{{Button_Search__cap}}
+        </el-button>
+        <el-button id="Button_Reset" size=medium v-if="Button_Reset__vis" :disabled="Button_Reset__dis" :type="Button_Reset__typ" :style="{left:Button_Reset__lef,top:Button_Reset__top,width:Button_Reset__wid,height:Button_Reset__hei}" style="position:absolute;" @click.native="dwevent($event,'Button_Reset','0','onclick','399446')">{{Button_Reset__cap}}
+        </el-button>
+        <el-button id="Button1" size=mini v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','399446')">{{Button1__cap}}
+        </el-button>
+        <el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" id="dpt1" v-if="dpt1__vis" :disabled="dpt1__dis" v-model="dpt1__val" :style="{left:dpt1__lef,top:dpt1__top,width:dpt1__wid,height:dpt1__hei}" style="position:absolute;" @change="dwevent($event,'dpt1','this.dpt1__val','onchange','399446')">
+        </el-date-picker>
+        <el-date-picker type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" id="dpt2" v-if="dpt2__vis" :disabled="dpt2__dis" v-model="dpt2__val" :style="{left:dpt2__lef,top:dpt2__top,width:dpt2__wid,height:dpt2__hei}" style="position:absolute;" @change="dwevent($event,'dpt2','this.dpt2__val','onchange','399446')">
+        </el-date-picker>
+        <el-button id="Button2" size=mini v-if="Button2__vis" :disabled="Button2__dis" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;" @click.native="dwevent($event,'Button2','0','onclick','399446')">{{Button2__cap}}
+        </el-button>
+        </el-main>
+        <div :style="{left:SG1__lef,top:SG1__top,width:SG1__wid,height:SG1__hei}" style="position:absolute;">
+            <el-table id="SG1" :data="SG1__ces" highlight-current-row :row-style="{height:'35px'}" :header-row-style="{height:'35px'}" ref="SG1" border stripe show-summary v-if="SG1__vis" :disabled="SG1__dis" :height="SG1__hei" style="width:100%" @row-click="dwevent($event,'SG1','val.d0','onclick','399446')">
+                <el-table-column show-overflow-tooltip fixed v-if=false prop="d0" label="rowno" width="10"></el-table-column>
+                <el-table-column fixed="left" v-if="SG1__clv0" show-overflow-tooltip prop="d1" :label="SG1__col0" :width="SG1__cws0"></el-table-column>
+                <el-table-column v-if="SG1__clv1" show-overflow-tooltip prop="d2" :label="SG1__col1" :width="SG1__cws1"></el-table-column>
+                <el-table-column v-if="SG1__clv2" show-overflow-tooltip prop="d3" :label="SG1__col2" :width="SG1__cws2"></el-table-column>
+                <el-table-column v-if="SG1__clv3" show-overflow-tooltip prop="d4" :label="SG1__col3" :width="SG1__cws3"></el-table-column>
+                <el-table-column v-if="SG1__clv4" show-overflow-tooltip prop="d5" :label="SG1__col4" :width="SG1__cws4"></el-table-column>
+                <el-table-column v-if="SG1__clv5" show-overflow-tooltip prop="d6" :label="SG1__col5" :width="SG1__cws5"></el-table-column>
+                <el-table-column v-if="SG1__clv6" show-overflow-tooltip prop="d7" :label="SG1__col6" :width="SG1__cws6"></el-table-column>
+                <el-table-column v-if="SG1__clv7" show-overflow-tooltip prop="d8" :label="SG1__col7" :width="SG1__cws7"></el-table-column>
+                <el-table-column v-if="SG1__clv8" show-overflow-tooltip prop="d9" :label="SG1__col8" :width="SG1__cws8"></el-table-column>
+                <el-table-column v-if="SG1__clv9" show-overflow-tooltip prop="d10" :label="SG1__col9" :width="SG1__cws9"></el-table-column>
+                <el-table-column v-if="SG1__clv10" show-overflow-tooltip prop="d11" :label="SG1__col10" :width="SG1__cws10"></el-table-column>
+                <el-table-column v-if="SG1__clv11" show-overflow-tooltip prop="d12" :label="SG1__col11" :width="SG1__cws11"></el-table-column>
+                <el-table-column v-if="SG1__clv12" show-overflow-tooltip prop="d13" :label="SG1__col12" :width="SG1__cws12"></el-table-column>
+                <el-table-column v-if="SG1__clv13" show-overflow-tooltip prop="d14" :label="SG1__col13" :width="SG1__cws13"></el-table-column>
+                <el-table-column v-if="SG1__clv14" show-overflow-tooltip prop="d15" :label="SG1__col14" :width="SG1__cws14"></el-table-column>
+                <el-table-column v-if="SG1__clv15" show-overflow-tooltip prop="d16" :label="SG1__col15" :width="SG1__cws15"></el-table-column>
+                <el-table-column v-if="SG1__clv16" show-overflow-tooltip prop="d17" :label="SG1__col16" :width="SG1__cws16"></el-table-column>
+                <el-table-column v-if="SG1__clv17" show-overflow-tooltip prop="d18" :label="SG1__col17" :width="SG1__cws17"></el-table-column>
+                <el-table-column v-if="SG1__clv18" show-overflow-tooltip prop="d19" :label="SG1__col18" :width="SG1__cws18"></el-table-column>
+                <el-table-column v-if="SG1__clv19" show-overflow-tooltip prop="d20" :label="SG1__col19" :width="SG1__cws19"></el-table-column>
+                <el-table-column v-if="SG1__clv20" show-overflow-tooltip prop="d21" :label="SG1__col20" :width="SG1__cws20"></el-table-column>
+                <el-table-column v-if="SG1__clv21" show-overflow-tooltip prop="d22" :label="SG1__col21" :width="SG1__cws21"></el-table-column>
+                <el-table-column v-if="SG1__clv22" show-overflow-tooltip prop="d23" :label="SG1__col22" :width="SG1__cws22"></el-table-column>
+                <el-table-column v-if="SG1__clv23" show-overflow-tooltip prop="d24" :label="SG1__col23" :width="SG1__cws23"></el-table-column>
+                <el-table-column v-if="SG1__clv24" show-overflow-tooltip prop="d25" :label="SG1__col24" :width="SG1__cws24"></el-table-column>
+            </el-table>
+        </div>
+        </el-main>
+            </div>
+        </el-tabs>
+        </el-main>
+        <el-menu id="MainMenu" :default-active="MainMenu__act" class="el-menu-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="MainMenu__cps" :collapse-transition="false" :style='{left:MainMenu__lef,top:MainMenu__top,width:MainMenu__wid,height:MainMenu__hei}' style="position:absolute;line-height:30px;" @select="dwevent($event,'MainMenu','val','onclick','399446')">
+        <el-menu-item index="0" style="height:50px;line-height:35px">首页</el-menu-item>
+        <el-submenu index="1"><template slot="title">
+        <i class="el-icon-s-home"></i>
+        <span>销售管理</span></template>
+        <el-menu-item index="1-0">销售对账单</el-menu-item>
+<el-menu-item index="1-1">销售成本利润分析</el-menu-item>
+
+        </el-submenu>
+        <el-submenu index="2"><template slot="title">
+        <i class="el-icon-pie-chart"></i>
+        <span>采购管理</span></template>
+        <el-menu-item index="2-0">采购对账单</el-menu-item>
+<el-submenu index="2-1"><template slot="title">
+<span>采购招标</span></template>
+<el-menu-item index="2-1-0">招标信息发布</el-menu-item>
+<el-menu-item index="2-1-1">采购竞标</el-menu-item>
+<el-menu-item index="2-1-2">招标信息管理</el-menu-item>
+</el-submenu>
+
+        </el-submenu>
+        <el-menu-item index="3" style="height:50px;line-height:35px"><i class="el-icon-collection"></i><span slot="title">OA办公</span></el-menu-item>
+        <el-menu-item index="4" style="height:50px;line-height:35px"><i class="el-icon-chat-dot-square"></i><span slot="title">租赁管理</span></el-menu-item>
+        <el-submenu index="5"><template slot="title">
+        <i class="el-icon-collection"></i>
+        <span>文档管理</span></template>
+        <el-menu-item index="5-0">我的文件</el-menu-item>
+<el-menu-item index="5-1">文件管理</el-menu-item>
+
+        </el-submenu>
+        <el-submenu index="6"><template slot="title">
+        <i class="el-icon-setting"></i>
+        <span>系统管理</span></template>
+        <el-menu-item index="6-0">导出EXCEL</el-menu-item>
+<el-menu-item index="6-1">修改密码</el-menu-item>
+
+        </el-submenu>
+        
+        </el-menu>
+	 </div>
+    <script>
+       Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + expiredays);
+            document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()); 
+       },
+       Vue.prototype.dwgetcookie = function (name) {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
+            if(arr=document.cookie.match(reg))
+                 return unescape(arr[2]); 
+            else
+                 return '';
+       },
+	    Vue.prototype.procResp = function (data){
+		    resp = JSON.parse(decodeURIComponent(String(data))); 
+		    if (resp.m === "update"){
+		        eval(String(resp.o));
+		    } else if (resp.m === "html"){
+		        document.body.innerHTML="";document.write(String(resp.o));document.close();
+		    } else if (resp.m === "showform"){
+		        document.open();document.write(String(resp.o));
+		    }
+	    } 
+        new Vue(
+			{
+				el: '#app',
+				data: function () {
+					return {
+					    Form1_1__top:"0px",
+					    Form1_1__wid:"1910px",
+					    Form1_1__hei:"965px",
+                        Image1__lef:"1px",
+                        Image1__top:"1px",
+                        Image1__wid:"1840px",
+                        Image1__hei:"64px",
+                        Image1__vis:true,
+                        Image1__dis:false,
+                        Image1__src:"media/images/main_log.png",
+                        Image2__lef:"1px",
+                        Image2__top:"1px",
+                        Image2__wid:"66px",
+                        Image2__hei:"40px",
+                        Image2__vis:true,
+                        Image2__dis:false,
+                        Image2__src:"media/images/mine.png",
+                        Label4__lef:"1px",
+                        Label4__top:"41px",
+                        Label4__wid:"66px",
+                        Label4__hei:"22px",
+                        Label4__vis:true,
+                        Label4__dis:false,
+                        Label4__cap:"Label4",
+                        Panel4__lef:"1841px",
+                        Panel4__top:"1px",
+                        Panel4__wid:"68px",
+                        Panel4__hei:"64px",
+                        Panel4__vis:true,
+                        Panel4__dis:false,
+                        Panel4__col:"RGB(240,240,240,1.0)",
+                        Panel1__lef:"0px",
+                        Panel1__top:"0px",
+                        Panel1__wid:"1910px",
+                        Panel1__hei:"66px",
+                        Panel1__vis:true,
+                        Panel1__dis:false,
+                        Panel1__col:"RGB(240,240,240,1.0)",
+                        Panel2__lef:"1px",
+                        Panel2__top:"1px",
+                        Panel2__wid:"250px",
+                        Panel2__hei:"897px",
+                        Panel2__vis:true,
+                        Panel2__dis:false,
+                        Panel2__col:"RGB(38,42,53,1.0)",
+                        Label13__lef:"0px",
+                        Label13__top:"0px",
+                        Label13__wid:"1182px",
+                        Label13__hei:"38px",
+                        Label13__vis:true,
+                        Label13__dis:false,
+                        Label13__cap:"招标信息发布",
+                        Panel6__lef:"0px",
+                        Panel6__top:"293px",
+                        Panel6__wid:"1182px",
+                        Panel6__hei:"328px",
+                        Panel6__vis:true,
+                        Panel6__dis:false,
+                        Panel6__col:"RGB(240,240,240,1.0)",
+                        Edit_FNOTE__lef:"673px",
+                        Edit_FNOTE__top:"11px",
+                        Edit_FNOTE__wid:"508px",
+                        Edit_FNOTE__hei:"171px",
+                        Edit_FNOTE__vis:true,
+                        Edit_FNOTE__dis:false,
+                        Edit_FNOTE__txt:"招标说明：",
+                        Edit_FNOTE__col:"#FFFFFF",
+                        Label5__lef:"0px",
+                        Label5__top:"16px",
+                        Label5__wid:"90px",
+                        Label5__hei:"20px",
+                        Label5__vis:true,
+                        Label5__dis:false,
+                        Label5__cap:"招标项目名称",
+                        Label6__lef:"0px",
+                        Label6__top:"102px",
+                        Label6__wid:"60px",
+                        Label6__hei:"20px",
+                        Label6__vis:true,
+                        Label6__dis:false,
+                        Label6__cap:"招标时间",
+                        Label7__lef:"384px",
+                        Label7__top:"106px",
+                        Label7__wid:"36px",
+                        Label7__hei:"26px",
+                        Label7__vis:true,
+                        Label7__dis:false,
+                        Label7__cap:"---",
+                        Label8__lef:"0px",
+                        Label8__top:"152px",
+                        Label8__wid:"60px",
+                        Label8__hei:"20px",
+                        Label8__vis:true,
+                        Label8__dis:false,
+                        Label8__cap:"招标文件",
+                        Label9__lef:"0px",
+                        Label9__top:"58px",
+                        Label9__wid:"60px",
+                        Label9__hei:"20px",
+                        Label9__vis:true,
+                        Label9__dis:false,
+                        Label9__cap:"招标数量",
+                        Label10__lef:"212px",
+                        Label10__top:"62px",
+                        Label10__wid:"30px",
+                        Label10__hei:"20px",
+                        Label10__vis:true,
+                        Label10__dis:false,
+                        Label10__cap:"单价",
+                        Label11__lef:"390px",
+                        Label11__top:"60px",
+                        Label11__wid:"30px",
+                        Label11__hei:"20px",
+                        Label11__vis:true,
+                        Label11__dis:false,
+                        Label11__cap:"单位",
+                        Label12__lef:"504px",
+                        Label12__top:"62px",
+                        Label12__wid:"30px",
+                        Label12__hei:"20px",
+                        Label12__vis:true,
+                        Label12__dis:false,
+                        Label12__cap:"金额",
+                        Edit_fname__lef:"93px",
+                        Edit_fname__top:"12px",
+                        Edit_fname__wid:"572px",
+                        Edit_fname__hei:"35px",
+                        Edit_fname__vis:true,
+                        Edit_fname__dis:false,
+                        Edit_fname__txt:"",
+                        Edit_fname__col:"#FFFFFF",
+                        Edit_fqty__lef:"93px",
+                        Edit_fqty__top:"55px",
+                        Edit_fqty__wid:"108px",
+                        Edit_fqty__hei:"35px",
+                        Edit_fqty__vis:true,
+                        Edit_fqty__dis:false,
+                        Edit_fqty__txt:"",
+                        Edit_fqty__col:"#FFFFFF",
+                        Edit_fprice__lef:"254px",
+                        Edit_fprice__top:"55px",
+                        Edit_fprice__wid:"124px",
+                        Edit_fprice__hei:"35px",
+                        Edit_fprice__vis:true,
+                        Edit_fprice__dis:false,
+                        Edit_fprice__txt:"",
+                        Edit_fprice__col:"#FFFFFF",
+                        Edit_funit__lef:"435px",
+                        Edit_funit__top:"54px",
+                        Edit_funit__wid:"56px",
+                        Edit_funit__hei:"35px",
+                        Edit_funit__vis:true,
+                        Edit_funit__dis:false,
+                        Edit_funit__txt:"",
+                        Edit_funit__col:"#FFFFFF",
+                        Edit_fmoney__lef:"541px",
+                        Edit_fmoney__top:"55px",
+                        Edit_fmoney__wid:"124px",
+                        Edit_fmoney__hei:"35px",
+                        Edit_fmoney__vis:true,
+                        Edit_fmoney__dis:false,
+                        Edit_fmoney__txt:"",
+                        Edit_fmoney__col:"#FFFFFF",
+                        Edit_ddate__lef:"92px",
+                        Edit_ddate__top:"103px",
+                        Edit_ddate__wid:"150px",
+                        Edit_ddate__hei:"34px",
+                        Edit_ddate__vis:true,
+                        Edit_ddate__dis:false,
+                        Edit_ddate__val:"2021-04-27",
+                        Edit_edate__lef:"410px",
+                        Edit_edate__top:"102px",
+                        Edit_edate__wid:"136px",
+                        Edit_edate__hei:"34px",
+                        Edit_edate__vis:true,
+                        Edit_edate__dis:false,
+                        Edit_edate__val:"2021-04-27",
+                        Edit_ddates__lef:"257px",
+                        Edit_ddates__top:"103px",
+                        Edit_ddates__wid:"121px",
+                        Edit_ddates__hei:"34px",
+                        Edit_ddates__vis:true,
+                        Edit_ddates__dis:false,
+                        Edit_ddates__val:"09:44:29",
+                        Edit_edates__lef:"547px",
+                        Edit_edates__top:"103px",
+                        Edit_edates__wid:"114px",
+                        Edit_edates__hei:"34px",
+                        Edit_edates__vis:true,
+                        Edit_edates__dis:false,
+                        Edit_edates__val:"09:44:29",
+                        BitBtn1__lef:"83px",
+                        BitBtn1__top:"150px",
+                        BitBtn1__wid:"348px",
+                        BitBtn1__hei:"36px",
+                        BitBtn1__vis:true,
+                        BitBtn1__dis:false,
+                        BitBtn1__cap:"选择文件",
+                        BitBtn1__typ:"primary",
+                        Button3__lef:"566px",
+                        Button3__top:"149px",
+                        Button3__wid:"105px",
+                        Button3__hei:"37px",
+                        Button3__vis:true,
+                        Button3__dis:false,
+                        Button3__cap:"上传",
+                        Button3__typ:"success",
+                        Edit1__lef:"4px",
+                        Edit1__top:"91px",
+                        Edit1__wid:"73px",
+                        Edit1__hei:"48px",
+                        Edit1__vis:false,
+                        Edit1__dis:false,
+                        Edit1__txt:"",
+                        Edit1__col:"#FFFFFF",
+                        Panel9__lef:"1px",
+                        Panel9__top:"1px",
+                        Panel9__wid:"672px",
+                        Panel9__hei:"191px",
+                        Panel9__vis:true,
+                        Panel9__dis:false,
+                        Panel9__col:"RGB(240,240,240,1.0)",
+                        Panel7__lef:"0px",
+                        Panel7__top:"100px",
+                        Panel7__wid:"1182px",
+                        Panel7__hei:"193px",
+                        Panel7__vis:true,
+                        Panel7__dis:false,
+                        Panel7__col:"RGB(240,240,240,1.0)",
+                        Label14__lef:"1px",
+                        Label14__top:"1px",
+                        Label14__wid:"76px",
+                        Label14__hei:"50px",
+                        Label14__vis:true,
+                        Label14__dis:false,
+                        Label14__cap:"单据日期",
+                        Label15__lef:"230px",
+                        Label15__top:"1px",
+                        Label15__wid:"35px",
+                        Label15__hei:"50px",
+                        Label15__vis:true,
+                        Label15__dis:false,
+                        Label15__cap:"--",
+                        Edit_Keyword2__lef:"431px",
+                        Edit_Keyword2__top:"4px",
+                        Edit_Keyword2__wid:"334px",
+                        Edit_Keyword2__hei:"40px",
+                        Edit_Keyword2__vis:true,
+                        Edit_Keyword2__dis:false,
+                        Edit_Keyword2__txt:"",
+                        Edit_Keyword2__col:"#FFFFFF",
+                        Button_zhaobiao__lef:"792px",
+                        Button_zhaobiao__top:"1px",
+                        Button_zhaobiao__wid:"115px",
+                        Button_zhaobiao__hei:"43px",
+                        Button_zhaobiao__vis:true,
+                        Button_zhaobiao__dis:false,
+                        Button_zhaobiao__cap:"查询",
+                        Button_zhaobiao__typ:"primary",
+                        dpt3__lef:"77px",
+                        dpt3__top:"1px",
+                        dpt3__wid:"153px",
+                        dpt3__hei:"50px",
+                        dpt3__vis:true,
+                        dpt3__dis:false,
+                        dpt3__val:"2021-04-14",
+                        dpt4__lef:"265px",
+                        dpt4__top:"1px",
+                        dpt4__wid:"151px",
+                        dpt4__hei:"50px",
+                        dpt4__vis:true,
+                        dpt4__dis:false,
+                        dpt4__val:"2021-04-14",
+                        Panel10__lef:"3px",
+                        Panel10__top:"41px",
+                        Panel10__wid:"1179px",
+                        Panel10__hei:"56px",
+                        Panel10__vis:true,
+                        Panel10__dis:false,
+                        Panel10__col:"RGB(255,255,255,1.0)",
+                        Button5__lef:"65px",
+                        Button5__top:"9px",
+                        Button5__wid:"60px",
+                        Button5__hei:"37px",
+                        Button5__vis:true,
+                        Button5__dis:false,
+                        Button5__cap:"下一页",
+                        Button5__typ:"primary",
+                        Button6__lef:"4px",
+                        Button6__top:"9px",
+                        Button6__wid:"60px",
+                        Button6__hei:"37px",
+                        Button6__vis:true,
+                        Button6__dis:false,
+                        Button6__cap:"上一页",
+                        Button6__typ:"primary",
+                        Edit2__lef:"131px",
+                        Edit2__top:"9px",
+                        Edit2__wid:"69px",
+                        Edit2__hei:"35px",
+                        Edit2__vis:true,
+                        Edit2__dis:false,
+                        Edit2__txt:"1",
+                        Edit2__col:"#FFFFFF",
+                        Button7__lef:"200px",
+                        Button7__top:"9px",
+                        Button7__wid:"40px",
+                        Button7__hei:"37px",
+                        Button7__vis:true,
+                        Button7__dis:false,
+                        Button7__cap:"GO",
+                        Button7__typ:"primary",
+                        ComboBox2__its:[{value:'10'},{value:'15'},{value:'20'},{value:'30'},{value:'40'},{value:'50'},{value:'60'},{value:'70'},{value:'80'},{value:'90'},{value:'100'}],
+                        ComboBox2__lef:"252px",
+                        ComboBox2__top:"13px",
+                        ComboBox2__wid:"76px",
+                        ComboBox2__hei:"28px",
+                        ComboBox2__vis:true,
+                        ComboBox2__dis:false,
+                        ComboBox2__txt:"10",
+                        Button_Append__lef:"17px",
+                        Button_Append__top:"5px",
+                        Button_Append__wid:"100px",
+                        Button_Append__hei:"37px",
+                        Button_Append__vis:true,
+                        Button_Append__dis:false,
+                        Button_Append__cap:"增加",
+                        Button_Append__typ:"primary",
+                        Button_Delete__lef:"221px",
+                        Button_Delete__top:"5px",
+                        Button_Delete__wid:"100px",
+                        Button_Delete__hei:"37px",
+                        Button_Delete__vis:true,
+                        Button_Delete__dis:false,
+                        Button_Delete__cap:"删除",
+                        Button_Delete__typ:"primary",
+                        Button4__lef:"119px",
+                        Button4__top:"5px",
+                        Button4__wid:"100px",
+                        Button4__hei:"36px",
+                        Button4__vis:true,
+                        Button4__dis:false,
+                        Button4__cap:"保存",
+                        Button4__typ:"primary",
+                        Panel8__lef:"1px",
+                        Panel8__top:"54px",
+                        Panel8__wid:"1648px",
+                        Panel8__hei:"45px",
+                        Panel8__vis:true,
+                        Panel8__dis:false,
+                        Panel8__col:"RGB(255,255,255,1.0)",
+                        Panel11__lef:"0px",
+                        Panel11__top:"787px",
+                        Panel11__wid:"1650px",
+                        Panel11__hei:"100px",
+                        Panel11__vis:true,
+                        Panel11__dis:false,
+                        Panel11__col:"RGB(255,255,255,1.0)",
+                        SG2__lef:"4px",
+                        SG2__top:"4px",
+                        SG2__wid:"1174px",
+                        SG2__hei:"295px",
+                        SG2__vis:true,
+                        SG2__dis:false,
+                        SG2__col0:"",
+                        SG2__col1:"",
+                        SG2__col2:"",
+                        SG2__col3:"",
+                        SG2__col4:"",
+                        SG2__col5:"",
+                        SG2__col6:"",
+                        SG2__col7:"",
+                        SG2__col8:"",
+                        SG2__col9:"",
+                        SG2__col10:"",
+                        SG2__cws0:"100",
+                        SG2__cws1:"100",
+                        SG2__cws2:"100",
+                        SG2__cws3:"100",
+                        SG2__cws4:"100",
+                        SG2__cws5:"100",
+                        SG2__cws6:"100",
+                        SG2__cws7:"100",
+                        SG2__cws8:"100",
+                        SG2__cws9:"100",
+                        SG2__cws10:"100",
+                        SG2__clv0:true,
+                        SG2__clv1:true,
+                        SG2__clv2:true,
+                        SG2__clv3:true,
+                        SG2__clv4:true,
+                        SG2__clv5:true,
+                        SG2__clv6:true,
+                        SG2__clv7:true,
+                        SG2__clv8:true,
+                        SG2__clv9:true,
+                        SG2__clv10:true,
+                        SG2__ces:[{d0:'1',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'2',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'3',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'4',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'5',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'6',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'7',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'8',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''},{d0:'9',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:''}],
+                        StaticText2__lef:"1026px",
+                        StaticText2__top:"203px",
+                        StaticText2__wid:"4px",
+                        StaticText2__hei:"4px",
+                        StaticText2__vis:true,
+                        StaticText2__dis:false,
+                        StaticText2__cap:"",
+                        StaticText2__hrf:"/download/1211.txt",
+                        StaticText3__lef:"1026px",
+                        StaticText3__top:"238px",
+                        StaticText3__wid:"4px",
+                        StaticText3__hei:"4px",
+                        StaticText3__vis:true,
+                        StaticText3__dis:false,
+                        StaticText3__cap:"",
+                        StaticText3__hrf:"/download/1211.txt",
+                        StaticText4__lef:"1026px",
+                        StaticText4__top:"267px",
+                        StaticText4__wid:"4px",
+                        StaticText4__hei:"4px",
+                        StaticText4__vis:true,
+                        StaticText4__dis:false,
+                        StaticText4__cap:"",
+                        StaticText4__hrf:"/download/1211.txt",
+                        StaticText5__lef:"1034px",
+                        StaticText5__top:"267px",
+                        StaticText5__wid:"4px",
+                        StaticText5__hei:"4px",
+                        StaticText5__vis:true,
+                        StaticText5__dis:false,
+                        StaticText5__cap:"",
+                        StaticText5__hrf:"/download/1211.txt",
+                        StaticText6__lef:"1042px",
+                        StaticText6__top:"267px",
+                        StaticText6__wid:"4px",
+                        StaticText6__hei:"4px",
+                        StaticText6__vis:true,
+                        StaticText6__dis:false,
+                        StaticText6__cap:"",
+                        StaticText6__hrf:"/download/1211.txt",
+                        StaticText7__lef:"1050px",
+                        StaticText7__top:"267px",
+                        StaticText7__wid:"4px",
+                        StaticText7__hei:"4px",
+                        StaticText7__vis:true,
+                        StaticText7__dis:false,
+                        StaticText7__cap:"",
+                        StaticText7__hrf:"/download/1211.txt",
+                        StaticText8__lef:"1058px",
+                        StaticText8__top:"267px",
+                        StaticText8__wid:"4px",
+                        StaticText8__hei:"4px",
+                        StaticText8__vis:true,
+                        StaticText8__dis:false,
+                        StaticText8__cap:"",
+                        StaticText8__hrf:"/download/1211.txt",
+                        StaticText9__lef:"1066px",
+                        StaticText9__top:"267px",
+                        StaticText9__wid:"4px",
+                        StaticText9__hei:"4px",
+                        StaticText9__vis:true,
+                        StaticText9__dis:false,
+                        StaticText9__cap:"",
+                        StaticText9__hrf:"/download/1211.txt",
+                        StaticText10__lef:"1074px",
+                        StaticText10__top:"267px",
+                        StaticText10__wid:"4px",
+                        StaticText10__hei:"4px",
+                        StaticText10__vis:true,
+                        StaticText10__dis:false,
+                        StaticText10__cap:"",
+                        StaticText10__hrf:"/download/1211.txt",
+                        StaticText11__lef:"1082px",
+                        StaticText11__top:"267px",
+                        StaticText11__wid:"4px",
+                        StaticText11__hei:"4px",
+                        StaticText11__vis:true,
+                        StaticText11__dis:false,
+                        StaticText11__cap:"",
+                        StaticText11__hrf:"/download/1211.txt",
+                        Panel12__lef:"0px",
+                        Panel12__top:"293px",
+                        Panel12__wid:"1650px",
+                        Panel12__hei:"494px",
+                        Panel12__vis:true,
+                        Panel12__dis:false,
+                        Panel12__col:"RGB(240,240,240,1.0)",
+                        TabSheet4__lef:"4px",
+                        TabSheet4__top:"6px",
+                        TabSheet4__wid:"1650px",
+                        TabSheet4__hei:"887px",
+                        TabSheet4__vis:false,
+                        TabSheet4__dis:false,
+                        TabSheet4__cap:"TabSheet4",
+                        Label_User__lef:"3px",
+                        Label_User__top:"32px",
+                        Label_User__wid:"48px",
+                        Label_User__hei:"26px",
+                        Label_User__vis:true,
+                        Label_User__dis:false,
+                        Label_User__cap:"新密码",
+                        Label_Psd__lef:"3px",
+                        Label_Psd__top:"110px",
+                        Label_Psd__wid:"97px",
+                        Label_Psd__hei:"30px",
+                        Label_Psd__vis:true,
+                        Label_Psd__dis:false,
+                        Label_Psd__cap:"确认密码",
+                        Edit_Psd__lef:"3px",
+                        Edit_Psd__top:"64px",
+                        Edit_Psd__wid:"1091px",
+                        Edit_Psd__hei:"40px",
+                        Edit_Psd__vis:true,
+                        Edit_Psd__dis:false,
+                        Edit_Psd__txt:"",
+                        Edit_Psd__col:"#FFFFFF",
+                        Edit_Confirm__lef:"3px",
+                        Edit_Confirm__top:"146px",
+                        Edit_Confirm__wid:"310px",
+                        Edit_Confirm__hei:"40px",
+                        Edit_Confirm__vis:true,
+                        Edit_Confirm__dis:false,
+                        Edit_Confirm__txt:"",
+                        Edit_Confirm__col:"#FFFFFF",
+                        Button_OK__lef:"3px",
+                        Button_OK__top:"226px",
+                        Button_OK__wid:"115px",
+                        Button_OK__hei:"40px",
+                        Button_OK__vis:true,
+                        Button_OK__dis:false,
+                        Button_OK__cap:"确定",
+                        Button_OK__typ:"primary",
+                        TabSheet5__lef:"4px",
+                        TabSheet5__top:"6px",
+                        TabSheet5__wid:"1650px",
+                        TabSheet5__hei:"887px",
+                        TabSheet5__vis:false,
+                        TabSheet5__dis:false,
+                        TabSheet5__cap:"TabSheet5",
+                        Chart1__lef:"128px",
+                        Chart1__top:"248px",
+                        Chart1__wid:"400px",
+                        Chart1__hei:"250px",
+                        Chart1__vis:true,
+                        Chart1__lgv:true,
+                        Chart1__sht:false,
+                        Chart1__grd:{show:true, backgroundColor: "#F0F0F0",  borderColor: "#000000",x:10,x2:20,y:10,y2:10},
+                        Chart1__set:{},
+                        Chart1__dat:{columns: ['X','Series1'],
+rows:]},
+                        Chart1__lgd:{orient: 'horizontal',x:'right',y:'center',textStyle:{color:"#000000"}},
+                        TabSheet1__lef:"4px",
+                        TabSheet1__top:"6px",
+                        TabSheet1__wid:"1650px",
+                        TabSheet1__hei:"887px",
+                        TabSheet1__vis:false,
+                        TabSheet1__dis:false,
+                        TabSheet1__cap:"TabSheet1",
+                        Label1__lef:"0px",
+                        Label1__top:"0px",
+                        Label1__wid:"1650px",
+                        Label1__hei:"38px",
+                        Label1__vis:true,
+                        Label1__dis:false,
+                        Label1__cap:"销售成本利润",
+                        Button_NextPage__lef:"66px",
+                        Button_NextPage__top:"10px",
+                        Button_NextPage__wid:"60px",
+                        Button_NextPage__hei:"30px",
+                        Button_NextPage__vis:true,
+                        Button_NextPage__dis:false,
+                        Button_NextPage__cap:"下一页",
+                        Button_NextPage__typ:"primary",
+                        Button_PrevPage__lef:"5px",
+                        Button_PrevPage__top:"10px",
+                        Button_PrevPage__wid:"60px",
+                        Button_PrevPage__hei:"30px",
+                        Button_PrevPage__vis:true,
+                        Button_PrevPage__dis:false,
+                        Button_PrevPage__cap:"上一页",
+                        Button_PrevPage__typ:"primary",
+                        Edit_Page__lef:"132px",
+                        Edit_Page__top:"10px",
+                        Edit_Page__wid:"69px",
+                        Edit_Page__hei:"28px",
+                        Edit_Page__vis:true,
+                        Edit_Page__dis:false,
+                        Edit_Page__txt:"1",
+                        Edit_Page__col:"#FFFFFF",
+                        Button_Go__lef:"201px",
+                        Button_Go__top:"10px",
+                        Button_Go__wid:"40px",
+                        Button_Go__hei:"30px",
+                        Button_Go__vis:true,
+                        Button_Go__dis:false,
+                        Button_Go__cap:"GO",
+                        Button_Go__typ:"primary",
+                        ComboBox1__its:[{value:'10'},{value:'15'},{value:'20'},{value:'30'},{value:'40'},{value:'50'},{value:'60'},{value:'70'},{value:'80'},{value:'90'},{value:'100'}],
+                        ComboBox1__lef:"252px",
+                        ComboBox1__top:"13px",
+                        ComboBox1__wid:"76px",
+                        ComboBox1__hei:"28px",
+                        ComboBox1__vis:true,
+                        ComboBox1__dis:false,
+                        ComboBox1__txt:"10",
+                        Panel3__lef:"0px",
+                        Panel3__top:"837px",
+                        Panel3__wid:"1650px",
+                        Panel3__hei:"50px",
+                        Panel3__vis:true,
+                        Panel3__dis:false,
+                        Panel3__col:"RGB(255,255,255,1.0)",
+                        Label2__lef:"1px",
+                        Label2__top:"1px",
+                        Label2__wid:"76px",
+                        Label2__hei:"50px",
+                        Label2__vis:true,
+                        Label2__dis:false,
+                        Label2__cap:"单据日期",
+                        Label3__lef:"230px",
+                        Label3__top:"1px",
+                        Label3__wid:"35px",
+                        Label3__hei:"50px",
+                        Label3__vis:true,
+                        Label3__dis:false,
+                        Label3__cap:"--",
+                        Edit_Keyword__lef:"435px",
+                        Edit_Keyword__top:"4px",
+                        Edit_Keyword__wid:"334px",
+                        Edit_Keyword__hei:"44px",
+                        Edit_Keyword__vis:true,
+                        Edit_Keyword__dis:false,
+                        Edit_Keyword__txt:"",
+                        Edit_Keyword__col:"#FFFFFF",
+                        Button_Search__lef:"792px",
+                        Button_Search__top:"4px",
+                        Button_Search__wid:"115px",
+                        Button_Search__hei:"43px",
+                        Button_Search__vis:true,
+                        Button_Search__dis:false,
+                        Button_Search__cap:"查询",
+                        Button_Search__typ:"primary",
+                        Button_Reset__lef:"916px",
+                        Button_Reset__top:"4px",
+                        Button_Reset__wid:"100px",
+                        Button_Reset__hei:"44px",
+                        Button_Reset__vis:false,
+                        Button_Reset__dis:false,
+                        Button_Reset__cap:"重置数据",
+                        Button_Reset__typ:"warning",
+                        Button1__lef:"1539px",
+                        Button1__top:"21px",
+                        Button1__wid:"83px",
+                        Button1__hei:"16px",
+                        Button1__vis:true,
+                        Button1__dis:false,
+                        Button1__cap:"导出",
+                        Button1__typ:"warning",
+                        dpt1__lef:"77px",
+                        dpt1__top:"1px",
+                        dpt1__wid:"153px",
+                        dpt1__hei:"50px",
+                        dpt1__vis:true,
+                        dpt1__dis:false,
+                        dpt1__val:"2019-08-10",
+                        dpt2__lef:"265px",
+                        dpt2__top:"1px",
+                        dpt2__wid:"151px",
+                        dpt2__hei:"50px",
+                        dpt2__vis:true,
+                        dpt2__dis:false,
+                        dpt2__val:"2021-04-30",
+                        Button2__lef:"1071px",
+                        Button2__top:"21px",
+                        Button2__wid:"83px",
+                        Button2__hei:"16px",
+                        Button2__vis:false,
+                        Button2__dis:false,
+                        Button2__cap:"更新表头",
+                        Button2__typ:"warning",
+                        Panel_Logo__lef:"3px",
+                        Panel_Logo__top:"41px",
+                        Panel_Logo__wid:"1647px",
+                        Panel_Logo__hei:"56px",
+                        Panel_Logo__vis:true,
+                        Panel_Logo__dis:false,
+                        Panel_Logo__col:"RGB(255,255,255,1.0)",
+                        SG1__lef:"0px",
+                        SG1__top:"100px",
+                        SG1__wid:"1650px",
+                        SG1__hei:"737px",
+                        SG1__vis:true,
+                        SG1__dis:false,
+                        SG1__col0:"",
+                        SG1__col1:"",
+                        SG1__col2:"",
+                        SG1__col3:"",
+                        SG1__col4:"",
+                        SG1__col5:"",
+                        SG1__col6:"",
+                        SG1__col7:"",
+                        SG1__col8:"",
+                        SG1__col9:"",
+                        SG1__col10:"",
+                        SG1__col11:"",
+                        SG1__col12:"",
+                        SG1__col13:"",
+                        SG1__col14:"",
+                        SG1__col15:"",
+                        SG1__col16:"",
+                        SG1__col17:"",
+                        SG1__col18:"",
+                        SG1__col19:"",
+                        SG1__col20:"",
+                        SG1__col21:"",
+                        SG1__col22:"",
+                        SG1__col23:"",
+                        SG1__col24:"",
+                        SG1__cws0:"100",
+                        SG1__cws1:"100",
+                        SG1__cws2:"100",
+                        SG1__cws3:"102",
+                        SG1__cws4:"100",
+                        SG1__cws5:"100",
+                        SG1__cws6:"100",
+                        SG1__cws7:"100",
+                        SG1__cws8:"100",
+                        SG1__cws9:"100",
+                        SG1__cws10:"100",
+                        SG1__cws11:"100",
+                        SG1__cws12:"100",
+                        SG1__cws13:"100",
+                        SG1__cws14:"100",
+                        SG1__cws15:"100",
+                        SG1__cws16:"100",
+                        SG1__cws17:"100",
+                        SG1__cws18:"100",
+                        SG1__cws19:"100",
+                        SG1__cws20:"100",
+                        SG1__cws21:"100",
+                        SG1__cws22:"100",
+                        SG1__cws23:"100",
+                        SG1__cws24:"100",
+                        SG1__clv0:true,
+                        SG1__clv1:true,
+                        SG1__clv2:true,
+                        SG1__clv3:true,
+                        SG1__clv4:true,
+                        SG1__clv5:true,
+                        SG1__clv6:true,
+                        SG1__clv7:true,
+                        SG1__clv8:true,
+                        SG1__clv9:true,
+                        SG1__clv10:true,
+                        SG1__clv11:true,
+                        SG1__clv12:true,
+                        SG1__clv13:true,
+                        SG1__clv14:true,
+                        SG1__clv15:true,
+                        SG1__clv16:true,
+                        SG1__clv17:true,
+                        SG1__clv18:true,
+                        SG1__clv19:true,
+                        SG1__clv20:true,
+                        SG1__clv21:true,
+                        SG1__clv22:true,
+                        SG1__clv23:true,
+                        SG1__clv24:true,
+                        SG1__ces:[{d0:'1',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'2',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'3',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'4',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'5',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'6',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'7',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'8',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''},{d0:'9',d1:'',d2:'',d3:'',d4:'',d5:'',d6:'',d7:'',d8:'',d9:'',d10:'',d11:'',d12:'',d13:'',d14:'',d15:'',d16:'',d17:'',d18:'',d19:'',d20:'',d21:'',d22:'',d23:'',d24:'',d25:''}],
+                        TabSheet6__lef:"4px",
+                        TabSheet6__top:"6px",
+                        TabSheet6__wid:"1650px",
+                        TabSheet6__hei:"887px",
+                        TabSheet6__vis:true,
+                        TabSheet6__dis:false,
+                        TabSheet6__cap:"TabSheet6",
+                        PageControl1__lef:"251px",
+                        PageControl1__top:"1px",
+                        PageControl1__wid:"1658px",
+                        PageControl1__hei:"897px",
+                        PageControl1__vis:true,
+                        PageControl1__dis:false,
+                        PageControl1__apg:"TabSheet6",
+                        PageControl1__tps:"top",
+                        TabSheet4__tbv:false,
+                        TabSheet5__tbv:false,
+                        TabSheet6__tbv:false,
+                        TabSheet1__tbv:false,
+                        Panel5__lef:"0px",
+                        Panel5__top:"66px",
+                        Panel5__wid:"1910px",
+                        Panel5__hei:"899px",
+                        Panel5__vis:true,
+                        Panel5__dis:false,
+                        Panel5__col:"RGB(240,240,240,1.0)",
+                        MainMenu__cps:false,
+                        MainMenu__lef:"0px",
+                        MainMenu__top:"60px",
+                        MainMenu__wid:"250px",
+                        MainMenu__hei:"500px",
+                        MainMenu__act:"{"background-color":"rgb(38,42,53)"}",
+					    input_query_visible:false,
+					    input_query_caption:"Input Query",
+					    input_query_inputname:"new",
+					    input_query_cancelcaption:"Cancel",
+					    input_query_okcaption:"OK",
+					    input_query_inputdefault:"",
+					    input_query_method:"processinputquery",
+					    input_query_visible:false,
+					    version__istrial:false,
+					    clientid:399446,
+					    shuntflag:4921
+                    }
+                },
+                mounted() {
+                    let me=this;
+Timer_GetCookie__tmr = window.setInterval(function() {
+axios.get('{"m":"event","i":399446,"c":"Timer_GetCookie"}',{headers:{shuntflag:4921}})
+.then(resp =>{me.procResp(resp.data);  })
+}, 100);
+                    window.addEventListener(
+                        "onorientationchange" in window ? "orientationchange" : "resize",
+                        function() {
+                            axios.get('{"m":"event","i":399446,"c":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:4921}})
+                            .then(resp =>{me.procResp(resp.data)});
+                        },
+                        false
+                    );
+                    let Form1_1hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":399446}',{headers:{shuntflag:4921}})
+                        .then(resp =>{me.procResp(resp.data)})
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                    }, 590000);
+                },
+				methods: {
+                    ToWebsite (e,n) {
+                        var aTag = document.createElement('a'); 
+                        aTag.setAttribute('href', e);
+                        aTag.setAttribute('target', n);
+                        aTag.click();
+                    },
+                    dwInputClick (e) {
+                        document.getElementById(e).click();
+                    },
+                    dwInputChange (e) {
+                        this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
+                        var sget = '{"m":"event","i":399446,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        axios.get(sget)
+                    },
+                    filterHandler(value, row, column) {
+                        const property = column['property'];
+                        return row[property] === value;
+                    },
+                    dwInputSubmit (ipname) {
+                        let me=this;let formData = new FormData();
+                        formData.append('file', document.getElementById(ipname+"__inp").files[0]);
+                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '399446'}}
+                        axios.post('/upload', formData, config)
+                        .then(function (res) {
+                            var sget = '{"m":"event","i":399446,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            axios.get(sget)
+                            .then(resp =>{me.procResp(resp.data)});
+                        })
+                    },
+                    dwInputSubmit0 (ipname) {
+                        document.getElementById(ipname+"__frm").submit();
+                    },
+                    dwnotify(caption,text) {this.$notify.warning({ title: caption, message: text, duration: 0,showClose: false });},
+                    dwevent(val,compname,compvalue,compevent,handle) {
+                        var jo={};
+                        jo.m="event";
+                        jo.i=handle;
+                        jo.c=compname;
+                        jo.v=escape(eval(compvalue))
+                        jo.e=compevent;
+                        axios.get(JSON.stringify(jo),{headers:{shuntflag:4921}})
+                        .then(resp =>{this.procResp(resp.data)});
+                    },
+                    processinputquery(val) {
+                        this.input_query_visible = false;
+                        axios.get('{"m":"interaction","i":399446,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:4921}})
+                        .then(resp =>{this.procResp(resp.data)});
+                    },
+                },
+                beforeDestroy() {
+                    clearInterval(hearttimer);
+                }
+            }
+        ); 
+    </script>
+</body>
+</html>

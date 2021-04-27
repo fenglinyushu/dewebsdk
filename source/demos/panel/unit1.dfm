@@ -298,6 +298,23 @@ object Form1: TForm1
       OnEnter = Panel1Enter
       OnExit = Panel1Exit
     end
+    object Panel13: TPanel
+      Left = 366
+      Top = 376
+      Width = 131
+      Height = 81
+      Hint = 
+        '{"dwstyle":"border-bottom:solid 2px #800;border-top:dashed 1px #' +
+        '008;"}'
+      BevelOuter = bvNone
+      BorderWidth = 1
+      Color = clSilver
+      ParentBackground = False
+      TabOrder = 6
+      OnClick = Panel1Click
+      OnEnter = Panel1Enter
+      OnExit = Panel1Exit
+    end
   end
   object Panel_01_Tile: TPanel
     Left = 0

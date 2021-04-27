@@ -181,7 +181,7 @@ object Form1: TForm1
           Top = 119
           Width = 726
           Height = 436
-          Hint = '{"dwstyle":"stripe border","background":"#f5f7fA"}'
+          Hint = '{"dwattr":"stripe border","background":"#f5f7fA"}'
           Margins.Top = 19
           Margins.Bottom = 10
           Align = alClient

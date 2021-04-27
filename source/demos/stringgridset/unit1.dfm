@@ -295,7 +295,7 @@ object Form1: TForm1
         Top = 1
         Width = 792
         Height = 481
-        Hint = '{"dwstyle":"stripe border"}'
+        Hint = '{"dwattr":"stripe border"}'
         DefaultColWidth = 200
         DefaultRowHeight = 35
         FixedCols = 0

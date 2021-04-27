@@ -358,10 +358,10 @@ object Form1: TForm1
         Width = 792
         Height = 481
         Hint = 
-          '{"dwstyle":"stripe border","background":"#f5f7fA","columns":[{"c' +
-          'aption":"'#26085#26399'","align":"right"},{"caption":"'#22995#21517'","align":"center"},' +
-          '{"caption":"'#30465#20221'","align":"left"},{"caption":"'#22478#24066'/'#21306'","align":"left"' +
-          '}]}'
+          '{"dwattr":"stripe border","background":"#f5f7fA","columns":[{"ca' +
+          'ption":"'#26085#26399'","align":"right"},{"caption":"'#22995#21517'","align":"center"},{' +
+          '"caption":"'#30465#20221'","align":"left"},{"caption":"'#22478#24066'/'#21306'","align":"left"}' +
+          ']}'
         DefaultColWidth = 200
         DefaultRowHeight = 35
         RowCount = 10

@@ -46,7 +46,6 @@ object Form1: TForm1
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 994
     object Panel_1: TPanel
       Left = 0
       Top = 55
@@ -57,7 +56,6 @@ object Form1: TForm1
       Color = clAqua
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 990
       object Panel_1_L: TPanel
         Left = 0
         Top = 0
@@ -74,8 +72,6 @@ object Form1: TForm1
         ParentBackground = False
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = -6
-        ExplicitTop = 6
         object Panel_Head: TPanel
           Left = 0
           Top = 0
@@ -151,8 +147,6 @@ object Form1: TForm1
           Color = 3091752
           ParentBackground = False
           TabOrder = 1
-          ExplicitLeft = 3
-          ExplicitTop = 193
           object Label3: TLabel
             Left = 145
             Top = 0
@@ -200,9 +194,6 @@ object Form1: TForm1
           Color = 3091752
           ParentBackground = False
           TabOrder = 2
-          ExplicitLeft = 3
-          ExplicitTop = 406
-          ExplicitHeight = 72
         end
       end
       object Panel_1_C: TPanel
@@ -215,7 +206,6 @@ object Form1: TForm1
         Color = 4473146
         ParentBackground = False
         TabOrder = 1
-        ExplicitWidth = 750
         object Panel1: TPanel
           Left = 0
           Top = 0
@@ -256,6 +246,177 @@ object Form1: TForm1
             ParentFont = False
             Layout = tlCenter
           end
+          object Button2: TButton
+            AlignWithMargins = True
+            Left = 784
+            Top = 40
+            Width = 136
+            Height = 60
+            Hint = 
+              '{"borderradius":"0px","backgroundcolor":"#424B4f","icon":"el-ico' +
+              'n-s-tools"}'
+            Margins.Top = 40
+            Margins.Right = 30
+            Margins.Bottom = 40
+            Align = alRight
+            Caption = #35774#32622
+            TabOrder = 0
+            ExplicitTop = 45
+            ExplicitHeight = 50
+          end
+        end
+        object Panel2: TPanel
+          Left = 16
+          Top = 156
+          Width = 300
+          Height = 140
+          Hint = '{"dwstyle":"border:solid 1px #282D2F"}'
+          BevelOuter = bvNone
+          Color = 5196610
+          ParentBackground = False
+          TabOrder = 1
+          object Label6: TLabel
+            Left = 16
+            Top = 8
+            Width = 137
+            Height = 41
+            AutoSize = False
+            Caption = #26376#24230#25910#25903#35745#21010
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 13158600
+            Font.Height = -15
+            Font.Name = #24494#36719#38597#40657
+            Font.Style = [fsBold]
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Label10: TLabel
+            Left = 16
+            Top = 40
+            Width = 257
+            Height = 41
+            AutoSize = False
+            Caption = 'DeWeb'#26159#19968#20010#21487#20197#30452#25509#23558'Delphi'#31243#24207
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 13158600
+            Font.Height = -15
+            Font.Name = #24494#36719#38597#40657
+            Font.Style = []
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Button3: TButton
+            AlignWithMargins = True
+            Left = 16
+            Top = 92
+            Width = 121
+            Height = 36
+            Hint = 
+              '{"borderradius":"0px","backgroundcolor":"#424B4f","icon":"el-ico' +
+              'n-s-tools"}'
+            Margins.Top = 40
+            Margins.Right = 30
+            Margins.Bottom = 40
+            Caption = #26356#22810#26376#20221
+            TabOrder = 0
+          end
+        end
+        object Panel3: TPanel
+          Left = 328
+          Top = 156
+          Width = 300
+          Height = 140
+          Hint = '{"dwstyle":"border:solid 2px #105F79"}'
+          BevelOuter = bvNone
+          Color = 11175447
+          ParentBackground = False
+          TabOrder = 2
+          object Label11: TLabel
+            Left = 16
+            Top = 8
+            Width = 137
+            Height = 41
+            AutoSize = False
+            Caption = #26412#23395#24230#21033#28070
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 13158600
+            Font.Height = -15
+            Font.Name = #24494#36719#38597#40657
+            Font.Style = [fsBold]
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Label12: TLabel
+            Left = 16
+            Top = 40
+            Width = 193
+            Height = 57
+            AutoSize = False
+            Caption = #65509'20,298'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 13158600
+            Font.Height = -43
+            Font.Name = #24494#36719#38597#40657
+            Font.Style = []
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Label15: TLabel
+            Left = 16
+            Top = 87
+            Width = 257
+            Height = 41
+            AutoSize = False
+            Caption = #26412#23395#24230#27604#19978#23395#24230#22810#25910#20837' 7,298 '#20803
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 13158600
+            Font.Height = -15
+            Font.Name = #24494#36719#38597#40657
+            Font.Style = []
+            ParentFont = False
+            Layout = tlCenter
+          end
+        end
+        object Panel4: TPanel
+          Left = 648
+          Top = 156
+          Width = 280
+          Height = 140
+          Hint = '{"dwstyle":"border:solid 2px #5C4375"}'
+          BevelOuter = bvNone
+          Color = 10049400
+          ParentBackground = False
+          TabOrder = 3
+          object Label13: TLabel
+            Left = 16
+            Top = 8
+            Width = 137
+            Height = 41
+            AutoSize = False
+            Caption = #26376#24230#25910#25903#35745#21010
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 13158600
+            Font.Height = -15
+            Font.Name = #24494#36719#38597#40657
+            Font.Style = [fsBold]
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Label14: TLabel
+            Left = 16
+            Top = 40
+            Width = 257
+            Height = 41
+            AutoSize = False
+            Caption = 'DeWeb'#26159#19968#20010#21487#20197#30452#25509#23558'Delphi'#31243#24207
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 13158600
+            Font.Height = -15
+            Font.Name = #24494#36719#38597#40657
+            Font.Style = []
+            ParentFont = False
+            Layout = tlCenter
+          end
         end
       end
     end
@@ -269,7 +430,6 @@ object Form1: TForm1
       Color = 3683375
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 990
       object Label5: TLabel
         Left = 952
         Top = 0
@@ -355,8 +515,8 @@ object Form1: TForm1
     AutoHotkeys = maManual
     BiDiMode = bdLeftToRight
     ParentBiDiMode = False
-    Left = 339
-    Top = 282
+    Left = 467
+    Top = 146
     object N1: TMenuItem
       Caption = #39318#39029
       Hint = '{"background-color":"#282d2f"}'

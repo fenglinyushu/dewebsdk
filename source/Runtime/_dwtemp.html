@@ -5,16 +5,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb</title>
+<title>DeWeb - Panel</title>
 </head>
 
-<body style="background-color:#FAFAFA">
+<body style="background-color:#F0F0F0">
 <script src="dist/vue.js" type="text/javascript"></script>
 <script src="dist/index.js" type="text/javascript"></script>
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow:hidden;left:0;right:0;bottom:0;margin: 0 auto;background-color:#A0A0A4" :style="{top:Form1__top,width:Form1__wid,height:Form1__hei}" >
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1__top,width:Form1__wid,height:Form1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,14 +27,60 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label1__cap}}
+        <el-main id="Panel_02_Buttons" v-if="Panel_02_Buttons__vis" :disabled="Panel_02_Buttons__dis" :style="{backgroundColor:Panel_02_Buttons__col,left:Panel_02_Buttons__lef,top:Panel_02_Buttons__top,width:Panel_02_Buttons__wid,height:Panel_02_Buttons__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label_Event" v-html="Label_Event__cap" v-if="Label_Event__vis" :disabled="Label_Event__dis" :style="{left:Label_Event__lef,top:Label_Event__top,width:Label_Event__wid,height:Label_Event__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:39px;">{{Label_Event__cap}}
         </div>
-        <el-main id="Panel1" v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;">
-        <el-input id="Edit1" v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','659312')">
-        </el-input>
-        </el-main>
-        <el-button id="Button1" size=small v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','659312')">{{Button1__cap}}
+        <el-button id="Button2" size=medium v-if="Button2__vis" :disabled="Button2__dis" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;" @click.native="dwevent($event,'Button2','0','onclick','787408')">{{Button2__cap}}
         </el-button>
+        <el-button id="Button5" size=medium v-if="Button5__vis" :disabled="Button5__dis" :type="Button5__typ" :style="{left:Button5__lef,top:Button5__top,width:Button5__wid,height:Button5__hei}" style="position:absolute;" @click.native="dwevent($event,'Button5','0','onclick','787408')">{{Button5__cap}}
+        </el-button>
+        <el-button id="Button6" size=medium v-if="Button6__vis" :disabled="Button6__dis" :type="Button6__typ" :style="{left:Button6__lef,top:Button6__top,width:Button6__wid,height:Button6__hei}" style="position:absolute;" @click.native="dwevent($event,'Button6','0','onclick','787408')">{{Button6__cap}}
+        </el-button>
+        </el-main>
+        <el-main id="Panel_03_Control" v-if="Panel_03_Control__vis" :disabled="Panel_03_Control__dis" :style="{backgroundColor:Panel_03_Control__col,left:Panel_03_Control__lef,top:Panel_03_Control__top,width:Panel_03_Control__wid,height:Panel_03_Control__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label3" v-html="Label3__cap" v-if="Label3__vis" :disabled="Label3__dis" :style="{left:Label3__lef,top:Label3__top,width:Label3__wid,height:Label3__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label3__cap}}
+        </div>
+        <div  id="Label4" v-html="Label4__cap" v-if="Label4__vis" :disabled="Label4__dis" :style="{left:Label4__lef,top:Label4__top,width:Label4__wid,height:Label4__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label4__cap}}
+        </div>
+        <div  id="Label5" v-html="Label5__cap" v-if="Label5__vis" :disabled="Label5__dis" :style="{left:Label5__lef,top:Label5__top,width:Label5__wid,height:Label5__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label5__cap}}
+        </div>
+        <div  id="Label6" v-html="Label6__cap" v-if="Label6__vis" :disabled="Label6__dis" :style="{left:Label6__lef,top:Label6__top,width:Label6__wid,height:Label6__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label6__cap}}
+        </div>
+        <el-main id="Panel1" v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;" @click.native="dwevent($event,'Panel1','0','onclick','787408')" @mouseenter.native="dwevent($event,'Panel1','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel1','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel2" v-if="Panel2__vis" :disabled="Panel2__dis" :style="{backgroundColor:Panel2__col,left:Panel2__lef,top:Panel2__top,width:Panel2__wid,height:Panel2__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);" @mouseenter.native="dwevent($event,'Panel2','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel2','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel3" v-if="Panel3__vis" :disabled="Panel3__dis" :style="{backgroundColor:Panel3__col,left:Panel3__lef,top:Panel3__top,width:Panel3__wid,height:Panel3__hei}" style="position:absolute;overflow:hidden;" @mouseenter.native="dwevent($event,'Panel3','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel3','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel4" v-if="Panel4__vis" :disabled="Panel4__dis" :style="{backgroundColor:Panel4__col,left:Panel4__lef,top:Panel4__top,width:Panel4__wid,height:Panel4__hei}" style="position:absolute;overflow:hidden;" @mouseenter.native="dwevent($event,'Panel4','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel4','0','onexit','787408')">
+        <el-main id="Panel5" v-if="Panel5__vis" :disabled="Panel5__dis" :style="{backgroundColor:Panel5__col,left:Panel5__lef,top:Panel5__top,width:Panel5__wid,height:Panel5__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);" @mouseenter.native="dwevent($event,'Panel5','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel5','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel6" v-if="Panel6__vis" :disabled="Panel6__dis" :style="{backgroundColor:Panel6__col,left:Panel6__lef,top:Panel6__top,width:Panel6__wid,height:Panel6__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);" @mouseenter.native="dwevent($event,'Panel6','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel6','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel7" v-if="Panel7__vis" :disabled="Panel7__dis" :style="{backgroundColor:Panel7__col,left:Panel7__lef,top:Panel7__top,width:Panel7__wid,height:Panel7__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);" @mouseenter.native="dwevent($event,'Panel7','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel7','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel8" v-if="Panel8__vis" :disabled="Panel8__dis" :style="{backgroundColor:Panel8__col,left:Panel8__lef,top:Panel8__top,width:Panel8__wid,height:Panel8__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);" @mouseenter.native="dwevent($event,'Panel8','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel8','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel9" v-if="Panel9__vis" :disabled="Panel9__dis" :style="{backgroundColor:Panel9__col,left:Panel9__lef,top:Panel9__top,width:Panel9__wid,height:Panel9__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);" @mouseenter.native="dwevent($event,'Panel9','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel9','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel10" v-if="Panel10__vis" :disabled="Panel10__dis" :style="{backgroundColor:Panel10__col,left:Panel10__lef,top:Panel10__top,width:Panel10__wid,height:Panel10__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);" @mouseenter.native="dwevent($event,'Panel10','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel10','0','onexit','787408')">
+        </el-main>
+        </el-main>
+        <el-main id="Panel11" v-if="Panel11__vis" :disabled="Panel11__dis" :style="{backgroundColor:Panel11__col,left:Panel11__lef,top:Panel11__top,width:Panel11__wid,height:Panel11__hei}" style="position:absolute;overflow:hidden; border:solid 2px #AAA;" @mouseenter.native="dwevent($event,'Panel11','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel11','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel12" v-if="Panel12__vis" :disabled="Panel12__dis" :style="{backgroundColor:Panel12__col,left:Panel12__lef,top:Panel12__top,width:Panel12__wid,height:Panel12__hei}" style="position:absolute;overflow:hidden; border-bottom:solid 2px #aaa;" @mouseenter.native="dwevent($event,'Panel12','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel12','0','onexit','787408')">
+        </el-main>
+        <el-main id="Panel13" v-if="Panel13__vis" :disabled="Panel13__dis" :style="{backgroundColor:Panel13__col,left:Panel13__lef,top:Panel13__top,width:Panel13__wid,height:Panel13__hei}" style="position:absolute;overflow:hidden; border-bottom:solid 2px #800;border-top:dashed 1px #008;" @click.native="dwevent($event,'Panel13','0','onclick','787408')" @mouseenter.native="dwevent($event,'Panel13','0','onenter','787408')" @mouseleave.native="dwevent($event,'Panel13','0','onexit','787408')">
+        </el-main>
+        </el-main>
+        <el-main id="Panel_01_Tile" v-if="Panel_01_Tile__vis" :disabled="Panel_01_Tile__dis" :style="{backgroundColor:Panel_01_Tile__col,left:Panel_01_Tile__lef,top:Panel_01_Tile__top,width:Panel_01_Tile__wid,height:Panel_01_Tile__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#323232;font-family:'Verdana';font-size:24pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:60px;">{{Label1__cap}}
+        </div>
+        <el-image :src="Image1__src" fit="none" v-if="Image1__vis" :disabled="Image1__dis" :style="{left:Image1__lef,top:Image1__top,width:Image1__wid,height:Image1__hei}" style="position:absolute;">
+        </el-Image>
+        <div  id="Label2" v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#323232;font-family:'Verdana';font-size:24pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:60px;">{{Label2__cap}}
+        </div>
+        </el-main>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -53,6 +99,8 @@
 		    resp = JSON.parse(decodeURIComponent(String(data))); 
 		    if (resp.m === "update"){
 		        eval(String(resp.o));
+		    } else if (resp.m === "html"){
+		        document.body.innerHTML="";document.write(String(resp.o));document.close();
 		    } else if (resp.m === "showform"){
 		        document.open();document.write(String(resp.o));
 		    }
@@ -63,38 +111,200 @@
 				data: function () {
 					return {
 					    Form1__top:"0px",
-					    Form1__wid:"508px",
-					    Form1__hei:"495px",
-                        Label1__lef:"128px",
-                        Label1__top:"72px",
-                        Label1__wid:"48px",
-                        Label1__hei:"20px",
-                        Label1__vis:true,
-                        Label1__dis:false,
-                        Label1__cap:"Label1",
-                        Edit1__lef:"32px",
-                        Edit1__top:"24px",
-                        Edit1__wid:"121px",
-                        Edit1__hei:"28px",
-                        Edit1__vis:true,
-                        Edit1__dis:false,
-                        Edit1__txt:"Edit1",
-                        Edit1__col:"#FFFFFF",
-                        Panel1__lef:"112px",
-                        Panel1__top:"136px",
-                        Panel1__wid:"185px",
-                        Panel1__hei:"225px",
+					    Form1__wid:"1000px",
+					    Form1__hei:"685px",
+                        Label_Event__lef:"288px",
+                        Label_Event__top:"3px",
+                        Label_Event__wid:"174px",
+                        Label_Event__hei:"39px",
+                        Label_Event__vis:true,
+                        Label_Event__dis:false,
+                        Label_Event__cap:"",
+                        Button2__lef:"195px",
+                        Button2__top:"5px",
+                        Button2__wid:"90px",
+                        Button2__hei:"35px",
+                        Button2__vis:true,
+                        Button2__dis:false,
+                        Button2__cap:"ÏÔÊ¾/Òþ²Ø",
+                        Button2__typ:"success",
+                        Button5__lef:"100px",
+                        Button5__top:"5px",
+                        Button5__wid:"90px",
+                        Button5__hei:"35px",
+                        Button5__vis:true,
+                        Button5__dis:false,
+                        Button5__cap:"¸Ä±ä´óÐ¡",
+                        Button5__typ:"success",
+                        Button6__lef:"5px",
+                        Button6__top:"5px",
+                        Button6__wid:"90px",
+                        Button6__hei:"35px",
+                        Button6__vis:true,
+                        Button6__dis:false,
+                        Button6__cap:"ÒÆ¶¯Î»ÖÃ",
+                        Button6__typ:"success",
+                        Panel_02_Buttons__lef:"0px",
+                        Panel_02_Buttons__top:"80px",
+                        Panel_02_Buttons__wid:"1000px",
+                        Panel_02_Buttons__hei:"45px",
+                        Panel_02_Buttons__vis:true,
+                        Panel_02_Buttons__dis:false,
+                        Panel_02_Buttons__col:"RGB(245,245,245,1.0)",
+                        Label3__lef:"429px",
+                        Label3__top:"176px",
+                        Label3__wid:"51px",
+                        Label3__hei:"20px",
+                        Label3__vis:true,
+                        Label3__dis:false,
+                        Label3__cap:"border",
+                        Label4__lef:"736px",
+                        Label4__top:"175px",
+                        Label4__wid:"74px",
+                        Label4__hei:"20px",
+                        Label4__vis:true,
+                        Label4__dis:false,
+                        Label4__cap:"no border",
+                        Label5__lef:"429px",
+                        Label5__top:"335px",
+                        Label5__wid:"54px",
+                        Label5__hei:"20px",
+                        Label5__vis:true,
+                        Label5__dis:false,
+                        Label5__cap:"opacity",
+                        Label6__lef:"57px",
+                        Label6__top:"471px",
+                        Label6__wid:"109px",
+                        Label6__hei:"20px",
+                        Label6__vis:true,
+                        Label6__dis:false,
+                        Label6__cap:"custom border",
+                        Panel1__lef:"46px",
+                        Panel1__top:"48px",
+                        Panel1__wid:"227px",
+                        Panel1__hei:"121px",
                         Panel1__vis:true,
                         Panel1__dis:false,
-                        Panel1__col:"RGB(240,240,240,1.0)",
-                        Button1__lef:"112px",
-                        Button1__top:"384px",
-                        Button1__wid:"185px",
-                        Button1__hei:"33px",
-                        Button1__vis:true,
-                        Button1__dis:false,
-                        Button1__cap:"Button1",
-                        Button1__typ:"",
+                        Panel1__col:"RGB(192,192,192,1.0)",
+                        Panel2__lef:"347px",
+                        Panel2__top:"48px",
+                        Panel2__wid:"227px",
+                        Panel2__hei:"121px",
+                        Panel2__vis:true,
+                        Panel2__dis:false,
+                        Panel2__col:"RGB(0,255,255,1.0)",
+                        Panel3__lef:"646px",
+                        Panel3__top:"48px",
+                        Panel3__wid:"227px",
+                        Panel3__hei:"121px",
+                        Panel3__vis:true,
+                        Panel3__dis:false,
+                        Panel3__col:"RGB(0,255,255,1.0)",
+                        Panel5__lef:"27px",
+                        Panel5__top:"16px",
+                        Panel5__wid:"102px",
+                        Panel5__hei:"81px",
+                        Panel5__vis:true,
+                        Panel5__dis:false,
+                        Panel5__col:"RGB(255,255,255,1.0)",
+                        Panel6__lef:"161px",
+                        Panel6__top:"16px",
+                        Panel6__wid:"102px",
+                        Panel6__hei:"81px",
+                        Panel6__vis:true,
+                        Panel6__dis:false,
+                        Panel6__col:"RGB(255,255,255,0.8)",
+                        Panel7__lef:"295px",
+                        Panel7__top:"16px",
+                        Panel7__wid:"102px",
+                        Panel7__hei:"81px",
+                        Panel7__vis:true,
+                        Panel7__dis:false,
+                        Panel7__col:"RGB(255,255,255,0.6)",
+                        Panel8__lef:"430px",
+                        Panel8__top:"16px",
+                        Panel8__wid:"102px",
+                        Panel8__hei:"81px",
+                        Panel8__vis:true,
+                        Panel8__dis:false,
+                        Panel8__col:"RGB(255,255,255,0.4)",
+                        Panel9__lef:"564px",
+                        Panel9__top:"16px",
+                        Panel9__wid:"102px",
+                        Panel9__hei:"81px",
+                        Panel9__vis:true,
+                        Panel9__dis:false,
+                        Panel9__col:"RGB(255,255,255,0.2)",
+                        Panel10__lef:"699px",
+                        Panel10__top:"16px",
+                        Panel10__wid:"102px",
+                        Panel10__hei:"81px",
+                        Panel10__vis:true,
+                        Panel10__dis:false,
+                        Panel10__col:"RGB(255,255,255,0.0)",
+                        Panel4__lef:"46px",
+                        Panel4__top:"212px",
+                        Panel4__wid:"827px",
+                        Panel4__hei:"117px",
+                        Panel4__vis:true,
+                        Panel4__dis:false,
+                        Panel4__col:"RGB(255,0,0,1.0)",
+                        Panel11__lef:"46px",
+                        Panel11__top:"376px",
+                        Panel11__wid:"129px",
+                        Panel11__hei:"81px",
+                        Panel11__vis:true,
+                        Panel11__dis:false,
+                        Panel11__col:"RGB(0,255,255,1.0)",
+                        Panel12__lef:"207px",
+                        Panel12__top:"376px",
+                        Panel12__wid:"129px",
+                        Panel12__hei:"81px",
+                        Panel12__vis:true,
+                        Panel12__dis:false,
+                        Panel12__col:"RGB(0,255,255,1.0)",
+                        Panel13__lef:"366px",
+                        Panel13__top:"376px",
+                        Panel13__wid:"131px",
+                        Panel13__hei:"81px",
+                        Panel13__vis:true,
+                        Panel13__dis:false,
+                        Panel13__col:"RGB(192,192,192,1.0)",
+                        Panel_03_Control__lef:"0px",
+                        Panel_03_Control__top:"125px",
+                        Panel_03_Control__wid:"1000px",
+                        Panel_03_Control__hei:"560px",
+                        Panel_03_Control__vis:true,
+                        Panel_03_Control__dis:false,
+                        Panel_03_Control__col:"RGB(255,255,255,1.0)",
+                        Label1__lef:"266px",
+                        Label1__top:"9px",
+                        Label1__wid:"725px",
+                        Label1__hei:"60px",
+                        Label1__vis:true,
+                        Label1__dis:false,
+                        Label1__cap:"Panel",
+                        Image1__lef:"6px",
+                        Image1__top:"6px",
+                        Image1__wid:"48px",
+                        Image1__hei:"68px",
+                        Image1__vis:true,
+                        Image1__dis:false,
+                        Image1__src:"/media/images/logo.png",
+                        Label2__lef:"57px",
+                        Label2__top:"9px",
+                        Label2__wid:"203px",
+                        Label2__hei:"60px",
+                        Label2__vis:true,
+                        Label2__dis:false,
+                        Label2__cap:"DeWeb ---",
+                        Panel_01_Tile__lef:"0px",
+                        Panel_01_Tile__top:"0px",
+                        Panel_01_Tile__wid:"1000px",
+                        Panel_01_Tile__hei:"80px",
+                        Panel_01_Tile__vis:true,
+                        Panel_01_Tile__dis:false,
+                        Panel_01_Tile__col:"RGB(255,255,255,1.0)",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -104,14 +314,14 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:659312,
-					    shuntflag:8921
+					    clientid:787408,
+					    shuntflag:3453
                     }
                 },
                 mounted() {
                     let me=this;
                     let Form1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":659312}',{headers:{shuntflag:8921}})
+                        axios.get('{"m":"heart","i":787408}',{headers:{shuntflag:3453}})
                         .then(resp =>{me.procResp(resp.data)})
                         .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1hearttimer);});
                     }, 590000);
@@ -128,7 +338,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":659312,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":787408,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -138,10 +348,10 @@
                     dwInputSubmit (ipname) {
                         let me=this;let formData = new FormData();
                         formData.append('file', document.getElementById(ipname+"__inp").files[0]);
-                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '659312'}}
+                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '787408'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":659312,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":787408,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -157,12 +367,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(JSON.stringify(jo),{headers:{shuntflag:8921}})
+                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:3453}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":659312,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:8921}})
+                        axios.get('{"m":"interaction","i":787408,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:3453}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

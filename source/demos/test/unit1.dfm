@@ -19,30 +19,15 @@ object Form1: TForm1
   Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 20
-  object cbb: TComboBox
-    Left = 24
-    Top = 32
-    Width = 145
-    Height = 28
+  object Chart1: TChart
+    Left = 80
+    Top = 72
+    Width = 400
+    Height = 250
+    Title.Text.Strings = (
+      'TChart')
     TabOrder = 0
-    Text = 'cbb'
-  end
-  object Button1: TButton
-    Left = 24
-    Top = 80
-    Width = 145
-    Height = 33
-    Caption = 'Add Items'
-    TabOrder = 1
-    OnClick = Button1Click
-  end
-  object Button2: TButton
-    Left = 24
-    Top = 119
-    Width = 145
-    Height = 33
-    Caption = 'Get Text'
-    TabOrder = 2
-    OnClick = Button2Click
+    DefaultCanvas = 'TGDIPlusCanvas'
+    ColorPaletteIndex = 13
   end
 end

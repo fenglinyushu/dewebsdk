@@ -153,6 +153,7 @@ begin
      //生成返回值数组
      joRes    := _Json('[]');
 
+     //根据第一个曲线的类型确定当前Chart的类型
      with TChart(ACtrl) do begin
           //
           sType     := 've-line';
@@ -252,12 +253,14 @@ begin
                     //添加rows
                     sDat := sDat +'rows: [';
 
-                    for iX := 0 to Series[0].XValues.Count-1 do begin
-                         //
-                         sDat := sDat +'{''X'':'''+TPieSeries(Series[0]).XLabel[iX]+''','
-                                   +'''Value'':'''+FloatToStr(TPieSeries(Series[0]).YValue[iX])+'''},'#13;
+                    if Series[0].XValues.Count>0 then begin
+                         for iX := 0 to Series[0].XValues.Count-1 do begin
+                              //
+                              sDat := sDat +'{''X'':'''+TPieSeries(Series[0]).XLabel[iX]+''','
+                                        +'''Value'':'''+FloatToStr(TPieSeries(Series[0]).YValue[iX])+'''},'#13;
+                         end;
+                         Delete(sDat,Length(sDat)-1,2);
                     end;
-                    Delete(sDat,Length(sDat)-1,2);
                     sDat := sDat +']}';
                end else begin
                     sDat      := '{columns: [';
@@ -270,26 +273,28 @@ begin
                     sDat := sDat +'],'#13;
                     //添加rows
                     sDat := sDat +'rows: [';
-                    if Series[0].Labels.Count  = Series[0].XValues.Count then begin
-                         for iX := 0 to Series[0].Labels.Count-1 do begin
-                              //
-                              sDat := sDat +'{''X'':'''+Series[0].Labels[iX]+'''';
-                              for iSeries := 0 to SeriesList.Count-1 do begin
-                                   sDat := sDat +','''+Series[iSeries].Title+''':'''+FloatToStr(Series[iSeries].YValues[iX])+'''';
+                    if Series[0].XValues.Count>0 then begin
+                         if Series[0].Labels.Count  = Series[0].XValues.Count then begin
+                              for iX := 0 to Series[0].Labels.Count-1 do begin
+                                   //
+                                   sDat := sDat +'{''X'':'''+Series[0].Labels[iX]+'''';
+                                   for iSeries := 0 to SeriesList.Count-1 do begin
+                                        sDat := sDat +','''+Series[iSeries].Title+''':'''+FloatToStr(Series[iSeries].YValues[iX])+'''';
+                                   end;
+                                   sDat := sDat +'},'#13;
                               end;
-                              sDat := sDat +'},'#13;
-                         end;
-                    end else begin
-                         for iX := 0 to Series[0].XValues.Count-1 do begin
-                              //
-                              sDat := sDat +'{''X'':'''+FloatToStr(Series[0].XValues[iX])+'''';
-                              for iSeries := 0 to SeriesList.Count-1 do begin
-                                   sDat := sDat +','''+Series[iSeries].Title+''':'''+FloatToStr(Series[iSeries].YValues[iX])+'''';
+                         end else begin
+                              for iX := 0 to Series[0].XValues.Count-1 do begin
+                                   //
+                                   sDat := sDat +'{''X'':'''+FloatToStr(Series[0].XValues[iX])+'''';
+                                   for iSeries := 0 to SeriesList.Count-1 do begin
+                                        sDat := sDat +','''+Series[iSeries].Title+''':'''+FloatToStr(Series[iSeries].YValues[iX])+'''';
+                                   end;
+                                   sDat := sDat +'},'#13;
                               end;
-                              sDat := sDat +'},'#13;
                          end;
+                         Delete(sDat,Length(sDat)-1,2);
                     end;
-                    Delete(sDat,Length(sDat)-1,2);
                     sDat := sDat +']}';
                end;
           end;

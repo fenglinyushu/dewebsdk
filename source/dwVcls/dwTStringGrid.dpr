@@ -230,14 +230,16 @@ begin
                               +' highlight-current-row'     //当前行高亮
                               +sRowStyle
                               +' ref="'+dwPrefix(Actrl)+Name+'"'            //参考名?
-                              +dwGetDWStyle(joHint)
+                              +dwGetDWAttr(joHint)
                               //+' stripe'                  //斑马纹
                               //+dwIIF(Borderstyle<>bsNone,' border','')     //是否边框
                               +dwVisible(TControl(ACtrl))                  //是否可见
                               +dwDisable(TControl(ACtrl))                  //是否可用
                               //+' height="'+IntToStr(TControl(ACtrl).Height)+'"' //高度, 有此值则显示滚动条
                               +' :height="'+dwPrefix(Actrl)+Name+'__hei"' //高度, 有此值则显示滚动条
-                              +' style="width:100%"'                            //宽度
+                              +' style="width:100%'
+                              +dwGetDWStyle(joHint)
+                              +'"'                            //宽度
                               +Format(_DWEVENT,['row-click',Name,'val.d0','onclick',TForm(Owner).Handle])
                               +'>');
 

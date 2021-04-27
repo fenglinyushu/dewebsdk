@@ -38,6 +38,10 @@ function dwGetHintValue(AHint:Variant;AJsonName,AHtmlName,ADefault:String):Strin
 
 function dwGetHintStyle(AHint:Variant;AJsonName,AHtmlName,ADefault:String):String;
 
+//得到属性字符串
+function dwGetDWAttr(AHint:Variant):String;
+
+//得到样式字符串
 function dwGetDWStyle(AHint:Variant):String;
 
 
@@ -1497,15 +1501,24 @@ begin
      end;
 end;
 
-function dwGetDWStyle(AHint:Variant):String;
+function dwGetDWAttr(AHint:Variant):String;
 begin
      Result    := '';
      if AHint<>null then begin
-          if AHint.Exists('dwstyle') then begin
+          if AHint.Exists('dwattr') then begin
                Result    := ' '+AnsiString(AHint.dwstyle);
           end;
      end;
 end;
 
+function dwGetDWStyle(AHint:Variant):String;
+begin
+     Result    := '';
+     if AHint<>null then begin
+          if AHint.Exists('dwstyle') then begin
+               Result    := AnsiString(AHint.dwstyle);
+          end;
+     end;
+end;
 
 end.
