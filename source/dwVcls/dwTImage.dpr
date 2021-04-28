@@ -264,9 +264,11 @@ begin
                               +' :src="'+dwPrefix(Actrl)+Name+'__src" fit="contain"'
                               +dwVisible(TControl(ACtrl))
                               +dwDisable(TControl(ACtrl))
+                              +dwGetDWAttr(joHint)
                               +dwLTWH(TControl(ACtrl))
                               +sRadius
                               +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                              +dwGetDWStyle(joHint)
                               +'"'
                               +'>');
                end else begin
@@ -274,9 +276,11 @@ begin
                          joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="fill"'
                                    +dwVisible(TControl(ACtrl))
                                    +dwDisable(TControl(ACtrl))
+                                   +dwGetDWAttr(joHint)
                                    +dwLTWH(TControl(ACtrl))
                                    +sRadius
                                    +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                                   +dwGetDWStyle(joHint)
                                    +'"'
                                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
@@ -286,9 +290,11 @@ begin
                          joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="none"'
                                    +dwVisible(TControl(ACtrl))
                                    +dwDisable(TControl(ACtrl))
+                                   +dwGetDWAttr(joHint)
                                    +dwLTWH(TControl(ACtrl))
                                    +sRadius
                                    +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                                   +dwGetDWStyle(joHint)
                                    +'"'
                                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
