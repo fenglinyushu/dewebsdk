@@ -107,7 +107,7 @@ begin
                          +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                          +dwLTWH(TControl(ACtrl))
                          +'"' //style ·â±Õ
-                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+Name+'__val','onchange',TForm(Owner).Handle])
+                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__val','onchange',TForm(Owner).Handle])
                          +'>';
           end else begin
                sCode     := '<el-time-select :picker-options="{start: ''00:00'', step: ''00:01'', end: ''23:59''}" format="HH:mm" value-format="HH:mm"'
@@ -117,7 +117,7 @@ begin
                          +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
                          +dwLTWH(TControl(ACtrl))
                          +'"' //style ·â±Õ
-                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+Name+'__val','onchange',TForm(Owner).Handle])
+                         +SysUtils.Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__val','onchange',TForm(Owner).Handle])
                          +'>';
           end;
           joRes.Add(sCode);
