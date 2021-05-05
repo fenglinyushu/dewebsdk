@@ -41,15 +41,35 @@ object Form1: TForm1
     Left = 96
     Top = 104
     Width = 121
-    Height = 49
+    Height = 35
     Hint = '{"type":"primary"}'
-    Caption = 'Pause'
+    Caption = 'Start'
     TabOrder = 0
     OnClick = Button1Click
   end
+  object Button2: TButton
+    Left = 96
+    Top = 216
+    Width = 121
+    Height = 35
+    Hint = '{"type":"primary"}'
+    Caption = 'Recreate'
+    TabOrder = 1
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 96
+    Top = 160
+    Width = 121
+    Height = 35
+    Hint = '{"type":"success"}'
+    Caption = 'Stop'
+    TabOrder = 2
+    OnClick = Button3Click
+  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 96
-    Top = 168
+    Left = 48
+    Top = 112
   end
 end

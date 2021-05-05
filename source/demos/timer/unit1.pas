@@ -24,8 +24,12 @@ type
     Label1: TLabel;
     Timer1: TTimer;
     Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,13 +47,32 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-     if Timer1.DesignInfo = 1 then begin
-          Button1.Caption     := 'Start';
-          Timer1.DesignInfo   := 0;
-     end else begin
-          Timer1.DesignInfo   := 1;
-          Button1.Caption     := 'Pause';
-     end;
+    Timer1.DesignInfo   := 1;
+    Exit;
+
+    if Timer1.DesignInfo = 1 then begin
+        Button1.Caption     := 'Start';
+        Timer1.DesignInfo   := 0;
+    end else begin
+        Timer1.DesignInfo   := 1;
+        Button1.Caption     := 'Pause';
+    end;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+    Timer1.Enabled  := False;
+    Timer1.DesignInfo   := 0;
+    //
+    Self.ParentFont := True;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+    Timer1.DesignInfo   := 0;
+    Label1.Caption      := 'pause';
+    Exit;
+
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
