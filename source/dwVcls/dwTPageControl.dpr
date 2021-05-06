@@ -87,8 +87,8 @@ var
      joRes     : Variant;
      iTab      : Integer;
 begin
-     with TPageControl(Actrl) do begin
-          if HelpKeyword = 'timeline' then begin
+    with TPageControl(Actrl) do begin
+        if HelpKeyword = 'timeline' then begin
                //用作时间线控件-------------------------------------------------
                (*
                <div class="block">
@@ -109,78 +109,86 @@ begin
                </div>
                *)
 
-               //生成返回值数组
-               joRes    := _Json('[]');
+            //生成返回值数组
+            joRes    := _Json('[]');
 
-               //取得HINT对象JSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
 
-               with TPageControl(ACtrl) do begin
-                    //外框
-                    joRes.Add('<div class="block"'
-                              +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +dwVisible(TControl(ACtrl))
-                              +dwDisable(TControl(ACtrl))
-                              +dwLTWH(TControl(ACtrl))
-                              +'"' //style 封闭
-                              +'>');
-                    //外框
-                    joRes.Add('    <el-timeline>');
+            with TPageControl(ACtrl) do begin
+                //外框
+                joRes.Add('<div class="block"'
+                        +' id="'+dwPrefix(Actrl)+Name+'"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwLTWH(TControl(ACtrl))
+                        +'"' //style 封闭
+                        +'>');
+                //外框
+                joRes.Add('    <el-timeline>');
 
-               end;
-               //
-               Result    := (joRes);
+            end;
+            //
+            Result    := (joRes);
 
-          end else if HelpKeyword = 'steps' then begin
-               //用作步骤条控件-------------------------------------------------
+        end else if HelpKeyword = 'steps' then begin
+            //用作步骤条控件-------------------------------------------------
 
-          end else begin
-               //用作Tabs控件---------------------------------------------------
+        end else begin
+            //用作Tabs控件---------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
+            //生成返回值数组
+            joRes    := _Json('[]');
 
-               //取得HINT对象JSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
 
-               with TPageControl(ACtrl) do begin
-                    //外框
-                    joRes.Add('<el-tabs'
-                              +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +dwVisible(TControl(ACtrl))
-                              +dwDisable(TControl(ACtrl))
-                              +' v-model="'+dwPrefix(Actrl)+Name+'__apg"'        //ActivePage
-                              +' :tab-position="'+dwPrefix(Actrl)+Name+'__tps"'  //标题位置
-                              +dwIIF(ParentBiDiMode,dwIIF(ParentShowHint,' type="border-card"',' type="card"'),'')   //是否有外框
-                              +dwLTWH(TControl(ACtrl))
-                              +'"' //style 封闭
-                              +Format(_DWEVENT,['tab-click',Name,'this.'+dwPrefix(Actrl)+Name+'__apg','onchange',TForm(Owner).Handle])
-                              +'>');
+            with TPageControl(ACtrl) do begin
+                //外框
+                joRes.Add('<el-tabs'
+                        +' id="'+dwPrefix(Actrl)+Name+'"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +' v-model="'+dwPrefix(Actrl)+Name+'__apg"'        //ActivePage
+                        +' :tab-position="'+dwPrefix(Actrl)+Name+'__tps"'  //标题位置
+                        +dwIIF(ParentBiDiMode,dwIIF(ParentShowHint,' type="border-card"',' type="card"'),'')   //是否有外框
+                        +dwLTWH(TControl(ACtrl))
+                        +'"' //style 封闭
+                        +Format(_DWEVENT,['tab-click',Name,'this.'+dwPrefix(Actrl)+Name+'__apg','onchange',TForm(Owner).Handle])
+                        +'>');
 
-                    //添加选项卡
-                    for iTab := 0 to PageCount-1 do begin
-                         //
-                         if (Pages[iTab].ImageIndex>0)and(Pages[iTab].ImageIndex<=280) then begin
-                              joRes.Add('    <el-tab-pane'+' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv" name="'+dwPrefix(Actrl)+Pages[iTab].Name+'">');
-                              joRes.Add('    <span slot="label"><i class="'+dwIcons[Pages[iTab].ImageIndex]+'"></i> {{'+dwPrefix(Actrl)+Pages[iTab].Name+'__cap}}</span>');
-                         end else begin
-                              joRes.Add('    <el-tab-pane'+' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv"'
-                                   +' :label="'+dwPrefix(Actrl)+Pages[iTab].Name+'__cap" name="'+dwPrefix(Actrl)+Pages[iTab].Name+'">');
-                         end;
-                         //
-                         joRes.Add('    </el-tab-pane>');
+                //添加选项卡
+                for iTab := 0 to PageCount-1 do begin
+                    //根据是否有图标分别处理
+                    if (Pages[iTab].ImageIndex>0)and(Pages[iTab].ImageIndex<=280) then begin
+                        joRes.Add('    <el-tab-pane'
+                                +' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv"'
+                                +' name="'+dwPrefix(Actrl)+Pages[iTab].Name+'">');
+                        joRes.Add('    <span slot="label">'
+                                +'<i class="'+dwIcons[Pages[iTab].ImageIndex]+'"></i>'
+                                +' {{'+dwPrefix(Actrl)+Pages[iTab].Name+'__cap}}'
+                                +'</span>');
+                    end else begin
+                        joRes.Add('    <el-tab-pane'
+                                +' v-if="'+dwPrefix(Actrl)+Pages[iTab].Name+'__tbv"'
+                                +' :label="'+dwPrefix(Actrl)+Pages[iTab].Name+'__cap"'
+                                +' name="'+dwPrefix(Actrl)+Pages[iTab].Name+'"'
+                                +'>');
                     end;
+                    //
+                    joRes.Add('    </el-tab-pane>');
+                end;
 
 
-                    //body框
-                    joRes.Add('<div'+dwLTWHTab(TControl(ACtrl))+'">');
+                //body框
+                joRes.Add('<div'+dwLTWHTab(TControl(ACtrl))+'">');
 
-               end;
-               //
-               Result    := (joRes);
+            end;
+            //
+            Result    := (joRes);
 
-          end;
-     end;
+        end;
+    end;
 end;
 
 //取得HTML尾部消息
@@ -188,33 +196,33 @@ function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     with TPageControl(Actrl) do begin
-          if HelpKeyword = 'timeline' then begin
-               //用作时间线控件-------------------------------------------------
+    with TPageControl(Actrl) do begin
+        if HelpKeyword = 'timeline' then begin
+            //用作时间线控件-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
-               //生成返回值数组
-               joRes.Add('    </el-timeline>');
-               //body框
-               joRes.Add('</div>');
-               //
-               Result    := (joRes);
-          end else if HelpKeyword = 'steps' then begin
-               //用作步骤条控件-------------------------------------------------
+            //生成返回值数组
+            joRes    := _Json('[]');
+            //生成返回值数组
+            joRes.Add('    </el-timeline>');
+            //body框
+            joRes.Add('</div>');
+            //
+            Result    := (joRes);
+        end else if HelpKeyword = 'steps' then begin
+            //用作步骤条控件-------------------------------------------------
 
-          end else begin
-               //用作Tabs控件---------------------------------------------------
+        end else begin
+            //用作Tabs控件---------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
-               //生成返回值数组
-               joRes.Add('    </div>');
-               joRes.Add('</el-tabs>');
-               //
-               Result    := (joRes);
-          end;
-     end;
+            //生成返回值数组
+            joRes    := _Json('[]');
+            //生成返回值数组
+            joRes.Add('    </div>');
+            joRes.Add('</el-tabs>');
+            //
+            Result    := (joRes);
+        end;
+    end;
 end;
 
 //取得Data
@@ -223,82 +231,82 @@ var
      joRes     : Variant;
      iTab      : Integer;
 begin
-     with TPageControl(Actrl) do begin
-          if HelpKeyword = 'timeline' then begin
-               //用作时间线控件-------------------------------------------------
+    with TPageControl(Actrl) do begin
+        if HelpKeyword = 'timeline' then begin
+            //用作时间线控件-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
-               //
-               with TPageControl(ACtrl) do begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+dwPrefix(Actrl)+ActivePage.Name+'",');
-                    //方向
-                    if TabPosition =  (tpTop) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"top",');
-                    end else  if TabPosition =  (tpBottom) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"bottom",');
-                    end else  if TabPosition =  (tpLeft) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"left",');
-                    end else  if TabPosition =  (tpRight) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"right",');
-                    end;
-                    //各页面可见性
-                    for iTab := 0 to PageCount-1 do begin
-                         joRes.Add(dwPrefix(Actrl)+Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
-                    end;
-               end;
-               //
-               Result    := (joRes);
-          end else if HelpKeyword = 'steps' then begin
-               //用作步骤条控件-------------------------------------------------
+            //生成返回值数组
+            joRes    := _Json('[]');
+            //
+            with TPageControl(ACtrl) do begin
+                joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+                //
+                joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                //
+                joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+dwPrefix(Actrl)+ActivePage.Name+'",');
+                //方向
+                if TabPosition =  (tpTop) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"top",');
+                end else  if TabPosition =  (tpBottom) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"bottom",');
+                end else  if TabPosition =  (tpLeft) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"left",');
+                end else  if TabPosition =  (tpRight) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"right",');
+                end;
+                //各页面可见性
+                for iTab := 0 to PageCount-1 do begin
+                    joRes.Add(dwPrefix(Actrl)+Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
+                end;
+            end;
+            //
+            Result    := (joRes);
+        end else if HelpKeyword = 'steps' then begin
+            //用作步骤条控件-------------------------------------------------
 
-          end else begin
-               //用作Tabs控件---------------------------------------------------
+        end else begin
+            //用作Tabs控件---------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
-               //
-               with TPageControl(ACtrl) do begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-                    //
-                    if ActivePageIndex>=0 then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+dwPrefix(Actrl)+ActivePage.Name+'",');
-                    end else begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+''+'",');
-                    end;
-                    //方向
-                    if TabPosition =  (tpTop) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"top",');
-                    end else  if TabPosition =  (tpBottom) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"bottom",');
-                    end else  if TabPosition =  (tpLeft) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"left",');
-                    end else  if TabPosition =  (tpRight) then begin
-                         joRes.Add(dwPrefix(Actrl)+Name+'__tps:"right",');
-                    end;
-                    //各页面可见性
-                    for iTab := 0 to PageCount-1 do begin
-                         joRes.Add(dwPrefix(Actrl)+Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
-                    end;
-               end;
-               //
-               Result    := (joRes);
-          end;
-     end;
+            //生成返回值数组
+            joRes    := _Json('[]');
+            //
+            with TPageControl(ACtrl) do begin
+                joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
+                joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
+                joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
+                joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+                //
+                joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+                joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                //
+                if ActivePageIndex>=0 then begin
+                     joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+dwPrefix(Actrl)+ActivePage.Name+'",');
+                end else begin
+                     joRes.Add(dwPrefix(Actrl)+Name+'__apg:"'+''+'",');
+                end;
+                //方向
+                if TabPosition =  (tpTop) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"top",');
+                end else  if TabPosition =  (tpBottom) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"bottom",');
+                end else  if TabPosition =  (tpLeft) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"left",');
+                end else  if TabPosition =  (tpRight) then begin
+                    joRes.Add(dwPrefix(Actrl)+Name+'__tps:"right",');
+                end;
+                //各页面可见性
+                for iTab := 0 to PageCount-1 do begin
+                    joRes.Add(dwPrefix(Actrl)+Pages[iTab].Name+'__tbv:'+dwIIF(Pages[iTab].TabVisible,'true,','false,'));
+                end;
+            end;
+            //
+            Result    := (joRes);
+        end;
+    end;
 end;
 
 function dwGetMethod(ACtrl:TComponent):string;StdCall;
@@ -358,12 +366,12 @@ end;
 
 
 exports
-     dwGetExtra,
-     dwGetEvent,
-     dwGetHead,
-     dwGetTail,
-     dwGetMethod,
-     dwGetData;
+    dwGetExtra,
+    dwGetEvent,
+    dwGetHead,
+    dwGetTail,
+    dwGetMethod,
+    dwGetData;
      
 begin
 end.

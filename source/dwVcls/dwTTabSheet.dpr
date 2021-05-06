@@ -112,7 +112,10 @@ begin
                               +' v-if="'+dwPrefix(Actrl)+PageControl.Name+'__apg=='''+dwPrefix(Actrl)+Name+'''"'
                               +dwDisable(TControl(ACtrl))
                               +dwGetHintValue(joHint,'icon','icon','')
-                              +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
+                              +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,'
+                                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
+                                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
+                                    +'height:'+dwPrefix(Actrl)+Name+'__hei}"'
                               +' style="position:absolute;overflow:hidden;'
                               +'"' //style ·â±Õ
                               +dwIIF(Assigned(OnShow),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
