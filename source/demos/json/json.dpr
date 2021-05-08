@@ -1,5 +1,4 @@
 ﻿library json;
-
 uses
   ShareMem,
   SysUtils,
@@ -11,12 +10,10 @@ uses
   Classes,
   Data.Win.ADODB,
   unit1 in 'unit1.pas' {Form1};
-
 {$R *.res}
 var
      DLLApp         : TApplication;
      DLLScreen      : TScreen;
-
 function dwLoad(AParams:String;AConnection:TADOConnection;AApp:TApplication;AScreen:TScreen):TForm;stdcall;
 begin
      //
@@ -39,10 +36,8 @@ begin
           Screen         := DLLScreen;
      end;
 end;
-
 exports
      dwLoad;
-
 begin
      DLLApp    := Application;     //保存 DLL 中初始的 Application 对象
      DLLScreen := Screen;

@@ -236,7 +236,11 @@ begin
                               +dwVisible(TControl(ACtrl))                  //是否可见
                               +dwDisable(TControl(ACtrl))                  //是否可用
                               //+' height="'+IntToStr(TControl(ACtrl).Height)+'"' //高度, 有此值则显示滚动条
-                              +' :height="'+dwPrefix(Actrl)+Name+'__hei"' //高度, 有此值则显示滚动条
+
+                              //2021-05-08屏蔽了以下行，主要是因为此行会导致苹果设备不能正确演示
+                              //造成的损失是不能显示滚动条了
+                              //+' :height="'+dwPrefix(Actrl)+Name+'__hei"' //高度, 有此值则显示滚动条
+
                               +' style="width:100%'
                               +dwGetDWStyle(joHint)
                               +'"'                            //宽度
