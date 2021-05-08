@@ -1,6 +1,7 @@
 object Form1: TForm1
   Left = 553
   Top = 32
+  AlphaBlend = True
   BorderStyle = bsNone
   Caption = 'DeWeb : Web Application Framework for Delphi'
   ClientHeight = 1080

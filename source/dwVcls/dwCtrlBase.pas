@@ -1506,7 +1506,7 @@ begin
      Result    := '';
      if AHint<>null then begin
           if AHint.Exists('dwattr') then begin
-               Result    := ' '+AnsiString(AHint.dwstyle);
+               Result    := ' '+AnsiString(AHint.dwattr);
           end;
      end;
 end;

@@ -1,0 +1,839 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>DeWeb : Web Application Framework for Delphi</title>
+</head>
+
+<body style="background-color:#FFFFFF">
+<script src="dist/vue.js" type="text/javascript"></script>
+<script src="dist/index.js" type="text/javascript"></script>
+<script src="dist/axios.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
+
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1__top,width:Form1__wid,height:Form1__hei}" >
+        <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
+        	<el-form style="width:90%;padding-left:5%;">
+        		<el-form-item :label="input_query_inputname" >
+        			<el-input v-model="input_query_inputdefault" autocomplete="off"></el-input>
+        		</el-form-item>
+        	</el-form>
+        	<div slot="footer" class="dialog-footer">
+        		<el-button @click="input_query_visible=false">{{input_query_cancelcaption}}</el-button>
+        		<el-button type="primary" @click="processinputquery">{{input_query_okcaption}}</el-button>
+        	</div>
+        </el-dialog>
+		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
+        <el-main id="Panel_All" v-if="Panel_All__vis" :disabled="Panel_All__dis" :style="{backgroundColor:Panel_All__col,left:Panel_All__lef,top:Panel_All__top,width:Panel_All__wid,height:Panel_All__hei}" style="position:relative;overflow:hidden;">
+        <el-main id="Panel_00_Logo" v-if="Panel_00_Logo__vis" :disabled="Panel_00_Logo__dis" :style="{backgroundColor:Panel_00_Logo__col,left:Panel_00_Logo__lef,top:Panel_00_Logo__top,width:Panel_00_Logo__wid,height:Panel_00_Logo__hei}" style="position:absolute;overflow:hidden;">
+        <el-main id="Panel_Line" v-if="Panel_Line__vis" :disabled="Panel_Line__dis" :style="{backgroundColor:Panel_Line__col,left:Panel_Line__lef,top:Panel_Line__top,width:Panel_Line__wid,height:Panel_Line__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-main id="Panel_Inner0" v-if="Panel_Inner0__vis" :disabled="Panel_Inner0__dis" :style="{backgroundColor:Panel_Inner0__col,left:Panel_Inner0__lef,top:Panel_Inner0__top,width:Panel_Inner0__wid,height:Panel_Inner0__hei}" style="position:absolute;overflow:hidden;">
+        <el-button id="Button_Search" size=medium v-if="Button_Search__vis" :disabled="Button_Search__dis" :type="Button_Search__typ" :style="{left:Button_Search__lef,top:Button_Search__top,width:Button_Search__wid,height:Button_Search__hei}" style="position:absolute;">{{Button_Search__cap}}
+        </el-button>
+        <el-input id="Edit_Search" v-if="Edit_Search__vis" :disabled="Edit_Search__dis" v-model="Edit_Search__txt" placeholder="Search" prefix-icon="el-icon-search" :style="{backgroundColor:Edit_Search__col,left:Edit_Search__lef,top:Edit_Search__top,width:Edit_Search__wid,height:Edit_Search__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit_Search','escape(this.Edit_Search__txt)','onchange','2363414')">
+        </el-input>
+        <el-main id="Panel_Logo" v-if="Panel_Logo__vis" :disabled="Panel_Logo__dis" :style="{backgroundColor:Panel_Logo__col,left:Panel_Logo__lef,top:Panel_Logo__top,width:Panel_Logo__wid,height:Panel_Logo__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label2" v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#517CC6;font-family:'Tahoma';font-size:24pt;font-weight:bold;font-style:normal;text-decoration:none;text-align:center;line-height:48px;">{{Label2__cap}}
+        </div>
+        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Tahoma';font-size:22pt;font-weight:bold;font-style:normal;text-decoration:none;text-align:right;line-height:48px;">{{Label1__cap}}
+        </div>
+        <div  id="Label11" v-html="Label11__cap" v-if="Label11__vis" :disabled="Label11__dis" :style="{left:Label11__lef,top:Label11__top,width:Label11__wid,height:Label11__hei}" style="position:absolute;color:#AAAAAA;font-family:'Tahoma';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:48px;">{{Label11__cap}}
+        </div>
+        </el-main>
+        </el-main>
+        </el-main>
+        <el-main id="Panel_99_Foot" v-if="Panel_99_Foot__vis" :disabled="Panel_99_Foot__dis" :style="{backgroundColor:Panel_99_Foot__col,left:Panel_99_Foot__lef,top:Panel_99_Foot__top,width:Panel_99_Foot__wid,height:Panel_99_Foot__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label14" v-html="Label14__cap" v-if="Label14__vis" :disabled="Label14__dis" :style="{left:Label14__lef,top:Label14__top,width:Label14__wid,height:Label14__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:32px;">{{Label14__cap}}
+        </div>
+        <div  id="Label15" v-html="Label15__cap" v-if="Label15__vis" :disabled="Label15__dis" :style="{left:Label15__lef,top:Label15__top,width:Label15__wid,height:Label15__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:32px;">{{Label15__cap}}
+        </div>
+        </el-main>
+        <el-main id="Panel_03_Demos" v-if="Panel_03_Demos__vis" :disabled="Panel_03_Demos__dis" :style="{backgroundColor:Panel_03_Demos__col,left:Panel_03_Demos__lef,top:Panel_03_Demos__top,width:Panel_03_Demos__wid,height:Panel_03_Demos__hei}" style="position:absolute;overflow:hidden;">
+        <el-main id="Panel_line3" v-if="Panel_line3__vis" :disabled="Panel_line3__dis" :style="{backgroundColor:Panel_line3__col,left:Panel_line3__lef,top:Panel_line3__top,width:Panel_line3__wid,height:Panel_line3__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-main id="Panel_Inner3" v-if="Panel_Inner3__vis" :disabled="Panel_Inner3__dis" :style="{backgroundColor:Panel_Inner3__col,left:Panel_Inner3__lef,top:Panel_Inner3__top,width:Panel_Inner3__wid,height:Panel_Inner3__hei}" style="position:absolute;overflow:hidden;">
+        <el-main id="Panel_Demo" v-if="Panel_Demo__vis" :disabled="Panel_Demo__dis" :style="{backgroundColor:Panel_Demo__col,left:Panel_Demo__lef,top:Panel_Demo__top,width:Panel_Demo__wid,height:Panel_Demo__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image__Demo__src" fit="fill" v-if="Image__Demo__vis" :disabled="Image__Demo__dis" :style="{left:Image__Demo__lef,top:Image__Demo__top,width:Image__Demo__wid,height:Image__Demo__hei}" style="position:absolute;border-radius:5px;cursor: pointer;" @click="dwevent($event,'Image__Demo','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText6" :underline="false" v-if="StaticText6__vis" :disabled="StaticText6__dis" type="primary" :href="StaticText6__hrf" target="_blank" :style="{left:StaticText6__lef,top:StaticText6__top,width:StaticText6__wid,height:StaticText6__hei}" style="position:absolute;text-align:center;">{{StaticText6__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_0" v-if="Panel_Demo_0__vis" :disabled="Panel_Demo_0__dis" :style="{backgroundColor:Panel_Demo_0__col,left:Panel_Demo_0__lef,top:Panel_Demo_0__top,width:Panel_Demo_0__wid,height:Panel_Demo_0__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_0__src" fit="fill" v-if="Image_id_0__vis" :disabled="Image_id_0__dis" :style="{left:Image_id_0__lef,top:Image_id_0__top,width:Image_id_0__wid,height:Image_id_0__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_0','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText61" :underline="false" v-if="StaticText61__vis" :disabled="StaticText61__dis" type="primary" :href="StaticText61__hrf" target="_blank" :style="{left:StaticText61__lef,top:StaticText61__top,width:StaticText61__wid,height:StaticText61__hei}" style="position:absolute;text-align:center;">{{StaticText61__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_1" v-if="Panel_Demo_1__vis" :disabled="Panel_Demo_1__dis" :style="{backgroundColor:Panel_Demo_1__col,left:Panel_Demo_1__lef,top:Panel_Demo_1__top,width:Panel_Demo_1__wid,height:Panel_Demo_1__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_1__src" fit="fill" v-if="Image_id_1__vis" :disabled="Image_id_1__dis" :style="{left:Image_id_1__lef,top:Image_id_1__top,width:Image_id_1__wid,height:Image_id_1__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_1','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText62" :underline="false" v-if="StaticText62__vis" :disabled="StaticText62__dis" type="primary" :href="StaticText62__hrf" target="_blank" :style="{left:StaticText62__lef,top:StaticText62__top,width:StaticText62__wid,height:StaticText62__hei}" style="position:absolute;text-align:center;">{{StaticText62__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_2" v-if="Panel_Demo_2__vis" :disabled="Panel_Demo_2__dis" :style="{backgroundColor:Panel_Demo_2__col,left:Panel_Demo_2__lef,top:Panel_Demo_2__top,width:Panel_Demo_2__wid,height:Panel_Demo_2__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_2__src" fit="fill" v-if="Image_id_2__vis" :disabled="Image_id_2__dis" :style="{left:Image_id_2__lef,top:Image_id_2__top,width:Image_id_2__wid,height:Image_id_2__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_2','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText63" :underline="false" v-if="StaticText63__vis" :disabled="StaticText63__dis" type="primary" :href="StaticText63__hrf" target="_blank" :style="{left:StaticText63__lef,top:StaticText63__top,width:StaticText63__wid,height:StaticText63__hei}" style="position:absolute;text-align:center;">{{StaticText63__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_3" v-if="Panel_Demo_3__vis" :disabled="Panel_Demo_3__dis" :style="{backgroundColor:Panel_Demo_3__col,left:Panel_Demo_3__lef,top:Panel_Demo_3__top,width:Panel_Demo_3__wid,height:Panel_Demo_3__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_3__src" fit="fill" v-if="Image_id_3__vis" :disabled="Image_id_3__dis" :style="{left:Image_id_3__lef,top:Image_id_3__top,width:Image_id_3__wid,height:Image_id_3__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_3','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText64" :underline="false" v-if="StaticText64__vis" :disabled="StaticText64__dis" type="primary" :href="StaticText64__hrf" target="_blank" :style="{left:StaticText64__lef,top:StaticText64__top,width:StaticText64__wid,height:StaticText64__hei}" style="position:absolute;text-align:center;">{{StaticText64__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_4" v-if="Panel_Demo_4__vis" :disabled="Panel_Demo_4__dis" :style="{backgroundColor:Panel_Demo_4__col,left:Panel_Demo_4__lef,top:Panel_Demo_4__top,width:Panel_Demo_4__wid,height:Panel_Demo_4__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_4__src" fit="fill" v-if="Image_id_4__vis" :disabled="Image_id_4__dis" :style="{left:Image_id_4__lef,top:Image_id_4__top,width:Image_id_4__wid,height:Image_id_4__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_4','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText65" :underline="false" v-if="StaticText65__vis" :disabled="StaticText65__dis" type="primary" :href="StaticText65__hrf" target="_blank" :style="{left:StaticText65__lef,top:StaticText65__top,width:StaticText65__wid,height:StaticText65__hei}" style="position:absolute;text-align:center;">{{StaticText65__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_5" v-if="Panel_Demo_5__vis" :disabled="Panel_Demo_5__dis" :style="{backgroundColor:Panel_Demo_5__col,left:Panel_Demo_5__lef,top:Panel_Demo_5__top,width:Panel_Demo_5__wid,height:Panel_Demo_5__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_5__src" fit="fill" v-if="Image_id_5__vis" :disabled="Image_id_5__dis" :style="{left:Image_id_5__lef,top:Image_id_5__top,width:Image_id_5__wid,height:Image_id_5__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_5','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText66" :underline="false" v-if="StaticText66__vis" :disabled="StaticText66__dis" type="primary" :href="StaticText66__hrf" target="_blank" :style="{left:StaticText66__lef,top:StaticText66__top,width:StaticText66__wid,height:StaticText66__hei}" style="position:absolute;text-align:center;">{{StaticText66__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_6" v-if="Panel_Demo_6__vis" :disabled="Panel_Demo_6__dis" :style="{backgroundColor:Panel_Demo_6__col,left:Panel_Demo_6__lef,top:Panel_Demo_6__top,width:Panel_Demo_6__wid,height:Panel_Demo_6__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_6__src" fit="fill" v-if="Image_id_6__vis" :disabled="Image_id_6__dis" :style="{left:Image_id_6__lef,top:Image_id_6__top,width:Image_id_6__wid,height:Image_id_6__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_6','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText67" :underline="false" v-if="StaticText67__vis" :disabled="StaticText67__dis" type="primary" :href="StaticText67__hrf" target="_blank" :style="{left:StaticText67__lef,top:StaticText67__top,width:StaticText67__wid,height:StaticText67__hei}" style="position:absolute;text-align:center;">{{StaticText67__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_7" v-if="Panel_Demo_7__vis" :disabled="Panel_Demo_7__dis" :style="{backgroundColor:Panel_Demo_7__col,left:Panel_Demo_7__lef,top:Panel_Demo_7__top,width:Panel_Demo_7__wid,height:Panel_Demo_7__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_7__src" fit="fill" v-if="Image_id_7__vis" :disabled="Image_id_7__dis" :style="{left:Image_id_7__lef,top:Image_id_7__top,width:Image_id_7__wid,height:Image_id_7__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_7','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText68" :underline="false" v-if="StaticText68__vis" :disabled="StaticText68__dis" type="primary" :href="StaticText68__hrf" target="_blank" :style="{left:StaticText68__lef,top:StaticText68__top,width:StaticText68__wid,height:StaticText68__hei}" style="position:absolute;text-align:center;">{{StaticText68__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_8" v-if="Panel_Demo_8__vis" :disabled="Panel_Demo_8__dis" :style="{backgroundColor:Panel_Demo_8__col,left:Panel_Demo_8__lef,top:Panel_Demo_8__top,width:Panel_Demo_8__wid,height:Panel_Demo_8__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_8__src" fit="fill" v-if="Image_id_8__vis" :disabled="Image_id_8__dis" :style="{left:Image_id_8__lef,top:Image_id_8__top,width:Image_id_8__wid,height:Image_id_8__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_8','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText69" :underline="false" v-if="StaticText69__vis" :disabled="StaticText69__dis" type="primary" :href="StaticText69__hrf" target="_blank" :style="{left:StaticText69__lef,top:StaticText69__top,width:StaticText69__wid,height:StaticText69__hei}" style="position:absolute;text-align:center;">{{StaticText69__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_9" v-if="Panel_Demo_9__vis" :disabled="Panel_Demo_9__dis" :style="{backgroundColor:Panel_Demo_9__col,left:Panel_Demo_9__lef,top:Panel_Demo_9__top,width:Panel_Demo_9__wid,height:Panel_Demo_9__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_9__src" fit="fill" v-if="Image_id_9__vis" :disabled="Image_id_9__dis" :style="{left:Image_id_9__lef,top:Image_id_9__top,width:Image_id_9__wid,height:Image_id_9__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_9','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText610" :underline="false" v-if="StaticText610__vis" :disabled="StaticText610__dis" type="primary" :href="StaticText610__hrf" target="_blank" :style="{left:StaticText610__lef,top:StaticText610__top,width:StaticText610__wid,height:StaticText610__hei}" style="position:absolute;text-align:center;">{{StaticText610__cap}}
+        </el-link>
+        </el-main>
+        <el-main id="Panel_Demo_10" v-if="Panel_Demo_10__vis" :disabled="Panel_Demo_10__dis" :style="{backgroundColor:Panel_Demo_10__col,left:Panel_Demo_10__lef,top:Panel_Demo_10__top,width:Panel_Demo_10__wid,height:Panel_Demo_10__hei}" style="position:absolute;overflow:hidden;">
+        <el-image :src="Image_id_10__src" fit="fill" v-if="Image_id_10__vis" :disabled="Image_id_10__dis" :style="{left:Image_id_10__lef,top:Image_id_10__top,width:Image_id_10__wid,height:Image_id_10__hei}" style="position:absolute;cursor: pointer;" @click="dwevent($event,'Image_id_10','0','onclick','2363414')">
+        </el-Image>
+        <el-link id="StaticText611" :underline="false" v-if="StaticText611__vis" :disabled="StaticText611__dis" type="primary" :href="StaticText611__hrf" target="_blank" :style="{left:StaticText611__lef,top:StaticText611__top,width:StaticText611__wid,height:StaticText611__hei}" style="position:absolute;text-align:center;">{{StaticText611__cap}}
+        </el-link>
+        </el-main>
+        </el-main>
+        </el-main>
+        <el-main id="Panel_02_Main" v-if="Panel_02_Main__vis" :disabled="Panel_02_Main__dis" :style="{backgroundColor:Panel_02_Main__col,left:Panel_02_Main__lef,top:Panel_02_Main__top,width:Panel_02_Main__wid,height:Panel_02_Main__hei}" style="position:absolute;overflow:hidden;">
+        <el-main id="Panel_Inner2" v-if="Panel_Inner2__vis" :disabled="Panel_Inner2__dis" :style="{backgroundColor:Panel_Inner2__col,left:Panel_Inner2__lef,top:Panel_Inner2__top,width:Panel_Inner2__wid,height:Panel_Inner2__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label_WDWD" v-html="Label_WDWD__cap" v-if="Label_WDWD__vis" :disabled="Label_WDWD__dis" :style="{left:Label_WDWD__lef,top:Label_WDWD__top,width:Label_WDWD__wid,height:Label_WDWD__hei}" style="position:absolute;color:#2AA527;font-family:'Tahoma';font-size:28pt;font-weight:bold;font-style:normal;text-decoration:none;text-align:center;line-height:45px;">{{Label_WDWD__cap}}
+        </div>
+        <div  id="Label_Fee" v-html="Label_Fee__cap" v-if="Label_Fee__vis" :disabled="Label_Fee__dis" :style="{left:Label_Fee__lef,top:Label_Fee__top,width:Label_Fee__wid,height:Label_Fee__hei}" style="position:absolute;color:#2AA527;font-family:'Tahoma';font-size:20pt;font-weight:bold;font-style:normal;text-decoration:none;line-height:48px;">{{Label_Fee__cap}}
+        </div>
+        <div  id="Label_BuyNow" v-html="Label_BuyNow__cap" v-if="Label_BuyNow__vis" :disabled="Label_BuyNow__dis" :style="{left:Label_BuyNow__lef,top:Label_BuyNow__top,width:Label_BuyNow__wid,height:Label_BuyNow__hei}" style="position:absolute;color:#000000;font-family:'Tahoma';font-size:20pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:48px;">{{Label_BuyNow__cap}}
+        </div>
+        <div  id="Label_Introduce0" v-html="Label_Introduce0__cap" v-if="Label_Introduce0__vis" :disabled="Label_Introduce0__dis" :style="{left:Label_Introduce0__lef,top:Label_Introduce0__top,width:Label_Introduce0__wid,height:Label_Introduce0__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:40px;">{{Label_Introduce0__cap}}
+        </div>
+        <div  id="Label_Introduce1" v-html="Label_Introduce1__cap" v-if="Label_Introduce1__vis" :disabled="Label_Introduce1__dis" :style="{left:Label_Introduce1__lef,top:Label_Introduce1__top,width:Label_Introduce1__wid,height:Label_Introduce1__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:40px;">{{Label_Introduce1__cap}}
+        </div>
+        <div  id="Label_Introduce2" v-html="Label_Introduce2__cap" v-if="Label_Introduce2__vis" :disabled="Label_Introduce2__dis" :style="{left:Label_Introduce2__lef,top:Label_Introduce2__top,width:Label_Introduce2__wid,height:Label_Introduce2__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;line-height:40px;">{{Label_Introduce2__cap}}
+        </div>
+        <el-button id="Button_BuyNow" size=large v-if="Button_BuyNow__vis" :disabled="Button_BuyNow__dis" :type="Button_BuyNow__typ" icon="el-icon-caret-right" :style="{left:Button_BuyNow__lef,top:Button_BuyNow__top,width:Button_BuyNow__wid,height:Button_BuyNow__hei}" style="position:absolute;">{{Button_BuyNow__cap}}
+        </el-button>
+        <el-button id="Button_Download" size=large v-if="Button_Download__vis" :disabled="Button_Download__dis" :type="Button_Download__typ" icon="el-icon-caret-right" :style="{left:Button_Download__lef,top:Button_Download__top,width:Button_Download__wid,height:Button_Download__hei}" style="position:absolute;" @click.native="dwevent($event,'Button_Download','0','onclick','2363414')">{{Button_Download__cap}}
+        </el-button>
+        </el-main>
+        <el-main id="Panel2" v-if="Panel2__vis" :disabled="Panel2__dis" :style="{backgroundColor:Panel2__col,left:Panel2__lef,top:Panel2__top,width:Panel2__wid,height:Panel2__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        </el-main>
+        <el-main id="Panel_01_Menu" v-if="Panel_01_Menu__vis" :disabled="Panel_01_Menu__dis" :style="{backgroundColor:Panel_01_Menu__col,left:Panel_01_Menu__lef,top:Panel_01_Menu__top,width:Panel_01_Menu__wid,height:Panel_01_Menu__hei}" style="position:absolute;overflow:hidden;">
+        <el-main id="Panel_line1" v-if="Panel_line1__vis" :disabled="Panel_line1__dis" :style="{backgroundColor:Panel_line1__col,left:Panel_line1__lef,top:Panel_line1__top,width:Panel_line1__wid,height:Panel_line1__hei}" style="position:absolute;overflow:hidden;">
+        </el-main>
+        <el-main id="Panel_Inner1" v-if="Panel_Inner1__vis" :disabled="Panel_Inner1__dis" :style="{backgroundColor:Panel_Inner1__col,left:Panel_Inner1__lef,top:Panel_Inner1__top,width:Panel_Inner1__wid,height:Panel_Inner1__hei}" style="position:absolute;overflow:hidden;">
+        <div  id="Label_Download" v-html="Label_Download__cap" v-if="Label_Download__vis" :disabled="Label_Download__dis" :style="{left:Label_Download__lef,top:Label_Download__top,width:Label_Download__wid,height:Label_Download__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:53px;">{{Label_Download__cap}}
+        </div>
+        <div  id="Label_ContactUs" v-html="Label_ContactUs__cap" v-if="Label_ContactUs__vis" :disabled="Label_ContactUs__dis" :style="{left:Label_ContactUs__lef,top:Label_ContactUs__top,width:Label_ContactUs__wid,height:Label_ContactUs__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:53px;">{{Label_ContactUs__cap}}
+        </div>
+        <div  id="Label_gitee" v-html="Label_gitee__cap" v-if="Label_gitee__vis" :disabled="Label_gitee__dis" :style="{left:Label_gitee__lef,top:Label_gitee__top,width:Label_gitee__wid,height:Label_gitee__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:53px;">{{Label_gitee__cap}}
+        </div>
+        <div  id="Label_blog" v-html="Label_blog__cap" v-if="Label_blog__vis" :disabled="Label_blog__dis" :style="{left:Label_blog__lef,top:Label_blog__top,width:Label_blog__wid,height:Label_blog__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:53px;">{{Label_blog__cap}}
+        </div>
+        <el-link id="StaticText_FAQs" :underline="false" v-if="StaticText_FAQs__vis" :disabled="StaticText_FAQs__dis" type="primary" :href="StaticText_FAQs__hrf" target="_blank" :style="{left:StaticText_FAQs__lef,top:StaticText_FAQs__top,width:StaticText_FAQs__wid,height:StaticText_FAQs__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;">{{StaticText_FAQs__cap}}
+        </el-link>
+        <el-link id="StaticText_Home" :underline="false" v-if="StaticText_Home__vis" :disabled="StaticText_Home__dis" type="primary" :href="StaticText_Home__hrf" target="_self" :style="{left:StaticText_Home__lef,top:StaticText_Home__top,width:StaticText_Home__wid,height:StaticText_Home__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;">{{StaticText_Home__cap}}
+        </el-link>
+        <el-link id="StaticText_ContactUs" :underline="false" v-if="StaticText_ContactUs__vis" :disabled="StaticText_ContactUs__dis" type="primary" :href="StaticText_ContactUs__hrf" target="_blank" :style="{left:StaticText_ContactUs__lef,top:StaticText_ContactUs__top,width:StaticText_ContactUs__wid,height:StaticText_ContactUs__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;">{{StaticText_ContactUs__cap}}
+        </el-link>
+        <el-link id="StaticText_Gitee" :underline="false" v-if="StaticText_Gitee__vis" :disabled="StaticText_Gitee__dis" type="primary" :href="StaticText_Gitee__hrf" target="_blank" :style="{left:StaticText_Gitee__lef,top:StaticText_Gitee__top,width:StaticText_Gitee__wid,height:StaticText_Gitee__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;">{{StaticText_Gitee__cap}}
+        </el-link>
+        <el-link id="StaticText_Blog" :underline="false" v-if="StaticText_Blog__vis" :disabled="StaticText_Blog__dis" type="primary" :href="StaticText_Blog__hrf" target="_blank" :style="{left:StaticText_Blog__lef,top:StaticText_Blog__top,width:StaticText_Blog__wid,height:StaticText_Blog__hei}" style="position:absolute;color:#646464;font-family:'微软雅黑';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;">{{StaticText_Blog__cap}}
+        </el-link>
+        </el-main>
+        </el-main>
+        </el-main>
+	 </div>
+    <script>
+       Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + expiredays);
+            document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()); 
+       },
+       Vue.prototype.dwgetcookie = function (name) {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
+            if(arr=document.cookie.match(reg))
+                 return unescape(arr[2]); 
+            else
+                 return '';
+       },
+	    Vue.prototype.procResp = function (data){
+		    resp = JSON.parse(decodeURIComponent(String(data))); 
+		    if (resp.m === "update"){
+		        eval(String(resp.o));
+		    } else if (resp.m === "html"){
+		        document.body.innerHTML="";document.write(String(resp.o));document.close();
+		    } else if (resp.m === "showform"){
+		        document.open();document.write(String(resp.o));
+		    }
+	    } 
+        new Vue(
+			{
+				el: '#app',
+				data: function () {
+					return {
+					    Form1__top:"0px",
+					    Form1__wid:"1000px",
+					    Form1__hei:"1014px",
+                        Panel_Line__lef:"0px",
+                        Panel_Line__top:"64px",
+                        Panel_Line__wid:"1000px",
+                        Panel_Line__hei:"2px",
+                        Panel_Line__vis:true,
+                        Panel_Line__dis:false,
+                        Panel_Line__col:"RGB(240,240,240,1.0)",
+                        Button_Search__lef:"905px",
+                        Button_Search__top:"12px",
+                        Button_Search__wid:"75px",
+                        Button_Search__hei:"35px",
+                        Button_Search__vis:true,
+                        Button_Search__dis:false,
+                        Button_Search__cap:"Search",
+                        Button_Search__typ:"success",
+                        Edit_Search__lef:"713px",
+                        Edit_Search__top:"12px",
+                        Edit_Search__wid:"192px",
+                        Edit_Search__hei:"35px",
+                        Edit_Search__vis:true,
+                        Edit_Search__dis:false,
+                        Edit_Search__txt:"",
+                        Edit_Search__col:"#FFFFFF",
+                        Label2__lef:"97px",
+                        Label2__top:"3px",
+                        Label2__wid:"56px",
+                        Label2__hei:"48px",
+                        Label2__vis:true,
+                        Label2__dis:false,
+                        Label2__cap:"bbs",
+                        Label1__lef:"3px",
+                        Label1__top:"3px",
+                        Label1__wid:"94px",
+                        Label1__hei:"48px",
+                        Label1__vis:true,
+                        Label1__dis:false,
+                        Label1__cap:"delphi",
+                        Label11__lef:"153px",
+                        Label11__top:"3px",
+                        Label11__wid:"78px",
+                        Label11__hei:"48px",
+                        Label11__vis:true,
+                        Label11__dis:false,
+                        Label11__cap:".com",
+                        Panel_Logo__lef:"9px",
+                        Panel_Logo__top:"4px",
+                        Panel_Logo__wid:"230px",
+                        Panel_Logo__hei:"54px",
+                        Panel_Logo__vis:true,
+                        Panel_Logo__dis:false,
+                        Panel_Logo__col:"RGB(247,249,250,1.0)",
+                        Panel_Inner0__lef:"0px",
+                        Panel_Inner0__top:"-1px",
+                        Panel_Inner0__wid:"1000px",
+                        Panel_Inner0__hei:"59px",
+                        Panel_Inner0__vis:true,
+                        Panel_Inner0__dis:false,
+                        Panel_Inner0__col:"RGB(247,249,250,1.0)",
+                        Panel_00_Logo__lef:"0px",
+                        Panel_00_Logo__top:"0px",
+                        Panel_00_Logo__wid:"1000px",
+                        Panel_00_Logo__hei:"66px",
+                        Panel_00_Logo__vis:true,
+                        Panel_00_Logo__dis:false,
+                        Panel_00_Logo__col:"RGB(247,249,250,1.0)",
+                        Label14__lef:"0px",
+                        Label14__top:"32px",
+                        Label14__wid:"1000px",
+                        Label14__hei:"32px",
+                        Label14__vis:true,
+                        Label14__dis:false,
+                        Label14__cap:"Please contact us : QQ45300355",
+                        Label15__lef:"0px",
+                        Label15__top:"0px",
+                        Label15__wid:"1000px",
+                        Label15__hei:"32px",
+                        Label15__vis:true,
+                        Label15__dis:false,
+                        Label15__cap:"(C) 2010 - 2021 Xi\'An Maxxua Info Tech Ltd",
+                        Panel_99_Foot__lef:"0px",
+                        Panel_99_Foot__top:"922px",
+                        Panel_99_Foot__wid:"1000px",
+                        Panel_99_Foot__hei:"92px",
+                        Panel_99_Foot__vis:true,
+                        Panel_99_Foot__dis:false,
+                        Panel_99_Foot__col:"RGB(255,255,255,1.0)",
+                        Panel_line3__lef:"0px",
+                        Panel_line3__top:"419px",
+                        Panel_line3__wid:"1000px",
+                        Panel_line3__hei:"1px",
+                        Panel_line3__vis:true,
+                        Panel_line3__dis:false,
+                        Panel_line3__col:"RGB(240,240,240,1.0)",
+                        Image__Demo__lef:"56px",
+                        Image__Demo__top:"16px",
+                        Image__Demo__wid:"64px",
+                        Image__Demo__hei:"64px",
+                        Image__Demo__vis:true,
+                        Image__Demo__dis:false,
+                        Image__Demo__src:"/media/images/hellott.png",
+                        StaticText6__lef:"1px",
+                        StaticText6__top:"82px",
+                        StaticText6__wid:"178px",
+                        StaticText6__hei:"27px",
+                        StaticText6__vis:true,
+                        StaticText6__dis:false,
+                        StaticText6__cap:"Hello,World!",
+                        StaticText6__hrf:"/hellott.dw",
+                        Panel_Demo__lef:"16px",
+                        Panel_Demo__top:"141px",
+                        Panel_Demo__wid:"180px",
+                        Panel_Demo__hei:"110px",
+                        Panel_Demo__vis:false,
+                        Panel_Demo__dis:false,
+                        Panel_Demo__col:"RGB(243,246,248,1.0)",
+                        Image_id_0__lef:"56px",
+                        Image_id_0__top:"16px",
+                        Image_id_0__wid:"64px",
+                        Image_id_0__hei:"64px",
+                        Image_id_0__vis:true,
+                        Image_id_0__dis:false,
+                        Image_id_0__src:"/media/images/hello.png",
+                        StaticText61__lef:"1px",
+                        StaticText61__top:"82px",
+                        StaticText61__wid:"178px",
+                        StaticText61__hei:"27px",
+                        StaticText61__vis:true,
+                        StaticText61__dis:false,
+                        StaticText61__cap:"Hello,World",
+                        StaticText61__hrf:"/hello.dw",
+                        Panel_Demo_0__lef:"50px",
+                        Panel_Demo_0__top:"0px",
+                        Panel_Demo_0__wid:"180px",
+                        Panel_Demo_0__hei:"110px",
+                        Panel_Demo_0__vis:true,
+                        Panel_Demo_0__dis:false,
+                        Panel_Demo_0__col:"RGB(243,246,248,1.0)",
+                        Image_id_1__lef:"56px",
+                        Image_id_1__top:"16px",
+                        Image_id_1__wid:"64px",
+                        Image_id_1__hei:"64px",
+                        Image_id_1__vis:true,
+                        Image_id_1__dis:false,
+                        Image_id_1__src:"/media/images/demos.png",
+                        StaticText62__lef:"1px",
+                        StaticText62__top:"82px",
+                        StaticText62__wid:"178px",
+                        StaticText62__hei:"27px",
+                        StaticText62__vis:true,
+                        StaticText62__dis:false,
+                        StaticText62__cap:"VCL Demos",
+                        StaticText62__hrf:"/demos.dw",
+                        Panel_Demo_1__lef:"230px",
+                        Panel_Demo_1__top:"0px",
+                        Panel_Demo_1__wid:"180px",
+                        Panel_Demo_1__hei:"110px",
+                        Panel_Demo_1__vis:true,
+                        Panel_Demo_1__dis:false,
+                        Panel_Demo_1__col:"RGB(243,246,248,1.0)",
+                        Image_id_2__lef:"56px",
+                        Image_id_2__top:"16px",
+                        Image_id_2__wid:"64px",
+                        Image_id_2__hei:"64px",
+                        Image_id_2__vis:true,
+                        Image_id_2__dis:false,
+                        Image_id_2__src:"/media/images/demo.png",
+                        StaticText63__lef:"1px",
+                        StaticText63__top:"82px",
+                        StaticText63__wid:"178px",
+                        StaticText63__hei:"27px",
+                        StaticText63__vis:true,
+                        StaticText63__dis:false,
+                        StaticText63__cap:"stringgrid",
+                        StaticText63__hrf:"/stringgrid.dw",
+                        Panel_Demo_2__lef:"410px",
+                        Panel_Demo_2__top:"0px",
+                        Panel_Demo_2__wid:"180px",
+                        Panel_Demo_2__hei:"110px",
+                        Panel_Demo_2__vis:true,
+                        Panel_Demo_2__dis:false,
+                        Panel_Demo_2__col:"RGB(243,246,248,1.0)",
+                        Image_id_3__lef:"56px",
+                        Image_id_3__top:"16px",
+                        Image_id_3__wid:"64px",
+                        Image_id_3__hei:"64px",
+                        Image_id_3__vis:true,
+                        Image_id_3__dis:false,
+                        Image_id_3__src:"/media/images/member.png",
+                        StaticText64__lef:"1px",
+                        StaticText64__top:"82px",
+                        StaticText64__wid:"178px",
+                        StaticText64__hei:"27px",
+                        StaticText64__vis:true,
+                        StaticText64__dis:false,
+                        StaticText64__cap:"DataBase",
+                        StaticText64__hrf:"/member.dw",
+                        Panel_Demo_3__lef:"590px",
+                        Panel_Demo_3__top:"0px",
+                        Panel_Demo_3__wid:"180px",
+                        Panel_Demo_3__hei:"110px",
+                        Panel_Demo_3__vis:true,
+                        Panel_Demo_3__dis:false,
+                        Panel_Demo_3__col:"RGB(243,246,248,1.0)",
+                        Image_id_4__lef:"56px",
+                        Image_id_4__top:"16px",
+                        Image_id_4__wid:"64px",
+                        Image_id_4__hei:"64px",
+                        Image_id_4__vis:true,
+                        Image_id_4__dis:false,
+                        Image_id_4__src:"/media/images/qrcode.png",
+                        StaticText65__lef:"1px",
+                        StaticText65__top:"82px",
+                        StaticText65__wid:"178px",
+                        StaticText65__hei:"27px",
+                        StaticText65__vis:true,
+                        StaticText65__dis:false,
+                        StaticText65__cap:"QR Code",
+                        StaticText65__hrf:"https://www.web0000.com/qrcode.dw",
+                        Panel_Demo_4__lef:"770px",
+                        Panel_Demo_4__top:"0px",
+                        Panel_Demo_4__wid:"180px",
+                        Panel_Demo_4__hei:"110px",
+                        Panel_Demo_4__vis:true,
+                        Panel_Demo_4__dis:false,
+                        Panel_Demo_4__col:"RGB(243,246,248,1.0)",
+                        Image_id_5__lef:"56px",
+                        Image_id_5__top:"16px",
+                        Image_id_5__wid:"64px",
+                        Image_id_5__hei:"64px",
+                        Image_id_5__vis:true,
+                        Image_id_5__dis:false,
+                        Image_id_5__src:"/media/images/driver.png",
+                        StaticText66__lef:"1px",
+                        StaticText66__top:"82px",
+                        StaticText66__wid:"178px",
+                        StaticText66__hei:"27px",
+                        StaticText66__vis:true,
+                        StaticText66__dis:false,
+                        StaticText66__cap:"Driver Test",
+                        StaticText66__hrf:"/driver.dw",
+                        Panel_Demo_5__lef:"50px",
+                        Panel_Demo_5__top:"140px",
+                        Panel_Demo_5__wid:"180px",
+                        Panel_Demo_5__hei:"110px",
+                        Panel_Demo_5__vis:true,
+                        Panel_Demo_5__dis:false,
+                        Panel_Demo_5__col:"RGB(243,246,248,1.0)",
+                        Image_id_6__lef:"56px",
+                        Image_id_6__top:"16px",
+                        Image_id_6__wid:"64px",
+                        Image_id_6__hei:"64px",
+                        Image_id_6__vis:true,
+                        Image_id_6__dis:false,
+                        Image_id_6__src:"/media/images/mediaplayer.png",
+                        StaticText67__lef:"1px",
+                        StaticText67__top:"82px",
+                        StaticText67__wid:"178px",
+                        StaticText67__hei:"27px",
+                        StaticText67__vis:true,
+                        StaticText67__dis:false,
+                        StaticText67__cap:"MediaPlayer",
+                        StaticText67__hrf:"/mediaplayer.dw",
+                        Panel_Demo_6__lef:"230px",
+                        Panel_Demo_6__top:"140px",
+                        Panel_Demo_6__wid:"180px",
+                        Panel_Demo_6__hei:"110px",
+                        Panel_Demo_6__vis:true,
+                        Panel_Demo_6__dis:false,
+                        Panel_Demo_6__col:"RGB(243,246,248,1.0)",
+                        Image_id_7__lef:"56px",
+                        Image_id_7__top:"16px",
+                        Image_id_7__wid:"64px",
+                        Image_id_7__hei:"64px",
+                        Image_id_7__vis:true,
+                        Image_id_7__dis:false,
+                        Image_id_7__src:"/media/images/forum.png",
+                        StaticText68__lef:"1px",
+                        StaticText68__top:"82px",
+                        StaticText68__wid:"178px",
+                        StaticText68__hei:"27px",
+                        StaticText68__vis:true,
+                        StaticText68__dis:false,
+                        StaticText68__cap:"Forum",
+                        StaticText68__hrf:"/dfw.dw",
+                        Panel_Demo_7__lef:"410px",
+                        Panel_Demo_7__top:"140px",
+                        Panel_Demo_7__wid:"180px",
+                        Panel_Demo_7__hei:"110px",
+                        Panel_Demo_7__vis:true,
+                        Panel_Demo_7__dis:false,
+                        Panel_Demo_7__col:"RGB(243,246,248,1.0)",
+                        Image_id_8__lef:"56px",
+                        Image_id_8__top:"16px",
+                        Image_id_8__wid:"64px",
+                        Image_id_8__hei:"64px",
+                        Image_id_8__vis:true,
+                        Image_id_8__dis:false,
+                        Image_id_8__src:"/media/images/pagecontrol.png",
+                        StaticText69__lef:"1px",
+                        StaticText69__top:"82px",
+                        StaticText69__wid:"178px",
+                        StaticText69__hei:"27px",
+                        StaticText69__vis:true,
+                        StaticText69__dis:false,
+                        StaticText69__cap:"PageControl",
+                        StaticText69__hrf:"/pagecontrol.dw",
+                        Panel_Demo_8__lef:"590px",
+                        Panel_Demo_8__top:"140px",
+                        Panel_Demo_8__wid:"180px",
+                        Panel_Demo_8__hei:"110px",
+                        Panel_Demo_8__vis:true,
+                        Panel_Demo_8__dis:false,
+                        Panel_Demo_8__col:"RGB(243,246,248,1.0)",
+                        Image_id_9__lef:"56px",
+                        Image_id_9__top:"16px",
+                        Image_id_9__wid:"64px",
+                        Image_id_9__hei:"64px",
+                        Image_id_9__vis:true,
+                        Image_id_9__dis:false,
+                        Image_id_9__src:"/media/images/Panel.png",
+                        StaticText610__lef:"1px",
+                        StaticText610__top:"82px",
+                        StaticText610__wid:"178px",
+                        StaticText610__hei:"27px",
+                        StaticText610__vis:true,
+                        StaticText610__dis:false,
+                        StaticText610__cap:"Panel",
+                        StaticText610__hrf:"/Panel.dw",
+                        Panel_Demo_9__lef:"770px",
+                        Panel_Demo_9__top:"140px",
+                        Panel_Demo_9__wid:"180px",
+                        Panel_Demo_9__hei:"110px",
+                        Panel_Demo_9__vis:true,
+                        Panel_Demo_9__dis:false,
+                        Panel_Demo_9__col:"RGB(243,246,248,1.0)",
+                        Image_id_10__lef:"56px",
+                        Image_id_10__top:"16px",
+                        Image_id_10__wid:"64px",
+                        Image_id_10__hei:"64px",
+                        Image_id_10__vis:true,
+                        Image_id_10__dis:false,
+                        Image_id_10__src:"/media/images/image.png",
+                        StaticText611__lef:"1px",
+                        StaticText611__top:"82px",
+                        StaticText611__wid:"178px",
+                        StaticText611__hei:"27px",
+                        StaticText611__vis:true,
+                        StaticText611__dis:false,
+                        StaticText611__cap:"Image",
+                        StaticText611__hrf:"/image.dw",
+                        Panel_Demo_10__lef:"50px",
+                        Panel_Demo_10__top:"280px",
+                        Panel_Demo_10__wid:"180px",
+                        Panel_Demo_10__hei:"110px",
+                        Panel_Demo_10__vis:true,
+                        Panel_Demo_10__dis:false,
+                        Panel_Demo_10__col:"RGB(243,246,248,1.0)",
+                        Panel_Inner3__lef:"0px",
+                        Panel_Inner3__top:"0px",
+                        Panel_Inner3__wid:"1000px",
+                        Panel_Inner3__hei:"420px",
+                        Panel_Inner3__vis:true,
+                        Panel_Inner3__dis:false,
+                        Panel_Inner3__col:"RGB(243,246,248,1.0)",
+                        Panel_03_Demos__lef:"0px",
+                        Panel_03_Demos__top:"502px",
+                        Panel_03_Demos__wid:"1000px",
+                        Panel_03_Demos__hei:"420px",
+                        Panel_03_Demos__vis:true,
+                        Panel_03_Demos__dis:false,
+                        Panel_03_Demos__col:"RGB(243,246,248,1.0)",
+                        Label_WDWD__lef:"0px",
+                        Label_WDWD__top:"0px",
+                        Label_WDWD__wid:"1000px",
+                        Label_WDWD__hei:"45px",
+                        Label_WDWD__vis:true,
+                        Label_WDWD__dis:false,
+                        Label_WDWD__cap:"DeWeb : Web develop with Delphi",
+                        Label_Fee__lef:"483px",
+                        Label_Fee__top:"184px",
+                        Label_Fee__wid:"89px",
+                        Label_Fee__hei:"48px",
+                        Label_Fee__vis:true,
+                        Label_Fee__dis:false,
+                        Label_Fee__cap:"$0",
+                        Label_BuyNow__lef:"344px",
+                        Label_BuyNow__top:"184px",
+                        Label_BuyNow__wid:"133px",
+                        Label_BuyNow__hei:"48px",
+                        Label_BuyNow__vis:true,
+                        Label_BuyNow__dis:false,
+                        Label_BuyNow__cap:"Buy now :",
+                        Label_Introduce0__lef:"170px",
+                        Label_Introduce0__top:"59px",
+                        Label_Introduce0__wid:"980px",
+                        Label_Introduce0__hei:"40px",
+                        Label_Introduce0__vis:true,
+                        Label_Introduce0__dis:false,
+                        Label_Introduce0__cap:"完全用Delphi快速开发网页应用",
+                        Label_Introduce1__lef:"170px",
+                        Label_Introduce1__top:"97px",
+                        Label_Introduce1__wid:"998px",
+                        Label_Introduce1__hei:"40px",
+                        Label_Introduce1__vis:true,
+                        Label_Introduce1__dis:false,
+                        Label_Introduce1__cap:"无需学习HTML、JavaScript、Java、PHP、ASP、C#等新知识，用Delphi搞定一切。",
+                        Label_Introduce2__lef:"170px",
+                        Label_Introduce2__top:"138px",
+                        Label_Introduce2__wid:"998px",
+                        Label_Introduce2__hei:"40px",
+                        Label_Introduce2__vis:true,
+                        Label_Introduce2__dis:false,
+                        Label_Introduce2__cap:"支持所有客户端，包括手机、平板等。",
+                        Button_BuyNow__lef:"470px",
+                        Button_BuyNow__top:"257px",
+                        Button_BuyNow__wid:"260px",
+                        Button_BuyNow__hei:"57px",
+                        Button_BuyNow__vis:true,
+                        Button_BuyNow__dis:true,
+                        Button_BuyNow__cap:"Buy now",
+                        Button_BuyNow__typ:"success",
+                        Button_Download__lef:"188px",
+                        Button_Download__top:"257px",
+                        Button_Download__wid:"260px",
+                        Button_Download__hei:"57px",
+                        Button_Download__vis:true,
+                        Button_Download__dis:false,
+                        Button_Download__cap:"Download Free",
+                        Button_Download__typ:"success",
+                        Panel_Inner2__lef:"0px",
+                        Panel_Inner2__top:"20px",
+                        Panel_Inner2__wid:"1000px",
+                        Panel_Inner2__hei:"317px",
+                        Panel_Inner2__vis:true,
+                        Panel_Inner2__dis:false,
+                        Panel_Inner2__col:"RGB(255,255,255,1.0)",
+                        Panel2__lef:"0px",
+                        Panel2__top:"369px",
+                        Panel2__wid:"1000px",
+                        Panel2__hei:"1px",
+                        Panel2__vis:true,
+                        Panel2__dis:false,
+                        Panel2__col:"RGB(240,240,240,1.0)",
+                        Panel_02_Main__lef:"0px",
+                        Panel_02_Main__top:"132px",
+                        Panel_02_Main__wid:"1000px",
+                        Panel_02_Main__hei:"370px",
+                        Panel_02_Main__vis:true,
+                        Panel_02_Main__dis:false,
+                        Panel_02_Main__col:"RGB(255,255,255,1.0)",
+                        Panel_line1__lef:"0px",
+                        Panel_line1__top:"65px",
+                        Panel_line1__wid:"1000px",
+                        Panel_line1__hei:"1px",
+                        Panel_line1__vis:true,
+                        Panel_line1__dis:false,
+                        Panel_line1__col:"RGB(240,240,240,1.0)",
+                        Label_Download__lef:"80px",
+                        Label_Download__top:"6px",
+                        Label_Download__wid:"10px",
+                        Label_Download__hei:"53px",
+                        Label_Download__vis:true,
+                        Label_Download__dis:false,
+                        Label_Download__cap:"|",
+                        Label_ContactUs__lef:"292px",
+                        Label_ContactUs__top:"6px",
+                        Label_ContactUs__wid:"10px",
+                        Label_ContactUs__hei:"53px",
+                        Label_ContactUs__vis:true,
+                        Label_ContactUs__dis:false,
+                        Label_ContactUs__cap:"|",
+                        Label_gitee__lef:"151px",
+                        Label_gitee__top:"6px",
+                        Label_gitee__wid:"10px",
+                        Label_gitee__hei:"53px",
+                        Label_gitee__vis:true,
+                        Label_gitee__dis:false,
+                        Label_gitee__cap:"|",
+                        Label_blog__lef:"225px",
+                        Label_blog__top:"6px",
+                        Label_blog__wid:"10px",
+                        Label_blog__hei:"53px",
+                        Label_blog__vis:true,
+                        Label_blog__dis:false,
+                        Label_blog__cap:"|",
+                        StaticText_FAQs__lef:"93px",
+                        StaticText_FAQs__top:"9px",
+                        StaticText_FAQs__wid:"55px",
+                        StaticText_FAQs__hei:"47px",
+                        StaticText_FAQs__vis:true,
+                        StaticText_FAQs__dis:false,
+                        StaticText_FAQs__cap:"FAQs",
+                        StaticText_FAQs__hrf:"/faq.dw",
+                        StaticText_Home__lef:"6px",
+                        StaticText_Home__top:"9px",
+                        StaticText_Home__wid:"71px",
+                        StaticText_Home__hei:"47px",
+                        StaticText_Home__vis:true,
+                        StaticText_Home__dis:false,
+                        StaticText_Home__cap:"Home",
+                        StaticText_Home__hrf:"/",
+                        StaticText_ContactUs__lef:"305px",
+                        StaticText_ContactUs__top:"9px",
+                        StaticText_ContactUs__wid:"114px",
+                        StaticText_ContactUs__hei:"47px",
+                        StaticText_ContactUs__vis:true,
+                        StaticText_ContactUs__dis:false,
+                        StaticText_ContactUs__cap:"Contact us",
+                        StaticText_ContactUs__hrf:"mailto:fenglinyushu@163.com",
+                        StaticText_Gitee__lef:"164px",
+                        StaticText_Gitee__top:"9px",
+                        StaticText_Gitee__wid:"58px",
+                        StaticText_Gitee__hei:"47px",
+                        StaticText_Gitee__vis:true,
+                        StaticText_Gitee__dis:false,
+                        StaticText_Gitee__cap:"gitee",
+                        StaticText_Gitee__hrf:"https://gitee.com/xamh/dewebsdk",
+                        StaticText_Blog__lef:"238px",
+                        StaticText_Blog__top:"9px",
+                        StaticText_Blog__wid:"51px",
+                        StaticText_Blog__hei:"47px",
+                        StaticText_Blog__vis:true,
+                        StaticText_Blog__dis:false,
+                        StaticText_Blog__cap:"Blog",
+                        StaticText_Blog__hrf:"https://www.cnblogs.com/maxxua/",
+                        Panel_Inner1__lef:"0px",
+                        Panel_Inner1__top:"0px",
+                        Panel_Inner1__wid:"1000px",
+                        Panel_Inner1__hei:"65px",
+                        Panel_Inner1__vis:true,
+                        Panel_Inner1__dis:false,
+                        Panel_Inner1__col:"RGB(243,246,248,1.0)",
+                        Panel_01_Menu__lef:"0px",
+                        Panel_01_Menu__top:"66px",
+                        Panel_01_Menu__wid:"1000px",
+                        Panel_01_Menu__hei:"66px",
+                        Panel_01_Menu__vis:true,
+                        Panel_01_Menu__dis:false,
+                        Panel_01_Menu__col:"RGB(243,246,248,1.0)",
+                        Panel_All__lef:"0px",
+                        Panel_All__top:"0px",
+                        Panel_All__wid:"1000px",
+                        Panel_All__hei:"1014px",
+                        Panel_All__vis:true,
+                        Panel_All__dis:false,
+                        Panel_All__col:"RGB(255,255,255,1.0)",
+					    input_query_visible:false,
+					    input_query_caption:"Input Query",
+					    input_query_inputname:"new",
+					    input_query_cancelcaption:"Cancel",
+					    input_query_okcaption:"OK",
+					    input_query_inputdefault:"",
+					    input_query_method:"processinputquery",
+					    input_query_visible:false,
+					    version__istrial:false,
+					    clientid:2363414,
+					    shuntflag:0
+                    }
+                },
+                mounted() {
+                    let me=this;
+                    window.addEventListener(
+                        "onorientationchange" in window ? "orientationchange" : "resize",
+                        function() {
+                            axios.get('{"m":"event","i":2363414,"c":"_screen","os":'+os()+',"orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:0}})
+                            .then(resp =>{me.procResp(resp.data)});
+                        },
+                        false
+                    );
+                },
+				methods: {
+                    ToWebsite (e,n) {
+                        var aTag = document.createElement('a'); 
+                        aTag.setAttribute('href', e);
+                        aTag.setAttribute('target', n);
+                        aTag.click();
+                    },
+                    dwInputClick (e) {
+                        document.getElementById(e).click();
+                    },
+                    dwInputChange (e) {
+                        this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
+                        var sget = '{"m":"event","i":2363414,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        axios.get(sget)
+                    },
+                    filterHandler(value, row, column) {
+                        const property = column['property'];
+                        return row[property] === value;
+                    },
+                    dwInputSubmit (ipname) {
+                        let me=this;let formData = new FormData();
+                        formData.append('file', document.getElementById(ipname+"__inp").files[0]);
+                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '2363414'}}
+                        axios.post('/upload', formData, config)
+                        .then(function (res) {
+                            var sget = '{"m":"event","i":2363414,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            axios.get(sget)
+                            .then(resp =>{me.procResp(resp.data)});
+                        })
+                    },
+                    dwInputSubmit0 (ipname) {
+                        document.getElementById(ipname+"__frm").submit();
+                    },
+                    dwnotify(caption,text) {this.$notify.warning({ title: caption, message: text, duration: 0,showClose: false });},
+                    dwevent(val,compname,compvalue,compevent,handle) {
+                        var jo={};
+                        jo.m="event";
+                        jo.i=handle;
+                        jo.c=compname;
+                        jo.v=escape(eval(compvalue))
+                        jo.e=compevent;
+                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:0}})
+                        .then(resp =>{this.procResp(resp.data)});
+                    },
+                    processinputquery(val) {
+                        this.input_query_visible = false;
+                        axios.get('{"m":"interaction","i":2363414,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:0}})
+                        .then(resp =>{this.procResp(resp.data)});
+                    },
+                },
+                beforeDestroy() {
+                    clearInterval(hearttimer);
+                }
+            }
+        ); 
+    </script>
+</body>
+</html>

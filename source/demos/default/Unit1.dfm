@@ -1,6 +1,7 @@
 object Form1: TForm1
   Left = 553
   Top = 32
+  AlphaBlend = True
   BorderStyle = bsNone
   Caption = 'DeWeb : Delphi -Web'
   ClientHeight = 684
