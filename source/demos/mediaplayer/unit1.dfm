@@ -20,6 +20,7 @@ object Form1: TForm1
     Top = 52
     Width = 523
     Height = 321
+    Hint = '{"dwattr":"controls"}'
     Align = alTop
     EnabledButtons = []
     DoubleBuffered = True

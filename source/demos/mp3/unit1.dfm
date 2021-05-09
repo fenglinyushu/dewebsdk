@@ -5,11 +5,10 @@ object Form1: TForm1
   AutoSize = True
   BorderStyle = bsNone
   BorderWidth = 5
-  Caption = 'DeWeb - TChart'
-  ClientHeight = 423
+  Caption = 'DeWeb - Mp3 player'
+  ClientHeight = 324
   ClientWidth = 350
   Color = clWhite
-  TransparentColor = True
   TransparentColorValue = 16448250
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -26,17 +25,16 @@ object Form1: TForm1
     Left = 3
     Top = 3
     Width = 344
-    Height = 417
+    Height = 318
     Align = alTop
     BevelOuter = bvNone
-    BorderStyle = bsSingle
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
     object Label_Name: TLabel
       Left = 0
       Top = 0
-      Width = 340
+      Width = 344
       Height = 65
       Align = alTop
       Alignment = taCenter
@@ -49,11 +47,12 @@ object Form1: TForm1
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
+      ExplicitWidth = 340
     end
     object MediaPlayer1: TMediaPlayer
       Left = 0
       Top = 65
-      Width = 334
+      Width = 343
       Height = 47
       HelpType = htKeyword
       HelpKeyword = 'mp3'
@@ -64,26 +63,24 @@ object Form1: TForm1
       FileName = 'media/audio/night.mp3'
       ParentDoubleBuffered = False
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitTop = 20
     end
     object Panel_Buttons: TPanel
-      Left = 0
-      Top = 112
-      Width = 340
-      Height = 51
+      AlignWithMargins = True
+      Left = 3
+      Top = 115
+      Width = 338
+      Height = 41
       Align = alTop
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 0
       object Button3: TButton
         AlignWithMargins = True
         Left = 3
         Top = 3
         Width = 64
-        Height = 45
+        Height = 35
         Hint = '{"type":"primary"}'
         Align = alLeft
         Caption = 'Play'
@@ -95,56 +92,52 @@ object Form1: TForm1
         Left = 70
         Top = 3
         Width = 64
-        Height = 45
+        Height = 35
         Hint = '{"type":"primary"}'
         Margins.Left = 0
         Align = alLeft
         Caption = 'Pause'
         TabOrder = 1
         OnClick = Button1Click
-        ExplicitLeft = 73
       end
       object Button2: TButton
         AlignWithMargins = True
         Left = 137
         Top = 3
         Width = 64
-        Height = 45
+        Height = 35
         Hint = '{"type":"primary"}'
         Margins.Left = 0
         Align = alLeft
         Caption = 'Switch'
         TabOrder = 2
         OnClick = Button2Click
-        ExplicitTop = 0
       end
       object Button4: TButton
         AlignWithMargins = True
         Left = 204
         Top = 3
         Width = 64
-        Height = 45
+        Height = 35
         Hint = '{"type":"primary"}'
         Margins.Left = 0
         Align = alLeft
         Caption = 'Loop'
         TabOrder = 3
         OnClick = Button4Click
-        ExplicitLeft = 213
       end
       object Button5: TButton
         AlignWithMargins = True
         Left = 271
         Top = 3
         Width = 64
-        Height = 45
+        Height = 35
         Hint = '{"type":"primary"}'
         Margins.Left = 0
         Align = alLeft
         Caption = 'To 15s'
         TabOrder = 4
         OnClick = Button5Click
-        ExplicitLeft = 283
       end
     end
   end

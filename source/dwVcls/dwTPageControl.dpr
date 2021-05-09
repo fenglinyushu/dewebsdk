@@ -134,6 +134,32 @@ begin
         end else if HelpKeyword = 'steps' then begin
             //用作步骤条控件-------------------------------------------------
 
+        end else if HelpKeyword = 'carousel' then begin
+            //用作走马灯控件-------------------------------------------------
+
+            //生成返回值数组
+            joRes    := _Json('[]');
+
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
+
+            with TPageControl(ACtrl) do begin
+                //外框
+                joRes.Add('<el-carousel'
+                        +' id="'+dwPrefix(Actrl)+Name+'"'
+                        +dwVisible(TControl(ACtrl))
+                        +' v-model="'+dwPrefix(Actrl)+Name+'__ati"'        //ActivePage
+                        +dwGetDWAttr(joHint)
+                        +dwLTWH(TControl(ACtrl))
+                        +dwGetDWStyle(joHint)
+                        +'"' //style 封闭
+                        +'>');
+
+
+            end;
+            //
+            Result    := (joRes);
+
         end else begin
             //用作Tabs控件---------------------------------------------------
 
@@ -211,6 +237,15 @@ begin
         end else if HelpKeyword = 'steps' then begin
             //用作步骤条控件-------------------------------------------------
 
+        end else if HelpKeyword = 'carousel' then begin
+            //用作走马灯控件-------------------------------------------------
+
+            //生成返回值数组
+            joRes    := _Json('[]');
+            //生成返回值数组
+            joRes.Add('</el-carousel>');
+            //
+            Result    := (joRes);
         end else begin
             //用作Tabs控件---------------------------------------------------
 

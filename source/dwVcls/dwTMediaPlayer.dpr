@@ -84,7 +84,7 @@ begin
 
                //外框
                sCode     := '<div'
-                         +' id="'+dwPrefix(Actrl)+Name+'"'
+                         +' id="'+dwPrefix(Actrl)+Name+'_frm"'
                          +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                          +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                          +'"' // 封闭style
@@ -121,7 +121,7 @@ begin
 
                //
                sCode     := '<div'
-                         +' id="'+dwPrefix(Actrl)+Name+'"'
+                         +' id="'+dwPrefix(Actrl)+Name+'__frm"'
                          +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                          +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                          +'"' // 封闭style
@@ -154,27 +154,40 @@ begin
                joHint    := dwGetHintJson(TControl(ACtrl));
 
                //
-               sCode     := '<video'
-                         +' id="'+dwPrefix(Actrl)+Name+'"'
-                         +' class="video-js vjs-big-play-centered"'
-                         +dwVisible(TControl(ACtrl))
-                         +' :preload="true"'
-                         +' :loop="'+dwPrefix(Actrl)+Name+'__loo"'
-                         +' :autoplay="'+dwPrefix(Actrl)+Name+'__aut"'
-                         +' :src="'+dwPrefix(Actrl)+Name+'__src"'
-                         +' data-setup="{}"'
-                         +' controls'
-                         //+' :poster="poster"'
-                         //+dwDisable(TControl(ACtrl))
-                         //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
-                         +dwLTWH(TControl(ACtrl))
-                         +'"' //style 封闭
+               sCode     := '<div'
+                         +' id="'+dwPrefix(Actrl)+Name+'__frm"'
+                         +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
+                         +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
+                         +'"' // 封闭style
                          +'>';
+               //添加到返回值数据
                joRes.Add(sCode);
-               //
-               Result    := (joRes);
-          end;
-     end;
+
+            //
+            sCode     := '    <video'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' class="video-js vjs-big-play-centered"'
+                    +dwVisible(TControl(ACtrl))
+                    +' :preload="true"'
+                    +' :loop="'+dwPrefix(Actrl)+Name+'__loo"'
+                    +' :autoplay="'+dwPrefix(Actrl)+Name+'__aut"'
+                    +' :src="'+dwPrefix(Actrl)+Name+'__src"'
+                    //+' data-setup="{}"'
+                    //+' controls'
+                    +dwGetDWAttr(joHint)
+                    //+' :poster="poster"'
+                    //+dwDisable(TControl(ACtrl))
+                    //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
+                    //+dwLTWH(TControl(ACtrl))
+                    +' style="width:100%;height:100%;'
+                    +dwGetDWStyle(joHint)
+                    +'"' //style 封闭
+                    +'>';
+            joRes.Add(sCode);
+            //
+            Result    := (joRes);
+        end;
+    end;
 end;
 
 //取得HTML尾部消息
@@ -185,6 +198,8 @@ begin
      //
      with TMediaPlayer(ACtrl) do begin
           if HelpKeyword = 'm3u8' then begin
+               //============m3u8格式===============================================================
+
                //生成返回值数组
                joRes    := _Json('[]');
                //生成返回值数组
@@ -194,7 +209,8 @@ begin
                Result    := (joRes);
 
           end else if HelpKeyword = 'mp3' then begin
-               //============mp3格式============================================
+               //============mp3格式================================================================
+
                //生成返回值数组
                joRes    := _Json('[]');
 
@@ -205,12 +221,13 @@ begin
                //
                Result    := (joRes);
           end else begin
-               //============mp4格式============================================
+               //============mp4格式================================================================
 
                //生成返回值数组
                joRes    := _Json('[]');
                //生成返回值数组
-               joRes.Add('</video>');
+               joRes.Add('    </video>');
+               joRes.Add('</div>');
                //
                Result    := (joRes);
           end;
@@ -225,7 +242,7 @@ begin
      //
      with TMediaPlayer(ACtrl) do begin
           if HelpKeyword = 'm3u8' then begin
-               //============m3u8格式===========================================
+               //============m3u8格式===============================================================
 
                //生成返回值数组
                joRes    := _Json('[]');
@@ -246,7 +263,7 @@ begin
                Result    := (joRes);
 
           end else if HelpKeyword = 'mp3' then begin
-               //============mp3格式============================================
+               //============mp3格式================================================================
 
                //生成返回值数组
                joRes    := _Json('[]');
@@ -268,7 +285,7 @@ begin
 
 
           end else begin
-               //============mp4格式============================================
+               //============mp4格式================================================================
                //生成返回值数组
                joRes    := _Json('[]');
                //
@@ -298,7 +315,7 @@ begin
      //
      with TMediaPlayer(ACtrl) do begin
           if HelpKeyword = 'm3u8' then begin
-               //============m3u8格式===========================================
+               //============m3u8格式===============================================================
                //生成返回值数组
                joRes    := _Json('[]');
                //
@@ -337,7 +354,7 @@ begin
 
 
           end else if HelpKeyword = 'mp3' then begin
-               //============mp3格式============================================
+               //============mp3格式================================================================
 
                //生成返回值数组
                joRes    := _Json('[]');
@@ -377,7 +394,7 @@ begin
 
 
           end else begin
-               //============mp4格式============================================
+               //============mp4格式================================================================
                //生成返回值数组
                joRes    := _Json('[]');
                //

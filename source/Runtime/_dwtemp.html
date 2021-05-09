@@ -5,16 +5,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>DeWeb</title>
+<title>Form1</title>
 </head>
 
-<body style="background-color:#FAFAFA">
+<body style="background-color:#FFFFFF">
 <script src="dist/vue.js" type="text/javascript"></script>
 <script src="dist/index.js" type="text/javascript"></script>
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_1__top,width:Form1_1__wid,height:Form1_1__hei}" >
+    <link rel="stylesheet" href="dist/_video/video-js.min.css">
+    <script src="dist/_video/video.min.js"></script>
+    <div id="app" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_2__wid,height:Form1_2__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
         		<el-form-item :label="input_query_inputname" >
@@ -27,12 +29,22 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:65px;">{{Label1__cap}}
+        <div id="MediaPlayer1__frm" v-if="MediaPlayer1__vis" :style="{left:MediaPlayer1__lef,top:MediaPlayer1__top,width:MediaPlayer1__wid,height:MediaPlayer1__hei}" style="position:absolute;">
+            <video id="MediaPlayer1" v-if="MediaPlayer1__vis" :preload="true" :loop="MediaPlayer1__loo" :autoplay="MediaPlayer1__aut" :src="MediaPlayer1__src" data-setup="{}" style="width:100%;height:100%;">
+            </video>
         </div>
-        <el-button id="Button1" size=medium v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','15862902')">{{Button1__cap}}
+        <el-main id="Panel1" v-if="Panel1__vis" :disabled="Panel1__dis" :style="{backgroundColor:Panel1__col,left:Panel1__lef,top:Panel1__top,width:Panel1__wid,height:Panel1__hei}" style="position:absolute;overflow:hidden;">
+        <el-button id="Button3" size=medium v-if="Button3__vis" :disabled="Button3__dis" :type="Button3__typ" :style="{left:Button3__lef,top:Button3__top,width:Button3__wid,height:Button3__hei}" style="position:absolute;" @click.native="dwevent($event,'Button3','0','onclick','656468')">{{Button3__cap}}
         </el-button>
-        <el-button id="Button2" size=medium v-if="Button2__vis" :disabled="Button2__dis" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;" @click.native="dwevent($event,'Button2','0','onclick','15862902')">{{Button2__cap}}
+        <el-button id="Button2" size=medium v-if="Button2__vis" :disabled="Button2__dis" :type="Button2__typ" :style="{left:Button2__lef,top:Button2__top,width:Button2__wid,height:Button2__hei}" style="position:absolute;" @click.native="dwevent($event,'Button2','0','onclick','656468')">{{Button2__cap}}
         </el-button>
+        <el-button id="Button1" size=medium v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;" @click.native="dwevent($event,'Button1','0','onclick','656468')">{{Button1__cap}}
+        </el-button>
+        <el-button id="Button4" size=medium v-if="Button4__vis" :disabled="Button4__dis" :type="Button4__typ" :style="{left:Button4__lef,top:Button4__top,width:Button4__wid,height:Button4__hei}" style="position:absolute;" @click.native="dwevent($event,'Button4','0','onclick','656468')">{{Button4__cap}}
+        </el-button>
+        <el-button id="Button5" size=medium v-if="Button5__vis" :disabled="Button5__dis" :type="Button5__typ" :style="{left:Button5__lef,top:Button5__top,width:Button5__wid,height:Button5__hei}" style="position:absolute;" @click.native="dwevent($event,'Button5','0','onclick','656468')">{{Button5__cap}}
+        </el-button>
+        </el-main>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -62,32 +74,64 @@
 				el: '#app',
 				data: function () {
 					return {
-					    Form1_1__top:"0px",
-					    Form1_1__wid:"320px",
-					    Form1_1__hei:"615px",
-                        Label1__lef:"0px",
-                        Label1__top:"0px",
-                        Label1__wid:"310px",
-                        Label1__hei:"65px",
-                        Label1__vis:true,
-                        Label1__dis:false,
-                        Label1__cap:"...",
-                        Button1__lef:"96px",
-                        Button1__top:"104px",
-                        Button1__wid:"121px",
-                        Button1__hei:"35px",
+					    Form1_2__top:"0px",
+					    Form1_2__wid:"550px",
+					    Form1_2__hei:"564px",
+                        MediaPlayer1__lef:"3px",
+                        MediaPlayer1__top:"52px",
+                        MediaPlayer1__wid:"523px",
+                        MediaPlayer1__hei:"321px",
+                        MediaPlayer1__vis:true,
+                        MediaPlayer1__loo:true,
+                        MediaPlayer1__aut:true,
+                        MediaPlayer1__src:"/media/video/ocean.mp4",
+                        Button3__lef:"3px",
+                        Button3__top:"3px",
+                        Button3__wid:"100px",
+                        Button3__hei:"43px",
+                        Button3__vis:true,
+                        Button3__dis:false,
+                        Button3__cap:"Play",
+                        Button3__typ:"primary",
+                        Button2__lef:"109px",
+                        Button2__top:"3px",
+                        Button2__wid:"100px",
+                        Button2__hei:"43px",
+                        Button2__vis:true,
+                        Button2__dis:false,
+                        Button2__cap:"Switch",
+                        Button2__typ:"primary",
+                        Button1__lef:"215px",
+                        Button1__top:"3px",
+                        Button1__wid:"100px",
+                        Button1__hei:"43px",
                         Button1__vis:true,
                         Button1__dis:false,
                         Button1__cap:"Pause",
                         Button1__typ:"primary",
-                        Button2__lef:"96px",
-                        Button2__top:"160px",
-                        Button2__wid:"121px",
-                        Button2__hei:"35px",
-                        Button2__vis:true,
-                        Button2__dis:false,
-                        Button2__cap:"Recreate",
-                        Button2__typ:"primary",
+                        Button4__lef:"321px",
+                        Button4__top:"3px",
+                        Button4__wid:"100px",
+                        Button4__hei:"43px",
+                        Button4__vis:true,
+                        Button4__dis:false,
+                        Button4__cap:"Loop",
+                        Button4__typ:"primary",
+                        Button5__lef:"427px",
+                        Button5__top:"3px",
+                        Button5__wid:"100px",
+                        Button5__hei:"43px",
+                        Button5__vis:true,
+                        Button5__dis:false,
+                        Button5__cap:"To 5s",
+                        Button5__typ:"primary",
+                        Panel1__lef:"0px",
+                        Panel1__top:"0px",
+                        Panel1__wid:"534px",
+                        Panel1__hei:"49px",
+                        Panel1__vis:true,
+                        Panel1__dis:false,
+                        Panel1__col:"RGB(255,255,255,1.0)",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -97,21 +141,16 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:15862902,
-					    shuntflag:2671
+					    clientid:656468,
+					    shuntflag:8234
                     }
                 },
                 mounted() {
                     let me=this;
-Timer1__tmr=null;if (Timer1__tmr != null) {clearInterval(Timer1__tmr);Timer1__tmr=null};
-Timer1__tmr = window.setInterval(function() {
-axios.get('{"m":"event","i":15862902,"c":"Timer1"}',{headers:{shuntflag:2671}})
-.then(resp =>{me.procResp(resp.data);  })
-}, 1000);
-                    let Form1_1hearttimer = window.setInterval(function() {
-                        axios.get('{"m":"heart","i":15862902}',{headers:{shuntflag:2671}})
+                    let Form1_2hearttimer = window.setInterval(function() {
+                        axios.get('{"m":"heart","i":656468}',{headers:{shuntflag:8234}})
                         .then(resp =>{me.procResp(resp.data)})
-                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_1hearttimer);});
+                        .catch((error) =>{me.dwnotify("Info","Network is disconnected!");clearInterval(Form1_2hearttimer);});
                     }, 590000);
                 },
 				methods: {
@@ -126,7 +165,7 @@ axios.get('{"m":"event","i":15862902,"c":"Timer1"}',{headers:{shuntflag:2671}})
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":15862902,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":656468,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -136,10 +175,10 @@ axios.get('{"m":"event","i":15862902,"c":"Timer1"}',{headers:{shuntflag:2671}})
                     dwInputSubmit (ipname) {
                         let me=this;let formData = new FormData();
                         formData.append('file', document.getElementById(ipname+"__inp").files[0]);
-                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '15862902'}}
+                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '656468'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":15862902,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":656468,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -155,12 +194,12 @@ axios.get('{"m":"event","i":15862902,"c":"Timer1"}',{headers:{shuntflag:2671}})
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:2671}})
+                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:8234}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":15862902,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:2671}})
+                        axios.get('{"m":"interaction","i":656468,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:8234}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },
