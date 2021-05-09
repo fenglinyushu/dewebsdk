@@ -53,80 +53,127 @@ var
      oMemo     : TMemo;
      iLine     : Integer;
 begin
-     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-          if HelpKeyword = 'timeline' then begin
-               //用作时间线控件-------------------------------------------------
+    with TPageControl(TTabSheet(Actrl).PageControl) do begin
+        if HelpKeyword = 'timeline' then begin
+            //用作时间线控件-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
+            //生成返回值数组
+            joRes    := _Json('[]');
 
-               //取得HINT对象JSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
 
-               //
-               joRes.Add('        <el-timeline-item '
-                         +' id="'+dwPrefix(Actrl)+Name+'"'
-                         +dwIIF(TTabSheet(Actrl).ImageIndex>0,'icon="'+dwIcons[Max(1,TTabSheet(Actrl).ImageIndex)]+'"','')
-                         //+dwGetHintValue(joHint,'type','type','')
-                         +dwGetHintValue(joHint,'color','color','')
-                         +' timestamp="'+IntToStr(TTabSheet(Actrl).Tag)+'" placement="top">');
-               if ParentBiDiMode = True then begin
-                    joRes.Add('            <el-card>');
-               end;
-               joRes.Add('                <h4>'+TTabSheet(Actrl).Caption+'</h4>');
-               //
-               for iCtrl := 0 to TWinControl(Actrl).ControlCount-1 do begin
-                    if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TLabel' then begin
-                         joRes.Add('                <p>'+TLabel(TWinControl(Actrl).Controls[iCtrl]).Caption+'</p>');
-                    end else if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TMemo' then begin
-                         oMemo     := TMemo(TWinControl(Actrl).Controls[iCtrl]);
-                         for iLine := 0 to oMemo.Lines.Count-1 do begin
-                              joRes.Add('                <p>'+oMemo.Lines[iLine]+'</p>');
-                         end;
+            //
+            joRes.Add('        <el-timeline-item '
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +dwIIF(TTabSheet(Actrl).ImageIndex>0,'icon="'+dwIcons[Max(1,TTabSheet(Actrl).ImageIndex)]+'"','')
+                    //+dwGetHintValue(joHint,'type','type','')
+                    +dwGetHintValue(joHint,'color','color','')
+                    +' timestamp="'+IntToStr(TTabSheet(Actrl).Tag)+'" placement="top">');
+            if ParentBiDiMode = True then begin
+                joRes.Add('            <el-card>');
+            end;
+            joRes.Add('                <h4>'+TTabSheet(Actrl).Caption+'</h4>');
+            //
+            for iCtrl := 0 to TWinControl(Actrl).ControlCount-1 do begin
+                if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TLabel' then begin
+                    joRes.Add('                <p>'+TLabel(TWinControl(Actrl).Controls[iCtrl]).Caption+'</p>');
+                end else if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TMemo' then begin
+                    oMemo     := TMemo(TWinControl(Actrl).Controls[iCtrl]);
+                    for iLine := 0 to oMemo.Lines.Count-1 do begin
+                        joRes.Add('                <p>'+oMemo.Lines[iLine]+'</p>');
                     end;
-               end;
+                end;
+            end;
 
-               //
-               if ParentBiDiMode = True then begin
-                    joRes.Add('            </el-card>');
-               end;
-               joRes.Add('        </el-timeline-item>');
+            //
+            if ParentBiDiMode = True then begin
+                joRes.Add('            </el-card>');
+            end;
+            joRes.Add('        </el-timeline-item>');
 
-               //
-               Result    := (joRes);
-          end else if HelpKeyword = 'steps' then begin
-               //用作步骤条控件-------------------------------------------------
+            //
+            Result    := (joRes);
+        end else if HelpKeyword = 'steps' then begin
+            //用作步骤条控件-------------------------------------------------
 
-          end else begin
-               //用作Tabs控件---------------------------------------------------
+        end else if HelpKeyword = 'swiper' then begin
+            //用作走马灯控件-------------------------------------------------
 
-               //生成返回值数组
-               joRes    := _Json('[]');
+            //生成返回值数组
+            joRes    := _Json('[]');
 
-               //取得HINT对象JSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
 
-               with TTabSheet(ACtrl) do begin
-                    sCode     := '<el-main'
+            with TTabSheet(ACtrl) do begin
+                    sCode     := '<div'
                               +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +' v-if="'+dwPrefix(Actrl)+PageControl.Name+'__apg=='''+dwPrefix(Actrl)+Name+'''"'
-                              +dwDisable(TControl(ACtrl))
-                              +dwGetHintValue(joHint,'icon','icon','')
+                              +' class="swiper-slide"'
                               +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,'
                                     +'top:'+dwPrefix(Actrl)+Name+'__top,'
                                     +'width:'+dwPrefix(Actrl)+Name+'__wid,'
                                     +'height:'+dwPrefix(Actrl)+Name+'__hei}"'
                               +' style="position:absolute;overflow:hidden;'
                               +'"' //style 封闭
+                              +'>';
+                    //添加到返回值数据
+                    joRes.Add(sCode);
+            end;
+            //
+            Result    := (joRes);
+
+        end else if HelpKeyword = 'carousel' then begin
+            //用作走马灯控件------------------------------------------------------------------------
+
+            //生成返回值数组
+            joRes    := _Json('[]');
+
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
+
+            with TTabSheet(ACtrl) do begin
+                    sCode     := '<el-carousel-item'
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
+                              +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,'
+                                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
+                                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
+                                    +'height:'+dwPrefix(Actrl)+Name+'__hei}"'
+                              +' style="position:absolute;overflow:hidden;'
+                              +'"' //style 封闭
+                              +'>';
+                    //添加到返回值数据
+                    joRes.Add(sCode);
+            end;
+            //
+            Result    := (joRes);
+
+        end else begin
+            //用作Tabs控件---------------------------------------------------
+
+            //生成返回值数组
+            joRes    := _Json('[]');
+
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
+
+            with TTabSheet(ACtrl) do begin
+                    sCode     := '<el-main'
+                              +' id="'+dwPrefix(Actrl)+Name+'"'
+                              +' v-if="'+dwPrefix(Actrl)+PageControl.Name+'__apg=='''+dwPrefix(Actrl)+Name+'''"'
+                              +dwDisable(TControl(ACtrl))
+                              +dwGetHintValue(joHint,'icon','icon','')
+                              +' style="position:absolute;height:100%;overflow:hidden;'
+                              +'"' //style 封闭
                               +dwIIF(Assigned(OnShow),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
                               +'>';
                     //添加到返回值数据
                     joRes.Add(sCode);
-               end;
-               //
-               Result    := (joRes);
-          end;
-     end;
+            end;
+            //
+            Result    := (joRes);
+        end;
+    end;
 
 end;
 
@@ -137,17 +184,35 @@ var
 begin
      with TPageControl(TTabSheet(Actrl).PageControl) do begin
           if HelpKeyword = 'timeline' then begin
-               //用作时间线控件-------------------------------------------------
+               //用作时间线控件---------------------------------------------------------------------
 
                //生成返回值数组
                joRes    := _Json('[]');
                //
                Result    := (joRes);
           end else if HelpKeyword = 'steps' then begin
-               //用作步骤条控件-------------------------------------------------
+               //用作步骤条控件---------------------------------------------------------------------
 
+          end else if HelpKeyword = 'swiper' then begin
+               //用作走马灯控件---------------------------------------------------------------------
+
+               //生成返回值数组
+               joRes    := _Json('[]');
+               //生成返回值数组
+               joRes.Add('</div>');
+               //
+               Result    := (joRes);
+          end else if HelpKeyword = 'carousel' then begin
+               //用作走马灯控件---------------------------------------------------------------------
+
+               //生成返回值数组
+               joRes    := _Json('[]');
+               //生成返回值数组
+               joRes.Add('</el-carousel-item>');
+               //
+               Result    := (joRes);
           end else begin
-               //用作Tabs控件---------------------------------------------------
+               //用作Tabs控件-----------------------------------------------------------------------
 
                //生成返回值数组
                joRes    := _Json('[]');

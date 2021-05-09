@@ -10777,7 +10777,7 @@
 
 .el-carousel__container {
 	position: relative;
-	height: 300px
+	height: 100%;
 }
 
 .el-carousel__arrow {
@@ -26089,7 +26089,7 @@
 
 .el-carousel__container {
 	position: relative;
-	height: 300px
+	height: 100%;
 }
 
 .el-carousel__arrow {

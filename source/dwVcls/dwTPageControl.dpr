@@ -27,8 +27,30 @@ end;
 
 //当前控件需要引入的第三方JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
+var
+    joRes   : Variant;
 begin
-     Result    := '[]';
+    with TPageControl(Actrl) do begin
+        if HelpKeyword = 'timeline' then begin
+               //用作时间线控件-------------------------------------------------
+
+            Result    := '[]';
+        end else if HelpKeyword = 'swiper' then begin
+            //用作走马灯控件-------------------------------------------------
+
+            //生成返回值数组
+            joRes    := _Json('[]');
+
+            //引入对应的库
+            joRes.Add('<script src="dist/_swiper/swiper-bundle.min.css"></script>');
+            joRes.Add('<link rel="stylesheet" href="dist/_swiper/swiper-bundle.min.css">');
+
+            //
+            Result    := joRes;
+        end else begin
+            Result    := '[]';
+        end;
+    end;
 end;
 
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
@@ -134,8 +156,59 @@ begin
         end else if HelpKeyword = 'steps' then begin
             //用作步骤条控件-------------------------------------------------
 
-        end else if HelpKeyword = 'carousel' then begin
+        end else if HelpKeyword = 'swiper' then begin
             //用作走马灯控件-------------------------------------------------
+(*
+	<div class="swiper-container" style="position:absolute;left:100px;top:100px;width:600px;height:400px;">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">Slide 1
+				<button style="position:absolute;left:100px;top:100px;width:60px;height:30px;">TEST</button>
+			</div>
+			<div class="swiper-slide">Slide 2</div>
+			<div class="swiper-slide">Slide 3</div>
+			<div class="swiper-slide">Slide 4</div>
+			<div class="swiper-slide">Slide 5</div>
+			<div class="swiper-slide">Slide 6</div>
+			<div class="swiper-slide">Slide 7</div>
+			<div class="swiper-slide">Slide 8</div>
+			<div class="swiper-slide">Slide 9</div>
+			<div class="swiper-slide">Slide 10</div>
+		</div>
+		<!-- Add Pagination -->
+		<div class="swiper-pagination"></div>
+		<!-- Add Arrows -->
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+	</div>
+*)
+            //生成返回值数组
+            joRes    := _Json('[]');
+
+            //取得HINT对象JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
+
+            with TPageControl(ACtrl) do begin
+                //外框
+                joRes.Add('<div'
+                        +' id="'+dwPrefix(Actrl)+Name+'"'
+                        +' class="swiper-container"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwGetDWAttr(joHint)
+                        +dwLTWH(TControl(ACtrl))
+                        +dwGetDWStyle(joHint)
+                        +'"' //style 封闭
+                        +'>');
+
+                //
+                joRes.Add('<div class="swiper-wrapper">');
+
+
+            end;
+            //
+            Result    := (joRes);
+
+        end else if HelpKeyword = 'carousel' then begin
+            //用作走马灯控件------------------------------------------------------------------------
 
             //生成返回值数组
             joRes    := _Json('[]');
@@ -147,15 +220,14 @@ begin
                 //外框
                 joRes.Add('<el-carousel'
                         +' id="'+dwPrefix(Actrl)+Name+'"'
+                        +' class="swiper-container"'
                         +dwVisible(TControl(ACtrl))
-                        +' v-model="'+dwPrefix(Actrl)+Name+'__ati"'        //ActivePage
                         +dwGetDWAttr(joHint)
                         +dwLTWH(TControl(ACtrl))
                         +dwGetDWStyle(joHint)
+                        +'overflow:hidden;' //style 封闭
                         +'"' //style 封闭
                         +'>');
-
-
             end;
             //
             Result    := (joRes);
@@ -182,6 +254,8 @@ begin
                         +'"' //style 封闭
                         +Format(_DWEVENT,['tab-click',Name,'this.'+dwPrefix(Actrl)+Name+'__apg','onchange',TForm(Owner).Handle])
                         +'>');
+
+
 
                 //添加选项卡
                 for iTab := 0 to PageCount-1 do begin
@@ -237,6 +311,16 @@ begin
         end else if HelpKeyword = 'steps' then begin
             //用作步骤条控件-------------------------------------------------
 
+        end else if HelpKeyword = 'swiper' then begin
+            //用作走马灯控件-------------------------------------------------
+
+            //生成返回值数组
+            joRes    := _Json('[]');
+            //生成返回值数组
+            joRes.Add('    </div>');
+            joRes.Add('</div>');
+            //
+            Result    := (joRes);
         end else if HelpKeyword = 'carousel' then begin
             //用作走马灯控件-------------------------------------------------
 
