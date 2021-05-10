@@ -14,8 +14,7 @@
 <script src="dist/axios.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" />
 
-    <script src="dist/_swiper/swiper-bundle.min.css"></script>
-    <link rel="stylesheet" href="dist/_swiper/swiper-bundle.min.css">
+    <script src="dist/ex/dwStringGrid.js"></script>
     <div id="app" style="position:absolute;overflow:hidden;left:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{top:Form1_1__top,width:Form1_1__wid,height:Form1_1__hei}" >
         <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
         	<el-form style="width:90%;padding-left:5%;">
@@ -29,23 +28,15 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:25px;">{{Label1__cap}}
+        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:20px;">{{Label1__cap}}
         </div>
-        <div id="PageControl1" class="swiper-container" v-if="PageControl1__vis" :style="{left:PageControl1__lef,top:PageControl1__top,width:PageControl1__wid,height:PageControl1__hei}" style="position:absolute;">
-        <div class="swiper-wrapper">
-        <div id="TabSheet1" class="swiper-slide" :style="{left:TabSheet1__lef,top:TabSheet1__top,width:TabSheet1__wid,height:TabSheet1__hei}" style="position:absolute;overflow:hidden;">
-        <div  id="Label2" v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label2__cap}}
-        </div>
-        </div>
-        <div id="TabSheet2" class="swiper-slide" :style="{left:TabSheet2__lef,top:TabSheet2__top,width:TabSheet2__wid,height:TabSheet2__hei}" style="position:absolute;overflow:hidden;">
-        <el-button id="Button1" size=small v-if="Button1__vis" :disabled="Button1__dis" :type="Button1__typ" :style="{left:Button1__lef,top:Button1__top,width:Button1__wid,height:Button1__hei}" style="position:absolute;">{{Button1__cap}}
-        </el-button>
-        </div>
-        <div id="TabSheet3" class="swiper-slide" :style="{left:TabSheet3__lef,top:TabSheet3__top,width:TabSheet3__wid,height:TabSheet3__hei}" style="position:absolute;overflow:hidden;">
-        <el-input id="Edit1" v-if="Edit1__vis" :disabled="Edit1__dis" v-model="Edit1__txt" :style="{backgroundColor:Edit1__col,left:Edit1__lef,top:Edit1__top,width:Edit1__wid,height:Edit1__hei}" style="position:absolute;border-radius:4px;border:1px solid #DCDFE6;overflow: hidden;" @input="dwevent($event,'Edit1','escape(this.Edit1__txt)','onchange','722436')">
-        </el-input>
-        </div>
-            </div>
+        <div :style="{left:SG__lef,top:SG__top,width:SG__wid,height:SG__hei}" style="position:absolute;">
+            <el-table id="SG" :data="SG__ces" highlight-current-row :row-style="{height:'40px'}" :header-row-style="{height:'40px'}" ref="SG" border stripe v-if="SG__vis" :disabled="SG__dis" style="width:100%" @row-click="dwevent($event,'SG','val.d0','onclick','527918')">
+                <el-table-column show-overflow-tooltip fixed v-if=false prop="d0" label="rowno" width="10"></el-table-column>
+                <el-table-column fixed="left" v-if="SG__clv0" show-overflow-tooltip prop="d1" :label="SG__col0" :width="SG__cws0"></el-table-column>
+                <el-table-column v-if="SG__clv1" show-overflow-tooltip prop="d2" :label="SG__col1" :width="SG__cws1"></el-table-column>
+                <el-table-column v-if="SG__clv2" show-overflow-tooltip prop="d3" :label="SG__col2" :width="SG__cws2"></el-table-column>
+            </el-table>
         </div>
 	 </div>
     <script>
@@ -82,65 +73,26 @@
                         Label1__lef:"0px",
                         Label1__top:"0px",
                         Label1__wid:"360px",
-                        Label1__hei:"25px",
+                        Label1__hei:"20px",
                         Label1__vis:true,
                         Label1__dis:false,
-                        Label1__cap:"Swiper",
-                        Label2__lef:"40px",
-                        Label2__top:"32px",
-                        Label2__wid:"48px",
-                        Label2__hei:"20px",
-                        Label2__vis:true,
-                        Label2__dis:false,
-                        Label2__cap:"Label2",
-                        TabSheet1__lef:"4px",
-                        TabSheet1__top:"31px",
-                        TabSheet1__wid:"352px",
-                        TabSheet1__hei:"245px",
-                        TabSheet1__vis:true,
-                        TabSheet1__dis:false,
-                        TabSheet1__cap:"TabSheet1",
-                        Button1__lef:"96px",
-                        Button1__top:"64px",
-                        Button1__wid:"75px",
-                        Button1__hei:"25px",
-                        Button1__vis:true,
-                        Button1__dis:false,
-                        Button1__cap:"Button1",
-                        Button1__typ:"",
-                        TabSheet2__lef:"4px",
-                        TabSheet2__top:"31px",
-                        TabSheet2__wid:"352px",
-                        TabSheet2__hei:"245px",
-                        TabSheet2__vis:false,
-                        TabSheet2__dis:false,
-                        TabSheet2__cap:"TabSheet2",
-                        Edit1__lef:"192px",
-                        Edit1__top:"32px",
-                        Edit1__wid:"121px",
-                        Edit1__hei:"28px",
-                        Edit1__vis:true,
-                        Edit1__dis:false,
-                        Edit1__txt:"Edit1",
-                        Edit1__col:"#FFFFFF",
-                        TabSheet3__lef:"4px",
-                        TabSheet3__top:"31px",
-                        TabSheet3__wid:"352px",
-                        TabSheet3__hei:"245px",
-                        TabSheet3__vis:false,
-                        TabSheet3__dis:false,
-                        TabSheet3__cap:"TabSheet3",
-                        PageControl1__lef:"0px",
-                        PageControl1__top:"25px",
-                        PageControl1__wid:"360px",
-                        PageControl1__hei:"280px",
-                        PageControl1__vis:true,
-                        PageControl1__dis:false,
-                        PageControl1__apg:"TabSheet1",
-                        PageControl1__tps:"top",
-                        TabSheet1__tbv:true,
-                        TabSheet2__tbv:true,
-                        TabSheet3__tbv:true,
+                        Label1__cap:"StringGrid Test",
+                        SG__lef:"0px",
+                        SG__top:"20px",
+                        SG__wid:"360px",
+                        SG__hei:"369px",
+                        SG__vis:true,
+                        SG__dis:false,
+                        SG__col0:"00",
+                        SG__col1:"10",
+                        SG__col2:"20",
+                        SG__cws0:"100",
+                        SG__cws1:"100",
+                        SG__cws2:"100",
+                        SG__clv0:true,
+                        SG__clv1:true,
+                        SG__clv2:true,
+                        SG__ces:[{d0:'1',d1:'01',d2:'11',d3:'21'},{d0:'2',d1:'02',d2:'12',d3:'22'}],
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -150,8 +102,8 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:722436,
-					    shuntflag:515
+					    clientid:527918,
+					    shuntflag:4578
                     }
                 },
                 mounted() {
@@ -169,7 +121,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":722436,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":527918,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -179,10 +131,10 @@
                     dwInputSubmit (ipname) {
                         let me=this;let formData = new FormData();
                         formData.append('file', document.getElementById(ipname+"__inp").files[0]);
-                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '722436'}}
+                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '527918'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":722436,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":527918,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -198,12 +150,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:515}})
+                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:4578}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":722436,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:515}})
+                        axios.get('{"m":"interaction","i":527918,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:4578}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },
