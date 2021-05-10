@@ -158,17 +158,18 @@ begin
             joHint    := dwGetHintJson(TControl(ACtrl));
 
             with TTabSheet(ACtrl) do begin
-                    sCode     := '<el-main'
-                              +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +' v-if="'+dwPrefix(Actrl)+PageControl.Name+'__apg=='''+dwPrefix(Actrl)+Name+'''"'
-                              +dwDisable(TControl(ACtrl))
-                              +dwGetHintValue(joHint,'icon','icon','')
-                              +' style="position:absolute;height:100%;overflow:hidden;'
-                              +'"' //style 封闭
-                              +dwIIF(Assigned(OnShow),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                              +'>';
-                    //添加到返回值数据
-                    joRes.Add(sCode);
+                sCode   := '<el-main'
+                        +' id="'+dwPrefix(Actrl)+Name+'"'
+                        +' v-if="'+dwPrefix(Actrl)+PageControl.Name+'__apg=='''+dwPrefix(Actrl)+Name+'''"'
+                        +dwDisable(TControl(ACtrl))
+                        +dwGetHintValue(joHint,'icon','icon','')
+                        +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
+                        +' style="position:absolute;height:100%;overflow:hidden;'
+                        +'"' //style 封闭
+                        +dwIIF(Assigned(OnShow),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                        +'>';
+                //添加到返回值数据
+                joRes.Add(sCode);
             end;
             //
             Result    := (joRes);
@@ -232,7 +233,7 @@ var
 begin
      sKeyword  := TPageControl(TTabSheet(Actrl).PageControl).HelpKeyword;
      if sKeyword = 'timeline' then begin
-          //用作时间线控件-------------------------------------------------
+          //用作时间线控件--------------------------------------------------------------------------
 
           //生成返回值数组
           joRes    := _Json('[]');
@@ -251,10 +252,10 @@ begin
           //
           Result    := (joRes);
      end else if sKeyword = 'steps' then begin
-          //用作步骤条控件-------------------------------------------------
+          //用作步骤条控件--------------------------------------------------------------------------
 
      end else begin
-          //用作Tabs控件---------------------------------------------------
+          //用作Tabs控件----------------------------------------------------------------------------
 
           //生成返回值数组
           joRes    := _Json('[]');
@@ -282,7 +283,7 @@ var
 begin
      sKeyword  := TPageControl(TTabSheet(Actrl).PageControl).HelpKeyword;
      if sKeyword = 'timeline' then begin
-          //用作时间线控件-------------------------------------------------
+          //用作时间线控件--------------------------------------------------------------------------
 
           //生成返回值数组
           joRes    := _Json('[]');
@@ -301,10 +302,10 @@ begin
           //
           Result    := (joRes);
      end else if sKeyword = 'steps' then begin
-          //用作步骤条控件-------------------------------------------------
+          //用作步骤条控件--------------------------------------------------------------------------
 
      end else begin
-          //用作Tabs控件---------------------------------------------------
+          //用作Tabs控件----------------------------------------------------------------------------
 
           //生成返回值数组
           joRes    := _Json('[]');

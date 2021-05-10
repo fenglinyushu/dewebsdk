@@ -233,7 +233,7 @@ begin
             Result    := (joRes);
 
         end else begin
-            //用作Tabs控件---------------------------------------------------
+            //用作Tabs控件--------------------------------------------------------------------------
 
             //生成返回值数组
             joRes    := _Json('[]');
@@ -257,7 +257,7 @@ begin
 
 
 
-                //添加选项卡
+                //添加选项卡(标题)
                 for iTab := 0 to PageCount-1 do begin
                     //根据是否有图标分别处理
                     if (Pages[iTab].ImageIndex>0)and(Pages[iTab].ImageIndex<=280) then begin

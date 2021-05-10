@@ -1,6 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  Hint = '{"type":"success"}'
   VertScrollBar.Visible = False
   AlphaBlend = True
   BorderStyle = bsNone

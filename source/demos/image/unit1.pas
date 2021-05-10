@@ -17,6 +17,7 @@ type
     Image_image_mm: TImage;
     Label1: TLabel;
     Image1: TImage;
+    Image2: TImage;
     procedure Button1Click(Sender: TObject);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
