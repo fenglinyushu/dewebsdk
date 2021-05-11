@@ -20,12 +20,9 @@ uses
 type
   TForm1 = class(TForm)
     Panel_All: TPanel;
-    Panel_00_Logo: TPanel;
     Panel_99_Foot: TPanel;
     Label14: TLabel;
     Label15: TLabel;
-    Panel_Logo: TPanel;
-    Label2: TLabel;
     Panel_03_Demos: TPanel;
     Panel_02_Main: TPanel;
     Panel_line3: TPanel;
@@ -34,9 +31,6 @@ type
     Label_Download: TLabel;
     StaticText_FAQs: TStaticText;
     StaticText_Home: TStaticText;
-    Button_Search: TButton;
-    Edit_Search: TEdit;
-    Panel_Inner0: TPanel;
     Label_ContactUs: TLabel;
     StaticText_ContactUs: TStaticText;
     Label_gitee: TLabel;
@@ -67,6 +61,8 @@ type
     Image3: TImage;
     Image4: TImage;
     Image5: TImage;
+    StaticText1: TStaticText;
+    Label2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
@@ -183,15 +179,6 @@ begin
           //
           Width     := iInnerW;
 
-          if iInnerW < 1000 then begin
-               Panel_Inner0.Width  := iInnerW;
-          end else begin
-               Panel_Inner0.Width  := 1000;
-          end;
-          Panel_Inner0.Left   := (Width - Panel_Inner0.Width) div 2;
-          //
-          Panel_Inner1.Width  := Panel_Inner0.Width;
-          Panel_Inner1.Left   := Panel_Inner0.Left;
      end else begin
           if Y>X then begin
                //
@@ -201,18 +188,11 @@ begin
                Panel_All.Width     := X;
 
                //
-               Panel_Inner0.Width  := X;
-               Panel_Inner0.Left   := 0;
-               Panel_Inner1.Width  := X;
-               Panel_Inner1.Left   := 0;
                Panel_Inner2.Width  := X;
                Panel_Inner2.Left   := 0;
                Panel_Inner3.Width  := X;
                Panel_Inner3.Left   := 0;
 
-               //hide components
-               Edit_Search.Visible           := False;
-               Button_Search.Visible         := False;
                //Label_FAQs.Visible            := False;
                //StaticText_FAQs.Visible       := False;
                Label_ContactUs.Visible       := False;

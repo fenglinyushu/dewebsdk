@@ -23,6 +23,7 @@ type
     Timer1: TTimer;
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     procedure Timer1Timer(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);

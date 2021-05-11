@@ -1,10 +1,9 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Hint = '{"type":"primary"}'
   BorderStyle = bsNone
-  Caption = 'DeWeb - TChart'
-  ClientHeight = 900
+  Caption = 'DeWeb - TProgressBar'
+  ClientHeight = 640
   ClientWidth = 360
   Color = clWhite
   TransparentColor = True
@@ -34,7 +33,7 @@ object Form1: TForm1
     TabStop = True
   end
   object ProgressBar2: TProgressBar
-    Left = 104
+    Left = 72
     Top = 216
     Width = 200
     Height = 153
@@ -49,7 +48,7 @@ object Form1: TForm1
     TabOrder = 1
   end
   object ProgressBar3: TProgressBar
-    Left = 104
+    Left = 72
     Top = 392
     Width = 200
     Height = 153
@@ -96,7 +95,7 @@ object Form1: TForm1
     Left = 30
     Top = 32
     Width = 139
-    Height = 42
+    Height = 35
     Hint = '{"type":"primary"}'
     Caption = 'Start/Pause'
     TabOrder = 5
@@ -106,11 +105,22 @@ object Form1: TForm1
     Left = 192
     Top = 32
     Width = 138
-    Height = 42
+    Height = 35
     Hint = '{"type":"primary"}'
     Caption = 'Reset'
     TabOrder = 6
     OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 72
+    Top = 551
+    Width = 200
+    Height = 35
+    Hint = 
+      '{"type":"success","onclick":"window.clearInterval(Timer1__tmr);"' +
+      '}'
+    Caption = 'JavaScripte Pause'
+    TabOrder = 7
   end
   object Timer1: TTimer
     Interval = 200

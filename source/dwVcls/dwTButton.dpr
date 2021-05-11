@@ -85,10 +85,10 @@ begin
                sSize     := ' size=mini';
           end;
 
-          //进入事件代码--------------------------------------------------------
+          //进入事件代码----------------------------------------------------------------------------
           sEnter  := '';
           if joHint.Exists('onenter') then begin
-               sEnter  := joHint.onenter;    //取得OnEnter的JS代码
+               sEnter  := 'dwexecute('''+joHint.onenter+''');';    //取得OnEnter的JS代码
           end;
           if sEnter='' then begin
                if Assigned(OnEnter) then begin
@@ -105,10 +105,10 @@ begin
           end;
 
 
-          //退出事件代码--------------------------------------------------------
+          //退出事件代码----------------------------------------------------------------------------
           sExit  := '';
           if joHint.Exists('onexit') then begin
-               sExit  := joHint.onexit;
+               sExit  := 'dwexecute('''+joHint.onexit+''');';
           end;
           if sExit='' then begin
                if Assigned(OnExit) then begin
@@ -124,10 +124,10 @@ begin
                end;
           end;
 
-          //单击事件代码--------------------------------------------------------
+          //单击事件的JS代码------------------------------------------------------------------------
           sClick    := '';
           if joHint.Exists('onclick') then begin
-               sClick := joHint.onclick;
+               sClick := 'dwexecute('''+joHint.onclick+''');';
           end;
           //
           if sClick='' then begin

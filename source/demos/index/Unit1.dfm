@@ -333,99 +333,16 @@ object Form1: TForm1
     ParentBackground = False
     ParentColor = True
     TabOrder = 0
-    object Panel_00_Logo: TPanel
-      Left = 0
-      Top = 0
-      Width = 1000
-      Height = 66
-      Hint = '{"dwstyle":"border-bottom:solid 2px #F0F0F0;"}'
-      Align = alTop
-      BevelOuter = bvNone
-      Color = 16447991
-      ParentBackground = False
-      TabOrder = 0
-      DesignSize = (
-        1000
-        66)
-      object Panel_Inner0: TPanel
-        Left = 0
-        Top = -1
-        Width = 1000
-        Height = 59
-        Anchors = [akTop]
-        BevelOuter = bvNone
-        ParentColor = True
-        TabOrder = 0
-        object Button_Search: TButton
-          AlignWithMargins = True
-          Left = 910
-          Top = 12
-          Width = 70
-          Height = 35
-          Hint = '{"borderradius":"0 4px 4px 0","type":"success"}'
-          Margins.Left = 0
-          Margins.Top = 12
-          Margins.Right = 20
-          Margins.Bottom = 12
-          Align = alRight
-          Caption = 'Search'
-          TabOrder = 0
-        end
-        object Edit_Search: TEdit
-          AlignWithMargins = True
-          Left = 790
-          Top = 12
-          Width = 120
-          Height = 33
-          Hint = 
-            '{"borderradius":"4px 0 0 4px","prefix-icon":"el-icon-search","pl' +
-            'aceholder":"Search"}'
-          Margins.Top = 12
-          Margins.Right = 0
-          Margins.Bottom = 14
-          Align = alRight
-          AutoSize = False
-          TabOrder = 1
-        end
-        object Panel_Logo: TPanel
-          Left = 9
-          Top = 4
-          Width = 230
-          Height = 54
-          BevelOuter = bvNone
-          BorderWidth = 3
-          ParentBackground = False
-          ParentColor = True
-          TabOrder = 2
-          object Label2: TLabel
-            Left = 3
-            Top = 3
-            Width = 186
-            Height = 48
-            Align = alLeft
-            Alignment = taCenter
-            AutoSize = False
-            Caption = 'DelphiBBS'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = 13007953
-            Font.Height = -32
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-            Layout = tlCenter
-          end
-        end
-      end
-    end
     object Panel_99_Foot: TPanel
       Left = 0
-      Top = 809
+      Top = 717
       Width = 1000
       Height = 92
       Align = alTop
       BevelOuter = bvNone
       ParentColor = True
-      TabOrder = 1
+      TabOrder = 0
+      ExplicitTop = 809
       object Label14: TLabel
         Left = 0
         Top = 32
@@ -465,14 +382,15 @@ object Form1: TForm1
     end
     object Panel_03_Demos: TPanel
       Left = 0
-      Top = 502
+      Top = 410
       Width = 1000
       Height = 307
       Align = alTop
       BevelOuter = bvNone
       Color = 16316147
       ParentBackground = False
-      TabOrder = 2
+      TabOrder = 1
+      ExplicitTop = 502
       DesignSize = (
         1000
         307)
@@ -558,14 +476,15 @@ object Form1: TForm1
     end
     object Panel_02_Main: TPanel
       Left = 0
-      Top = 132
+      Top = 40
       Width = 1000
       Height = 370
       Align = alTop
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 2
+      ExplicitTop = 132
       DesignSize = (
         1000
         370)
@@ -602,7 +521,6 @@ object Form1: TForm1
             BevelOuter = bvNone
             ParentColor = True
             TabOrder = 0
-            ExplicitHeight = 322
             object Label_WDWD: TLabel
               Left = 232
               Top = 16
@@ -5694,201 +5612,288 @@ object Form1: TForm1
     end
     object Panel_01_Menu: TPanel
       Left = 0
-      Top = 66
+      Top = 0
       Width = 1000
-      Height = 66
-      Hint = '{"dwstyle":"border-bottom:solid 2px #F0F0F0;"}'
+      Height = 40
+      Hint = '{"dwstyle":"border-bottom:solid 1px #F0F0F0;"}'
       Align = alTop
       BevelOuter = bvNone
-      Color = 16316147
+      Color = 133063
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
       DesignSize = (
         1000
-        66)
+        40)
       object Panel_Inner1: TPanel
         Left = 0
         Top = -2
         Width = 1000
-        Height = 65
+        Height = 40
         Anchors = [akTop]
+        BevelOuter = bvNone
         BorderWidth = 5
         Font.Charset = ANSI_CHARSET
         Font.Color = 6579300
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = #24494#36719#38597#40657
         Font.Style = []
         ParentColor = True
         ParentFont = False
         TabOrder = 0
         object Label_Download: TLabel
-          Left = 80
-          Top = 6
+          Left = 98
+          Top = 5
           Width = 10
-          Height = 53
+          Height = 30
           Align = alLeft
           Alignment = taCenter
           AutoSize = False
           Caption = '|'
+          Color = clWhite
           Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
+          Font.Color = clWhite
           Font.Height = -15
           Font.Name = #24494#36719#38597#40657
           Font.Style = []
+          ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitLeft = 80
           ExplicitTop = 7
+          ExplicitHeight = 53
         end
         object Label_ContactUs: TLabel
-          Left = 342
-          Top = 6
+          Left = 416
+          Top = 5
           Width = 10
-          Height = 53
+          Height = 30
           Align = alLeft
           Alignment = taCenter
           AutoSize = False
           Caption = '|'
+          Color = clWhite
           Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
+          Font.Color = clWhite
           Font.Height = -15
           Font.Name = #24494#36719#38597#40657
           Font.Style = []
+          ParentColor = False
           ParentFont = False
           Layout = tlCenter
           ExplicitLeft = 367
+          ExplicitTop = 6
+          ExplicitHeight = 53
         end
         object Label_gitee: TLabel
-          Left = 201
-          Top = 6
+          Left = 204
+          Top = 5
           Width = 10
-          Height = 53
+          Height = 30
           Align = alLeft
           Alignment = taCenter
           AutoSize = False
           Caption = '|'
+          Color = clWhite
           Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
+          Font.Color = clWhite
           Font.Height = -15
           Font.Name = #24494#36719#38597#40657
           Font.Style = []
+          ParentColor = False
           ParentFont = False
           Layout = tlCenter
           ExplicitLeft = 266
           ExplicitTop = -1
+          ExplicitHeight = 53
         end
         object Label_blog: TLabel
-          Left = 275
-          Top = 6
+          Left = 310
+          Top = 5
           Width = 10
-          Height = 53
+          Height = 30
           Align = alLeft
           Alignment = taCenter
           AutoSize = False
           Caption = '|'
+          Color = clWhite
           Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
+          Font.Color = clWhite
           Font.Height = -15
           Font.Name = #24494#36719#38597#40657
           Font.Style = []
+          ParentColor = False
           ParentFont = False
           Layout = tlCenter
           ExplicitLeft = 361
+          ExplicitTop = 6
+          ExplicitHeight = 53
         end
-        object StaticText_FAQs: TStaticText
-          AlignWithMargins = True
-          Left = 93
-          Top = 9
-          Width = 105
-          Height = 47
-          Hint = '{"href":"/faq.dw","target":"_blank"}'
+        object Label2: TLabel
+          Left = 522
+          Top = 5
+          Width = 10
+          Height = 30
           Align = alLeft
           Alignment = taCenter
           AutoSize = False
-          Caption = #24120#35265#38382#39064
+          Caption = '|'
+          Color = clWhite
           Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
-          Font.Height = -19
+          Font.Color = clWhite
+          Font.Height = -15
           Font.Name = #24494#36719#38597#40657
           Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitLeft = 483
+          ExplicitTop = 0
+          ExplicitHeight = 28
+        end
+        object StaticText_FAQs: TStaticText
+          AlignWithMargins = True
+          Left = 111
+          Top = 8
+          Width = 90
+          Height = 24
+          Hint = '{"href":"/demos?category=1","target":"_self"}'
+          Align = alLeft
+          Alignment = taCenter
+          AutoSize = False
+          Caption = #25511#20214#20351#29992
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
           ParentFont = False
           TabOrder = 0
+          ExplicitLeft = 112
+          ExplicitTop = 9
+          ExplicitHeight = 22
         end
         object StaticText_Home: TStaticText
           AlignWithMargins = True
-          Left = 6
-          Top = 9
-          Width = 71
-          Height = 47
-          Hint = '{"href":"/","target":"_self"}'
+          Left = 5
+          Top = 8
+          Width = 90
+          Height = 24
+          Hint = '{"href":"/demos?category=0","target":"_self"}'
           Margins.Left = 0
           Align = alLeft
           Alignment = taCenter
           AutoSize = False
-          Caption = #39318#39029
+          Caption = #25152#26377#26696#20363
+          Color = clWhite
           Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
-          Font.Height = -19
+          Font.Color = clWhite
+          Font.Height = -16
           Font.Name = #24494#36719#38597#40657
           Font.Style = []
+          ParentColor = False
           ParentFont = False
           TabOrder = 1
+          ExplicitLeft = 6
+          ExplicitTop = 9
+          ExplicitHeight = 22
         end
         object StaticText_ContactUs: TStaticText
           AlignWithMargins = True
-          Left = 355
-          Top = 9
-          Width = 114
-          Height = 47
-          Hint = '{"href":"mailto:fenglinyushu@163.com","target":"_blank"}'
+          Left = 429
+          Top = 8
+          Width = 90
+          Height = 24
+          Hint = '{"href":"/demos?category=4","target":"_self"}'
+          Align = alLeft
+          Alignment = taCenter
+          AutoSize = False
+          Caption = #20856#22411#26041#27861
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 2
+          ExplicitLeft = 430
+          ExplicitTop = 9
+          ExplicitHeight = 22
+        end
+        object StaticText_Gitee: TStaticText
+          AlignWithMargins = True
+          Left = 217
+          Top = 8
+          Width = 90
+          Height = 24
+          Hint = '{"href":"/demos?category=2","target":"_self"}'
+          Align = alLeft
+          Alignment = taCenter
+          AutoSize = False
+          Caption = #31227#21160#24212#29992
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 3
+          ExplicitLeft = 218
+          ExplicitTop = 9
+          ExplicitHeight = 22
+        end
+        object StaticText_Blog: TStaticText
+          AlignWithMargins = True
+          Left = 323
+          Top = 8
+          Width = 90
+          Height = 24
+          Hint = '{"href":"/demos?category=3","target":"_self"}'
+          Align = alLeft
+          Alignment = taCenter
+          AutoSize = False
+          Caption = #32508#21512#24212#29992
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = #24494#36719#38597#40657
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 4
+          ExplicitLeft = 324
+          ExplicitTop = 9
+          ExplicitHeight = 22
+        end
+        object StaticText1: TStaticText
+          AlignWithMargins = True
+          Left = 535
+          Top = 8
+          Width = 90
+          Height = 24
+          Hint = '{"href":"/demos?category=4","target":"_self"}'
           Align = alLeft
           Alignment = taCenter
           AutoSize = False
           Caption = #32852#31995#25105#20204
+          Color = clWhite
           Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
-          Font.Height = -19
+          Font.Color = clWhite
+          Font.Height = -16
           Font.Name = #24494#36719#38597#40657
           Font.Style = []
+          ParentColor = False
           ParentFont = False
-          TabOrder = 2
-        end
-        object StaticText_Gitee: TStaticText
-          AlignWithMargins = True
-          Left = 214
-          Top = 9
-          Width = 58
-          Height = 47
-          Hint = '{"href":"https://gitee.com/xamh/dewebsdk","target":"_blank"}'
-          Align = alLeft
-          Alignment = taCenter
-          AutoSize = False
-          Caption = #30721#20113
-          Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
-          Font.Height = -19
-          Font.Name = #24494#36719#38597#40657
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 3
-        end
-        object StaticText_Blog: TStaticText
-          AlignWithMargins = True
-          Left = 288
-          Top = 9
-          Width = 51
-          Height = 47
-          Hint = '{"href":"https://www.cnblogs.com/maxxua/","target":"_blank"}'
-          Align = alLeft
-          Alignment = taCenter
-          AutoSize = False
-          Caption = #21338#23458
-          Font.Charset = ANSI_CHARSET
-          Font.Color = 6579300
-          Font.Height = -19
-          Font.Name = #24494#36719#38597#40657
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 4
+          TabOrder = 5
+          ExplicitLeft = 632
+          ExplicitTop = 12
+          ExplicitHeight = 22
         end
       end
     end
