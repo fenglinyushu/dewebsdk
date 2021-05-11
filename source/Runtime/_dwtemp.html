@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -27,32 +27,10 @@
         	</div>
         </el-dialog>
 		<iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
-        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:20px;">{{Label1__cap}}
+        <div  id="Label1" v-html="Label1__cap" v-if="Label1__vis" :disabled="Label1__dis" :style="{left:Label1__lef,top:Label1__top,width:Label1__wid,height:Label1__hei}" style="position:absolute;color:#000000;font-family:'å¾®è½¯é›…é»‘';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;text-align:center;line-height:33px;">{{Label1__cap}}
         </div>
-        <el-tabs id="PageControl1" v-if="PageControl1__vis" :disabled="PageControl1__dis" v-model="PageControl1__apg" :tab-position="PageControl1__tps" type="border-card" :style="{left:PageControl1__lef,top:PageControl1__top,width:PageControl1__wid,height:PageControl1__hei}" style="position:absolute;" @tab-click="dwevent($event,'PageControl1','this.PageControl1__apg','onchange','14161128')">
-            <el-tab-pane v-if="TabSheet1__tbv" :label="TabSheet1__cap" name="TabSheet1">
-            </el-tab-pane>
-            <el-tab-pane v-if="TabSheet2__tbv" name="TabSheet2">
-            <span slot="label"><i class="el-icon-platform-eleme"></i> {{TabSheet2__cap}}</span>
-            </el-tab-pane>
-            <el-tab-pane v-if="TabSheet3__tbv" name="TabSheet3">
-            <span slot="label"><i class="el-icon-eleme"></i> {{TabSheet3__cap}}</span>
-            </el-tab-pane>
-        <div :style="{width:PageControl1__wid,height:PageControl1__hei}" style="position:absolute;left:0px;top:0px;">
-        <el-main id="TabSheet1" v-if="PageControl1__apg=='TabSheet1'" :disabled="TabSheet1__dis" style="position:absolute;height:100%;overflow:hidden;">
-        <div  id="Label2" v-html="Label2__cap" v-if="Label2__vis" :disabled="Label2__dis" :style="{left:Label2__lef,top:Label2__top,width:Label2__wid,height:Label2__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label2__cap}}
-        </div>
-        </el-main>
-        <el-main id="TabSheet2" v-if="PageControl1__apg=='TabSheet2'" :disabled="TabSheet2__dis" style="position:absolute;height:100%;overflow:hidden;">
-        <div  id="Label3" v-html="Label3__cap" v-if="Label3__vis" :disabled="Label3__dis" :style="{left:Label3__lef,top:Label3__top,width:Label3__wid,height:Label3__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label3__cap}}
-        </div>
-        </el-main>
-        <el-main id="TabSheet3" v-if="PageControl1__apg=='TabSheet3'" :disabled="TabSheet3__dis" style="position:absolute;height:100%;overflow:hidden;">
-        <div  id="Label4" v-html="Label4__cap" v-if="Label4__vis" :disabled="Label4__dis" :style="{left:Label4__lef,top:Label4__top,width:Label4__wid,height:Label4__hei}" style="position:absolute;color:#000000;font-family:'Î¢ÈíÑÅºÚ';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;">{{Label4__cap}}
-        </div>
-        </el-main>
-            </div>
-        </el-tabs>
+        <el-image :src="Image2__src" fit="fill" v-if="Image2__vis" :disabled="Image2__dis" :preview-src-list="image_preview_list" :style="{left:Image2__lef,top:Image2__top,width:Image2__wid,height:Image2__hei}" style="position:absolute;border-radius:10px;" @click="this.image_preview_list.push('media/images/mn/2.jpg');">
+        </el-Image>
 	 </div>
     <script>
        Vue.prototype.dwsetcookie = function (c_name, value, expiredays) {
@@ -82,70 +60,24 @@
 				el: '#app',
 				data: function () {
 					return {
-					imagelist:[],
+					    image_preview_list:[],
 					    Form1_1__top:"0px",
-					    Form1_1__wid:"666px",
+					    Form1_1__wid:"360px",
 					    Form1_1__hei:"480px",
                         Label1__lef:"0px",
                         Label1__top:"0px",
-                        Label1__wid:"666px",
-                        Label1__hei:"20px",
+                        Label1__wid:"360px",
+                        Label1__hei:"33px",
                         Label1__vis:true,
                         Label1__dis:false,
-                        Label1__cap:"StringGrid Test",
-                        Label2__lef:"72px",
-                        Label2__top:"64px",
-                        Label2__wid:"48px",
-                        Label2__hei:"20px",
-                        Label2__vis:true,
-                        Label2__dis:false,
-                        Label2__cap:"Label2",
-                        TabSheet1__lef:"4px",
-                        TabSheet1__top:"31px",
-                        TabSheet1__wid:"593px",
-                        TabSheet1__hei:"158px",
-                        TabSheet1__vis:false,
-                        TabSheet1__dis:false,
-                        TabSheet1__cap:"TabSheet1",
-                        Label3__lef:"104px",
-                        Label3__top:"72px",
-                        Label3__wid:"48px",
-                        Label3__hei:"20px",
-                        Label3__vis:true,
-                        Label3__dis:false,
-                        Label3__cap:"Label3",
-                        TabSheet2__lef:"4px",
-                        TabSheet2__top:"31px",
-                        TabSheet2__wid:"593px",
-                        TabSheet2__hei:"158px",
-                        TabSheet2__vis:false,
-                        TabSheet2__dis:false,
-                        TabSheet2__cap:"TabSheet2",
-                        Label4__lef:"88px",
-                        Label4__top:"32px",
-                        Label4__wid:"48px",
-                        Label4__hei:"20px",
-                        Label4__vis:true,
-                        Label4__dis:false,
-                        Label4__cap:"Label4",
-                        TabSheet3__lef:"4px",
-                        TabSheet3__top:"31px",
-                        TabSheet3__wid:"593px",
-                        TabSheet3__hei:"158px",
-                        TabSheet3__vis:true,
-                        TabSheet3__dis:false,
-                        TabSheet3__cap:"TabSheet3",
-                        PageControl1__lef:"0px",
-                        PageControl1__top:"26px",
-                        PageControl1__wid:"601px",
-                        PageControl1__hei:"193px",
-                        PageControl1__vis:true,
-                        PageControl1__dis:false,
-                        PageControl1__apg:"TabSheet3",
-                        PageControl1__tps:"top",
-                        TabSheet1__tbv:true,
-                        TabSheet2__tbv:true,
-                        TabSheet3__tbv:true,
+                        Label1__cap:"DeWeb Test",
+                        Image2__lef:"20px",
+                        Image2__top:"43px",
+                        Image2__wid:"320px",
+                        Image2__hei:"326px",
+                        Image2__vis:true,
+                        Image2__dis:false,
+                        Image2__src:"media/images/mn/2.jpg",
 					    input_query_visible:false,
 					    input_query_caption:"Input Query",
 					    input_query_inputname:"new",
@@ -155,8 +87,8 @@
 					    input_query_method:"processinputquery",
 					    input_query_visible:false,
 					    version__istrial:false,
-					    clientid:14161128,
-					    shuntflag:3078
+					    clientid:1837756,
+					    shuntflag:5250
                     }
                 },
                 mounted() {
@@ -174,7 +106,7 @@
                     },
                     dwInputChange (e) {
                         this[e+"__cap"] = document.getElementById(e+"__inp").files[0].name;
-                        var sget = '{"m":"event","i":14161128,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
+                        var sget = '{"m":"event","i":1837756,"c":"'+e+'","e":"getfilename","v":"'+escape(document.getElementById(e+"__inp").files[0].name)+'"}';
                         axios.get(sget)
                     },
                     filterHandler(value, row, column) {
@@ -184,10 +116,10 @@
                     dwInputSubmit (ipname) {
                         let me=this;let formData = new FormData();
                         formData.append('file', document.getElementById(ipname+"__inp").files[0]);
-                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '14161128'}}
+                        let config = {headers: {'Content-Type': 'multipart/form-data','clientid': '1837756'}}
                         axios.post('/upload', formData, config)
                         .then(function (res) {
-                            var sget = '{"m":"event","i":14161128,"c":"'+ipname+'","e":"onenddock","v":"success"}';
+                            var sget = '{"m":"event","i":1837756,"c":"'+ipname+'","e":"onenddock","v":"success"}';
                             axios.get(sget)
                             .then(resp =>{me.procResp(resp.data)});
                         })
@@ -203,12 +135,12 @@
                         jo.c=compname;
                         jo.v=escape(eval(compvalue))
                         jo.e=compevent;
-                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:3078}})
+                        axios.get(escape(JSON.stringify(jo)),{headers:{shuntflag:5250}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                     processinputquery(val) {
                         this.input_query_visible = false;
-                        axios.get('{"m":"interaction","i":14161128,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:3078}})
+                        axios.get('{"m":"interaction","i":1837756,"s":"inputquery","t":"'+this.input_query_method+'","v":"'+this.input_query_inputdefault+'"}',{headers:{shuntflag:5250}})
                         .then(resp =>{this.procResp(resp.data)});
                     },
                 },

@@ -185,128 +185,142 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     sSize     : string;
-     sName     : string;
-     sRadius   : string;
-     //
-     joHint    : Variant;
-     joRes     : Variant;
-     sSrc      : String;
-     sCaptcha  : string;
+    sCode       : string;
+    sSize       : string;
+    sName       : string;
+    sRadius     : string;
+    sPreview    : string;   //用于预览的字符串
+    //
+    joHint      : Variant;
+    joRes       : Variant;
+    sSrc        : String;
+    sCaptcha    : string;
 begin
-     if TImage(ACtrl).HelpKeyword = 'captcha' then begin
-          //=============验证码=================================================
+    if TImage(ACtrl).HelpKeyword = 'captcha' then begin
+        //=============验证码=================================================
 
-          //生成返回值数组
-          joRes    := _Json('[]');
+        //生成返回值数组
+        joRes    := _Json('[]');
 
-          //取得HINT对象JSON
-          joHint    := dwGetHintJson(TControl(ACtrl));
+        //取得HINT对象JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
 
 
-          with TImage(ACtrl) do begin
-               //生成验证码
-               _CreateCaptcha(Width,Height,sSrc,sCaptcha);
-               //
-               Hint := '{"src":"media/images/'+sSrc+'","captcha":"'+sCaptcha+'"}';
+        with TImage(ACtrl) do begin
+            //生成验证码
+            _CreateCaptcha(Width,Height,sSrc,sCaptcha);
+            //
+            Hint := '{"src":"media/images/'+sSrc+'","captcha":"'+sCaptcha+'"}';
 
-               //
-               joRes.Add('<el-image'
-                         +' id="'+dwPrefix(Actrl)+Name+'"'
-                         +' :src="'+dwPrefix(Actrl)+Name+'__src"'
-                         +' fit="none"'
-                         +dwVisible(TControl(ACtrl))
-                         +dwDisable(TControl(ACtrl))
-                         +dwLTWH(TControl(ACtrl))
-                         +sRadius
-                         +'cursor: pointer;'
-                         +'"'
-                         +dwIIF(True,Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+            //
+            joRes.Add('<el-image'
+                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' :src="'+dwPrefix(Actrl)+Name+'__src"'
+                    +' fit="none"'
+                    +dwVisible(TControl(ACtrl))
+                    +dwDisable(TControl(ACtrl))
+                    +dwLTWH(TControl(ACtrl))
+                    +sRadius
+                    +'cursor: pointer;'
+                    +'"'
+                    +dwIIF(True,Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                     +'>');
-          end;
+        end;
 
-          //
-          Result    := (joRes);
+        //
+        Result    := (joRes);
 
-     end else begin
-          //=============普通图片===============================================
+    end else begin
+        //=============普通图片===================================================================
 
-          //生成返回值数组
-          joRes    := _Json('[]');
+        //生成返回值数组
+        joRes    := _Json('[]');
 
-          //取得HINT对象JSON
-          joHint    := dwGetHintJson(TControl(ACtrl));
+        //取得HINT对象JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
 
-          //得到圆角半径信息
-          sRadius   := dwGetHintValue(joHint,'radius','border-radius','');
-          sRadius   := StringReplace(sRadius,'=',':',[]);
-          sRadius   := Trim(StringReplace(sRadius,'"','',[rfReplaceAll]));
-          if sRadius<>'' then begin
-               sRadius   := sRadius + ';';
-          end;
+        //得到圆角半径信息
+        sRadius   := dwGetHintValue(joHint,'radius','border-radius','');
+        sRadius   := StringReplace(sRadius,'=',':',[]);
+        sRadius   := Trim(StringReplace(sRadius,'"','',[rfReplaceAll]));
+        if sRadius<>'' then begin
+            sRadius   := sRadius + ';';
+        end;
 
-          with TImage(ACtrl) do begin
-               //如果没有手动设置图片源，则自动保存当前图片，并设置为图片源
-               if dwGetProp(TControl(ACtrl),'src')='' then begin
-                    sName     := 'dist\webimages\'+dwPrefix(Actrl)+Name+'.jpg';
-                    //保存图片到本地
-                    if not FileExists(sName) then begin
-                         Picture.SaveToFile(sName);
-                    end;
-               end;
+        with TImage(ACtrl) do begin
+            //如果没有手动设置图片源，则自动保存当前图片，并设置为图片源
+            if dwGetProp(TControl(ACtrl),'src')='' then begin
+                sName     := 'dist\webimages\'+dwPrefix(Actrl)+Name+'.jpg';
+                //保存图片到本地
+                if not FileExists(sName) then begin
+                    Picture.SaveToFile(sName);
+                end;
+            end;
 
-               if Proportional then begin
-                    joRes.Add('<el-image'
-                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                              +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                              +' :src="'+dwPrefix(Actrl)+Name+'__src" fit="contain"'
-                              +dwVisible(TControl(ACtrl))
-                              +dwDisable(TControl(ACtrl))
-                              +dwGetDWAttr(joHint)
-                              +dwLTWH(TControl(ACtrl))
-                              +sRadius
-                              +dwIIF(Assigned(OnClick),'cursor: pointer;','')
-                              +dwGetDWStyle(joHint)
-                              +'"'
-                              +'>');
-               end else begin
-                    if Stretch then begin
-                         joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="fill"'
-                                   +dwVisible(TControl(ACtrl))
-                                   +dwDisable(TControl(ACtrl))
-                                   +dwGetDWAttr(joHint)
-                                   +dwLTWH(TControl(ACtrl))
-                                   +sRadius
-                                   +dwIIF(Assigned(OnClick),'cursor: pointer;','')
-                                   +dwGetDWStyle(joHint)
-                                   +'"'
-                                   +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                                   +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                                   +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                              +'>');
-                    end else begin
-                         joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="none"'
-                                   +dwVisible(TControl(ACtrl))
-                                   +dwDisable(TControl(ACtrl))
-                                   +dwGetDWAttr(joHint)
-                                   +dwLTWH(TControl(ACtrl))
-                                   +sRadius
-                                   +dwIIF(Assigned(OnClick),'cursor: pointer;','')
-                                   +dwGetDWStyle(joHint)
-                                   +'"'
-                                   +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                                   +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                                   +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                              +'>');
-                    end;
-               end;
-          end;
+            //生成预览字符串 Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle])
+            //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
+            if IncrementalDisplay then begin
+                sPreview := ' @click="image_preview_list=[];image_preview_list.push('''+dwGetProp(TControl(ACtrl),'src')+''');"';
+            end else begin
+                sPreview    := '';
+            end;
 
-          //
-          Result    := (joRes);
-     end;
+
+            //
+            if Proportional then begin
+                joRes.Add('<el-image'
+                        +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
+                        +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                        +' :src="'+dwPrefix(Actrl)+Name+'__src" fit="contain"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
+                        +dwGetDWAttr(joHint)
+                        +dwLTWH(TControl(ACtrl))
+                        +sRadius
+                        +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                        +dwGetDWStyle(joHint)
+                        +'"'
+                        +'>');
+            end else begin
+                if Stretch then begin
+                    joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="fill"'
+                            +dwVisible(TControl(ACtrl))
+                            +dwDisable(TControl(ACtrl))
+                            +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
+                            +dwGetDWAttr(joHint)
+                            +dwLTWH(TControl(ACtrl))
+                            +sRadius
+                            +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                            +dwGetDWStyle(joHint)
+                            +'"'
+                            +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                            +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),sPreview)
+                            +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                            +'>');
+                end else begin
+                    joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="none"'
+                            +dwVisible(TControl(ACtrl))
+                            +dwDisable(TControl(ACtrl))
+                            +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
+                            +dwGetDWAttr(joHint)
+                            +dwLTWH(TControl(ACtrl))
+                            +sRadius
+                            +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                            +dwGetDWStyle(joHint)
+                            +'"'
+                            +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
+                            +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                            +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                            +'>');
+                end;
+            end;
+        end;
+
+        //
+        Result    := (joRes);
+    end;
 end;
 
 //取得HTML尾部消息

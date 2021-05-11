@@ -4111,7 +4111,6 @@ object Form1: TForm1
     Align = alTop
     Alignment = taCenter
     Caption = 'EVENT'
-    ExplicitTop = 621
     ExplicitWidth = 47
   end
   object Image1: TImage
@@ -8201,9 +8200,7 @@ object Form1: TForm1
     Top = 211
     Width = 280
     Height = 110
-    Hint = 
-      '{"dwattr":":preview-src-list=\"imagelist\"","radius":"25px","src' +
-      '":"media/images/mn/2.jpg"}'
+    Hint = '{"radius":"10px","src":"media/images/mn/2.jpg"}'
     Margins.Left = 20
     Margins.Top = 10
     Margins.Right = 20
@@ -12285,6 +12282,5 @@ object Form1: TForm1
     Caption = 'Start'
     TabOrder = 0
     OnClick = Button1Click
-    ExplicitTop = 664
   end
 end
