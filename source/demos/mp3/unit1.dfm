@@ -2,11 +2,10 @@ object Form1: TForm1
   Left = 0
   Top = 30
   Hint = '{"type":"primary"}'
-  AutoSize = True
   BorderStyle = bsNone
   BorderWidth = 5
   Caption = 'DeWeb - Mp3 player'
-  ClientHeight = 324
+  ClientHeight = 558
   ClientWidth = 350
   Color = clWhite
   TransparentColorValue = 16448250
@@ -18,23 +17,26 @@ object Form1: TForm1
   OldCreateOrder = False
   Position = poDesigned
   OnMouseUp = FormMouseUp
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 20
   object Panel_Full: TPanel
-    AlignWithMargins = True
-    Left = 3
-    Top = 3
-    Width = 344
-    Height = 318
-    Align = alTop
+    Left = 0
+    Top = 0
+    Width = 350
+    Height = 558
+    Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    DesignSize = (
+      350
+      558)
     object Label_Name: TLabel
       Left = 0
       Top = 0
-      Width = 344
+      Width = 350
       Height = 65
       Align = alTop
       Alignment = taCenter
@@ -47,12 +49,12 @@ object Form1: TForm1
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
-      ExplicitWidth = 340
+      ExplicitTop = -6
     end
     object MediaPlayer1: TMediaPlayer
       Left = 0
       Top = 65
-      Width = 343
+      Width = 350
       Height = 47
       HelpType = htKeyword
       HelpKeyword = 'mp3'
@@ -60,85 +62,67 @@ object Form1: TForm1
       EnabledButtons = []
       AutoRewind = False
       DoubleBuffered = True
-      FileName = 'media/audio/night.mp3'
+      FileName = 'media/audio/'#22812#30340#38050#29748#26354'.mp3'
       ParentDoubleBuffered = False
       TabOrder = 0
+      ExplicitWidth = 343
     end
-    object Panel_Buttons: TPanel
-      AlignWithMargins = True
-      Left = 3
-      Top = 115
-      Width = 338
-      Height = 41
-      Align = alTop
-      BevelOuter = bvNone
-      Color = clWhite
-      ParentBackground = False
+    object ScrollBox1: TScrollBox
+      Left = 0
+      Top = 112
+      Width = 350
+      Height = 446
+      VertScrollBar.Visible = False
+      Align = alClient
       TabOrder = 1
-      object Button3: TButton
+      object Panel_Buttons: TPanel
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 64
-        Height = 35
-        Hint = '{"type":"primary"}'
-        Align = alLeft
-        Caption = 'Play'
+        Width = 340
+        Height = 257
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
         TabOrder = 0
-        OnClick = Button3Click
+        object Button_Audio: TButton
+          AlignWithMargins = True
+          Left = 10
+          Top = 3
+          Width = 320
+          Height = 34
+          Hint = '{"type":"primary"}'
+          Margins.Left = 10
+          Margins.Right = 10
+          Align = alTop
+          Caption = '2021.WAV'
+          TabOrder = 0
+          OnClick = Button_AudioClick
+        end
+        object FileListBox_Audio: TFileListBox
+          Left = 80
+          Top = 112
+          Width = 217
+          Height = 145
+          ItemHeight = 20
+          Mask = '*.mp3;*.wav'
+          TabOrder = 1
+        end
       end
-      object Button1: TButton
-        AlignWithMargins = True
-        Left = 70
-        Top = 3
-        Width = 64
-        Height = 35
-        Hint = '{"type":"primary"}'
-        Margins.Left = 0
-        Align = alLeft
-        Caption = 'Pause'
-        TabOrder = 1
-        OnClick = Button1Click
-      end
-      object Button2: TButton
-        AlignWithMargins = True
-        Left = 137
-        Top = 3
-        Width = 64
-        Height = 35
-        Hint = '{"type":"primary"}'
-        Margins.Left = 0
-        Align = alLeft
-        Caption = 'Switch'
-        TabOrder = 2
-        OnClick = Button2Click
-      end
-      object Button4: TButton
-        AlignWithMargins = True
-        Left = 204
-        Top = 3
-        Width = 64
-        Height = 35
-        Hint = '{"type":"primary"}'
-        Margins.Left = 0
-        Align = alLeft
-        Caption = 'Loop'
-        TabOrder = 3
-        OnClick = Button4Click
-      end
-      object Button5: TButton
-        AlignWithMargins = True
-        Left = 271
-        Top = 3
-        Width = 64
-        Height = 35
-        Hint = '{"type":"primary"}'
-        Margins.Left = 0
-        Align = alLeft
-        Caption = 'To 15s'
-        TabOrder = 4
-        OnClick = Button5Click
-      end
+    end
+    object BitBtn_Upload: TBitBtn
+      Left = 303
+      Top = 13
+      Width = 36
+      Height = 36
+      Hint = 
+        '{"icon":"el-icon-upload","fontsize":"18px","style":"circle","acc' +
+        'ept":".mp3,.wav","auto":1}'
+      Anchors = [akTop, akRight]
+      TabOrder = 2
+      OnEndDock = BitBtn_UploadEndDock
     end
   end
 end

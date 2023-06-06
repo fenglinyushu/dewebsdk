@@ -1,30 +1,115 @@
-library dwTButton;
+ï»¿library dwTButton;
 
 uses
-     ShareMem,
+    ShareMem,
 
-     //
-     dwCtrlBase,
+    //
+    dwCtrlBase,
 
-     //
-     SynCommons,
+    //
+    SynCommons,
 
-     //
-     SysUtils,
-     Classes,
-     Dialogs,
-     StdCtrls,
-     Windows,
-     Controls,
-     Forms;
+    //
+    Messages, SysUtils, Variants, Classes, Graphics,
+    Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
+    StdCtrls, Windows;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+
+//--------------------------------------------------------------------------------------------------
+
+function _GetFont(AFont:TFont):string;
+begin
+     Result    := 'color:'+dwColor(AFont.color)+';'
+               +'font-family:'''+AFont.name+''';'
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
+
+     //ç²—ä½“
+     if fsBold in AFont.Style then begin
+          Result    := Result+'font-weight:bold;';
+     end else begin
+          Result    := Result+'font-weight:normal;';
+     end;
+
+     //æ–œä½“
+     if fsItalic in AFont.Style then begin
+          Result    := Result+'font-style:italic;';
+     end else begin
+          Result    := Result+'font-style:normal;';
+     end;
+
+     //ä¸‹åˆ’çº¿
+     if fsUnderline in AFont.Style then begin
+          Result    := Result+'text-decoration:underline;';
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end;
+     end else begin
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end else begin
+               Result    := Result+'text-decoration:none;';
+          end;
+     end;
+end;
+function _GetFontWeight(AFont:TFont):String;
+begin
+     if fsBold in AFont.Style then begin
+          Result    := 'bold';
+     end else begin
+          Result    := 'normal';
+     end;
+
+end;
+function _GetFontStyle(AFont:TFont):String;
+begin
+     if fsItalic in AFont.Style then begin
+          Result    := 'italic';
+     end else begin
+          Result    := 'normal';
+     end;
+end;
+function _GetTextDecoration(AFont:TFont):String;
+begin
+     if fsUnderline in AFont.Style then begin
+          Result    :='underline';
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := 'line-through';
+          end;
+     end else begin
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := 'line-through';
+          end else begin
+               Result    := 'none';
+          end;
+     end;
+end;
+
+function  dwButtonFontStyle(ACtrl:TControl):String;
+begin
+    with ACtrl do begin
+        Result    := //'color:'+dwFullName(Actrl)+'__fcl,'+         //é¢œè‰²
+            '''font-size'':'+dwFullName(Actrl)+'__fsz,'         //size
+            +'''font-family'':'+dwFullName(Actrl)+'__ffm,'       //å­—ä½“
+            +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'       //bold
+            +'''font-style'':'+dwFullName(Actrl)+'__fsl,'        //italic
+            +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'   //ä¸‹åˆ’çº¿æˆ–è´¯ç©¿çº¿ï¼Œåªèƒ½é€‰ä¸€ç§
+    end;
+end;
+
+
+//--------------------------------------------------------------------------------------------------
+
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
 var
      joData    : Variant;
@@ -49,208 +134,366 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
-     sCode     : String;
-     sSize     : String;
+    sCode   : String;
+    sRIcon  : string;
+    sFull   : string;
 
-     //
-     joHint    : Variant;
-     joRes     : Variant;
-     sEnter    : String;
-     sExit     : String;
-     sClick    : string;
+    //
+    joHint  : Variant;
+    joRes   : Variant;
+    sEnter  : String;
+    sExit   : String;
+    sClick  : string;
 begin
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //È¡µÃHINT¶ÔÏóJSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+    //
+    sFull   := dwFullName(ACtrl);
 
-     //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
-     //²ÎÊıÒÀ´ÎÎª: JSÊÂ¼şÃû³Æ, ¿Ø¼şÃû³Æ,¿Ø¼şÖµ,DelphiÊÂ¼şÃû³Æ,¾ä±ú
-
-
-     //
-     with TButton(ACtrl) do begin
-          //µÃµ½´óĞ¡£ºlarge/medium/small/mini
-          if Height>=50 then begin
-               sSize     := ' size=large';
-          end else if Height>=35 then begin
-               sSize     := ' size=medium';
-          end else if Height>=20 then begin
-               sSize     := ' size=small';
-          end else begin
-               sSize     := ' size=mini';
-          end;
-
-          //½øÈëÊÂ¼ş´úÂë----------------------------------------------------------------------------
-          sEnter  := '';
-          if joHint.Exists('onenter') then begin
-               sEnter  := 'dwexecute('''+joHint.onenter+''');';    //È¡µÃOnEnterµÄJS´úÂë
-          end;
-          if sEnter='' then begin
-               if Assigned(OnEnter) then begin
-                    sEnter    := Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]);
-               end else begin
-
-               end;
-          end else begin
-               if Assigned(OnEnter) then begin
-                    sEnter    := Format(_DWEVENTPlus,['mouseenter.native',sEnter,Name,'0','onenter',TForm(Owner).Handle])
-               end else begin
-                    sEnter    := ' @mouseenter.native="'+sEnter+'"';
-               end;
-          end;
+    //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
+    //å‚æ•°ä¾æ¬¡ä¸º: JSäº‹ä»¶åç§°, æ§ä»¶åç§°,æ§ä»¶å€¼,Delphiäº‹ä»¶åç§°,å¥æŸ„
 
 
-          //ÍË³öÊÂ¼ş´úÂë----------------------------------------------------------------------------
-          sExit  := '';
-          if joHint.Exists('onexit') then begin
-               sExit  := 'dwexecute('''+joHint.onexit+''');';
-          end;
-          if sExit='' then begin
-               if Assigned(OnExit) then begin
-                    sExit    := Format(_DWEVENT,['mouseleave.native',Name,'0','onexit','']);
-               end else begin
+    //
+    with TButton(ACtrl) do begin
 
-               end;
-          end else begin
-               if Assigned(OnExit) then begin
-                    sExit    := Format(_DWEVENTPlus,['mouseleave.native',sExit,Name,'0','onexit',TForm(Owner).Handle])
-               end else begin
-                    sExit    := ' @mouseleave.native="'+sExit+'"';
-               end;
-          end;
+        //è¿›å…¥äº‹ä»¶ä»£ç ----------------------------------------------------------------------------
+        sEnter  := '';
+        if joHint.Exists('onenter') then begin
+            sEnter  := 'dwexecute('''+String(joHint.onenter)+''');';    //å–å¾—OnEnterçš„JSä»£ç 
+        end;
+        if sEnter='' then begin
+            if Assigned(OnEnter) then begin
+                sEnter    := Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]);
+            end else begin
+            end;
+        end else begin
+            if Assigned(OnEnter) then begin
+                sEnter    := Format(_DWEVENTPlus,['mouseenter.native',sEnter,Name,'0','onenter',TForm(Owner).Handle])
+            end else begin
+                sEnter    := ' @mouseenter.native="'+sEnter+'"';
+            end;
+        end;
 
-          //µ¥»÷ÊÂ¼şµÄJS´úÂë------------------------------------------------------------------------
-          sClick    := '';
-          if joHint.Exists('onclick') then begin
-               sClick := 'dwexecute('''+joHint.onclick+''');';
-          end;
-          //
-          if sClick='' then begin
-               if Assigned(OnClick) then begin
-                    sClick    := Format(_DWEVENT,['click.native',Name,'0','onclick',TForm(Owner).Handle]);
-               end else begin
 
-               end;
-          end else begin
-               if Assigned(OnClick) then begin
-                    sClick    := Format(_DWEVENTPlus,['click.native',sClick,Name,'0','onclick',TForm(Owner).Handle])
-               end else begin
-                    sClick    := ' @click.native="'+sClick+'"';
-               end;
-          end;
+        //é€€å‡ºäº‹ä»¶ä»£ç ----------------------------------------------------------------------------
+        sExit  := '';
+        if joHint.Exists('onexit') then begin
+            sExit  := 'dwexecute('''+String(joHint.onexit)+''');';
+        end;
+        if sExit='' then begin
+            if Assigned(OnExit) then begin
+                sExit    := Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]);
+            end else begin
+            end;
+        end else begin
+            if Assigned(OnExit) then begin
+                sExit    := Format(_DWEVENTPlus,['mouseleave.native',sExit,Name,'0','onexit',TForm(Owner).Handle])
+            end else begin
+                sExit    := ' @mouseleave.native="'+sExit+'"';
+            end;
+        end;
 
-          //
-          sCode     := '<el-button'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +sSize
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
-                    +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
-                    +dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
-                    +dwGetHintValue(joHint,'style','','')             //ÑùÊ½£¬¿Õ£¨Ä¬ÈÏ£©/plain/round/circle
-                    //Style
-                    +dwLTWH(TControl(ACtrl))
-                    +dwGetHintStyle(joHint,'borderradius','border-radius','')   //border-radius
-                    +dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //×Ô¶¨Òå±³¾°É«
-                    +dwGetHintStyle(joHint,'color','color','')             //×Ô¶¨Òå×ÖÌåÉ«
-                    +dwGetHintStyle(joHint,'fontsize','font-size','')      //×Ô¶¨Òå×ÖÌå´óĞ¡
-                    +'"' //style ·â±Õ
-                    +sClick
-                    +sEnter
-                    +sExit
-                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                    //+dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    //+dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                    +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
+        //å•å‡»äº‹ä»¶çš„JSä»£ç ------------------------------------------------------------------------
+        sClick    := '';
+        if joHint.Exists('onclick') then begin
+            sClick := 'dwexecute('''+dwProcQuotation(String(joHint.onclick))+''');';
+        end;
 
-     end;
-     joRes.Add(sCode);
-     Result    := (joRes);
-     //
-     //@mouseenter.native=¡°enter¡±
+        //é˜²å¤šæ¬¡ç‚¹å‡»è®¾ç½®(ç‚¹å‡»æ—¶åŒæ—¶è®¾ç½®ä¸å¯ç”¨)
+        if ElevationRequired = True then begin
+            sClick  := sClick + dwFullName(Actrl)+'__dis=true;'
+        end;
+
+        //
+        if sClick='' then begin
+            if Assigned(OnClick) then begin
+                 //sClick    := Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]);
+                 sClick := ' @click="'
+                    +'dwevent($event,'''+Name+''',''0'',''onclick'','''+IntToStr(TForm(Owner).Handle)+''');'
+                    //+dwFullName(Actrl)+'__dis=false;'
+                    +'"';
+            end else begin
+
+            end;
+        end else begin
+            if Assigned(OnClick) then begin
+                //åŒæ—¶æ‰§è¡Œjså’Œdelphi
+                sClick    := Format(_DWEVENTPlus,['click',sClick,Name,'0','onclick',TForm(Owner).Handle])
+            end else begin
+                sClick    := ' @click="'+sClick+'"';
+            end;
+        end;
+
+        //<æŠŠäº‹ä»¶å†™å…¥åˆ°å•ç‹¬çš„methodsä¸­ 2023-02-15
+        sClick  := '';
+        if joHint.Exists('onclick') or Assigned(OnClick) then begin
+            sClick  := ' @click="'+sFull+'__click()"';
+        end;
+        //>
+
+
+
+        //å³ä¾§å›¾æ ‡å­—ç¬¦ä¸²
+        sRIcon    := '';
+        if joHint.Exists('righticon') then begin
+            sRIcon  := '<i :class="'+sFull+'__rin"></i>'
+        end else if ( HotImageIndex >= 1 ) and (HotImageIndex <= 280) then begin
+            sRIcon  := '<i :class="'+sFull+'__rin"></i>'
+        end else begin
+            sRIcon  := '';
+        end;
+
+
+
+        //
+        sCode   := '<el-button'
+                +' id="'+sFull+'"'
+                //+sSize
+                +dwVisible(TControl(ACtrl))
+                +dwDisable(TControl(ACtrl))
+                //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
+                +' :type="'+sFull+'__typ"'
+                +' :icon="'+sFull+'__icn"'                                              //dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
+                +dwGetHintValue(joHint,'style','','')             //æ ·å¼ï¼Œç©ºï¼ˆé»˜è®¤ï¼‰/plain/round/circle
+                +dwGetDWAttr(joHint)
+                //åŠ¨æ€Style
+                +' :style="{'
+                    +dwIIF(joHint.Exists('type') and (joHint.type <>'text'),dwButtonFontStyle(TControl(ACtrl)),dwFontStyle(TControl(ACtrl)))
+                    +'left:'+sFull+'__lef,'
+                    +'top:'+sFull+'__top,'
+                    +'width:'+sFull+'__wid,'
+                    +'height:'+sFull+'__hei'
+                +'}"'
+                //é™æ€style
+                +' style="position:absolute;'
+                    +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
+                    +dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //è‡ªå®šä¹‰èƒŒæ™¯è‰²
+                    //+_GetFont(Font)                   //å­—ä½“
+                    +dwGetDWStyle(joHint)
+                +'"' //style å°é—­
+
+                +sClick
+                //+sEnter
+                //+sExit
+                //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                //+dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                //+dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                +'>'
+                //ä»¥ä¸‹å½“ (Cancel=True)and(Caption='') ä¸ä½¿ç”¨æ ‡é¢˜ï¼Œä»¥ç”¨äºå›¾æ ‡å±…ä¸­
+                +dwIIF((Cancel=True)and(Caption=''),'','{{'+sFull+'__cap}}')
+                //å¢åŠ å³ä¾§å›¾æ ‡
+                +sRIcon
+                ;
+
+    end;
+    joRes.Add(sCode);
+    Result    := (joRes);
+    //
+    //@mouseenter.native=â€œenterâ€
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
 
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-button>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃDataÏûÏ¢
+//å–å¾—Dataæ¶ˆæ¯
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    sFull   : String;
+    joRes   : Variant;
+    joHint  : Variant;
 begin
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TButton(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+
+    //
+    sFull   := dwFullName(ACtrl);
+
+    //
+    with TButton(ACtrl) do begin
+        joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
+        //
+        joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        //
+        joRes.Add(sFull+'__cap:"'+dwProcessCaption(Caption)+'",');
+        //
+        joRes.Add(sFull+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
+        //å›¾æ ‡
+        if joHint.Exists('icon') then begin
+            joRes.Add(sFull+'__icn:"'+String(joHint.icon)+'",');
+        end else if ( ImageIndex >= 1 ) and (ImageIndex <= 280) then begin
+            joRes.Add(sFull+'__icn:"'+dwIcons[ImageIndex]+'",');
+        end else begin
+            joRes.Add(sFull+'__icn:"",');
+        end;
+        if joHint.Exists('righticon') then begin
+            joRes.Add(sFull+'__rin:"'+String(joHint.righticon)+'",');
+        end else if ( HotImageIndex >= 1 ) and (HotImageIndex <= 280) then begin
+            joRes.Add(sFull+'__rin:"'+dwIcons[HotImageIndex]+'",');
+        end else begin
+            joRes.Add(sFull+'__rin:"",');
+        end;
+        //å­—ä½“
+        joRes.Add(sFull+'__fcl:"'+dwColor(Font.Color)+'",');
+        joRes.Add(sFull+'__fsz:"'+IntToStr(Font.size+3)+'px",');
+        joRes.Add(sFull+'__ffm:"'+Font.Name+'",');
+        joRes.Add(sFull+'__fwg:"'+_GetFontWeight(Font)+'",');
+        joRes.Add(sFull+'__fsl:"'+_GetFontStyle(Font)+'",');
+        joRes.Add(sFull+'__ftd:"'+_GetTextDecoration(Font)+'",');
+
+    end;
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃÊÂ¼ş
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+//å–å¾—äº‹ä»¶
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes   : Variant;
+    joHint  : Variant;
+    sRes    : String;
+    sFull   : string;
+    pRes    : PWideChar;
 begin
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TButton(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height+2)+'px";');
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
-     end;
-     //
-     Result    := (joRes);
+    //
+    sFull   := dwFullName(ACtrl);
+
+    //
+    with TButton(ACtrl) do begin
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height+2)+'px";');
+        //
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        joRes.Add('this.'+sFull+'__cap="'+dwProcessCaption(Caption)+'";');
+        //
+        joRes.Add('this.'+sFull+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
+
+
+
+        //å›¾æ ‡
+        if joHint.Exists('icon') then begin
+            joRes.Add('this.'+sFull+'__icn="'+String(joHint.icon)+'";');
+        end else if ( ImageIndex >= 1 ) and (ImageIndex <= 280) then begin
+            joRes.Add(sFull+'__icn="'+dwIcons[ImageIndex]+'";');
+        end else begin
+            joRes.Add('this.'+sFull+'__icn="";');
+        end;
+
+        if joHint.Exists('righticon') then begin
+            joRes.Add('this.'+sFull+'__rin="'+String(joHint.righticon)+'";');
+        end else if ( HotImageIndex >= 1 ) and (HotImageIndex <= 280) then begin
+            joRes.Add(sFull+'__rin="'+dwIcons[HotImageIndex]+'";');
+        end else begin
+            joRes.Add('this.'+sFull+'__rin="";');
+        end;
+
+
+
+        //å­—ä½“
+        joRes.Add('this.'+sFull+'__fcl="'+dwColor(Font.Color)+'";');
+        joRes.Add('this.'+sFull+'__fsz="'+IntToStr(Font.size+3)+'px";');
+        joRes.Add('this.'+sFull+'__ffm="'+Font.Name+'";');
+        joRes.Add('this.'+sFull+'__fwg="'+_GetFontWeight(Font)+'";');
+        joRes.Add('this.'+sFull+'__fsl="'+_GetFontStyle(Font)+'";');
+        joRes.Add('this.'+sFull+'__ftd="'+_GetTextDecoration(Font)+'";');
+
+    end;
+
+    //
+    Result    := joRes;
+{
+            Result := '["this.Button1__lef=\"8px\";","this.Button1__top=\"8px\";","this.Button1__wid=\"104px\";",'
+                +'"this.Button1__hei=\"35px\";","this.Button1__vis=true;","this.Button1__dis=false;",'
+                +'"this.Button1__cap=\"åˆ·æ–°\";","this.Button1__typ=\"primary\";","this.Button1__icn=\"\";",'
+                +'"this.Button1__rin=\"\";","this.Button1__fcl=\"#FFFFFF\";","this.Button1__fsz=\"11px\";",'
+                +'"this.Button1__ffm=\"Tahoma\";","this.Button1__fwg=\"normal\";","this.Button1__fsl=\"normal\";",'
+                +'"this.Button1__ftd=\"none\";"]';
+}
 end;
+
+function dwGetMethods(ACtrl:TControl):String;stdCall;
+var
+    //
+    sCode   : string;
+    sFull   : string;
+    //
+    joHint  : Variant;
+    joRes   : Variant;
+begin
+    //è¿”å›å€¼ JSONå¯¹è±¡ï¼Œå¯ä»¥ç›´æ¥è½¬æ¢ä¸ºå­—ç¬¦ä¸²
+    joRes   := _json('[]');
+
+    //
+    sFull   := dwFullName(Actrl);
+
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+    with TButton(ACtrl) do begin
+        //å‡½æ•°å¤´éƒ¨
+        sCode   := sFull+'__click(event) {'#13;
+        //
+        if joHint.Exists('onclick') then begin
+            sCode   := sCode +joHint.onclick+#13;
+        end;
+
+        //
+        sCode   := sCode + 'this.dwevent("",'''+Name+''',''0'',''onclick'','''+IntToStr(TForm(Owner).Handle)+''');'
+                +'},';
+
+        //
+        joRes.Add(sCode);
+    end;
+
+    //
+    Result   := joRes;
+end;
+
 
 exports
      //dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
+     dwGetMethods,
      dwGetData;
-     
+
 begin
 end.
  

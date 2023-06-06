@@ -7,7 +7,7 @@ object Form1: TForm1
   Caption = 'DeWeb'
   ClientHeight = 770
   ClientWidth = 590
-  Color = clWhite
+  Color = clBlack
   TransparentColorValue = 16448250
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -47,6 +47,42 @@ object Form1: TForm1
     TabOrder = 2
     OnClick = Button3Click
   end
+  object Button4: TButton
+    Left = 192
+    Top = 247
+    Width = 97
+    Height = 43
+    Caption = #22686#21152#33756#21333#39033
+    TabOrder = 3
+    OnClick = Button4Click
+  end
+  object Button5: TButton
+    Left = 192
+    Top = 296
+    Width = 97
+    Height = 43
+    Caption = #21024#38500#33756#21333#39033
+    TabOrder = 4
+    OnClick = Button5Click
+  end
+  object Button6: TButton
+    Left = 192
+    Top = 345
+    Width = 97
+    Height = 40
+    Caption = #25442#32932
+    TabOrder = 5
+    OnClick = Button6Click
+  end
+  object Button7: TButton
+    Left = 192
+    Top = 392
+    Width = 97
+    Height = 41
+    Caption = 'Open'
+    TabOrder = 6
+    OnClick = Button7Click
+  end
   object MainMenu: TMainMenu
     AutoHotkeys = maManual
     Left = 501
@@ -58,6 +94,21 @@ object Form1: TForm1
     object MenuItem_Edit: TMenuItem
       Caption = #32534#36753
       ImageIndex = 111
+      object N10: TMenuItem
+        Caption = #25764#28040
+      end
+      object N11: TMenuItem
+        Caption = #37325#20570
+      end
+      object N12: TMenuItem
+        Caption = #22797#21046
+      end
+      object N13: TMenuItem
+        Caption = #21098#20999
+      end
+      object N14: TMenuItem
+        Caption = #31896#36148
+      end
     end
     object MenuItem_Delete: TMenuItem
       Caption = #21024#38500
@@ -80,6 +131,7 @@ object Form1: TForm1
     Top = 117
     object MenuItem2: TMenuItem
       Caption = #31995#32479#21442#25968
+      Hint = '{"dwloading":"deweb"}'
       ImageIndex = 2
       object N3: TMenuItem
         Caption = #25171#24320
@@ -87,10 +139,12 @@ object Form1: TForm1
     end
     object MenuItem1: TMenuItem
       Caption = #24179#21488#25509#21475
+      Hint = '{"indent":20}'
       ImageIndex = 1
       object N2: TMenuItem
         Caption = #25903#20184#23453#25509#21475
         ImageIndex = 31
+        OnClick = N2Click
       end
       object N4: TMenuItem
         Caption = #24494#20449#25509#21475
@@ -99,6 +153,18 @@ object Form1: TForm1
       object N1: TMenuItem
         Caption = #38134#34892#25509#21475
         ImageIndex = 33
+        object N15: TMenuItem
+          Caption = #24037#34892
+        end
+        object N16: TMenuItem
+          Caption = #25307#34892
+        end
+        object N17: TMenuItem
+          Caption = #24314#34892
+        end
+        object N18: TMenuItem
+          Caption = #20013#34892
+        end
       end
     end
     object MenuItem3: TMenuItem
@@ -110,16 +176,53 @@ object Form1: TForm1
       ImageIndex = 121
       object N6: TMenuItem
         Caption = #23548#20837
+        Hint = '{"indent":20}'
         ImageIndex = 122
       end
       object N7: TMenuItem
-        Caption = #23548#20986
+        Caption = '<a style="font-size:20px">'#23548#20986'<a>'
         ImageIndex = 123
       end
     end
     object N8: TMenuItem
       Caption = #31995#32479#35774#32622
       ImageIndex = 130
+      object B2: TMenuItem
+        Caption = 'C'
+      end
+      object B1: TMenuItem
+        Caption = 'B'
+      end
+      object HH2: TMenuItem
+        Caption = 'A'
+      end
+      object HH1: TMenuItem
+        Caption = 'HH'
+      end
+      object GG2: TMenuItem
+        Caption = 'GGG'
+      end
+      object GG1: TMenuItem
+        Caption = 'GG'
+      end
+      object FF2: TMenuItem
+        Caption = 'EE'
+      end
+      object FF1: TMenuItem
+        Caption = 'FF'
+      end
+      object CCCC2: TMenuItem
+        Caption = 'DD'
+      end
+      object CCCC1: TMenuItem
+        Caption = 'CCCC'
+      end
+      object AAA2: TMenuItem
+        Caption = 'BB'
+      end
+      object AAA1: TMenuItem
+        Caption = 'AAA'
+      end
       object N9: TMenuItem
         Caption = #25968#25454#38480#21046
       end

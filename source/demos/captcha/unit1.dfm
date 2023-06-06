@@ -11,7 +11,7 @@ object Form1: TForm1
   TransparentColor = True
   TransparentColorValue = 16448250
   Font.Charset = ANSI_CHARSET
-  Font.Color = clWindowText
+  Font.Color = clWhite
   Font.Height = -15
   Font.Name = #24494#36719#38597#40657
   Font.Style = []
@@ -19,15 +19,6 @@ object Form1: TForm1
   Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 20
-  object Image1: TImage
-    Left = 215
-    Top = 56
-    Width = 100
-    Height = 40
-    HelpType = htKeyword
-    HelpKeyword = 'captcha'
-    OnClick = Image1Click
-  end
   object Label1: TLabel
     Left = 8
     Top = 56
@@ -36,6 +27,16 @@ object Form1: TForm1
     AutoSize = False
     Caption = #35831#36755#20837#39564#35777#30721
     Layout = tlCenter
+  end
+  object Label2: TLabel
+    Left = 215
+    Top = 56
+    Width = 100
+    Height = 40
+    HelpType = htKeyword
+    HelpKeyword = 'captcha'
+    AutoSize = False
+    Caption = 'Label2'
   end
   object Edit1: TEdit
     Left = 115
@@ -47,12 +48,18 @@ object Form1: TForm1
     TabOrder = 0
   end
   object Button1: TButton
-    Left = 8
+    Left = 32
     Top = 120
-    Width = 307
+    Width = 283
     Height = 40
     Hint = '{"type":"success"}'
     Caption = 'OK'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     OnClick = Button1Click
   end

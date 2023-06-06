@@ -1,4 +1,4 @@
-library dwTMemo;
+ï»¿library dwTMemo;
 
 uses
      ShareMem,
@@ -14,250 +14,340 @@ uses
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
      StdCtrls, Windows;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//Delphiçš„Memoä¸­çš„å­—ç¬¦ä¸² -> Webç”¨çš„å­—ç¬¦ä¸²
+function dwTextToWeb(AText:string):string;
+var
+    slTxt     : TStringList;
+    iItem     : Integer;
+begin
+    //<è½¬ä¹‰å¯èƒ½å‡ºé”™çš„å­—ç¬¦
+
+{
+    AText     := StringReplace(AText,'\"','[!__!]',[rfReplaceAll]);
+    AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
+    AText     := StringReplace(AText,'[!__!]','\"',[rfReplaceAll]);
+
+    AText     := StringReplace(AText,'\>','[!__!]',[rfReplaceAll]);
+    AText     := StringReplace(AText,'>','\>',[rfReplaceAll]);
+    AText     := StringReplace(AText,'[!__!]','\>',[rfReplaceAll]);
+
+    AText     := StringReplace(AText,'\<','[!__!]',[rfReplaceAll]);
+    AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
+    AText     := StringReplace(AText,'[!__!]','\<',[rfReplaceAll]);
+}
+    AText     := StringReplace(AText,'\','\\',[rfReplaceAll]);
+    AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
+
+    //AText     := StringReplace(AText,'&','&amp;',[rfReplaceAll]);
+    //AText     := StringReplace(AText,'"','&quot;',[rfReplaceAll]);
+    //AText     := StringReplace(AText,'>','&gt;',[rfReplaceAll]);
+    //AText     := StringReplace(AText,'<','&lt;',[rfReplaceAll]);
+    //AText     := StringReplace(AText,' ','&nbsp;',[rfReplaceAll]);
+    //>
+
+    //
+    slTxt     := TStringList.Create;
+    slTxt.Text     := AText;
+    Result    := '';
+    for iItem := 0 to slTxt.Count-1 do begin
+        if iItem <slTxt.Count-1 then begin
+            Result     := Result + slTxt[iItem]+'\n';
+        end else begin
+            Result     := Result + slTxt[iItem];
+        end;
+    end;
+    slTxt.Destroy;
+    //
+    //Result    := StringReplace(Result,'''','\''''+''',[rfReplaceAll]);
+
+end;
+
+//Webç”¨çš„å­—ç¬¦ä¸² -> Delphiçš„Memoä¸­çš„å­—ç¬¦ä¸²
+function dwWebToText(AText:string):string;
+var
+    slTxt     : TStringList;
+begin
+    //æ›´æ–°å€¼
+    Result  := dwUnescape(AText);
+    Result  := dwUnescape(Result);
+    Result  := StringReplace(Result,#10,#13#10,[rfReplaceAll]);
+    //Result  := StringReplace(Result,'"','\"',[rfReplaceAll]);
+end;
+
+
+function _GetFont(AFont:TFont):string;
+begin
+     Result    := 'color:'+dwColor(AFont.color)+';'
+               +'font-family:'''+AFont.name+''';'
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
+
+     //ç²—ä½“
+     if fsBold in AFont.Style then begin
+          Result    := Result+'font-weight:bold;';
+     end else begin
+          Result    := Result+'font-weight:normal;';
+     end;
+
+     //æ–œä½“
+     if fsItalic in AFont.Style then begin
+          Result    := Result+'font-style:italic;';
+     end else begin
+          Result    := Result+'font-style:normal;';
+     end;
+
+     //ä¸‹åˆ’çº¿
+     if fsUnderline in AFont.Style then begin
+          Result    := Result+'text-decoration:underline;';
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end;
+     end else begin
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end else begin
+               Result    := Result+'text-decoration:none;';
+          end;
+     end;
+end;
+
+
+
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
      oChange   : Procedure(Sender:TObject) of Object;
      sText     : string;
 begin
-     //
-     joData    := _Json(AData);
+    with TMemo(ACtrl) do begin
+        //
+        joData    := _Json(AData);
 
 
-     if joData.e = 'onenter' then begin
-          if Assigned(TMemo(ACtrl).OnEnter) then begin
-               TMemo(ACtrl).OnEnter(TMemo(ACtrl));
-          end;
-     end else if joData.e = 'onchange' then begin
-          //±£´æÊÂ¼ş
-          oChange   := TMemo(ACtrl).OnChange;
-          //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
-          TMemo(ACtrl).OnChange  := nil;
-          //¸üĞÂÖµ
-          sText     := dwUnescape(joData.v);
-          sText     := dwUnescape(sText);
-          sText     := StringReplace(sText,#10,#13#10,[rfReplaceAll]);
-          sText     := StringReplace(sText,'"','\"',[rfReplaceAll]);
-          TMemo(ACtrl).Text    := sText;
+        if joData.e = 'onenter' then begin
+            if Assigned(TMemo(ACtrl).OnEnter) then begin
+                TMemo(ACtrl).OnEnter(TMemo(ACtrl));
+            end;
+        end else if joData.e = 'onchange' then begin
+            //ä¿å­˜äº‹ä»¶
+            oChange   := TMemo(ACtrl).OnChange;
+            //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
+            TMemo(ACtrl).OnChange  := nil;
+            TMemo(ACtrl).Text    := dwWebToText(joData.v);
 
-          //»Ö¸´ÊÂ¼ş
-          TMemo(ACtrl).OnChange  := oChange;
+            //æ¢å¤äº‹ä»¶
+            TMemo(ACtrl).OnChange  := oChange;
 
-          //Ö´ĞĞÊÂ¼ş
-          if Assigned(TMemo(ACtrl).OnChange) then begin
+            //æ‰§è¡Œäº‹ä»¶
+            if Assigned(TMemo(ACtrl).OnChange) then begin
                TMemo(ACtrl).OnChange(TMemo(ACtrl));
-          end;
-     end else if joData.e = 'onexit' then begin
-          if Assigned(TMemo(ACtrl).OnExit) then begin
-               TMemo(ACtrl).OnExit(TMemo(ACtrl));
-          end;
-     end else if joData.e = 'onmouseenter' then begin
-          if Assigned(TMemo(ACtrl).OnMouseEnter) then begin
-               TMemo(ACtrl).OnMouseEnter(TMemo(ACtrl));
-          end;
-     end else if joData.e = 'onmouseexit' then begin
-          if Assigned(TMemo(ACtrl).OnMouseLeave) then begin
-               TMemo(ACtrl).OnMouseLeave(TMemo(ACtrl));
-          end;
-     end;
+            end;
+        end else if joData.e = 'onexit' then begin
+            if Assigned(TMemo(ACtrl).OnExit) then begin
+                TMemo(ACtrl).OnExit(TMemo(ACtrl));
+            end;
+        end else if joData.e = 'onmouseenter' then begin
+            if Assigned(TMemo(ACtrl).OnMouseEnter) then begin
+                TMemo(ACtrl).OnMouseEnter(TMemo(ACtrl));
+            end;
+        end else if joData.e = 'onmouseexit' then begin
+            if Assigned(TMemo(ACtrl).OnMouseLeave) then begin
+                TMemo(ACtrl).OnMouseLeave(TMemo(ACtrl));
+            end;
+        end;
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     joHint    : Variant;
-     joRes     : Variant;
-     sScroll   : string;
+    sCode     : string;
+    joHint    : Variant;
+    joRes     : Variant;
+    sScroll   : string;
 begin
-     //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-     if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-          if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-               joRes    := _Json('[]');
-               //
-               Result    := joRes;
-               //
-               Exit;
-          end;
-     end;
-     //>
+    with TMemo(ACtrl) do begin
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+        //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+        if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+            if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                joRes    := _Json('[]');
+                //
+                Result    := joRes;
+                //
+                Exit;
+            end;
+        end;
+        //>
 
-     //È¡µÃHINT¶ÔÏóJSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
 
-     with TMemo(ACtrl) do begin
-          //
-          sScroll   := '';
+        //å–å¾—HINTå¯¹è±¡JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
 
-          sCode     := '<el-input type="textarea"'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
+        with TMemo(ACtrl) do begin
+            //
+            sScroll   := '';
+
+            sCode     := '<el-input type="textarea"'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+dwPrefix(Actrl)+Name+'__txt"'
+                    +' v-model="'+dwFullName(Actrl)+'__txt"'
+                    +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,æç¤ºè¯­
+                    +dwIIF(ReadOnly,' readonly','')
+                    +dwGetDWAttr(joHint)
                     //style
                     +dwLTWH(TControl(ACtrl))
                     +sScroll
-                    +'"' //style ·â±Õ
+                    +dwGetDWStyle(joHint)
+                    +'"' //style å°é—­
                     //
-                    +Format(_DWEVENT,['input',Name,'escape(this.'+dwPrefix(Actrl)+Name+'__txt)','onchange',TForm(Owner).Handle])
-                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+dwPrefix(Actrl)+Name+'__txt)','onchange',TForm(Owner).Handle]),'')
+                    +Format(_DWEVENT,['input',Name,'escape(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle])
+                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',Name,'0','onenter',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-          joRes.Add(sCode);
-     end;
+                    //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+            joRes.Add(sCode);
+        end;
 
-     //
-     Result    := (joRes);
+        //
+        Result    := (joRes);
+    end;
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
 begin
-     //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-     if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-          if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-               joRes    := _Json('[]');
-               //
-               Result    := joRes;
-               //
-               Exit;
-          end;
-     end;
-     //>
+    with TMemo(ACtrl) do begin
+        //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+        if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+            if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                joRes    := _Json('[]');
+                //
+                Result    := joRes;
+                //
+                Exit;
+            end;
+        end;
+        //>
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
-     joRes.Add('</el-input>');
-     //
-     Result    := (joRes);
-end;
-
-function dwMemoTextToValue(AText:string):string;
-var
-     slTxt     : TStringList;
-     iItem     : Integer;
-begin
-     //<×ªÒå¿ÉÄÜ³ö´íµÄ×Ö·û
-     AText     := StringReplace(AText,'\"','[!__!]',[rfReplaceAll]);
-     AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
-     AText     := StringReplace(AText,'[!__!]','\"',[rfReplaceAll]);
-
-     AText     := StringReplace(AText,'\>','[!__!]',[rfReplaceAll]);
-     AText     := StringReplace(AText,'>','\>',[rfReplaceAll]);
-     AText     := StringReplace(AText,'[!__!]','\>',[rfReplaceAll]);
-
-     AText     := StringReplace(AText,'\<','[!__!]',[rfReplaceAll]);
-     AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
-     AText     := StringReplace(AText,'[!__!]','\<',[rfReplaceAll]);
-     //>
-
-     //
-     slTxt     := TStringList.Create;
-     slTxt.Text     := AText;
-     Result    := '';
-     for iItem := 0 to slTxt.Count-1 do begin
-          if iItem <slTxt.Count-1 then begin
-               Result     := Result + slTxt[iItem]+'\n';
-          end else begin
-               Result     := Result + slTxt[iItem];
-          end;
-     end;
-     slTxt.Destroy;
-     //
-     //Result    := StringReplace(Result,'''','\''''+''',[rfReplaceAll]);
-
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes.Add('</el-input>');
+        //
+        Result    := (joRes);
+    end;
 end;
 
 
-//È¡µÃData
+
+
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
      sCode     : String;
      iItem     : Integer;
 begin
-     //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-     if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-          if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-               joRes    := _Json('[]');
-               //
-               Result    := joRes;
-               //
-               Exit;
-          end;
-     end;
-     //>
+    with TMemo(ACtrl) do begin
+        //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+        if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+            if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                joRes    := _Json('[]');
+                //
+                Result    := joRes;
+                //
+                Exit;
+            end;
+        end;
+        //>
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TMemo(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__txt:"'+dwMemoTextToValue(Text)+'",');
-     end;
-     //
-     Result    := (joRes);
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
+        //
+        with TMemo(ACtrl) do begin
+            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+            //
+            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+            joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+            //
+            joRes.Add(dwFullName(Actrl)+'__txt:"'+dwTextToWeb(Text)+'",');
+        end;
+        //
+        Result    := (joRes);
+    end;
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     sCode     : String;
-     iItem     : Integer;
+    joRes       : Variant;
+    sCode       : String;
+    iItem       : Integer;
+    joHint      : Variant;  //__eventcomponent
+    sEventComp  : String;
 begin
-     //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-     if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-          if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-               joRes    := _Json('[]');
-               //
-               Result    := joRes;
-               //
-               Exit;
-          end;
-     end;
-     //>
+    //å¾—åˆ°äº‹ä»¶æºæ§ä»¶
+    joHint  := dwGetHintJson(TControl(ACtrl.Owner));
+    sEventComp  := '';
+    if joHint.Exists('__eventcomponent') then begin
+        sEventComp  := LowerCase(joHint.__eventcomponent);
+    end;
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TMemo(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__txt="'+dwMemoTextToValue(Text)+'";');
-     end;
-     //
-     Result    := (joRes);
+    with TMemo(ACtrl) do begin
+        //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+        if TMemo(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+            if TTabSheet(TMemo(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                joRes    := _Json('[]');
+                //
+                Result    := joRes;
+                //
+                Exit;
+            end;
+        end;
+        //>
+
+
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
+        //
+        with TMemo(ACtrl) do begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+            joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+            joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+            joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+            //
+            joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+            joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+            //
+            if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
+                joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+dwTextToWeb(Text)+'";');
+            end else begin
+                joRes.Add('');
+            end
+        end;
+        //
+        Result    := (joRes);
+    end;
 end;
 
 
@@ -266,7 +356,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

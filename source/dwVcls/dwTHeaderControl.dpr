@@ -1,4 +1,4 @@
-library dwTHeaderControl;
+ï»¿library dwTHeaderControl;
 
 uses
      ShareMem,
@@ -14,213 +14,333 @@ uses
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
      StdCtrls, Windows;
 
-function _GetFont(AFont:TFont):string;
+function _GetInt(AHint:Variant;AName:String;ADefault:Integer):Integer;
 begin
-     Result    := 'color:'+dwColor(AFont.color)+';'
-               +'font-family:'''+AFont.name+''';'
-               +'font-size:'+IntToStr(AFont.size)+'pt;';
-
-     //´ÖÌå
-     if fsBold in AFont.Style then begin
-          Result    := Result+'font-weight:bold;';
-     end else begin
-          Result    := Result+'font-weight:normal;';
-     end;
-
-     //Ğ±Ìå
-     if fsItalic in AFont.Style then begin
-          Result    := Result+'font-style:italic;';
-     end else begin
-          Result    := Result+'font-style:normal;';
-     end;
-
-     //ÏÂ»®Ïß
-     if fsUnderline in AFont.Style then begin
-          Result    := Result+'text-decoration:underline;';
-          //É¾³ıÏß
-          if fsStrikeout in AFont.Style then begin
-               Result    := Result+'text-decoration:line-through;';
-          end;
-     end else begin
-          //É¾³ıÏß
-          if fsStrikeout in AFont.Style then begin
-               Result    := Result+'text-decoration:line-through;';
-          end else begin
-               Result    := Result+'text-decoration:none;';
-          end;
-     end;
+    Result  := ADefault;
+    if AHint.Exists(AName) then begin
+        Result  := AHint._(AName);
+    end;
 end;
-
-function __GetAlignment(ACtrl:THeaderSection):string;
+function _GetStr(AHint:Variant;AName:String;ADefault:String):String;
 begin
-     Result    := '';
-     case ACtrl.Alignment of
-          taRightJustify : begin
-               Result    := 'text-align:right;';
-          end;
-          taCenter : begin
-               Result    := 'text-align:center;';
-          end;
-     end;
+    Result  := ADefault;
+    if AHint.Exists(AName) then begin
+        Result  := AHint._(AName);
+    end;
 end;
 
 
-
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
 begin
-     //
-     joData    := _Json(AData);
-
-     if joData.e = 'onsectionclick' then begin
-          THeaderControl(ACtrl).OnSectionClick(THeaderControl(ACtrl),THeaderControl(ACtrl).Sections[joData.v]);
-     end else if joData.e = 'onenter' then begin
-          THeaderControl(ACtrl).OnMouseEnter(THeaderControl(ACtrl));
-     end else if joData.e = 'onexit' then begin
-          THeaderControl(ACtrl).OnMouseLeave(THeaderControl(ACtrl));
-     end;
+    //
+    joData    := _Json(AData);
+    with THeaderControl(ACtrl) do begin
+        if joData.e = 'onsectionclick' then begin
+            HelpContext := joData.v;
+            if Assigned(OnSectionClick) then begin
+                OnSectionClick(THeaderControl(ACtrl),Sections[HelpContext]);
+            end;
+        end;
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     joHint    : Variant;
-     joRes     : Variant;
-     iSect     : Integer;
-     sSect     : String;
-     oSection  : THeaderSection;
-     iLeft     : Integer;
+    sCode       : string;
+    sFull       : string;
+    //
+    joHint      : Variant;
+    joRes       : Variant;
+    //
+    iMode       : Integer;
+    sHot        : String;
+    iHotSize    : Integer;
+    sActiveBk   : string;
+    sActiveClr  : string;
+    iActiveSize : Integer;
+    iActiveBold : Integer;
+    sNormalBk   : string;
+    sNormalClr  : string;
+    sRadius     : string;
+    iMargin     : Integer;
+    //
+    sHotBorder  : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes   := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint  := dwGetHintJson(TControl(ACtrl));
 
-     with THeaderControl(ACtrl) do begin
-          //Íâ¿ò
-          sCode     := '<div'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
-                    +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';overflow:hidden;'
-                    +'"' //style ·â±Õ
-                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                    +'>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-          joRes.Add(sCode);
+    //
+    iMode       := _GetInt(joHint,'mode',0);
+    sHot        := _GetStr(joHint,'hot','rgb(13,95,171)');
+    iHotSize    := _GetInt(joHint,'hotsize',3);
+    sActiveBk   := _GetStr(joHint,'activebk','#fff');
+    sActiveClr  := _GetStr(joHint,'activecolor','rgb(13,95,171)');
+    iActiveSize := _GetInt(joHint,'activesize',THeaderControl(ACtrl).Font.Size);
+    iActiveBold := _GetInt(joHint,'activebold',0);
+    sNormalBk   := _GetStr(joHint,'normalbk','rgb(240,240,240)');
+    sNormalClr  := _GetStr(joHint,'normalcolor','#000');
+    sRadius     := _GetStr(joHint,'radius','0px');
+    iMargin     := _GetInt(joHint,'margin',0);
 
-          //
-          for iSect := 0 to Sections.Count-1 do begin
-               sSect     := Format('%.2d',[iSect]);
-               oSection  := Sections[iSect];
-               //
-               sCode     := '<div'
-                         +' v-html="'+dwPrefix(Actrl)+Name+'__c'+sSect+'"'
-                         +' :style="{left:'+dwPrefix(Actrl)+Name+'__l'+sSect+',top:0,width:'+dwPrefix(Actrl)+Name+'__w'+sSect+'}"'
-                         +' style="position:absolute;'
-                         +_GetFont(Font)
-                         //style
-                         +__GetAlignment(oSection)
-                         +'line-height:'+IntToStr(Height)+'px;'
-                         +'"'
-                         //style ·â±Õ
-                         +'>{{'+dwPrefix(Actrl)+Name+'__c'+sSect+'}}</div>';
-               //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-               joRes.Add(sCode);
+    //
+    sHotBorder  := '';
+    case iMode of
+        0 : begin
+            sHotBorder  := 'border-top:solid '+IntToStr(iHotSize)+'px '+sHot+';'
+        end;
+        1 : begin
+            sHotBorder  := 'border-bottom:solid '+IntToStr(iHotSize)+'px '+sHot+';'
+        end;
+    end;
 
-          end;
+    //
+    sFull   := dwFullName(ACtrl);
 
+    with THeaderControl(ACtrl) do begin
+        //å¤–æ¡†
+        sCode   := concat('<div',
+                ' id="'+sFull+'"',
+                dwVisible(TControl(ACtrl)),
+                dwDisable(TControl(ACtrl)),
+                ' :style="{',
+                    'left:'+sFull+'__lef,',
+                    'top:'+sFull+'__top,',
+                    'width:'+sFull+'__wid,',
+                    'height:'+sFull+'__hei',
+                '}"',
+                ' style="',
+                    'position:absolute;',
+                '"',
+                dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),''),
+                dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),''),
+                '>');
+        //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+        joRes.Add(sCode);
 
-     end;
-     //
-     Result    := (joRes);
+        //
+        sCode   := concat('<div',
+                ' v-for="(item,index) in '+sFull+'__itm"',
+                ' :style="{',
+                    'left:item.l,',
+                    'right:item.r,',
+                    'color:item.c,',
+                    '''font-size'':item.fs,',
+                    '''font-weight'':item.fb,',
+                    '''margin-left'':item.mg,',
+                    '''margin-right'':item.mg,',
+                    '''border-width'':item.bw,',
+                    '''border-radius'':item.br,',
+                    'background:item.bg',
+                '}"',
+                ' style="',
+                    'position:absolute;',
+                    'height:100%;',
+                    'display:flex;',
+                    'justify-content:center;',
+                    'align-items:center;',
+                    'text-align:center;',
+                    sHotBorder,
+                '"',
+                ' @click="'+sFull+'__onsectionclick(index)"',
+                '>',
+                '<i :class="item.ic" :style="{width:item.iw}"></i>',
+                '{{item.cp}}',
+                '</div>');
+        //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+        joRes.Add(sCode);
+
+    end;
+
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</div>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
-function dwGetData(ACtrl:TComponent):string;StdCall;
+function _dwGeneral(ACtrl:TComponent;AMode:string):string;StdCall;
 var
-     joRes     : Variant;
-     sCode     : string;
-     iSect     : Integer;
-     sSect     : String;
-     oSection  : THeaderSection;
-     iLeft     : Integer;
+    iSect       : Integer;
+    //
+    sCode       : string;
+    sFull       : string;
+    sMiddle     : string;
+    sTail       : string;
+    sIcon       : string;
+    sIconWidth  : string;
+
+    //
+    joRes       : variant;
+    joHint      : Variant;
+    oSection    : THeaderSection;
+    //
+    iMode       : Integer;
+    sHot        : String;
+    iHotSize    : Integer;
+    sActiveBk   : string;
+    sActiveClr  : string;
+    iActiveSize : Integer;
+    iActiveBold : Integer;
+    sNormalBk   : string;
+    sNormalClr  : string;
+    sRadius     : string;
+    iMargin     : Integer;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with THeaderControl(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          //joRes.Add(dwPrefix(Actrl)+Name+'__col:"'+dwColor(Color)+'",');
-          iLeft     := 0;     //ÓÃÓÚ¼ÆËã×ó±ß½ç
-          for iSect := 0 to Sections.Count-1 do begin
-               sSect     := Format('%.2d',[iSect]);
-               oSection  := Sections[iSect];
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__l'+sSect+':"'+IntToStr(iLeft)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__w'+sSect+':"'+IntToStr(oSection.Width)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__c'+sSect+':"'+oSection.Text+'",');
-               //
-               iLeft     := iLeft + oSection.Width;
-          end;
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint  := dwGetHintJson(TControl(ACtrl));
+
+    //
+    sFull   := dwFullName(ACtrl);
+
+    //
+    if AMode = 'data' then begin
+        sMiddle := ':';
+        sTail   := ',';
+    end else begin
+        sMiddle := '=';
+        sTail   := ';';
+        sFull   := 'this.'+sFull;
+    end;
+
+    //
+    iMode       := _GetInt(joHint,'mode',0);
+    sHot        := _GetStr(joHint,'hot','rgb(13,95,171)');
+    iHotSize    := _GetInt(joHint,'hotsize',3);
+    sActiveBk   := _GetStr(joHint,'activebk','#fff');
+    sActiveClr  := _GetStr(joHint,'activecolor','rgb(13,95,171)');
+    iActiveSize := _GetInt(joHint,'activesize',THeaderControl(ACtrl).Font.Size);
+    iActiveBold := _GetInt(joHint,'activebold',0);
+    sNormalBk   := _GetStr(joHint,'normalbk','rgb(240,240,240)');
+    sNormalClr  := _GetStr(joHint,'normalcolor','#000');
+    sRadius     := _GetStr(joHint,'radius','0px');
+    iMargin     := _GetInt(joHint,'margin',0);
+
+    //
+    with THeaderControl(ACtrl) do begin
+        //åŸºæœ¬LTWH
+        joRes.Add(sFull+'__lef'+sMiddle+'"'+IntToStr(Left)+'px"'+sTail);
+        joRes.Add(sFull+'__top'+sMiddle+'"'+IntToStr(Top)+'px"'+sTail);
+        joRes.Add(sFull+'__wid'+sMiddle+'"'+IntToStr(Width)+'px"'+sTail);
+        joRes.Add(sFull+'__hei'+sMiddle+'"'+IntToStr(Height)+'px"'+sTail);
+
+        //å¯è§æ€§å’Œç¦ç”¨
+        joRes.Add(sFull+'__vis'+sMiddle+''+dwIIF(Visible,'true'+sTail,'false'+sTail));
+        joRes.Add(sFull+'__dis'+sMiddle+''+dwIIF(Enabled,'false'+sTail,'true'+sTail));
+
+        //
+        sCode   := sFull + '__itm'+sMiddle+'[';
+        for iSect := 0 to Sections.Count-1 do begin
+            oSection    := Sections[iSect];
+
+            //
+            sIcon       := '';
+            sIconWidth  := '0px';
+            if (oSection.ImageIndex>-1) and (oSection.ImageIndex<280) then begin
+                sIcon   := dwIcons[oSection.ImageIndex];
+                sIconWidth  := '30px';
+            end;
+
+            //
+            sCode   := Concat(sCode,
+                    '{',
+                        //left
+                        'l:"'+IntToStr(Round(iSect*100/Sections.Count))+'%",',
+                        //right
+                        'r:"'+dwIIF(iSect=Sections.Count-1,'0",',IntToStr(100-Round((iSect+1)*100/Sections.Count))+'%",'),
+                        //color
+                        'c:"'+dwIIF(iSect=HelpContext,sActiveClr,sNormalClr)+'",',
+                        //font bold
+                        'fb:"'+dwIIF( (iSect=HelpContext)and(iActiveBold=1),'bold','normal')+'",',
+                        //font size
+                        'fs:"'+dwIIF(iSect=HelpContext,IntToStr(iActiveSize+4),IntToStr(Font.Size+4))+'px",',
+                        //background
+                        'bg:"'+dwIIF(iSect=HelpContext,sActiveBk,sNormalBk)+'",',
+                        //border width (hot track)
+                        'bw:"'+dwIIF(iSect=HelpContext,IntToStr(iHotSize),'0')+'px",',
+                        //border radius
+                        'br:"'+sRadius+'",',
+                        //margin
+                        'mg:"'+IntToStr(iMargin)+'px",',
+                        //icon å›¾æ ‡
+                        'ic:"'+sIcon+'",',
+                        //icon width
+                        'iw:"'+sIconWidth+'",',
+                        //text
+                        'cp:"'+oSection.Text+'"',
+                    '},');
+
+        end;
+        if Sections.Count>0 then begin
+            Delete(sCode,Length(sCode),1);
+        end;
+        sCode   := sCode +']'+sTail;
+        joRes.Add(sCode);
+    end;
+    //
+    Result  := joRes;
+
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
-var
-     joRes     : Variant;
+
+
+//å–å¾—Data
+function dwGetData(ACtrl:TComponent):string;StdCall;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with THeaderControl(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__col="'+dwColor(Color)+'";');
-     end;
-     //
-     Result    := (joRes);
+     Result    := _dwGeneral(ACtrl,'data');
+end;
+
+function dwGetAction(ACtrl:TComponent):string;StdCall;
+begin
+     Result    := _dwGeneral(ACtrl,'action');
+end;
+
+function dwGetMethods(ACtrl:TControl):String;StdCall;
+var
+    //
+    sCode   : string;
+    sFull   : string;
+    joRes   : Variant;
+begin
+    joRes   := _json('[]');
+
+    //
+    sFull   := dwFullName(ACtrl);
+    with THeaderControl(ACtrl) do begin
+        sCode   := concat(sFull + '__onsectionclick(val){',
+                'this.dwevent(null,"'+sFull+'",val,"onsectionclick",'+IntToStr(TForm(Owner).Handle)+');',
+                '},');
+        joRes.Add(sCode);
+    end;
+    //
+    Result  := joRes;
+
 end;
 
 
@@ -229,7 +349,8 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
+     dwGetMethods,
      dwGetData;
      
 begin

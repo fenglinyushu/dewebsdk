@@ -1,13 +1,13 @@
-library dwTRadioButton;
+ï»¿library dwTRadioButton;
 
 uses
-     ShareMem,      //±ØĞëÌí¼Ó
+     ShareMem,      //å¿…é¡»æ·»åŠ 
 
      //
-     dwCtrlBase,    //Ò»Ğ©»ù´¡º¯Êı
+     dwCtrlBase,    //ä¸€äº›åŸºç¡€å‡½æ•°
 
      //
-     SynCommons,    //mormotÓÃÓÚ½âÎöJSONµÄµ¥Ôª
+     SynCommons,    //mormotç”¨äºè§£æJSONçš„å•å…ƒ
 
      //
      SysUtils,
@@ -18,16 +18,16 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS ,Ò»°ãÎª²»×ö¸Ä¶¯,Ä¿Ç°½öÔÚTChartÊ¹ÓÃÊ±ĞèÒªÓÃµ½
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS ,ä¸€èˆ¬ä¸ºä¸åšæ”¹åŠ¨,ç›®å‰ä»…åœ¨TChartä½¿ç”¨æ—¶éœ€è¦ç”¨åˆ°
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
      {
-     //ÒÔÏÂÊÇTChartÊ±µÄ´úÂë,¹©²Î¿¼
+     //ä»¥ä¸‹æ˜¯TChartæ—¶çš„ä»£ç ,ä¾›å‚è€ƒ
      joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
      joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
      joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
@@ -37,123 +37,120 @@ begin
      Result    := joRes;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     joData    : Variant;
+    joData      : Variant;
+    oProcedure  : procedure(Sender:TObject) of Object;
 begin
      //
      joData    := _Json(AData);
 
      if joData.e = 'onclick' then begin
-          //±£´æÊÂ¼ş
-          TRadioButton(ACtrl).OnExit := TRadioButton(ACtrl).OnClick;
-          //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
+          //ä¿å­˜äº‹ä»¶
+          oProcedure    := TRadioButton(ACtrl).OnClick;
+          //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
           TRadioButton(ACtrl).OnClick := nil;
-          //¸üĞÂÖµ
-          TRadioButton(ACtrl).Checked := dwUnescape(joData.v)='true';
-          //»Ö¸´ÊÂ¼ş
-          TRadioButton(ACtrl).OnClick := TRadioButton(ACtrl).OnExit;
-          //Ö´ĞĞÊÂ¼ş
+          //æ›´æ–°å€¼
+          TRadioButton(ACtrl).Checked := not TRadioButton(ACtrl).Checked;//dwUnescape(joData.v)='true';
+          //æ¢å¤äº‹ä»¶
+          TRadioButton(ACtrl).OnClick := oProcedure;
+          //æ‰§è¡Œäº‹ä»¶
           if Assigned(TRadioButton(ACtrl).OnClick) then begin
                TRadioButton(ACtrl).OnClick(TRadioButton(ACtrl));
           end;
-          //Çå¿ÕOnExitÊÂ¼ş
-          TRadioButton(ACtrl).OnExit := nil;
      end else if joData.e = 'onenter' then begin
      end;
 
-     //Çå¿ÕOnExitÊÂ¼ş
-     TRadioButton(ACtrl).OnExit  := nil;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
      with TRadioButton(ACtrl) do begin
           sCode     := '<el-radio'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' label="1"'       //Ñ¡ÖĞÖµ
+                    +' id="'+dwFullName(Actrl)+'"'
+                    +' label="1"'       //é€‰ä¸­å€¼
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+dwPrefix(Actrl)+Name+'__chk"'
+                    +' v-model="'+dwFullName(Actrl)+'__chk"'
                     +dwLTWH(TControl(ACtrl))
-                    +'"' //style ·â±Õ
-                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['change',Name,'(this.'+dwPrefix(Actrl)+Name+'__chk)','onclick',TForm(Owner).Handle]),'')
-                    +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+                    +'"' //style å°é—­
+                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click.native.prevent',Name,'(this.'+dwFullName(Actrl)+'__chk)','onclick',TForm(Owner).Handle]),'')
+                    +'>{{'+dwFullName(Actrl)+'__cap}}';
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
-     joRes.Add('</el-radio>');          //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+     joRes.Add('</el-radio>');          //æ­¤å¤„éœ€è¦å’ŒdwGetHeadå¯¹åº”
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TRadioButton(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__chk:"'+dwIIF(Checked,'1','0')+'",');
+          joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
+          joRes.Add(dwFullName(Actrl)+'__chk:"'+dwIIF(Checked,'1','0')+'",');
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+//å–å¾—Data
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TRadioButton(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__chk="'+dwIIF(Checked,'1','0')+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__chk="'+dwIIF(Checked,'1','0')+'";');
      end;
      //
      Result    := (joRes);
@@ -165,7 +162,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

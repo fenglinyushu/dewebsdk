@@ -1,13 +1,13 @@
-library dwTEdit;
+ï»¿library dwTEdit;
 
 uses
-     ShareMem,      //±ØĞëÌí¼Ó
+     ShareMem,      //å¿…é¡»æ·»åŠ 
 
      //
-     dwCtrlBase,    //Ò»Ğ©»ù´¡º¯Êı
+     dwCtrlBase,    //ä¸€äº›åŸºç¡€å‡½æ•°
 
      //
-     SynCommons,    //mormotÓÃÓÚ½âÎöJSONµÄµ¥Ôª
+     SynCommons,    //mormotç”¨äºè§£æJSONçš„å•å…ƒ
 
      //
      SysUtils,
@@ -18,16 +18,16 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS ,Ò»°ãÎª²»×ö¸Ä¶¯,Ä¿Ç°½öÔÚTChartÊ¹ÓÃÊ±ĞèÒªÓÃµ½
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS ,ä¸€èˆ¬ä¸ºä¸åšæ”¹åŠ¨,ç›®å‰ä»…åœ¨TChartä½¿ç”¨æ—¶éœ€è¦ç”¨åˆ°
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
      {
-     //ÒÔÏÂÊÇTChartÊ±µÄ´úÂë,¹©²Î¿¼
+     //ä»¥ä¸‹æ˜¯TChartæ—¶çš„ä»£ç ,ä¾›å‚è€ƒ
      joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
      joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
      joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
@@ -37,169 +37,227 @@ begin
      Result    := joRes;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     joData    : Variant;
-     oChange   : Procedure(Sender:TObject) of Object;
+     joData     : Variant;
+     oChange    : Procedure(Sender:TObject) of Object;
+     iKey       : Word;
+     cKey       : Char;
 begin
-     //
-     joData    := _Json(AData);
+    //
+    joData    := _Json(AData);
 
 
-     if joData.e = 'onenter' then begin
-          if Assigned(TEdit(ACtrl).OnEnter) then begin
-               TEdit(ACtrl).OnEnter(TEdit(ACtrl));
-          end;
-     end else if joData.e = 'onchange' then begin
-          //±£´æÊÂ¼ş
-          oChange   := TEdit(ACtrl).OnChange;
-          //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
-          TEdit(ACtrl).OnChange  := nil;
-          //¸üĞÂÖµ
-          TEdit(ACtrl).Text    := dwUnescape(dwUnescape(joData.v));
-          //»Ö¸´ÊÂ¼ş
-          TEdit(ACtrl).OnChange  := oChange;
+    if joData.e = 'onenter' then begin
+        if Assigned(TEdit(ACtrl).OnEnter) then begin
+            TEdit(ACtrl).OnEnter(TEdit(ACtrl));
+        end;
+    end else if joData.e = 'onchange' then begin
+        //ä¿å­˜äº‹ä»¶
+        oChange   := TEdit(ACtrl).OnChange;
+        //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
+        TEdit(ACtrl).OnChange  := nil;
+        //æ›´æ–°å€¼
+        TEdit(ACtrl).Text    := dwUnescape(dwUnescape(joData.v));
+        //æ¢å¤äº‹ä»¶
+        TEdit(ACtrl).OnChange  := oChange;
 
-          //Ö´ĞĞÊÂ¼ş
-          if Assigned(TEdit(ACtrl).OnChange) then begin
-               TEdit(ACtrl).OnChange(TEdit(ACtrl));
-          end;
-     end else if joData.e = 'onexit' then begin
-          if Assigned(TEdit(ACtrl).OnExit) then begin
-               TEdit(ACtrl).OnExit(TEdit(ACtrl));
-          end;
-     end else if joData.e = 'onmouseenter' then begin
-          if Assigned(TEdit(ACtrl).OnMouseEnter) then begin
-               TEdit(ACtrl).OnMouseEnter(TEdit(ACtrl));
-          end;
-     end else if joData.e = 'onmouseexit' then begin
-          if Assigned(TEdit(ACtrl).OnMouseLeave) then begin
-               TEdit(ACtrl).OnMouseLeave(TEdit(ACtrl));
-          end;
-     end;
+        //æ‰§è¡Œäº‹ä»¶
+        if Assigned(TEdit(ACtrl).OnChange) then begin
+            TEdit(ACtrl).OnChange(TEdit(ACtrl));
+        end;
+    end else if joData.e = 'onexit' then begin
+        if Assigned(TEdit(ACtrl).OnExit) then begin
+            TEdit(ACtrl).OnExit(TEdit(ACtrl));
+        end;
+    end else if joData.e = 'onclick' then begin
+        if Assigned(TEdit(ACtrl).Onclick) then begin
+            TEdit(ACtrl).Onclick(TEdit(ACtrl));
+        end;
+    end else if joData.e = 'onkeydown' then begin
+        if Assigned(TEdit(ACtrl).OnKeyDown) then begin
+            iKey    := StrToIntDef(joData.v,0);
+            TEdit(ACtrl).OnKeyDown(TEdit(ACtrl),iKey,[]);//Chr(StrToIntDef(joData.v,32)));
+        end;
+    end else if joData.e = 'onkeyup' then begin
+        if Assigned(TEdit(ACtrl).OnKeyup) then begin
+            iKey    := StrToIntDef(joData.v,0);
+            TEdit(ACtrl).OnKeyup(TEdit(ACtrl),iKey,[]);//Chr(StrToIntDef(joData.v,32)));
+        end;
+    end else if joData.e = 'onkeypress' then begin
+        if Assigned(TEdit(ACtrl).OnKeyPress) then begin
+            cKey  := Chr(StrToIntDef(joData.v,0));
+            TEdit(ACtrl).OnKeyPress(TEdit(ACtrl),cKey);//Chr(StrToIntDef(joData.v,32)));
+        end;
+    end else if joData.e = 'onmouseenter' then begin
+        if Assigned(TEdit(ACtrl).OnMouseEnter) then begin
+            TEdit(ACtrl).OnMouseEnter(TEdit(ACtrl));
+        end;
+    end else if joData.e = 'onmouseexit' then begin
+        if Assigned(TEdit(ACtrl).OnMouseLeave) then begin
+            TEdit(ACtrl).OnMouseLeave(TEdit(ACtrl));
+        end;
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     joHint    : Variant;
-     joRes     : Variant;
-     sBorder   : string;
+    sCode   : string;
+    joHint  : Variant;
+    joRes   : Variant;
+    sBorder : string;
+    sAlign  : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-     //¼ÆËãBorder
-     if TEdit(ACtrl).BorderStyle = bsSingle then begin
-          sBorder   := dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
-                    +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
-     end else begin
-          sBorder   := 'border:0px;'+dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
-                    +dwGetHintStyle(joHint,'border','border','border:0px solid #DCDFE6;')   //border-radius
-     end;
+    //è®¡ç®—Border
+    if TEdit(ACtrl).BorderStyle = bsSingle then begin
+        sBorder := dwGetHintStyle(joHint,'radius','border-radius','border-radius:4px;')   //border-radius
+                +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
+    end else begin
+        sBorder := 'border:0px;'+dwGetHintStyle(joHint,'radius','border-radius','border-radius:4px;')   //border-radius
+                +dwGetHintStyle(joHint,'border','border','border:0px solid #DCDFE6;')   //border-radius
+    end;
 
+    //
+    with TEdit(ACtrl) do begin
+        //è®¡ç®—alignment
+        case Alignment of
+            taLeftJustify : begin
+                sAlign  := 'text-align: left;'
+            end;
+            taCenter : begin
+                sAlign  := 'text-align: center;'
+            end;
+            taRightJustify : begin
+                sAlign  := 'text-align: right;'
+            end;
+        end;
 
-     with TEdit(ACtrl) do begin
-          sCode     := '<el-input'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +dwVisible(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿É¼ûĞÔVisible
-                    +dwDisable(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿ÉÓÃĞÔEnabled(²¿·Ö¿Ø¼ş²»Ö§³Ö)
-                    +dwIIF(PasswordChar=#0,'',' show-password')            //ÊÇ·ñÎªÃÜÂë
-                    +' v-model="'+dwPrefix(ACtrl)+Name+'__txt"'                            //Ç°ÖÃ
-                    +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,ÌáÊ¾Óï
-                    +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //Ç°ÖÃIcon
-                    +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //ºóÖÃIcon
-                    //+dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                    +' :style="{'
-                              +'backgroundColor:'+dwPrefix(ACtrl)+Name+'__col,'
-                              +'left:'+dwPrefix(ACtrl)+Name+'__lef,'
-                              +'top:'+dwPrefix(ACtrl)+Name+'__top,'
-                              +'width:'+dwPrefix(ACtrl)+Name+'__wid,'
-                              +'height:'+dwPrefix(ACtrl)+Name+'__hei}"'
-                    +' style="position:absolute;'
-                              +sBorder
-                              +'overflow: hidden;'
-                    +'"' // ·â±Õstyle
-                    +Format(_DWEVENT,['input',Name,'escape(this.'+dwPrefix(ACtrl)+Name+'__txt)','onchange',TForm(Owner).Handle]) //°ó¶¨ÊÂ¼ş
-                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+Name+'__txt)','onchange',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',Name,'0','onexit',TForm(Owner).Handle]),'')
-                    +'>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-          joRes.Add(sCode);
-     end;
-     //
-     Result    := (joRes);
+        //
+        sCode     := '<el-input'
+                   +' id="'+dwFullName(Actrl)+'"'
+                   +dwVisible(TControl(ACtrl))                            //ç”¨äºæ§åˆ¶å¯è§æ€§Visible
+                   +dwDisable(TControl(ACtrl))                            //ç”¨äºæ§åˆ¶å¯ç”¨æ€§Enabled(éƒ¨åˆ†æ§ä»¶ä¸æ”¯æŒ)
+                   +dwIIF(PasswordChar=#0,'',' show-password')            //æ˜¯å¦ä¸ºå¯†ç 
+                   +' v-model="'+dwFullName(Actrl)+'__txt"'                            //å‰ç½®
+                   +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,æç¤ºè¯­
+                   +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //å‰ç½®Icon
+                   +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //åç½®Icon
+                   +dwIIF(ReadOnly,' readonly','')                         //æ˜¯å¦åªè¯»
+                   +dwGetDWAttr(joHint)
+                   //+dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
+                   +' :style="{'
+                             +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                             +'left:'+dwFullName(Actrl)+'__lef,'
+                             +'top:'+dwFullName(Actrl)+'__top,'
+                             +'width:'+dwFullName(Actrl)+'__wid,'
+                             +'height:'+dwFullName(Actrl)+'__hei}"'
+                   +' style="position:absolute;'
+                             +sBorder
+                             +sAlign
+                             +'overflow: hidden;'
+                   +dwGetDWStyle(joHint)
+                   +'"' // å°é—­style
+                   //+' onclick="this.dwevent('''','''+Name+''',''0'',''onclick'','''+IntToStr(TForm(Owner).Handle)+''')"'
+                   +dwIIF(Assigned(OnClick),    Format(_DWEVENT,['click.native',             Name,'0','onclick', TForm(Owner).Handle]),'')
+                   +dwIIF(Assigned(OnKeyDown),   Format(_DWEVENT,['keydown.native',   Name,'event.keyCode','onkeydown', TForm(Owner).Handle]),'')
+                   +dwIIF(Assigned(OnKeyUp),     Format(_DWEVENT,['keyup.native',     Name,'event.keyCode','onkeyup',   TForm(Owner).Handle]),'')
+                   +dwIIF(Assigned(OnKeyPress),  Format(_DWEVENT,['keypress.native',  Name,'event.keyCode','onkeypress',TForm(Owner).Handle]),'')
+                   +Format(_DWEVENT,['input',Name,'escape(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle]) //ç»‘å®šäº‹ä»¶
+                   +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter',TForm(Owner).Handle]),'')
+                   +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit',TForm(Owner).Handle]),'')
+                   +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',            Name,'0','onenter',TForm(Owner).Handle]),'')
+                   +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',             Name,'0','onexit',TForm(Owner).Handle]),'')
+                   +'>';
+         //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+         joRes.Add(sCode);
+    end;
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
-     joRes.Add('</el-input>');          //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+     joRes.Add('</el-input>');          //æ­¤å¤„éœ€è¦å’ŒdwGetHeadå¯¹åº”
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TEdit(ACtrl) do begin
-          joRes.Add(dwPrefix(ACtrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(ACtrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(ACtrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(ACtrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(ACtrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(ACtrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(dwPrefix(ACtrl)+Name+'__txt:"'+dwChangeChar(Text)+'",');
+          joRes.Add(dwFullName(Actrl)+'__txt:"'+dwChangeChar(Text)+'",');
           //
-          joRes.Add(dwPrefix(ACtrl)+Name+'__col:"'+dwColor(Color)+'",');
+          joRes.Add(dwFullName(Actrl)+'__col:"'+dwColor(Color)+'",');
      end;
      //
      Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes       : Variant;
+    joHint      : Variant;  //__eventcomponent
+    sEventComp  : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TEdit(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-          //
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__txt="'+dwChangeChar(Text)+'";');
-          //
-          joRes.Add('this.'+dwPrefix(ACtrl)+Name+'__col="'+dwColor(Color)+'";');
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes   := _Json('[]');
+
+    //å¾—åˆ°äº‹ä»¶æºæ§ä»¶
+    joHint  := dwGetHintJson(TControl(ACtrl.Owner));
+    sEventComp  := '';
+    if joHint.Exists('__eventcomponent') then begin
+        sEventComp  := LowerCase(joHint.__eventcomponent);
+    end;
+
+    //
+    with TEdit(ACtrl) do begin
+        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //å¦‚æœå½“å‰æ˜¯äº‹ä»¶æºæ§ä»¶ï¼Œåˆ™ä¸å¤„ç†
+        if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+dwChangeChar(Text)+'";');
+        end else begin
+            joRes.Add('');
+        end;
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwColor(Color)+'";');
+    end;
+    //
+    Result    := (joRes);
 end;
 
 
@@ -208,7 +266,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

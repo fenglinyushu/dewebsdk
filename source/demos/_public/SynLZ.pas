@@ -1,4 +1,4 @@
-/// SynLZ Compression routines
+﻿/// SynLZ Compression routines
 // - licensed under a MPL/GPL/LGPL tri-license; version 1.18
 unit SynLZ;
 

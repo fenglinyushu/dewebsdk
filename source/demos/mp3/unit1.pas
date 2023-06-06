@@ -1,10 +1,11 @@
-unit unit1;
+ï»¿unit unit1;
 
 interface
 
 uses
      //
      dwBase,
+     CloneComponents,
 
      //
      Math,
@@ -12,30 +13,27 @@ uses
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.MPlayer,
      Vcl.Menus, Vcl.Buttons, Vcl.Samples.Spin, Vcl.Imaging.jpeg,
      Vcl.Imaging.pngimage, VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series,
-  VCLTee.TeeProcs, VCLTee.Chart, Vcl.WinXCtrls, Vcl.Grids;
+  VCLTee.TeeProcs, VCLTee.Chart, Vcl.WinXCtrls, Vcl.Grids, Vcl.FileCtrl;
 
 type
   TForm1 = class(TForm)
     MediaPlayer1: TMediaPlayer;
-    Panel_Buttons: TPanel;
-    Button3: TButton;
-    Button1: TButton;
-    Button2: TButton;
-    Button4: TButton;
-    Button5: TButton;
     Panel_Full: TPanel;
     Label_Name: TLabel;
+    ScrollBox1: TScrollBox;
+    Panel_Buttons: TPanel;
+    Button_Audio: TButton;
+    FileListBox_Audio: TFileListBox;
+    BitBtn_Upload: TBitBtn;
     procedure Button3Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
-    procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure FormShow(Sender: TObject);
+    procedure Button_AudioClick(Sender: TObject);
+    procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure BitBtn_UploadEndDock(Sender, Target: TObject; X, Y: Integer);
   private
     { Private declarations }
   public
-    { Public declarations }
+    gsMainDir   : string;
   end;
 
 var
@@ -46,94 +44,85 @@ implementation
 {$R *.dfm}
 
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.Button_AudioClick(Sender: TObject);
 begin
-     MediaPlayer1.EnabledButtons   := [btPause];
+    //
+    MediaPlayer1.FileName   := 'media/audio/'+TButton(Sender).Caption;
+    //
+    Label_Name.Caption      := TButton(Sender).Caption;
 
+    //
+    for var I := 0 to Panel_Buttons.ControlCount-1 do begin
+        TButton(Panel_Buttons.Controls[I]).Hint := '{"type":"primary"}';
+    end;
+    //
+    TButton(Sender).Hint := '{"type":"success"}';
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TForm1.BitBtn_UploadEndDock(Sender, Target: TObject; X, Y: Integer);
+var
+    sFile   : String;
 begin
-     if MediaPlayer1.FileName  = 'media/audio/night.mp3' then begin
-          MediaPlayer1.FileName    := 'media/audio/spring.mp3';
-          Label_Name.Caption       := '´º·çÊ®Àï';
-     end else begin
-          MediaPlayer1.FileName    := 'media/audio/night.mp3';
-          Label_Name.Caption       := 'Ò¹µÄ¸ÖÇÙÇú';
-     end;
+    //å–å¾—ä¸Šä¼ çš„æ–‡ä»¶å
+    sFile   := dwGetProp(self,'__upload');
+
+    //ç§»åŠ¨æ–‡ä»¶åˆ°ç³»ç»Ÿçš„æ–‡æ¡£ç›®å½•
+    MoveFile(PWideChar(gsMainDir+'upload\'+sFile),PWideChar(gsMainDir+'media\audio\'+sFile));
+
+    //è‡ªåŠ¨åˆ‡æ¢åˆ°å½“å‰æ–‡ä»¶
+    MediaPlayer1.FileName   := 'media/audio/'+sFile;
+
+    //æ˜¾ç¤ºæ–‡ä»¶å
+    Label_Name.Caption      := sFile;
+
+    //åˆ·æ–°çª—ä½“
+    Self.DockSite         := True;
 
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
-     MediaPlayer1.EnabledButtons   := [btPlay];
+    //æ’­æ”¾
+    MediaPlayer1.EnabledButtons   := [btPlay];
 
 end;
 
-procedure TForm1.Button4Click(Sender: TObject);
+procedure TForm1.FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
+  Y: Integer);
 begin
-     MediaPlayer1.AutoRewind := not MediaPlayer1.AutoRewind;
-     if MediaPlayer1.AutoRewind then begin
-          Button4.Caption     := 'Looped';
-     end else begin
-          Button4.Caption     := 'Loop';
-     end;
-
+    //è®¾ç½®ä¸ºç§»åŠ¨æ¨¡å¼
+    dwSetMobileMode(Self,360,720);
 end;
 
-procedure TForm1.Button5Click(Sender: TObject);
+procedure TForm1.FormShow(Sender: TObject);
 begin
-     MediaPlayer1.HelpContext := 16;
+    //ä»URLä¸­å¾—åˆ°æ–‡ä»¶åå¹¶æ’­æ”¾
 
-end;
+    var sParams := dwGetProp(Self,'params');
+    sParams := dwUnescape(sParams);
+    if Pos('file=',sParams)>0 then begin
+        //å¾—åˆ°åç§°
+        Delete(sParams,1,5);
+        MediaPlayer1.FileName    := sParams;
+        //
+        var sName := sParams;
+        while Pos('/',sName)>0 do begin
+            Delete(sName,1,Pos('/',sName));
+        end;
+        Label_Name.Caption       := ExtractFileName(sName);
+    end;
 
-procedure TForm1.FormMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var
-     bMobile   : Boolean;     //ÊÇ·ñÎªÊÖ»ú
-     bVert     : Boolean;     //ÊÇ·ñÎªÊúÆÁ
-     iWidth    : Integer;     //¿í¶È
-     iHeight   : Integer;     //¸ß¶È
-begin
-     //<È¡µÃ¿Í»§¶ËÊôĞÔ
-     //ÊÇ·ñÊÖ»ú
-     bMobile   := (ssCtrl in Shift) or (ssLeft in Shift);
-
-     //ÊÇ·ñÎªÊúÆÁ
-     bVert     := Button = mbLeft;
-
-     //µÃµ½¿í¶ÈºÍ¸ß¶È£¨ÒòÎªiphoneµÄ¿í¶È²»Ëæ×İÏò/ºáÏò±ä»¯£©
-     iWidth    := X;
-     iHeight   := Y;
-     if  (ssLeft in Shift) and (not bVert) then begin
-          iWidth    := Y;
-          iHeight   := X;
-     end;
-     //>
-
-     //ÊÖ»ú/µçÄÔ×Ô¶¯ÊÊÓ¦
-     //Èç¹ûÊÇÊÖ»ú£¬Ôò½øĞĞÈçÏÂÉèÖÃ£º
-     //1 Íâ¿òPanelÎŞ±ß¿ò
-     //2 ±³¾°É«Îª°×É«
-
-     if bMobile then begin
-          //×İÏòÊ±ÎªµÈ¿í£¬·ñÔòÏŞÖÆ¿í¶ÈÎª×î´ó360
-          if bVert then begin
-               Width     := iWidth;
-          end else begin
-               Width     := Min(480,iWidth);
-          end;
-          //
-          Panel_Full.BorderStyle   := bsNone;
-          TransparentColorValue    := clWhite;
-     end else begin
-          //
-          Width     := Min(360,iWidth);
-
-          //
-          Panel_Full.BorderStyle   := bsSingle;
-          TransparentColorValue    := clBtnFace;
-     end;
+    //
+    var sDir    := GetCurrentDir;
+    FileListBox_Audio.Directory := sDir+'\media\audio\';
+    //
+    for var I := 0 to FileListBox_Audio.Count-1 do begin
+        with TButton(CloneComponent(Button_Audio)) do begin
+            Caption := FileListBox_Audio.Items[I];
+        end;
+    end;
+    //
+    Button_Audio.Destroy;
 end;
 
 end.

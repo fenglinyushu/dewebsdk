@@ -1,4 +1,4 @@
-library dwTTabSheet;
+ï»¿library dwTTabSheet;
 
 uses
      ShareMem,
@@ -15,35 +15,27 @@ uses
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
      StdCtrls, Windows;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 begin
-     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-          if HelpKeyword = 'timeline' then begin
-               //ÓÃ×÷Ê±¼äÏß¿Ø¼ş-------------------------------------------------
+    with TPageControl(TTabSheet(Actrl).PageControl) do begin
+        //ç”¨ä½œTabsæ§ä»¶---------------------------------------------------
 
-          end else if HelpKeyword = 'steps' then begin
-               //ÓÃ×÷²½ÖèÌõ¿Ø¼ş-------------------------------------------------
-
-          end else begin
-               //ÓÃ×÷Tabs¿Ø¼ş---------------------------------------------------
-
-               //
-               if Assigned( TTabSheet(ACtrl).OnShow) then begin
-                    TTabSheet(ACtrl).OnShow(TTabSheet(ACtrl));
-               end;
-          end;
-     end;
+        //
+        if Assigned( TTabSheet(ACtrl).OnShow) then begin
+            TTabSheet(ACtrl).OnShow(TTabSheet(ACtrl));
+        end;
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
@@ -54,286 +46,124 @@ var
      iLine     : Integer;
 begin
     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-        if HelpKeyword = 'timeline' then begin
-            //ÓÃ×÷Ê±¼äÏß¿Ø¼ş-------------------------------------------------
+        //ç”¨ä½œTabsæ§ä»¶---------------------------------------------------
 
-            //Éú³É·µ»ØÖµÊı×é
-            joRes    := _Json('[]');
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
 
-            //È¡µÃHINT¶ÔÏóJSON
-            joHint    := dwGetHintJson(TControl(ACtrl));
+        //å–å¾—HINTå¯¹è±¡JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
 
-            //
-            joRes.Add('        <el-timeline-item '
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +dwIIF(TTabSheet(Actrl).ImageIndex>0,'icon="'+dwIcons[Max(1,TTabSheet(Actrl).ImageIndex)]+'"','')
-                    //+dwGetHintValue(joHint,'type','type','')
-                    +dwGetHintValue(joHint,'color','color','')
-                    +' timestamp="'+IntToStr(TTabSheet(Actrl).Tag)+'" placement="top">');
-            if ParentBiDiMode = True then begin
-                joRes.Add('            <el-card>');
-            end;
-            joRes.Add('                <h4>'+TTabSheet(Actrl).Caption+'</h4>');
-            //
-            for iCtrl := 0 to TWinControl(Actrl).ControlCount-1 do begin
-                if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TLabel' then begin
-                    joRes.Add('                <p>'+TLabel(TWinControl(Actrl).Controls[iCtrl]).Caption+'</p>');
-                end else if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TMemo' then begin
-                    oMemo     := TMemo(TWinControl(Actrl).Controls[iCtrl]);
-                    for iLine := 0 to oMemo.Lines.Count-1 do begin
-                        joRes.Add('                <p>'+oMemo.Lines[iLine]+'</p>');
-                    end;
-                end;
-            end;
-
-            //
-            if ParentBiDiMode = True then begin
-                joRes.Add('            </el-card>');
-            end;
-            joRes.Add('        </el-timeline-item>');
-
-            //
-            Result    := (joRes);
-        end else if HelpKeyword = 'steps' then begin
-            //ÓÃ×÷²½ÖèÌõ¿Ø¼ş-------------------------------------------------
-
-        end else if HelpKeyword = 'swiper' then begin
-            //ÓÃ×÷×ßÂíµÆ¿Ø¼ş-------------------------------------------------
-
-            //Éú³É·µ»ØÖµÊı×é
-            joRes    := _Json('[]');
-
-            //È¡µÃHINT¶ÔÏóJSON
-            joHint    := dwGetHintJson(TControl(ACtrl));
-
-            with TTabSheet(ACtrl) do begin
-                    sCode     := '<div'
-                              +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +' class="swiper-slide"'
-                              +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,'
-                                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
-                                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
-                                    +'height:'+dwPrefix(Actrl)+Name+'__hei}"'
-                              +' style="position:absolute;overflow:hidden;'
-                              +'"' //style ·â±Õ
-                              +'>';
-                    //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-                    joRes.Add(sCode);
-            end;
-            //
-            Result    := (joRes);
-
-        end else if HelpKeyword = 'carousel' then begin
-            //ÓÃ×÷×ßÂíµÆ¿Ø¼ş------------------------------------------------------------------------
-
-            //Éú³É·µ»ØÖµÊı×é
-            joRes    := _Json('[]');
-
-            //È¡µÃHINT¶ÔÏóJSON
-            joHint    := dwGetHintJson(TControl(ACtrl));
-
-            with TTabSheet(ACtrl) do begin
-                    sCode     := '<el-carousel-item'
-                              +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,'
-                                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
-                                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
-                                    +'height:'+dwPrefix(Actrl)+Name+'__hei}"'
-                              +' style="position:absolute;overflow:hidden;'
-                              +'"' //style ·â±Õ
-                              +'>';
-                    //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-                    joRes.Add(sCode);
-            end;
-            //
-            Result    := (joRes);
-
-        end else begin
-            //ÓÃ×÷Tabs¿Ø¼ş---------------------------------------------------
-
-            //Éú³É·µ»ØÖµÊı×é
-            joRes    := _Json('[]');
-
-            //È¡µÃHINT¶ÔÏóJSON
-            joHint    := dwGetHintJson(TControl(ACtrl));
-
-            with TTabSheet(ACtrl) do begin
-                sCode   := '<el-main'
-                        +' id="'+dwPrefix(Actrl)+Name+'"'
-                        +' v-if="'+dwPrefix(Actrl)+PageControl.Name+'__apg=='''+dwPrefix(Actrl)+Name+'''"'
-                        +dwDisable(TControl(ACtrl))
-                        +dwGetHintValue(joHint,'icon','icon','')
-                        +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
-                        +' style="position:absolute;height:100%;overflow:hidden;'
-                        +'"' //style ·â±Õ
-                        +dwIIF(Assigned(OnShow),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                        +'>';
-                //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-                joRes.Add(sCode);
-            end;
-            //
-            Result    := (joRes);
+        with TTabSheet(ACtrl) do begin
+            sCode   := '<el-main'
+                    +' id="'+dwFullName(Actrl)+'"'
+                    +' v-show="'+LowerCase(dwPrefix(Actrl)+PageControl.Name)+'__apg=='''+dwFullName(Actrl)+'''"'
+                    +dwDisable(TControl(ACtrl))
+                    +dwGetHintValue(joHint,'icon','icon','')
+                    +dwGetDWAttr(joHint)
+                    +' :style="{left:'+dwFullName(Actrl)+'__lef,'
+                            +'top:'+dwFullName(Actrl)+'__ttp,'
+                            +'width:'+dwFullName(Actrl)+'__wid,'
+                            +'height:'+dwFullName(Actrl)+'__hei}"'
+                    +' style="position:absolute;height:100%;overflow:hidden;'
+                    +dwGetDWStyle(joHint)
+                    +'"' //style å°é—­
+                    +dwIIF(Assigned(OnShow),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                    +'>';
+            //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+            joRes.Add(sCode);
         end;
+        //
+        Result    := (joRes);
     end;
 
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
 begin
-     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-          if HelpKeyword = 'timeline' then begin
-               //ÓÃ×÷Ê±¼äÏß¿Ø¼ş---------------------------------------------------------------------
+    with TPageControl(TTabSheet(Actrl).PageControl) do begin
+        //ç”¨ä½œTabsæ§ä»¶-----------------------------------------------------------------------
 
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               Result    := (joRes);
-          end else if HelpKeyword = 'steps' then begin
-               //ÓÃ×÷²½ÖèÌõ¿Ø¼ş---------------------------------------------------------------------
-
-          end else if HelpKeyword = 'swiper' then begin
-               //ÓÃ×÷×ßÂíµÆ¿Ø¼ş---------------------------------------------------------------------
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('</div>');
-               //
-               Result    := (joRes);
-          end else if HelpKeyword = 'carousel' then begin
-               //ÓÃ×÷×ßÂíµÆ¿Ø¼ş---------------------------------------------------------------------
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('</el-carousel-item>');
-               //
-               Result    := (joRes);
-          end else begin
-               //ÓÃ×÷Tabs¿Ø¼ş-----------------------------------------------------------------------
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('</el-main>');
-               //
-               Result    := (joRes);
-          end;
-     end;
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes.Add('</el-main>');
+        //
+        Result    := (joRes);
+    end;
 end;
 
-//È¡µÃDataÏûÏ¢
+//å–å¾—Dataæ¶ˆæ¯
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     sKeyword  : String;
+    joRes     : Variant;
+    sKeyword  : String;
 begin
-     sKeyword  := TPageControl(TTabSheet(Actrl).PageControl).HelpKeyword;
-     if sKeyword = 'timeline' then begin
-          //ÓÃ×÷Ê±¼äÏß¿Ø¼ş--------------------------------------------------------------------------
+    //ç”¨ä½œTabsæ§ä»¶----------------------------------------------------------------------------
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TTabSheet(ACtrl) do begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(0)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(0)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-               joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          end;
-          //
-          Result    := (joRes);
-     end else if sKeyword = 'steps' then begin
-          //ÓÃ×÷²½ÖèÌõ¿Ø¼ş--------------------------------------------------------------------------
-
-     end else begin
-          //ÓÃ×÷Tabs¿Ø¼ş----------------------------------------------------------------------------
-
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TTabSheet(ACtrl) do begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-               joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          end;
-          //
-          Result    := (joRes);
-     end;
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TTabSheet(ACtrl) do begin
+        if PageControl.TabPosition = tpLeft then begin
+            joRes.Add(dwFullName(Actrl)+'__lef:"0px",');
+        end else begin
+            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+        end;
+        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        //
+        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        //
+        joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
+        joRes.Add(dwFullName(Actrl)+'__ttp:"4px",');
+    end;
+    //
+    Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     sKeyword  : String;
+    joRes     : Variant;
+    sKeyword  : String;
 begin
-     sKeyword  := TPageControl(TTabSheet(Actrl).PageControl).HelpKeyword;
-     if sKeyword = 'timeline' then begin
-          //ÓÃ×÷Ê±¼äÏß¿Ø¼ş--------------------------------------------------------------------------
+    //ç”¨ä½œTabsæ§ä»¶----------------------------------------------------------------------------
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TTabSheet(ACtrl) do begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-          end;
-          //
-          Result    := (joRes);
-     end else if sKeyword = 'steps' then begin
-          //ÓÃ×÷²½ÖèÌõ¿Ø¼ş--------------------------------------------------------------------------
-
-     end else begin
-          //ÓÃ×÷Tabs¿Ø¼ş----------------------------------------------------------------------------
-
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TTabSheet(ACtrl) do begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-          end;
-          //
-          Result    := (joRes);
-     end;
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TTabSheet(ACtrl) do begin
+        if PageControl.TabPosition = tpLeft then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__lef="0px";');
+        end else begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        end;
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(TabVisible,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
+    end;
+    //
+    Result    := (joRes);
 end;
 
 
 exports
-     //dwGetExtra,
-     dwGetEvent,
-     dwGetHead,
-     dwGetTail,
-     dwGetMethod,
-     dwGetData;
+    //dwGetExtra,
+    dwGetEvent,
+    dwGetHead,
+    dwGetTail,
+    dwGetAction,
+    dwGetData;
 
 begin
 end.

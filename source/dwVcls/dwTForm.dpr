@@ -1,47 +1,73 @@
-library dwTForm;
+ï»¿library dwTForm;
 
 uses
      ShareMem,
-
      //
      dwCtrlBase,
-
      //
      SynCommons,
-
      //
      Messages, SysUtils, Variants, Classes, Graphics,
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
      StdCtrls, Windows;
-
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
-
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     joData    : Variant;
-     oAction   : TCloseAction;
+    joData  : Variant;
+    oAction : TCloseAction;
+    oObject : TDragDockObject;
 begin
-     with TForm(ACtrl) do begin
-          if HelpKeyword = 'dialog' then begin
-
-          end else begin
-               //
-               joData    := _Json(AData);
-
-               if joData.e = 'onclose' then begin
+    with TForm(ACtrl) do begin
+        if HelpKeyword = 'dialog' then begin
+            //-------------ä½œä¸ºå¯¹è¯æ¡†---------------------------------------------------------------
+        end else if HelpKeyword = 'embed' then begin
+            //-------------ä½œä¸ºåµŒå…¥å¼çª—ä½“-----------------------------------------------------------
+            //
+            joData    := _Json(AData);
+            if joData.e = 'onclick' then begin
+                if Assigned(OnClick) then begin
+                    TForm(ACtrl).OnClick(TForm(ACtrl));
+                end;
+            end else if joData.e = 'onenter' then begin
+                //TForm(ACtrl).OnEnter(TForm(ACtrl));
+            end else if joData.e = 'onexit' then begin
+                //TForm(ACtrl).OnExit(TForm(ACtrl));
+            end else if joData.e = 'onenddock' then begin
+                if Assigned(TForm(ACtrl).OnEndDock) then begin
+                    TForm(ACtrl).OnEndDock(TForm(ACtrl),nil,0,0);
+                end;
+            end else if joData.e = 'onstartdock' then begin
+                if Assigned(TForm(ACtrl).OnStartDock) then begin
+                    TForm(ACtrl).OnStartDock(TForm(ACtrl),oObject);
+                end;
+            end;
+        end else begin
+            //-------------ä½œä¸ºæ™®é€šçª—ä½“-------------------------------------------------------------
+            //
+            joData    := _Json(AData);
+            if joData.e = 'onclose' then begin
+                if Assigned(OnClose) then begin
                     TForm(ACtrl).OnClose(TForm(ACtrl),oAction);
-               end;
-          end;
-     end;
+                end;
+            end else if joData.e = 'onenddock' then begin
+                if Assigned(TForm(ACtrl).OnEndDock) then begin
+                    TForm(ACtrl).OnEndDock(TForm(ACtrl),nil,0,0);
+                end;
+            end else if joData.e = 'onstartdock' then begin
+                if Assigned(TForm(ACtrl).OnStartDock) then begin
+                    TForm(ACtrl).OnStartDock(TForm(ACtrl),oObject);
+                end;
+            end;
+        end;
+    end;
 end;
 
-
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
@@ -51,178 +77,346 @@ var
      sExit     : String;
      sClick    : string;
 begin
-     with TForm(ACtrl) do begin
-          if HelpKeyword = 'dialog' then begin
+    with TForm(ACtrl) do begin
+        if HelpKeyword = 'dialog' then begin
+
+        end else if HelpKeyword = 'embed' then begin
+            //===============================================================
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //å–å¾—HINTå¯¹è±¡JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
+            //è¿›å…¥äº‹ä»¶ä»£ç --------------------------------------------------------
+            sEnter  := '';
+
+            //é€€å‡ºäº‹ä»¶ä»£ç --------------------------------------------------------
+            sExit  := '';
+            //å•å‡»äº‹ä»¶ä»£ç --------------------------------------------------------
+            sClick    := '';
+            if joHint.Exists('onclick') then begin
+                 sClick := String(joHint.onclick);
+            end;
+            //
+            if sClick='' then begin
+                 if Assigned(OnClick) then begin
+                      sClick    := Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]);
+                 end else begin
+                 end;
+            end else begin
+                 if Assigned(OnClick) then begin
+                      sClick    := Format(_DWEVENTPlus,['click',sClick,Name,'0','onclick',TForm(Owner).Handle])
+                 end else begin
+                      sClick    := ' @click="'+sClick+'"';
+                 end;
+            end;
+
+            //
+            sCode     := '<el-main'
+                    +' id="'+dwFullName(Actrl)+'"'
+                    +dwVisible(TControl(ACtrl))
+                    //+dwDisable(TControl(ACtrl))
+                    //+dwGetHintValue(joHint,'type','type',' type="default"')
+                    //+dwGetHintValue(joHint,'icon','icon','')
+                    +' :style="{'
+                        +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                        +'left:'+dwFullName(Actrl)+'__lef,'
+                        +'top:'+dwFullName(Actrl)+'__top,'
+                        +'width:'+dwFullName(Actrl)+'__wid,'
+                        +'height:'+dwFullName(Actrl)+'__hei'
+                    +'}"'
+                    +' style="'
+                        +'position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';'
+                        +'overflow:hidden;'
+                        +dwIIF(BorderStyle=bsSingle,'border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);','')
+                        +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
+                        +dwGetDWStyle(joHint)
+                    +'"' //style å°é—­
+                    +sClick
+                    +sEnter
+                    +sExit
+                    +'>';
+            //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+            joRes.Add(sCode);
+            //
+            Result    := (joRes);
+        end else begin
+            //===============================================================
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //å–å¾—HINTå¯¹è±¡JSON
+            joHint    := dwGetHintJson(TControl(ACtrl));
+
+            //é€€å‡ºäº‹ä»¶ä»£ç --------------------------------------------------------
+            sExit  := '';
+            if joHint.Exists('onexit') then begin
+                sExit  := String(joHint.onexit);
+            end;
+            if sExit='' then begin
+                if Assigned(OnClose) then begin
+                    sExit    := Format(_DWEVENT,['mouseleave',Name,'0','onexit',Handle]);
+                end else begin
+                end;
+            end;
+            //å•å‡»äº‹ä»¶ä»£ç --------------------------------------------------------
+            sClick    := '';
+            if joHint.Exists('onclick') then begin
+                sClick := String(joHint.onclick);
+            end;
+            //
+            if sClick='' then begin
+                if Assigned(OnClick) then begin
+                    sClick    := Format(_DWEVENT,['click',Name,'0','onclick',Handle]);
+                end else begin
+                end;
+            end else begin
+                if Assigned(OnClick) then begin
+                    sClick    := Format(_DWEVENTPlus,['click',sClick,Name,'0','onclick',Handle])
+                end else begin
+                    sClick    := ' @click="'+sClick+'"';
+                end;
+            end;
+            //
+            sCode     := '<div'
+                    +' class="dwmask"'
+                    +' v-show="'+Name+'__vis"'
+                    //+' :visible.sync="'+Name+'__vis"'
+                    //+' :close-on-click-modal="false"'
+                    +' :style="{'
+                    //     +'backgroundColor:'+Name+'__col;'
+                        +'paddingTop:'+Name+'__top'
+                    +'}"' //:style å°é—­
+                    +'>';
+            //:width='+Name+'__wid :height='+Name+'__hei
+            //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+            joRes.Add(sCode);
+
+            //FORMå…¨éƒ¨------------------------------------------------------------------------------
+            sCode     := '<div'
+            +' id="'+Name+'"'
+            +dwGetDWAttr(joHint)
+            +' :style="{'
+                +'opacity:1,'
+                +'backgroundColor:'+Name+'__col,'
+                +'width:'+Name+'__wid,'
+                +'height:'+Name+'__fht'
+            +'}"'
+            +' style="position:relative;'
+                +'margin:0 auto;'
+                +'overflow:hidden;'
+                +'border-radius: 4px;'
+                +'box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);'
+                //+'box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);'
+                +dwGetDWStyle(joHint)
+            +'"' //style å°é—­
+            +sClick
+            +sEnter
+            +sExit
+            +'>';
+            //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+            joRes.Add(sCode);
 
 
-          end else begin
-               //===============================================================
+            //FORMæ ‡é¢˜------------------------------------------------------------------------------
+            if BorderStyle <> bsNone then begin
+                sCode     := '<div'
+                        //+' id="formtitle"'
+                        //+' :style="{'
+                        //    +'width:'+Name+'__wid,'
+                        //    +'height:'+Name+'__hei'
+                        //+'}"'
+                        +' style="'
+                            +'position:absolute;'
+                            +'border:3px 3px 0 0;'
+                            +'border-bottom:solid 1px rgba(0,0,0,0.04);'
+                            +'left:0;'
+                            +'top:0;'
+                            +'width:100%;'
+                            +'height:40px;'
+                        +'"' //style å°é—­
+                        +'>'
+                        +'<span style="font-size:12pt;line-height:40px;color:#555" >'
+                            +'{{'+Name+'__cap}}'
+                        +'</span>';
 
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
+                        //å…³é—­æŒ‰é’®
+                        if biSystemMenu in BorderIcons then begin
+                            sCode   := sCode
+                                    + '<el-button type="text"'
+                                    +' icon="el-icon-close"'
+                                    +' style="height:40px;width:40px;font-size:14pt;color:#aaa;float:right;"'
+                                    +' @click="dwexecute(''this.'+Name+'__vis=false;'');'
+                                    +'dwevent($event,'''+name+''',''0'',''onclose'','''+IntToStr(Handle)+''')"'
+                                    +'>'
+                                    +'</el-button>'
+                        end;
+                        sCode   := sCode + '</div>';
+                //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+                joRes.Add(sCode);
+            end;
 
-               //È¡µÃHINT¶ÔÏóJSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
+            //FORMå†…å®¹åŒº----------------------------------------------------------------------------
+            sCode     := '<div'
+                    //+' id="formcontent"'
+                    +' :style="{'
+                        +'height:'+Name+'__hei'
+                    +'}"'
+                    +' style="'
+                        +'position:absolute;'
+                        +'text-align:left;'
+                        +'border:0 0 3px 3px;'
+                        +'left:0;'
+                        +dwIIF(BorderStyle=bsNone,'top:0px;','top:40px;')
+                        +'width:100%;'
+                    +'"' //style å°é—­
+                    +'>';
+            //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+            joRes.Add(sCode);
 
-
-
-               //ÍË³öÊÂ¼ş´úÂë--------------------------------------------------------
-               sExit  := '';
-               if joHint.Exists('onexit') then begin
-                    sExit  := joHint.onexit;
-               end;
-               if sExit='' then begin
-                    if Assigned(OnClose) then begin
-                         sExit    := Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',Handle]);
-                    end else begin
-
-                    end;
-               end;
-
-               //µ¥»÷ÊÂ¼ş´úÂë--------------------------------------------------------
-               sClick    := '';
-               if joHint.Exists('onclick') then begin
-                    sClick := joHint.onclick;
-               end;
-               //
-               if sClick='' then begin
-                    if Assigned(OnClick) then begin
-                         sClick    := Format(_DWEVENT,['click.native',Name,'0','onclick',Handle]);
-                    end else begin
-
-                    end;
-               end else begin
-                    if Assigned(OnClick) then begin
-                         sClick    := Format(_DWEVENTPlus,['click.native',sClick,Name,'0','onclick',Handle])
-                    end else begin
-                         sClick    := ' @click.native="'+sClick+'"';
-                    end;
-               end;
-
-               //
-               sCode     := '<el-dialog'
-                         +' :title="'+Name+'__cap"'
-                         +' width="'+IntToStr(Width+40)+'px"'
-                         +' :visible.sync="'+Name+'__vis"'
-                         +' :close-on-click-modal="false"'
-                         +'>';
-               //:width='+Name+'__wid :height='+Name+'__hei
-               //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-               joRes.Add(sCode);
-
-               //
-               sCode     := '<el-form'
-                         +' id="'+Name+'"'
-                         +' v-if="'+Name+'__vis"'
-                         //+dwGetHintValue(joHint,'type','type',' type="default"')
-                         //+dwGetHintValue(joHint,'icon','icon','')
-                         +' :style="{'
-                              //+'backgroundColor:'+Name+'__col,'
-                              +'left:'+Name+'__lef,top:'+Name+'__top,width:'+Name+'__wid,height:'+Name+'__hei}"'
-                         +' style="position:relative;overflow:hidden;'
-                         //+dwIIF(BorderStyle=bsSingle,'border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);','')
-                         //+dwGetHintStyle(joHint,'borderradius','border-radius','')   //border-radius
-                         +'"' //style ·â±Õ
-                         +sClick
-                         +sEnter
-                         +sExit
-                         +'>';
-               //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-               joRes.Add(sCode);
-               //
-               Result    := (joRes);
-          end;
-     end;
+            //
+            Result    := (joRes);
+        end;
+    end;
 end;
-
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     sCode     : String;
+    joRes     : Variant;
+    sCode     : String;
 begin
-     with TForm(ACtrl) do begin
-          if HelpKeyword = 'dialog' then begin
-
-          end else begin
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('</el-form>');
-               joRes.Add('</el-dialog>');
-               //
-               Result    := (joRes);
-          end;
-     end;
+    with TForm(ACtrl) do begin
+        if HelpKeyword = 'dialog' then begin
+        end else if HelpKeyword = 'embed' then begin
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes.Add('</el-main>');
+            //
+            Result    := (joRes);
+        end else begin
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes.Add('</div>');
+            joRes.Add('</div>');
+            joRes.Add('</div>');
+            //
+            Result    := (joRes);
+        end;
+    end;
 end;
-
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     with TForm(ACtrl) do begin
-          if HelpKeyword = 'dialog' then begin
-
-          end else begin
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TForm(ACtrl) do begin
-                    joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(Name+'__wid:"'+IntToStr(ClientWidth)+'px",');
-                    joRes.Add(Name+'__hei:"'+IntToStr(ClientHeight)+'px",');
-                    //
-                    joRes.Add(Name+'__col:"'+dwColor(Color)+'",');
-                    //
-                    joRes.Add(Name+'__vis:false,');     //Ä¬ÈÏ²»ÏÔÊ¾
-                    //±êÌâ
-                    joRes.Add(Name+'__cap:"'+Caption+'",');
-               end;
-               //
-               Result    := (joRes);
-          end;
-     end;
+    with TForm(ACtrl) do begin
+        if HelpKeyword = 'dialog' then begin
+        end else if HelpKeyword = 'embed' then begin
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //
+            with TForm(ACtrl) do begin
+                joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+                //
+                joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Enabled,'true,','false,'));
+                //
+                if TPanel(ACtrl).Color = clNone then begin
+                    joRes.Add(dwFullName(Actrl)+'__col:"rgba(0,0,0,0)",');
+                end else begin
+                    joRes.Add(dwFullName(Actrl)+'__col:"'+dwAlphaColor(TPanel(ACtrl))+'",');
+                end;
+            end;
+            //
+            Result    := (joRes);
+        end else begin
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //
+            with TForm(ACtrl) do begin
+                joRes.Add(Name+'__lef:"'+IntToStr(Left)+'px",');
+                joRes.Add(Name+'__top:"'+IntToStr(Top)+'px",');
+                joRes.Add(Name+'__wid:"'+IntToStr(ClientWidth)+'px",');
+                joRes.Add(Name+'__hei:"'+IntToStr(ClientHeight)+'px",');
+                //
+                joRes.Add(Name+'__col:"'+dwColor(Color)+'",');
+                //
+                joRes.Add(Name+'__vis:false,');     //é»˜è®¤ä¸æ˜¾ç¤º
+                //æ ‡é¢˜
+                joRes.Add(Name+'__cap:"'+Caption+'",');
+                if BorderStyle = bsNone then begin
+                    joRes.Add(Name+'__fht:"'+IntToStr(ClientHeight)+'px",');
+                end else begin
+                    joRes.Add(Name+'__fht:"'+IntToStr(ClientHeight+40)+'px",');
+                end;
+            end;
+            //
+            Result    := (joRes);
+        end;
+    end;
 end;
-
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
 begin
-     with TForm(ACtrl) do begin
-          if HelpKeyword = 'dialog' then begin
-
-          end else begin
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TForm(ACtrl) do begin
-                    joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+Name+'__wid="'+IntToStr(ClientWidth)+'px";');
-                    joRes.Add('this.'+Name+'__hei="'+IntToStr(ClientHeight)+'px";');
-                    //
-                    //joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    //joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-                    //
-                    joRes.Add('this.'+Name+'__col="'+dwColor(Color)+'";');
-               end;
-               //
-               Result    := (joRes);
-          end;
-     end;
+    with TForm(ACtrl) do begin
+        if HelpKeyword = 'dialog' then begin
+        end else if HelpKeyword = 'embed' then begin
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //
+            with TPanel(ACtrl) do begin
+                joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+                //
+                joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Enabled,'true;','false;'));
+                //
+                if TPanel(ACtrl).Color = clNone then begin
+                    joRes.Add('this.'+dwFullName(Actrl)+'__col="rgba(0,0,0,0)";');
+                end else begin
+                    joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwAlphaColor(TPanel(ACtrl))+'";');
+                end;
+            end;
+            //
+            Result    := (joRes);
+        end else begin
+            //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+            joRes    := _Json('[]');
+            //
+            with TForm(ACtrl) do begin
+                joRes.Add('this.'+Name+'__lef="'+IntToStr(Left)+'px";');
+                joRes.Add('this.'+Name+'__top="'+IntToStr(Top)+'px";');
+                joRes.Add('this.'+Name+'__wid="'+IntToStr(ClientWidth)+'px";');
+                joRes.Add('this.'+Name+'__hei="'+IntToStr(ClientHeight)+'px";');
+                //
+                joRes.Add('this.'+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+                //joRes.Add('this.'+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+                //
+                joRes.Add('this.'+Name+'__col="'+dwColor(Color)+'";');
+                joRes.Add('this.'+Name+'__cap="'+Caption+'";');
+                if BorderStyle = bsNone then begin
+                    joRes.Add('this.'+Name+'__fht="'+IntToStr(ClientHeight)+'px";');
+                end else begin
+                    joRes.Add('this.'+Name+'__fht="'+IntToStr(ClientHeight+40)+'px";');
+                end;
+            end;
+            //
+            Result    := (joRes);
+        end;
+    end;
 end;
-
 
 exports
      dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
-     
 begin
 end.
- 
+

@@ -20,7 +20,7 @@ var
 
 
 
-function dwLoad(AParams:String;AConnection:TADOConnection;AApp:TApplication;AScreen:TScreen):TForm;stdcall;
+function dwLoad(AParams:String;AConnection:Pointer;AApp:TApplication;AScreen:TScreen):TForm;stdcall;
 begin
      //
      Application    := AApp;

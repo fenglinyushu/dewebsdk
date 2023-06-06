@@ -1,4 +1,4 @@
-unit unit1;
+﻿unit unit1;
 
 interface
 
@@ -26,10 +26,13 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
+    Label_Captcha: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,13 +62,6 @@ begin
     end;
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
-begin
-    Timer1.Enabled  := False;
-    Timer1.DesignInfo   := 0;
-    //
-    Self.ParentFont := True;
-end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
@@ -73,6 +69,20 @@ begin
     Label1.Caption      := 'pause';
     Exit;
 
+end;
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+    Timer1.Interval := 200;
+    DockSite    := True;
+
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+    Timer1.Enabled  := False;
+    Timer1.DesignInfo   := 0;
+    //
+    Self.DockSite := True;
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);

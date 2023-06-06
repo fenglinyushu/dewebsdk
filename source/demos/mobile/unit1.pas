@@ -16,9 +16,9 @@ uses
 
 type
   TForm1 = class(TForm)
-    Panel_Header: TPanel;
+    Panel_0_Header: TPanel;
     Label_Header: TLabel;
-    Panel_Footer: TPanel;
+    Panel_9_Footer: TPanel;
     Panel_FooterTopLine: TPanel;
     Button_Return: TButton;
     Button_Menu: TButton;
@@ -29,7 +29,6 @@ type
     Image_bottom2: TImage;
     Image_bottom3: TImage;
     Image_bottom4: TImage;
-    Panel1: TPanel;
     Panel_dm2: TPanel;
     Image_DM2: TImage;
     Panel_dm2c: TPanel;
@@ -84,7 +83,8 @@ end;
 
 procedure TForm1.FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-     //
+    dwSetMobileMode(self,414,736);
+{     //
      Width     := Min(480,X);
 
      //得到移动端实际可用高度
@@ -97,6 +97,7 @@ begin
 
      //
      ScrollBox_Content.Height := Panel_Footer.Top - ScrollBox_Content.Top;
+}
 end;
 
 procedure TForm1.Panel_dm2Click(Sender: TObject);

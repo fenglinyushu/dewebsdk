@@ -29,6 +29,7 @@ function dwDirectInteraction(AData:PWideChar):PWideChar;stdcall;
      end;
 begin
      //name%3Dww%26age%3D18
+     //Result := 'i love U forever!';
 
      Result    := PWideChar(Format('You Name is %s Age is %s',[_Get('name'),_Get('age')]));
 end;

@@ -1,4 +1,4 @@
-library dwTMainMenu;
+ï»¿library dwTMainMenu;
 
 uses
      ShareMem,
@@ -10,18 +10,20 @@ uses
      SynCommons,
 
      //
+     StrUtils,
+     Types, Winapi.Windows, System.Character,
      Messages, SysUtils, Variants, Classes, Graphics,
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls, Menus,
-     StdCtrls, Windows;
+     StdCtrls;
 
-//======¸¨Öúº¯Êı====================================================================================
-//È¡µÃMenuItem
+//======è¾…åŠ©å‡½æ•°====================================================================================
+//å–å¾—MenuItem
 function dwGetMenuItem(AMenu:TMainMenu;AValue:string):TMenuItem;
 var
     iIDs      : array of Integer;
     I         : Integer;
 begin
-    //½«AValue ×ª»»ÎªintÊı×é
+    //å°†AValue è½¬æ¢ä¸ºintæ•°ç»„
     SetLength(iIDs,0);
     while Pos('-',AValue)>0 do begin
         SetLength(iIDs,Length(iIDs)+1);
@@ -40,36 +42,83 @@ begin
         Result    := Result.Items[iIDs[i]];
     end;
 end;
-//==================================================================================================
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
-function dwGetExtra(ACtrl:TComponent):string;stdCall;
+//æ§åˆ¶èœå•æ˜¾éš
+procedure SetItemVisible(APrefix:String;AParent:TMenuItem;AParentVisible:Boolean;var ARes:Variant);
+var
+    I       : Integer;
+    oItem   : TMenuItem;
 begin
-	Result    := '[]';
+    for I := 0 to AParent.Count-1 do begin
+        oItem := AParent.Items[I];
+        ARes.Add(LowerCase(APrefix + oItem.Name)+'__vis:'+dwIIF(AParentVisible AND oItem.Visible,'true,','false,'));
+        ARes.Add(LowerCase(APrefix + oItem.Name)+'__dis:'+dwIIF(not oItem.Enabled,'true,','false,'));
+        //
+        SetItemVisible(APrefix,oItem,AParentVisible AND oItem.Visible,ARes);
+    end;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
-function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
+procedure GetMainMenuVisible(AMenu:TMainMenu;var ARes:Variant);
 var
-    joData    : Variant;
-    oMenuItem : TMenuItem;
-
+    sPrefix : string;
+    I       : Integer;
+    oItem   : TMenuItem;
 begin
-    joData    := _json(AData);
-
-    //ÏÈÕÒµ½¶ÔÓ¦µÄ²Ëµ¥Ïî
-    oMenuItem := dwGetMenuItem(TMainMenu(ACtrl),joData.v);
+    //
+    sPrefix := dwPrefix(AMenu);
 
     //
-    if oMenuItem = nil then begin
-    	Exit;
-    end;
-
-    //Ö´ĞĞÊÂ¼ş
-    if Assigned(oMenuItem.OnClick) then begin
-    	oMenuItem.OnClick(oMenuItem);
+    for I := 0 to AMenu.Items.Count-1 do begin
+        oItem := AMenu.Items[I];
+        ARes.Add(Lowercase(sPrefix + oItem.Name)+'__vis:'+dwIIF(oItem.Visible,'true,','false,'));
+        ARes.Add(LowerCase(sPrefix + oItem.Name)+'__dis:'+dwIIF(not oItem.Enabled,'true,','false,'));
+        //
+        SetItemVisible(sPrefix,oItem,oItem.Visible,ARes);
     end;
 end;
+
+procedure GetMainMenuActionVisible(AMenu:TMainMenu;var ARes:Variant);
+var
+    sPrefix : string;
+    I       : Integer;
+    oItem   : TMenuItem;
+begin
+    //
+    sPrefix := dwPrefix(AMenu);
+
+    //
+    for I := 0 to AMenu.Items.Count-1 do begin
+        oItem := AMenu.Items[I];
+        ARes.Add('this.'+LowerCase(sPrefix + oItem.Name)+'__vis='+dwIIF(oItem.Visible,'true;','false;'));
+        ARes.Add('this.'+LowerCase(sPrefix + oItem.Name)+'__dis='+dwIIF(not oItem.Enabled,'true;','false;'));
+        //
+        SetItemVisible(sPrefix,oItem,oItem.Visible,ARes);
+    end;
+end;
+
+function GetMenuItemIndex(AItem:TMenuItem):String;
+begin
+    Result  := IntToStr(AItem.MenuIndex);
+    while (AItem.Parent <> nil) and (AItem.Parent.MenuIndex >=0 ) do begin
+        AItem   := AItem.Parent;
+        Result  := IntToStr(AItem.MenuIndex)+'-'+Result;
+    end;
+end;
+
+function _GetStyle(AItem:TMenuItem):string;
+var
+    joHint  : Variant;
+begin
+    Result  := '';
+    //
+    joHint  := _json(AItem.Hint);
+    if joHint <> unassigned then begin
+        if joHint.Exists('indent') then begin
+            Result  := ' style="margin-left:'+IntToStr(joHint.indent)+'px;"';
+        end;
+    end;
+end;
+
 
 function _CreateItems (AItem:TMenuItem;APath:String; var ACode:String):Integer;
 var
@@ -78,7 +127,7 @@ var
     miItem    : TMenuItem;
     ssPath    : String;
 begin
-    //×¢ÊÍ£º index ´Ó0¿ªÊ¼£¬Ã¿Ò»²ãÓÃ-¸ô¿ª£¬Èç1-3-2
+    //æ³¨é‡Šï¼š index ä»0å¼€å§‹ï¼Œæ¯ä¸€å±‚ç”¨-éš”å¼€ï¼Œå¦‚1-3-2
 
     //
     for ii := 0 to AItem.Count-1 do begin
@@ -86,44 +135,69 @@ begin
 
         //
         if miItem.Count = 0 then begin
-            //ÎŞ×ÓÏîµÄÇé¿ö
+            //æ— å­é¡¹çš„æƒ…å†µ
 
             if (miItem.ImageIndex>0)and(miItem.ImageIndex<=High(dwIcons)) then begin
-                //ÓĞÍ¼±ê
+                //æœ‰å›¾æ ‡
                 ACode   := ACode
-                        + '<el-menu-item index="'+APath+'-'+IntToStr(ii)+'">'
+                        + '                    <el-menu-item'
+                            +' index="'+APath+'-'+IntToStr(ii)+'"'
+                            +dwVisible(TControl(miItem))
+                            +dwDisable(TControl(miItem))
+                            +' style="'
+                                +dwGetDWStyle(_json(miItem.Hint))
+                            +'"' //style å°é—­
+                        +'>'
                         +'<i class="'+dwIcons[miItem.ImageIndex]+'"></i>'
                         +'<span slot="title">'+miItem.caption+'</span>'
                         +'</el-menu-item>'#13;
             end else begin
-                //ÎŞÍ¼±ê
+                //æ— å›¾æ ‡
                 ACode   := ACode
-                        + '<el-menu-item index="'+APath+'-'+IntToStr(ii)+'">'
+                        + '<el-menu-item'
+                            +' index="'+APath+'-'+IntToStr(ii)+'"'
+                            +dwVisible(TControl(miItem))
+                            +dwDisable(TControl(miItem))
+                            +' style="'
+                                +dwGetDWStyle(_json(miItem.Hint))
+                            +'"' //style å°é—­
+                        +'>'
                         +miItem.caption
                         +'</el-menu-item>'#13;
             end;
         end else begin
-            //ÓĞ×ÓÏîµÄÇé¿ö
+            //æœ‰å­é¡¹çš„æƒ…å†µ
 
             //
             ACode   := ACode
-                    + '<el-submenu index="'+APath+'-'+IntToStr(ii)+'"><template slot="title">'#13;
+                    +'<el-submenu'
+                        +' index="'+APath+'-'+IntToStr(ii)+'"'
+                        +dwVisible(TControl(miItem))
+                        +dwDisable(TControl(miItem))
 
-            //Í¼±ê
+                        +' style="'
+                            +dwGetDWStyle(_json(miItem.Hint))
+                        +'"' //style å°é—­
+                    +'>'
+                    +'<template'
+                        +' slot="title"'
+                    +'>'#13;
+
+            //å›¾æ ‡
             if (miItem.ImageIndex>0)and(miItem.ImageIndex<=High(dwIcons)) then begin
 	            ACode     := ACode + '<i class="'+dwIcons[miItem.ImageIndex]+'"></i>';
             end;
 
-            //²Ëµ¥±êÌâ
+            //èœå•æ ‡é¢˜
             ACode     := ACode + '<span>'+miItem.caption+'</span></template>'#13;
 
-            //Â·¾¶
+            //è·¯å¾„
             ssPath    := APath+'-'+IntToStr(ii);
 
-            //µİ¹éÉú³É×ÓÏî
+            //é€’å½’ç”Ÿæˆå­é¡¹
             _CreateItems(miItem,ssPath,ACode);
 
-            //Ôö¼ÓÎ²²¿×Ö·û
+            //å¢åŠ å°¾éƒ¨å­—ç¬¦
             ACode     := ACode + '</el-submenu>'#13;
         end;
     end;
@@ -131,7 +205,53 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//==================================================================================================
+
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
+function dwGetExtra(ACtrl:TComponent):string;stdCall;
+begin
+	Result    := '[]';
+end;
+
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
+function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
+var
+    joData      : Variant;
+    joHint      : Variant;
+    oMenuItem   : TMenuItem;
+    sHint       : string;
+begin
+    joData    := _json(AData);
+
+    //å…ˆæ‰¾åˆ°å¯¹åº”çš„èœå•é¡¹
+    oMenuItem := dwGetMenuItem(TMainMenu(ACtrl),joData.v);
+
+    //
+    if oMenuItem = nil then begin
+    	Exit;
+    end;
+
+    //æ‰§è¡Œäº‹ä»¶
+    if Assigned(oMenuItem.OnClick) then begin
+        //
+    	oMenuItem.OnClick(oMenuItem);
+    end;
+
+    //å°†å½“å‰èœå•ä½ç½®ä¿å­˜èµ·æ¥ï¼Œå¤‡ç”¨
+    if TMainMenu(ACtrl).Items.Count>0 then begin
+        sHint     := TMainMenu(ACtrl).Items[0].Hint;
+        if dwStrIsJson(sHint) then begin
+            joHint  := _Json(sHint);
+        end else begin
+            joHint  := _json('{}');
+        end;
+        joHint.activeindex  := GetMenuItemIndex(oMenuItem);  //ä»0å¼€å§‹ï¼Œæ¯ä¸€å±‚ç”¨-éš”å¼€ï¼Œå¦‚1-3-2
+        TMainMenu(ACtrl).Items[0].Hint  := joHint;
+    end;
+end;
+
+
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
     sCode     : string;
@@ -141,50 +261,85 @@ var
     oItem     : TMenuItem;
     sHint     : String;
 begin
-    //Éú³É·µ»ØÖµÊı×é
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
     joRes    := _Json('[]');
 
-    //È¡µÃHINT¶ÔÏóJSON
+    //å–å¾—HINTå¯¹è±¡JSON
     sHint     := '{}';
     if TMainMenu(ACtrl).Items.Count>0 then begin
         sHint     := TMainMenu(ACtrl).Items[0].Hint;
     end;
-    TDocVariant.New(joHint);
-    if (sHint<>'') then begin
-        if (Copy(sHint,1,1) = '{') and (Copy(sHint,Length(sHint),1) = '}') then begin
-            joHint    := _json(sHint);
-        end;
+
+    //
+    joHint  := _Json(sHint);
+    if joHint = unassigned then begin
+        joHint  := _json('{}');
     end;
 
     with TMainMenu(ACtrl) do begin
-        sCode	:= '<el-menu'
-                +' id="'+dwPrefix(Actrl)+Name+'"'
-                +' :default-active="'+dwPrefix(Actrl)+Name+'__act"'     //Ä¬ÈÏÑ¡ÖĞ×´Ì¬
+        //å…³é—­"è‡ªåŠ¨çƒ­é”®"
+        AutoHotkeys := maManual;
+
+        //å¤–æ¡†
+        sCode   := '<div'
+                +' :style=''{'
+                    +'backgroundColor:'+dwFullName(Actrl)+'__col,'     //èƒŒæ™¯è‰²
+                    +'left:'+dwFullName(Actrl)+'__lef,'
+                    +'top:'+dwFullName(Actrl)+'__top,'
+                    +'width:'+dwFullName(Actrl)+'__wid,'
+                    +'height:'+dwFullName(Actrl)+'__hei'
+                +'}'''
+                +' style="position:absolute;'
+                +'"' //style å°é—­
+                +'>';
+        joRes.Add(sCode);
+
+        //æ»šåŠ¨æ¡†scrollbar
+        sCode   := '    <el-scrollbar'
+                //+' ref="'+dwFullName(Actrl)+'"'
+                +' style="height:100%;width:100%"'
+                //+dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll',TForm(Owner).Handle]),'')
+                +'>';
+        joRes.Add(sCode);
+
+        //æ€»menué¡¹
+        sCode	:= '        <el-menu'
+                +' id="'+dwFullName(Actrl)+'"'
+                +' :default-active="'+dwFullName(Actrl)+'__act"'     //é»˜è®¤é€‰ä¸­çŠ¶æ€
+                //é»˜è®¤æ‰“å¼€çš„èœå• :default-openeds
+                +' :default-openeds="'+dwFullName(Actrl)+'__opd"'    //é»˜è®¤æ‰“å¼€çš„èœå•é¡¹ openeds: ['1','2','3']
                 +' class="el-menu-demo"'
-                +dwIIF(ParentBiDiMode=False,'',' mode="horizontal"')
+                +dwIIF(ParentBiDiMode=False,'',' mode="horizontal"')    //æ°´å¹³æˆ–å‚ç›´
 
-                //+' background-color="#545c64"'  ±³¾°É«
-                +dwGetHintValue(joHint,'background-color','background-color',' background-color="#545c64"')
+                //+' background-color="#545c64"'  èƒŒæ™¯è‰²
+                //+dwGetHintValue(joHint,'background-color','background-color',' background-color="#545c64"')
+                +' :background-color="'+dwFullName(Actrl)+'__col"'     //èƒŒæ™¯è‰²
 
-                //+' text-color="#fff"'           //ÎÄ±¾É«
+                //+' text-color="#fff"'           //æ–‡æœ¬è‰²
                 +dwGetHintValue(joHint,'text-color','text-color',' text-color="#fff"')
 
-                //+' active-text-color="#ffd04b"' //¼¤»î×´Ì¬ÎÄ±¾É«
+                //+' active-text-color="#ffd04b"' //æ¿€æ´»çŠ¶æ€æ–‡æœ¬è‰²
                 +dwGetHintValue(joHint,'active-text-color','active-text-color',' active-text-color="#ffd04b"')
 
-                //:collapse="isCollapse"           //ÕÛµş
-                +' :collapse="'+dwPrefix(Actrl)+Name+'__cps"'
+                //:collapse="isCollapse"           //æŠ˜å 
+                +' :collapse="'+dwFullName(Actrl)+'__cps"'
                 +' :collapse-transition="false"'
 
                 //+dwVisible(ACtrl)
                 //+dwDisable(ACtrl)
-                +dwLTWHComp(ACtrl)
+                +dwGetDWAttr(joHint)
+                +' style="left:0;top:0;width:99%;height:100%;'  //
+                //+dwLTWHComp(ACtrl)
                 +dwIIF(ParentBiDiMode=False,'line-height:30px;','line-height:'+IntToStr((Tag mod 10000)-22)+'px;')
-                +'"' //style ·â±Õ
+                +dwGetDWStyle(joHint)
+                +'"' //style å°é—­
 
-                +Format(_DWEVENT,['select',Name,'val','onclick',TForm(Owner).Handle])
+                //å•å‡»äº‹ä»¶
+                //+Format(_DWEVENT,['select',Name,'val','onclick',TForm(Owner).Handle])
+                +Format(_DWEVENTPlus,['select',dwIIF(joHint.Exists('dwloading'),'dwloading=true',''),Name,'val','onclick',TForm(Owner).Handle])
+                //+Format(_DWEVENTPlus,['click',Name,'0','onclick',TForm(Owner).Handle])
                 +'>';
-        //Ìí¼Ó
+        //æ·»åŠ 
         joRes.Add(sCode);
 
         //
@@ -192,33 +347,54 @@ begin
 
         for iItem := 0 to Items.Count-1 do begin
             oItem     := Items[iItem];
-            if oItem.Count = 0 then begin //ÎŞ×Ó²Ëµ¥
+            if oItem.Count = 0 then begin //æ— å­èœå•
 
-                //¸ù¾İÓĞÎŞÍ¼±êÅĞ¶Ï
+                //æ ¹æ®æœ‰æ— å›¾æ ‡åˆ¤æ–­
                 if (oItem.ImageIndex>0)and(oItem.ImageIndex<=High(dwIcons)) then begin
-                    joRes.Add('<el-menu-item index="'+IntToStr(iItem)+'" style="height:50px;line-height:35px">'
+                    joRes.Add('            <el-menu-item'
+                                +dwVisible(TControl(oItem))
+                                +dwDisable(TControl(oItem))
+                                +' index="'+IntToStr(iItem)+'"'
+                                +' style="height:50px;line-height:35px"'
+                            +_GetStyle(oItem)
+                            +'>'
                             +'<i class="'+dwIcons[oItem.ImageIndex]+'"></i>'
                             +'<span slot="title">'+oItem.caption+'</span>'
                             +'</el-menu-item>');
                 end else begin
-                    joRes.Add('<el-menu-item index="'+IntToStr(iItem)+'" style="height:50px;line-height:35px">'+oItem.Caption+'</el-menu-item>');
+                    joRes.Add('            <el-menu-item'
+                                +dwVisible(TControl(oItem))
+                                +dwDisable(TControl(oItem))
+                                +' index="'+IntToStr(iItem)+'"'
+                                +' style="height:50px;line-height:35px"'
+                            +_GetStyle(oItem)
+                            +'>'
+                            +oItem.Caption
+                            +'</el-menu-item>');
                 end;
 
             end else begin
-                joRes.Add('<el-submenu index="'+IntToStr(iItem)+'"><template slot="title">');
+                joRes.Add('            <el-submenu'
+                        +dwVisible(TControl(oItem))
+                        +dwDisable(TControl(oItem))
+                        +' index="'+IntToStr(iItem)+'"'
+                        +_GetStyle(oItem)
+                        +'>'
+                        +'<template slot="title">');
                 if (oItem.ImageIndex>0)and(oItem.ImageIndex<=High(dwIcons)) then begin
-                    joRes.Add('<i class="'+dwIcons[oItem.ImageIndex]+'"></i>');
+                    joRes.Add('            <i class="'+dwIcons[oItem.ImageIndex]+'"></i>');
                 end;
-                joRes.Add('<span>'+oItem.Caption+'</span></template>');
-                //
+                joRes.Add('            <span>'+oItem.Caption+'</span></template>');
+                //é€’å½’ç”Ÿæˆèœå•é¡¹
                 _CreateItems(oItem,IntToStr(iItem),sCode);
+                //
                 joRes.Add(sCode);
                 sCode     := '';
                 //
-                joRes.Add('</el-submenu>');
+                joRes.Add('            </el-submenu>');
             end;
         end;
-        //Ìí¼Ó
+        //æ·»åŠ 
         joRes.Add(sCode);
     end;
 
@@ -226,78 +402,173 @@ begin
     Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
     joRes     : Variant;
 begin
-    //Éú³É·µ»ØÖµÊı×é
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
     joRes    := _Json('[]');
-    //Éú³É·µ»ØÖµÊı×é
-    joRes.Add('</el-menu>');
+    //èœå•
+    joRes.Add('        </el-menu>');
+    //scrollbar
+    joRes.Add('    </el-scrollbar>');
+    //æœ€å¤–æ¡†
+    joRes.Add('</div>');
     //
     Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-    joRes     : Variant;
-    sAction   : String;
+    sActive : String;
+    sHint   : string;
+    sCode   : string;
+    sIds    : TStringDynArray;
+    sCur    : String;
+    sOpens  : string;
+    joRes   : Variant;
+    joHint  : Variant;
+    iItem   : Integer;
+    iTmp    : Integer;
 begin
-    //Éú³É·µ»ØÖµÊı×é
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
     joRes    := _Json('[]');
     //
     with TMainMenu(ACtrl) do begin
 
-        //ÕÛµş×´Ì¬
-        joRes.Add(dwPrefix(Actrl)+Name+'__cps:'+dwIIF(AutoMerge,'true','false')+',');
-
-        if Tag < 10000 then begin
-            //Èç¹ûÃ»ÓĞÉèÖÃµ±Ç°²Ëµ¥µÄLTWH,ÔòÎªÄ¬ÈÏÖµ
-            joRes.Add(dwPrefix(Actrl)+Name+'__lef:"0px",');
-            joRes.Add(dwPrefix(Actrl)+Name+'__top:"0px",');
-            joRes.Add(dwPrefix(Actrl)+Name+'__wid:"600px",');
-            joRes.Add(dwPrefix(Actrl)+Name+'__hei:"38px",');
+        //å–å¾—HINTå¯¹è±¡JSON
+        sHint     := '{}';
+        if TMainMenu(ACtrl).Items.Count>0 then begin
+            sHint     := TMainMenu(ACtrl).Items[0].Hint;
+        end;
+        if dwStrIsJson(sHint) then begin
+            joHint  := _Json(sHint);
         end else begin
-            joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(DesignInfo div 10000)+'px",');
-            joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(DesignInfo mod 10000)+'px",');
-            joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Tag div 10000)+'px",');
-            joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Tag mod 10000)+'px",');
+            joHint  := _json('{}');
         end;
 
-        //µ±Ç°¼¤»î²Ëµ¥Î»ÖÃ(±£´æÔÚItems[0].Hint)
+
+        //æŠ˜å çŠ¶æ€
+        joRes.Add(dwFullName(Actrl)+'__cps:'+dwIIF(AutoMerge,'true','false')+',');
+
+        //èƒŒæ™¯è‰²
+        if joHint.Exists('background-color') then begin
+            joRes.Add(dwFullName(Actrl)+'__col:"'+String(joHint._('background-color'))+'",');
+        end else begin
+            joRes.Add(dwFullName(Actrl)+'__col:"#545c64",');
+        end;
+
+        //è®¾ç½®ä½ç½®å¤§å°LTWH
+        if Tag < 10000 then begin
+            //å¦‚æœæ²¡æœ‰è®¾ç½®å½“å‰èœå•çš„LTWH,åˆ™ä¸ºé»˜è®¤å€¼
+            joRes.Add(dwFullName(Actrl)+'__lef:"0px",');
+            joRes.Add(dwFullName(Actrl)+'__top:"0px",');
+            joRes.Add(dwFullName(Actrl)+'__wid:"600px",');
+            joRes.Add(dwFullName(Actrl)+'__hei:"38px",');
+        end else begin
+            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(DesignInfo div 10000)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(DesignInfo mod 10000)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Tag div 10000)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Tag mod 10000)+'px",');
+        end;
+
+
+
+        //å½“å‰æ¿€æ´»èœå•ä½ç½®(ä¿å­˜åœ¨Items[0].Hint)
+        sOpens  := '';
         if Items.Count>0 then begin
-            sAction   := Items[1].Hint;// dwGetProp(TControl(Items[0]),'actionindex');
-            if sAction<>'' then begin
-                joRes.Add(dwPrefix(Actrl)+Name+'__act:"'+sAction+'",');
+            if joHint.Exists('activeindex') then begin
+                sActive := String(joHint.activeindex);
+            end;
+            if sActive<>'' then begin
+                joRes.Add(dwFullName(Actrl)+'__act:"'+sActive+'",');
+                //é»˜è®¤æ‰“å¼€çš„èœå•
+                if Pos('-',sActive)>0 then begin
+                    sIDs    := SplitString(sActive,'-');
+                    for iItem := 0 to High(sIDs) do begin
+                        sCur    := sIDs[0];
+                        for iTmp := 1 to iItem do begin
+                            sCur    := sCur + '-' + sIDs[iTmp];
+                        end;
+                        sOpens  := sOpens+''''+sCur+''',';
+                    end;
+                    Delete(sOpens,Length(sOpens),1);
+                end;
             end else begin
-                joRes.Add(dwPrefix(Actrl)+Name+'__act:"0",');
+                joRes.Add(dwFullName(Actrl)+'__act:"0",');
             end;
         end else begin
-            joRes.Add(dwPrefix(Actrl)+Name+'__act:"0",');
+            joRes.Add(dwFullName(Actrl)+'__act:"0",');
         end;
+        //
+        joRes.Add(dwFullName(Actrl)+'__opd:['+sOpens+'],');
+
     end;
+
+    //å¾—åˆ°å¯è§†æ€§å’Œå¯ç”¨æ€§
+    GetMainMenuVisible(TMainMenu(ACtrl),joRes);
+
     //
-    Result    := (joRes);
+    Result    := VariantSaveJSON(joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-    joRes     : Variant;
+    joRes   : Variant;
+    joHint  : Variant;
+    sHint   : string;
+    sActive : string;
 begin
-    //Éú³É·µ»ØÖµÊı×é
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
     joRes    := _Json('[]');
+
     //
     with TMainMenu(ACtrl) do begin
-        joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(DesignInfo div 10000)+'px";');
-        joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(DesignInfo mod 10000)+'px";');
-        joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Tag div 10000)+'px";');
-        joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Tag mod 10000)+'px";');
+        //å–å¾—HINTå¯¹è±¡JSON
+        sHint     := '{}';
+        if TMainMenu(ACtrl).Items.Count>0 then begin
+            sHint     := TMainMenu(ACtrl).Items[0].Hint;
+        end;
 
-        //ÕÛµş×´Ì¬
-        joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cps='+dwIIF(AutoMerge,'true','false')+';');
+        joHint  := _Json(sHint);
+        if joHint = unassigned then begin
+            joHint  := _json('{}');
+        end;
+
+        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(DesignInfo div 10000)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(DesignInfo mod 10000)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Tag div 10000)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Tag mod 10000)+'px";');
+
+        //æŠ˜å çŠ¶æ€
+        joRes.Add('this.'+dwFullName(Actrl)+'__cps='+dwIIF(AutoMerge,'true','false')+';');
+
+        //èƒŒæ™¯è‰²
+        if joHint.Exists('backgroundcolor') then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__col="'+String(joHint.backgroundcolor)+'";');
+        end else begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__col="#545c64";');
+        end;
+
+        //å½“å‰æ¿€æ´»èœå•ä½ç½®(ä¿å­˜åœ¨Items[0].Hint)
+        if Items.Count>0 then begin
+            if joHint.Exists('activeindex') then begin
+                sActive := String(joHint.activeindex);
+            end;
+            if sActive<>'' then begin
+                joRes.Add('this.'+dwFullName(Actrl)+'__act="'+sActive+'";');
+            end else begin
+                joRes.Add('this.'+dwFullName(Actrl)+'__act="0";');
+            end;
+        end else begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__act="0";');
+        end;
     end;
+
+    //å¾—åˆ°å¯è§†æ€§å’Œå¯ç”¨æ€§
+    GetMainMenuActionVisible(TMainMenu(ACtrl),joRes);
 
     //
     Result    := (joRes);
@@ -309,7 +580,7 @@ exports
     dwGetEvent,
     dwGetHead,
     dwGetTail,
-    dwGetMethod,
+    dwGetAction,
     dwGetData;
      
 begin

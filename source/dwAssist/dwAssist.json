@@ -1,0 +1,598 @@
+[
+   {
+      "class" : "TBitBtn",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "string",
+            "hint" : "按钮的显示样式",
+            "items" : [
+               [ "primary", "主要" ],
+               [ "success", "成功" ],
+               [ "info", "信息" ],
+               [ "warning", "警告" ],
+               [ "danger", "危险" ],
+               [ "text", "文本" ]
+            ]
+         },
+         {
+            "name" : "style",
+            "type" : "按钮的显示形状",
+            "items" : [
+               [ "plain", "朴素" ],
+               [ "round", "圆角" ],
+               [ "circle", "圆形" ]
+            ]
+         },
+         {
+            "name" : "icon",
+            "type" : "string",
+            "hint" : "按钮的图标（左侧）",
+            "items" : [
+               [ "el-icon-platform-eleme" ],
+               [ "el-icon-eleme" ],
+               [ "el-icon-delete-solid" ],
+               [ "el-icon-delete" ],
+               [ "el-icon-s-tools" ],
+               [ "el-icon-setting" ],
+               [ "el-icon-user-solid" ],
+               [ "el-icon-user" ],
+               [ "el-icon-phone" ],
+               [ "el-icon-phone-outline" ]
+            ]
+         },
+         {
+            "name" : "backgroundcolor",
+            "type" : "string",
+            "hint" : "按钮的背景色",
+            "items" : [
+               [ "#4CAF50" ],
+               [ "#00AC6A" ],
+               [ "#6CCF70" ],
+               [ "#008CBA" ],
+               [ "#0094D9" ],
+               [ "#00B4F4" ],
+               [ "#f44336" ],
+               [ "#FE5E08" ],
+               [ "#FF6356" ],
+               [ "#e7e7e7" ],
+               [ "#D71103" ],
+               [ "#156AA8" ],
+               [ "#555555" ]
+            ]
+         },
+         {
+            "name" : "radius",
+            "type" : "string",
+            "hint" : "按钮的圆角半径（数值可自行更改）",
+            "items" : [
+               [ "5px", "5像素圆角" ],
+               [ "50%", "50%圆角" ],
+               [ "5px 5px 0px 0px", "左上/右上角5像素圆角，左下/右下直角" ],
+               [ "10px 0 0 10px", "左上/左下角5像素圆角，右上/右下直角" ],
+               [ "0 10px 10px 0", "左上/左下角直角，右上/右下5像素圆角" ]
+            ]
+         },
+         {
+            "name" : "accept",
+            "type" : "string",
+            "hint" : "指定上传文件的类型",
+            "items" : [
+               [ "image/*", "上传图片" ],
+               [ "video/*", "上传视频" ],
+               [ "image/gif, image/jpeg", "上传gif和jpeg" ],
+               [ ".doc,.docx,.xls,.xlsx,.pdf", "上传指定扩展名" ],
+               [ "application/msword", "WORD文档" ],
+               [ "application/pdf", "上传PDF" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TButton",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "string",
+            "hint" : "按钮的显示样式",
+            "items" : [
+               [ "primary", "主要" ],
+               [ "success", "成功" ],
+               [ "info", "信息" ],
+               [ "warning", "警告" ],
+               [ "danger", "危险" ],
+               [ "text", "文本" ]
+            ]
+         },
+         {
+            "name" : "style",
+            "type" : "string",
+            "hint" : "按钮的显示形状",
+            "items" : [
+               [ "plain", "朴素" ],
+               [ "round", "圆角" ],
+               [ "circle", "圆形" ]
+            ]
+         },
+         {
+            "name" : "icon",
+            "type" : "string",
+            "hint" : "按钮的图标（左侧）",
+            "items" : [
+               [ "el-icon-platform-eleme" ],
+               [ "el-icon-eleme" ],
+               [ "el-icon-delete-solid" ],
+               [ "el-icon-delete" ],
+               [ "el-icon-s-tools" ],
+               [ "el-icon-setting" ],
+               [ "el-icon-user-solid" ],
+               [ "el-icon-user" ],
+               [ "el-icon-phone" ],
+               [ "el-icon-phone-outline" ]
+            ]
+         },
+         {
+            "name" : "backgroundcolor",
+            "type" : "string",
+            "hint" : "按钮的背景色",
+            "items" : [
+               [ "#4CAF50" ],
+               [ "#00AC6A" ],
+               [ "#6CCF70" ],
+               [ "#008CBA" ],
+               [ "#0094D9" ],
+               [ "#00B4F4" ],
+               [ "#f44336" ],
+               [ "#FE5E08" ],
+               [ "#FF6356" ],
+               [ "#e7e7e7" ],
+               [ "#D71103" ],
+               [ "#156AA8" ],
+               [ "#555555" ]
+            ]
+         },
+         {
+            "name" : "radius",
+            "type" : "string",
+            "hint" : "按钮的圆角半径（数值可自行更改）",
+            "items" : [
+               [ "5px", "5像素圆角" ],
+               [ "50%", "50%圆角" ],
+               [ "5px 5px 0px 0px", "左上/右上角5像素圆角，左下/右下直角" ],
+               [ "10px 0 0 10px", "左上/左下角5像素圆角，右上/右下直角" ],
+               [ "0 10px 10px 0", "左上/左下角直角，右上/右下5像素圆角" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TColumnTitle",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "字段类型",
+            "items" : [
+               [ "image", "显示图像" ],
+               [ "rate", "显示为徽章" ]
+            ]
+         },
+         {
+            "name" : "left",
+            "type" : "integer",
+            "hint" : "left",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "top",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ]
+            ]
+         },
+         {
+            "name" : "width",
+            "type" : "integer",
+            "hint" : "width",
+            "items" : [
+               [ 40 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 120 ],
+               [ 150 ],
+               [ 180 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "height",
+            "type" : "integer",
+            "hint" : "height",
+            "items" : [
+               [ 40 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 120 ],
+               [ 150 ],
+               [ 180 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "right",
+            "type" : "integer",
+            "hint" : "right",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "bottom",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ]
+            ]
+         },
+         {
+            "name" : "nowidth",
+            "type" : "integer",
+            "hint" : "not use width",
+            "items" : [
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "noheight",
+            "type" : "integer",
+            "hint" : "not use height",
+            "items" : [
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "format",
+            "type" : "string",
+            "hint" : "用于格式化字段值",
+            "items" : [
+               [ "media/images/%s.png" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TComboBox",
+      "items" : [
+         {
+            "name" : "height",
+            "type" : "integer",
+            "hint" : "用于解决TComboBox的高度问题",
+            "items" : [
+               [ "25" ],
+               [ "30" ],
+               [ "35" ],
+               [ "40" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TEdit",
+      "items" : [
+         {
+            "name" : "prefix-icon",
+            "type" : "string",
+            "hint" : "按钮的图标（左侧）",
+            "items" : [
+               [ "el-icon-platform-eleme" ],
+               [ "el-icon-eleme" ],
+               [ "el-icon-delete-solid" ],
+               [ "el-icon-delete" ],
+               [ "el-icon-s-tools" ],
+               [ "el-icon-setting" ],
+               [ "el-icon-user-solid" ],
+               [ "el-icon-user" ],
+               [ "el-icon-phone" ],
+               [ "el-icon-phone-outline" ]
+            ]
+         },
+         {
+            "name" : "suffix-icon",
+            "type" : "string",
+            "hint" : "按钮的图标（右侧）",
+            "items" : [
+               [ "el-icon-platform-eleme" ],
+               [ "el-icon-eleme" ],
+               [ "el-icon-delete-solid" ],
+               [ "el-icon-delete" ],
+               [ "el-icon-s-tools" ],
+               [ "el-icon-setting" ],
+               [ "el-icon-user-solid" ],
+               [ "el-icon-user" ],
+               [ "el-icon-phone" ],
+               [ "el-icon-phone-outline" ]
+            ]
+         },
+         {
+            "name" : "placeholder",
+            "type" : "string",
+            "hint" : "输入提示",
+            "items" : [
+               [ "请输入用户名" ],
+               [ "请输入密码" ],
+               [ "搜索" ],
+               [ "search" ]
+            ]
+         },
+         {
+            "name" : "dwattr",
+            "type" : "string",
+            "hint" : "直接HTML节点属性",
+            "items" : [
+               [ "type=\"number\"" ],
+               [ "type=\"color\"" ],
+               [ "type=\"date\"" ],
+               [ "type=\"email\"" ],
+               [ "type=\"week\"" ],
+               [ "type=\"time\"" ],
+               [ "type=\"datetime-local\"" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TForm",
+      "items" : [
+         {
+            "name" : "tablename",
+            "type" : "string",
+            "hint" : "用于CRUD时的表名",
+            "items" : [
+               [ "user" ],
+               [ "product" ],
+               [ "role" ]
+            ]
+         },
+         {
+            "name" : "pagesize",
+            "type" : "integer",
+            "hint" : "每页显示记录数量",
+            "items" : [
+               [ 5 ],
+               [ 10 ],
+               [ 15 ],
+               [ 20 ],
+               [ 30 ],
+               [ 50 ]
+            ]
+         },
+         {
+            "name" : "rowheight",
+            "type" : "integer",
+            "hint" : "行高",
+            "items" : [
+               [ 25 ],
+               [ 30 ],
+               [ 35 ],
+               [ 40 ],
+               [ 45 ],
+               [ 50 ]
+            ]
+         },
+         {
+            "name" : "fields",
+            "type" : "string",
+            "hint" : "字段列表",
+            "items" : [
+               [ "name" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TImage",
+      "items" : [
+         {
+            "name" : "src",
+            "type" : "string",
+            "hint" : "对应的图片文件地址",
+            "items" : [
+               [ "media/images/mn/1.jpg" ],
+               [ "image/1.jpg" ]
+            ]
+         },
+         {
+            "name" : "radius",
+            "type" : "string",
+            "hint" : "圆角半径（数值可自行更改）",
+            "items" : [
+               [ "5px", "5像素圆角" ],
+               [ "50%", "50%圆角" ],
+               [ "5px 5px 0px 0px", "左上/右上角5像素圆角，左下/右下直角" ],
+               [ "10px 0 0 10px", "左上/左下角5像素圆角，右上/右下直角" ],
+               [ "0 10px 10px 0", "左上/左下角直角，右上/右下5像素圆角" ]
+            ]
+         },
+         {
+            "name" : "href",
+            "type" : "string",
+            "hint" : "点击跳转网址（在新页面打开）",
+            "items" : [
+               [ "/hello" ]
+            ]
+         },
+         {
+            "name" : "hrefself",
+            "type" : "string",
+            "hint" : "点击跳转网址（在当前页面打开）",
+            "items" : [
+               [ "/hello" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TLabel",
+      "items" : []
+   },
+   {
+      "class" : "TListView",
+      "items" : [
+         {
+            "name" : "dataset",
+            "type" : "对应的FDQuery控件，如FDQuery1",
+            "items" : [
+               [ "FDQuery1" ],
+               [ "FDQuery2" ],
+               [ "FDQuery" ]
+            ]
+         },
+         {
+            "name" : "primarykey",
+            "type" : "DataSet的主键，比如id",
+            "items" : [
+               [ "id" ],
+               [ "uid" ]
+            ]
+         },
+         {
+            "name" : "topheight",
+            "type" : "integer",
+            "hint" : "顶部栏高度",
+            "items" : [
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 70 ],
+               [ 80 ],
+               [ 90 ],
+               [ 100 ]
+            ]
+         },
+         {
+            "name" : "rowheight",
+            "type" : "integer",
+            "hint" : "记录行高度",
+            "items" : [
+               [ 30 ],
+               [ 35 ],
+               [ 40 ],
+               [ 45 ],
+               [ 50 ],
+               [ 60 ]
+            ]
+         },
+         {
+            "name" : "pagesize",
+            "type" : "integer",
+            "hint" : "每页记录数",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 70 ],
+               [ 80 ],
+               [ 90 ],
+               [ 100 ]
+            ]
+         },
+         {
+            "name" : "db",
+            "type" : "数据库类型",
+            "items" : [
+               [ "access" ],
+               [ "mssql2000" ],
+               [ "mssql2008" ],
+               [ "mssql2014" ],
+               [ "mysql" ],
+               [ "sqlite" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TPanel",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "string",
+            "hint" : "徽章样式（HelpKeyword为badge时有效）",
+            "items" : [
+               [ "primary" ],
+               [ "success" ],
+               [ "info" ],
+               [ "warning" ],
+               [ "danger" ],
+               [ "text" ]
+            ]
+         },
+         {
+            "name" : "radius",
+            "type" : "string",
+            "hint" : "按钮的圆角半径（数值可自行更改）",
+            "items" : [
+               [ "5px", "5像素圆角" ],
+               [ "50%", "50%圆角" ],
+               [ "5px 5px 0px 0px", "左上/右上角5像素圆角，左下/右下直角" ],
+               [ "10px 0 0 10px", "左上/左下角5像素圆角，右上/右下直角" ],
+               [ "0 10px 10px 0", "左上/左下角直角，右上/右下5像素圆角" ]
+            ]
+         },
+         {
+            "name" : "dwstyle",
+            "type" : "string",
+            "hint" : "直接设置HTML元素style",
+            "items" : [
+               [
+                  "background-image: linear-gradient(#7A88FF, #7AFFAF);",
+                  "从上到下渐变"
+               ],
+               [
+                  "background-image: linear-gradient(to right , #7A88FF, #7AFFAF);",
+                  "从左到右渐变"
+               ]
+            ]
+         }
+      ]
+   }
+]

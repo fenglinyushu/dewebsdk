@@ -1,13 +1,13 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{F0CBF1F9-F884-4092-B26A-5D808E06437E}</ProjectGuid>
+        <ProjectGuid>{D2756829-E980-4F44-873B-E4E38C9D5D39}</ProjectGuid>
         <MainSource>dwTMainMenu.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Library</AppType>
         <FrameworkType>VCL</FrameworkType>
-        <ProjectVersion>19.2</ProjectVersion>
+        <ProjectVersion>19.4</ProjectVersion>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -26,6 +26,12 @@
     <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
@@ -50,7 +56,6 @@
         <DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
         <DCC_ExeOutput>..\Runtime\dwVcls\</DCC_ExeOutput>
         <DCC_UnitSearchPath>E:\编程参考\D10.2.3\Steema TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi7\Lib;E:\Steema TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi7\Lib;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_UsePackage>vcl;rtl;vclx;vclshlctrls;dbrtl;vcldb;adortl;bdertl;vcldbx;VclSmp;PSysTray;dpkUDT;PTheadTimer;tb2k_d7;vclactnband;tbx_d7;PSplit;PMyDBGrid;RaizeComponentsVcl;RaizeComponentsVclDb;PSPComm;PXpBtn;TMSD7;TMSD7PERS;PngComponentsD7;SynEdit_D7;RxCtl7;VirtualTreesD7;FR7;RaudusD70;NxGridDsgn;NxGridRun;NxCommonRun;NxCollectionRun;NxCollectionDsgn;NxDBThirdpartyRun;NxInspectorDsgn;NxInspectorRun;NxSheetRun;NxTBX;SUIPackD7;cxLibraryVCLD7;dxEdtrD7;cxPageControlVCLD7;cxWebD7;cxWebSnapD7;cxWebPascalScriptD7;dxPSLnksD7;dxPSCoreD7;cxDataD7;dxPScxCommonD7;cxEditorsVCLD7;dxPScxExtCommonD7;cxExtEditorsVCLD7;dxThemeD7;dxPScxGridLnkD7;cxGridVCLD7;dxPScxScheduler2LnkD7;cxSchedulerVCLD7;dxPScxSSLnkD7;dxPScxTLLnkD7;cxTreeListVCLD7;dxPScxVGridLnkD7;cxVerticalGridVCLD7;dxPSdxDBOCLnkD7;dxdborD7;dxorgcD7;dxPSdxOCLnkD7;dxPSdxDBTVLnkD7;dxdbtrD7;dxPSdxFCLnkD7;dxFlowChartD7;dxPSdxLCLnkD7;dxLayoutControlD7;dxPSdxMVLnkD7;dxMasterViewD7;dxPsPrVwAdvD7;dxBarExtItemsD7;dxBarD7;dxComnD7;dxInsD7;dxDBEdD7;dxObjInsD7;dxForumLibD7;dxELibD7;ECQDBCD7;EQTLD7;EQDBTLD7;dxExELD7;EQGridD7;dxGrEdD7;TDBNavPlus;dxmdsD7;dxsbD7;dxDockingD7;dxBarExtDBItemsD7;dxBarDBNavD7;dxtrmdD7;dxNavBarD7;dxPScxPCProdD7;Tee97;TeeUI97;TeeDB97;TeePro97;TeeGL97;TeeImage97;TeeLanguage97;TeeWorld97;TeeImport97;SpTBXLib_d7;$(DCC_UsePackage)</DCC_UsePackage>
         <GenDll>true</GenDll>
         <SanitizedProjectName>dwTMainMenu</SanitizedProjectName>
         <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;$(DCC_Namespace)</DCC_Namespace>
@@ -76,6 +81,16 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <DCC_ExeOutput>..\..\Runtime\Apps\</DCC_ExeOutput>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <Manifest_File>(None)</Manifest_File>
+        <Debugger_HostApplication>..\..\runtime\DeWebServer.exe</Debugger_HostApplication>
+        <Debugger_CWD>..\..\runtime\</Debugger_CWD>
+        <DCC_UnitSearchPath>..\_public;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -137,6 +152,16 @@
                     </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidClasses">
+                    <Platform Name="Android">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>64</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>64</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="AndroidClassesDexFile">
@@ -533,7 +558,29 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
+                <DeployClass Name="iPad_Launch1024">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
                 <DeployClass Name="iPad_Launch1024x768">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1536">
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
@@ -567,6 +614,17 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPad_Launch1668x2388">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch2048">
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
@@ -639,6 +697,17 @@
                     </Platform>
                     <Platform Name="iOSSimulator">
                         <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch768">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -1081,6 +1150,7 @@
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>

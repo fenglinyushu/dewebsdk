@@ -1,13 +1,13 @@
-library dwTLabeledEdit;
+ï»¿library dwTLabeledEdit;
 
 uses
-     ShareMem,      //±ØĞëÌí¼Ó
+     ShareMem,      //å¿…é¡»æ·»åŠ 
 
      //
-     dwCtrlBase,    //Ò»Ğ©»ù´¡º¯Êı
+     dwCtrlBase,    //ä¸€äº›åŸºç¡€å‡½æ•°
 
      //
-     SynCommons,    //mormotÓÃÓÚ½âÎöJSONµÄµ¥Ôª
+     SynCommons,    //mormotç”¨äºè§£æJSONçš„å•å…ƒ
 
      //
      Messages, SysUtils, Variants, Classes, Graphics,
@@ -18,31 +18,31 @@ function _GetFont(AFont:TFont):string;
 begin
      Result    := 'color:'+dwColor(AFont.color)+';'
                +'font-family:'''+AFont.name+''';'
-               +'font-size:'+IntToStr(AFont.size)+'pt;';
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
 
-     //´ÖÌå
+     //ç²—ä½“
      if fsBold in AFont.Style then begin
           Result    := Result+'font-weight:bold;';
      end else begin
           Result    := Result+'font-weight:normal;';
      end;
 
-     //Ğ±Ìå
+     //æ–œä½“
      if fsItalic in AFont.Style then begin
           Result    := Result+'font-style:italic;';
      end else begin
           Result    := Result+'font-style:normal;';
      end;
 
-     //ÏÂ»®Ïß
+     //ä¸‹åˆ’çº¿
      if fsUnderline in AFont.Style then begin
           Result    := Result+'text-decoration:underline;';
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end;
      end else begin
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end else begin
@@ -72,12 +72,12 @@ function _GetTextDecoration(AFont:TFont):String;
 begin
      if fsUnderline in AFont.Style then begin
           Result    :='underline';
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := 'line-through';
           end;
      end else begin
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := 'line-through';
           end else begin
@@ -115,16 +115,16 @@ begin
 end;
 
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS ,Ò»°ãÎª²»×ö¸Ä¶¯,Ä¿Ç°½öÔÚTChartÊ¹ÓÃÊ±ĞèÒªÓÃµ½
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS ,ä¸€èˆ¬ä¸ºä¸åšæ”¹åŠ¨,ç›®å‰ä»…åœ¨TChartä½¿ç”¨æ—¶éœ€è¦ç”¨åˆ°
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
      {
-     //ÒÔÏÂÊÇTChartÊ±µÄ´úÂë,¹©²Î¿¼
+     //ä»¥ä¸‹æ˜¯TChartæ—¶çš„ä»£ç ,ä¾›å‚è€ƒ
      joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
      joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
      joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
@@ -134,7 +134,7 @@ begin
      Result    := joRes;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -149,16 +149,16 @@ begin
                TLabeledEdit(ACtrl).OnEnter(TLabeledEdit(ACtrl));
           end;
      end else if joData.e = 'onchange' then begin
-          //±£´æÊÂ¼ş
+          //ä¿å­˜äº‹ä»¶
           oChange   := TLabeledEdit(ACtrl).OnChange;
-          //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
+          //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
           TLabeledEdit(ACtrl).OnChange  := nil;
-          //¸üĞÂÖµ
+          //æ›´æ–°å€¼
           TLabeledEdit(ACtrl).Text    := dwUnescape(dwUnescape(joData.v));
-          //»Ö¸´ÊÂ¼ş
+          //æ¢å¤äº‹ä»¶
           TLabeledEdit(ACtrl).OnChange  := oChange;
 
-          //Ö´ĞĞÊÂ¼ş
+          //æ‰§è¡Œäº‹ä»¶
           if Assigned(TLabeledEdit(ACtrl).OnChange) then begin
                TLabeledEdit(ACtrl).OnChange(TLabeledEdit(ACtrl));
           end;
@@ -178,26 +178,26 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
      with TLabeledEdit(ACtrl) do begin
-          //Ìí¼Ó±êÇ©
+          //æ·»åŠ æ ‡ç­¾
           sCode     := '<div '
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' v-html="'+dwPrefix(Actrl)+Name+'__lbc"'
+                    +' id="'+dwFullName(Actrl)+'"'
+                    +' v-html="'+dwFullName(Actrl)+'__lbc"'
 
                     //:style
-                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__lbl,top:'+dwPrefix(Actrl)+Name+'__lbt,width:'+dwPrefix(Actrl)+Name+'__lbw,height:'+dwPrefix(Actrl)+Name+'__lbh}"'
+                    +' :style="{left:'+dwFullName(Actrl)+'__lbl,top:'+dwFullName(Actrl)+'__lbt,width:'+dwFullName(Actrl)+'__lbw,height:'+dwFullName(Actrl)+'__lbh}"'
 
                     //style
                     +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';'
@@ -205,133 +205,146 @@ begin
                     +dwIIF(TLabeledEdit(ACtrl).EditLabel.Layout=tlCenter,'line-height:'+IntToStr(Height)+'px;','')
                     +'"'
 
-                   +'>{{'+dwPrefix(Actrl)+Name+'__lbc}}</div>';
+                   +'>{{'+dwFullName(Actrl)+'__lbc}}</div>';
 
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
 
           sCode     := '<el-input'
-                    +dwVisible(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿É¼ûĞÔVisible
-                    +dwDisable(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿ÉÓÃĞÔEnabled(²¿·Ö¿Ø¼ş²»Ö§³Ö)
-                    +dwIIF(PasswordChar=#0,'',' show-password')            //ÊÇ·ñÎªÃÜÂë
-                    +' v-model="'+dwPrefix(Actrl)+Name+'__txt"'                            //Ç°ÖÃ
-                    +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,ÌáÊ¾Óï
-                    +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //Ç°ÖÃIcon
-                    +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //ºóÖÃIcon
+                    +dwVisible(TControl(ACtrl))                            //ç”¨äºæ§åˆ¶å¯è§æ€§Visible
+                    +dwDisable(TControl(ACtrl))                            //ç”¨äºæ§åˆ¶å¯ç”¨æ€§Enabled(éƒ¨åˆ†æ§ä»¶ä¸æ”¯æŒ)
+                    +dwIIF(PasswordChar=#0,'',' show-password')            //æ˜¯å¦ä¸ºå¯†ç 
+                    +' v-model="'+dwFullName(Actrl)+'__txt"'                            //å‰ç½®
+                    +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,æç¤ºè¯­
+                    +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //å‰ç½®Icon
+                    +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //åç½®Icon
                     //+dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__edl,top:'+dwPrefix(Actrl)+Name+'__edt,width:'+dwPrefix(Actrl)+Name+'__edw,height:'+dwPrefix(Actrl)+Name+'__edh}"'
+                    +dwIIF(ReadOnly,' readonly','')                         //æ˜¯å¦åªè¯»
+                    +dwGetDWAttr(joHint)
+                    +' :style="{'
+                        +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                        +'left:'+dwFullName(Actrl)+'__edl,'
+                        +'top:'+dwFullName(Actrl)+'__edt,'
+                        +'width:'+dwFullName(Actrl)+'__edw,'
+                        +'height:'+dwFullName(Actrl)+'__edh'
+                    +'}"'
                     +' style="position:absolute;'
-                         +dwGetHintStyle(joHint,'borderradius','border-radius','border-radius:4px;')   //border-radius
+                         +dwGetHintStyle(joHint,'radius','border-radius','border-radius:4px;')   //border-radius
                          +dwGetHintStyle(joHint,'border','border','border:1px solid #DCDFE6;')   //border-radius
                          +'overflow: hidden;'
-                    +'"' // ·â±Õstyle
-                    +Format(_DWEVENT,['input',Name,'escape(this.'+dwPrefix(Actrl)+Name+'__txt)','onchange',TForm(Owner).Handle]) //°ó¶¨ÊÂ¼ş
-                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+dwPrefix(Actrl)+Name+'__txt)','onchange',TForm(Owner).Handle]),'')
+                         +dwGEtDWStyle(joHint)
+                    +'"' // å°é—­style
+                    +Format(_DWEVENT,['input',Name,'escape(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle]) //ç»‘å®šäº‹ä»¶
+                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',Name,'0','onenter',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'></el-input>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
-     //Õû¸ö
+     //æ•´ä¸ª
      iL,iT     : Integer;
      iW,iH     : Integer;
-     //±êÇ©
+     //æ ‡ç­¾
      iLbL,iLbT : Integer;
      iLbW,iLbH : Integer;
-     //±à¼­¿ò
+     //ç¼–è¾‘æ¡†
      iEdL,iEdT : Integer;
      iEdW,iEdH : Integer;
 
 begin
 
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TLabeledEdit(ACtrl) do begin
           //
-          //joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          //joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          //joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          //joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          //joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          //joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          //joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          //joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__txt:"'+dwChangeChar(Text)+'",');
+          joRes.Add(dwFullName(Actrl)+'__txt:"'+dwChangeChar(Text)+'",');
 
 
 
           //Label
-          joRes.Add(dwPrefix(Actrl)+Name+'__lbl:"'+IntToStr(EditLabel.Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__lbt:"'+IntToStr(EditLabel.Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__lbw:"'+IntToStr(EditLabel.Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__lbh:"'+IntToStr(EditLabel.Height)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__lbc:"'+EditLabel.Caption+'",');
+          joRes.Add(dwFullName(Actrl)+'__lbl:"'+IntToStr(EditLabel.Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lbt:"'+IntToStr(EditLabel.Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lbw:"'+IntToStr(EditLabel.Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lbh:"'+IntToStr(EditLabel.Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lbc:"'+EditLabel.Caption+'",');
 
           //Edit
-          joRes.Add(dwPrefix(Actrl)+Name+'__edl:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__edt:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__edw:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__edh:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__edl:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__edt:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__edw:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__edh:"'+IntToStr(Height)+'px",');
 
+          //
+          joRes.Add(dwFullName(Actrl)+'__col:"'+dwColor(Color)+'",');
      end;
      //
      Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TLabeledEdit(ACtrl) do begin
           //
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__txt="'+dwChangeChar(Text)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+dwChangeChar(Text)+'";');
 
           //Label
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbl="'+IntToStr(EditLabel.Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbt="'+IntToStr(EditLabel.Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbw="'+IntToStr(EditLabel.Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbh="'+IntToStr(EditLabel.Height)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbc="'+EditLabel.Caption+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lbl="'+IntToStr(EditLabel.Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lbt="'+IntToStr(EditLabel.Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lbw="'+IntToStr(EditLabel.Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lbh="'+IntToStr(EditLabel.Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lbc="'+EditLabel.Caption+'";');
 
           //Edit
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edl="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edt="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edw="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__edh="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__edl="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__edt="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__edw="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__edh="'+IntToStr(Height)+'px";');
+          //
+          joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwColor(Color)+'";');
      end;
      //
      Result    := (joRes);
@@ -343,7 +356,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

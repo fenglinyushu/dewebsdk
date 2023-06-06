@@ -20,11 +20,11 @@ object Form1: TForm1
   OnMouseUp = FormMouseUp
   PixelsPerInch = 96
   TextHeight = 20
-  object Panel_Header: TPanel
+  object Panel_0_Header: TPanel
     Left = 0
     Top = 0
     Width = 360
-    Height = 40
+    Height = 48
     Margins.Left = 0
     Margins.Top = 10
     Margins.Right = 0
@@ -39,7 +39,7 @@ object Form1: TForm1
       Left = 49
       Top = 3
       Width = 265
-      Height = 34
+      Height = 42
       Align = alClient
       Alignment = taCenter
       AutoSize = False
@@ -60,7 +60,7 @@ object Form1: TForm1
       Left = 3
       Top = 2
       Width = 40
-      Height = 34
+      Height = 42
       Hint = 
         '{"fontsize":"24px","color":"rgb(255,255,255)","icon":"el-icon-ar' +
         'row-left","type":"text"}'
@@ -68,13 +68,14 @@ object Form1: TForm1
       Margins.Bottom = 4
       Align = alLeft
       TabOrder = 0
+      ExplicitHeight = 34
     end
     object Button_Menu: TButton
       AlignWithMargins = True
       Left = 320
       Top = 2
       Width = 40
-      Height = 34
+      Height = 42
       Hint = 
         '{"fontsize":"24px","color":"rgb(255,255,255)","icon":"el-icon-me' +
         'nu","type":"text"}'
@@ -83,91 +84,94 @@ object Form1: TForm1
       Margins.Bottom = 4
       Align = alRight
       TabOrder = 1
+      ExplicitHeight = 34
     end
   end
-  object Panel_Footer: TPanel
-    Left = 16
-    Top = 416
-    Width = 300
+  object Panel_9_Footer: TPanel
+    Left = 0
+    Top = 461
+    Width = 360
     Height = 50
+    Align = alBottom
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 16
+    ExplicitTop = 416
+    ExplicitWidth = 300
     DesignSize = (
-      300
+      360
       50)
     object Image_bottom0: TImage
-      Left = 12
+      Left = 17
       Top = 14
       Width = 24
       Height = 24
       Hint = '{"src":"/media/images/app0/bottom0.jpg"}'
       Anchors = [akTop]
+      ExplicitLeft = 12
     end
     object Image_bottom1: TImage
-      Left = 74
+      Left = 91
       Top = 14
       Width = 24
       Height = 24
       Hint = '{"src":"/media/images/app0/bottom1.jpg"}'
       Anchors = [akTop]
+      ExplicitLeft = 74
     end
     object Image_bottom2: TImage
-      Left = 129
+      Left = 159
       Top = 1
       Width = 40
       Height = 50
       Hint = '{"radius":"50%","src":"/media/images/app0/bottom2.jpg"}'
       Anchors = [akTop]
+      ExplicitLeft = 129
     end
     object Image_bottom3: TImage
-      Left = 201
+      Left = 244
       Top = 14
       Width = 24
       Height = 24
       Hint = '{"src":"/media/images/app0/bottom3.jpg"}'
       Anchors = [akTop]
+      ExplicitLeft = 201
     end
     object Image_bottom4: TImage
-      Left = 257
+      Left = 311
       Top = 14
       Width = 24
       Height = 24
       Hint = '{"src":"/media/images/app0/bottom4.jpg"}'
       Anchors = [akTop]
+      ExplicitLeft = 257
     end
     object Panel_FooterTopLine: TPanel
       Left = 0
       Top = 0
-      Width = 300
+      Width = 360
       Height = 1
       Align = alTop
       BevelOuter = bvNone
       ParentBackground = False
       TabOrder = 0
-    end
-    object Panel1: TPanel
-      Left = 0
-      Top = 49
-      Width = 300
-      Height = 1
-      Align = alBottom
-      BevelOuter = bvNone
-      Color = clNavy
-      ParentBackground = False
-      TabOrder = 1
+      ExplicitWidth = 300
     end
   end
   object ScrollBox_Content: TScrollBox
     Left = 0
-    Top = 40
+    Top = 48
     Width = 360
-    Height = 321
+    Height = 413
     VertScrollBar.Visible = False
-    Align = alTop
+    Align = alClient
+    BevelInner = bvNone
     BorderStyle = bsNone
     TabOrder = 2
+    ExplicitTop = 40
+    ExplicitHeight = 321
     object Panel_Content: TPanel
       Left = 0
       Top = 0
@@ -184,7 +188,7 @@ object Form1: TForm1
         Top = 0
         Width = 355
         Height = 130
-        Hint = '{"borderradius":"10px"}'
+        Hint = '{"radius":"10px"}'
         Margins.Left = 5
         Margins.Top = 0
         Margins.Right = 0
@@ -359,7 +363,7 @@ object Form1: TForm1
             Top = 0
             Width = 70
             Height = 20
-            Hint = '{"borderradius":"10px"}'
+            Hint = '{"radius":"10px"}'
             BevelOuter = bvNone
             Color = 16748617
             ParentBackground = False

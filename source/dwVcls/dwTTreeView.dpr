@@ -1,13 +1,13 @@
-library dwTTreeView;
+ï»¿library dwTTreeView;
 
 uses
-     ShareMem,      //±ØĞëÌí¼Ó
+     ShareMem,      //å¿…é¡»æ·»åŠ 
 
      //
-     dwCtrlBase,    //Ò»Ğ©»ù´¡º¯Êı
+     dwCtrlBase,    //ä¸€äº›åŸºç¡€å‡½æ•°
 
      //
-     SynCommons,    //mormotÓÃÓÚ½âÎöJSONµÄµ¥Ôª
+     SynCommons,    //mormotç”¨äºè§£æJSONçš„å•å…ƒ
 
      //
      SysUtils,
@@ -64,12 +64,21 @@ var
      tnItem    : TTreeNode;
      iItem     : Integer;
 begin
-     //ÉèÖÃstateindexÎªĞòºÅ, ÒÔÓÃÓÚºóÀ´È·¶¨µã»÷µÄ½Úµã
-     for iItem := 0 to ATV.Items.Count-1 do begin
-          ATV.Items[iItem].StateIndex  := iItem;
+     //è®¾ç½®stateindexä¸ºåºå·, ä»¥ç”¨äºåæ¥ç¡®å®šç‚¹å‡»çš„èŠ‚ç‚¹
+     //for iItem := 0 to ATV.Items.Count-1 do begin
+     //     ATV.Items[iItem].StateIndex  := iItem;
+     //end;
+
+     iItem  := 0;
+     tnItem := ATV.Items.GetFirstNode;
+     while tnItem <> nil do begin
+         tnItem.StateIndex  := iItem;
+         tnItem := tnItem.GetNext;
+         Inc(iItem);
      end;
 
-     //Éú³ÉÊı¾İ
+
+     //ç”Ÿæˆæ•°æ®
      Result    := '[';
      tnItem    := ATV.Items.GetFirstNode;
      while tnItem <> nil do begin
@@ -87,16 +96,16 @@ end;
 
 
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS ,Ò»°ãÎª²»×ö¸Ä¶¯,Ä¿Ç°½öÔÚTChartÊ¹ÓÃÊ±ĞèÒªÓÃµ½
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS ,ä¸€èˆ¬ä¸ºä¸åšæ”¹åŠ¨,ç›®å‰ä»…åœ¨TChartä½¿ç”¨æ—¶éœ€è¦ç”¨åˆ°
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
      {
-     //ÒÔÏÂÊÇTChartÊ±µÄ´úÂë,¹©²Î¿¼
+     //ä»¥ä¸‹æ˜¯TChartæ—¶çš„ä»£ç ,ä¾›å‚è€ƒ
      joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
      joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
      joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
@@ -106,7 +115,7 @@ begin
      Result    := joRes;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -114,60 +123,37 @@ var
      oTreeNode : TTreeNode;
 
 begin
-{
-                                   //ÏÈÕÒµ½¶ÔÓ¦µÄ½Úµã
-                                   iItem     := StrToIntDef(joData.v,1)-1;
-                                   oTreeNode := TTreeView(oComp).Items[iItem];
-                                   oTreeNode.Selected  := True;
+    //
+    joData    := _Json(AData);
 
-                                   //Èç¹ûÓĞÊÂ¼ş
-                                   if Assigned(TTreeView(oComp).OnClick) then begin
-                                        //±ê¼ÇCID, ÒÔ±¸ºóÃædwCreateFormÊ¹ÓÃ
-                                        TTreeView(oComp).Tag  := joData.i;
+    //æ‰¾åˆ°å¯¹åº”çš„èŠ‚ç‚¹,å¹¶é€‰ä¸­
+    iItem     := StrToIntDef(joData.v,1);
+    oTreeNode := TTreeView(ACtrl).Items[iItem];
+    oTreeNode.Selected  := True;
 
-                                        //È¡µÃÊÂ¼şÖ´ĞĞÇ°¿Ø¼şĞÅÏ¢
-                                        jaBefore  := dwGetComponentInfos(oForm);
-
-                                        //Ö´ĞĞÊÂ¼ş
-                                        TTreeView(oComp).OnClick(TTreeView(oComp));
-
-
-                                        //×ÛºÏ¹ı³ÌAfter
-                                        ProcessAfter;
-
-                                   end;
-
-}     //
-     joData    := _Json(AData);
-
-     //ÕÒµ½¶ÔÓ¦µÄ½Úµã,²¢Ñ¡ÖĞ
-     iItem     := StrToIntDef(joData.v,1)-1;
-     oTreeNode := TTreeView(ACtrl).Items[iItem];
-     oTreeNode.Selected  := True;
-
-     //
-     if joData.e = 'onclick' then begin
-          //Ö´ĞĞÊÂ¼ş
-          if Assigned(TTreeView(ACtrl).OnClick) then begin
-               TTreeView(ACtrl).OnClick(TTreeView(ACtrl));
-          end;
-     end else if joData.e = 'onenter' then begin
-     end;
+    //
+    if joData.e = 'onclick' then begin
+        //æ‰§è¡Œäº‹ä»¶
+        if Assigned(TTreeView(ACtrl).OnClick) then begin
+            TTreeView(ACtrl).OnClick(TTreeView(ACtrl));
+        end;
+    end else if joData.e = 'onenter' then begin
+    end;
 
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
      with TTreeView(ACtrl) do begin
           sCode     := '';
@@ -177,18 +163,19 @@ begin
           end;
           //
           joRes.Add('<el-tree'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +dwVisible(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿É¼ûĞÔVisible
-                    +dwDisable(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿ÉÓÃĞÔEnabled(²¿·Ö¿Ø¼ş²»Ö§³Ö)
-                    +' :data="'+dwPrefix(Actrl)+Name+'__dat"'
+                    +' id="'+dwFullName(Actrl)+'"'
+                    +dwVisible(TControl(ACtrl))                            //ç”¨äºæ§åˆ¶å¯è§æ€§Visible
+                    +dwDisable(TControl(ACtrl))                            //ç”¨äºæ§åˆ¶å¯ç”¨æ€§Enabled(éƒ¨åˆ†æ§ä»¶ä¸æ”¯æŒ)
+                    +' :data="'+dwFullName(Actrl)+'__dat"'
                     +' node-key="id"'
                     +' :default-expanded-keys="['+sCode+']"'
-                    +' :props="'+dwPrefix(Actrl)+Name+'__dps"'                             //defaultProps
+                    +' :props="'+dwFullName(Actrl)+'__dps"'                             //defaultProps
                     +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                     +'background-color:'+dwColor(Color)+';'
                     +'overflow:auto;'
-                    +'"' // ·â±Õstyle
-                    +Format(_DWEVENT,['node-click',Name,'val.$treeNodeId','onclick',TForm(Owner).Handle]) //°ó¶¨OnChangeÊÂ¼ş
+                    +'"' // å°é—­style
+                    //+Format(_DWEVENT,['node-click',Name,'val.$treeNodeId','onclick',TForm(Owner).Handle]) //ç»‘å®šOnChangeäº‹ä»¶
+                    +Format(_DWEVENT,['node-click',Name,'val.id','onclick',TForm(Owner).Handle]) //ç»‘å®šOnChangeäº‹ä»¶
                     +'>');
           joRes.Add('<span class="custom-tree-node" slot-scope="{ node, data }">'
                     +'<span>'
@@ -196,71 +183,71 @@ begin
                     +'</span>'
                     +'</span>');
 
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
-     joRes.Add('</el-tree>');          //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+     joRes.Add('</el-tree>');          //æ­¤å¤„éœ€è¦å’ŒdwGetHeadå¯¹åº”
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
      sCode     : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TTreeView(ACtrl) do begin
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__dat:'+_GetTreeViewData(TTreeView(ACtrl))+',');
+          joRes.Add(dwFullName(Actrl)+'__dat:'+_GetTreeViewData(TTreeView(ACtrl))+',');
           //defaultProps
-          joRes.Add(dwPrefix(Actrl)+Name+'__dps: {children: ''children'',label: ''label''},');
+          joRes.Add(dwFullName(Actrl)+'__dps: {children: ''children'',label: ''label''},');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
      end;
      //
      Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
      sCode     : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TTreeView(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dat='+_GetTreeViewData(TTreeView(ACtrl))+';');
+          joRes.Add('this.'+dwFullName(Actrl)+'__dat='+_GetTreeViewData(TTreeView(ACtrl))+';');
      end;
      //
      Result    := (joRes);
@@ -272,7 +259,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

@@ -1,4 +1,4 @@
-unit dwTreeViews;
+ï»¿unit dwTreeViews;
 
 interface
 
@@ -19,45 +19,45 @@ uses
 
 
 
-//·µ»ØÖµËµÃ÷ : ·µ»ØÒ»¸ö×Ö·û´®Êı×é(Ã¿¸öÔªËØ´ú±íÒ»ĞĞ,×Ô´øµ±Ç°Ëõ½ø)
+//è¿”å›å€¼è¯´æ˜ : è¿”å›ä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„(æ¯ä¸ªå…ƒç´ ä»£è¡¨ä¸€è¡Œ,è‡ªå¸¦å½“å‰ç¼©è¿›)
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHtmlHead(ACtrl:TControl):Variant;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetHtmlTail(ACtrl:TControl):Variant;
 
-//È¡µÃDataÏûÏ¢, ASeparatorÎª·Ö¸ô·û, Ò»°ãÎª:»ò=
+//å–å¾—Dataæ¶ˆæ¯, ASeparatorä¸ºåˆ†éš”ç¬¦, ä¸€èˆ¬ä¸º:æˆ–=
 function dwGetData(ACtrl:TControl;ASeparator:String):Variant;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwEvent(ACtrl:TControl;AData:Variant):String;
 
 
 implementation
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwEvent(ACtrl:TControl;AData:Variant):String;
 var
      sValue    : String;
      iItem     : Integer;
 begin
 
-     //±£´æÊÂ¼ş
+     //ä¿å­˜äº‹ä»¶
      TTreeView(ACtrl).OnExit    := TTreeView(ACtrl).OnClick;
-     //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
+     //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
      TTreeView(ACtrl).OnClick  := nil;
-     //¸üĞÂÖµ
+     //æ›´æ–°å€¼
      TTreeView(ACtrl).Items[AData.v-1].Selected := True;
-     //»Ö¸´ÊÂ¼ş
+     //æ¢å¤äº‹ä»¶
      TTreeView(ACtrl).OnClick  := TTreeView(ACtrl).OnExit;
 
-     //Ö´ĞĞÊÂ¼ş
+     //æ‰§è¡Œäº‹ä»¶
      if Assigned(TTreeView(ACtrl).OnClick) then begin
           TTreeView(ACtrl).OnClick(TTreeView(ACtrl));
      end;
 
-     //Çå¿ÕOnExitÊÂ¼ş
+     //æ¸…ç©ºOnExitäº‹ä»¶
      TTreeView(ACtrl).OnExit  := nil;
 
 end;
@@ -100,7 +100,7 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHtmlHead(ACtrl:TControl):Variant;
 var
      sCode     : string;
@@ -110,18 +110,18 @@ var
      //
      joHint    : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      Result    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(ACtrl);
 
      with TTreeView(ACtrl) do begin
-          //ÉèÖÃstateindex,±¸ÓÃ
+          //è®¾ç½®stateindex,å¤‡ç”¨
           for iItem := 0 to items.Count-1 do begin
                Items[iItem].StateIndex  := iItem;
           end;
-          //È¡µÃExpanded×Ö·û´®
+          //å–å¾—Expandedå­—ç¬¦ä¸²
           sExpanded    := '';
           for iItem := 0 to items.Count-1 do begin
                if Items[iItem].Expanded then begin
@@ -132,13 +132,13 @@ begin
                Delete(sExpanded,Length(sExpanded),1);
           end;
 
-          //Éú³É×Ö·û´® 
+          //ç”Ÿæˆå­—ç¬¦ä¸² 
           Result.Add('<el-tree'
                     +' ref="tree"'
-                    +' :data="'+dwPrefix(Actrl)+Name+'__dat"'
+                    +' :data="'+dwFullName(Actrl)+'__dat"'
                     +'  node-key="id"'
                     +' :default-expanded-keys="['+sExpanded+']"'
-                    +' :props="'+dwPrefix(Actrl)+Name+'__dfp"'
+                    +' :props="'+dwFullName(Actrl)+'__dfp"'
                     +dwVisible(ACtrl)
                     +dwDisable(ACtrl)
                     +dwLTWH(ACtrl)
@@ -149,37 +149,37 @@ begin
      end;
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetHtmlTail(ACtrl:TControl):Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      Result    := _Json('["</el-tree>"]');
 end;
 
-//È¡µÃDataÏûÏ¢, ASeparatorÎª·Ö¸ô·û, Ò»°ãÎª:»ò=
+//å–å¾—Dataæ¶ˆæ¯, ASeparatorä¸ºåˆ†éš”ç¬¦, ä¸€èˆ¬ä¸º:æˆ–=
 function dwGetData(ACtrl:TControl;ASeparator:String):Variant;
 var
      iItem     : Integer;
      sCode     : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      Result    := _Json('[]');
 
-     //Éú³ÉData:Ñ¡Ïî
+     //ç”ŸæˆData:é€‰é¡¹
 
      //
      with TTreeView(ACtrl) do begin
           //
-          Result.Add(dwPrefix(Actrl)+Name+'__lef'+ASeparator+'"'+IntToStr(Left)+'px"');
-          Result.Add(dwPrefix(Actrl)+Name+'__top'+ASeparator+'"'+IntToStr(Top)+'px"');
-          Result.Add(dwPrefix(Actrl)+Name+'__wid'+ASeparator+'"'+IntToStr(Width)+'px"');
-          Result.Add(dwPrefix(Actrl)+Name+'__hei'+ASeparator+'"'+IntToStr(Height)+'px"');
+          Result.Add(dwFullName(Actrl)+'__lef'+ASeparator+'"'+IntToStr(Left)+'px"');
+          Result.Add(dwFullName(Actrl)+'__top'+ASeparator+'"'+IntToStr(Top)+'px"');
+          Result.Add(dwFullName(Actrl)+'__wid'+ASeparator+'"'+IntToStr(Width)+'px"');
+          Result.Add(dwFullName(Actrl)+'__hei'+ASeparator+'"'+IntToStr(Height)+'px"');
           //
-          Result.Add(dwPrefix(Actrl)+Name+'__vis'+ASeparator+''+dwIIF(Visible,'true','false'));
-          Result.Add(dwPrefix(Actrl)+Name+'__dis'+ASeparator+''+dwIIF(Enabled,'false','true'));
+          Result.Add(dwFullName(Actrl)+'__vis'+ASeparator+''+dwIIF(Visible,'true','false'));
+          Result.Add(dwFullName(Actrl)+'__dis'+ASeparator+''+dwIIF(Enabled,'false','true'));
           //
-          Result.Add(dwPrefix(Actrl)+Name+'__dat'+ASeparator+dwGetTreeViewData(TTreeView(ACtrl)));
-          Result.Add(dwPrefix(Actrl)+Name+'__dfp'+ASeparator+'{children: ''children'',label: ''label''}');
+          Result.Add(dwFullName(Actrl)+'__dat'+ASeparator+dwGetTreeViewData(TTreeView(ACtrl)));
+          Result.Add(dwFullName(Actrl)+'__dfp'+ASeparator+'{children: ''children'',label: ''label''}');
      end;
 end;
 

@@ -1,4 +1,4 @@
-library dwTShape;
+ï»¿library dwTShape;
 
 uses
      ShareMem,
@@ -20,22 +20,21 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 const
-     ss : array[0..3] of string = (
+     ss : array[0..2] of string = (
           '<script type="text/javascript" src="ZXing_files/librarylatest"></script>',
           '<link rel="stylesheet" as="style" href="ZXing_files/css.css">',
-          '<link rel="stylesheet" as="style" href="ZXing_files/normalize.css">',
-          '<link rel="stylesheet" as="style" href="ZXing_files/milligram.css">'
+          '<link rel="stylesheet" as="style" href="ZXing_files/normalize.css">'
      );
 var
      joRes     : Variant;
      I         : Integer;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      for I := 0 to High(SS) do begin
           joRes.Add(SS[I]);
      end;
@@ -43,7 +42,7 @@ begin
      Result    := (joRes);
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
 var
      joData    : Variant;
@@ -63,7 +62,7 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
      sCode     : String;
@@ -73,25 +72,30 @@ var
      joRes     : Variant;
 
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 
      //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
-     //²ÎÊıÒÀ´ÎÎª: JSÊÂ¼şÃû³Æ, ¿Ø¼şÃû³Æ,¿Ø¼şÖµ,DelphiÊÂ¼şÃû³Æ,±¸ÓÃ
+     //å‚æ•°ä¾æ¬¡ä¸º: JSäº‹ä»¶åç§°, æ§ä»¶åç§°,æ§ä»¶å€¼,Delphiäº‹ä»¶åç§°,å¤‡ç”¨
 
 
      //
      with TShape(ACtrl) do begin
           //
           sCode     := '<video'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
+                    +dwGetDWAttr(joHint)
                     +dwLTWH(TControl(ACtrl))
-                    +'position:absolute;border: '+IntToStr(Pen.Width)+'px solid '+dwColor(Pen.Color)+'"'
+                    +'position:absolute;border: '+IntToStr(Pen.Width)+'px solid '+dwColor(Pen.Color)
+                    +'width=100%;height=100%;'
+                    //+'object-fit: fill;'
+                    +dwGetDWStyle(joHint)
+                    +'"'
                     //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                     //+dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
                     //+dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
@@ -102,64 +106,67 @@ begin
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</video>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃDataÏûÏ¢
+//å–å¾—Dataæ¶ˆæ¯
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TShape(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+
+          //å®šä¹‰ä¸€ä¸ªå¯¹è±¡ç”¨äºä¿å­˜ï¼Œä»¥ä¾¿åé¢å…³é—­const codeReader = new ZXing.BrowserMultiFormatReader();
+          joRes.Add(dwFullName(Actrl)+'__crd:new ZXing.BrowserMultiFormatReader(),');
+
+          //joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
           //
-          //joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          //
-          //joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TShape(ACtrl),'type')+'",');
+          //joRes.Add(dwFullName(Actrl)+'__typ:"'+dwGetProp(TShape(ACtrl),'type')+'",');
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃÊÂ¼ş
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+//å–å¾—äº‹ä»¶
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TShape(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
           //
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TShape(ACtrl),'type')+'";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__typ="'+dwGetProp(TShape(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);
@@ -170,7 +177,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

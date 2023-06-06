@@ -1,4 +1,4 @@
-unit unit1;
+﻿unit unit1;
 
 interface
 
@@ -23,7 +23,7 @@ type
     Timer1: TTimer;
     Button1: TButton;
     Button2: TButton;
-    Button3: TButton;
+    Label1: TLabel;
     procedure Timer1Timer(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -61,11 +61,14 @@ end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
-     ProgressBar1.Position    := ProgressBar1.Position + 1;
+     ProgressBar1.Position    := ProgressBar1.Position + 5;
      ProgressBar2.Position    := ProgressBar2.Position + 1;
      ProgressBar3.Position    := ProgressBar3.Position + 1;
-     ProgressBar4.Position    := ProgressBar4.Position + 1;
+     ProgressBar4.Position    := ProgressBar4.Position + 2;
      ProgressBar5.Position    := ProgressBar5.Position + 1;
+
+     //
+     Label1.Caption := '当前I:'+IntToStr(ProgressBar1.Position);
 end;
 
 end.

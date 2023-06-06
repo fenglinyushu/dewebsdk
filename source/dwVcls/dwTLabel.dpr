@@ -1,4 +1,4 @@
-library dwTLabel;
+ï»¿library dwTLabel;
 
 uses
      ShareMem,
@@ -16,33 +16,34 @@ uses
 
 function _GetFont(AFont:TFont):string;
 begin
-     Result    := 'color:'+dwColor(AFont.color)+';'
-               +'font-family:'''+AFont.name+''';'
-               +'font-size:'+IntToStr(AFont.size)+'pt;';
 
-     //´ÖÌå
+    Result    := 'color:'+dwColor(AFont.color)+';'
+               +'font-family:'''+AFont.name+''';'
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
+
+     //ç²—ä½“
      if fsBold in AFont.Style then begin
           Result    := Result+'font-weight:bold;';
      end else begin
           Result    := Result+'font-weight:normal;';
      end;
 
-     //Ğ±Ìå
+     //æ–œä½“
      if fsItalic in AFont.Style then begin
           Result    := Result+'font-style:italic;';
      end else begin
           Result    := Result+'font-style:normal;';
      end;
 
-     //ÏÂ»®Ïß
+     //ä¸‹åˆ’çº¿
      if fsUnderline in AFont.Style then begin
           Result    := Result+'text-decoration:underline;';
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end;
      end else begin
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end else begin
@@ -72,12 +73,12 @@ function _GetTextDecoration(AFont:TFont):String;
 begin
      if fsUnderline in AFont.Style then begin
           Result    :='underline';
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := 'line-through';
           end;
      end else begin
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := 'line-through';
           end else begin
@@ -95,6 +96,8 @@ begin
           taCenter : begin
                Result    := 'center';
           end;
+     else
+               Result    := 'left';
      end;
 end;
 
@@ -115,391 +118,277 @@ begin
 end;
 
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     joData    : Variant;
+    joData  : Variant;
+    iX,iY   : Integer;
 begin
-     with TLabel(Actrl) do begin
-          if HelpKeyword = 'rich' then begin
-               //ÓÃ×÷¿É¿ØLabel¿Ø¼ş----------------------------------------------
+    with TLabel(Actrl) do begin
+        //ç”¨ä½œå¯æ§Labelæ§ä»¶----------------------------------------------
 
 
-               //
-               joData    := _Json(AData);
+        //
+        joData    := _Json(AData);
 
-               if joData.e = 'onclick' then begin
-                    if Assigned(TLabel(ACtrl).OnClick) then begin
-                         TLabel(ACtrl).OnClick(TLabel(ACtrl));
-                    end;
-               end else if joData.e = 'onenter' then begin
-                    if Assigned(TLabel(ACtrl).OnMouseEnter) then begin
-                         TLabel(ACtrl).OnMouseEnter(TLabel(ACtrl));
-                    end;
-               end else if joData.e = 'onexit' then begin
-                    if Assigned(TLabel(ACtrl).OnMouseLeave) then begin
-                         TLabel(ACtrl).OnMouseLeave(TLabel(ACtrl));
-                    end;
-               end;
-          end else begin
-               //ÓÃ×÷ÆÕÍ¨Label¿Ø¼ş----------------------------------------------
-
-               //
-               joData    := _Json(AData);
-
-               if joData.e = 'onclick' then begin
-                    if Assigned(TLabel(ACtrl).OnClick) then begin
-                         TLabel(ACtrl).OnClick(TLabel(ACtrl));
-                    end;
-               end else if joData.e = 'onenter' then begin
-                    if Assigned(TLabel(ACtrl).OnMouseEnter) then begin
-                         TLabel(ACtrl).OnMouseEnter(TLabel(ACtrl));
-                    end;
-               end else if joData.e = 'onexit' then begin
-                    if Assigned(TLabel(ACtrl).OnMouseLeave) then begin
-                         TLabel(ACtrl).OnMouseLeave(TLabel(ACtrl));
-                    end;
-               end;
-          end;
-     end;
+        if joData.e = 'onclick' then begin
+             if Assigned(TLabel(ACtrl).OnClick) then begin
+                  TLabel(ACtrl).OnClick(TLabel(ACtrl));
+             end;
+        end else if joData.e = 'onmousedown' then begin
+            if Assigned(TLabel(ACtrl).OnMouseDown) then begin
+                iX  := StrToIntDef(joData.v,0);
+                iY  := iX mod 100000;
+                iX  := iX div 100000;
+                TLabel(ACtrl).OnMouseDown(TLabel(ACtrl),mbLeft,[],iX,iY);
+            end;
+        end else if joData.e = 'onmouseup' then begin
+            if Assigned(TLabel(ACtrl).OnMouseup) then begin
+                iX  := StrToIntDef(joData.v,0);
+                iY  := iX mod 100000;
+                iX  := iX div 100000;
+                TLabel(ACtrl).OnMouseup(TLabel(ACtrl),mbLeft,[],iX,iY);
+            end;
+        end else if joData.e = 'onenter' then begin
+             if Assigned(TLabel(ACtrl).OnMouseEnter) then begin
+                  TLabel(ACtrl).OnMouseEnter(TLabel(ACtrl));
+             end;
+        end else if joData.e = 'onexit' then begin
+             if Assigned(TLabel(ACtrl).OnMouseLeave) then begin
+                  TLabel(ACtrl).OnMouseLeave(TLabel(ACtrl));
+             end;
+        end;
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     joHint    : Variant;
-     joRes     : Variant;
+    sCode     : string;
+    joHint    : Variant;
+    joRes     : Variant;
 begin
-     with TLabel(Actrl) do begin
-          if HelpKeyword = 'rich' then begin
-               //ÓÃ×÷¿É¿ØLabel¿Ø¼ş----------------------------------------------
-               //¿ØÖÆ£º´ÖÌå/ÑÕÉ«/×ÖºÅ/×ÖÌå
+    with TLabel(Actrl) do begin
+        //ç”¨ä½œå¯æ§Labelæ§ä»¶----------------------------------------------
+        //æ§åˆ¶ï¼šç²—ä½“/é¢œè‰²/å­—å·/å­—ä½“
 
 
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
+        //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+        if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+            if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                joRes    := _Json('[]');
+                //
+                Result    := joRes;
+                //
+                Exit;
+            end;
+        end;
+        //>
 
 
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
 
-               //È¡µÃHINT¶ÔÏóJSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
+        //å–å¾—HINTå¯¹è±¡JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
 
-               with TLabel(ACtrl) do begin
-                    sCode     := '<div '
-                              +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
-                              +dwVisible(TControl(ACtrl))
-                              +dwDisable(TControl(ACtrl))
-                              //
-                              +' :style="{'
-                                   +'color:'+dwPrefix(Actrl)+Name+'__fcl,'
-                                   +'''font-size'':'+dwPrefix(Actrl)+Name+'__fsz,'
-                                   +'''font-family'':'+dwPrefix(Actrl)+Name+'__ffm,'
-                                   +'''font-weight'':'+dwPrefix(Actrl)+Name+'__fwg,'
-                                   +'''font-style'':'+dwPrefix(Actrl)+Name+'__fsl,'
-                                   +'''text-decoration'':'+dwPrefix(Actrl)+Name+'__ftd,'
-                                   +'''text-align'':'+dwPrefix(Actrl)+Name+'__fta,'
-                                   +'left:'+dwPrefix(Actrl)+Name+'__lef,'
-                                   +'top:'+dwPrefix(Actrl)+Name+'__top,'
-                                   +'width:'+dwPrefix(Actrl)+Name+'__wid,'
-                                   +'height:'+dwPrefix(Actrl)+Name+'__hei'
-                                   +'}"'
-                              //
-                              +'style="position:absolute;'
-                              //+_GetFont(Font)
-                              //style
-                              +_GetAlignment(TControl(ACtrl))
-                              +dwIIF(Layout=tlCenter,'line-height:'+IntToStr(Height)+'px;','')
-                              +'"'
-                              //style ·â±Õ
+        with TLabel(ACtrl) do begin
+            sCode     := '<div '
+                    +' class="dwdisselect"'
+                    +' id="'+dwFullName(Actrl)+'"'
+                    //+dwIIF((Layout=tlCenter)and(WordWrap=True),'',
+                    +' v-html="'+dwFullName(Actrl)+'__cap"'
+                    +dwVisible(TControl(ACtrl))
+                    +dwDisable(TControl(ACtrl))
+                    +dwGetDWAttr(joHint)
+                    //
+                    +' :style="{'
+                        +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                        +'color:'+dwFullName(Actrl)+'__fcl,'
+                        +'''font-size'':'+dwFullName(Actrl)+'__fsz,'
+                        +'''font-family'':'+dwFullName(Actrl)+'__ffm,'
+                        +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'
+                        +'''font-style'':'+dwFullName(Actrl)+'__fsl,'
+                        +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'
+                        +'''text-align'':'+dwFullName(Actrl)+'__fta,'
+                        //+dwIIF((Layout=tlCenter)and(WordWrap=False),'''line-height'':'+dwFullName(Actrl)+'__hei,','')
+                        //+dwIIF(Layout=tlCenter,'''line-height'':'+dwFullName(Actrl)+'__hei,','')
+                        +'left:'+dwFullName(Actrl)+'__lef,'
+                        +'top:'+dwFullName(Actrl)+'__top,'
+                        +'width:'+dwFullName(Actrl)+'__wid,'
+                        +'height:'+dwFullName(Actrl)+'__hei'
+                    +'}"'
+                    //
+                    +' style="position:absolute;'
+                    +dwIIF(Layout=tlCenter,'justify-content: center;flex-direction: column;display: flex;','')
+                    +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                    //+_GetFont(Font)
+                    //style
+                    +_GetAlignment(TControl(ACtrl))
+                    +dwGetHintStyle(joHint,'radius','border-radius','')
+                    +dwGetDWStyle(joHint)
+                    +'"'
+                    //style å°é—­
 
-                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                              +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                              +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
-                    //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-                    joRes.Add(sCode);
-               end;
-               //
-               Result    := (joRes);
-          end else begin
-               //ÓÃ×÷ÆÕÍ¨Label¿Ø¼ş----------------------------------------------
-
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
-
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-
-               //È¡µÃHINT¶ÔÏóJSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
-
-               with TLabel(ACtrl) do begin
-                    sCode     := '<div '
-                              +' id="'+dwPrefix(Actrl)+Name+'"'
-                              +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
-                              +dwVisible(TControl(ACtrl))
-                              +dwDisable(TControl(ACtrl))
-                              +dwLTWH(TControl(ACtrl))
-                              +_GetFont(Font)
-                              //style
-                              +_GetAlignment(TControl(ACtrl))
-                              +dwIIF(Layout=tlCenter,'line-height:'+IntToStr(Height)+'px;','')
-                              +'"'
-                              //style ·â±Õ
-
-                              +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                              +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                              +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                              +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
-                    //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-                    joRes.Add(sCode);
-               end;
-               //
-               Result    := (joRes);
-          end;
-     end;
+                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave',Name,'0','onexit',TForm(Owner).Handle]),'')
+                    +'>'
+                    //+'{{'+dwFullName(Actrl)+'__cap}}'
+                    //ä»¥ä¸‹æ˜¯æ ‡é¢˜
+                    //+dwIIF(ParentBidiMode,'{{'+dwFullName(Actrl)+'__cap}}','')
+                    //+dwIIF(ParentBidiMode,'{{'+dwFullName(Actrl)+'__cap}}','')
+                    ;
+            //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+            joRes.Add(sCode);
+        end;
+        //
+        Result    := (joRes);
+    end;
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
      with TLabel(Actrl) do begin
-          if HelpKeyword = 'rich' then begin
-               //ÓÃ×÷¿É¿ØLabel¿Ø¼ş----------------------------------------------
+           //ç”¨ä½œå¯æ§Labelæ§ä»¶----------------------------------------------
 
 
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
+           //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+           if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+                if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                     joRes    := _Json('[]');
+                     //
+                     Result    := joRes;
+                     //
+                     Exit;
+                end;
+           end;
+           //>
 
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('</div>');
-               //
-               Result    := (joRes);
-          end else begin
-               //ÓÃ×÷ÆÕÍ¨Label¿Ø¼ş----------------------------------------------
-
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('</div>');
-               //
-               Result    := (joRes);
-          end;
+           //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+           joRes    := _Json('[]');
+           //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+           joRes.Add('</div>');
+           //
+           Result    := (joRes);
      end;
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
      with TLabel(Actrl) do begin
-          if HelpKeyword = 'rich' then begin
-               //ÓÃ×÷¿É¿ØLabel¿Ø¼ş----------------------------------------------
+           //ç”¨ä½œå¯æ§Labelæ§ä»¶----------------------------------------------
 
 
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TLabel(ACtrl) do begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__fcl:"'+dwColor(Font.Color)+'",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__fsz:"'+IntToStr(Font.size)+'pt",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__ffm:"'+Font.Name+'",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__fwg:"'+_GetFontWeight(Font)+'",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__fsl:"'+_GetFontStyle(Font)+'",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__ftd:"'+_GetTextDecoration(Font)+'",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__fta:"'+_GetTextAlignment(TLabel(ACtrl))+'",');
-               end;
-               //
-               Result    := (joRes);
-          end else begin
-               //ÓÃ×÷ÆÕÍ¨Label¿Ø¼ş----------------------------------------------
-
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TLabel(ACtrl) do begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-               end;
-               //
-               Result    := (joRes);
-          end;
+           //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+           if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+                if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                     joRes    := _Json('[]');
+                     //
+                     Result    := joRes;
+                     //
+                     Exit;
+                end;
+           end;
+           //>
+           //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+           joRes    := _Json('[]');
+           //
+           with TLabel(ACtrl) do begin
+                joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+                //
+                joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+                joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                //
+                joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
+                //
+                if TLabel(ACtrl).Transparent then begin
+                    joRes.Add(dwFullName(Actrl)+'__col:"rgba(0,0,0,0)",');
+                end else begin
+                    joRes.Add(dwFullName(Actrl)+'__col:"'+dwColor(TLabel(ACtrl).Color)+'",');
+                end;
+                //
+                joRes.Add(dwFullName(Actrl)+'__fcl:"'+dwColor(Font.Color)+'",');
+                joRes.Add(dwFullName(Actrl)+'__fsz:"'+IntToStr(Font.size+3)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__ffm:"'+Font.Name+'",');
+                joRes.Add(dwFullName(Actrl)+'__fwg:"'+_GetFontWeight(Font)+'",');
+                joRes.Add(dwFullName(Actrl)+'__fsl:"'+_GetFontStyle(Font)+'",');
+                joRes.Add(dwFullName(Actrl)+'__ftd:"'+_GetTextDecoration(Font)+'",');
+                joRes.Add(dwFullName(Actrl)+'__fta:"'+_GetTextAlignment(TLabel(ACtrl))+'",');
+           end;
+           //
+           Result    := (joRes);
      end;
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
      with TLabel(Actrl) do begin
-          if HelpKeyword = 'rich' then begin
-               //ÓÃ×÷¿É¿ØLabel¿Ø¼ş----------------------------------------------
+           //ç”¨ä½œå¯æ§Labelæ§ä»¶----------------------------------------------
 
 
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
+           //<å¤„ç†PageControlåšæ—¶é—´çº¿çš„é—®é¢˜
+           if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
+                if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
+                     joRes    := _Json('[]');
+                     //
+                     Result    := joRes;
+                     //
+                     Exit;
+                end;
+           end;
+           //>
 
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TLabel(ACtrl) do begin
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-                    //
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-                    //
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-                    //
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fcl="'+dwColor(Font.Color)+'";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fsz="'+IntToStr(Font.size)+'pt";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__ffm="'+Font.Name+'";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fwg="'+_GetFontWeight(Font)+'";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fsl="'+_GetFontStyle(Font)+'";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__ftd="'+_GetTextDecoration(Font)+'";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__fta="'+_GetTextAlignment(TLabel(ACtrl))+'";');
-               end;
-               //
-               Result    := (joRes);
-          end else begin
-               //ÓÃ×÷ÆÕÍ¨Label¿Ø¼ş----------------------------------------------
-
-               //<´¦ÀíPageControl×öÊ±¼äÏßµÄÎÊÌâ
-               if TLabel(ACtrl).Parent.ClassName = 'TTabSheet' then begin
-                    if TTabSheet(TLabel(ACtrl).Parent).PageControl.HelpKeyword = 'timeline' then begin
-                         joRes    := _Json('[]');
-                         //
-                         Result    := joRes;
-                         //
-                         Exit;
-                    end;
-               end;
-               //>
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TLabel(ACtrl) do begin
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-                    //
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-                    //
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-               end;
-               //
-               Result    := (joRes);
-          end;
+           //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+           joRes    := _Json('[]');
+           //
+           with TLabel(ACtrl) do begin
+                joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+                //
+                joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+                joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+                //
+                joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
+                //
+                if TLabel(ACtrl).Transparent then begin
+                    joRes.Add('this.'+dwFullName(Actrl)+'__col="rgba(0,0,0,0)";');
+                end else begin
+                    joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwColor(TLabel(ACtrl).Color)+'";');
+                end;
+                //
+                joRes.Add('this.'+dwFullName(Actrl)+'__fcl="'+dwColor(Font.Color)+'";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__fsz="'+IntToStr(Font.size+3)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__ffm="'+Font.Name+'";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__fwg="'+_GetFontWeight(Font)+'";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__fsl="'+_GetFontStyle(Font)+'";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__ftd="'+_GetTextDecoration(Font)+'";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__fta="'+_GetTextAlignment(TLabel(ACtrl))+'";');
+           end;
+           //
+           Result    := (joRes);
      end;
 end;
 
@@ -509,9 +398,9 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
-     
+
 begin
 end.
- 
+

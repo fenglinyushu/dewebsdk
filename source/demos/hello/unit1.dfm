@@ -1,24 +1,27 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Hint = '{"type":"primary"}'
-  Caption = 'Hello,World!'
-  ClientHeight = 525
-  ClientWidth = 382
+  BorderStyle = bsNone
+  Caption = 'DeWeb'
+  ClientHeight = 540
+  ClientWidth = 360
   Color = clWhite
+  TransparentColor = True
+  TransparentColorValue = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -15
   Font.Name = #24494#36719#38597#40657
   Font.Style = []
-  OldCreateOrder = False
+  OldCreateOrder = True
+  OnMouseUp = FormMouseUp
   PixelsPerInch = 96
   TextHeight = 20
   object Label1: TLabel
     Left = 0
     Top = 0
-    Width = 382
-    Height = 177
+    Width = 360
+    Height = 137
     Align = alTop
     Alignment = taCenter
     AutoSize = False
@@ -30,6 +33,27 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     Layout = tlCenter
-    ExplicitWidth = 441
+    ExplicitWidth = 305
+  end
+  object Button1: TButton
+    AlignWithMargins = True
+    Left = 30
+    Top = 167
+    Width = 300
+    Height = 45
+    Hint = '{"type":"success"}'
+    Margins.Left = 30
+    Margins.Top = 30
+    Margins.Right = 30
+    Align = alTop
+    Caption = 'OK'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = Button1Click
   end
 end

@@ -1,13 +1,13 @@
-library dwTImage;
+ï»¿library dwTImage;
 
 uses
-     ShareMem,      //±ØĞëÌí¼Ó
+     ShareMem,      //å¿…é¡»æ·»åŠ 
 
      //
-     dwCtrlBase,    //Ò»Ğ©»ù´¡º¯Êı
+     dwCtrlBase,    //ä¸€äº›åŸºç¡€å‡½æ•°
 
      //
-     SynCommons,    //mormotÓÃÓÚ½âÎöJSONµÄµ¥Ôª
+     SynCommons,    //mormotç”¨äºè§£æJSONçš„å•å…ƒ
 
      //
      SysUtils,DateUtils,ComCtrls, ExtCtrls,
@@ -19,439 +19,381 @@ uses
      Controls,
      Forms;
 
-const
-     CodeChar: array [0 .. 31] of char = (
-          '2','3','4','5','6','7','8','9',
-          'A','B','C','D','E','F','G','H',
-          'J','K','L','M','N','P','Q','R',
-          'S','T','U','V','W','X','Y','Z');
-
-     CodeChar1: array [0 .. 31] of char = (
-          'ÎÒ','Äİ','°®','Ëû','Ëû','Ëæ','Äã','Âğ','Çï',
-          'ÁÕ','Ó¢','È¦','À¤','²Ë','Æ½','ºó','·¼','Òª',
-          'Ïã','¸Û','°Ä','Çé','¸Ğ','Öµ','µÃ','±ö','¿ª',
-          'Ç¹','·É','¼¦','Ñ¼','¾¦');
 
 
-function _CreateCaptcha(AWidth,AHeight:Integer;var ASrc,ACaptcha:String):Integer;
-var
-     //
-     iFont     : Integer;
-     I,X,Y     : Integer;
-     sTmp      : String;
-     oBmp      : Vcl.Graphics.TBitmap;
-
-begin
-     try
-          //ÎÄ¼şÃû³Æ=Ëæ»úÇ°×º£¨¿É×ÔĞĞ¸ü¸Ä£©+ÈÕÆÚ
-          ASrc     := 'LJTRNB_'+FormatDateTime('YYYYMMdd_hhmmss_zzz',now)+'.jpg';
-          //
-          oBmp := Vcl.Graphics.TBitmap.Create;
-          oBmp.Width     := AWidth;
-          oBmp.Height    := AHeight;
-          oBmp.Canvas.Pen.Width    := 1;
-          iFont     := AWidth div 8; //¿ÉÒÔĞ´N¸ö×Ö·ûµÄ
-          oBmp.Canvas.Font.Size:= iFont;
-          oBmp.Canvas.Font.Name:='Î¢ÈíÑÅºÚ';
-          oBmp.Canvas.Font.Color:=clGreen;
-          //ÏÈËæ»ú»­Ïß200Ìõ
-          for I := 0 to (AWidth*AHeight) div 300 do  begin
-               Randomize;
-               oBmp.Canvas.Pen.Color:= RGB(Random(156)+100, Random(156)+100,Random(156)+100);
-               oBmp.Canvas.MoveTo(Random(AWidth),Random(AHeight));
-               oBmp.Canvas.LineTo(Random(AWidth),Random(AHeight));
-          end;
-          oBmp.Canvas.Font.Color:=RGB(Random(10), Random(100),Random(100));//clBlack;
-          oBmp.Canvas.Font.Style:=[fsBold,fsItalic];
-
-
-          //×î¶àÓĞËÄ¸ö×Ö·û
-          X    := 0;
-          ACaptcha  := '';
-          oBmp.Canvas.Brush.Style:=bsClear;
-          for I :=0 to 3 do begin
-               Randomize;
-               sTmp      := CodeChar[Random(Length(CodeChar))];
-               ACaptcha  := ACaptcha + sTmp;
-               X    := X + Random((AWidth-iFont*2) div 4);
-               oBmp.Canvas.TextOut(X,Random(AHeight-iFont*2),sTmp);
-               x:=x+iFont;
-          end;
-
-          //ÔÙËæ»ú»­Ïß
-          for I := 0 to (AWidth*AHeight) div 400 do  begin
-               Randomize;
-               oBmp.Canvas.Pen.Color:= RGB(Random(156)+100, Random(156)+100,Random(156)+100);
-               oBmp.Canvas.MoveTo(Random(AWidth),Random(AHeight));
-               oBmp.Canvas.LineTo(Random(AWidth),Random(AHeight));
-          end;
-
-          //
-          oBmp.SaveToFile('media/images/'+ASrc);
-          oBmp.Destroy;
-          //>
-
-          //
-          Result    := 1;
-     except
-     end;
-end;
-
-
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS ,Ò»°ãÎª²»×ö¸Ä¶¯,Ä¿Ç°½öÔÚTChartÊ¹ÓÃÊ±ĞèÒªÓÃµ½
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS ,ä¸€èˆ¬ä¸ºä¸åšæ”¹åŠ¨,ç›®å‰ä»…åœ¨TChartä½¿ç”¨æ—¶éœ€è¦ç”¨åˆ°
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
 begin
-     if TImage(ACtrl).HelpKeyword = 'captcha' then begin
-          //=============ÑéÖ¤Âë=================================================
+    //=============æ™®é€šå›¾ç‰‡===============================================
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-          {
-          //ÒÔÏÂÊÇTChartÊ±µÄ´úÂë,¹©²Î¿¼
-          joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
-          joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
-          joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
-          }
+    {
+    //ä»¥ä¸‹æ˜¯TChartæ—¶çš„ä»£ç ,ä¾›å‚è€ƒ
+    joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
+    joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
+    joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
+    }
 
-          //
-          Result    := joRes;
-     end else begin
-          //=============ÆÕÍ¨Í¼Æ¬===============================================
-
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-
-          {
-          //ÒÔÏÂÊÇTChartÊ±µÄ´úÂë,¹©²Î¿¼
-          joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
-          joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
-          joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
-          }
-
-          //
-          Result    := joRes;
-     end;
+    //
+    Result    := joRes;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     joData    : Variant;
-     sSrc      : string;
-     sCaptcha  : string;
+    joData      : Variant;
+    sSrc        : string;
+    sCaptcha    : string;
+    iX,iY       : Integer;
 begin
-     if TImage(ACtrl).HelpKeyword = 'captcha' then begin
-          //=============ÑéÖ¤Âë=================================================
-          //
-          joData    := _Json(AData);
+    //=============æ™®é€šå›¾ç‰‡===============================================
 
-          if joData.e = 'onclick' then begin
-               //ÖØĞÂÉú³ÉÑéÖ¤Âë
-               with TImage(ACtrl) do begin
-                    _CreateCaptcha(Width,Height,sSrc,sCaptcha);
-                    //
-                    Hint := '{"src":"media/images/'+sSrc+'","captcha":"'+sCaptcha+'"}';
-               end;
-          end;
-     end else begin
-          //=============ÆÕÍ¨Í¼Æ¬===============================================
+    //
+    joData    := _Json(AData);
 
-          //
-          joData    := _Json(AData);
-
-          if joData.e = 'onclick' then begin
-               //
-               if Assigned(TImage(ACtrl).OnClick) then begin
-                    TImage(ACtrl).OnClick(TImage(ACtrl));
-               end;
-          end else if joData.e = 'onenter' then begin
-               //
-               if Assigned(TImage(ACtrl).OnMouseEnter) then begin
-                    TImage(ACtrl).OnMouseEnter(TImage(ACtrl));
-               end;
-          end else if joData.e = 'onexit' then begin
-               //
-               if Assigned(TImage(ACtrl).OnMouseLeave) then begin
-                    TImage(ACtrl).OnMouseLeave(TImage(ACtrl));
-               end;
-          end;
-     end;
+    if joData.e = 'onclick' then begin
+         //
+         if Assigned(TImage(ACtrl).OnClick) then begin
+              TImage(ACtrl).OnClick(TImage(ACtrl));
+         end;
+    end else if joData.e = 'onmousedown' then begin
+        if Assigned(TLabel(ACtrl).OnMouseDown) then begin
+            iX  := StrToIntDef(joData.v,0);
+            iY  := iX mod 100000;
+            iX  := iX div 100000;
+            TLabel(ACtrl).OnMouseDown(TLabel(ACtrl),mbLeft,[],iX,iY);
+        end;
+    end else if joData.e = 'onmouseup' then begin
+        if Assigned(TLabel(ACtrl).OnMouseup) then begin
+            iX  := StrToIntDef(joData.v,0);
+            iY  := iX mod 100000;
+            iX  := iX div 100000;
+            TLabel(ACtrl).OnMouseup(TLabel(ACtrl),mbLeft,[],iX,iY);
+        end;
+    end else if joData.e = 'onenter' then begin
+         //
+         if Assigned(TImage(ACtrl).OnMouseEnter) then begin
+              TImage(ACtrl).OnMouseEnter(TImage(ACtrl));
+         end;
+    end else if joData.e = 'onexit' then begin
+         //
+         if Assigned(TImage(ACtrl).OnMouseLeave) then begin
+              TImage(ACtrl).OnMouseLeave(TImage(ACtrl));
+         end;
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
     sCode       : string;
     sSize       : string;
     sName       : string;
     sRadius     : string;
-    sPreview    : string;   //ÓÃÓÚÔ¤ÀÀµÄ×Ö·û´®
+    sPreview    : string;   //ç”¨äºé¢„è§ˆçš„å­—ç¬¦ä¸²
     //
     joHint      : Variant;
     joRes       : Variant;
     sSrc        : String;
     sCaptcha    : string;
+    //JS ä»£ç 
+    sEnter      : String;
+    sExit       : String;
+    sClick      : string;
 begin
-    if TImage(ACtrl).HelpKeyword = 'captcha' then begin
-        //=============ÑéÖ¤Âë=================================================
+    //=============æ™®é€šå›¾ç‰‡===================================================================
 
-        //Éú³É·µ»ØÖµÊı×é
-        joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-        //È¡µÃHINT¶ÔÏóJSON
-        joHint    := dwGetHintJson(TControl(ACtrl));
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+    if joHint = null then begin
+        ShowMessage(TControl(ACtrl).Hint);
+    end;
 
 
-        with TImage(ACtrl) do begin
-            //Éú³ÉÑéÖ¤Âë
-            _CreateCaptcha(Width,Height,sSrc,sCaptcha);
-            //
-            Hint := '{"src":"media/images/'+sSrc+'","captcha":"'+sCaptcha+'"}';
+    with TImage(ACtrl) do begin
+        //è¿›å…¥äº‹ä»¶ä»£ç ----------------------------------------------------------------------------
+        sEnter  := '';
+        if joHint.Exists('onenter') then begin
+            sEnter  := 'dwexecute('''+dwProcQuotation(String(joHint.onenter))+''');';    //å–å¾—OnEnterçš„JSä»£ç 
+        end;
+        if sEnter='' then begin
+            if Assigned(OnMouseEnter) then begin
+                sEnter    := Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]);
+            end else begin
 
-            //
-            joRes.Add('<el-image'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' :src="'+dwPrefix(Actrl)+Name+'__src"'
-                    +' fit="none"'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +dwLTWH(TControl(ACtrl))
-                    +sRadius
-                    +'cursor: pointer;'
-                    +'"'
-                    +dwIIF(True,Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                    +'>');
+            end;
+        end else begin
+            if Assigned(OnMouseEnter) then begin
+                sEnter    := Format(_DWEVENTPlus,['mouseenter.native',sEnter,Name,'0','onenter',TForm(Owner).Handle])
+            end else begin
+                sEnter    := ' @mouseenter.native="'+sEnter+'"';
+            end;
+        end;
+
+
+      //é€€å‡ºäº‹ä»¶ä»£ç ----------------------------------------------------------------------------
+        sExit  := '';
+        if joHint.Exists('onexit') then begin
+            sExit  := 'dwexecute('''+dwProcQuotation(String(joHint.onexit))+''');';
+        end;
+        if sExit='' then begin
+            if Assigned(OnMouseLeave) then begin
+                sExit    := Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]);
+            end else begin
+
+            end;
+        end else begin
+            if Assigned(OnMouseLeave) then begin
+                sExit    := Format(_DWEVENTPlus,['mouseleave.native',sExit,Name,'0','onexit',TForm(Owner).Handle])
+            end else begin
+                sExit    := ' @mouseleave.native="'+sExit+'"';
+            end;
+        end;
+
+        //å•å‡»äº‹ä»¶çš„JSä»£ç ------------------------------------------------------------------------
+        sClick    := '';
+        if joHint.Exists('onclick') then begin
+            sClick := 'dwexecute('''+dwProcQuotation(String(joHint.onclick))+''');';
+        end;
+        //
+        if sClick='' then begin
+            if Assigned(OnClick) then begin
+                sClick    := Format(_DWEVENT,['click.native',Name,'0','onclick',TForm(Owner).Handle]);
+            end else begin
+
+            end;
+        end else begin
+            if Assigned(OnClick) then begin
+                sClick    := Format(_DWEVENTPlus,['click.native',sClick,Name,'0','onclick',TForm(Owner).Handle])
+            end else begin
+                sClick    := ' @click.native="'+sClick+'"';
+            end;
+        end;
+    end;
+
+
+    //å¾—åˆ°åœ†è§’åŠå¾„ä¿¡æ¯
+    sRadius   := dwGetHintValue(joHint,'radius','border-radius','');
+    sRadius   := StringReplace(sRadius,'=',':',[]);
+    sRadius   := Trim(StringReplace(sRadius,'"','',[rfReplaceAll]));
+    if sRadius<>'' then begin
+        sRadius   := sRadius + ';';
+    end;
+
+    with TImage(ACtrl) do begin
+        //å¦‚æœæ²¡æœ‰æ‰‹åŠ¨è®¾ç½®å›¾ç‰‡æºï¼Œåˆ™è‡ªåŠ¨ä¿å­˜å½“å‰å›¾ç‰‡ï¼Œå¹¶è®¾ç½®ä¸ºå›¾ç‰‡æº
+        //if dwGetProp(TControl(ACtrl),'src')='' then begin
+        //    sName     := 'dist\webimages\'+dwFullName(Actrl)+'.jpg';
+        //    //ä¿å­˜å›¾ç‰‡åˆ°æœ¬åœ°
+        //    if not FileExists(sName) then begin
+        //        Picture.SaveToFile(sName);
+        //    end;
+        //end;
+
+        //ç”Ÿæˆé¢„è§ˆå­—ç¬¦ä¸²
+        if IncrementalDisplay then begin
+            sClick  := ' @click="image_preview_list=[];image_preview_list.push('+dwFullName(Actrl)+'__src);"';
+        end;
+
+        //2021-07-28 æ›´æ”¹ä¸ºå¯åŠ¨æ€è®¾ç½®href
+        //if joHint.Exists('href') then begin
+        //    joRes.Add('<a href="'+String(joHint.href+'" target="_blank">');
+        //end else if joHint.Exists('hrefself') then begin
+        //    joRes.Add('<a href="'+String(joHint.hrefself+'">');
+        //end;
+        if joHint.Exists('href') then begin
+            joRes.Add('<a :href="'+dwFullName(Actrl)+'__hrf" target="_blank">');
+        end else if joHint.Exists('hrefself') then begin
+            joRes.Add('<a :href="'+dwFullName(Actrl)+'__hrf">');
         end;
 
         //
-        Result    := (joRes);
-
-    end else begin
-        //=============ÆÕÍ¨Í¼Æ¬===================================================================
-
-        //Éú³É·µ»ØÖµÊı×é
-        joRes    := _Json('[]');
-
-        //È¡µÃHINT¶ÔÏóJSON
-        joHint    := dwGetHintJson(TControl(ACtrl));
-
-        //µÃµ½Ô²½Ç°ë¾¶ĞÅÏ¢
-        sRadius   := dwGetHintValue(joHint,'radius','border-radius','');
-        sRadius   := StringReplace(sRadius,'=',':',[]);
-        sRadius   := Trim(StringReplace(sRadius,'"','',[rfReplaceAll]));
-        if sRadius<>'' then begin
-            sRadius   := sRadius + ';';
-        end;
-
-        with TImage(ACtrl) do begin
-            //Èç¹ûÃ»ÓĞÊÖ¶¯ÉèÖÃÍ¼Æ¬Ô´£¬Ôò×Ô¶¯±£´æµ±Ç°Í¼Æ¬£¬²¢ÉèÖÃÎªÍ¼Æ¬Ô´
-            if dwGetProp(TControl(ACtrl),'src')='' then begin
-                sName     := 'dist\webimages\'+dwPrefix(Actrl)+Name+'.jpg';
-                //±£´æÍ¼Æ¬µ½±¾µØ
-                if not FileExists(sName) then begin
-                    Picture.SaveToFile(sName);
-                end;
-            end;
-
-            //Éú³ÉÔ¤ÀÀ×Ö·û´® Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle])
-            //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
-            if IncrementalDisplay then begin
-                sPreview := ' @click="image_preview_list=[];image_preview_list.push('''+dwGetProp(TControl(ACtrl),'src')+''');"';
-            end else begin
-                sPreview    := '';
-            end;
-
-
-            //
-            if Proportional then begin
-                joRes.Add('<el-image'
-                        +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
-                        +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                        +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                        +' :src="'+dwPrefix(Actrl)+Name+'__src" fit="contain"'
+        if Proportional then begin //Proportional:æˆæ¯”ä¾‹çš„
+            joRes.Add('<el-image'
+                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
+                    //+dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    //+dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                    +' :src="'+dwFullName(Actrl)+'__src" fit="contain"'
+                    +dwVisible(TControl(ACtrl))
+                    +dwDisable(TControl(ACtrl))
+                    +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
+                    +dwGetDWAttr(joHint)
+                    +dwLTWH(TControl(ACtrl))
+                    +sRadius
+                    +dwIIF(sClick<>'','cursor: pointer;','')
+                    +dwGetDWStyle(joHint)
+                    +'"'
+                    +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                    +sClick
+                    +sEnter
+                    +sExit
+                    +'>');
+        end else begin
+            if Stretch then begin
+                joRes.Add('<el-image :src="'+dwFullName(Actrl)+'__src" fit="fill"'
                         +dwVisible(TControl(ACtrl))
                         +dwDisable(TControl(ACtrl))
                         +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
                         +dwGetDWAttr(joHint)
                         +dwLTWH(TControl(ACtrl))
                         +sRadius
-                        +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                        +dwIIF(sClick<>'','cursor: pointer;','')
                         +dwGetDWStyle(joHint)
                         +'"'
+                        //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                        //+dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),sPreview)
+                        //+dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                        +sClick
+                        +sEnter
+                        +sExit
                         +'>');
             end else begin
-                if Stretch then begin
-                    joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="fill"'
-                            +dwVisible(TControl(ACtrl))
-                            +dwDisable(TControl(ACtrl))
-                            +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
-                            +dwGetDWAttr(joHint)
-                            +dwLTWH(TControl(ACtrl))
-                            +sRadius
-                            +dwIIF(Assigned(OnClick),'cursor: pointer;','')
-                            +dwGetDWStyle(joHint)
-                            +'"'
-                            +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                            +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),sPreview)
-                            +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                            +'>');
-                end else begin
-                    joRes.Add('<el-image :src="'+dwPrefix(Actrl)+Name+'__src" fit="none"'
-                            +dwVisible(TControl(ACtrl))
-                            +dwDisable(TControl(ACtrl))
-                            +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
-                            +dwGetDWAttr(joHint)
-                            +dwLTWH(TControl(ACtrl))
-                            +sRadius
-                            +dwIIF(Assigned(OnClick),'cursor: pointer;','')
-                            +dwGetDWStyle(joHint)
-                            +'"'
-                            +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
-                            +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                            +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                            +'>');
-                end;
+                joRes.Add('<el-image :src="'+dwFullName(Actrl)+'__src"  fit="none"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
+                        +dwGetDWAttr(joHint)
+                        +dwLTWH(TControl(ACtrl))
+                        +sRadius
+                        +dwIIF(sClick<>'','cursor: pointer;','')
+                        +dwGetDWStyle(joHint)
+                        +'"'
+                        //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
+                        //+dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                        //+dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                        +sClick
+                        +sEnter
+                        +sExit
+                        +'>');
             end;
         end;
-
-        //
-        Result    := (joRes);
     end;
+
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
+    joHint      : Variant;
 begin
-     if TImage(ACtrl).HelpKeyword = 'captcha' then begin
-          //=============ÑéÖ¤Âë=================================================
+    //=============æ™®é€šå›¾ç‰‡===============================================
 
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes.Add('</el-Image>');          //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes.Add('</el-image>');          //æ­¤å¤„éœ€è¦å’ŒdwGetHeadå¯¹åº”
 
-          //
-          Result    := (joRes);
-     end else begin
-          //=============ÆÕÍ¨Í¼Æ¬===============================================
-
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-
-          //Éú³É·µ»ØÖµÊı×é
-          joRes.Add('</el-Image>');          //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
-
-          //
-          Result    := (joRes);
-     end;
+    if joHint.Exists('href') OR joHint.Exists('hrefself') then begin
+        joRes.Add('</a>');
+    end;
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes   : Variant;
+    joHint  : Variant;
 begin
-     if TImage(ACtrl).HelpKeyword = 'captcha' then begin
-          //=============ÑéÖ¤Âë=================================================
+    //=============æ™®é€šå›¾ç‰‡===============================================
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TImage(ACtrl) do begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-               joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
-          end;
-          //
-          Result    := (joRes);
-     end else begin
-          //=============ÆÕÍ¨Í¼Æ¬===============================================
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TImage(ACtrl) do begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-               //
-               joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-               joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-               //
-               if dwGetProp(TControl(ACtrl),'src')='' then begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__src:"dist/webimages/'+dwPrefix(Actrl)+Name+'.jpg",');
-               end else begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
-               end;
-          end;
-          //
-          Result    := (joRes);
-     end;
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TImage(ACtrl) do begin
+        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        //
+        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        //
+        //if dwGetProp(TControl(ACtrl),'src')='' then begin
+        //    joRes.Add(dwFullName(Actrl)+'__src:"dist/webimages/'+dwFullName(Actrl)+'.jpg",');
+        //end else begin
+            joRes.Add(dwFullName(Actrl)+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
+        //end;
+
+        //2021-07-28 æ›´æ”¹ä¸ºå¯åŠ¨æ€è®¾ç½®href
+        if joHint.Exists('href') then begin
+             joRes.Add(dwFullName(Actrl)+'__hrf:"'+String(joHint.href)+'",');
+        end else if joHint.Exists('hrefself') then begin
+             joRes.Add(dwFullName(Actrl)+'__hrf:"'+String(joHint.hrefself)+'",');
+        end;
+    end;
+    //
+    Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
+    joHint    : Variant;
 begin
-     if TImage(ACtrl).HelpKeyword = 'captcha' then begin
-          //=============ÑéÖ¤Âë=================================================
+    //=============æ™®é€šå›¾ç‰‡===============================================
 
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TImage(ACtrl) do begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
-          end;
-          //
-          Result    := (joRes);
-     end else begin
-          //=============ÆÕÍ¨Í¼Æ¬===============================================
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-          //Éú³É·µ»ØÖµÊı×é
-          joRes    := _Json('[]');
-          //
-          with TImage(ACtrl) do begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-               //
-               if dwGetProp(TControl(ACtrl),'src')='' then begin
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="dist/webimages/'+dwPrefix(Actrl)+Name+'.jpg";');
-               end else begin
-                    joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
-               end;
-          end;
-          //
-          Result    := (joRes);
-     end;
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TImage(ACtrl) do begin
+        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+
+        //joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        //joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        //joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        //joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        //if dwGetProp(TControl(ACtrl),'src')='' then begin
+        //    joRes.Add('this.'+dwFullName(Actrl)+'__src="dist/webimages/'+dwFullName(Actrl)+'.jpg";');
+        //end else begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
+        //end;
+
+        //2021-07-28 æ›´æ”¹ä¸ºå¯åŠ¨æ€è®¾ç½®href
+        if joHint.Exists('href') then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__hrf="'+String(joHint.href)+'";');
+        end else if joHint.Exists('hrefself') then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__hrf="'+String(joHint.hrefself)+'";');
+        end;
+    end;
+    //
+    Result    := (joRes);
 end;
 
 
@@ -460,7 +402,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

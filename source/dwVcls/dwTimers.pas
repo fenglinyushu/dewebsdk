@@ -1,4 +1,4 @@
-unit dwTimers;
+ï»¿unit dwTimers;
 
 interface
 
@@ -20,7 +20,7 @@ uses
 
 
 
-//È¡µÃDataÏûÏ¢, ASeparatorÎª·Ö¸ô·û, Ò»°ãÎª:»ò=
+//å–å¾—Dataæ¶ˆæ¯, ASeparatorä¸ºåˆ†éš”ç¬¦, ä¸€èˆ¬ä¸º:æˆ–=
 function dwGetData(ACtrl:TComponent;ASeparator:String):Variant;
 
 implementation
@@ -28,10 +28,10 @@ implementation
 
 
 
-//È¡µÃDataÏûÏ¢, ASeparatorÎª·Ö¸ô·û, Ò»°ãÎª:»ò=
+//å–å¾—Dataæ¶ˆæ¯, ASeparatorä¸ºåˆ†éš”ç¬¦, ä¸€èˆ¬ä¸º:æˆ–=
 function dwGetData(ACtrl:TComponent;ASeparator:String):Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      Result    := _Json('[]');
      //
      with TTimer(ACtrl) do begin

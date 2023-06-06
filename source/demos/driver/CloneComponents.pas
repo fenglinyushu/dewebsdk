@@ -1,4 +1,4 @@
-unit CloneComponents;
+锘縰nit CloneComponents;
 
 interface
 uses
@@ -30,7 +30,7 @@ var
 begin
   I := 0;
   Tempname := Name;
-  //确保控件Name属性唯一
+  //纭繚鎺т欢Name灞炴�у敮涓�
   while Component.Owner.FindComponent(Name) <> nil do
     begin
     Inc(I);
@@ -77,7 +77,7 @@ begin
     try
       with Reader do
         begin
-        OnSetName := getName;     //生成唯一名称
+        OnSetName := getName;     //鐢熸垚鍞竴鍚嶇О
         Component := nil;
 
         if aSource is TWinControl then

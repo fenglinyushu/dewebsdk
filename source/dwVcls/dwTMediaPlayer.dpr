@@ -1,4 +1,4 @@
-library dwTMediaPlayer;
+ï»¿library dwTMediaPlayer;
 
 uses
      ShareMem,
@@ -20,41 +20,18 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
 begin
-     with TMediaPlayer(Actrl) do begin
-          if HelpKeyword = 'm3u8' then begin
-               //============m3u8¸ñÊ½===========================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-
-
-               //ĞèÒª¶îÍâÒıµÄ´úÂë
-               joRes.Add('<link href="dist/_videom3u8/video-js.css" rel="stylesheet" />');
-               joRes.Add('<script src="dist/_videom3u8/video.js"></script>');
-
-               //
-               Result    := joRes;
-
-          end else if HelpKeyword = 'mp3' then begin
-               //============mp3¸ñÊ½============================================
-
-               Result    := '[]';
-
-          end else begin
-               //============mp4¸ñÊ½============================================
-
-               Result    := '["<link rel=\"stylesheet\" href=\"dist/_video/video-js.min.css\">",'
-                         +'"<script src=\"dist/_video/video.min.js\"></script>"]';
-          end;
-     end;
+    with TMediaPlayer(Actrl) do begin
+         Result    := '["<link rel=\"stylesheet\" href=\"dist/_video/video-js.min.css\">",'
+                   +'"<script src=\"dist/_video/video.min.js\"></script>"]';
+    end;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
 begin
      //
@@ -62,376 +39,152 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
-     sCode     : String;
+    sCode     : String;
 
-     //
-     joHint    : Variant;
-     joRes     : Variant;
+    //
+    joHint    : Variant;
+    joRes     : Variant;
 begin
-     //
-     with TMediaPlayer(ACtrl) do begin
-          if HelpKeyword = 'm3u8' then begin
-               //============m3u8¸ñÊ½===========================================
+    //
+    with TMediaPlayer(ACtrl) do begin
+        //============mp4æ ¼å¼============================================
 
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
 
-               //È¡µÃHINT¶ÔÏóJSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
+        //å–å¾—HINTå¯¹è±¡JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
 
-               //Íâ¿ò
-               sCode     := '<div'
-                         +' id="'+dwPrefix(Actrl)+Name+'_frm"'
-                         +dwVisible(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿É¼ûĞÔVisible
-                         +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                         +'"' // ·â±Õstyle
-                         +'>';
-               //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-               joRes.Add(sCode);
+        //
+        sCode     := '<div'
+                 +' id="'+dwFullName(Actrl)+'__frm"'
+                 +dwVisible(TControl(ACtrl))                            //ç”¨äºæ§åˆ¶å¯è§æ€§Visible
+                 +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
+                 +'"' // å°é—­style
+                 +'>';
+        //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
+        joRes.Add(sCode);
 
-               //
-               sCode     := '<video'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' class="video-js  vjs-big-play-centered"'
-                    +' controls'
-                    +' preload="auto"'
-                    +' style="width:100%;height:100%"'
-                    //+' width="'+dwPrefix(Actrl)+Name+'__wid"'
-                    //+' height="'+dwPrefix(Actrl)+Name+'__hei"'
-                    +' data-setup="{}"'
-                    +' >'
-                    +'     <source :src="'+dwPrefix(Actrl)+Name+'__src"'
-                    +' type="application/x-mpegURL"/>';
-
-               joRes.Add(sCode);
-               //
-               Result    := (joRes);
-
-          end else if HelpKeyword = 'mp3' then begin
-               //============mp3¸ñÊ½============================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-
-               //È¡µÃHINT¶ÔÏóJSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
-
-               //
-               sCode     := '<div'
-                         +' id="'+dwPrefix(Actrl)+Name+'__frm"'
-                         +dwVisible(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿É¼ûĞÔVisible
-                         +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                         +'"' // ·â±Õstyle
-                         +'>';
-               //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-               joRes.Add(sCode);
-
-               //
-               sCode     := '    <audio'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' :preload="true"'
-                    +' :src="'+dwPrefix(Actrl)+Name+'__src"'
-                    +' :autoplay="'+dwPrefix(Actrl)+Name+'__aut"'
-                    +' :loop="'+dwPrefix(Actrl)+Name+'__loo"'
-                    +' :controls="'+dwPrefix(Actrl)+Name+'__vis"'
-                    +' style="width:100%;height:100%"'
-                    +'>';
-
-               joRes.Add(sCode);
-
-               //
-               Result    := (joRes);
-          end else begin
-               //============mp4¸ñÊ½============================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-
-               //È¡µÃHINT¶ÔÏóJSON
-               joHint    := dwGetHintJson(TControl(ACtrl));
-
-               //
-               sCode     := '<div'
-                         +' id="'+dwPrefix(Actrl)+Name+'__frm"'
-                         +dwVisible(TControl(ACtrl))                            //ÓÃÓÚ¿ØÖÆ¿É¼ûĞÔVisible
-                         +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
-                         +'"' // ·â±Õstyle
-                         +'>';
-               //Ìí¼Óµ½·µ»ØÖµÊı¾İ
-               joRes.Add(sCode);
-
-            //
-            sCode     := '    <video'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' class="video-js vjs-big-play-centered"'
-                    +dwVisible(TControl(ACtrl))
-                    +' :preload="true"'
-                    +' :loop="'+dwPrefix(Actrl)+Name+'__loo"'
-                    +' :autoplay="'+dwPrefix(Actrl)+Name+'__aut"'
-                    +' :src="'+dwPrefix(Actrl)+Name+'__src"'
-                    //+' data-setup="{}"'
-                    //+' controls'
-                    +dwGetDWAttr(joHint)
-                    //+' :poster="poster"'
-                    //+dwDisable(TControl(ACtrl))
-                    //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
-                    //+dwLTWH(TControl(ACtrl))
-                    +' style="width:100%;height:100%;'
-                    +dwGetDWStyle(joHint)
-                    +'"' //style ·â±Õ
-                    +'>';
-            joRes.Add(sCode);
-            //
-            Result    := (joRes);
-        end;
+        //
+        sCode     := '    <video'
+                +' id="'+dwFullName(Actrl)+'"'
+                +' class="video-js vjs-big-play-centered"'
+                +dwVisible(TControl(ACtrl))
+                +' :preload="true"'
+                +' :loop="'+dwFullName(Actrl)+'__loo"'
+                +' :autoplay="'+dwFullName(Actrl)+'__aut"'
+                +' :src="'+dwFullName(Actrl)+'__src"'
+                //+' data-setup="{}"'
+                //+' controls'
+                +dwGetDWAttr(joHint)
+                //+' :poster="poster"'
+                //+dwDisable(TControl(ACtrl))
+                //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
+                //+dwLTWH(TControl(ACtrl))
+                +' style="width:100%;height:100%;'
+                +dwGetDWStyle(joHint)
+                +'"' //style å°é—­
+                +'>';
+        joRes.Add(sCode);
+        //
+        Result    := (joRes);
     end;
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
      //
-     with TMediaPlayer(ACtrl) do begin
-          if HelpKeyword = 'm3u8' then begin
-               //============m3u8¸ñÊ½===============================================================
+    with TMediaPlayer(ACtrl) do begin
+        //============mp4æ ¼å¼================================================================
 
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('</video>');
-               joRes.Add('</div>');
-               //
-               Result    := (joRes);
-
-          end else if HelpKeyword = 'mp3' then begin
-               //============mp3¸ñÊ½================================================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('    </audio>');
-               joRes.Add('</div>');
-
-               //
-               Result    := (joRes);
-          end else begin
-               //============mp4¸ñÊ½================================================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //Éú³É·µ»ØÖµÊı×é
-               joRes.Add('    </video>');
-               joRes.Add('</div>');
-               //
-               Result    := (joRes);
-          end;
-     end;
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes.Add('    </video>');
+        joRes.Add('</div>');
+        //
+        Result    := (joRes);
+    end;
 end;
 
-//È¡µÃDataÏûÏ¢
+//å–å¾—Dataæ¶ˆæ¯
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
 begin
-     //
-     with TMediaPlayer(ACtrl) do begin
-          if HelpKeyword = 'm3u8' then begin
-               //============m3u8¸ñÊ½===============================================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TMediaPlayer(ACtrl) do begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__aut:'+dwIIF(Enabled,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__src:"'+FileName+'",');
-               end;
-               //
-               Result    := (joRes);
-
-          end else if HelpKeyword = 'mp3' then begin
-               //============mp3¸ñÊ½================================================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TMediaPlayer(ACtrl) do begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__aut:'+dwIIF(Enabled,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__src:"'+FileName+'",');
-               end;
-               //
-               Result    := (joRes);
-
-
-          end else begin
-               //============mp4¸ñÊ½================================================================
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               with TMediaPlayer(ACtrl) do begin
-                    joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-                    joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-                    //
-                    joRes.Add(dwPrefix(Actrl)+Name+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__aut:'+dwIIF(Enabled,'true,','false,'));
-                    joRes.Add(dwPrefix(Actrl)+Name+'__src:"'+FileName+'",');
-               end;
-               //
-               Result    := (joRes);
-          end;
-     end;
+    //
+    with TMediaPlayer(ACtrl) do begin
+        //============mp4æ ¼å¼================================================================
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
+        //
+        with TMediaPlayer(ACtrl) do begin
+            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+            //
+            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+            //
+            joRes.Add(dwFullName(Actrl)+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
+            joRes.Add(dwFullName(Actrl)+'__aut:'+dwIIF(Enabled,'true,','false,'));
+            joRes.Add(dwFullName(Actrl)+'__src:"'+FileName+'",');
+        end;
+        //
+        Result    := (joRes);
+    end;
 end;
 
-//È¡µÃÊÂ¼ş
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+//å–å¾—äº‹ä»¶
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
 begin
-     //
-     with TMediaPlayer(ACtrl) do begin
-          if HelpKeyword = 'm3u8' then begin
-               //============m3u8¸ñÊ½===============================================================
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__loo='+dwIIF(AutoRewind,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__aut='+dwIIF(Enabled,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="'+FileName+'";');
+    //
+    with TMediaPlayer(ACtrl) do begin
+        //============mp4æ ¼å¼================================================================
+        //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+        joRes    := _Json('[]');
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__loo='+dwIIF(AutoRewind,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__aut='+dwIIF(Enabled,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__src="'+FileName+'";');
 
-               //
-               if EnabledButtons  = [btPlay] then begin
-                    joRes.Add('var player = videojs("'+dwPrefix(Actrl)+Name+'");  player.play();');
-                    EnabledButtons := [];
-               end else begin
-                    joRes.Add('');      //Ôö¼ÓÒ»Ïî¿ÕÖµ£¬ÓÃÓÚ¶ÔÆë
-               end;
-               if EnabledButtons  = [btPause] then begin
-                    joRes.Add('var player = videojs("'+dwPrefix(Actrl)+Name+'"); player.pause();');
-                    EnabledButtons := [];
-               end else begin
-                    joRes.Add('');
-               end;
-               if HelpContext > 0 then begin
-                    joRes.Add('document.getElementById("'+dwPrefix(Actrl)+Name+'").currentTime = '+IntToStr(HelpContext-1)+';');
-                    HelpContext    := 0;
-               end else begin
-                    joRes.Add('');
-               end;
-               //
-               Result    := (joRes);
-
-
-          end else if HelpKeyword = 'mp3' then begin
-               //============mp3¸ñÊ½================================================================
-
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__loo='+dwIIF(AutoRewind,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__aut='+dwIIF(Enabled,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="'+FileName+'";');
-
-               //
-               if EnabledButtons  = [btPlay] then begin
-                    joRes.Add('document.getElementById("'+dwPrefix(Actrl)+Name+'").play();');
-                    EnabledButtons := [];
-               end else begin
-                    joRes.Add('');
-               end;
-               if EnabledButtons  = [btPause] then begin
-                    joRes.Add('document.getElementById("'+dwPrefix(Actrl)+Name+'").pause();');
-                    EnabledButtons := [];
-               end else begin
-                    joRes.Add('');
-               end;
-               if HelpContext > 0 then begin
-                    joRes.Add('document.getElementById("'+dwPrefix(Actrl)+Name+'").currentTime = '+IntToStr(HelpContext-1)+';');
-                    HelpContext    := 0;
-               end else begin
-                    joRes.Add('');
-               end;
-               //
-               Result    := (joRes);
-
-
-          end else begin
-               //============mp4¸ñÊ½================================================================
-               //Éú³É·µ»ØÖµÊı×é
-               joRes    := _Json('[]');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-               //
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__loo='+dwIIF(AutoRewind,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__aut='+dwIIF(Enabled,'true;','false;'));
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="'+FileName+'";');
-
-               //
-               if EnabledButtons  = [btPlay] then begin
-                    joRes.Add('document.getElementById("'+dwPrefix(Actrl)+Name+'").play();');
-                    EnabledButtons := [];
-               end else begin
-                    joRes.Add('');
-               end;
-               if EnabledButtons  = [btPause] then begin
-                    joRes.Add('document.getElementById("'+dwPrefix(Actrl)+Name+'").pause();');
-                    EnabledButtons := [];
-               end else begin
-                    joRes.Add('');
-               end;
-               if HelpContext > 0 then begin
-                    joRes.Add('document.getElementById("'+dwPrefix(Actrl)+Name+'").currentTime = '+IntToStr(HelpContext-1)+';');
-                    HelpContext    := 0;
-               end else begin
-                    joRes.Add('');
-               end;
-               //
-               Result    := (joRes);
-          end;
-     end;
+        //
+        if EnabledButtons  = [btPlay] then begin
+            joRes.Add('document.getElementById("'+dwFullName(Actrl)+'").play();');
+            EnabledButtons := [];
+        end else begin
+            joRes.Add('');
+        end;
+        if EnabledButtons  = [btPause] then begin
+            joRes.Add('document.getElementById("'+dwFullName(Actrl)+'").pause();');
+            EnabledButtons := [];
+        end else begin
+            joRes.Add('');
+        end;
+        if HelpContext > 0 then begin
+            joRes.Add('document.getElementById("'+dwFullName(Actrl)+'").currentTime = '+IntToStr(HelpContext-1)+';');
+            HelpContext    := 0;
+        end else begin
+            joRes.Add('');
+        end;
+        //
+        Result    := (joRes);
+    end;
 end;
 
 exports
@@ -439,7 +192,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

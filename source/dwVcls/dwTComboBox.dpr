@@ -1,4 +1,4 @@
-library dwTComboBox;
+ï»¿library dwTComboBox;
 
 uses
      ShareMem,
@@ -10,197 +10,369 @@ uses
      SynCommons,
 
      //
-     SysUtils,
-     Classes,
-     Dialogs,
-     StdCtrls,
-     Windows,
-     Controls,
-     Forms;
+     Messages, SysUtils, Variants, Classes, Graphics,
+     Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
+     StdCtrls, Windows;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     joData    : Variant;
+    joData  : Variant;
+    sValue  : String;
+    I       : Integer;
+    oChange : Procedure(Sender:TObject) of Object;
 begin
-     //
-     joData    := _Json(AData);
+    //
+    joData    := _Json(AData);
 
-     if joData.e = 'onchange' then begin
-          //±£´æÊÂ¼ş
-          TComboBox(ACtrl).OnExit    := TComboBox(ACtrl).OnChange;
-          //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
-          TComboBox(ACtrl).OnChange  := nil;
-          //¸üĞÂÖµ
-          TComboBox(ACtrl).Text    := dwUnescape(joData.v);
-          //»Ö¸´ÊÂ¼ş
-          TComboBox(ACtrl).OnChange  := TComboBox(ACtrl).OnExit;
+    with TComboBox(ACtrl) do begin
+        if joData.e = 'onchange' then begin
+            //ä¿å­˜äº‹ä»¶
+            oChange := TComboBox(ACtrl).OnChange;
+            //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
+            OnChange  := nil;
 
-          //Ö´ĞĞÊÂ¼ş
-          if Assigned(TComboBox(ACtrl).OnChange) then begin
-               TComboBox(ACtrl).OnChange(TComboBox(ACtrl));
-          end;
+            //æ›´æ–°å€¼
+            sValue    := dwUnescape(joData.v);
+            if TComboBox(ACtrl).Style = csDropDown then begin
+                TComboBox(ACtrl).Text    := sValue;
+            end else begin
+                for I := 0 to TComboBox(ACtrl).Items.Count-1 do begin
+                    if sValue = TComboBox(ACtrl).Items[I] then begin
+                        TComboBox(ACtrl).ItemIndex  := I;
+                        break;
+                    end;
+                end;
+            end;
+            //æ¢å¤äº‹ä»¶
+            OnChange  := oChange;
 
-          //Çå¿ÕOnExitÊÂ¼ş
-          TComboBox(ACtrl).OnExit  := nil;
-     end else if joData.e = 'ondropdown' then begin
-          if joData.v = 'true' then begin
-               if Assigned(TComboBox(ACtrl).OnDropDown) then begin
-                    TComboBox(ACtrl).OnDropDown(TLabel(ACtrl));
-               end;
-          end else if joData.v = 'false' then begin
-               if Assigned(TComboBox(ACtrl).OnCloseUp) then begin
-                    TComboBox(ACtrl).OnCloseUp(TLabel(ACtrl));
-               end;
-          end;
-     end;
+            //æ‰§è¡Œäº‹ä»¶
+            if Assigned(OnChange) then begin
+                OnChange(TComboBox(ACtrl));
+            end;
+
+        end else if joData.e = 'onblur' then begin
+            //æ›´æ–°å€¼
+            sValue    := dwUnescape(joData.v);
+            if sValue <> '' then begin
+                //ä¿å­˜äº‹ä»¶
+                oChange := OnChange;
+                //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
+                OnChange  := nil;
+
+                //ä¿è¯ç©ºå­—ç¬¦çš„ä¼ é€’
+                if (sValue = '[!empty!]') or (sValue = '__empty__') or (sValue = 'undefined') then begin
+                    sValue  := Text;
+                end;
+
+
+                if TComboBox(ACtrl).Style = csDropDown then begin
+                    Text    := sValue;
+                end else begin
+                    for I := 0 to Items.Count-1 do begin
+                        if sValue = Items[I] then begin
+                            TComboBox(ACtrl).ItemIndex  := I;
+                            break;
+                        end;
+                    end;
+                end;
+                //æ¢å¤äº‹ä»¶
+                OnChange  := oChange;
+
+                //æ‰§è¡Œäº‹ä»¶
+                if Assigned(OnChange) then begin
+                    OnChange(TComboBox(ACtrl));
+                end;
+
+            end;
+        end else if joData.e = 'ondropdown' then begin
+            if joData.v = 'true' then begin
+                if Assigned(OnDropDown) then begin
+                    OnDropDown(TLabel(ACtrl));
+                end;
+            end else if joData.v = 'false' then begin
+                if Assigned(OnCloseUp) then begin
+                    OnCloseUp(TLabel(ACtrl));
+                end;
+            end;
+        end;
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     joHint    : Variant;
-     joRes     : Variant;
+    sCode   : string;
+    sBlur   : String;
+    sDrop   : String;
+    sFull   : String;
+    joHint  : Variant;
+    joRes   : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-     with TComboBox(ACtrl) do begin
-          //
-          joRes.Add('<el-select'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' v-model="'+dwPrefix(Actrl)+Name+'__txt"'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +dwLTWH(TControl(ACtrl))
+    with TComboBox(ACtrl) do begin
+        //å¾—åˆ°åç§°å¤‡ç”¨
+        sFull   := dwFullName(Actrl);
+
+        //ç”Ÿæˆbluræ—¶çš„ä»£ç ï¼Œ ä¸»è¦ç”¨äºè§£å†³å¯è¾“å…¥å¯é€‰æ‹©åŠŸèƒ½
+        //sBlur   := ' @blur=function(e){'+sName+'__txt=e.target.value;$forceUpdate();'
+        //        +'dwevent(null,'''+sName+''',''this.'+sName+'__txt'',''onchange'','''+IntToStr(TForm(Owner).Handle)+''')}';
+        sBlur   := ' @blur=function(e){'
+                        +sFull+'__txt=e.target.value;'
+                        +'$forceUpdate();'
+                        +'if(e.target.value==''''){'
+                            +'dwevent(null,'''+sFull+''',''"[!empty!]"'',''onblur'','''+IntToStr(TForm(Owner).Handle)+''');'
+                        +'}else{'
+                            +'dwevent(null,'''+sFull+''',''this.'+sFull+'__txt'',''onblur'','''+IntToStr(TForm(Owner).Handle)+''');'
+                        +'}'
+                +'}';
+
+        //
+        sBlur   := ' @blur = "'+sFull+'__blur"';
+        sBlur   := sBlur + ' @keydown.enter.native = "'+sFull+'__blur"';
+
+
+        //Dropdownäº‹ä»¶
+        sDrop   := ' @visible-change = "'+sFull+'__drop"';
+
+        //
+        joRes.Add('<el-select'
+                +' id="'+sFull+'"'
+                +' ref="'+sFull+'"'
+                +' v-model="'+sFull+'__txt"'
+                +dwIIF(Style=csDropDown,' filterable','')
+                +dwVisible(TControl(ACtrl))
+                +dwDisable(TControl(ACtrl))
+                +dwGetDWAttr(joHint)
+                +' :style="{'
+                    +'backgroundColor:'+sFull+'__col,'
+                    +'left:'+sFull+'__lef,'
+                    +'top:'+sFull+'__top,'
+                    +'width:'+sFull+'__wid,'
+                    +'height:'+sFull+'__hei'
+                +'}"'
+                +' style="position:absolute;'
                     +'border:1px solid #DCDFF0;'
-                    +'border-radius:2px;'
-                    +'"' //style ·â±Õ
-                    +dwIIF(Assigned(OnDropDown) OR Assigned(OnCloseUp),
-                         '@visible-change="dwevent($event,'''+dwPrefix(Actrl)+Name+''',$event,''ondropdown'','''')"',
-                         '')
-                    +Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__txt','onchange',TForm(Owner).Handle])
-                    +'>');
-          joRes.Add('    <el-option v-for="item in '+dwPrefix(Actrl)+Name+'__its" :key="item.value" :label="item.value" :value="item.value"/>');
+                    +'border-radius:3px;'
+                    +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
+                    +dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //è‡ªå®šä¹‰èƒŒæ™¯è‰²
+                    +dwGetHintStyle(joHint,'color','color','')             //è‡ªå®šä¹‰å­—ä½“è‰²
+                    +dwGetHintStyle(joHint,'fontsize','font-size','')      //è‡ªå®šä¹‰å­—ä½“å¤§å°
+                    +dwGetDWStyle(joHint)
+                +'"' //style å°é—­
+                //+dwIIF(Style=csDropDown,sBlur,'')
+                +sBlur
+                +sDrop
+                //+dwIIF(Assigned(OnDropDown) OR Assigned(OnCloseUp),'@visible-change="dwevent($event,'''+sFull+''',$event,''ondropdown'','''')"','')
 
-     end;
+                +Format(_DWEVENT,['change',sFull,'this.'+sFull+'__txt','onchange',TForm(Owner).Handle])
+                +'>');
+        joRes.Add('    <el-option v-for="item in '+sFull+'__its" :key="item.value" :label="item.value" :value="item.value"/>');
 
-     //
-     Result    := (joRes);
+    end;
+
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-select>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
      sCode     : string;
      iItem     : Integer;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TComboBox(ACtrl) do begin
-          //Ìí¼ÓÑ¡Ïî
-          sCode     := dwPrefix(Actrl)+Name+'__its:[';
-          for iItem := 0 to Items.Count-1 do begin
-               sCode     := sCode + '{value:'''+Items[iItem]+'''},';
-          end;
-          if Items.Count>0 then begin
-               Delete(sCode,Length(sCode),1);     //É¾³ı×îºóµÄ¶ººÅ
-          end;
-          sCode     := sCode + '],';
-          joRes.Add(sCode);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TComboBox(ACtrl) do begin
+        //æ·»åŠ é€‰é¡¹
+        sCode     := dwFullName(Actrl)+'__its:[';
+        for iItem := 0 to Items.Count-1 do begin
+             sCode     := sCode + '{value:'''+Items[iItem]+'''},';
+        end;
+        if Items.Count>0 then begin
+             Delete(sCode,Length(sCode),1);     //åˆ é™¤æœ€åçš„é€—å·
+        end;
+        sCode     := sCode + '],';
+        joRes.Add(sCode);
 
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          if dwGetProp(TControl(ACtrl),'height')='' then begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-          end else begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+dwGetProp(TControl(ACtrl),'height')+'px",');
-          end;
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__txt:"'+Text+'",');
-     end;
-     //
-     Result    := (joRes);
+        //
+        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+        if dwGetProp(TControl(ACtrl),'height')='' then begin
+             joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        end else begin
+             joRes.Add(dwFullName(Actrl)+'__hei:"'+dwGetProp(TControl(ACtrl),'height')+'px",');
+        end;
+        //
+        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        //
+        joRes.Add(dwFullName(Actrl)+'__txt:"'+Text+'",');
+        //
+        if Color = clNone then begin
+            joRes.Add(dwFullName(Actrl)+'__col:"rgba(0,0,0,0)",');
+        end else begin
+            joRes.Add(dwFullName(Actrl)+'__col:"'+dwAlphaColor(TPanel(ACtrl))+'",');
+        end;
+    end;
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃMethod
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+//å–å¾—Method
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     sCode     : string;
-     iItem     : Integer;
+    joRes       : Variant;
+    sCode       : string;
+    sEventComp  : string;       //ç”¨äºè¯»å–äº‹ä»¶å‘èµ·æ§ä»¶åç§°
+    iItem       : Integer;
+    joHint      : Variant;  //__eventcomponent
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TComboBox(ACtrl) do begin
-          //Ìí¼ÓÑ¡Ïî
-          sCode     := 'this.'+dwPrefix(Actrl)+Name+'__its=[';
-          for iItem := 0 to Items.Count-1 do begin
-               sCode     := sCode + '{value:'''+Items[iItem]+'''},';
-          end;
-          if Items.Count>0 then begin
-               Delete(sCode,Length(sCode),1);
-          end;
-          sCode     := sCode + '];';
-          joRes.Add(sCode);
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          if dwGetProp(TControl(ACtrl),'height')='' then begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-          end else begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+dwGetProp(TControl(ACtrl),'height')+'px";');
-          end;
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__txt="'+Text+'";');
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+
+    //å¾—åˆ°äº‹ä»¶æºæ§ä»¶
+    joHint  := dwGetHintJson(TControl(ACtrl.Owner));
+    sEventComp  := '';
+    if joHint.Exists('__eventcomponent') then begin
+        sEventComp  := LowerCase(joHint.__eventcomponent);
+    end;
+
+    //
+    with TComboBox(ACtrl) do begin
+        //æ·»åŠ é€‰é¡¹
+        sCode     := 'this.'+dwFullName(Actrl)+'__its=[';
+        for iItem := 0 to Items.Count-1 do begin
+             sCode     := sCode + '{value:'''+Items[iItem]+'''},';
+        end;
+        if Items.Count>0 then begin
+             Delete(sCode,Length(sCode),1);
+        end;
+        sCode     := sCode + '];';
+        joRes.Add(sCode);
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        if dwGetProp(TControl(ACtrl),'height')='' then begin
+             joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        end else begin
+             joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+dwGetProp(TControl(ACtrl),'height')+'px";');
+        end;
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        //å¦‚æœå½“å‰æ˜¯äº‹ä»¶æºæ§ä»¶ï¼Œåˆ™ä¸å¤„ç†
+        if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+Text+'";');
+        end else begin
+            joRes.Add('');
+        end;
+        //
+        if Color = clNone then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__col="rgba(0,0,0,0)";');
+        end else begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwAlphaColor(TPanel(ACtrl))+'";');
+        end;
+    //
+    end;
+    Result    := (joRes);
 end;
 
+function dwGetMethods(ACtrl:TComponent):string;StdCall;
+var
+    sCode   : string;
+    sFull   : string;
+    //
+    joRes   : variant;
+begin
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes   := _Json('[]');
+
+    //
+    sFull   := dwFullName(ACtrl);
+
+    with TComboBox(ACtrl) do begin
+        //bluräº‹ä»¶
+        sCode   := sFull + '__blur(e){'
+                    //+'console.log("onblur");'
+                    +'this.'+sFull+'__txt = e.target.value;'
+                    +'this.$forceUpdate();'
+                    +'__empty__ = "__empty__";'
+                    +'if(e.target.value == ""){'
+                        +'this.dwevent(null,"'+sFull+'","__empty__",''onblur'','''+IntToStr(TForm(Owner).Handle)+''');'
+                    +'}else{'
+                        +'this.dwevent(null,"'+sFull+'",''this.'+sFull+'__txt'',''onblur'','''+IntToStr(TForm(Owner).Handle)+''');'
+                    +'};'
+                    //+'this.$refs.'+sFull+'.visible = false;' //éšè—ä¸‹æ‹‰æ¡†
+                +'},';
+        joRes.Add(sCode);
+
+        //dropäº‹ä»¶
+        sCode   :=
+                sFull + '__drop(e){' +
+                    'console.log(e);' +
+                    'if (e == true){'+
+                        'this.dwevent(null,"'+sFull+'",''"true"'',''ondropdown'','''+IntToStr(TForm(Owner).Handle)+''');'+
+                    '}else{' +
+                        'this.dwevent(null,"'+sFull+'",''"false"'',''ondropdown'','''+IntToStr(TForm(Owner).Handle)+''');'+
+                    '};' +
+
+(*
+                    'this.'+sFull+'__txt = e.target.value;' +
+                    'this.$forceUpdate();' +
+                    '__empty__ = "__empty__";' +
+                    'if(e.target.value == ""){' +
+                        'this.dwevent(null,"'+sFull+'","__empty__",''onblur'','''+IntToStr(TForm(Owner).Handle)+''');'+
+                    '}else{' +
+                        'this.dwevent(null,"'+sFull+'",''this.'+sFull+'__txt'',''onblur'','''+IntToStr(TForm(Owner).Handle)+''');'+
+                    '};' +
+*)
+                '},';
+        joRes.Add(sCode);
+    end;
+
+    //
+    Result  := joRes;
+end;
 
 exports
      //dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
+     dwGetMethods,
      dwGetData;
      
 begin

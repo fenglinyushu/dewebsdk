@@ -1,13 +1,13 @@
-unit dwCtrlBase;
+ï»¿unit dwCtrlBase;
 
 interface
 
 uses
 
      //
-     SynCommons,
+     SynCommons,System.JSON,
      
-     //ÇóMD5
+     //æ±‚MD5
      IdHashMessageDigest,IdGlobal, IdHash,
      //
      Vcl.GraphUtil,
@@ -18,52 +18,59 @@ uses
      DateUtils, StdCtrls, Menus,
      Windows,Types;
 
-//¸ù¾İ¿Ø¼şµÄHintÉú³ÉJSON
+//æ ¹æ®æ§ä»¶çš„Hintç”ŸæˆJSON
 function dwGetHintJson(ACtrl:TControl):Variant;
 
-//Éú³É¿É¼ûĞÔ×Ö·û´®
+//ç”Ÿæˆå¯è§æ€§å­—ç¬¦ä¸²
 function dwVisible(ACtrl:TControl):String;
 
-//Éú³É¿ÉÓÃĞÔ×Ö·û´®
+//ç”Ÿæˆå¯ç”¨æ€§å­—ç¬¦ä¸²
 function dwDisable(ACtrl:TControl):String;
 
-//Éú³ÉLTWH×Ö·û´®
-function dwLTWH(ACtrl:TControl):String;      //¿ÉÒÔ¸üĞÂÎ»ÖÃµÄÓÃ·¨
-function dwLTWHComp(ACtrl:TComponent):String;  //¿ÉÒÔ¸üĞÂÎ»ÖÃµÄÓÃ·¨
+//ç”ŸæˆLTWHå­—ç¬¦ä¸²
+function dwLTWH(ACtrl:TControl):String;      //å¯ä»¥æ›´æ–°ä½ç½®çš„ç”¨æ³•
+function dwLTWHComp(ACtrl:TComponent):String;  //å¯ä»¥æ›´æ–°ä½ç½®çš„ç”¨æ³•
+function dwLTWHBordered(ACtrl:TControl):String;  //é’ˆå¯¹éœ€è¦å¤–æ¡†çš„å†™æ³•
 
-//¼ì²éHINTµÄJOSN¶ÔÏóÖĞÈç¹û´æÔÚÔÚÄ³ÊôĞÔ,Ôò·µ»Ø×Ö·û´®
-//Èç¹û´æÔÚ AJsonName Ôò ·µ»Ø AHtmlName = "AJson.AJsonName";
-//                 ·ñÔò ·µ»Ø ADefault
+//æ£€æŸ¥HINTçš„JOSNå¯¹è±¡ä¸­å¦‚æœå­˜åœ¨åœ¨æŸå±æ€§,åˆ™è¿”å›å­—ç¬¦ä¸²
+//å¦‚æœå­˜åœ¨ AJsonName åˆ™ è¿”å› AHtmlName = "AJson.AJsonName";
+//                 å¦åˆ™ è¿”å› ADefault
 function dwGetHintValue(AHint:Variant;AJsonName,AHtmlName,ADefault:String):String;
 
 function dwGetHintStyle(AHint:Variant;AJsonName,AHtmlName,ADefault:String):String;
 
-//µÃµ½ÊôĞÔ×Ö·û´®
+//å¾—åˆ°å±æ€§å­—ç¬¦ä¸²
 function dwGetDWAttr(AHint:Variant):String;
 
-//µÃµ½ÑùÊ½×Ö·û´®
+//å¾—åˆ°æ ·å¼å­—ç¬¦ä¸²
 function dwGetDWStyle(AHint:Variant):String;
 
+//æ ¹æ®HINTä¸­æ˜¯å¦æœ‰æŸå±æ€§ï¼Œç”Ÿæˆattrå­—ç¬¦ä¸²ã€‚ æ²¡æœ‰è¿”å›ç©ºå­—ç¬¦ä¸²
+function dwGetAttr(AHint:Variant;AAttr:String):String;
+function dwGetAttrBoolean(AHint:Variant;AAttr:String):String;
 
-//¼ì²éHINTµÄJOSN¶ÔÏóÖĞÈç¹û´æÔÚÔÚÄ³ÊôĞÔ,Ôò·µ»Ø×Ö·û´®
-//Èç¹û´æÔÚ AJsonName Ôò ·µ»Ø AHtmlName:AJson.AJsonName;
-//                 ·ñÔò ·µ»Ø ADefault
+
+//æ£€æŸ¥HINTçš„JOSNå¯¹è±¡ä¸­å¦‚æœå­˜åœ¨åœ¨æŸå±æ€§,åˆ™è¿”å›å­—ç¬¦ä¸²
+//å¦‚æœå­˜åœ¨ AJsonName åˆ™ è¿”å› AHtmlName:AJson.AJsonName;
+//                 å¦åˆ™ è¿”å› ADefault
 function dwIIF(ABool:Boolean;AYes,ANo:string):string;
+function dwIIFi(ABool:Boolean;AYes,ANo:Integer):Integer;
 
 const
-     //²ÎÊıÒÀ´ÎÎª:JSÊÂ¼şÃû³Æ ---  ¿Ø¼şÃû³Æ,¿Ø¼şÖµ,DÊÂ¼şÃû³Æ,¾ä±ú
+     //å‚æ•°ä¾æ¬¡ä¸º:JSäº‹ä»¶åç§° ---  æ§ä»¶åç§°,æ§ä»¶å€¼,Däº‹ä»¶åç§°,å¥æŸ„
      _DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
+     _DWEVENT1 = ' %s="this.dwevent(event,''%s'',''%s'',''%s'',''%d'')"';   //ç”¨äºEditçš„OnKeyDown
 
-     //²ÎÊıÒÀ´ÎÎª:JSÊÂ¼şÃû³Æ ---±¾µØjS´úÂë£¬¿Ø¼şÃû³Æ,¿Ø¼şÖµ,DÊÂ¼şÃû³Æ,¾ä±ú
+     //å‚æ•°ä¾æ¬¡ä¸º:JSäº‹ä»¶åç§° ---æœ¬åœ°jSä»£ç ï¼Œæ§ä»¶åç§°,æ§ä»¶å€¼,Däº‹ä»¶åç§°,å¥æŸ„
      _DWEVENTPlus = ' @%s="%s;dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
 
-//½âÃÜº¯Êı
+//è§£å¯†å‡½æ•°
 function dwDecryptKey (Src:String; Key:String):string;
 
-//Delphi ÑÕÉ«×ªHTML ÑÕÉ«×Ö·û´®
+//Delphi é¢œè‰²è½¬HTML é¢œè‰²å­—ç¬¦ä¸²
 function dwColor(AColor:Integer):string;
 
-//Delphi ÑÕÉ«×ªHTML ÑÕÉ«×Ö·û´®,´øÍ¸Ã÷¶È
+//Delphi é¢œè‰²è½¬HTML é¢œè‰²å­—ç¬¦ä¸²,å¸¦é€æ˜åº¦
 function dwAlphaColor(ACtrl:TPanel):string;
 
 //
@@ -72,398 +79,68 @@ function dwEncodeURIComponent(S:AnsiString):AnsiString;
 function dwBoolToStr(AVal:Boolean):string;
 function dwIsNull(AVar:Variant):Boolean;
 
-//´¦ÀíDELPHIÖĞµÄÌØÊâ×Ö·û
+//å¤„ç†DELPHIä¸­çš„ç‰¹æ®Šå­—ç¬¦
 function dwConvertStr(AStr:String):String;
 
-//´¦ÀíDELPHIÖĞCaptionµÄÌØÊâ×Ö·û
+//å¤„ç†DELPHIä¸­Captionçš„ç‰¹æ®Šå­—ç¬¦
 function dwProcessCaption(AStr:String):String;
 
-//ÓÃÓÚ¶ÔÖĞÎÄ½øĞĞ±àÂë, ¶ÔÓ¦JSÖĞµÄescapeº¯Êı
+//ç”¨äºå¯¹ä¸­æ–‡è¿›è¡Œç¼–ç , å¯¹åº”JSä¸­çš„escapeå‡½æ•°
 function dwEscape(const StrToEscape:string):String;
 function dwUnescape(S: string): string;
 
-//±£´æ/¶ÁÈ¡ÒÔHintÖĞ´æ·ÅµÄÖµ
+//ä¿å­˜/è¯»å–ä»¥Hintä¸­å­˜æ”¾çš„å€¼
 function dwSetProp(ACtrl:TControl;AAttr,AValue:String):Integer;
 function dwGetProp(ACtrl:TControl;AAttr:String):String;
-function dwGetJsonAttr(AJson:Variant;AAttr:String):String;   //´ÓJSON¶ÔÏóÖĞ¶ÁÈ¡ÊôĞÔÖµ
+function dwGetJsonAttr(AJson:Variant;AAttr:String):String;   //ä»JSONå¯¹è±¡ä¸­è¯»å–å±æ€§å€¼
 
-//¶ÁÈ¡²¢Éú³ÉÔ²½ÇĞÅÏ¢
+//è¯»å–å¹¶ç”Ÿæˆåœ†è§’ä¿¡æ¯
 function dwRadius(AJson:Variant):string;
 
-//ÖØÅÅACtrlµÄ×ÓÒªËØ.   AHorzÎªÕæÊ± Ë®Æ½µÈ¿íÅÅÁĞ, ·ñÔò´¹Ö±ÅÅÁĞ
+//é‡æ’ACtrlçš„å­è¦ç´ .   AHorzä¸ºçœŸæ—¶ æ°´å¹³ç­‰å®½æ’åˆ—, å¦åˆ™å‚ç›´æ’åˆ—
 procedure dwRealignChildren(ACtrl:TWinControl;AHorz:Boolean;ASize:Integer);
 
 
 
-//Memo.text×ª»»Îªelemenu Textarea µÄ¸ñÊ½
+//Memo.textè½¬æ¢ä¸ºelemenu Textarea çš„æ ¼å¼
 function  dwMemoValueToText(AText:string):string;
 function  dwMemoTextToValue(AText:string):string;
 
 procedure showMsg(AMsg:string);
 
-//ÉèÖÃHeight
+//è®¾ç½®Height
 function  dwSetHeight(AControl:TControl;AHeight:Integer):Integer;
 
-//ÉèÖÃPlaceHolder
+//è®¾ç½®PlaceHolder
 function  dwSetPlaceHodler(AControl:TControl;APH:String):Integer;
 
-//ÉèÖÃLTWH
+//è®¾ç½®LTWH
 function  dwSetCompLTWH(AComponent:TComponent;ALeft,ATop,AWidth,AHeight:Integer):Integer;
 
-//·´±àÂëº¯Êı
+//åç¼–ç å‡½æ•°
 function  dwDecode(AText:string):string;
 
 //
 function dwPHPToDate(ADate:Integer):TDateTime;
 
-//¶Ô¿ÉÄÜÔì³ÉÎÊÌâµÄ×Ö·û´®½øĞĞ×ªÒå´¦Àí
+//å¯¹å¯èƒ½é€ æˆé—®é¢˜çš„å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰å¤„ç†
 function  dwChangeChar(AText:string):string;
 
 //
 function dwLongStr(AText:String):String;
 
-//ÅÅÁĞPanelµÄ×Ó¿Ø¼ş
+//æ’åˆ—Panelçš„å­æ§ä»¶
 procedure dwRealignPanel(APanel:TPanel;AHorz:Boolean);
 
-const
-     _Head : string =
-          '<!DOCTYPE html>                                                                    '#13
-          +'<html lang="en">                                                                  '#13
-          +'                                                                                  '#13
-          +'<head>                                                                            '#13
-          +'    <meta charset="utf-8">                                                        '#13
-          +'    <meta name="viewport" content="width=device-width, initial-scale=1.0">        '#13
-          +'    <meta http-equiv="X-UA-Compatible" content="ie=edge">                         '#13
-          +'    <title>[!!!]</title>                                                          '#13
-          +'</head>                                                                           '#13;
+//æ£€éªŒå½“å‰å­—ç¬¦ä¸²æ˜¯å¦åˆæ³•çš„JSONå­—ç¬¦ä¸²
+function    dwStrIsJson(AText:String):Boolean;
 
-     _LOADING  : string =
-           '    <style type="text/css">                                             '#13
-          +'         #Loading {                                                     '#13
-          +'              top: 50%;                                                 '#13
-          +'              left: 50%;                                                '#13
-          +'              position: absolute;                                       '#13
-          +'              -webkit-transform: translateY(-50%) translateX(-50%);     '#13
-          +'              transform: translateY(-50%) translateX(-50%);             '#13
-          +'              z-index: 100;                                             '#13
-          +'         }                                                              '#13
-          +'         @-webkit-keyframes ball-beat {                                 '#13
-          +'              50% {                                                     '#13
-          +'                   opacity: 0.2;                                        '#13
-          +'                   -webkit-transform: scale(0.75);                      '#13
-          +'                   transform: scale(0.75);                              '#13
-          +'              }                                                         '#13
-          +'              100% {                                                    '#13
-          +'                   opacity: 1;                                          '#13
-          +'                   -webkit-transform: scale(1);                         '#13
-          +'                   transform: scale(1);                                 '#13
-          +'              }                                                         '#13
-          +'         }                                                              '#13
-          +'         @keyframes ball-beat {                                         '#13
-          +'              50% {                                                     '#13
-          +'                   opacity: 0.2;                                        '#13
-          +'                   -webkit-transform: scale(0.75);                      '#13
-          +'                   transform: scale(0.75);                              '#13
-          +'              }                                                         '#13
-          +'              100% {                                                    '#13
-          +'                   opacity: 1;                                          '#13
-          +'                   -webkit-transform: scale(1);                         '#13
-          +'                   transform: scale(1);                                 '#13
-          +'              }                                                         '#13
-          +'         }                                                              '#13
-          +'         .ball-beat>div {                                               '#13
-          +'              background-color: #279fcf;                                '#13
-          +'              width: 15px;                                              '#13
-          +'              height: 15px;                                             '#13
-          +'              border-radius: 100% !important;                           '#13
-          +'              margin: 2px;                                              '#13
-          +'              -webkit-animation-fill-mode: both;                        '#13
-          +'              animation-fill-mode: both;                                '#13
-          +'              display: inline-block;                                    '#13
-          +'              -webkit-animation: ball-beat 0.7s 0s infinite linear;     '#13
-          +'              animation: ball-beat 0.7s 0s infinite linear;             '#13
-          +'         }                                                              '#13
-          +'         .ball-beat>div:nth-child(2n-1) {                               '#13
-          +'              -webkit-animation-delay: 0.35s !important;                '#13
-          +'              animation-delay: 0.35s !important;                        '#13
-          +'         }                                                              '#13
-          +'         #loader-wrapper {                                              '#13
-          +'              position: fixed;                                          '#13
-          +'              top: 0;                                                   '#13
-          +'              left: 0;                                                  '#13
-          +'              width: 100%;                                              '#13
-          +'              height: 100%;                                             '#13
-          +'              z-index: 999999;                                          '#13
-          +'              background: #fff;                                         '#13
-          +'         }                                                              '#13
-          +'         #loader {                                                      '#13
-          +'              display: block;                                           '#13
-          +'              position: relative;                                       '#13
-          +'              left: 50%;                                                '#13
-          +'              top: 50%;                                                 '#13
-          +'              width: 150px;                                             '#13
-          +'              height: 150px;                                            '#13
-          +'              margin: -75px 0 0 -75px;                                  '#13
-          +'              border-radius: 50%;                                       '#13
-          +'              border: 3px solid transparent;                            '#13
-          +'              /* COLOR 1 */                                             '#13
-          +'              border-top-color: #000;                                   '#13
-          +'              -webkit-animation: spin 2s linear infinite;               '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -ms-animation: spin 2s linear infinite;                   '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -moz-animation: spin 2s linear infinite;                  '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -o-animation: spin 2s linear infinite;                    '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              animation: spin 2s linear infinite;                       '#13
-          +'              /* Chrome, Firefox 16+, IE 10+, Opera */                  '#13
-          +'              z-index: 1001;                                            '#13
-          +'         }                                                              '#13
-          +'         #loader:before {                                               '#13
-          +'              content: "";                                              '#13
-          +'              position: absolute;                                       '#13
-          +'              top: 5px;                                                 '#13
-          +'              left: 5px;                                                '#13
-          +'              right: 5px;                                               '#13
-          +'              bottom: 5px;                                              '#13
-          +'              border-radius: 50%;                                       '#13
-          +'              border: 3px solid transparent;                            '#13
-          +'              /* COLOR 2 */                                             '#13
-          +'              border-top-color: #000;                                   '#13
-          +'              -webkit-animation: spin 3s linear infinite;               '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -moz-animation: spin 3s linear infinite;                  '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -o-animation: spin 3s linear infinite;                    '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -ms-animation: spin 3s linear infinite;                   '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              animation: spin 3s linear infinite;                       '#13
-          +'              /* Chrome, Firefox 16+, IE 10+, Opera */                  '#13
-          +'         }                                                              '#13
-          +'         #loader:after {                                                '#13
-          +'              content: "";                                              '#13
-          +'              position: absolute;                                       '#13
-          +'              top: 15px;                                                '#13
-          +'              left: 15px;                                               '#13
-          +'              right: 15px;                                              '#13
-          +'              bottom: 15px;                                             '#13
-          +'              border-radius: 50%;                                       '#13
-          +'              border: 3px solid transparent;                            '#13
-          +'              border-top-color: #000;                                   '#13
-          +'              /* COLOR 3 */                                             '#13
-          +'              -moz-animation: spin 1.5s linear infinite;                '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -o-animation: spin 1.5s linear infinite;                  '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -ms-animation: spin 1.5s linear infinite;                 '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              -webkit-animation: spin 1.5s linear infinite;             '#13
-          +'              /* Chrome, Opera 15+, Safari 5+ */                        '#13
-          +'              animation: spin 1.5s linear infinite;                     '#13
-          +'              /* Chrome, Firefox 16+, IE 10+, Opera */                  '#13
-          +'         }                                                              '#13
-          +'         @-webkit-keyframes spin {                                      '#13
-          +'              0% {                                                      '#13
-          +'                   -webkit-transform: rotate(0deg);                     '#13
-          +'                   /* Chrome, Opera 15+, Safari 3.1+ */                 '#13
-          +'                   -ms-transform: rotate(0deg);                         '#13
-          +'                   /* IE 9 */                                           '#13
-          +'                   transform: rotate(0deg);                             '#13
-          +'                   /* Firefox 16+, IE 10+, Opera */                     '#13
-          +'              }                                                         '#13
-          +'                                                                        '#13
-          +'              100% {                                                    '#13
-          +'                   -webkit-transform: rotate(360deg);                   '#13
-          +'                   /* Chrome, Opera 15+, Safari 3.1+ */                 '#13
-          +'                   -ms-transform: rotate(360deg);                       '#13
-          +'                   /* IE 9 */                                           '#13
-          +'                   transform: rotate(360deg);                           '#13
-          +'                   /* Firefox 16+, IE 10+, Opera */                     '#13
-          +'              }                                                         '#13
-          +'         }                                                              '#13
-          +'         @keyframes spin {                                              '#13
-          +'              0% {                                                      '#13
-          +'                   -webkit-transform: rotate(0deg);                     '#13
-          +'                   /* Chrome, Opera 15+, Safari 3.1+ */                 '#13
-          +'                   -ms-transform: rotate(0deg);                         '#13
-          +'                   /* IE 9 */                                           '#13
-          +'                   transform: rotate(0deg);                             '#13
-          +'                   /* Firefox 16+, IE 10+, Opera */                     '#13
-          +'              }                                                         '#13
-          +'              100% {                                                    '#13
-          +'                   -webkit-transform: rotate(360deg);                   '#13
-          +'                   /* Chrome, Opera 15+, Safari 3.1+ */                 '#13
-          +'                   -ms-transform: rotate(360deg);                       '#13
-          +'                   /* IE 9 */                                           '#13
-          +'                   transform: rotate(360deg);                           '#13
-          +'                   /* Firefox 16+, IE 10+, Opera */                     '#13
-          +'              }                                                         '#13
-          +'         }                                                              '#13
-          +'         #loader-wrapper .loader-section {                              '#13
-          +'              position: fixed;                                          '#13
-          +'              top: 0;                                                   '#13
-          +'              width: 51%;                                               '#13
-          +'              height: 100%;                                             '#13
-          +'              background: #fff;                                         '#13
-          +'              /* opacity: 0.7; */                                       '#13
-          +'              /* Old browsers */                                        '#13
-          +'              z-index: 1000;                                            '#13
-          +'              -webkit-transform: translateX(0);                         '#13
-          +'              /* Chrome, Opera 15+, Safari 3.1+ */                      '#13
-          +'              -ms-transform: translateX(0);                             '#13
-          +'              /* IE 9 */                                                '#13
-          +'              transform: translateX(0);                                 '#13
-          +'              /* Firefox 16+, IE 10+, Opera */                          '#13
-          +'         }                                                              '#13
-          +'         #loader-wrapper .loader-section.section-left {                 '#13
-          +'              left: 0;                                                  '#13
-          +'         }                                                              '#13
-          +'         #loader-wrapper .loader-section.section-right {                '#13
-          +'              right: 0;                                                 '#13
-          +'         }                                                              '#13
-          +'         /* Loaded */                                                   '#13
-          +'         .loaded #loader-wrapper .loader-section.section-left {         '#13
-          +'              -webkit-transform: translateX(-100%);                     '#13
-          +'              /* Chrome, Opera 15+, Safari 3.1+ */                      '#13
-          +'              -ms-transform: translateX(-100%);                         '#13
-          +'              /* IE 9 */                                                '#13
-          +'              transform: translateX(-100%);                             '#13
-          +'              /* Firefox 16+, IE 10+, Opera */                          '#13
-          +'              -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000); '#13
-          +'              transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);         '#13
-          +'         }                                                              '#13
-          +'         .loaded #loader-wrapper .loader-section.section-right {        '#13
-          +'              -webkit-transform: translateX(100%);                      '#13
-          +'              /* Chrome, Opera 15+, Safari 3.1+ */                      '#13
-          +'              -ms-transform: translateX(100%);                          '#13
-          +'              /* IE 9 */                                                '#13
-          +'              transform: translateX(100%);                              '#13
-          +'              /* Firefox 16+, IE 10+, Opera */                          '#13
-          +'              -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000); '#13
-          +'              transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);         '#13
-          +'         }                                                              '#13
-          +'         .loaded #loader {                                              '#13
-          +'              opacity: 0;                                               '#13
-          +'              -webkit-transition: all 0.3s ease-out;                    '#13
-          +'              transition: all 0.3s ease-out;                            '#13
-          +'         }                                                              '#13
-          +'         .loaded #loader-wrapper {                                      '#13
-          +'              visibility: hidden;                                       '#13
-          +'              -webkit-transform: translateY(-100%);                     '#13
-          +'              /* Chrome, Opera 15+, Safari 3.1+ */                      '#13
-          +'              -ms-transform: translateY(-100%);                         '#13
-          +'              /* IE 9 */                                                '#13
-          +'              transform: translateY(-100%);                             '#13
-          +'              /* Firefox 16+, IE 10+, Opera */                          '#13
-          +'              -webkit-transition: all 0.3s 1s ease-out;                 '#13
-          +'              transition: all 0.3s 1s ease-out;                         '#13
-          +'         }                                                              '#13
-          +'         /* JavaScript Turned Off */                                    '#13
-          +'                                                                        '#13
-          +'         .no-js #loader-wrapper {                                       '#13
-          +'              display: none;                                            '#13
-          +'         }                                                              '#13
-          +'                                                                        '#13
-          +'         .no-js h1 {                                                    '#13
-          +'              color: #222222;                                           '#13
-          +'         }                                                              '#13
-          +'         #loader-wrapper .load_title {                                  '#13
-          +'              font-family: ''Open Sans'';                               '#13
-          +'              color: rgb(245, 245, 245);                                '#13
-          +'              font-size: 19px;                                          '#13
-          +'              width: 100%;                                              '#13
-          +'              text-align: center;                                       '#13
-          +'              z-index: 9999999999999;                                   '#13
-          +'              position: absolute;                                       '#13
-          +'              top: 36px;                                                '#13
-          +'              opacity: 1;                                               '#13
-          +'              line-height: 30px;                                        '#13
-          +'         }                                                              '#13
-          +'         #loader-wrapper .load_title span {                             '#13
-          +'              font-weight: normal;                                      '#13
-          +'              font-style: italic;                                       '#13
-          +'              font-size: 13px;                                          '#13
-          +'              color: rgb(220, 220, 220);                                '#13
-          +'              opacity: 0.5;                                             '#13
-          +'         }                                                              '#13
-          +'         @keyframes moveover {                                          '#13
-          +'              0% {                                                      '#13
-          +'                   transform: rotate(0deg);                             '#13
-          +'              }                                                         '#13
-          +'                                                                        '#13
-          +'              100% {                                                    '#13
-          +'                   transform: rotate(360deg);                           '#13
-          +'              }                                                         '#13
-          +'         }                                                              '#13
-          +'         .box {                                                         '#13
-          +'              position: relative;                                       '#13
-          +'              width: 100px;                                             '#13
-          +'              height: 100px;                                            '#13
-          +'              margin: 18% auto;                                         '#13
-          +'              /*ÕûÌåĞı×ª*/                                              '#13
-          +'              animation: moveover 3s linear infinite;                   '#13
-          +'         }                                                              '#13
-          +'         .box_text {                                                    '#13
-          +'              position: absolute;                                       '#13
-          +'              top: 0;                                                   '#13
-          +'              left: 0;                                                  '#13
-          +'         }                                                              '#13
-          +'         .box::before {                                                 '#13
-          +'              content: "";                                              '#13
-          +'              position: absolute;                                       '#13
-          +'              width: 50px;                                              '#13
-          +'              height: 100px;                                            '#13
-          +'              border-radius: 50px 0 0 50px;                             '#13
-          +'              background: linear-gradient(#999, rgb(220, 220, 220));    '#13
-          +'              background-color: #999;                                   '#13
-          +'              z-index: 2;                                               '#13
-          +'         }                                                              '#13
-          +'         .box2 {                                                        '#13
-          +'              position: absolute;                                       '#13
-          +'              width: 50px;                                              '#13
-          +'              height: 100px;                                            '#13
-          +'              border-radius: 0 50px 50px 0;                             '#13
-          +'              left: 50%;                                                '#13
-          +'              background: linear-gradient(rgb(255,255,255),rgb(220,220, 220));      '#13
-          +'              z-index: 1;                                               '#13
-          +'         }                                                              '#13
-          +'         .box::after {                                                  '#13
-          +'              content: "";                                              '#13
-          +'              position: absolute;                                       '#13
-          +'              width: 92px;                                              '#13
-          +'              height: 92px;                                             '#13
-          +'              top: 4px;                                                 '#13
-          +'              left: 4px;                                                '#13
-          +'              border-radius: 50%;                                       '#13
-          +'              background-color: #fff;                                   '#13
-          +'              z-index: 2;                                               '#13
-          +'         }                                                              '#13
-          +'         .wrapper {                                                     '#13
-          +'              position: relative;                                       '#13
-          +'         }                                                              '#13
-          +'    </style>                                                            '#13
-          +'    <div id="loader-wrapper">                                           '#13
-          +'         <div class="wrapper">                                          '#13
-          +'              <div class=''box''>                                       '#13
-          +'                   <div class="box2"></div>                             '#13
-          +'              </div>                                                    '#13
-          +'              <div class="load_title">DeWeb                             '#13
-          +'              </div>                                                    '#13
-          +'                                                                        '#13
-          +'         </div>                                                         '#13
-          +'    </div>                                                              '#13
-          +'    <script src="dist/vue.js" type="text/javascript"></script>          '#13
-          +'    <script src="dist/index.js" type="text/javascript"></script>        '#13
-          +'    <script src="dist/axios.min.js" type="text/javascript"></script>    '#13
-                                                                                    
-          +'    <script src="dist/charts/echarts.min.js"></script>                  '#13
-          +'    <script src="dist/charts/lib/index.min.js"></script>                '#13
-          +'    <link rel="stylesheet" href="dist/charts/lib/style.min.css">        '#13
+//ä»JSONä¸­è¯»å±æ€§ï¼Œå¦‚æœä¸å­˜åœ¨çš„è¯ï¼Œå–é»˜è®¤å€¼
+function dwGetInt(AJson:Variant;AName:String;ADefault:Integer):Integer;
 
-          +'    <link rel="icon" href="dist/webimages/[###].ico" type="image/x-icon">       '#13
-          +'    <link rel="stylesheet" type="text/css" href="dist/theme-chalk/index.css" /> '#13;
+//ä»JSONä¸­è¯»å±æ€§ï¼Œå¦‚æœä¸å­˜åœ¨çš„è¯ï¼Œå–é»˜è®¤å€¼
+function dwGetStr(AJson:Variant;AName:String;ADefault:String):String;
+
 const
      dwIcons : array[1..280] of string = (
           'el-icon-platform-eleme'
@@ -753,30 +430,283 @@ function dwGetText(AText:string;ALen:integer):string;
 function dwGetMD5(AStr:String):string;
 
 
-//È¡µÃDLLÃû³Æ
+//å–å¾—DLLåç§°
 function dwGetDllName: string;
 
-//¸ù¾İownerÊÇ·ñÎªTForm1, À´Ôö¼ÓÇ°×º£¬Ö÷ÒªÓÃÓÚÇø·Ö¶à¸öFormÖĞµÄÍ¬Ãû¿Ø¼ş
+//æ ¹æ®owneræ˜¯å¦ä¸ºTForm1, æ¥å¢åŠ å‰ç¼€ï¼Œä¸»è¦ç”¨äºåŒºåˆ†å¤šä¸ªFormä¸­çš„åŒåæ§ä»¶
 function  dwPrefix(ACtrl:TComponent):String;
+//å–å…¨åï¼ŒåŒ…æ‹¬çª—ä½“å‰ç¼€
+function  dwFullName(ACtrl:TComponent):String;
+
+//ä¸ºå¼•å·åŠ ä¸‹\
+function  dwProcQuotation(AText:String):String;
+
+//åˆå¹¶ä¸¤ä¸ªjsonå­—ç¬¦ä¸²
+function  dwCombineJson(S0,S1:String): string;
+
+//å–å¾—å¯åŠ¨æ€è®¾ç½®çš„å­—ä½“å¤´éƒ¨
+function  dwFontStyle(ACtrl:TControl):String;
+
+//å»é‡ï¼ˆæ³¨ï¼šä¼šè‡ªåŠ¨æ’åºï¼Œä¹Ÿå°±æ˜¯ä¼šæ”¹å˜åŸæ¥çš„é¡ºåºï¼‰
+function dwRemoveDuplicates(const stringList : TStringList):Integer ;
+
+//å–å­å­—ç¬¦ä¸²åœ¨å­—ç¬¦ä¸²ä¸­çš„æ¬¡æ•°
+function dwSubStrCount(const Source, Sub: string): integer;
+
+//
+function  dwFontStyleToStr(AStyle:TFontStyles):String;
+
+//æ£€æŸ¥JSONå±æ€§ï¼Œå¦‚æœä¸å­˜åœ¨çš„è¯ï¼Œèµ‹é»˜è®¤å€¼
+function dwSetDefaultInt(var AJson:Variant;AName:String;ADefault:Integer):Integer;
+function dwSetDefaultStr(var AJson:Variant;AName:String;ADefault:String):Integer;
+function dwSetDefaultObj(var AJson:Variant;AName:String;ADefault:Variant):Integer;
+
+function dwGetAlignment(AAlign:TAlignment):String;
+
+//json to string
+function dwJsonToStr(AData : Variant):String;
+function _J2S(AData : Variant):String;
 
 implementation      //==============================================================================
 
-//¸ù¾İownerÊÇ·ñÎªTForm1, À´Ôö¼ÓÇ°×º£¬Ö÷ÒªÓÃÓÚÇø·Ö¶à¸öFormÖĞµÄÍ¬Ãû¿Ø¼ş
-function  dwPrefix(ACtrl:TComponent):String;
+function _J2S(AData : Variant):String;
 begin
+    Result  := dwJsonToStr(AData);
+end;
+function dwJsonToStr(AData : Variant):String;
+begin
+    Result  := 'nil';
+    if AData <> unassigned then begin
+        Result  := VariantSaveJSON(AData);
+    end;
 
-     //Ä¬ÈÏÎª¿Õ
-     Result    := '';
+end;
+
+function dwGetAlignment(AAlign:TAlignment):String;
+begin
+    Result  := 'center';
+    if AAlign = taLeftJustify then begin
+        Result  := 'left';
+    end else if AAlign = taRightJustify then begin
+        Result  := 'right';
+    end
+end;
+
+//æ£€æŸ¥JSONå±æ€§ï¼Œå¦‚æœä¸å­˜åœ¨çš„è¯ï¼Œèµ‹é»˜è®¤å€¼
+function dwSetDefaultInt(var AJson:Variant;AName:String;ADefault:Integer):Integer;
+begin
+    if AJson <> unassigned then begin
+        if not AJson.Exists(AName) then begin
+            AJson.Add(AName,ADefault);
+        end;
+        Result  := 0;
+    end else begin
+        Result  := -1;
+    end;
+
+end;
+function dwSetDefaultStr(var AJson:Variant;AName:String;ADefault:String):Integer;
+begin
+    if AJson <> unassigned then begin
+        if not AJson.Exists(AName) then begin
+            AJson.Add(AName,ADefault);
+        end;
+        Result  := 0;
+    end else begin
+        Result  := -1;
+    end;
+
+end;
+
+
+//æ£€æŸ¥JSONå±æ€§ï¼Œå¦‚æœä¸å­˜åœ¨çš„è¯ï¼Œèµ‹é»˜è®¤å€¼
+function dwSetDefaultObj(var AJson:Variant;AName:String;ADefault:Variant):Integer;
+begin
+    if AJson <> unassigned then begin
+        if not AJson.Exists(AName) then begin
+            AJson.Add(AName,ADefault);
+        end;
+        Result  := 0;
+    end else begin
+        Result  := -1;
+    end;
+
+end;
+
+//ä»JSONä¸­è¯»å±æ€§ï¼Œå¦‚æœä¸å­˜åœ¨çš„è¯ï¼Œå–é»˜è®¤å€¼
+function dwGetInt(AJson:Variant;AName:String;ADefault:Integer):Integer;
+begin
+    Result  := ADefault;
+    if AJson <> unassigned then begin
+        if AJson.Exists(AName) then begin
+            Result  := AJson._(AName);
+        end;
+    end;
+end;
+
+//ä»JSONä¸­è¯»å±æ€§ï¼Œå¦‚æœä¸å­˜åœ¨çš„è¯ï¼Œå–é»˜è®¤å€¼
+function dwGetStr(AJson:Variant;AName:String;ADefault:String):String;
+begin
+    Result  := ADefault;
+    if AJson <> unassigned then begin
+        if AJson.Exists(AName) then begin
+            Result  := AJson._(AName);
+        end;
+    end;
+end;
+
+
+function  dwFontStyleToStr(AStyle:TFontStyles):String;
+begin
+    Result  := '';
+    if fsBold in AStyle then begin
+        Result  := Result + '1';
+    end else begin
+        Result  := Result + '0';
+    end;
+    if fsItalic in AStyle then begin
+        Result  := Result + '1';
+    end else begin
+        Result  := Result + '0';
+    end;
+    if fsStrikeOut in AStyle then begin
+        Result  := Result + '1';
+    end else begin
+        Result  := Result + '0';
+    end;
+    if fsUnderLine in AStyle then begin
+        Result  := Result + '1';
+    end else begin
+        Result  := Result + '0';
+    end;
+end;
+
+function dwSubStrCount(const Source, Sub: string): integer;
+var
+    Buf     : string;
+    i       : integer;
+    Len     : integer;
+begin
+    Result := 0;
+    Buf:=Source;
+    i := Pos(Sub, Buf);
+    Len := Length(Sub);
+    while i <> 0 do begin
+        Inc(Result);
+        Delete(Buf, 1, i + Len -1);
+        i:=Pos(Sub,Buf);
+    end;
+end;
+
+
+function dwRemoveDuplicates(const stringList : TStringList):Integer ;
+var
+    buffer  : TStringList;
+    cnt     : Integer;
+begin
+    stringList.Sort;
+    buffer  := TStringList.Create;
+    try
+        buffer.Sorted       := True;
+        buffer.Duplicates   := dupIgnore;
+        buffer.BeginUpdate;
+        for cnt := 0 to stringList.Count - 1 do
+        buffer.Add(stringList[cnt]) ;
+        buffer.EndUpdate;
+        stringList.Assign(buffer) ;
+    finally
+        FreeandNil(buffer) ;
+    end;
+    Result   := 0;
+end;
+
+
+function  dwFontStyle(ACtrl:TControl):String;
+begin
+    with ACtrl do begin
+        Result    := 'color:'+dwFullName(Actrl)+'__fcl,'         //é¢œè‰²
+            +'''font-size'':'+dwFullName(Actrl)+'__fsz,'         //size
+            +'''font-family'':'+dwFullName(Actrl)+'__ffm,'       //å­—ä½“
+            +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'       //bold
+            +'''font-style'':'+dwFullName(Actrl)+'__fsl,'        //italic
+            +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'   //ä¸‹åˆ’çº¿æˆ–è´¯ç©¿çº¿ï¼Œåªèƒ½é€‰ä¸€ç§
+    end;
+end;
+
+//åˆå¹¶ä¸¤ä¸ªjsonå­—ç¬¦ä¸²
+function  dwCombineJson(S0,S1:String): string;
+var
+     b0,b1     : Boolean;
+begin
+     b0   := dwStrIsJson(S0);   //åˆ¤æ–­æ˜¯å¦JSONå­—ç¬¦ä¸²
+     b1   := dwStrIsJson(S1);
      //
-     if lowerCase(ACtrl.Owner.ClassName) <> 'tform1' then begin
-          Result    := ACtrl.Owner.Name+'__';
+     if b0 then begin
+          if b1 then begin
+               S0     := Trim(S0);
+               Delete(S0,Length(S0),1);   //åˆ é™¤æœ€åçš„èŠ±æ‹¬å·
+               //
+               S1     := Trim(S1);
+               Delete(S1,1,1);            //åˆ é™¤æœ€å‰çš„èŠ±æ‹¬å·
+               //
+               Result    := S0+','+s1;
+          end else begin
+               Result    := S0;
+          end;
+     end else begin
+          if b1 then begin
+               Result    := S1;
+          end else begin
+               Result    := S0;
+          end;
      end;
 end;
 
 
+//ä¸ºå¼•å·åŠ ä¸‹\
+function  dwProcQuotation(AText:String):String;
+begin
+    //Result  := StringReplace(AText,'"','&quot;',[rfReplaceAll]);
+    Result  := StringReplace(AText,'"','\''',[rfReplaceAll]);
+    //Result  := StringReplace(Result,'''','&#39;',[rfReplaceAll]);
+    //Result  := StringReplace(Result,'<','&lt;',[rfReplaceAll]);
+    //Result  := StringReplace(Result,'>','&gt;',[rfReplaceAll]);
+end;
+
+//æ ¹æ®owneræ˜¯å¦ä¸ºTForm1, æ¥å¢åŠ å‰ç¼€ï¼Œä¸»è¦ç”¨äºåŒºåˆ†å¤šä¸ªFormä¸­çš„åŒåæ§ä»¶
+function  dwPrefix(ACtrl:TComponent):String;
+begin
+
+     //é»˜è®¤ä¸ºç©º
+     Result    := '';
+
+     //<å¼‚å¸¸å¤„ç†
+     //ACtrlå·²è¢«é”€æ¯çš„æƒ…å†µ
+     if ACtrl.Name = '' then begin
+        Exit;
+     end;
+     //ACtrl.Owner ä¸ºnilæƒ…å†µ
+     if ACtrl.Owner = nil then begin
+        Exit;
+     end;
+     //>
+
+     //
+     if lowerCase(ACtrl.Owner.ClassName) <> 'tform1' then begin
+          Result    := LowerCase(ACtrl.Owner.Name)+'__';
+     end;
+end;
+
+
+//å–å…¨åï¼ŒåŒ…æ‹¬çª—ä½“å‰ç¼€
+function  dwFullName(ACtrl:TComponent):String;
+begin
+    Result  := LowerCase(dwPrefix(ACtrl)+ACtrl.Name);
+end;
+
 function  dwChangeChar(AText:String):String;
 begin
-     //<×ªÒå¿ÉÄÜ³ö´íµÄ×Ö·û
+     //<è½¬ä¹‰å¯èƒ½å‡ºé”™çš„å­—ç¬¦
      AText     := StringReplace(AText,'\"','[!__!]',[rfReplaceAll]);
      AText     := StringReplace(AText,'"','\"',[rfReplaceAll]);
      AText     := StringReplace(AText,'[!__!]','\"',[rfReplaceAll]);
@@ -793,19 +723,19 @@ begin
      Result    := AText;
 end;
 
-//È¡µÃDLLÃû³Æ
+//å–å¾—DLLåç§°
 function dwGetDllName: string;
 var
      sModule   : string;
 begin
      SetLength(sModule, 255);
-     //È¡µÃDll×ÔÉíÂ·¾¶
+     //å–å¾—Dllè‡ªèº«è·¯å¾„
      GetModuleFileName(HInstance, PChar(sModule), Length(sModule));
-     //È¥³ıÂ·¾¶
+     //å»é™¤è·¯å¾„
      while Pos('\',sModule)>0 do begin
           Delete(sModule,1,Pos('\',sModule));
      end;
-     //È¥³ı.dll
+     //å»é™¤.dll
      if Pos('.',sModule)>0 then begin
           sModule     := Copy(sModule,1,Pos('.',sModule)-1);
      end;
@@ -835,8 +765,8 @@ begin
      if Length(AText)<ALen then begin
           Result    := AText;
      end else begin
-          //ÏÈÅĞ¶ÏÒª½ØÈ¡µÄ×Ö·û´®×îºóÒ»¸ö×Ö½ÚµÄÀàĞÍ
-          //Èç¹ûÎªºº×ÖµÄµÚÒ»¸ö×Ö½ÚÔò¼õ(¼Ó)Ò»Î»
+          //å…ˆåˆ¤æ–­è¦æˆªå–çš„å­—ç¬¦ä¸²æœ€åä¸€ä¸ªå­—èŠ‚çš„ç±»å‹
+          //å¦‚æœä¸ºæ±‰å­—çš„ç¬¬ä¸€ä¸ªå­—èŠ‚åˆ™å‡(åŠ )ä¸€ä½
           if ByteType(AText,ALen) = mbLeadByte then
                ALen := ALen - 1;
           result := copy(AText,1,ALen) + '...';
@@ -869,14 +799,14 @@ function dwPHPToDate(ADate:Integer):TDateTime;
 var
      f1970     : TDateTime;
 begin
-     //PHPÊ±¼äÊÇ¸ñÁÖÍşÖÎÊ±¼ä1970-1-1 00:00:00µ½µ±Ç°Á÷ÊÅµÄÃëÊı
+     //PHPæ—¶é—´æ˜¯æ ¼æ—å¨æ²»æ—¶é—´1970-1-1 00:00:00åˆ°å½“å‰æµé€çš„ç§’æ•°
      f1970     := EncodeDateTime(1970, 1, 1, 8, 0, 0, 0);//StrToDateTime('1970-01-01 00:00:00');
      Result    := IncSecond(f1970,ADate);
      //Result    := ((ADate+28800)/86400+25569);
 end;
 
 
-//·´±àÂëº¯Êı                                                                    
+//åç¼–ç å‡½æ•°                                                                    
 function dwDecode(AText:string):string;
 begin
      Result    := StringReplace(AText,'%7B','{',[rfReplaceAll]);
@@ -885,7 +815,7 @@ begin
 end;
 
 
-//ÉèÖÃLTWH
+//è®¾ç½®LTWH
 function dwSetCompLTWH(AComponent:TComponent;ALeft,ATop,AWidth,AHeight:Integer):Integer;
 begin
      AComponent.DesignInfo    := ALeft  * 10000 + ATop;
@@ -894,19 +824,17 @@ begin
      Result    := 0;
 end;
 
-//ÉèÖÃPlaceHolder
+//è®¾ç½®PlaceHolder
 function dwSetPlaceHodler(AControl:TControl;APH:String):Integer;
 var
      sHint     : String;
      joHint    : Variant;
 begin
      sHint     := AControl.Hint;
-     //joHint    := Variant.Create;
+     //
      TDocVariant.New(joHint);
-     if (sHint<>'') then begin
-          if (Copy(sHint,1,1) = '{') and (Copy(sHint,Length(sHint),1) = '}') then begin
-               joHint    := _json(sHint);
-          end;
+     if dwStrIsJson(sHint) then begin
+        joHint    := _json(sHint);
      end;
      joHint.planeholder  := APH;
      AControl.Hint  := VariantSaveJSON(joHint);
@@ -914,7 +842,7 @@ begin
      Result    := 0;
 end;
 
-//ÉèÖÃHeight
+//è®¾ç½®Height
 function dwSetHeight(AControl:TControl;AHeight:Integer):Integer;
 var
      sHint     : String;
@@ -922,10 +850,8 @@ var
 begin
      sHint     := AControl.Hint;
      TDocVariant.New(joHint);
-     if (sHint<>'') then begin
-          if (Copy(sHint,1,1) = '{') and (Copy(sHint,Length(sHint),1) = '}') then begin
-               joHint    := _json(sHint);
-          end;
+     if dwStrIsJson(sHint) then begin
+        joHint    := _json(sHint);
      end;
      joHint.height  := AHeight;
      AControl.Hint  := VariantSaveJSON(joHint);
@@ -982,13 +908,13 @@ begin
           Exit;
      end;
 
-     //È¡µÃµÚÒ»¸ö¿Ø¼ş, ÒÔ¼ì²âµ±Ç°×´Ì¬
+     //å–å¾—ç¬¬ä¸€ä¸ªæ§ä»¶, ä»¥æ£€æµ‹å½“å‰çŠ¶æ€
      oCtrl0    := APanel.Controls[0];
 
      if AHorz then begin
-          //Ë®Æ½ÅÅÁĞµÄÇé¿ö
+          //æ°´å¹³æ’åˆ—çš„æƒ…å†µ
           if (oCtrl0.Align = alLeft) and (oCtrl0.Width = (APanel.Width-2*APanel.BorderWidth) div APanel.ControlCount) then begin
-               //ÒÑ¾­Ë®Æ½ÅÅÁĞ,
+               //å·²ç»æ°´å¹³æ’åˆ—,
           end else begin
                APanel.Height  := APanel.BorderWidth*2+oCtrl0.Height;
                //
@@ -999,14 +925,14 @@ begin
                     oCtrl.Width    := (APanel.Width-2*APanel.BorderWidth) div APanel.ControlCount;
                     oCtrl.Left     := 9000+iCtrl;
                end;
-               //×îºóÒ»¸öalClient
+               //æœ€åä¸€ä¸ªalClient
                oCtrl     := APanel.Controls[APanel.ControlCount-1];
                oCtrl.Align    := alClient;
           end;
      end else begin
-          //´¹Ö±ÅÅÁĞµÄÇé¿ö
+          //å‚ç›´æ’åˆ—çš„æƒ…å†µ
           if (oCtrl0.Align = alTop) and (oCtrl0.Height = (APanel.Height-2*APanel.BorderWidth) div APanel.ControlCount) then begin
-               //ÒÑ¾­´¹Ö±ÅÅÁĞ,
+               //å·²ç»å‚ç›´æ’åˆ—,
           end else begin
                APanel.Height  := APanel.BorderWidth*2+oCtrl0.Height*APanel.ControlCount;
                //
@@ -1017,7 +943,7 @@ begin
                     oCtrl.Height   := (APanel.Height-2*APanel.BorderWidth) div APanel.ControlCount;
                     oCtrl.Top      := 9000+iCtrl;
                end;
-               //×îºóÒ»¸öalClient
+               //æœ€åä¸€ä¸ªalClient
                oCtrl     := APanel.Controls[APanel.ControlCount-1];
                oCtrl.Align    := alClient;
           end;
@@ -1042,12 +968,12 @@ var
           end;
      end;
 begin
-     //ÖØÅÅACtrlµÄ×Ó¿Ø¼ş
-     //Èç¹ûË®Æ½(AHorz=True), ÔòÈ¡ËùÓĞ¿Ø¼şµÈ¿íË®Æ½·ÅÖÃ
-     //Èç¹û´¹Ö±, ÔòËùÓĞ¿Ø¼şAlign=alTop
+     //é‡æ’ACtrlçš„å­æ§ä»¶
+     //å¦‚æœæ°´å¹³(AHorz=True), åˆ™å–æ‰€æœ‰æ§ä»¶ç­‰å®½æ°´å¹³æ”¾ç½®
+     //å¦‚æœå‚ç›´, åˆ™æ‰€æœ‰æ§ä»¶Align=alTop
 
 
-     //µÃµ½×Ó¿Ø¼şÊıÁ¿
+     //å¾—åˆ°å­æ§ä»¶æ•°é‡
      iCount    := ACtrl.ControlCount;
      if iCount = 0 then begin
           Exit;
@@ -1055,9 +981,9 @@ begin
 
 
      if AHorz then begin
-          //Ë®Æ½ÅÅÁĞ
+          //æ°´å¹³æ’åˆ—
 
-          //ÏÈÈ¡µÃ×Ü¿í¶È
+          //å…ˆå–å¾—æ€»å®½åº¦
           if Assigned(GetPropInfo(ACtrl.ClassInfo,'BorderWidth')) then begin
                iW   := ACtrl.Width - TPanel(ACtrl).BorderWidth;
           end else begin
@@ -1065,10 +991,10 @@ begin
           end;
           iItemW    := Round(iW / iCount);
 
-          //ÖØĞÂÅÅÁĞ
+          //é‡æ–°æ’åˆ—
           for iItem := 0 to ACtrl.ControlCount-1 do begin
                oCtrl     := ACtrl.Controls[iItem];
-               //×Ô¶¯´óĞ¡
+               //è‡ªåŠ¨å¤§å°
                //_AutoSize(oCtrl);
                //
                if iItem<ACtrl.ControlCount-1 then begin
@@ -1080,19 +1006,19 @@ begin
                     oCtrl.Align    := alClient;
                end;
 
-               //×Ô¶¯´óĞ¡
+               //è‡ªåŠ¨å¤§å°
                _AutoSize(oCtrl);
           end;
 
-          //×Ô¶¯´óĞ¡
+          //è‡ªåŠ¨å¤§å°
           _AutoSize(ACtrl);
      end else begin
-          //´¹Ö±ÅÅÁĞ
+          //å‚ç›´æ’åˆ—
 
-          //ÖØĞÂÅÅÁĞ
+          //é‡æ–°æ’åˆ—
           for iItem := 0 to ACtrl.ControlCount-1 do begin
                oCtrl     := ACtrl.Controls[iItem];
-               //×Ô¶¯´óĞ¡
+               //è‡ªåŠ¨å¤§å°
                _AutoSize(oCtrl);
                //
                oCtrl.Align    := alTop;
@@ -1100,19 +1026,19 @@ begin
                if ASize>0 then begin
                     oCtrl.Height   := ASize;
                end else begin
-                    //×Ô¶¯´óĞ¡
+                    //è‡ªåŠ¨å¤§å°
                     _AutoSize(oCtrl);
                end;
           end;
 
-          //×Ô¶¯´óĞ¡
+          //è‡ªåŠ¨å¤§å°
           _AutoSize(ACtrl);
      end;
 
 end;
 
 
-//¶ÁÈ¡²¢Éú³ÉÔ²½ÇĞÅÏ¢
+//è¯»å–å¹¶ç”Ÿæˆåœ†è§’ä¿¡æ¯
 function dwRadius(AJson:Variant):string;
 var
      sRadius   : string;
@@ -1135,7 +1061,7 @@ begin
      //
      sHint     := AJson.hint;
 
-     //´´½¨HINT¶ÔÏó, ÓÃÓÚÉú³ÉÒ»Ğ©¶îÍâÊôĞÔ
+     //åˆ›å»ºHINTå¯¹è±¡, ç”¨äºç”Ÿæˆä¸€äº›é¢å¤–å±æ€§
      TDocVariant.New(joHint);
      if ( sHint <> '' ) and ( Pos('{',sHint) >= 0 ) and ( Pos('}',sHint) > 0 ) then begin
           try
@@ -1154,58 +1080,46 @@ end;
 
 function dwGetProp(ACtrl:TControl;AAttr:String):String;
 var
-     sHint     : String;
-     joHint    : Variant;
+    sHint   : String;
+    joHint  : Variant;
 begin
+    joHint  := dwGetHintJson(ACtrl);
+{
      //
      sHint     := ACtrl.Hint;
 
-     //´´½¨HINT¶ÔÏó, ÓÃÓÚÉú³ÉÒ»Ğ©¶îÍâÊôĞÔ
+     //åˆ›å»ºHINTå¯¹è±¡, ç”¨äºç”Ÿæˆä¸€äº›é¢å¤–å±æ€§
      TDocVariant.New(joHint);
-     if ( sHint <> '' ) and ( Pos('{',sHint) >= 0 ) and ( Pos('}',sHint) > 0 ) then begin
-          try
-               joHint    := _JSON(UTF8ToWideString(sHint));
-          except
-               TDocVariant.New(joHint);
-          end;
+     if dwStrIsJson(sHint) then begin
+        joHint    := _JSON(UTF8ToWideString(sHint));
      end;
-
-     //
-     Result    := '';
-     if joHint.Exists(AAttr) then begin
-          Result    := joHint._(AAttr);
-     end;
+}
+    //
+    if joHint.Exists(AAttr) then begin
+        Result    := joHint._(AAttr);
+    end else begin
+        Result    := '';
+    end;
 end;
 
 function dwSetProp(ACtrl:TControl;AAttr,AValue:String):Integer;
 var
-     sHint     : String;
-     joHint    : Variant;
+    sHint   : String;
+    joHint  : Variant;
 begin
-     Result    := 0;
-     //
-     sHint     := ACtrl.Hint;
+    Result  := 0;
+    joHint  := dwGetHintJson(ACtrl);
 
-     //´´½¨HINT¶ÔÏó, ÓÃÓÚÉú³ÉÒ»Ğ©¶îÍâÊôĞÔ
-     TDocVariant.New(joHint);
-     if ( sHint <> '' ) and ( Pos('{',sHint) >= 0 ) and ( Pos('}',sHint) > 0 ) then begin
-          try
-               joHint    := _Json(sHint);
-          except
-               TDocVariant.New(joHint);
-          end;
-     end;
+    //å¦‚æœå½“å‰å­˜åœ¨è¯¥å±æ€§, åˆ™å…ˆåˆ é™¤
+    if joHint.Exists(AAttr) then begin
+        joHint.Delete(AAttr);
+    end;
 
-     //Èç¹ûµ±Ç°´æÔÚ¸ÃÊôĞÔ, ÔòÏÈÉ¾³ı
-     if joHint.Exists(AAttr) then begin
-          joHint.Delete(AAttr);
-     end;
+    //æ·»åŠ å±æ€§
+    joHint.Add(AAttr,AValue);
 
-     //Ìí¼ÓÊôĞÔ
-     joHint.Add(AAttr,AValue);
-
-     //·µ»Øµ½HINT×Ö·û´®
-     ACtrl.Hint     := VariantSaveJSON(joHint);
+    //è¿”å›åˆ°HINTå­—ç¬¦ä¸²
+    ACtrl.Hint  := VariantSaveJSON(joHint);
 
 
 end;
@@ -1279,22 +1193,23 @@ end;
 
 function dwConvertStr(AStr:String):String;
 begin
-     //Ìæ»»¿Õ¸ñ
+     //æ›¿æ¢ç©ºæ ¼
      Result    := StringReplace(AStr,' ','&ensp;',[rfReplaceAll]);
 end;
 
 function dwProcessCaption(AStr:String):String;
 begin
-     //Ìæ»»¿Õ¸ñ
+     //æ›¿æ¢ç©ºæ ¼
      Result    := AStr;
      //Result    := StringReplace(Result,' ','&nbsp;',[rfReplaceAll]);
      Result    := StringReplace(Result,'"','\"',[rfReplaceAll]);
      Result    := StringReplace(Result,'''','\''',[rfReplaceAll]);
-     Result    := StringReplace(Result,#13#10,'\n',[rfReplaceAll]);
+     Result    := StringReplace(Result,#13#10,'<br>',[rfReplaceAll]);
+     Result    := StringReplace(Result,#13,'<br>',[rfReplaceAll]);
      Result    := Trim(Result);
-     //Òì³£´¦Àí(ÖĞÎÄÂÒÂë)
+     //å¼‚å¸¸å¤„ç†(ä¸­æ–‡ä¹±ç )
      if Length(Result)>800 then begin
-          Result    := dwGetText(Result,800);
+          //Result    := dwGetText(Result,800);
      end;
 
 end;
@@ -1345,22 +1260,26 @@ end;
 
 function dwColor(AColor:Integer):string;
 begin
-     Result    := ColorToWebColorStr(AColor);
+    if AColor = clNone then begin
+        Result    := 'rgba(0,0,0,0)';
+    end else begin
+        Result    := ColorToWebColorStr(AColor);
+    end;
      //Result := Format('#%.2x%.2x%.2x',[GetRValue(ColorToRGB(AColor)),GetGValue(ColorToRGB(AColor)),GetBValue(ColorToRGB(AColor))]);
 end;
 
-//Delphi ÑÕÉ«×ªHTML ÑÕÉ«×Ö·û´®,´øÍ¸Ã÷¶È
+//Delphi é¢œè‰²è½¬HTML é¢œè‰²å­—ç¬¦ä¸²,å¸¦é€æ˜åº¦
 function dwAlphaColor(ACtrl:TPanel):string;
 var
      RGB: Integer;
      iR,iG,iB  : Integer;
-     iA        : Integer;     //0:ÍêÈ«Í¸Ã÷£¬1-9°ëÍ¸Ã÷£¬10£º²»Í¸Ã÷
+     iA        : Integer;     //0:å®Œå…¨é€æ˜ï¼Œ1-9åŠé€æ˜ï¼Œ10ï¼šä¸é€æ˜
 begin
      RGB  := ColorToRGB(ACtrl.Color);
      iR   := GetRValue(RGB);
      iG   := GetGValue(RGB);
      iB   := GetBValue(RGB);
-     //ÓÃHelpContextÀ´¿ØÖÆÍ¸Ã÷¶È
+     //ç”¨HelpContextæ¥æ§åˆ¶é€æ˜åº¦
      iA   := ACtrl.HelpContext;
      if iA>10 then begin
           iA   := 10;
@@ -1371,7 +1290,7 @@ begin
 end;
 
 
-//½âÃÜº¯Êı
+//è§£å¯†å‡½æ•°
 function dwDecryptKey (Src:String; Key:String):string;
 var
      KeyLen :Integer;
@@ -1409,60 +1328,93 @@ end;
 
 function dwIIF(ABool:Boolean;AYes,ANo:string):string;
 begin
-     if ABool then begin
-          Result    := AYes;
-     end else begin
-          Result    := ANo;
-     end;
+    if ABool then begin
+        Result    := AYes;
+    end else begin
+        Result    := ANo;
+    end;
+end;
+function dwIIFi(ABool:Boolean;AYes,ANo:Integer):Integer;
+begin
+    if ABool then begin
+        Result    := AYes;
+    end else begin
+        Result    := ANo;
+    end;
 end;
 
 function dwVisible(ACtrl:TControl):String;
 begin
-     Result    := ' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__vis"';
+    Result    := ' v-show="'+dwFullName(Actrl)+'__vis"';
 end;
 
 function dwDisable(ACtrl:TControl):String;
 begin
-     Result    := ' :disabled="'+dwPrefix(Actrl)+ACtrl.Name+'__dis"';
+    Result    := ' :disabled="'+dwFullName(Actrl)+'__dis"';
+end;
+
+function    dwStrIsJson(AText:String):Boolean;
+begin
+    Result  := _json(AText) <> unassigned;
+(*
+    if Length(Trim(AText))<7 then begin //{"a":0}
+        Result  := False;
+    end else if (Pos('{',AText)<=0) OR (Pos('}',AText)<=0) OR (Pos('"',AText)<=0) OR (Pos(':',AText)<=0) then begin
+        Result  := False;
+    end else begin
+        Result  := TJSONObject.ParseJSONValue(Trim(AText)) <> nil;
+    end;
+*)
 end;
 
 function dwGetHintJson(ACtrl:TControl):Variant;
 var
-     sHint     : String;
+    sHint     : String;
 begin
-     sHint     := ACtrl.Hint;
-     TDocVariant.New(Result);
-     if ( sHint <> '' ) and ( sHint[1] = '{' ) and ( sHint[Length(sHint)] = '}' ) then begin
-          try
-               Result    := _Json(sHint);
-          except
-               TDocVariant.New(Result);
-          end;
-     end;
+    //æ–¹æ³•2ï¼Œæ— å†…å­˜æ³„æ¼
+    sHint     := ACtrl.Hint;
+    Result  := _json(ACtrl.Hint);
+    if Result = unassigned then begin
+        Result  := _json('{}');
+    end;
 end;
 
-function dwLTWH(ACtrl:TControl):String;  //¿ÉÒÔ¸üĞÂÎ»ÖÃµÄÓÃ·¨
+function dwLTWH(ACtrl:TControl):String;  //å¯ä»¥æ›´æ–°ä½ç½®çš„ç”¨æ³•
 begin
-     with ACtrl do begin
-          Result    := ' :style="{'
-                    +'left:'+dwPrefix(Actrl)+Name+'__lef,'
-                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
-                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
-                    +'height:'+dwPrefix(Actrl)+Name+'__hei'
-                    +'}"'
-                    +' style="position:absolute;';
-     end;
+    with ACtrl do begin
+        Result    := ' :style="{'
+                +'left:'+dwFullName(Actrl)+'__lef,'
+                +'top:'+dwFullName(Actrl)+'__top,'
+                +'width:'+dwFullName(Actrl)+'__wid,'
+                +'height:'+dwFullName(Actrl)+'__hei'
+                +'}"'
+                +' style="position:absolute;';
+    end;
 end;
 
-function dwLTWHComp(ACtrl:TComponent):String;  //¿ÉÒÔ¸üĞÂÎ»ÖÃµÄÓÃ·¨
+function dwLTWHBordered(ACtrl:TControl):String;  //å¯ä»¥æ›´æ–°ä½ç½®çš„ç”¨æ³•
+begin
+    with ACtrl do begin
+        Result    := ' :style="{'
+                +'left:'+dwFullName(Actrl)+'__leb,'
+                +'top:'+dwFullName(Actrl)+'__tob,'
+                +'width:'+dwFullName(Actrl)+'__wib,'
+                +'height:'+dwFullName(Actrl)+'__heb'
+                +'}"'
+                +' style="position:absolute;';
+    end;
+end;
+
+
+function dwLTWHComp(ACtrl:TComponent):String;  //å¯ä»¥æ›´æ–°ä½ç½®çš„ç”¨æ³•
 begin
      //
      with ACtrl do begin
           Result    := ' :style=''{'
-                    +'left:'+dwPrefix(Actrl)+Name+'__lef,'
-                    +'top:'+dwPrefix(Actrl)+Name+'__top,'
-                    +'width:'+dwPrefix(Actrl)+Name+'__wid,'
-                    +'height:'+dwPrefix(Actrl)+Name+'__hei}'''
+                    +'left:'+dwFullName(Actrl)+'__lef,'
+                    +'top:'+dwFullName(Actrl)+'__top,'
+                    +'width:'+dwFullName(Actrl)+'__wid,'
+                    +'height:'+dwFullName(Actrl)+'__hei}'''
                     +' style="position:absolute;';
      end;
 end;
@@ -1473,9 +1425,9 @@ begin
      if AHint<>null then begin
           if AHint.Exists(AJsonName) then begin
                if AHtmlName <> '' then begin
-                    Result    := AnsiString(' '+AHtmlName+'="'+AHint._(AJsonName)+'"');
+                    Result    := (' '+AHtmlName+'="'+AHint._(AJsonName)+'"');
                end else begin
-                    Result    := AnsiString(' '+AHint._(AJsonName));
+                    Result    := (' '+AHint._(AJsonName));
                end;
           end else begin
                Result    := ADefault;
@@ -1489,9 +1441,9 @@ begin
      if AHint<>null then begin
           if AHint.Exists(AJsonName) then begin
                if AHtmlName <> '' then begin
-                    Result    := AnsiString(AHtmlName+':'+AHint._(AJsonName)+';');
+                    Result    := (AHtmlName+':'+AHint._(AJsonName)+';');
                end else begin
-                    Result    := AnsiString(AHint._(AJsonName));
+                    Result    := (AHint._(AJsonName));
                end;
           end else begin
                Result    := ADefault;
@@ -1506,17 +1458,41 @@ begin
      Result    := '';
      if AHint<>null then begin
           if AHint.Exists('dwattr') then begin
-               Result    := ' '+AnsiString(AHint.dwattr);
+               Result    := ' '+(AHint.dwattr);
           end;
      end;
+end;
+
+
+function dwGetAttr(AHint:Variant;AAttr:String):String;
+begin
+    Result    := '';
+    if AHint<>null then begin
+        if AHint.Exists(AAttr) then begin
+            Result    := ' '+AAttr+'="'+AHint._(AAttr)+'"';
+        end;
+    end;
+end;
+function dwGetAttrBoolean(AHint:Variant;AAttr:String):String;
+begin
+    Result    := '';
+    if AHint<>null then begin
+        if AHint.Exists(AAttr) then begin
+            if AHint._(AAttr) = True then begin
+                Result    := ' '+AAttr+'="true"';
+            end else begin
+                Result    := ' '+AAttr+'="false"';
+            end;
+        end;
+    end;
 end;
 
 function dwGetDWStyle(AHint:Variant):String;
 begin
      Result    := '';
-     if AHint<>null then begin
+     if AHint <> unassigned then begin
           if AHint.Exists('dwstyle') then begin
-               Result    := AnsiString(AHint.dwstyle);
+               Result    := (AHint.dwstyle);
           end;
      end;
 end;

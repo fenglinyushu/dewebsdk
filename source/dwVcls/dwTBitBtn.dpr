@@ -1,4 +1,4 @@
-library dwTBitBtn;
+ï»¿library dwTBitBtn;
 
 uses
      ShareMem,
@@ -19,16 +19,17 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
 var
-     joData    : Variant;
+    joData  : Variant;
+    oObject : TDragDockObject;
 begin
      //
      joData    := _Json(AData);
@@ -36,6 +37,10 @@ begin
      if joData.e = 'onenddock' then begin
           if Assigned(TBitBtn(ACtrl).OnEndDock) then begin
                TBitBtn(ACtrl).OnEndDock(TBitBtn(ACtrl),nil,0,0);
+          end;
+     end else if joData.e = 'onstartdock' then begin
+          if Assigned(TBitBtn(ACtrl).OnStartDock) then begin
+               TBitBtn(ACtrl).OnStartDock(TBitBtn(ACtrl),oObject);
           end;
      end else if joData.e = 'onenter' then begin
           if Assigned(TBitBtn(ACtrl).OnEnter) then begin
@@ -46,165 +51,275 @@ begin
                TBitBtn(ACtrl).OnExit(TBitBtn(ACtrl));
           end;
      end else if joData.e = 'getfilename' then begin
-          TBitBtn(ACtrl).Caption   := dwUnescape(joData.v);
+          //TBitBtn(ACtrl).Caption   := dwUnescape(joData.v);
      end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
-     sCode     : String;
-     sSize     : String;
+    sCode   : String;
+    sSize   : String;
+    sDir    : String;   //è‡ªå®šä¹‰ä¸Šä¼ ç›®å½•
+    sFull   : string;
+    //
+    bAuto   : Boolean;
 
-     //
-     joHint    : Variant;
-     joRes     : Variant;
+    //
+    joHint  : Variant;
+    joRes   : Variant;
+    iHandle : Integer;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+    //
+    sFull   := dwFullName(ACtrl);
 
-     //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
-     //²ÎÊıÒÀ´ÎÎª: JSÊÂ¼şÃû³Æ, ¿Ø¼şÃû³Æ,¿Ø¼şÖµ,DelphiÊÂ¼şÃû³Æ,±¸ÓÃ
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+    //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
+    //å‚æ•°ä¾æ¬¡ä¸º: JSäº‹ä»¶åç§°, æ§ä»¶åç§°,æ§ä»¶å€¼,Delphiäº‹ä»¶åç§°,å¤‡ç”¨
 
 
-     //
-     with TBitBtn(ACtrl) do begin
-          //Ìí¼ÓForm
-          joRes.Add('<form'
-                    +' id="'+dwPrefix(Actrl)+Name+'__frm"'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +dwLTWH(TControl(ACtrl))
-                    +'"' //style ·â±Õ
-                    +' action="/dwupload"'
-                    +' method="POST"'
-                    +' enctype="multipart/form-data"'
-                    +' target="upload_iframe"'
-                    +'>');
+    //
+    with TBitBtn(ACtrl) do begin
+        //æ·»åŠ Form
+        joRes.Add('<form'
+                +' id="'+sFull+'__frm"'
+                +dwVisible(TControl(ACtrl))
+                +dwDisable(TControl(ACtrl))
+                +dwLTWH(TControl(ACtrl))
+                +'"' //style å°é—­
+                +' action="/dwupload"'
+                +' method="POST"'
+                +' enctype="multipart/form-data"'
+                +' target="upload_iframe"'
+                +'>');
 
-          //Ìí¼ÓInput
-		joRes.Add('<input id="'+dwPrefix(Actrl)+Name+'__inp" type="FILE" name="file"'
-                    +' style="display:none"'
-                    +dwGetHintValue(joHint,'accept','accept','')
-                    +dwGetHintValue(joHint,'capture','capture','')
-                    +' @change=dwInputChange('''+Name+''');>');
+        //æ±‚Formçš„Handle
+        //
+        iHandle := TForm(Actrl.Owner).Handle;
+        if lowerCase(ACtrl.Owner.ClassName) <> 'tform1' then begin
+            //iHandle := TForm(TForm(Actrl.Owner).Owner).Handle;
+        end;
 
-          //Ìí¼ÓButton
-          //µÃµ½´óĞ¡£ºlarge/medium/small/mini
-          if Height>50 then begin
-               sSize     := ' size=large';
-          end else if Height>35 then begin
-               sSize     := ' size=medium';
-          end else if Height>20 then begin
-               sSize     := ' size=small';
-          end else begin
-               sSize     := ' size=mini';
-          end;
 
-          //
-          sCode     := '<el-button'
-                    +' id="'+dwPrefix(Actrl)+Name+'__btn"'
-                    +sSize
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
-                    +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
-                    +dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
-                    +dwGetHintValue(joHint,'style','','')             //ÑùÊ½£¬¿Õ£¨Ä¬ÈÏ£©/plain/round/circle
+        //æ·»åŠ Input
+		joRes.Add('<input'
+                +' id="'+sFull+'__inp"'
+                +' type="FILE"'
+                +' name="file"'
+                +' style="display:none"'
+                +dwGetHintValue(joHint,'accept','accept','')
+                +dwGetHintValue(joHint,'capture','capture','')
+                +' @change="'+sFull+'__change"'
+                //+dwIIF(bAuto,
+                //    ' @change=dwInputSubmit('+iHandle.ToString+','''+sFull+''','''+sDir+''');',
+                //    ' @change=dwInputChange('+iHandle.ToString+','''+sFull+''');')
+                +'>');
 
-                    +' style="width:100%;height:100%;"'
-                    //Ä¬ÈÏÑ¡ÔñÎÄ¼ş
-                    +' @click="dwInputClick('''+dwPrefix(Actrl)+Name+'__inp'');"'
 
-                    //ÆäËûÊÂ¼ş
-                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                    +'>{{'+Name+'__cap}}';
-          //
-          joRes.Add(sCode);
+        //æ·»åŠ Button
+        //å¾—åˆ°å¤§å°ï¼šlarge/medium/small/mini
+        if Height>50 then begin
+             sSize     := ' size=large';
+        end else if Height>35 then begin
+             sSize     := ' size=medium';
+        end else if Height>20 then begin
+             sSize     := ' size=small';
+        end else begin
+             sSize     := ' size=mini';
+        end;
 
-     end;
+        //
+        sCode     := '<el-button'
+                +' id="'+sFull+'__btn"'
+                +sSize
+                +dwVisible(TControl(ACtrl))
+                +dwDisable(TControl(ACtrl))
+                //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
+                +' :type="'+sFull+'__typ"'
+                +dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
+                +dwGetHintValue(joHint,'style','','')             //æ ·å¼ï¼Œç©ºï¼ˆé»˜è®¤ï¼‰/plain/round/circle
+                //
+                +dwGetDWAttr(joHint)
+                //
+                +' style="position:absolute;width:100%;height:100%;'
+                +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
+                +dwGetDWStyle(joHint)
+                +'"'
+                //é»˜è®¤é€‰æ‹©æ–‡ä»¶
+                +' @click="'+sFull+'__click()"'
+                //+' @click="''dwInputClick('''+sFull+'__inp'');"'
 
-     Result    := (joRes);
-     //
-     //@mouseenter.native=¡°enter¡±
+                //å…¶ä»–äº‹ä»¶
+                //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',sFull,'0','onenter',TForm(Owner).Handle]),'')
+                +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',sFull,'0','onexit',TForm(Owner).Handle]),'')
+                +'>{{'+sFull+'__cap}}';
+        //
+        joRes.Add(sCode);
+
+    end;
+
+    Result    := (joRes);
+    //
+    //@mouseenter.native=â€œenterâ€
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-button>');
      joRes.Add('</form>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃDataÏûÏ¢
+//å–å¾—Dataæ¶ˆæ¯
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes   : Variant;
+    sFull   : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TBitBtn(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TBitBtn(ACtrl),'type')+'",');
-     end;
-     //
-     Result    := (joRes);
+    //
+    sFull  := dwFullName(ACtrl);
+
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes  := _Json('[]');
+
+    //
+    with TBitBtn(ACtrl) do begin
+        joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
+        //
+        joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        //
+        joRes.Add(sFull+'__cap:"'+dwProcessCaption(Caption)+'",');
+        //
+        joRes.Add(sFull+'__typ:"'+dwGetProp(TBitBtn(ACtrl),'type')+'",');
+    end;
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃÊÂ¼ş
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+//å–å¾—äº‹ä»¶
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes   : Variant;
+    sFull   : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TBitBtn(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TBitBtn(ACtrl),'type')+'";');
-     end;
-     //
-     Result    := (joRes);
+    //
+    sFull  := dwFullName(ACtrl);
+
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TBitBtn(ACtrl) do begin
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        joRes.Add('this.'+sFull+'__cap="'+dwProcessCaption(Caption)+'";');
+        //
+        joRes.Add('this.'+sFull+'__typ="'+dwGetProp(TBitBtn(ACtrl),'type')+'";');
+    end;
+    //
+    Result    := (joRes);
 end;
+
+function dwGetMethods(ACtrl:TControl):String;stdCall;
+var
+    bAuto   : Boolean;
+    //
+    sCode   : string;
+    sFull   : string;
+    sDir    : string;
+    //
+    joRes   : Variant;
+    joHint  : variant;
+
+begin
+    //è¿”å›å€¼ JSONå¯¹è±¡ï¼Œå¯ä»¥ç›´æ¥è½¬æ¢ä¸ºå­—ç¬¦ä¸²
+    joRes   := _json('[]');
+
+    //
+    sFull   := dwFullName(Actrl);
+
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+
+    with TButton(ACtrl) do begin
+        //---------- clickäº‹ä»¶
+        sCode   := sFull+'__click(event) {'
+                    +'console.log("dwClick");'
+                    +'document.getElementById("'+sFull+'__inp").click();'
+                +'},';
+        joRes.Add(sCode);
+
+        //---------- changeäº‹ä»¶
+
+        //åœ¨Hintä¸­"auto":1è¡¨ç¤ºè‡ªåŠ¨ä¸Šä¼ 
+        bAuto   := False;
+        if joHint.Exists('auto') then begin
+            bAuto  := Integer(joHint.auto) = 1;
+        end;
+
+        //å–ä¸Šä¼ ç›®å½•. æ ¼å¼: mydir\dasdf  å‰é¢æ²¡æœ‰\, åé¢æ— \
+        sDir    := '';
+        if joHint.Exists('dir') then begin
+            sDir  := String(joHint.dir);
+        end;
+        sDir    := Trim(sDir);
+        if sDir <> '' then begin
+            //å»é™¤å‰é¢çš„\
+            if sDir[1] = '\' then begin
+                Delete(sDir,1,1);
+            end;
+            //å»é™¤åé¢çš„\
+            if sDir[Length(sDir)]='\' then begin
+                Delete(sDir,Length(sDir),1);
+            end;
+        end;
+        sCode   := sFull+'__change(event) {'
+                +dwIIF(bAuto,
+                    //'console.log("dwInputSubmit");'+
+                    'this.dwInputSubmit('+IntToStr(TForm(Actrl.Owner).Handle)+','''+sFull+''','''+sDir+''');',
+                    //'console.log("dwInputChange");'+
+                    'this.dwInputChange('+IntTostr(TForm(Actrl.Owner).Handle)+','''+sFull+''');')
+                +'},';
+        joRes.Add(sCode);
+
+    end;
+
+    //
+    Result   := joRes;
+end;
+
 
 exports
      //dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetMethods,
+     dwGetAction,
      dwGetData;
 
 begin

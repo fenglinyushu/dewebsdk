@@ -18,7 +18,7 @@ var
      DLLApp         : TApplication;
      DLLScreen      : TScreen;
 
-function dwLoad(AParams:String;AConnection:TADOConnection;AApp:TApplication;AScreen:TScreen):TForm;stdcall;
+function dwLoad(AParams:String;AConnection:Pointer;AApp:TApplication;AScreen:TScreen):TForm;stdcall;
 begin
      //
      Application    := AApp;
@@ -26,7 +26,8 @@ begin
      //
 
      //
-     Form1          := TForm1.Create(nil);
+     Form1              := TForm1.Create(nil);
+     Form1.gsMainDir    := ExtractFilePath(Application.ExeName);
 
      //Form1.ADOQuery1.Connection   := AConnection;
 

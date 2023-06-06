@@ -1,4 +1,4 @@
-unit unit1;
+﻿unit unit1;
 
 interface
 
@@ -9,18 +9,15 @@ uses
      //
      Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
      Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.MPlayer,
-     Vcl.Menus, Vcl.Buttons, Vcl.Samples.Spin, Vcl.Imaging.jpeg,
-     Vcl.Imaging.pngimage, VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series,
-  VCLTee.TeeProcs, VCLTee.Chart, Vcl.WinXCtrls, Vcl.Grids;
+     Vcl.Menus, Vcl.Buttons, Vcl.Samples.Spin;
 
 type
   TForm1 = class(TForm)
-    Image1: TImage;
     Edit1: TEdit;
     Label1: TLabel;
     Button1: TButton;
+    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
-    procedure Image1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,17 +34,14 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-     if uppercase(Edit1.Text) = dwGetProp(Image1,'captcha') then begin
-          dwShowMessage('��֤ͨ��!',self);
-     end else begin
-          dwRunJS('document.getElementById("'+Image1.Name+'").click();',self);
-          dwShowMessage('��֤δͨ����',self);
-     end;
-end;
-
-procedure TForm1.Image1Click(Sender: TObject);
-begin
-     //
+    if uppercase(Edit1.Text) = Label2.Caption then begin
+        dwMessage('验证通过!','Success',self);
+    end else begin
+        //刷新验证码
+        dwRunJS('document.getElementById("'+dwFullName(Label2)+'").click();',self);
+        //提示
+        dwMessage('验证未通过！','',self);
+    end;
 end;
 
 end.

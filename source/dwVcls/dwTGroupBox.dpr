@@ -1,4 +1,4 @@
-library dwTGroupBox;
+ï»¿library dwTGroupBox;
 
 uses
      ShareMem,
@@ -18,31 +18,31 @@ function _GetFont(AFont:TFont):string;
 begin
      Result    := 'color:'+dwColor(AFont.color)+';'
                +'font-family:'''+AFont.name+''';'
-               +'font-size:'+IntToStr(AFont.size)+'pt;';
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
 
-     //´ÖÌå
+     //ç²—ä½“
      if fsBold in AFont.Style then begin
           Result    := Result+'font-weight:bold;';
      end else begin
           Result    := Result+'font-weight:normal;';
      end;
 
-     //Ğ±Ìå
+     //æ–œä½“
      if fsItalic in AFont.Style then begin
           Result    := Result+'font-style:italic;';
      end else begin
           Result    := Result+'font-style:normal;';
      end;
 
-     //ÏÂ»®Ïß
+     //ä¸‹åˆ’çº¿
      if fsUnderline in AFont.Style then begin
           Result    := Result+'text-decoration:underline;';
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end;
      end else begin
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end else begin
@@ -52,13 +52,13 @@ begin
 end;
 
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -76,66 +76,66 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 
      with TGroupBox(ACtrl) do begin
-          //Íâ¿ò
+          //å¤–æ¡†
           sCode     := '<el-main'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     //+dwGetHintValue(joHint,'type','type',' type="default"')
                     //+dwGetHintValue(joHint,'icon','icon','')
-                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
+                    +' :style="{left:'+dwFullName(Actrl)+'__lef,top:'+dwFullName(Actrl)+'__top,width:'+dwFullName(Actrl)+'__wid,height:'+dwFullName(Actrl)+'__hei}"'
                     +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';overflow:hidden;'
-                    +'"' //style ·â±Õ
+                    +'"' //style å°é—­
                     +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
 
-          //ÄÚ¿ò
+          //å†…æ¡†
           sCode     := '    <el-main'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     //+dwGetHintValue(joHint,'type','type',' type="default"')
                     //+dwGetHintValue(joHint,'icon','icon','')
-                    +' :style="{backgroundColor:'+dwPrefix(Actrl)+Name+'__col,left:''2px'',top:''10px'',width:'+dwPrefix(Actrl)+Name+'__wi2,height:'+dwPrefix(Actrl)+Name+'__he2}"'
+                    +' :style="{backgroundColor:'+dwFullName(Actrl)+'__col,left:''2px'',top:''10px'',width:'+dwFullName(Actrl)+'__wi2,height:'+dwFullName(Actrl)+'__he2}"'
                     +' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';overflow:hidden;'
                     +'border-radius: 4px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);'
-                    +dwGetHintStyle(joHint,'borderradius','border-radius','')   //border-radius
-                    +'"' //style ·â±Õ
+                    +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
+                    +'"' //style å°é—­
                     +'></el-main>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
 
-          //±êÌâ
+          //æ ‡é¢˜
           sCode     := '    <div '
-                    +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
+                    +' v-html="'+dwFullName(Actrl)+'__cap"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' :style="{backgroundColor:'+dwPrefix(Actrl)+Name+'__col,left:''20px'',top:''0px'',height:''20px''}"'
+                    +' :style="{backgroundColor:'+dwFullName(Actrl)+'__col,left:''20px'',top:''0px'',height:''20px''}"'
                     +' style="position:absolute;'
                     +'line-height:20px;'
                     +_GetFont(Font)
                     +'"'
-                    //style ·â±Õ
-                    +'>{{'+dwPrefix(Actrl)+Name+'__cap}}'
+                    //style å°é—­
+                    +'>{{'+dwFullName(Actrl)+'__cap}}'
                     +'</div>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
 
      end;
@@ -143,69 +143,69 @@ begin
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-main>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TGroupBox(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__wi2:"'+IntToStr(Width-5)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__he2:"'+IntToStr(Height-12)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wi2:"'+IntToStr(Width-5)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__he2:"'+IntToStr(Height-12)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__col:"'+dwColor(Color)+'",');
+          joRes.Add(dwFullName(Actrl)+'__col:"'+dwColor(Color)+'",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+          joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
      end;
      //
      Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TGroupBox(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wi2="'+IntToStr(Width-5)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__he2="'+IntToStr(Height-12)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wi2="'+IntToStr(Width-5)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__he2="'+IntToStr(Height-12)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__col="'+dwColor(Color)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwColor(Color)+'";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
      end;
      //
      Result    := (joRes);
@@ -217,7 +217,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

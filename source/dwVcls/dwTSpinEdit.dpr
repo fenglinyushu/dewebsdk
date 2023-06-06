@@ -1,4 +1,4 @@
-library dwTSpinEdit;
+ï»¿library dwTSpinEdit;
 
 uses
      ShareMem,
@@ -14,13 +14,13 @@ uses
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls, Spin,
      StdCtrls, Windows;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -28,125 +28,182 @@ begin
      joData    := _json(AData);
 
 
-     //±£´æÊÂ¼ş
+     //ä¿å­˜äº‹ä»¶
      TSpinEdit(ACtrl).OnExit    := TSpinEdit(ACtrl).OnChange;
-     //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
+     //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
      TSpinEdit(ACtrl).OnChange  := nil;
-     //¸üĞÂÖµ
+     //æ›´æ–°å€¼
      TSpinEdit(ACtrl).Value        := (joData.v);
-     //»Ö¸´ÊÂ¼ş
+     //æ¢å¤äº‹ä»¶
      TSpinEdit(ACtrl).OnChange  := TSpinEdit(ACtrl).OnExit;
 
-     //Ö´ĞĞÊÂ¼ş
+     //æ‰§è¡Œäº‹ä»¶
      if Assigned(TSpinEdit(ACtrl).OnChange) then begin
           TSpinEdit(ACtrl).OnChange(TSpinEdit(ACtrl));
      end;
 
-     //Çå¿ÕOnExitÊÂ¼ş
+     //æ¸…ç©ºOnExitäº‹ä»¶
      TSpinEdit(ACtrl).OnExit  := nil;
 end;
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     joHint    : Variant;
-     joRes     : Variant;
+    sCode     : string;
+    joHint    : Variant;
+    joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-     with TSpinEdit(ACtrl) do begin
-          if ( maxvalue =  0 ) and  ( maxvalue =  0 ) then begin
-               joRes.Add('<el-input-number'
-                         +' id="'+dwPrefix(Actrl)+Name+'"'
-                         +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
-                         +dwIIF(Ctl3D,'',' controls-position="right"')
-                         +dwVisible(TControl(ACtrl))
-                         +dwDisable(TControl(ACtrl))
-                         +dwLTWH(TControl(ACtrl))
-                         +'"' //style ·â±Õ
-                         +Format(_DWEVENT,['change',Name,'(this.'+dwPrefix(Actrl)+Name+'__val)','onchange',TForm(Owner).Handle])
-                         +'>');
-          end else begin
-               joRes.Add('<el-input-number'
-                         +' id="'+dwPrefix(Actrl)+Name+'"'
-                         +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
-                         +' :min="'+dwPrefix(Actrl)+Name+'__min" :max="'+dwPrefix(Actrl)+Name+'__max"'
-                         +dwIIF(Ctl3D,'',' controls-position="right"')
-                         +dwVisible(TControl(ACtrl))
-                         +dwDisable(TControl(ACtrl))
-                         +dwLTWH(TControl(ACtrl))
-                         +'"' //style ·â±Õ
-                         +Format(_DWEVENT,['change',Name,'(this.'+dwPrefix(Actrl)+Name+'__val)','onchange',TForm(Owner).Handle])
-                         +'>');
-          end;
-     end;
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-     //
-     Result    := (joRes);
+    with TSpinEdit(ACtrl) do begin
+        if ( maxvalue =  0 ) and  ( maxvalue =  0 ) then begin
+            joRes.Add('<el-input-number'
+                        +' id="'+dwFullName(Actrl)+'"'
+                        +' v-model="'+dwFullName(Actrl)+'__val"'
+                        +dwIIF(not Ctl3D,'',' controls-position="right"')
+                        +' :step="'+dwFullName(Actrl)+'__stp"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwGetDWAttr(joHint)
+                        +' :style="{'
+                            +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                            +'left:'+dwFullName(Actrl)+'__lef,'
+                            +'top:'+dwFullName(Actrl)+'__top,'
+                            +'width:'+dwFullName(Actrl)+'__wid,'
+                            +'height:'+dwFullName(Actrl)+'__hei'
+                        +'}"'
+                        +' style="position:absolute;'
+                            +dwGetDWStyle(joHint)
+                        +'"' //style å°é—­
+                        +Format(_DWEVENT,['change',Name,'(this.'+dwFullName(Actrl)+'__val)','onchange',TForm(Owner).Handle])
+                        +'>');
+        end else begin
+            joRes.Add('<el-input-number'
+                +' id="'+dwFullName(Actrl)+'"'
+                +' v-model="'+dwFullName(Actrl)+'__val"'
+                +' :min="'+dwFullName(Actrl)+'__min"'
+                +' :max="'+dwFullName(Actrl)+'__max"'
+                +' :step="'+dwFullName(Actrl)+'__stp"'
+                +dwIIF(not Ctl3D,'',' controls-position="right"')
+                +dwVisible(TControl(ACtrl))
+                +dwDisable(TControl(ACtrl))
+                +dwGetDWAttr(joHint)
+                //
+                +' :style="{'
+                    +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                    +'left:'+dwFullName(Actrl)+'__lef,'
+                    +'top:'+dwFullName(Actrl)+'__top,'
+                    +'width:'+dwFullName(Actrl)+'__wid,'
+                    +'height:'+dwFullName(Actrl)+'__hei'
+                +'}"'
+                +' style="position:absolute;'
+                    +dwGetDWStyle(joHint)
+                +'"' //style å°é—­
+                //
+                +Format(_DWEVENT,['change',Name,'(this.'+dwFullName(Actrl)+'__val)','onchange',TForm(Owner).Handle])
+                +'>');
+        end;
+    end;
+
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-input-number>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TSpinEdit(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__val:"'+IntToStr(Value)+'",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__min:"'+IntToStr(MinValue)+'",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__max:"'+IntToStr(MaxValue)+'",');
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TSpinEdit(ACtrl) do begin
+        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        //
+        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        //
+        joRes.Add(dwFullName(Actrl)+'__val:'+IntToStr(Value)+',');
+        joRes.Add(dwFullName(Actrl)+'__min:'+IntToStr(MinValue)+',');
+        joRes.Add(dwFullName(Actrl)+'__max:'+IntToStr(MaxValue)+',');
+        joRes.Add(dwFullName(Actrl)+'__stp:'+IntToStr(Increment)+',');
+        //
+        if Color = clNone then begin
+            joRes.Add(dwFullName(Actrl)+'__col:"rgba(0,0,0,0)",');
+        end else begin
+            joRes.Add(dwFullName(Actrl)+'__col:"'+dwAlphaColor(TPanel(ACtrl))+'",');
+        end;
+    end;
+    //
+    Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
+    joHint      : Variant;  //__eventcomponent
+    sEventComp  : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TSpinEdit(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__val="'+IntToStr(Value)+'";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__min="'+IntToStr(MinValue)+'";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__max="'+IntToStr(MaxValue)+'";');
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+
+    //å¾—åˆ°äº‹ä»¶æºæ§ä»¶
+    joHint  := dwGetHintJson(TControl(ACtrl.Owner));
+    sEventComp  := '';
+    if joHint.Exists('__eventcomponent') then begin
+        sEventComp  := LowerCase(joHint.__eventcomponent);
+    end;
+
+    //
+    with TSpinEdit(ACtrl) do begin
+        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+
+        //å¦‚æœå½“å‰æ˜¯äº‹ä»¶æºæ§ä»¶ï¼Œåˆ™ä¸å¤„ç†
+        if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__val='+IntToStr(Value)+';');
+        end else begin
+            joRes.Add('');
+        end;
+
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__min='+IntToStr(MinValue)+';');
+        joRes.Add('this.'+dwFullName(Actrl)+'__max='+IntToStr(MaxValue)+';');
+        joRes.Add('this.'+dwFullName(Actrl)+'__stp='+IntToStr(Increment)+';');
+        //
+        if Color = clNone then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__col="rgba(0,0,0,0)";');
+        end else begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwAlphaColor(TPanel(ACtrl))+'";');
+        end;
+    end;
+    //
+    Result    := (joRes);
 end;
 
 
@@ -155,7 +212,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

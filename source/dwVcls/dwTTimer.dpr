@@ -1,4 +1,4 @@
-library dwTTimer;
+ï»¿library dwTTimer;
 
 uses
      ShareMem,
@@ -18,13 +18,13 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
 begin
      //
@@ -34,46 +34,46 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
      sCode     : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
      with TTimer(ACtrl) do begin
-          if DesignInfo = 1 then begin   //´´½¨¶¨Ê±Æ÷
-               sCode     := dwPrefix(Actrl)+Name+'__tmr = window.setInterval(function() {'
-                    +'axios.get(''{"m":"event","i":''+this.clientid+'',"c":"'+dwPrefix(Actrl)+Name+'"}'')'
+          if DesignInfo = 1 then begin   //åˆ›å»ºå®šæ—¶å™¨
+               sCode     := dwFullName(Actrl)+'__tmr = window.setInterval(function() {'
+                    +'axios.post(''/deweb/post'',''{"m":"event","test":999,"i":'+IntToStr(TForm(Owner).Handle)+',"c":"'+dwFullName(Actrl)+'"}'')'
                     +'.then(resp =>{this.procResp(resp.data);  })'
                     +'}, '+IntToStr(Interval)+');';
 
-          end else begin                     //Çå³ı¶¨Ê±Æ÷
-               sCOde     := 'clearInterval('+dwPrefix(Actrl)+Name+'__tmr);';
+          end else begin                     //æ¸…é™¤å®šæ—¶å™¨
+               sCOde     := 'clearInterval('+dwFullName(Actrl)+'__tmr);';
           end;
           joRes.Add(sCode);
      end;
@@ -82,29 +82,33 @@ begin
      Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
-     sCode     : String;
+    joRes   : Variant;
+    sCode   : String;
+    sFull   : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    sFull   := dwFullName(Actrl);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-     with TTimer(ACtrl) do begin
-          if DesignInfo = 1 then begin   //´´½¨¶¨Ê±Æ÷
-               sCode     := 'me=this;'+dwPrefix(Actrl)+Name+'__tmr = window.setInterval(function() {'
-                    +'axios.get(''{"m":"event","i":'+IntToStr(TForm(Owner).Handle)+',"c":"'+dwPrefix(Actrl)+Name+'"}'')'
-                    +'.then(resp =>{me.procResp(resp.data);  })'
-                    +'},'+IntToStr(Interval)+');';
+    with TTimer(ACtrl) do begin
+        if DesignInfo = 1 then begin   //åˆ›å»ºå®šæ—¶å™¨
+            sCode   := 'me = this;'+
+                    dwFullName(Actrl)+'__tmr = window.setInterval(function() {'+
+                        'axios.post(''/deweb/post'',''{"m":"event","test":0,"i":'+IntToStr(TForm(Owner).Handle)+',"c":"'+sFull+'"}'')'+
+                        '.then(resp =>{me.procResp(resp.data);})'+
+                    '},'+IntToStr(Interval)+');';
 
-          end else begin                     //Çå³ı¶¨Ê±Æ÷
-               sCode     := 'clearInterval('+dwPrefix(Actrl)+Name+'__tmr);';
-          end;
-          joRes.Add(sCode);
-     end;
+        end else begin                     //æ¸…é™¤å®šæ—¶å™¨
+            sCode     := 'clearInterval('+dwFullName(Actrl)+'__tmr);';
+        end;
+        joRes.Add(sCode);
+    end;
 
-     //
-     Result    := (joRes);
+    //dwFrame3ä¸­çš„æ—¶é’Ÿæœªæ­£ç¡®åœæ­¢
+    //
+    Result    := (joRes);
 end;
 
 
@@ -113,7 +117,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

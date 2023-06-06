@@ -490,9 +490,21 @@ object Form1: TForm1
       end
     end
   end
-  object ADOQuery1: TADOQuery
-    Parameters = <>
-    Left = 146
-    Top = 233
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 282
+    Top = 305
+  end
+  object FDConnection1: TFDConnection
+    Left = 282
+    Top = 369
+  end
+  object FDPhysODBCDriverLink1: TFDPhysODBCDriverLink
+    Left = 282
+    Top = 425
+  end
+  object FDPhysMSAccessDriverLink1: TFDPhysMSAccessDriverLink
+    Left = 282
+    Top = 481
   end
 end

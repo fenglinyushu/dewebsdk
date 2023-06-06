@@ -1,17 +1,13 @@
 {
-	"port": 80,
+	"port": 8888,
 	"resource": 0,
 	"third": "http://cdn.delphibbs.com",
-	"redir": [
-		[
-			"mm",
-			"hello.dw"
-		],
-		[
-			"gg",
-			"login.dw"
-		]
+	"redir": 
+	[
 	],
-	"uploaddir": "up",
-	"connectionstring": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=deweb.mdb"
+	"upload_dir": "upload",
+	"errorhtml": "<html><body><br/><p style='text-align:center'>!!!deweb web not exist !</p></body></html>",
+	"connectionstring": "DriverID=MSAcc;Server=;Database=.\\main.mdb;User_Name=;Password=;",
+	"disconnect": "Network is disconnected!",
+	"nightrestart": 0
 }

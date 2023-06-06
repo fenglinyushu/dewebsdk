@@ -1,4 +1,4 @@
-unit Unit1;
+ï»¿unit Unit1;
 
 interface
 
@@ -9,7 +9,12 @@ uses
      CloneComponents,
      //
      Windows, Messages, SysUtils, Variants, Classes, Graphics,
-     Controls, Forms, Dialogs, StdCtrls, ExtCtrls, Data.DB, Data.Win.ADODB;
+     Controls, Forms, Dialogs, StdCtrls, ExtCtrls, Data.DB, Data.Win.ADODB, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Phys.ODBCDef, FireDAC.Phys.MSAccDef,
+  FireDAC.Phys.MSAcc, FireDAC.Phys.ODBCBase, FireDAC.Phys.ODBC, FireDAC.Comp.Client,
+  FireDAC.Comp.DataSet;
 
 type
   TForm1 = class(TForm)
@@ -29,7 +34,10 @@ type
     RadioButton18: TRadioButton;
     RadioButton15: TRadioButton;
     RadioButton16: TRadioButton;
-    ADOQuery1: TADOQuery;
+    FDQuery1: TFDQuery;
+    FDConnection1: TFDConnection;
+    FDPhysODBCDriverLink1: TFDPhysODBCDriverLink;
+    FDPhysMSAccessDriverLink1: TFDPhysMSAccessDriverLink;
     procedure RadioButton17Click(Sender: TObject);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -48,24 +56,6 @@ implementation
 
 {$R *.dfm}
 
-function _GetADOConnection:TADOConnection;
-type
-     PdwGetConn   = function ():TADOConnection;StdCall;
-var
-     iDll      : Integer;
-     //
-     fGetConn  : PdwGetConn;
-begin
-     Result    := nil;
-     //µÃµ½ADOConnection
-     if FileExists('dwADOConnection.dll') then begin
-          iDll      := LoadLibrary('dwADOConnection.dll');
-          fGetConn  := GetProcAddress(iDll,'dwGetConnection');
-
-          Result    := fGetConn;
-     end;
-
-end;
 
 
 procedure TForm1.Button_OKClick(Sender: TObject);
@@ -103,13 +93,13 @@ begin
 
      //
      if iScore<60 then begin
-          dwShowMessage('³É¼¨ºÜ²î,·ÖÊıÎª '+IntToStr(iScore)+', ²»ÒªÍµÀÁÓ´!',Self);
+          dwShowMessage('æˆç»©å¾ˆå·®,åˆ†æ•°ä¸º '+IntToStr(iScore)+', ä¸è¦å·æ‡’å“Ÿ!',Self);
      end else if iScore < 70 then begin
-          dwShowMessage('³É¼¨ÃãÇ¿¼°¸ñ,·ÖÊıÎª '+IntToStr(iScore)+',¼ÓÓÍ!',Self);
+          dwShowMessage('æˆç»©å‹‰å¼ºåŠæ ¼,åˆ†æ•°ä¸º '+IntToStr(iScore)+',åŠ æ²¹!',Self);
      end else if iScore < 80 then begin
-          dwShowMessage('³É¼¨»¹¿ÉÒÔ!,·ÖÊıÎª '+IntToStr(iScore)+',¼ÌĞøÅ¬Á¦!',Self);
+          dwShowMessage('æˆç»©è¿˜å¯ä»¥!,åˆ†æ•°ä¸º '+IntToStr(iScore)+',ç»§ç»­åŠªåŠ›!',Self);
      end else begin
-          dwShowMessage('³É¼¨ºÜºÃ! ·ÖÊıÎª '+IntToStr(iScore)+',ÄãÕæ°ô!',Self);
+          dwShowMessage('æˆç»©å¾ˆå¥½! åˆ†æ•°ä¸º '+IntToStr(iScore)+',ä½ çœŸæ£’!',Self);
      end;
 end;
 
@@ -120,7 +110,7 @@ var
 begin
      sOS  := dwGetProp(Self,'os');
 
-     //¸ù¾İÊÇ·ñÒÆ¶¯¶Ë, ·Ö±ğ´¦Àí. ÒòÎª clientwidth/clientheightÈ¡µÃµÄÊÇÊµ¼ÊÖµ, Ò²¾ÍÊÇ·Ö±æÂÊ;¶øÊÖ»ú¶Ë²ÉÓÃµÄÊÇĞéÄâÖµ
+     //æ ¹æ®æ˜¯å¦ç§»åŠ¨ç«¯, åˆ†åˆ«å¤„ç†. å› ä¸º clientwidth/clientheightå–å¾—çš„æ˜¯å®é™…å€¼, ä¹Ÿå°±æ˜¯åˆ†è¾¨ç‡;è€Œæ‰‹æœºç«¯é‡‡ç”¨çš„æ˜¯è™šæ‹Ÿå€¼
      if (sOS = '0') or (sOS='1') then begin
           Panel_99_Buttons.Align   := alNone;
           Panel_99_Buttons.Width   := 130;
@@ -141,7 +131,7 @@ var
 begin
      //
      if (X>700) and (Y>700) then begin
-          //PCµÈ¸ß·Ö±æÂÊ
+          //PCç­‰é«˜åˆ†è¾¨ç‡
 
           Width     := X;
           Height    := Y;
@@ -161,10 +151,10 @@ begin
                     Continue;
                end;
 
-               //ÒÔÏÂÁ½ĞĞÊÇÎªÁËË¢ĞÂ×Ô¶¯¸ß¶È
+               //ä»¥ä¸‹ä¸¤è¡Œæ˜¯ä¸ºäº†åˆ·æ–°è‡ªåŠ¨é«˜åº¦
                TLabel(oPanel.Controls[0]).AutoSize     := False;
                TLabel(oPanel.Controls[0]).AutoSize     := True;
-               //ÒÔÏÂÁ½ĞĞÊÇÎªÁË½â¾öÍøÒ³ÏÔÊ¾²»È«µÄÎÊÌâ
+               //ä»¥ä¸‹ä¸¤è¡Œæ˜¯ä¸ºäº†è§£å†³ç½‘é¡µæ˜¾ç¤ºä¸å…¨çš„é—®é¢˜
                TLabel(oPanel.Controls[0]).AutoSize     := False;
                TLabel(oPanel.Controls[0]).Height       := TLabel(oPanel.Controls[0]).Height+5;
 
@@ -199,10 +189,10 @@ begin
                     Continue;
                end;
 
-               //ÒÔÏÂÁ½ĞĞÊÇÎªÁËË¢ĞÂ×Ô¶¯¸ß¶È
+               //ä»¥ä¸‹ä¸¤è¡Œæ˜¯ä¸ºäº†åˆ·æ–°è‡ªåŠ¨é«˜åº¦
                TLabel(oPanel.Controls[0]).AutoSize     := False;
                TLabel(oPanel.Controls[0]).AutoSize     := True;
-               //ÒÔÏÂÁ½ĞĞÊÇÎªÁË½â¾öÍøÒ³ÏÔÊ¾²»È«µÄÎÊÌâ
+               //ä»¥ä¸‹ä¸¤è¡Œæ˜¯ä¸ºäº†è§£å†³ç½‘é¡µæ˜¾ç¤ºä¸å…¨çš„é—®é¢˜
                TLabel(oPanel.Controls[0]).AutoSize     := False;
                TLabel(oPanel.Controls[0]).Height       := TLabel(oPanel.Controls[0]).Height+5;
 
@@ -225,7 +215,7 @@ var
 begin
      oPanel    := TPanel(TRadioButton(Sender).Parent);
 
-     //ÏÈ½ûÖ¹ÊÂ¼ş
+     //å…ˆç¦æ­¢äº‹ä»¶
      TRadioButton(oPanel.Controls[0]).OnClick   := nil;
      TRadioButton(oPanel.Controls[1]).OnClick   := nil;
      TRadioButton(oPanel.Controls[2]).OnClick   := nil;
@@ -240,7 +230,7 @@ begin
      //
      TRadioButton(Sender).Checked  := True;
 
-     //»Ö¸´ÊÂ¼ş
+     //æ¢å¤äº‹ä»¶
      TRadioButton(oPanel.Controls[0]).OnClick   := RadioButton17Click;
      TRadioButton(oPanel.Controls[1]).OnClick   := RadioButton17Click;
      TRadioButton(oPanel.Controls[2]).OnClick   := RadioButton17Click;
@@ -276,11 +266,9 @@ var
 begin
 
 
-     //
-     ADOQuery1.Connection     := _GetADOConnection;
 
-     ADOQuery1.SQL.Text     := 'SELECT * FROM Questions WHERE FQuestionTypeID=1';
-     ADOQuery1.Open;
+     FDQuery1.SQL.Text     := 'SELECT * FROM Questions WHERE FQuestionTypeID=1';
+     FDQuery1.Open;
      
 
      //
@@ -298,22 +286,22 @@ begin
           end;
      end;
 
-     //Éú³É20¸öÑ¡ÔñÌâ
-     ADOQuery1.First;
+     //ç”Ÿæˆ20ä¸ªé€‰æ‹©é¢˜
+     FDQuery1.First;
      for iItem := 0 to iIDs[0]-1 do begin
-          ADOQuery1.Next;
+          FDQuery1.Next;
      end;
      for iItem := 0 to 19 do  begin
           //
-          sContent  := (ADOQuery1.FieldByName('FContent').AsString);
+          sContent  := (FDQuery1.FieldByName('FContent').AsString);
 
-          //¿ËÂ¡¿Ø¼ş
+          //å…‹éš†æ§ä»¶
           oPanel    := TPanel(CloneComponent(Panel_01_Select));
           oPanel.Visible      := True;
-          oPanel.Top          := 9999;  //ÖÃ×îµ×
+          oPanel.Top          := 9999;  //ç½®æœ€åº•
 
-          //±£´æ´ğ°¸
-          sRight    := UpperCase((ADOQuery1.FieldByName('FRightSolution').AsString));
+          //ä¿å­˜ç­”æ¡ˆ
+          sRight    := UpperCase((FDQuery1.FieldByName('FRightSolution').AsString));
           if sRight = 'A' then begin
                oPanel.Tag     := 0;
           end else if sRight = 'B' then begin
@@ -324,7 +312,7 @@ begin
                oPanel.Tag     := 3;
           end;
 
-          //µÃµ½¸÷¶ÔÏó
+          //å¾—åˆ°å„å¯¹è±¡
           oTitle    := TLabel(oPanel.Controls[0]);
           oPanelAll := TPanel(oPanel.Controls[1]);
           oCheckA   := TCheckBox(oPanelAll.Controls[0]);
@@ -332,23 +320,25 @@ begin
           oCheckC   := TCheckBox(oPanelAll.Controls[2]);
           oCheckD   := TCheckBox(oPanelAll.Controls[3]);
 
-          //ÌâÄ¿
-          sTitle    := IntToStr(iItem+1)+'¡¢ '+Copy(sContent,1,Pos('A¡¢',sContent)-1);
+          //é¢˜ç›®
+          sTitle    := IntToStr(iItem+1)+'ã€ '+Copy(sContent,1,Pos('Aã€',sContent)-1);
           sTitle    := StringReplace(sTitle,#13#10,'',[rfReplaceAll]);
+          sTitle    := StringReplace(sTitle,#13,'',[rfReplaceAll]);
+          sTitle    := StringReplace(sTitle,#10,'',[rfReplaceAll]);
           oTitle.Caption      := Trim(sTitle);
-          //ÒÔÏÂÁ½ĞĞÊÇÎªÁËË¢ĞÂoTitle×Ô¶¯¸ß¶È
+          //ä»¥ä¸‹ä¸¤è¡Œæ˜¯ä¸ºäº†åˆ·æ–°oTitleè‡ªåŠ¨é«˜åº¦
           oTitle.AutoSize     := False;
           oTitle.AutoSize     := True;
-          //ÒÔÏÂÁ½ĞĞÊÇÎªÁË½â¾öÍøÒ³ÏÔÊ¾²»È«µÄÎÊÌâ
+          //ä»¥ä¸‹ä¸¤è¡Œæ˜¯ä¸ºäº†è§£å†³ç½‘é¡µæ˜¾ç¤ºä¸å…¨çš„é—®é¢˜
           oTitle.AutoSize     := False;
           oTitle.Height       := oTitle.Height+5;
 
 
-          //µÃµ½ABCDÑ¡Ïî
-          iA   := Pos('A¡¢',sContent);
-          iB   := Pos('B¡¢',sContent);
-          iC   := Pos('C¡¢',sContent);
-          iD   := Pos('D¡¢',sContent);
+          //å¾—åˆ°ABCDé€‰é¡¹
+          iA   := Pos('Aã€',sContent);
+          iB   := Pos('Bã€',sContent);
+          iC   := Pos('Cã€',sContent);
+          iD   := Pos('Dã€',sContent);
           oCheckA.Caption     := Trim(Copy(sContent,iA,iB-iA));
           oCheckB.Caption     := Trim(Copy(sContent,iB,iC-iB));
           oCheckC.Caption     := Trim(Copy(sContent,iC,iD-iC));
@@ -367,7 +357,7 @@ begin
           //
           if iItem < 19 then begin
                for iRec := 0 to iIDs[iItem+1]-iIDs[iItem] do begin
-                    ADOQuery1.Next;
+                    FDQuery1.Next;
                end;
           end;
 

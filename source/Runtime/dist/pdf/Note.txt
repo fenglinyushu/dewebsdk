@@ -1,0 +1,4 @@
+
+To increase print quality below parameter manually edited in file viewer.js. (Default is 150) 
+
+  var PRINT_RESOLUTION = 300;

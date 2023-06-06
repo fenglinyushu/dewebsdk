@@ -1,4 +1,4 @@
-library dwTListBox;
+ï»¿library dwTListBox;
 
 uses
      ShareMem,
@@ -14,70 +14,98 @@ uses
      Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
      StdCtrls, Windows;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     sValue    : String;
-     iItem     : Integer;
-     joData    : Variant;
+    sValue  : String;
+    iItem   : Integer;
+    joData  : Variant;
+    oOld    : Procedure(Sender:TObject) of Object;  //ç”¨äºä¿å­˜äº‹ä»¶
 begin
-     joData    := _json(AData);
+    with TListBox(ACtrl) do begin
+        if HelpKeyword = 'dialog' then begin
 
-     //±£´æÊÂ¼ş
-     TListBox(ACtrl).OnExit    := TListBox(ACtrl).OnClick;
-     //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
-     TListBox(ACtrl).OnClick  := nil;
-     //¸üĞÂÖµ
-     sValue    := dwUnescape(joData.v);
-     sValue    := ','+sValue+',';
-     for iItem := 0 to TListBox(ACtrl).Items.Count-1 do begin
-          TListBox(ACtrl).Selected[iItem]    := Pos(','+IntToStr(iItem)+',',sValue)>0;
-     end;
-     //»Ö¸´ÊÂ¼ş
-     TListBox(ACtrl).OnClick  := TListBox(ACtrl).OnExit;
 
-     //Ö´ĞĞÊÂ¼ş
-     if Assigned(TListBox(ACtrl).OnClick) then begin
-          TListBox(ACtrl).OnClick(TListBox(ACtrl));
-     end;
+        end else begin
+            joData    := _json(AData);
 
-     //Çå¿ÕOnExitÊÂ¼ş
-     TListBox(ACtrl).OnExit  := nil;
+            //ä¿å­˜äº‹ä»¶
+            oOld    := TListBox(ACtrl).OnClick;
+
+            //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
+            TListBox(ACtrl).OnClick  := nil;
+
+            //æ›´æ–°å€¼
+            sValue    := dwUnescape(joData.v);
+            sValue    := ','+sValue+',';
+            for iItem := 0 to TListBox(ACtrl).Items.Count-1 do begin
+                TListBox(ACtrl).Selected[iItem]    := Pos(','+IntToStr(iItem)+',',sValue)>0;
+            end;
+
+            //æ¢å¤äº‹ä»¶
+            TListBox(ACtrl).OnClick  := oOld;
+
+            //å¤„ç†äº‹ä»¶
+            if joData.e = 'onclick' then begin
+                if Assigned(TListBox(ACtrl).OnClick) then begin
+                    TListBox(ACtrl).OnClick(TListBox(ACtrl));
+                end;
+            end else if joData.e = 'ondblclick' then begin
+                TListBox(ACtrl).OnDblClick(TListBox(ACtrl));
+            end;
+            {
+            //ä¿å­˜äº‹ä»¶
+            oOld    := TListBox(ACtrl).OnClick;
+
+            //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
+            TListBox(ACtrl).OnClick  := nil;
+
+
+            //æ‰§è¡Œäº‹ä»¶
+            if Assigned(TListBox(ACtrl).OnClick) then begin
+            TListBox(ACtrl).OnClick(TListBox(ACtrl));
+            end;
+            }
+        end;
+    end;
+
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 
      with TListBox(ACtrl) do begin
           //
           joRes.Add('<select class="dwselect" size=2'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwIIF(MultiSelect,' multiple','')
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+dwPrefix(Actrl)+Name+'__val"'
+                    +' v-model="'+dwFullName(Actrl)+'__val"'
+                    +dwGetDWAttr(joHint)
                     +dwLTWH(TControl(ACtrl))
-                    +'"' //style ·â±Õ
-                    +Format(_DWEVENT,['change',Name,'String(this.'+dwPrefix(Actrl)+Name+'__val)','onchange',TForm(Owner).Handle])
+                    +dwGetDWStyle(joHint)
+                    +'"' //style å°é—­
+                    +Format(_DWEVENT,['click',dwFullName(Actrl),'String(this.'+dwFullName(Actrl)+'__val)','onclick',TForm(Owner).Handle])
                     +'>');
-          joRes.Add('    <option class="dwoption" v-for=''(item,index) in '+dwPrefix(Actrl)+Name+'__its''  :value=item.value :key=''index''>{{ item.text }}</option>');
+          joRes.Add('    <option class="dwoption" v-for=''(item,index) in '+dwFullName(Actrl)+'__its''  :value=item.value :key=''index''>{{ item.text }}</option>');
 
      end;
 
@@ -85,44 +113,46 @@ begin
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</select>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
      sCode     : String;
      iItem     : Integer;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TListBox(ACtrl) do begin
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //Ìí¼ÓÑ¡Ïî
-          sCode     := dwPrefix(Actrl)+Name+'__its:[';
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          //æ·»åŠ é€‰é¡¹
+          sCode     := dwFullName(Actrl)+'__its:[';
           for iItem := 0 to Items.Count-1 do begin
                sCode     := sCode + '{text:'''+Items[iItem]+''',value:'''+IntToStr(iItem)+'''},';
           end;
-          Delete(sCode,Length(sCode),1);
+          if Items.Count>0 then begin
+            Delete(sCode,Length(sCode),1);
+          end;
           sCode     := sCode + '],';
           joRes.Add(sCode);
           //
@@ -135,49 +165,53 @@ begin
           if sCode<>'' then begin
                Delete(sCode,Length(sCode),1);
           end;
-          joRes.Add(dwPrefix(Actrl)+Name+'__val:['+sCode+'],');
+          joRes.Add(dwFullName(Actrl)+'__val:['+sCode+'],');
      end;
      //
      Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
      sCode     : String;
      iItem     : Integer;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TListBox(ACtrl) do begin
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //Ìí¼ÓÑ¡Ïî
-          sCode     := 'this.'+dwPrefix(Actrl)+Name+'__its=[';
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+          //æ·»åŠ é€‰é¡¹
+          sCode     := 'this.'+dwFullName(Actrl)+'__its=[';
           for iItem := 0 to Items.Count-1 do begin
                sCode     := sCode + '{text:'''+Items[iItem]+''',value:'''+IntToStr(iItem)+'''},';
           end;
-          Delete(sCode,Length(sCode),1);
+          //åˆ é™¤æœ€åçš„é€—å·
+          if Items.Count>0 then begin
+            Delete(sCode,Length(sCode),1);
+          end;
+
           sCode     := sCode + '];';
           joRes.Add(sCode);
           //
           sCode     := '';
           for iItem := 0 to Items.Count-1 do begin
                if Selected[iItem] then begin
-                    sCode     := sCode + IntToStr(iItem)+',';
+                    sCode     := sCode + '''' + IntToStr(iItem)+''',';
                end
           end;
           if sCode<>'' then begin
                Delete(sCode,Length(sCode),1);
           end;
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__val=['+sCode+'];');
+          joRes.Add('this.'+dwFullName(Actrl)+'__val=['+sCode+'];');
      end;
      //
      Result    := (joRes);
@@ -189,7 +223,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

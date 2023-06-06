@@ -1,4 +1,4 @@
-library dwTToggleSwitch;
+ï»¿library dwTToggleSwitch;
 
 uses
      ShareMem,
@@ -19,13 +19,13 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -40,9 +40,11 @@ begin
                end else begin
                     State     := tssOFF;
                end;
-               if Assigned(OnClick) then begin
-                    OnClick(TToggleSwitch(ACtrl));
-               end;
+
+               //2021-08-04 ç§»é˜Ÿä»¥ä¸‹ä»£ç ,å› ä¸ºæ›´æ”¹stateä¼šè‡ªåŠ¨è§¦å‘OnClick
+               //if Assigned(OnClick) then begin
+               //     OnClick(TToggleSwitch(ACtrl));
+               //end;
           end else if joData.e = 'onenter' then begin
                if Assigned(OnEnter) then begin
                     OnEnter(TToggleSwitch(ACtrl));
@@ -56,17 +58,17 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 (*
 
@@ -75,107 +77,109 @@ begin
   v-model="value2"
   active-color="#13ce66"
   inactive-color="#ff4949"
-  active-text="°´ÔÂ¸¶·Ñ"
-  inactive-text="°´Äê¸¶·Ñ">
+  active-text="æŒ‰æœˆä»˜è´¹"
+  inactive-text="æŒ‰å¹´ä»˜è´¹">
 </el-switch>
 
 *)
      with TToggleSwitch(ACtrl) do begin
           sCode     := '<el-switch'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+dwPrefix(Actrl)+Name+'__sta"'
-                    +' :width="'+dwPrefix(Actrl)+Name+'__stw"'
-                    +' :active-color="'+dwPrefix(Actrl)+Name+'__acc"'
-                    +' :inactive-color="'+dwPrefix(Actrl)+Name+'__inc"'
-                    +' :active-text="'+dwPrefix(Actrl)+Name+'__act"'
-                    +' :inactive-text="'+dwPrefix(Actrl)+Name+'__int"'
+                    +' v-model="'+dwFullName(Actrl)+'__sta"'
+                    +' :width="'+dwFullName(Actrl)+'__stw"'
+                    +' :active-color="'+dwFullName(Actrl)+'__acc"'
+                    +' :inactive-color="'+dwFullName(Actrl)+'__inc"'
+                    +' :active-text="'+dwFullName(Actrl)+'__act"'
+                    +' :inactive-text="'+dwFullName(Actrl)+'__int"'
                     //+dwGetHintValue(joHint,'type','type',' type="default"')         //sCheckBoxType
                     //+dwGetHintValue(joHint,'icon','icon','')         //CheckBoxIcon
                     //
+                    +dwGetDWAttr(joHint)
                     +dwLTWH(TControl(ACtrl))
                     +'display: block;'
-                    +'"' //style ·â±Õ
-                    +Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__sta','onclick',TForm(Owner).Handle])
+                    +dwGetDWStyle(joHint)
+                    +'"' //style å°é—­
+                    +Format(_DWEVENT,['change',Name,'this.'+dwFullName(Actrl)+'__sta','onclick',TForm(Owner).Handle])
                     +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                     +'>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-switch>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃDataÏûÏ¢, ASeparatorÎª·Ö¸ô·û, Ò»°ãÎª:»ò=
+//å–å¾—Dataæ¶ˆæ¯, ASeparatorä¸ºåˆ†éš”ç¬¦, ä¸€èˆ¬ä¸º:æˆ–=
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TToggleSwitch(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
 
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__stw:'+IntToStr(SwitchWidth)+',');
-          joRes.Add(dwPrefix(Actrl)+Name+'__sta:'+dwIIF(State = tssOn,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__acc:"'+dwColor(ThumbColor)+'",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__inc:"'+dwColor(DisabledColor)+'",');
+          joRes.Add(dwFullName(Actrl)+'__stw:'+IntToStr(SwitchWidth)+',');
+          joRes.Add(dwFullName(Actrl)+'__sta:'+dwIIF(State = tssOn,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__acc:"'+dwColor(ThumbColor)+'",');
+          joRes.Add(dwFullName(Actrl)+'__inc:"'+dwColor(DisabledColor)+'",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__act:"'+StateCaptions.CaptionOn+'",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__int:"'+StateCaptions.CaptionOff+'",');
+          joRes.Add(dwFullName(Actrl)+'__act:"'+StateCaptions.CaptionOn+'",');
+          joRes.Add(dwFullName(Actrl)+'__int:"'+StateCaptions.CaptionOff+'",');
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃÊÂ¼ş
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+//å–å¾—äº‹ä»¶
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TToggleSwitch(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__stw='+IntToStr(SwitchWidth)+';');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__sta='+dwIIF(State = tssOn,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__acc="'+dwColor(ThumbColor)+'";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__inc="'+dwColor(DisabledColor)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__stw='+IntToStr(SwitchWidth)+';');
+          joRes.Add('this.'+dwFullName(Actrl)+'__sta='+dwIIF(State = tssOn,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__acc="'+dwColor(ThumbColor)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__inc="'+dwColor(DisabledColor)+'";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__act="'+StateCaptions.CaptionOn+'";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__int="'+StateCaptions.CaptionOff+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__act="'+StateCaptions.CaptionOn+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__int="'+StateCaptions.CaptionOff+'";');
      end;
      //
      Result    := (joRes);
@@ -188,7 +192,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

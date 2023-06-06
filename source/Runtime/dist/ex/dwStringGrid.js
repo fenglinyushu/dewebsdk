@@ -90,6 +90,7 @@ function dwSGSetStyle(dom, row, column, style, isFixed = false) {
  * jsSetRow('table1', 1, { backgroundColor: 'green', color: '#fff' })
  */
  function dwSGSetRow(dom, row, style, isFixed = false) {
+  
   if (row === 0) {
     const target = 
       document.getElementById(dom)

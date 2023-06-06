@@ -17,13 +17,20 @@ object Form1: TForm1
   Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 20
+  object Label1: TLabel
+    Left = 32
+    Top = 8
+    Width = 30
+    Height = 20
+    Caption = #24403#21069
+  end
   object ProgressBar1: TProgressBar
     Left = 30
     Top = 96
     Width = 300
     Height = 23
+    Max = 9999
     ParentShowHint = False
-    Position = 35
     BarColor = clFuchsia
     BackgroundColor = clBlue
     SmoothReverse = True
@@ -66,7 +73,7 @@ object Form1: TForm1
   object ProgressBar4: TProgressBar
     Left = 30
     Top = 144
-    Width = 300
+    Width = 267
     Height = 15
     ParentShowHint = False
     Position = 35
@@ -98,6 +105,12 @@ object Form1: TForm1
     Height = 35
     Hint = '{"type":"primary"}'
     Caption = 'Start/Pause'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 5
     OnClick = Button1Click
   end
@@ -108,24 +121,19 @@ object Form1: TForm1
     Height = 35
     Hint = '{"type":"primary"}'
     Caption = 'Reset'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 6
     OnClick = Button2Click
-  end
-  object Button3: TButton
-    Left = 72
-    Top = 551
-    Width = 200
-    Height = 35
-    Hint = 
-      '{"type":"success","onclick":"window.clearInterval(Timer1__tmr);"' +
-      '}'
-    Caption = 'JavaScripte Pause'
-    TabOrder = 7
   end
   object Timer1: TTimer
     Interval = 200
     OnTimer = Timer1Timer
-    Left = 288
-    Top = 96
+    Left = 304
+    Top = 232
   end
 end

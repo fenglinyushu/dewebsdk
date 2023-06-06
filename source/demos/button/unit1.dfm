@@ -4,7 +4,7 @@ object Form1: TForm1
   Hint = '{"type":"primary"}'
   BorderStyle = bsNone
   Caption = 'deweb'
-  ClientHeight = 635
+  ClientHeight = 700
   ClientWidth = 360
   Color = clWhite
   Font.Charset = ANSI_CHARSET
@@ -21,6 +21,12 @@ object Form1: TForm1
     Width = 100
     Height = 40
     Caption = #40664#35748#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
   end
   object Button2: TButton
@@ -30,6 +36,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"primary"}'
     Caption = #20027#35201#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
   end
   object Button3: TButton
@@ -39,6 +51,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"success"}'
     Caption = #25104#21151#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
   end
   object Button4: TButton
@@ -48,6 +66,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"danger"}'
     Caption = #21361#38505
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
   end
   object Button5: TButton
@@ -57,6 +81,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"warning"}'
     Caption = #35686#21578#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
   end
   object Button6: TButton
@@ -66,6 +96,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"information"}'
     Caption = #20449#24687#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 5
   end
   object Button7: TButton
@@ -74,6 +110,12 @@ object Form1: TForm1
     Width = 100
     Height = 40
     Caption = #26420#32032#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 6
   end
   object Button8: TButton
@@ -83,6 +125,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"primary","style":"plain"}'
     Caption = #20027#35201#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 7
   end
   object Button9: TButton
@@ -92,6 +140,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"success","style":"plain"}'
     Caption = #25104#21151#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 8
   end
   object Button10: TButton
@@ -101,6 +155,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"danger","style":"plain"}'
     Caption = #21361#38505
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 9
   end
   object Button11: TButton
@@ -110,6 +170,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"warning","style":"plain"}'
     Caption = #35686#21578#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 10
   end
   object Button12: TButton
@@ -119,6 +185,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"information","style":"plain"}'
     Caption = #20449#24687#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 11
   end
   object Button13: TButton
@@ -128,6 +200,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"style":"round"}'
     Caption = #22278#35282#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 12
   end
   object Button14: TButton
@@ -137,6 +215,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"primary","style":"round"}'
     Caption = #20027#35201#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 13
   end
   object Button15: TButton
@@ -146,6 +230,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"success","style":"round"}'
     Caption = #25104#21151#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 14
   end
   object Button16: TButton
@@ -155,6 +245,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"danger","style":"round"}'
     Caption = #21361#38505
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 15
   end
   object Button17: TButton
@@ -164,6 +260,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"warning","style":"round"}'
     Caption = #35686#21578#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 16
   end
   object Button18: TButton
@@ -173,6 +275,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"information","style":"round"}'
     Caption = #20449#24687#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 17
   end
   object Button19: TButton
@@ -181,6 +289,12 @@ object Form1: TForm1
     Width = 40
     Height = 40
     Hint = '{"style":"circle","icon":"el-icon-search"}'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 18
   end
   object Button20: TButton
@@ -189,6 +303,12 @@ object Form1: TForm1
     Width = 40
     Height = 40
     Hint = '{"style":"circle","type":"primary","icon":"el-icon-edit"}'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 19
   end
   object Button21: TButton
@@ -197,6 +317,12 @@ object Form1: TForm1
     Width = 40
     Height = 40
     Hint = '{"style":"circle","type":"success","icon":"el-icon-check"}'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 20
   end
   object Button22: TButton
@@ -205,6 +331,12 @@ object Form1: TForm1
     Width = 40
     Height = 40
     Hint = '{"style":"circle","icon":"el-icon-delete","type":"danger"}'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 21
   end
   object Button23: TButton
@@ -213,6 +345,12 @@ object Form1: TForm1
     Width = 40
     Height = 40
     Hint = '{"style":"circle","icon":"el-icon-star-off","type":"warning"}'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 22
   end
   object Button24: TButton
@@ -221,6 +359,12 @@ object Form1: TForm1
     Width = 40
     Height = 40
     Hint = '{"style":"circle","type":"info","icon":"el-icon-message"}'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 23
   end
   object Button25: TButton
@@ -230,6 +374,12 @@ object Form1: TForm1
     Height = 40
     Caption = #31105#29992#25353#38062
     Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 24
   end
   object Button26: TButton
@@ -240,6 +390,12 @@ object Form1: TForm1
     Hint = '{"type":"primary"}'
     Caption = #20027#35201#25353#38062
     Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 25
   end
   object Button27: TButton
@@ -250,6 +406,12 @@ object Form1: TForm1
     Hint = '{"type":"success"}'
     Caption = #25104#21151#25353#38062
     Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 26
   end
   object Button28: TButton
@@ -260,6 +422,12 @@ object Form1: TForm1
     Hint = '{"type":"danger"}'
     Caption = #21361#38505
     Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 27
   end
   object Button29: TButton
@@ -270,6 +438,12 @@ object Form1: TForm1
     Hint = '{"type":"warning"}'
     Caption = #35686#21578#25353#38062
     Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 28
   end
   object Button30: TButton
@@ -280,6 +454,12 @@ object Form1: TForm1
     Hint = '{"type":"information"}'
     Caption = #20449#24687#25353#38062
     Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 29
   end
   object Button31: TButton
@@ -289,6 +469,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"type":"text"}'
     Caption = #25991#23383#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 30
   end
   object Button32: TButton
@@ -299,6 +485,12 @@ object Form1: TForm1
     Hint = '{"type":"text"}'
     Caption = #25991#23383#25353#38062
     Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 31
   end
   object Button33: TButton
@@ -308,6 +500,12 @@ object Form1: TForm1
     Height = 40
     Hint = '{"icon":"el-icon-search","type":"primary"}'
     Caption = #22270#26631#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 32
   end
   object Button34: TButton
@@ -315,8 +513,14 @@ object Form1: TForm1
     Top = 506
     Width = 102
     Height = 40
-    Hint = '{"type":"primary","borderradius":"5px 0 0 5px"}'
+    Hint = '{"type":"primary","radius":"5px 0 0 5px"}'
     Caption = #40664#35748#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 33
   end
   object Button35: TButton
@@ -324,8 +528,14 @@ object Form1: TForm1
     Top = 506
     Width = 105
     Height = 40
-    Hint = '{"type":"primary","borderradius":"0 0 0 0"}'
+    Hint = '{"type":"primary","radius":"0 0 0 0"}'
     Caption = #20027#35201#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 34
   end
   object Button36: TButton
@@ -333,8 +543,14 @@ object Form1: TForm1
     Top = 506
     Width = 103
     Height = 40
-    Hint = '{"type":"primary","borderradius":"0 5px 5px 0"}'
+    Hint = '{"type":"primary","radius":"0 5px 5px 0"}'
     Caption = #25104#21151#25353#38062
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 35
   end
   object Button37: TButton
@@ -346,6 +562,12 @@ object Form1: TForm1
       '{"backgroundcolor":"rgb(51,123,208)","color":"#D00","borderradiu' +
       's":"5px 0 0 5px"}'
     Caption = #33258#23450#20041#39068#33394' '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 36
   end
   object Button38: TButton
@@ -353,8 +575,14 @@ object Form1: TForm1
     Top = 572
     Width = 105
     Height = 40
-    Hint = '{"type":"success","fontsize":"16px","borderradius":"0 0 0 0"}'
+    Hint = '{"type":"success","fontsize":"16px","radius":"0 0 0 0"}'
     Caption = #23383#20307#22823#23567
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 37
   end
   object Button39: TButton
@@ -362,8 +590,44 @@ object Form1: TForm1
     Top = 572
     Width = 103
     Height = 40
-    Hint = '{"backgroundcolor":"#00f","borderradius":"0 5px 5px 0"}'
+    Hint = '{"backgroundcolor":"#00f","radius":"0 5px 5px 0"}'
     Caption = #33258#23450#20041#39068#33394' '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 38
+  end
+  object Button40: TButton
+    Left = 16
+    Top = 618
+    Width = 102
+    Height = 40
+    Hint = '{"dwstyle":"text-align:left;","type":"success"}'
+    Caption = 'Left'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 39
+  end
+  object Button41: TButton
+    Left = 224
+    Top = 618
+    Width = 103
+    Height = 40
+    Hint = '{"dwstyle":"text-align:right;","type":"primary"}'
+    Caption = 'Right'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 40
   end
 end

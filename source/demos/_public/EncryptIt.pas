@@ -1,4 +1,4 @@
-unit EncryptIt;
+ï»¿unit EncryptIt;
 
 interface
 USES
@@ -120,7 +120,7 @@ begin
      Result:=Dest;
 end;
 
-//½âÃÜº¯Êý
+//è§£å¯†å‡½æ•°
 function DecryptKey (Src:String; Key:String):string;
 var
      KeyLen :Integer;

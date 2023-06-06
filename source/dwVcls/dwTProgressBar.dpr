@@ -1,13 +1,13 @@
-library dwTProgressBar;
+ï»¿library dwTProgressBar;
 
 uses
-     ShareMem,      //±ØĞëÌí¼Ó
+     ShareMem,      //å¿…é¡»æ·»åŠ 
 
      //
-     dwCtrlBase,    //Ò»Ğ©»ù´¡º¯Êı
+     dwCtrlBase,    //ä¸€äº›åŸºç¡€å‡½æ•°
 
      //
-     SynCommons,    //mormotÓÃÓÚ½âÎöJSONµÄµ¥Ôª
+     SynCommons,    //mormotç”¨äºè§£æJSONçš„å•å…ƒ
 
      //
      Math,
@@ -20,15 +20,15 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS ,Ò»°ãÎª²»×ö¸Ä¶¯,Ä¿Ç°½öÔÚTProgressBarÊ¹ÓÃÊ±ĞèÒªÓÃµ½
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS ,ä¸€èˆ¬ä¸ºä¸åšæ”¹åŠ¨,ç›®å‰ä»…åœ¨TProgressBarä½¿ç”¨æ—¶éœ€è¦ç”¨åˆ°
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //ĞèÒª¶îÍâÒıµÄ´úÂë
+     //éœ€è¦é¢å¤–å¼•çš„ä»£ç 
      //joRes.Add('<script src="dist/_vcharts/echarts.min.js"></script>');
      //joRes.Add('<script src="dist/_vcharts/lib/index.min.js"></script>');
      //joRes.Add('<link rel="stylesheet" href="dist/_vcharts/lib/style.min.css">');
@@ -38,7 +38,7 @@ begin
      Result    := joRes;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -53,16 +53,16 @@ begin
                TProgressBar(ACtrl).OnEnter(TProgressBar(ACtrl));
           end;
      end else if joData.e = 'onchange' then begin
-          //±£´æÊÂ¼ş
+          //ä¿å­˜äº‹ä»¶
           oChange   := TProgressBar(ACtrl).OnChange;
-          //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
+          //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
           TProgressBar(ACtrl).OnChange  := nil;
-          //¸üĞÂÖµ
+          //æ›´æ–°å€¼
           TProgressBar(ACtrl).Text    := dwUnescape(joData.v);
-          //»Ö¸´ÊÂ¼ş
+          //æ¢å¤äº‹ä»¶
           TProgressBar(ACtrl).OnChange  := oChange;
 
-          //Ö´ĞĞÊÂ¼ş
+          //æ‰§è¡Œäº‹ä»¶
           if Assigned(TProgressBar(ACtrl).OnChange) then begin
                TProgressBar(ACtrl).OnChange(TProgressBar(ACtrl));
           end;
@@ -83,7 +83,7 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
@@ -91,31 +91,34 @@ var
      joRes     : Variant;
      sType     : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 
      with TProgressBar(ACtrl) do begin
-          //Íâ¿ò
+          //å¤–æ¡†
           sCode     := '<div'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
-                    +' :style="{left:'+dwPrefix(Actrl)+Name+'__lef,top:'+dwPrefix(Actrl)+Name+'__top,width:'+dwPrefix(Actrl)+Name+'__wid,height:'+dwPrefix(Actrl)+Name+'__hei}"'
+                    +' id="'+dwFullName(Actrl)+'"'
+                    +' :style="{left:'+dwFullName(Actrl)+'__lef,top:'+dwFullName(Actrl)+'__top,width:'+dwFullName(Actrl)+'__wid,height:'+dwFullName(Actrl)+'__hei}"'
                     +' style="position:absolute;'
-                    +'"' //style ·â±Õ
+                    +'"' //style å°é—­
                     +'>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
 
           //
           sCode     := '    <el-progress'
-                    +' :percentage="'+dwPrefix(Actrl)+Name+'__pct"';    //°Ù·Ö±È£¨±ØÌî£©
-          //type   ½ø¶ÈÌõÀàĞÍ	string	line/circle/dashboard
+                    //+' :percentage="'+dwFullName(Actrl)+'__pct"';    //ç™¾åˆ†æ¯”ï¼ˆå¿…å¡«ï¼‰
+                    +' :percentage="'+dwFullName(Actrl)+'__pct > 100 ? 100 : '+dwFullName(Actrl)+'__pct"'
+                    +' :format="'+dwFullName(Actrl)+'_format('+dwFullName(Actrl)+'__pct)"';
+
+          //type   è¿›åº¦æ¡ç±»å‹	string	line/circle/dashboard
           if State = pbsNormal then begin
                sCode     := sCode +' type="line"'
-                    +' :stroke-width="'+dwPrefix(Actrl)+Name+'__stw"'  //½ø¶ÈÌõµÄ¿í¶È£¬µ¥Î» px	number	¡ª	6
-                    +' :text-inside="'+dwPrefix(Actrl)+Name+'__tid"'   //½ø¶ÈÌõÏÔÊ¾ÎÄ×ÖÄÚÖÃÔÚ½ø¶ÈÌõÄÚ£¨Ö»ÔÚ type=line Ê±¿ÉÓÃ£©
+                    +' :stroke-width="'+dwFullName(Actrl)+'__stw"'  //è¿›åº¦æ¡çš„å®½åº¦ï¼Œå•ä½ px	number	â€”	6
+                    +' :text-inside="'+dwFullName(Actrl)+'__tid"'   //è¿›åº¦æ¡æ˜¾ç¤ºæ–‡å­—å†…ç½®åœ¨è¿›åº¦æ¡å†…ï¼ˆåªåœ¨ type=line æ—¶å¯ç”¨ï¼‰
           end else if State = pbsError then begin
                sCode     := sCode +' type="circle"';
           end else begin
@@ -123,35 +126,35 @@ begin
           end;
 
           sCode     := sCode
-                    //+' :status="'+dwPrefix(Actrl)+Name+'__stt"'
-                    +' :color="'+dwPrefix(Actrl)+Name+'__clr"'
-                    +' :show-text="'+dwPrefix(Actrl)+Name+'__swt"'
-                    //+' :stroke-linecap="'+dwPrefix(Actrl)+Name+'__slc"'
+                    //+' :status="'+dwFullName(Actrl)+'__stt"'
+                    +' :color="'+dwFullName(Actrl)+'__clr"'
+                    +' :show-text="'+dwFullName(Actrl)+'__swt"'
+                    //+' :stroke-linecap="'+dwFullName(Actrl)+'__slc"'
                     +'>';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
      sType     : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes.Add('    </el-progress>');               //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
-     joRes.Add('</div>');               //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+     joRes.Add('    </el-progress>');               //æ­¤å¤„éœ€è¦å’ŒdwGetHeadå¯¹åº”
+     joRes.Add('</div>');               //æ­¤å¤„éœ€è¦å’ŒdwGetHeadå¯¹åº”
      //
      Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      iSeries   : Integer;
@@ -162,39 +165,41 @@ var
      sDat      : String;
      sGrid     : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TProgressBar(ACtrl) do begin
-          //»ù±¾Êı¾İ
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          //åŸºæœ¬æ•°æ®
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
 
-          //ÏÔÊ¾legend
-          if (Max-Min)>0 then begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__pct:'+IntToStr(Round((Position-Min)*100/(Max-Min)))+',');
-          end else begin
-               joRes.Add(dwPrefix(Actrl)+Name+'__pct:'+IntToStr(Position)+',');
-          end;
-          //ÏÔÊ¾ÎÄ±¾
-          joRes.Add(dwPrefix(Actrl)+Name+'__swt:'+dwIIF(ShowHint,'true,','false,'));
-          //¸ß¶È
-          joRes.Add(dwPrefix(Actrl)+Name+'__stw:'+IntToStr(Height)+',');
-          //ÔÚÄÚÏÔÊ¾ÎÄ±¾
-          joRes.Add(dwPrefix(Actrl)+Name+'__tid:'+dwIIF(SmoothReverse,'true,','false,'));
-          //BarÑÕÉ«
-          joRes.Add(dwPrefix(Actrl)+Name+'__clr:"'+dwColor(BarColor)+'",');
+          //æ˜¾ç¤ºlegend
+          //if (Max-Min)>0 then begin
+          //     joRes.Add(dwFullName(Actrl)+'__pct:'+IntToStr(Round((Position-Min)*100/(Max-Min)))+',');
+          //end else begin
+          //     joRes.Add(dwFullName(Actrl)+'__pct:'+IntToStr(Position)+',');
+          //end;
+          joRes.Add(dwFullName(Actrl)+'__pct:'+IntToStr(Position)+',');
+
+          //æ˜¾ç¤ºæ–‡æœ¬
+          joRes.Add(dwFullName(Actrl)+'__swt:'+dwIIF(ShowHint,'true,','false,'));
+          //é«˜åº¦
+          joRes.Add(dwFullName(Actrl)+'__stw:'+IntToStr(Height)+',');
+          //åœ¨å†…æ˜¾ç¤ºæ–‡æœ¬
+          joRes.Add(dwFullName(Actrl)+'__tid:'+dwIIF(SmoothReverse,'true,','false,'));
+          //Baré¢œè‰²
+          joRes.Add(dwFullName(Actrl)+'__clr:"'+dwColor(BarColor)+'",');
           //>------
      end;
      //
      Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      iSeries   : Integer;
      iX        : Integer;
@@ -204,44 +209,61 @@ var
      sDat      : String;
      sGrid     : String;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TProgressBar(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
 
-          //ÏÔÊ¾legend
-          if (Max-Min)>0 then begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__pct='+IntToStr(Round((Position-Min)*100/(Max-Min)))+';');
-          end else begin
-               joRes.Add('this.'+dwPrefix(Actrl)+Name+'__pct='+IntToStr(Position)+';');
-          end;
-          //ÏÔÊ¾ÎÄ±¾
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__swt='+dwIIF(ShowHint,'true;','false;'));
-          //¸ß¶È
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__stw='+IntToStr(Height)+';');
-          //ÔÚÄÚÏÔÊ¾ÎÄ±¾
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tid='+dwIIF(SmoothReverse,'true;','false;'));
-          //BarÑÕÉ«
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__clr="'+dwColor(BarColor)+'";');
+          //æ˜¾ç¤ºlegend
+          //if (Max-Min)>0 then begin
+          //     joRes.Add('this.'+dwFullName(Actrl)+'__pct='+IntToStr(Round((Position-Min)*100/(Max-Min)))+';');
+          //end else begin
+          //     joRes.Add('this.'+dwFullName(Actrl)+'__pct='+IntToStr(Position)+';');
+          //end;
+          joRes.Add('this.'+dwFullName(Actrl)+'__pct='+IntToStr(Position)+';');
+
+          //æ˜¾ç¤ºæ–‡æœ¬
+          joRes.Add('this.'+dwFullName(Actrl)+'__swt='+dwIIF(ShowHint,'true;','false;'));
+          //é«˜åº¦
+          joRes.Add('this.'+dwFullName(Actrl)+'__stw='+IntToStr(Height)+';');
+          //åœ¨å†…æ˜¾ç¤ºæ–‡æœ¬
+          joRes.Add('this.'+dwFullName(Actrl)+'__tid='+dwIIF(SmoothReverse,'true;','false;'));
+          //Baré¢œè‰²
+          joRes.Add('this.'+dwFullName(Actrl)+'__clr="'+dwColor(BarColor)+'";');
           //>------
      end;
      //
      Result    := (joRes);
 end;
 
+function dwGetMethods(ACtrl:TControl):string;StdCall;
+var
+    //
+    sCode   : string;
+    //
+    joRes   : Variant;
+begin
+    joRes   := _json('[]');
+
+    joRes.Add(dwFullName(ACtrl)+'_format(value) {return () => { return value + ''%'' }},');
+
+    //
+    Result  := joRes;
+end;
 
 exports
      //dwGetExtra,
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
+     dwGetMethods,
      dwGetData;
      
 begin

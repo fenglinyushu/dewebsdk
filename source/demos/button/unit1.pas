@@ -1,4 +1,4 @@
-unit unit1;
+﻿unit unit1;
 
 interface
 
@@ -49,6 +49,8 @@ type
     Button37: TButton;
     Button38: TButton;
     Button39: TButton;
+    Button40: TButton;
+    Button41: TButton;
   private
     { Private declarations }
   public

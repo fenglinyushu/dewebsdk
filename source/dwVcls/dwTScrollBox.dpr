@@ -1,4 +1,4 @@
-library dwTScrollBox;
+ï»¿library dwTScrollBox;
 
 uses
      ShareMem,
@@ -18,41 +18,56 @@ uses
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
 var
-     joData    : Variant;
+    joData   : Variant;
+    iValue  : Integer;
 begin
-     //
-     joData    := _Json(AData);
+    //
+    joData  := _Json(AData);
 
-     if joData.e = 'onenter' then begin
-          if Assigned(TScrollBox(ACtrl).OnEnter) then begin
-               TScrollBox(ACtrl).OnEnter(TScrollBox(ACtrl));
-          end;
-     end else if joData.e = 'onexit' then begin
-          if Assigned(TScrollBox(ACtrl).OnExit) then begin
-               TScrollBox(ACtrl).OnExit(TScrollBox(ACtrl));
-          end;
-     end else if joData.e = 'onenddock' then begin
-          if Assigned(TScrollBox(ACtrl).OnEndDock) then begin
-               if joData.v > 0 then begin
-                    TScrollBox(ACtrl).OnEndDock(TScrollBox(ACtrl),nil,joData.v,1);
-               end else begin
-                    TScrollBox(ACtrl).OnEndDock(TScrollBox(ACtrl),nil,abs(Integer(joData.v)),-1);
-               end;
-          end;
-     end;
+    if joData.e = 'onenter' then begin
+        if Assigned(TScrollBox(ACtrl).OnEnter) then begin
+            TScrollBox(ACtrl).OnEnter(TScrollBox(ACtrl));
+        end;
+    end else if joData.e = 'onexit' then begin
+        if Assigned(TScrollBox(ACtrl).OnExit) then begin
+            TScrollBox(ACtrl).OnExit(TScrollBox(ACtrl));
+        end;
+    end else if joData.e = 'onmouseup' then begin
+        //ä¿å­˜å½“å‰æ»šåŠ¨ä½ç½®,å¤‡ç”¨
+        TScrollBox(ACtrl).HelpContext   := abs(Integer(joData.v));
+
+        //æ¿€æ´»æ»šåŠ¨äº‹ä»¶
+        if Assigned(TScrollBox(ACtrl).Onmouseup) then begin
+            TScrollBox(ACtrl).Onmouseup(TScrollBox(ACtrl),TMouseButton(ACtrl),[],joData.v,1);
+        end;
+    end else if joData.e = 'onenddock' then begin
+        iValue  := Round(StrToFloatDef(joData.v,0));
+        //ä¿å­˜å½“å‰æ»šåŠ¨ä½ç½®,å¤‡ç”¨
+        TScrollBox(ACtrl).HelpContext   := abs(iValue);
+
+        //æ¿€æ´»æ»šåŠ¨äº‹ä»¶
+        if Assigned(TScrollBox(ACtrl).OnEndDock) then begin
+            if iValue > 0 then begin
+                TScrollBox(ACtrl).OnEndDock(TScrollBox(ACtrl),nil,iValue,1);
+            end else begin
+                TScrollBox(ACtrl).OnEndDock(TScrollBox(ACtrl),nil,Abs(iValue),-1);
+            end;
+        end;
+
+    end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
      sCode     : String;
@@ -61,14 +76,14 @@ var
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 
      //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
-     //²ÎÊıÒÀ´ÎÎª: JSÊÂ¼şÃû³Æ, ¿Ø¼şÃû³Æ,¿Ø¼şÖµ,DelphiÊÂ¼şÃû³Æ,±¸ÓÃ
+     //å‚æ•°ä¾æ¬¡ä¸º: JSäº‹ä»¶åç§°, æ§ä»¶åç§°,æ§ä»¶å€¼,Delphiäº‹ä»¶åç§°,å¤‡ç”¨
 
 
      //
@@ -76,11 +91,12 @@ begin
 
           //
           sCode     := '<div'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
                     +dwLTWH(TControl(ACtrl))
-                    +'"' //style ·â±Õ
+                    +dwGetDWStyle(joHint)
+                    +'"' //style å°é—­
                     //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
                     +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
@@ -88,112 +104,157 @@ begin
           joRes.Add(sCode);
           //
           sCode     := '<el-scrollbar'
-                    +' ref="'+dwPrefix(Actrl)+Name+'"'
+                    +' ref="'+dwFullName(Actrl)+'"'
                     +' style="height:100%;"'
-                    +dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll',TForm(Owner).Handle]),'')
+                    //æ­¤å¤„ä¸éœ€è¦ç›‘å¬scrolläº‹ä»¶ï¼Œæ²¡ç”¨ã€‚æ”¾åˆ°mountedä¸­å¤„ç†äº†
+                    //+dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll',TForm(Owner).Handle]),'')
                     +'>';
           joRes.Add(sCode);
      end;
 
      Result    := (joRes);
      //
-     //@mouseenter.native=¡°enter¡±
+     //@mouseenter.native=â€œenterâ€
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-scrollbar>');
      joRes.Add('</div>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃDataÏûÏ¢
+//å–å¾—Dataæ¶ˆæ¯
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TScrollBox(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          //joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
+          //joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TScrollBox(ACtrl),'type')+'",');
-          //±£´æoldscrolltopÒÔÈ·¶¨¹ö¶¯·½Ïò
-          joRes.Add(dwPrefix(Actrl)+Name+'__ost:0,');
+          joRes.Add(dwFullName(Actrl)+'__typ:"'+dwGetProp(TScrollBox(ACtrl),'type')+'",');
+          //ä¿å­˜oldscrolltopä»¥ç¡®å®šæ»šåŠ¨æ–¹å‘
+          joRes.Add(dwFullName(Actrl)+'__ost:0,');
      end;
      //
      Result    := (joRes);
 end;
 
 
-//È¡µÃÊÂ¼ş
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+//å–å¾—äº‹ä»¶
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TScrollBox(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          //joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TScrollBox(ACtrl),'type')+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__typ="'+dwGetProp(TScrollBox(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃMounted
+//å–å¾—Mounted
 function dwGetMounted(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
-     sCode     : string;
+    joRes   : Variant;
+    sCode   : string;
+    sFull   : string;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TScrollBox(ACtrl) do begin
-          if Assigned(OnEndDock) then begin
-               sCode     := 'let '+dwPrefix(Actrl)+Name+'__scr = this.$refs.'+dwPrefix(Actrl)+Name+'.wrap;'
-                    +dwPrefix(Actrl)+Name+'__scr.onscroll = function() {'
-                         +'if (me.'+dwPrefix(Actrl)+Name+'__ost<'+dwPrefix(Actrl)+Name+'__scr.scrollTop) {'
-                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+dwPrefix(Actrl)+Name+'","v":''+'+dwPrefix(Actrl)+Name+'__scr.scrollTop+''}'')'
-                              +'.then(resp =>{me.procResp(resp.data);});'
-                         +'} else {'
-                              +'axios.get(''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+dwPrefix(Actrl)+Name+'","v":-''+'+dwPrefix(Actrl)+Name+'__scr.scrollTop+''}'')'
-                              +'.then(resp =>{me.procResp(resp.data);});'
-                         +'};'
-                         +'me.'+dwPrefix(Actrl)+Name+'__ost='+dwPrefix(Actrl)+Name+'__scr.scrollTop;'
-                    +'};';
-               joRes.Add(sCode);
-          end;
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes   := _Json('[]');
+    //
+    sFull   := dwFullName(Actrl);
+    //
+    with TScrollBox(ACtrl) do begin
+        sCode   := ''
+                //+'console.log(''me.$refs.'+sFull+''');'#13
+                //+'console.log(me.$refs'+');'#13
+                //+'console.log(me.$refs.'+sFull+');'#13
+                +'let '+sFull+'__scr = me.$refs.'+sFull+'.wrap;'#13
+                +'let '+sFull+'__t1 = 0;'#13       //ç¬¬ä¸€æ¬¡ä½ç½®
+                +'let '+sFull+'__t2 = 0;'#13       //ç¬¬äºŒæ¬¡ä½ç½®
+                +'let '+sFull+'__tmr = null;'#13   //å®šæ—¶å™¨ï¼Œç”¨äºæ£€æŸ¥æ»šåŠ¨åœæ­¢
+                +sFull+'__scr.onscroll = function() {'#13
+                    //ä»¥ä¸‹ if åŒºåˆ†å‘ä¸Šæ»šåŠ¨å’Œå‘ä¸‹æ»šåŠ¨ï¼Œæ¿€æ´»OnEndDockäº‹ä»¶  ost=OldScrollTop
+                    +'if (me.'+sFull+'__ost<'+sFull+'__scr.scrollTop - '+IntToStr(HelpContext)+') {'#13
+                        +'axios.post('#13
+                            +'''/deweb/post'','#13
+                            +'''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+sFull+'","v":"''+'+sFull+'__scr.scrollTop+''"}'''#13
+                            +',{headers:{shuntflag:0}}'#13
+                            +')'#13
+                        +'.then(resp =>{me.procResp(resp.data);});'#13
+                        //æ»šåŠ¨åœæ­¢æ—¶ï¼ˆ200msæ»šåŠ¨å€¼æœªå˜åŒ–ï¼‰ï¼Œæ¿€æ´»æ»šåŠ¨åœæ­¢äº‹ä»¶
+                        +'me.'+sFull+'__ost='+sFull+'__scr.scrollTop;'#13
+                        +'clearTimeout('+sFull+'__tmr);'#13
+                        +sFull+'__tmr = setTimeout('+sFull+'__ise, 200);'#13   //ise = isScrollEnd
+                        +sFull+'__t1 = '+sFull+'__scr.scrollTop;'#13
+                    +'} else if (me.'+sFull+'__ost>'+sFull+'__scr.scrollTop + '+IntToStr(HelpContext)+') {'#13
+                        +'axios.post('#13
+                            +'''/deweb/post'','#13
+                            +'''{"m":"event","i":''+me.clientid+'',"e":"onenddock","c":"'+sFull+'","v":"-''+'+sFull+'__scr.scrollTop+''"}'''#13
+                            +',{headers:{shuntflag:0}}'#13
+                            +')'#13
+                        +'.then(resp =>{me.procResp(resp.data);});'#13
+                        //æ»šåŠ¨åœæ­¢æ—¶ï¼ˆ200msæ»šåŠ¨å€¼æœªå˜åŒ–ï¼‰ï¼Œæ¿€æ´»æ»šåŠ¨åœæ­¢äº‹ä»¶
+                        +'me.'+sFull+'__ost='+sFull+'__scr.scrollTop;'#13
+                        +'clearTimeout('+sFull+'__tmr);'#13
+                        +sFull+'__tmr = setTimeout('+sFull+'__ise, 200);'#13   //ise = isScrollEnd
+                        +sFull+'__t1 = '+sFull+'__scr.scrollTop;'#13
+                    +'};'#13
+
+                +'};'#13;
+
+        //ä»¥ä¸‹å®šæ—¶æ£€æŸ¥æ˜¯å¦åœæ­¢ï¼Œå¦‚æœå·²åœæ­¢ï¼Œåˆ™æ¿€æ´»onenddock
+        sCode   := sCode + #13
+                +'function '+sFull+'__ise() {'#13  //ise = isScrollEnd
+
+                    +sFull+'__t2 = '+sFull+'__scr.scrollTop;'#13
+                    +'if('+sFull+'__t2 == '+sFull+'__t1){'#13
+                        //+'console.log(''æ»šåŠ¨ç»“æŸäº†'');'
+                        +'axios.post('#13
+                            +'''/deweb/post'','#13
+                            +'''{"m":"event","i":''+me.clientid+'',"e":"onmouseup","c":"'+sFull+'","v":"''+'+sFull+'__scr.scrollTop+''"}'''#13
+                            +',{headers:{shuntflag:0}}'#13
+                            +')'#13
+                        +'.then(resp =>{me.procResp(resp.data);});'#13
+                    +'}'#13
+
+                +'}';
+        joRes.Add(sCode);
+    end;
+    //
+    Result    := (joRes);
 end;
 
 exports
@@ -201,7 +262,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetMounted,
      dwGetData;
      

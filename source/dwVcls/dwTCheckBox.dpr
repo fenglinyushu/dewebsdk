@@ -1,4 +1,4 @@
-library dwTCheckBox;
+ï»¿library dwTCheckBox;
 
 uses
      ShareMem,
@@ -15,16 +15,61 @@ uses
      Dialogs,
      StdCtrls,
      Windows,
+     Graphics,
      Controls,
      Forms;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS
+{
+     //
+     Messages, SysUtils, Variants, Classes, Graphics,
+     Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
+     StdCtrls, Windows;
+}
+function _GetFont(AFont:TFont):string;
+begin
+     Result    := 'color:'+dwColor(AFont.color)+';'
+               +'font-family:'''+AFont.name+''';'
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
+
+     //ç²—ä½“
+     if fsBold in AFont.Style then begin
+          Result    := Result+'font-weight:bold;';
+     end else begin
+          Result    := Result+'font-weight:normal;';
+     end;
+
+     //æ–œä½“
+     if fsItalic in AFont.Style then begin
+          Result    := Result+'font-style:italic;';
+     end else begin
+          Result    := Result+'font-style:normal;';
+     end;
+
+     //ä¸‹åˆ’çº¿
+     if fsUnderline in AFont.Style then begin
+          Result    := Result+'text-decoration:underline;';
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end;
+     end else begin
+          //åˆ é™¤çº¿
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end else begin
+               Result    := Result+'text-decoration:none;';
+          end;
+     end;
+end;
+
+
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 begin
      Result    := '[]';
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -33,112 +78,115 @@ begin
      joData    := _Json(AData);
 
      if joData.e = 'onclick' then begin
-          //±£´æÊÂ¼ş
+          //ä¿å­˜äº‹ä»¶
           TCheckBox(ACtrl).OnExit := TCheckBox(ACtrl).OnClick;
-          //Çå¿ÕÊÂ¼ş,ÒÔ·ÀÖ¹×Ô¶¯Ö´ĞĞ
+          //æ¸…ç©ºäº‹ä»¶,ä»¥é˜²æ­¢è‡ªåŠ¨æ‰§è¡Œ
           TCheckBox(ACtrl).OnClick := nil;
-          //¸üĞÂÖµ
+          //æ›´æ–°å€¼
           TCheckBox(ACtrl).Checked := dwUnescape(joData.v)='true';
-          //»Ö¸´ÊÂ¼ş
+          //æ¢å¤äº‹ä»¶
           TCheckBox(ACtrl).OnClick := TCheckBox(ACtrl).OnExit;
-          //Ö´ĞĞÊÂ¼ş
+          //æ‰§è¡Œäº‹ä»¶
           if Assigned(TCheckBox(ACtrl).OnClick) then begin
                TCheckBox(ACtrl).OnClick(TCheckBox(ACtrl));
           end;
-          //Çå¿ÕOnExitÊÂ¼ş
+          //æ¸…ç©ºOnExitäº‹ä»¶
           TCheckBox(ACtrl).OnExit := nil;
      end;
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
      sCode     : string;
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
+     //å–å¾—HINTå¯¹è±¡JSON
      joHint    := dwGetHintJson(TControl(ACtrl));
 
      with TCheckBox(ACtrl) do begin
           sCode     := '<el-checkbox'
-                    +' id="'+dwPrefix(Actrl)+Name+'"'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+dwPrefix(Actrl)+Name+'__chk"'
+                    +' v-model="'+dwFullName(Actrl)+'__chk"'
                     +dwGetHintValue(joHint,'type','type',' type="default"')         //sCheckBoxType
                     +dwGetHintValue(joHint,'icon','icon','')         //CheckBoxIcon
+                    +dwGetDWAttr(joHint)
                     +dwLTWH(TControl(ACtrl))
-                    +'"' //style ·â±Õ
-                    +Format(_DWEVENT,['change',Name,'this.'+dwPrefix(Actrl)+Name+'__chk','onclick',TForm(Owner).Handle])
-                    +'>{{'+dwPrefix(Actrl)+Name+'__cap}}';
-          //Ìí¼Óµ½·µ»ØÖµÊı¾İ
+                    +dwGetDWStyle(joHint)
+                    +_GetFont(Font)
+                    +'"' //style å°é—­
+                    +Format(_DWEVENT,['change',Name,'this.'+dwFullName(Actrl)+'__chk','onclick',TForm(Owner).Handle])
+                    +'>{{'+dwFullName(Actrl)+'__cap}}';
+          //æ·»åŠ åˆ°è¿”å›å€¼æ•°æ®
           joRes.Add(sCode);
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes.Add('</el-checkbox>');
      //
      Result    := (joRes);
 end;
 
-//È¡µÃDataÏûÏ¢, ASeparatorÎª·Ö¸ô·û, Ò»°ãÎª:»ò=
+//å–å¾—Dataæ¶ˆæ¯, ASeparatorä¸ºåˆ†éš”ç¬¦, ä¸€èˆ¬ä¸º:æˆ–=
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TCheckBox(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
+          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__chk:'+dwIIF(Checked,'true,','false,'));
+          joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
+          joRes.Add(dwFullName(Actrl)+'__chk:'+dwIIF(Checked,'true,','false,'));
      end;
      //
      Result    := (joRes);
 end;
 
-//È¡µÃÊÂ¼ş
-function dwGetMethod(ACtrl:TComponent):String;StdCall;
+//å–å¾—äº‹ä»¶
+function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TCheckBox(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__chk='+dwIIF(Checked,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__chk='+dwIIF(Checked,'true;','false;'));
      end;
      //
      Result    := (joRes);
@@ -151,7 +199,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin

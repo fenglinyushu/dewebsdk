@@ -11,7 +11,7 @@ object Form1: TForm1
   TransparentColor = True
   TransparentColorValue = 16448250
   Font.Charset = ANSI_CHARSET
-  Font.Color = clWindowText
+  Font.Color = clWindow
   Font.Height = -15
   Font.Name = #24494#36719#38597#40657
   Font.Style = []
@@ -37,6 +37,16 @@ object Form1: TForm1
     Layout = tlCenter
     ExplicitWidth = 790
   end
+  object Label_Captcha: TLabel
+    Left = 96
+    Top = 336
+    Width = 121
+    Height = 32
+    HelpType = htKeyword
+    HelpKeyword = 'captcha'
+    AutoSize = False
+    Caption = 'Label_Captcha'
+  end
   object Button1: TButton
     Left = 96
     Top = 104
@@ -44,6 +54,12 @@ object Form1: TForm1
     Height = 35
     Hint = '{"type":"primary"}'
     Caption = 'Start'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindow
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     OnClick = Button1Click
   end
@@ -54,6 +70,12 @@ object Form1: TForm1
     Height = 35
     Hint = '{"type":"primary"}'
     Caption = 'Recreate'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindow
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     OnClick = Button2Click
   end
@@ -64,8 +86,23 @@ object Form1: TForm1
     Height = 35
     Hint = '{"type":"success"}'
     Caption = 'Stop'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindow
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
     OnClick = Button3Click
+  end
+  object Button4: TButton
+    Left = 96
+    Top = 272
+    Width = 121
+    Height = 33
+    Caption = 'Refresh'
+    TabOrder = 3
+    OnClick = Button4Click
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

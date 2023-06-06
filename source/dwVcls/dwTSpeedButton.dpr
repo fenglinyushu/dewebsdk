@@ -1,13 +1,13 @@
-library dwTSpeedButton;
+ï»¿library dwTSpeedButton;
 
 uses
-     ShareMem,      //±ØĞëÌí¼Ó
+     ShareMem,      //å¿…é¡»æ·»åŠ 
 
      //
-     dwCtrlBase,    //Ò»Ğ©»ù´¡º¯Êı
+     dwCtrlBase,    //ä¸€äº›åŸºç¡€å‡½æ•°
 
      //
-     SynCommons,    //mormotÓÃÓÚ½âÎöJSONµÄµ¥Ôª
+     SynCommons,    //mormotç”¨äºè§£æJSONçš„å•å…ƒ
 
      //
      Buttons,
@@ -17,16 +17,16 @@ uses
 const
      _K   = 3;
 
-//µ±Ç°¿Ø¼şĞèÒªÒıÈëµÄµÚÈı·½JS/CSS ,Ò»°ãÎª²»×ö¸Ä¶¯,Ä¿Ç°½öÔÚTChartÊ¹ÓÃÊ±ĞèÒªÓÃµ½
+//å½“å‰æ§ä»¶éœ€è¦å¼•å…¥çš„ç¬¬ä¸‰æ–¹JS/CSS ,ä¸€èˆ¬ä¸ºä¸åšæ”¹åŠ¨
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
 
      {
-     //ÒÔÏÂÊÇTChartÊ±µÄ´úÂë,¹©²Î¿¼
+     //ä»¥ä¸‹æ˜¯TChartæ—¶çš„ä»£ç ,ä¾›å‚è€ƒ
      joRes.Add('<script src="dist/charts/echarts.min.js"></script>');
      joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
      joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
@@ -36,7 +36,7 @@ begin
      Result    := joRes;
 end;
 
-//¸ù¾İJSON¶ÔÏóADataÖ´ĞĞµ±Ç°¿Ø¼şµÄÊÂ¼ş, ²¢·µ»Ø½á¹û×Ö·û´®
+//æ ¹æ®JSONå¯¹è±¡ADataæ‰§è¡Œå½“å‰æ§ä»¶çš„äº‹ä»¶, å¹¶è¿”å›ç»“æœå­—ç¬¦ä¸²
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
@@ -63,20 +63,20 @@ begin
 
 end;
 
-function _ImageLTWH(ACtrl:TControl):String;  //¿ÉÒÔ¸üĞÂÎ»ÖÃµÄÓÃ·¨
+function _ImageLTWH(ACtrl:TControl):String;  //å¯ä»¥æ›´æ–°ä½ç½®çš„ç”¨æ³•
 begin
      //
      with ACtrl do begin
-          Result    := ' :style="{left:0,top:0,width:'+dwPrefix(Actrl)+Name+'__wid,'
-                    +'height:'+dwPrefix(Actrl)+Name+'__imh}" style="position:absolute;';
+          Result    := ' :style="{left:0,top:0,'
+                    +'height:'+dwFullName(Actrl)+'__imh}" style="position:absolute;width:100%;';
      end;
 end;
-function _LabelLTWH(ACtrl:TControl):String;  //¿ÉÒÔ¸üĞÂÎ»ÖÃµÄÓÃ·¨
+function _LabelLTWH(ACtrl:TControl):String;  //å¯ä»¥æ›´æ–°ä½ç½®çš„ç”¨æ³•
 begin
      //
      with ACtrl do begin
-          Result    := ' :style="{left:0,top:'+dwPrefix(Actrl)+Name+'__lbt,width:'+dwPrefix(Actrl)+Name+'__wid,'
-                    +'height:'+dwPrefix(Actrl)+Name+'__lbh}" style="position:absolute;';
+          Result    := ' :style="{left:0,top:'+dwFullName(Actrl)+'__lbt,'
+                    +'height:'+dwFullName(Actrl)+'__lbh}" style="position:absolute;width:100%;';
      end;
 end;
 
@@ -84,31 +84,31 @@ function _GetFont(AFont:TFont):string;
 begin
      Result    := 'color:'+dwColor(AFont.color)+';'
                +'font-family:'''+AFont.Name+''';'
-               +'font-size:'+IntToStr(AFont.size)+'pt;';
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
 
-     //´ÖÌå
+     //ç²—ä½“
      if fsBold in AFont.Style then begin
           Result    := Result+'font-weight:bold;';
      end else begin
           Result    := Result+'font-weight:normal;';
      end;
 
-     //Ğ±Ìå
+     //æ–œä½“
      if fsItalic in AFont.Style then begin
           Result    := Result+'font-style:italic;';
      end else begin
           Result    := Result+'font-style:normal;';
      end;
 
-     //ÏÂ»®Ïß
+     //ä¸‹åˆ’çº¿
      if fsUnderline in AFont.Style then begin
           Result    := Result+'text-decoration:underline;';
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end;
      end else begin
-          //É¾³ıÏß
+          //åˆ é™¤çº¿
           if fsStrikeout in AFont.Style then begin
                Result    := Result+'text-decoration:line-through;';
           end else begin
@@ -118,10 +118,10 @@ begin
 end;
 
 
-//È¡µÃHTMLÍ·²¿ÏûÏ¢
+//å–å¾—HTMLå¤´éƒ¨æ¶ˆæ¯
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     iTri      : Integer;     //ÓÃÓÚ»æÖÆÈı½ÇĞÎµÄÕı·½ĞÎ±ß³¤
+     iTri      : Integer;     //ç”¨äºç»˜åˆ¶ä¸‰è§’å½¢çš„æ­£æ–¹å½¢è¾¹é•¿
      sCode     : string;
      sSize     : string;
      sName     : string;
@@ -129,182 +129,216 @@ var
      joHint    : Variant;
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-     //È¡µÃHINT¶ÔÏóJSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+    //
+    sName  := dwFullName(Actrl);
 
 
-     with TSpeedButton(ACtrl) do begin
-          //Ìí¼ÓÍâ¿ò
-          joRes.Add('<div'
-               +' id="'+dwPrefix(Actrl)+Name+'"'
-               +dwVisible(TControl(ACtrl))
-               +dwDisable(TControl(ACtrl))
-               +dwLTWH(TControl(ACtrl))
-               +dwIIF(Flat,'','border:1px solid #E8E8E8;')
-               +'overflow:hidden;'
-               +'"'
-               +'>');
+    with TSpeedButton(ACtrl) do begin
+        //å¦‚æœæœ‰hrefï¼Œåˆ™ç›´æ¥å¯¹åº”é“¾æ¥
+        if joHint.Exists('href') then begin
+            joRes.Add('<a href="'+String(joHint.href)+'" target="_blank">');
+        end else if joHint.Exists('hrefself') then begin
+            joRes.Add('<a href="'+String(joHint.hrefself)+'">');
+        end;
 
-          //×óÉÏÌáÊ¾Èı½Ç£¬   ÑÕÉ«Îªgroupindex
+        //æ·»åŠ å¤–æ¡†
+        joRes.Add('<div'
+                +' id="'+dwFullName(Actrl)+'"'
+                +dwVisible(TControl(ACtrl))
+                +dwGetDWAttr(joHint)
+                +' :style="{'
+                    +'left:'+sName+'__lef,'
+                    +'top:'+sName+'__top,'
+                    +'width:'+sName+'__wid,'
+                    +'height:'+sName+'__hei,'
+                    //+'backgroundColor:'+sName+'__col,'
+                    +'pointerEvents:'+sName+'__pet'
+                +'}"'
+                +' style="position:absolute;'
+                    +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
+                    +dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //è‡ªå®šä¹‰èƒŒæ™¯è‰²
+                    +dwGetHintStyle(joHint,'color','color','')             //è‡ªå®šä¹‰å­—ä½“è‰²
+                    +dwGetHintStyle(joHint,'fontsize','font-size','')      //è‡ªå®šä¹‰å­—ä½“å¤§å°
+                    +dwIIF(Flat,'','border:1px solid #E8E8E8;')
+                    +dwGetDWStyle(joHint)
+                    +'overflow:hidden;'
+                +'"'
+                +'>');
+
+          //å·¦ä¸Šæç¤ºä¸‰è§’ï¼Œ   é¢œè‰²ä¸ºgroupindex
           if Layout = blGlyphRight then begin
                iTri := Round(Width / 2.5);
                joRes.Add('<div'
-                         +' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__tri"'
-                         +' style="position:absolute;'
-                         +'left:'+IntToStr(Round(Width-iTri*0.5))+'px;'
-                         +'top:'+IntToStr(Round(-iTri*0.707))+'px;'
-                         +'width:'+IntToStr(iTri)+'px;height:'+IntToStr(iTri)+'px;'
-                         +'background-color:'+dwColor(groupindex)+';'
-                         +'transform:rotate(45deg);"></div>');
+                        +' v-show="'+dwFullName(Actrl)+'__tri"'
+                        +' style="position:absolute;'
+                        +'left:'+IntToStr(Round(Width-iTri*0.5))+'px;'
+                        +'top:'+IntToStr(Round(-iTri*0.707))+'px;'
+                        +'width:'+IntToStr(iTri)+'px;height:'+IntToStr(iTri)+'px;'
+                        +'background-color:'+dwColor(groupindex)+';'
+                        +'transform:rotate(45deg);"></div>');
           end else if Layout = blGlyphTop then begin
                iTri := Round(Width / 10);
                joRes.Add('<el-badge'
-                         +' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__bdg"'
-                         +' :value="'+dwPrefix(Actrl)+ACtrl.Name+'__spc"'
-                         +' :max="'+dwPrefix(Actrl)+ACtrl.Name+'__max"'
-                         +' :type="'+dwPrefix(Actrl)+Name+'__typ"'
-                         +' class="item"'
-                         +' style="position:absolute;'
-                         +'left:'+IntToStr(Round(Width-iTri*3))+'px;'
-                         +'top:'+IntToStr(Round(iTri))+'px;'
-                         //+'width:'+IntToStr(iTri)+'px;height:'+IntToStr(iTri)+'px;'
-                         //+'background-color:'+dwColor(groupindex)+';'
-                         +'">'
-                         +'<el-button  v-if="false" ></el-button>'
-                         +'</el-badge>');
+                        +' v-show="'+dwFullName(Actrl)+'__bdg"'
+                        +' :value="'+dwFullName(Actrl)+'__spc"'
+                        +' :max="'+dwFullName(Actrl)+'__max"'
+                        //+' :type="'+dwFullName(Actrl)+'__typ"'
+                        +' class="item"'
+                        +' style="position:absolute;'
+                        +'left:'+IntToStr(Round(Width-iTri*3))+'px;'
+                        +'top:'+IntToStr(Round(iTri))+'px;'
+                        //+'width:'+IntToStr(iTri)+'px;height:'+IntToStr(iTri)+'px;'
+                        //+'background-color:'+dwColor(groupindex)+';'
+                        +'">'
+                        +'<el-button  v-show="false" ></el-button>'
+                        +'</el-badge>');
           end else if Layout = blGlyphBottom then begin
                iTri := Round(Width / 10);
                joRes.Add('<el-badge'
-                         +' v-if="'+dwPrefix(Actrl)+ACtrl.Name+'__idt"'
-                         +' is-dot'
-                         +' class="item"'
-                         +' style="position:absolute;'
-                         +'left:'+IntToStr(Round(Width-iTri*3))+'px;'
-                         +'top:'+IntToStr(Round(iTri*1.5))+'px;'
-                         +'">'
-                         +'<el-button  v-if="false" ></el-button>'
-                         +'</el-badge>');
+                        +' v-show="'+dwFullName(Actrl)+'__idt"'
+                        +' is-dot'
+                        +' class="item"'
+                        +' style="position:absolute;'
+                        +'left:'+IntToStr(Round(Width-iTri*3))+'px;'
+                        +'top:'+IntToStr(Round(iTri*1.5))+'px;'
+                        +'">'
+                        +'<el-button  v-show="false" ></el-button>'
+                        +'</el-badge>');
           end;
 
-          //Í¼±ê
+          //å›¾æ ‡
           joRes.Add('<el-image'
-               +' :src="'+dwPrefix(Actrl)+Name+'__src"'
+               +' :src="'+dwFullName(Actrl)+'__src"'
                +' fit="none"'
                +_ImageLTWH(TControl(ACtrl))
-               +'cursor: pointer;'   //Í¼Æ¬Êó±êÑùÊ½
+               +'cursor: pointer;'   //å›¾ç‰‡é¼ æ ‡æ ·å¼
                +'"'
                +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
                +dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                +'></el-image>');
 
-          //ÎÄ±¾
+          //æ–‡æœ¬
           joRes.Add('<div'
-               +' v-html="'+dwPrefix(Actrl)+Name+'__cap"'
+               +' v-html="'+dwFullName(Actrl)+'__cap"'
+               +' class="dwdisselect"'      //ç¦æ­¢é€‰ä¸­
                +_LabelLTWH(TControl(ACtrl))
                +_GetFont(Font)
                //style
                +'text-align:center;'
-               +'line-height:'+IntToStr(Round(Font.Size * _K))+'px;'
-               +'cursor: pointer;'   //Í¼Æ¬Êó±êÑùÊ½
+               +'line-height:'+IntToStr(Round((Font.Size+3) * _K))+'px;'
+               +'cursor: pointer;'   //å›¾ç‰‡é¼ æ ‡æ ·å¼
                +'"'
-               //style ·â±Õ
+               //style å°é—­
                +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
                +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
                +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-               +'>{{'+dwPrefix(Actrl)+Name+'__cap}}</div>');
+               +'>{{'+dwFullName(Actrl)+'__cap}}</div>');
      end;
 
      //
      Result    := (joRes);
 end;
 
-//È¡µÃHTMLÎ²²¿ÏûÏ¢
+//å–å¾—HTMLå°¾éƒ¨æ¶ˆæ¯
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
+    joHint      : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
 
-     //Éú³É·µ»ØÖµÊı×é
-     joRes.Add('</div>');          //´Ë´¦ĞèÒªºÍdwGetHead¶ÔÓ¦
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes.Add('</div>');          //æ­¤å¤„éœ€è¦å’ŒdwGetHeadå¯¹åº”
 
-     //
-     Result    := (joRes);
+    //å–å¾—HINTå¯¹è±¡JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+
+    //
+    if joHint.Exists('href') then begin
+        joRes.Add('</a>');
+    end;
+    //
+    Result    := (joRes);
 end;
 
-//È¡µÃData
+//å–å¾—Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
-     joRes    := _Json('[]');
-     //
-     with TSpeedButton(ACtrl) do begin
-          joRes.Add(dwPrefix(Actrl)+Name+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__hei:"'+IntToStr(Height)+'px",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__imh:"'+IntToStr(Height-Round(Font.Size*2))+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__lbt:"'+IntToStr(Height-Round(Font.Size*_K))+'px",');
-          joRes.Add(dwPrefix(Actrl)+Name+'__lbh:"'+IntToStr(Round(Font.Size*_K))+'px",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__tri:'+dwIIF(Layout = blGlyphRight,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__bdg:'+dwIIF(Layout = blGlyphTop,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__idt:'+dwIIF(Layout = blGlyphBottom,'true,','false,'));
-          joRes.Add(dwPrefix(Actrl)+Name+'__spc:'+IntToStr(Spacing)+',');
-          joRes.Add(dwPrefix(Actrl)+Name+'__max:'+IntToStr(Margin)+',');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__cap:"'+dwProcessCaption(Caption)+'",');
-          //
-          joRes.Add(dwPrefix(Actrl)+Name+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
-     end;
-     //
-     Result    := (joRes);
+    //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
+    joRes    := _Json('[]');
+    //
+    with TSpeedButton(ACtrl) do begin
+        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        //
+        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+        //
+        joRes.Add(dwFullName(Actrl)+'__pet:'+dwIIF(Enabled,'"auto",','"none",'));
+        //
+        joRes.Add(dwFullName(Actrl)+'__imh:"'+IntToStr(Height-Round((Font.Size+3)*2))+'px",'); //-Round(Font.Size*2)
+        joRes.Add(dwFullName(Actrl)+'__lbt:"'+IntToStr(Height-Round((Font.Size+3)*_K))+'px",');
+        joRes.Add(dwFullName(Actrl)+'__lbh:"'+IntToStr(Round((Font.Size+3)*_K))+'px",');
+        //
+        joRes.Add(dwFullName(Actrl)+'__tri:'+dwIIF(Layout = blGlyphRight,'true,','false,'));
+        joRes.Add(dwFullName(Actrl)+'__bdg:'+dwIIF(Layout = blGlyphTop,'true,','false,'));
+        joRes.Add(dwFullName(Actrl)+'__idt:'+dwIIF(Layout = blGlyphBottom,'true,','false,'));
+        joRes.Add(dwFullName(Actrl)+'__spc:'+IntToStr(Spacing)+',');
+        joRes.Add(dwFullName(Actrl)+'__max:'+IntToStr(Margin)+',');
+        //
+        joRes.Add(dwFullName(Actrl)+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
+        //
+        joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
+        //
+        //joRes.Add(dwFullName(Actrl)+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
+    end;
+    //
+    Result    := (joRes);
 end;
 
-function dwGetMethod(ACtrl:TComponent):string;StdCall;
+function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     //Éú³É·µ»ØÖµÊı×é
+     //ç”Ÿæˆè¿”å›å€¼æ•°ç»„
      joRes    := _Json('[]');
      //
      with TSpeedButton(ACtrl) do begin
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__hei="'+IntToStr(Height)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__dis='+dwIIF(Enabled,'false;','true;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__pet='+dwIIF(Enabled,'"auto";','"none";'));
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__imh="'+IntToStr(Height-Round(Font.Size*2))+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbt="'+IntToStr(Height-Round(Font.Size*_K))+'px";');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__lbh="'+IntToStr(Round(Font.Size*_K))+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__imh="'+IntToStr(Height-Round((Font.Size+3)*2))+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lbt="'+IntToStr(Height-Round((Font.Size+3)*_K))+'px";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__lbh="'+IntToStr(Round((Font.Size+3)*_K))+'px";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__tri='+dwIIF(Layout = blGlyphRight,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__bdg='+dwIIF(Layout = blGlyphTop,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__idt='+dwIIF(Layout = blGlyphBottom,'true;','false;'));
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__spc='+IntToStr(Spacing)+';');
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__max='+IntToStr(Margin)+';');
+          joRes.Add('this.'+dwFullName(Actrl)+'__tri='+dwIIF(Layout = blGlyphRight,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__bdg='+dwIIF(Layout = blGlyphTop,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__idt='+dwIIF(Layout = blGlyphBottom,'true;','false;'));
+          joRes.Add('this.'+dwFullName(Actrl)+'__spc='+IntToStr(Spacing)+';');
+          joRes.Add('this.'+dwFullName(Actrl)+'__max='+IntToStr(Margin)+';');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__cap="'+dwProcessCaption(Caption)+'";');
+          joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
           //
-          joRes.Add('this.'+dwPrefix(Actrl)+Name+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
+          //joRes.Add('this.'+dwFullName(Actrl)+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
      end;
      //
      Result    := (joRes);
@@ -316,7 +350,7 @@ exports
      dwGetEvent,
      dwGetHead,
      dwGetTail,
-     dwGetMethod,
+     dwGetAction,
      dwGetData;
      
 begin
