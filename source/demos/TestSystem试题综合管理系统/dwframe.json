@@ -1,0 +1,58 @@
+{
+	"modules": 
+	[
+		{
+			"caption": "试题管理",
+			"module": "DB",
+			"name": "Questions",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-receiving",
+			"memo": ""
+		},
+		{
+			"caption": "自主考试",
+			"module": "DB",
+			"name": "Test",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-data-line",
+			"memo": ""
+		},
+		{
+			"caption": "考试成绩",
+			"module": "DB",
+			"name": "Score",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-files",
+			"memo": ""
+		},
+		{
+			"caption": "用户管理",
+			"module": "User",
+			"name": "User",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-coordinate",
+			"memo": ""
+		},
+		{
+			"caption": "更改密码",
+			"module": "DB",
+			"name": "Password",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-bank-card",
+			"memo": ""
+		},
+		{
+			"caption": "系统设置",
+			"module": "DB",
+			"name": "Setting",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-setting",
+			"memo": ""
+		}
+	],
+	"title": "ZHeart 通用考试系统",
+	"expand": 0,
+	"theme": 0,
+	"menus": [],
+	"shorts": []
+}

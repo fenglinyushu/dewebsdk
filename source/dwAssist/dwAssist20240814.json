@@ -1,0 +1,1727 @@
+[
+   {
+      "class" : "TBitBtn",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "type",
+            "hint" : "按钮的显示样式"
+         },
+         {
+            "name" : "style",
+            "type" : "concat",
+            "items" : [
+               [ " plain", "朴素" ],
+               [ " round", "圆角" ],
+               [ " circle", "圆形" ]
+            ]
+         },
+         {
+            "name" : "icon",
+            "type" : "icon",
+            "hint" : "按钮的图标（左侧）"
+         },
+         {
+            "name" : "backgroundcolor",
+            "type" : "color",
+            "hint" : "按钮的背景色"
+         },
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "按钮的圆角半径（数值可自行更改）"
+         },
+         {
+            "name" : "accept",
+            "type" : "string",
+            "hint" : "指定上传文件的类型",
+            "items" : [
+               [ "image/*", "上传图片" ],
+               [ "video/*", "上传视频" ],
+               [ "image/gif, image/jpeg", "上传gif和jpeg" ],
+               [ ".doc,.docx,.xls,.xlsx,.pdf", "上传指定扩展名" ],
+               [ "application/msword", "WORD文档" ],
+               [ "application/pdf", "上传PDF" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TButton",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "type",
+            "hint" : "按钮的显示样式"
+         },
+         {
+            "name" : "style",
+            "type" : "concat",
+            "hint" : "按钮的显示形状",
+            "items" : [
+               [ " plain", "朴素" ],
+               [ " round", "圆角" ],
+               [ " circle", "圆形" ]
+            ]
+         },
+         {
+            "name" : "icon",
+            "type" : "icon",
+            "hint" : "按钮的图标（左侧）"
+         },
+         {
+            "name" : "righticon",
+            "type" : "icon",
+            "hint" : "按钮的图标（右侧）"
+         },
+         {
+            "name" : "backgroundcolor",
+            "type" : "color",
+            "hint" : "按钮的背景色"
+         },
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "按钮的圆角半径（数值可自行更改）"
+         }
+      ]
+   },
+   {
+      "class" : "TButton",
+      "helpkeyword" : "comm",
+      "items" : [
+         {
+            "name" : "baudrate",
+            "type" : "integer",
+            "hint" : "波特率",
+            "items" : [
+               [ 2400 ],
+               [ 4800 ],
+               [ 9600 ],
+               [ 38400 ],
+               [ 57600 ],
+               [ 115200 ]
+            ]
+         },
+         {
+            "name" : "databits",
+            "type" : "integer",
+            "hint" : "数据位",
+            "items" : [
+               [ 8 ]
+            ]
+         },
+         {
+            "name" : "stopbits",
+            "type" : "integer",
+            "hint" : "停止位",
+            "items" : [
+               [ 8 ]
+            ]
+         },
+         {
+            "name" : "parity",
+            "type" : "string",
+            "hint" : "奇偶校验",
+            "items" : [
+               [ "none", "无校验" ],
+               [ "mark", "校验" ],
+               [ "odd", "奇校验" ],
+               [ "even", "偶校验" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TButtonGroup",
+      "helpkeyword" : "category",
+      "items" : [
+         {
+            "name" : "hot",
+            "type" : "color",
+            "hint" : "激活类别标签色"
+         },
+         {
+            "name" : "hotsize",
+            "type" : "integer",
+            "hint" : "激活类别标签像素",
+            "items" : [
+               [ 1 ],
+               [ 2 ],
+               [ 3 ],
+               [ 5 ]
+            ]
+         },
+         {
+            "name" : "activebk",
+            "type" : "color",
+            "hint" : "激活类别背景色"
+         },
+         {
+            "name" : "activecolor",
+            "type" : "color",
+            "hint" : "激活类别字体色"
+         },
+         {
+            "name" : "activesize",
+            "type" : "integer",
+            "hint" : "激活类别字体大小像素",
+            "items" : [
+               [ 8 ],
+               [ 10 ],
+               [ 12 ],
+               [ 14 ]
+            ]
+         },
+         {
+            "name" : "activebold",
+            "type" : "integer",
+            "hint" : "激活类别字体粗体",
+            "items" : [
+               [ 0 ]
+            ]
+         },
+         {
+            "name" : "normalbk",
+            "type" : "color",
+            "hint" : "普通类别背景色"
+         },
+         {
+            "name" : "normalcolor",
+            "type" : "color",
+            "hint" : "普通类别字体色"
+         },
+         {
+            "name" : "radius",
+            "type" : "integer",
+            "hint" : "圆角半径",
+            "items" : [
+               [ 0 ]
+            ]
+         },
+         {
+            "name" : "margin",
+            "type" : "integer",
+            "hint" : "边距",
+            "items" : [
+               [ 0 ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TCardPanel",
+      "items" : []
+   },
+   {
+      "class" : "TCardPanel",
+      "helpkeyword" : "turn",
+      "items" : [
+         {
+            "name" : "acceleration",
+            "type" : "integer",
+            "hint" : "0/1。是否启动硬件加速，移动端必须设置为true否则将不可使用",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "autocenter",
+            "type" : "integer",
+            "hint" : "0/1。是否自动居中",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "direction",
+            "type" : "string",
+            "hint" : "翻页方向",
+            "items" : [
+               [ "ltr", "从左到右" ],
+               [ "rtl", "从右到左" ]
+            ]
+         },
+         {
+            "name" : "display",
+            "type" : "string",
+            "hint" : "显示模式",
+            "items" : [
+               [ "double", "双页" ],
+               [ "single", "单页" ]
+            ]
+         },
+         {
+            "name" : "gradients",
+            "type" : "integer",
+            "hint" : "0/1。是否显示翻页阴影效果",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TColumnTitle",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "string",
+            "items" : [
+               [ "image", "显示图像" ],
+               [ "rate", "显示为徽章" ]
+            ]
+         },
+         {
+            "name" : "left",
+            "type" : "integer",
+            "hint" : "left",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "top",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "width",
+            "type" : "integer",
+            "hint" : "width",
+            "items" : [
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "height",
+            "type" : "integer",
+            "hint" : "height",
+            "items" : [
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "right",
+            "type" : "integer",
+            "hint" : "right",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "bottom",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "nowidth",
+            "type" : "integer",
+            "hint" : "not use width",
+            "items" : [
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "noheight",
+            "type" : "integer",
+            "hint" : "not use height",
+            "items" : [
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "format",
+            "type" : "string",
+            "hint" : "用于格式化字段值",
+            "items" : [
+               [ "media/images/%s.png" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TComboBox",
+      "items" : [
+         {
+            "name" : "height",
+            "type" : "integer",
+            "hint" : "高度（解决ComboBox不能设置高度的问题）",
+            "items" : [
+               [ 30 ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TEdit",
+      "items" : [
+         {
+            "name" : "prefix-icon",
+            "type" : "icon",
+            "hint" : "按钮的图标（左侧）"
+         },
+         {
+            "name" : "suffix-icon",
+            "type" : "icon",
+            "hint" : "按钮的图标（右侧）"
+         },
+         {
+            "name" : "placeholder",
+            "type" : "string",
+            "hint" : "输入提示",
+            "items" : [
+               [ "请输入用户名" ],
+               [ "请输入密码" ],
+               [ "搜索" ],
+               [ "search" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TEdit",
+      "helpkeyword" : "tree",
+      "items" : [
+         {
+            "name" : "multipe",
+            "type" : "integer",
+            "hint" : "是否多选0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "clearable",
+            "type" : "integer",
+            "hint" : "是否可清除0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "searchable",
+            "type" : "integer",
+            "hint" : "是否可搜索0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "openonclick",
+            "type" : "integer",
+            "hint" : "是否点击打开0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "openonfocus",
+            "type" : "integer",
+            "hint" : "是否自动打开0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "clearonselect",
+            "type" : "integer",
+            "hint" : "是否选择时清除0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "closeonselect",
+            "type" : "integer",
+            "hint" : "是否选择后自动关闭0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "alwaysopen",
+            "type" : "integer",
+            "hint" : "是否保持打开0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "appendtobody",
+            "type" : "integer",
+            "hint" : "是否追加0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "limit",
+            "type" : "integer",
+            "hint" : "限制",
+            "items" : [
+               [ 3 ],
+               [ 5 ]
+            ]
+         },
+         {
+            "name" : "maxheight",
+            "type" : "integer",
+            "hint" : "最大高度",
+            "items" : [
+               [ 100 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "disablebranchnodes",
+            "type" : "integer",
+            "hint" : "禁止非末节点0/1",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TFlowPanel",
+      "items" : [
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "按钮的圆角半径（数值可自行更改）"
+         }
+      ]
+   },
+   {
+      "class" : "THeaderControl",
+      "items" : [
+         {
+            "name" : "mode",
+            "type" : "integer",
+            "hint" : "指标器位置，0：上，1：下",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "hot",
+            "type" : "color",
+            "hint" : "激活类别标签色"
+         },
+         {
+            "name" : "hotsize",
+            "type" : "integer",
+            "hint" : "激活类别标签像素",
+            "items" : [
+               [ 1 ],
+               [ 2 ],
+               [ 3 ],
+               [ 5 ]
+            ]
+         },
+         {
+            "name" : "activebk",
+            "type" : "color",
+            "hint" : "激活类别背景色"
+         },
+         {
+            "name" : "activecolor",
+            "type" : "color",
+            "hint" : "激活类别字体色"
+         },
+         {
+            "name" : "activesize",
+            "type" : "integer",
+            "hint" : "激活类别字体大小像素",
+            "items" : [
+               [ 8 ],
+               [ 10 ],
+               [ 12 ],
+               [ 14 ]
+            ]
+         },
+         {
+            "name" : "activebold",
+            "type" : "integer",
+            "hint" : "激活类别字体粗体",
+            "items" : [
+               [ 0 ]
+            ]
+         },
+         {
+            "name" : "normalbk",
+            "type" : "color",
+            "hint" : "普通类别背景色"
+         },
+         {
+            "name" : "normalcolor",
+            "type" : "color",
+            "hint" : "普通类别字体色"
+         },
+         {
+            "name" : "radius",
+            "type" : "integer",
+            "hint" : "圆角半径",
+            "items" : [
+               [ 0 ]
+            ]
+         },
+         {
+            "name" : "margin",
+            "type" : "integer",
+            "hint" : "边距",
+            "items" : [
+               [ 0 ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TImage",
+      "items" : [
+         {
+            "name" : "src",
+            "type" : "string",
+            "hint" : "对应的图片文件地址",
+            "items" : [
+               [ "media/images/mn/1.jpg" ],
+               [ "image/1.jpg" ]
+            ]
+         },
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "圆角半径（数值可自行更改）"
+         },
+         {
+            "name" : "href",
+            "type" : "string",
+            "hint" : "点击跳转网址（在新页面打开）",
+            "items" : [
+               [ "/hello" ]
+            ]
+         },
+         {
+            "name" : "hrefself",
+            "type" : "string",
+            "hint" : "点击跳转网址（在当前页面打开）",
+            "items" : [
+               [ "/hello" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TLabel",
+      "items" : [
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "圆角半径（数值可自行更改）"
+         }
+      ]
+   },
+   {
+      "class" : "TLabel",
+      "helpkeyword" : "captcha",
+      "items" : []
+   },
+   {
+      "class" : "TLabel",
+      "helpkeyword" : "cool",
+      "items" : []
+   },
+   {
+      "class" : "TLabel",
+      "helpkeyword" : "marquee",
+      "items" : []
+   },
+   {
+      "class" : "TListBox",
+      "items" : []
+   },
+   {
+      "class" : "TListColumn",
+      "helpkeyword" : "card",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "string",
+            "hint" : "字段类型",
+            "items" : [
+               [ "boolean", "布尔型" ],
+               [ "button", "按钮" ],
+               [ "check", "选择框" ],
+               [ "image", "图片" ],
+               [ "integer", "整型" ],
+               [ "label", "标签" ],
+               [ "link", "链接" ],
+               [ "rate", "显示为徽章" ]
+            ]
+         },
+         {
+            "name" : "left",
+            "type" : "integer",
+            "hint" : "left",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "top",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "width",
+            "type" : "integer",
+            "hint" : "width",
+            "items" : [
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "height",
+            "type" : "integer",
+            "hint" : "height",
+            "items" : [
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "right",
+            "type" : "integer",
+            "hint" : "right",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "bottom",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "nowidth",
+            "type" : "integer",
+            "hint" : "not use width",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "noheight",
+            "type" : "integer",
+            "hint" : "not use height",
+            "items" : [
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "format",
+            "type" : "string",
+            "hint" : "用于格式化字段值",
+            "items" : [
+               [ "%f" ]
+            ]
+         },
+         {
+            "name" : "list",
+            "type" : "string",
+            "hint" : "Boolean型时用于显示的值，2个元素的数组",
+            "items" : [
+               [ "真" ],
+               [ "假" ]
+            ]
+         },
+         {
+            "name" : "default",
+            "type" : "integer",
+            "hint" : "默认值（仅type=integer有效）",
+            "items" : [
+               [ 0 ],
+               [ 10 ],
+               [ 20 ],
+               [ 40 ]
+            ]
+         },
+         {
+            "name" : "min",
+            "type" : "integer",
+            "hint" : "最小值（仅type=integer有效）",
+            "items" : [
+               [ 0 ],
+               [ 10 ],
+               [ 20 ],
+               [ 40 ]
+            ]
+         },
+         {
+            "name" : "max",
+            "type" : "integer",
+            "hint" : "最大值（仅type=integer有效）",
+            "items" : [
+               [ 100 ],
+               [ 200 ],
+               [ 999 ]
+            ]
+         },
+         {
+            "name" : "scale",
+            "type" : "integer",
+            "hint" : "缩放值（仅type=rate有效）",
+            "items" : [
+               [ 1 ],
+               [ 10 ],
+               [ 1 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "fontname",
+            "type" : "字体",
+            "items" : [
+               [ "宋体" ],
+               [ "Tahoma" ]
+            ]
+         },
+         {
+            "name" : "fontsize",
+            "type" : "integer",
+            "hint" : "缩放值（仅type=rate有效）",
+            "items" : [
+               [ 8 ],
+               [ 9 ],
+               [ 10 ],
+               [ 12 ],
+               [ 14 ],
+               [ 16 ],
+               [ 20 ]
+            ]
+         },
+         {
+            "name" : "fontcolor",
+            "type" : "color",
+            "hint" : "字体色"
+         },
+         {
+            "name" : "fontbold",
+            "type" : "字体粗体",
+            "items" : [
+               [ "normal" ],
+               [ "bold" ],
+               [ "bolder" ],
+               [ "lighter" ],
+               [ "inherit" ]
+            ]
+         },
+         {
+            "name" : "fontitalic",
+            "type" : "字体斜体",
+            "items" : [
+               [ "normal" ],
+               [ "italic" ],
+               [ "oblique" ],
+               [ "inherit" ]
+            ]
+         },
+         {
+            "name" : "fontdecoration",
+            "type" : "字体装饰",
+            "items" : [
+               [ "overline" ],
+               [ "underline" ],
+               [ "line-through" ],
+               [ "blink" ],
+               [ "none" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TListColumn",
+      "helpkeyword" : "crud",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "string",
+            "hint" : "字段类型",
+            "items" : [
+               [ "autoinc", "自增型" ],
+               [ "integer", "整型" ],
+               [ "boolean", "布尔型" ],
+               [ "date", "日期型" ],
+               [ "image", "图片" ],
+               [ "progress", "进度条" ],
+               [ "button", "按钮" ],
+               [ "check", "选择框" ]
+            ]
+         },
+         {
+            "name" : "left",
+            "type" : "integer",
+            "hint" : "left",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "top",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "width",
+            "type" : "integer",
+            "hint" : "width",
+            "items" : [
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "height",
+            "type" : "integer",
+            "hint" : "height",
+            "items" : [
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "format",
+            "type" : "string",
+            "hint" : "用于格式化字段值",
+            "items" : [
+               [ "%f" ]
+            ]
+         },
+         {
+            "name" : "list",
+            "type" : "string",
+            "hint" : "Boolean型时用于显示的值，2个元素的数组",
+            "items" : [
+               [ "真" ],
+               [ "假" ]
+            ]
+         },
+         {
+            "name" : "default",
+            "type" : "integer",
+            "hint" : "默认值（仅type=integer有效）",
+            "items" : [
+               [ 0 ],
+               [ 10 ],
+               [ 20 ],
+               [ 40 ]
+            ]
+         },
+         {
+            "name" : "min",
+            "type" : "integer",
+            "hint" : "最小值（仅type=integer有效）",
+            "items" : [
+               [ 0 ],
+               [ 10 ],
+               [ 20 ],
+               [ 40 ]
+            ]
+         },
+         {
+            "name" : "max",
+            "type" : "integer",
+            "hint" : "最大值（仅type=integer有效）",
+            "items" : [
+               [ 100 ],
+               [ 200 ],
+               [ 999 ]
+            ]
+         },
+         {
+            "name" : "fieldname",
+            "type" : "string",
+            "hint" : "字段名",
+            "items" : [
+               [ "id" ]
+            ]
+         },
+         {
+            "name" : "caption",
+            "type" : "string",
+            "hint" : "标题",
+            "items" : [
+               [ "id" ]
+            ]
+         },
+         {
+            "name" : "color",
+            "type" : "color",
+            "hint" : "字体颜色"
+         },
+         {
+            "name" : "bkcolor",
+            "type" : "color",
+            "hint" : "字体颜色"
+         },
+         {
+            "name" : "align",
+            "type" : "string",
+            "hint" : "对齐方式",
+            "items" : [
+               [ "left" ],
+               [ "center" ],
+               [ "right" ]
+            ]
+         },
+         {
+            "name" : "sort",
+            "type" : "integer",
+            "hint" : "排序",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "readonly",
+            "type" : "integer",
+            "hint" : "只读",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TListColumn",
+      "helpkeyword" : "mobile",
+      "items" : [
+         {
+            "name" : "type",
+            "type" : "string",
+            "hint" : "字段类型",
+            "items" : [
+               [ "autoinc", "自增" ],
+               [ "label", "文本" ],
+               [ "integer", "整型" ],
+               [ "boolean", "布尔型" ],
+               [ "combo", "下拉框" ],
+               [ "date", "日期型" ],
+               [ "image", "图片" ],
+               [ "rate", "徽章" ],
+               [ "button", "按钮" ],
+               [ "link", "链接" ]
+            ]
+         },
+         {
+            "name" : "left",
+            "type" : "integer",
+            "hint" : "left",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "top",
+            "type" : "integer",
+            "hint" : "top",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "width",
+            "type" : "integer",
+            "hint" : "width",
+            "items" : [
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "height",
+            "type" : "integer",
+            "hint" : "height",
+            "items" : [
+               [ 20 ],
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 80 ],
+               [ 100 ],
+               [ 150 ],
+               [ 200 ]
+            ]
+         },
+         {
+            "name" : "format",
+            "type" : "string",
+            "hint" : "用于格式化字段值",
+            "items" : [
+               [ "%f" ]
+            ]
+         },
+         {
+            "name" : "list",
+            "type" : "string",
+            "hint" : "Boolean型时用于显示的值，2个元素的数组",
+            "items" : [
+               [ "真" ],
+               [ "假" ]
+            ]
+         },
+         {
+            "name" : "default",
+            "type" : "integer",
+            "hint" : "默认值（仅type=integer有效）",
+            "items" : [
+               [ 0 ],
+               [ 10 ],
+               [ 20 ],
+               [ 40 ]
+            ]
+         },
+         {
+            "name" : "min",
+            "type" : "integer",
+            "hint" : "最小值（仅type=integer有效）",
+            "items" : [
+               [ 0 ],
+               [ 10 ],
+               [ 20 ],
+               [ 40 ]
+            ]
+         },
+         {
+            "name" : "max",
+            "type" : "integer",
+            "hint" : "最大值（仅type=integer有效）",
+            "items" : [
+               [ 100 ],
+               [ 200 ],
+               [ 999 ]
+            ]
+         },
+         {
+            "name" : "fieldname",
+            "type" : "string",
+            "hint" : "字段名",
+            "items" : [
+               [ "id" ]
+            ]
+         },
+         {
+            "name" : "caption",
+            "type" : "string",
+            "hint" : "标题",
+            "items" : [
+               [ "id" ]
+            ]
+         },
+         {
+            "name" : "color",
+            "type" : "color",
+            "hint" : "字体颜色"
+         },
+         {
+            "name" : "bkcolor",
+            "type" : "color",
+            "hint" : "字体颜色"
+         },
+         {
+            "name" : "align",
+            "type" : "string",
+            "hint" : "对齐方式",
+            "items" : [
+               [ "left" ],
+               [ "center" ],
+               [ "right" ]
+            ]
+         },
+         {
+            "name" : "sort",
+            "type" : "integer",
+            "hint" : "排序",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         },
+         {
+            "name" : "readonly",
+            "type" : "integer",
+            "hint" : "只读",
+            "items" : [
+               [ 0 ],
+               [ 1 ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TListView",
+      "helpkeyword" : "crud",
+      "items" : [
+         {
+            "name" : "topheight",
+            "type" : "integer",
+            "hint" : "顶部栏高度",
+            "items" : [
+               [ 40 ],
+               [ 50 ]
+            ]
+         },
+         {
+            "name" : "rowheight",
+            "type" : "integer",
+            "hint" : "行高",
+            "items" : [
+               [ 40 ],
+               [ 30 ],
+               [ 50 ]
+            ]
+         },
+         {
+            "name" : "pageheight",
+            "type" : "integer",
+            "hint" : "分页栏高度",
+            "items" : [
+               [ 40 ],
+               [ 30 ],
+               [ 50 ]
+            ]
+         },
+         {
+            "name" : "pagesize",
+            "type" : "integer",
+            "hint" : "每页记录条数",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 50 ]
+            ]
+         },
+         {
+            "name" : "topbackground",
+            "type" : "color",
+            "hint" : "顶部栏背景色"
+         },
+         {
+            "name" : "headerbkcolor",
+            "type" : "color",
+            "hint" : "标题背景色"
+         },
+         {
+            "name" : "evenbkcolor",
+            "type" : "color",
+            "hint" : "奇数行背景色"
+         },
+         {
+            "name" : "merge",
+            "type" : "string",
+            "hint" : "多表头",
+            "items" : [
+               [ " " ]
+            ]
+         },
+         {
+            "name" : "summary",
+            "type" : "string",
+            "hint" : "汇总",
+            "items" : [
+               [ " " ]
+            ]
+         },
+         {
+            "name" : "module",
+            "type" : "string",
+            "hint" : "功能模块",
+            "items" : [
+               [ " " ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TListView",
+      "helpkeyword" : "card",
+      "items" : [
+         {
+            "name" : "dataset",
+            "type" : "string",
+            "items" : [
+               [ "FDQuery1" ],
+               [ "FDQuery2" ],
+               [ "FDQuery" ]
+            ]
+         },
+         {
+            "name" : "topheight",
+            "type" : "integer",
+            "hint" : "顶部栏高度",
+            "items" : [
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 70 ],
+               [ 80 ],
+               [ 90 ],
+               [ 100 ]
+            ]
+         },
+         {
+            "name" : "rowheight",
+            "type" : "integer",
+            "hint" : "记录行高度",
+            "items" : [
+               [ 30 ],
+               [ 40 ],
+               [ 50 ],
+               [ 60 ],
+               [ 70 ],
+               [ 80 ],
+               [ 90 ],
+               [ 100 ]
+            ]
+         },
+         {
+            "name" : "pagesize",
+            "type" : "integer",
+            "hint" : "每页记录数",
+            "items" : [
+               [ 10 ],
+               [ 20 ],
+               [ 30 ],
+               [ 50 ],
+               [ 70 ],
+               [ 80 ],
+               [ 90 ],
+               [ 100 ]
+            ]
+         },
+         {
+            "name" : "db",
+            "hint" : "数据库类型",
+            "items" : [
+               [ "access" ],
+               [ "mssql2000" ],
+               [ "mssql2008" ],
+               [ "mssql2014" ],
+               [ "mysql" ],
+               [ "sqlite" ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TListView",
+      "helpkeyword" : "mobile",
+      "items" : [
+         {
+            "name" : "cardattr",
+            "type" : "string",
+            "hint" : "卡片属性",
+            "items" : [
+               [ " " ]
+            ]
+         },
+         {
+            "name" : "cardattr",
+            "type" : "concat",
+            "hint" : "卡片样式"
+         },
+         {
+            "name" : "module",
+            "type" : "string",
+            "hint" : "功能模块",
+            "items" : [
+               [ " " ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TMemo",
+      "items" : []
+   },
+   {
+      "class" : "TPageControl",
+      "items" : []
+   },
+   {
+      "class" : "TPanel",
+      "items" : [
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "按钮的圆角半径（数值可自行更改）"
+         }
+      ]
+   },
+   {
+      "class" : "TPanel",
+      "helpkeyword" : "popup",
+      "items" : [
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "按钮的圆角半径（数值可自行更改）"
+         }
+      ]
+   },
+   {
+      "class" : "TPanel",
+      "helpkeyword" : "modal",
+      "items" : [
+         {
+            "name" : "radius",
+            "type" : "radius",
+            "hint" : "按钮的圆角半径（数值可自行更改）"
+         }
+      ]
+   },
+   {
+      "class" : "TShape",
+      "helpkeyword" : "menu",
+      "items" : [
+         {
+            "name" : "menu",
+            "type" : "string",
+            "hint" : "绑定的菜单",
+            "items" : [
+               [ "MainMenu1" ]
+            ]
+         },
+         {
+            "name" : "activebkcolor",
+            "type" : "color",
+            "hint" : "激活时背景色"
+         },
+         {
+            "name" : "activetextcolor",
+            "type" : "color",
+            "hint" : "激活时字体色"
+         },
+         {
+            "name" : "hovercolor",
+            "type" : "color",
+            "hint" : "Hover颜色"
+         }
+      ]
+   },
+   {
+      "class" : "TSpinEdit",
+      "helpkeyword" : "",
+      "items" : []
+   },
+   {
+      "class" : "TStringGrid",
+      "helpkeyword" : "",
+      "items" : []
+   },
+   {
+      "class" : "TStringGrid",
+      "helpkeyword" : "dvscroll",
+      "items" : [
+         {
+            "name" : "rowNum",
+            "type" : "integer",
+            "hint" : "表行数",
+            "items" : [
+               [ 5 ],
+               [ 6 ],
+               [ 8 ],
+               [ 10 ],
+               [ 15 ],
+               [ 20 ],
+               [ 30 ]
+            ]
+         },
+         {
+            "name" : "headerBGC",
+            "type" : "color",
+            "hint" : "表头背景色"
+         },
+         {
+            "name" : "oddRowBGC",
+            "type" : "color",
+            "hint" : "奇数行背景色"
+         },
+         {
+            "name" : "evenRowBGC",
+            "type" : "color",
+            "hint" : "偶数行背景色"
+         },
+         {
+            "name" : "waitTime",
+            "type" : "integer",
+            "hint" : "轮播时间间隔(ms)",
+            "items" : [
+               [ 3000 ],
+               [ 2000 ],
+               [ 5000 ],
+               [ 10000 ]
+            ]
+         },
+         {
+            "name" : "headerHeight",
+            "type" : "integer",
+            "hint" : "表头高度",
+            "items" : [
+               [ 30 ],
+               [ 35 ],
+               [ 40 ],
+               [ 50 ]
+            ]
+         },
+         {
+            "name" : "carousel",
+            "type" : "string",
+            "hint" : "轮播方式",
+            "items" : [
+               [ "single", "逐行轮播" ],
+               [ "page", "整页轮播" ]
+            ]
+         },
+         {
+            "name" : "hoverPause",
+            "type" : "boolean",
+            "hint" : "悬浮暂停轮播",
+            "items" : [
+               [ true ],
+               [ false ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TStringGrid",
+      "helpkeyword" : "lucky"
+   },
+   {
+      "class" : "TStringGrid",
+      "helpkeyword" : "ww"
+   },
+   {
+      "class" : "TTrackBar",
+      "helpkeyword" : "page",
+      "items" : [
+         {
+            "name" : "dwattr",
+            "type" : "concat",
+            "items" : [
+               [ " background", "带背景" ],
+               [ " :pager-count='5'", "页码按钮的数量" ],
+               [
+                  " layout='prev, pager, next, jumper, ->, total'",
+                  "组件布局，子组件名用逗号分隔"
+               ]
+            ]
+         },
+         {
+            "name" : "hoverPause",
+            "type" : "boolean",
+            "hint" : "悬浮暂停轮播",
+            "items" : [
+               [ true ],
+               [ false ]
+            ]
+         }
+      ]
+   },
+   {
+      "class" : "TTrackBar",
+      "helpkeyword" : "mobile"
+   },
+   {
+      "class" : "TTrackBar",
+      "helpkeyword" : "ww"
+   }
+]

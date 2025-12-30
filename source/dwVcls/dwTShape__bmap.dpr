@@ -24,16 +24,31 @@ uses
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 var
     joRes   : Variant;
+    joHint  : Variant;
+    sAK     : string;
 begin
+    //取得HINT对象JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
     //生成返回值数组
     joRes    := _Json('[]');
+
     //生成返回值数组
     joRes.Add('<style type="text/css">'+
                 '.anchorBL {display: none;}'+
                 '.BMap_cpyCtrl {display: none;}'+
                 '.BMap_scaleCtrl {display: block;}'+
             '</style>');
-    joRes.Add('<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=MDUPjhlGcCsg7gKrs6FmTQsz"></script>');
+
+    //
+    sAK := 'MDUPjhlGcCsg7gKrs6FmTQsz';
+    if joHint.Exists('ak') then begin
+        sAK := joHint.ak;
+    end;
+
+    joRes.Add('<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak='+sAK+'"></script>');
+
+    //
     joRes.Add('<script type="text/javascript" src="https://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>');
     //
     Result    := joRes;
@@ -64,11 +79,11 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
-     sCode     : String;
+    sCode   : String;
 
-     //
-     joHint    : Variant;
-     joRes     : Variant;
+    //
+    joHint  : Variant;
+    joRes   : Variant;
 
 begin
      //生成返回值数组
@@ -147,47 +162,61 @@ end;
 //取得事件
 function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes       : Variant;
 begin
-     //生成返回值数组
-     joRes    := _Json('[]');
-     //
-     with TShape(ACtrl) do begin
-          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
-          //
-          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          //joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
-          //
-          //joRes.Add('this.'+dwFullName(Actrl)+'__typ="'+dwGetProp(TShape(ACtrl),'type')+'";');
-     end;
-     //
-     Result    := (joRes);
+    //生成返回值数组
+    joRes    := _Json('[]');
+
+    //
+    with TShape(ACtrl) do begin
+        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        //joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
+        //
+        //joRes.Add('this.'+dwFullName(Actrl)+'__typ="'+dwGetProp(TShape(ACtrl),'type')+'";');
+    end;
+    //
+    Result    := (joRes);
 end;
 
 //取得Mounted
 function dwGetMounted(ACtrl:TComponent):String;StdCall;
 var
-    joRes   : Variant;
-    sCode   : string;
+    sCode       : string;
+    joRes       : Variant;
+    joHint      : Variant;
+    fLon,fLat   : Double;
+    iLevel      : Integer;
 begin
+
+    //取得HINT对象JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+    //取得参数
+    fLon    := dwGetDouble(joHint,'lon',108.9426);
+    fLat    := dwGetDouble(joHint,'lat',34.2606);
+    iLevel  := dwGetInt(joHint,'level',12);
+
     //生成返回值数组
     joRes   := _Json('[]');
+
     //
     with TShape(ACtrl) do begin
         sCode   := dwFullName(Actrl)+'__map = new BMap.Map("'+dwFullName(Actrl)+'",{minZoom:1,maxZoom:25});'
                 // 创建点坐标 （北京天安门坐标）
-                +'var point = new BMap.Point(116.404, 39.915);'
+                +'var point = new BMap.Point('+FloatToStr(fLon)+', '+FloatToStr(fLat)+');'
 
                 // 默认的地图是只可以鼠标拖动的，鼠标滚轮不会修改Zoom值
                 +dwFullName(Actrl)+'__map.enableScrollWheelZoom(true);'
 
                 // 初始化地图，设置中心点坐标和地图级别
-                +dwFullName(Actrl)+'__map.centerAndZoom(point, 12);';
+                +dwFullName(Actrl)+'__map.centerAndZoom(point, '+IntToStr(iLevel)+');';
         joRes.Add(sCode);
     end;
     //

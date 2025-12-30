@@ -107,7 +107,7 @@ begin
         Result  := 7;
     end else if AStr = 'Aug' then begin
         Result  := 8;
-    end else if AStr = 'Sept' then begin
+    end else if AStr = 'Sep' then begin
         Result  := 9;
     end else if AStr = 'Oct' then begin
         Result  := 10;
@@ -240,9 +240,15 @@ begin
             //清空事件,以防止自动执行
             OnChange  := nil;
             //更新值
-            if DoubleBuffered then begin
+            //针对D10.4.2以前无 dtkDateTime 的处理 ,标识为：日期+时间型
+            {$IFDEF VER340}
+                //ShowHint    := True;
+                if ShowHint then begin
+            {$ELSE}
+                if  Kind = dtkDateTime then begin
+            {$ENDIF}
                 sDate     := dwUnescape(joData.v);  //Mon Feb 19 2018 06:00:00 GMT+0800 (中国标准时间)
-                iYear     := StrToIntDef(Copy(sDate,12,4),1990);
+                iYear     := StrToIntDef(Copy(sDate,12,4),1900);
                 iMonth    := StrToMonth(Copy(sDate,5,3));
                 iDay      := StrToIntDef(Copy(sDate,9,2),1);
 
@@ -250,7 +256,7 @@ begin
                 TDateTimePicker(ACtrl).Time := StrToTimeDef(Copy(sDate,17,8),Now);
             end else if Kind = dtkDate then begin
                 sDate     := joData.v;
-                iYear     := StrToIntDef(Copy(sDate,1,4),1990);
+                iYear     := StrToIntDef(Copy(sDate,1,4),1900);
                 iMonth    := StrToIntDef(Copy(sDate,6,2),1);
                 iDay      := StrToIntDef(Copy(sDate,9,2),1);
 
@@ -295,7 +301,11 @@ begin
     joHint    := dwGetHintJson(TControl(ACtrl));
     with TDateTimePicker(ACtrl) do begin
         //生成字符串
-        if DoubleBuffered then begin
+        {$IFDEF VER340}
+            if ShowHint then begin
+        {$ELSE}
+            if ShowHint or (kind = dtkDateTime) then begin
+        {$ENDIF}
             //日期时间  <el-date-picker v-model="value1" type="datetime" placeholder="选择日期时间"> </el-date-picker>
             sCode   := '<el-date-picker'
                     +' v-model="'+sFull+'__val"'
@@ -358,15 +368,20 @@ begin
     joRes    := _Json('[]');
 
      //生成返回值数组
-    if TDateTimePicker(ACtrl).DoubleBuffered then begin
-        //日期时间  <el-date-picker v-model="value1" type="datetime" placeholder="选择日期时间"> </el-date-picker>
-        joRes.Add('</el-date-picker>');          //此处需要和dwGetHead对应
-    end else if TDateTimePicker(ACtrl).Kind =  dtkDate then begin
-        joRes.Add('</el-date-picker>');          //此处需要和dwGetHead对应
-    end else begin
-        joRes.Add('</el-time-picker>');          //此处需要和dwGetHead对应
-    end;
-
+    with TDateTimePicker(ACtrl) do begin
+        {$IFDEF VER340}
+            if ShowHint then begin
+        {$ELSE}
+            if ShowHint or (kind = dtkDateTime) then begin
+        {$ENDIF}
+            //日期时间  <el-date-picker v-model="value1" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+            joRes.Add('</el-date-picker>');          //此处需要和dwGetHead对应
+        end else if Kind =  dtkDate then begin
+            joRes.Add('</el-date-picker>');          //此处需要和dwGetHead对应
+        end else begin
+            joRes.Add('</el-time-picker>');          //此处需要和dwGetHead对应
+        end;
+     end;
      //
      Result    := (joRes);
 end;
@@ -393,10 +408,26 @@ begin
         joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
         joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
         //
-        if DoubleBuffered then begin
-            joRes.Add(sFull+'__val:"'+DateTimeToGMTRFC822(DateTime)+'",');
+        {$IFDEF VER340}
+            if ShowHint then begin
+        {$ELSE}
+            if ShowHint or (kind = dtkDateTime) then begin
+        {$ENDIF}
+            if Trunc(Date) = StrToDateDef('9999-09-09',Now) then begin
+                joRes.Add(sFull+'__val:"",');
+            end else if Trunc(Date) = StrToDateDef('3000-01-01',Now) then begin
+                joRes.Add(sFull+'__val:"",');
+            end else begin
+                joRes.Add(sFull+'__val:"'+DateTimeToGMTRFC822(DateTime)+'",');
+            end;
         end else if kind = dtkDate then begin
-            joRes.Add(sFull+'__val:"'+FormatDateTime('yyyy-mm-dd',Date)+'",');
+            if Trunc(Date) = StrToDateDef('9999-09-09',Now) then begin
+                joRes.Add(sFull+'__val:"",');
+            end else if Trunc(Date) = StrToDateDef('3000-01-01',Now) then begin
+                joRes.Add(sFull+'__val:"",');
+            end else begin
+                joRes.Add(sFull+'__val:"'+FormatDateTime('yyyy-MM-dd',Date)+'",');
+            end;
         end else begin
             joRes.Add(sFull+'__val:"'+DateTimeToGMTRFC822(DateTime)+'",');//+FormatDateTime('hh:mm:ss',Time)+'",');
         end;
@@ -427,13 +458,29 @@ begin
         joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
         joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
         //
-        if DoubleBuffered then begin
-            sDT:= DateTimeToStr(DateTime);
-            sDt := DateTimeToGMTRFC822(DateTime);
-            joRes.Add('this.'+sFull+'__val="'+DateTimeToGMTRFC822(DateTime)+'";');
-        end else if kind =  dtkDate then begin
-            joRes.Add('this.'+sFull+'__val="'+FormatDateTime('YYYY-MM-dd',Date)+'";');
-        end else begin
+        {$IFDEF VER340}
+            if ShowHint then begin
+        {$ELSE}
+            if ShowHint or (kind = dtkDateTime) then begin
+        {$ENDIF}
+            if Trunc(Date) = 0 then begin
+                joRes.Add('this.'+sFull+'__val="";');
+            end else if Trunc(Date) = StrToDateDef('9999-09-09',Now) then begin
+                joRes.Add('this.'+sFull+'__val="";');
+            end else begin
+                sDT     := DateTimeToStr(DateTime);
+                sDt     := DateTimeToGMTRFC822(DateTime);
+                joRes.Add('this.'+sFull+'__val="'+DateTimeToGMTRFC822(DateTime)+'";');
+            end;
+        end else if kind =  dtkDate then begin  //日期型
+            if Trunc(Date) = 0 then begin
+                joRes.Add('this.'+sFull+'__val="";');
+            end else if Trunc(Date) = StrToDateDef('9999-09-09',Now) then begin
+                joRes.Add('this.'+sFull+'__val="";');
+            end else begin
+                joRes.Add('this.'+sFull+'__val="'+FormatDateTime('YYYY-MM-dd',Date)+'";');
+            end;
+        end else begin  //时间型
             //joRes.Add('this.'+sFull+'__val="'+FormatDateTime('hh:mm:ss',Time)+'";');
             sDT:= DateTimeToStr(DateTime);
             sDt := DateTimeToGMTRFC822(DateTime);

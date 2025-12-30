@@ -18,11 +18,26 @@ end;
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-    joData  : Variant;
     oAction : TCloseAction;
     oObject : TDragDockObject;
+    oState  : TDragState;
+    oCtrl   : TPanel;
+    oForm   : TForm;
+    //
+    bAccept : Boolean;
+    bFound  : Boolean;
+    sTarget : string;   //主要用于取得upload拟触发事件的控件名称
+    //
+    joData  : Variant;
+    joHint  : variant;
+    joCtrl  : Variant;
 begin
-    with TForm(ACtrl) do begin
+    //取得JSON字符串备用
+    joHint  := dwGetHintJson(TControl(ACtrl));
+
+    //
+    oForm   := TForm(ACtrl);
+    with oForm do begin
         if HelpKeyword = 'dialog' then begin
             //-------------作为对话框---------------------------------------------------------------
         end else if HelpKeyword = 'embed' then begin
@@ -38,29 +53,192 @@ begin
             end else if joData.e = 'onexit' then begin
                 //TForm(ACtrl).OnExit(TForm(ACtrl));
             end else if joData.e = 'onenddock' then begin
-                if Assigned(TForm(ACtrl).OnEndDock) then begin
-                    TForm(ACtrl).OnEndDock(TForm(ACtrl),nil,0,0);
+
+                //检查是否有触发事件转移的情况，主要是upload后不触发TForm，而是触发指定控件的
+                bFound  := False;
+                if joHint.Exists('__uploadinfo') then begin
+                    sTarget := dwGetStr(joHint.__uploadinfo,'target','');
+                    if sTarget <> '' then begin
+                        oCtrl   := TPanel(FindComponent(sTarget));
+                        if (oCtrl <> nil) and Assigned(oCtrl.OnEndDock) then begin
+                            bFound  := True;
+                        end;
+                    end;
+                end;
+
+                //根据是否有事件转移分别处理
+                if bFound then begin
+                    //为oCtrl写Hint, 主要是 __uploadsource 和 __uploadsources / __uploadfiles
+                    //取得JSON字符串备用
+                    joCtrl  := dwGetHintJson(TControl(oCtrl));
+                    joCtrl.__upload         := dwGetStr(joHint,'__upload','');
+                    joCtrl.__uploadsource   := dwGetStr(joHint,'__uploadsource','');
+                    if joHint.Exists('__uploadsources') then begin
+                        joCtrl.__uploadsources  := _json(joHint.__uploadsources);
+                    end else begin
+                        joCtrl.__uploadsources  := _json('[]');
+                    end;
+                    if joHint.Exists('__uploadfiles') then begin
+                        joCtrl.__uploadfiles    := _json(joHint.__uploadfiles);
+                    end else begin
+                        joCtrl.__uploadfiles    := _json('[]');
+                    end;
+                    oCtrl.Hint  := joCtrl;
+                    //
+                    oCtrl.OnEndDock(oCtrl,nil,0,0);
+                end else begin
+                    if Assigned(oForm.OnEndDock) then begin
+                        oForm.OnEndDock(oForm,nil,0,0);
+                    end;
                 end;
             end else if joData.e = 'onstartdock' then begin
-                if Assigned(TForm(ACtrl).OnStartDock) then begin
-                    TForm(ACtrl).OnStartDock(TForm(ACtrl),oObject);
+
+                //检查是否有触发事件转移的情况，主要是upload后不触发TForm，而是触发指定控件的
+                bFound  := False;
+                if joHint.Exists('__uploadinfo') then begin
+                    sTarget := dwGetStr(joHint.__uploadinfo,'target','');
+                    if sTarget <> '' then begin
+                        oCtrl   := TPanel(FindComponent(sTarget));
+                        if (oCtrl <> nil) and Assigned(oCtrl.OnStartDock) then begin
+                            bFound  := True;
+                        end;
+                    end;
+                end;
+
+                //根据是否有事件转移分别处理
+                if bFound then begin
+                    //为oCtrl写Hint, 主要是 __uploadsource 和 __uploadsources / __uploadfiles
+                    //取得JSON字符串备用
+                    joCtrl  := dwGetHintJson(TControl(oCtrl));
+                    joCtrl.__uploadsource   := joHint.__uploadsource;
+                    joCtrl.__uploadsources  := _json(joHint.__uploadsources);
+                    joCtrl.__uploadfiles    := _json(joHint.__uploadfiles);
+                    oCtrl.Hint  := joCtrl;
+                    //
+                    oCtrl.OnStartDock(oCtrl,oObject);
+                end else begin
+                    if Assigned(TForm(ACtrl).OnStartDock) then begin
+                        TForm(ACtrl).OnStartDock(TForm(ACtrl),oObject);
+                    end;
+                end;
+            end else if joData.e = 'ondragdrop' then begin
+                if Assigned(TForm(ACtrl).ondragdrop) then begin
+                    TForm(ACtrl).ondragdrop(TForm(ACtrl),nil,0,0);
+                end;
+            end else if joData.e = 'ondragover' then begin
+                if Assigned(TForm(ACtrl).ondragover) then begin
+                    TForm(ACtrl).ondragover(TForm(ACtrl),nil,0,0,oState,bAccept);
+                end;
+            end else if joData.e = 'onvar' then begin
+                //该消息用于通过JS向窗体传递变量（仅支持字符串类型），
+                //变量值保存的Form的Hint中__var中，如{"__var":"newValue"}
+
+                //保存变量值
+                joHint  := _Json(TForm(ACtrl).Hint);
+                if joHint = unassigned then begin
+                    joHint  := _json('{}');
+                end;
+                joHint.__var    := joData.v;
+                TForm(ACtrl).Hint   := joHint;
+
+                //激活事件
+                if Assigned(TForm(ACtrl).onContextPopup) then begin
+                    TForm(ACtrl).onContextPopup(TForm(ACtrl),Point(0,0),bAccept);
                 end;
             end;
         end else begin
             //-------------作为普通窗体-------------------------------------------------------------
             //
             joData    := _Json(AData);
+
             if joData.e = 'onclose' then begin
                 if Assigned(OnClose) then begin
                     TForm(ACtrl).OnClose(TForm(ACtrl),oAction);
                 end;
             end else if joData.e = 'onenddock' then begin
-                if Assigned(TForm(ACtrl).OnEndDock) then begin
-                    TForm(ACtrl).OnEndDock(TForm(ACtrl),nil,0,0);
+
+                //检查是否有触发事件转移的情况，主要是upload后不触发TForm，而是触发指定控件的
+                bFound  := False;
+                if joHint.Exists('__uploadinfo') then begin
+                    sTarget := dwGetStr(joHint.__uploadinfo,'target','');
+                    if sTarget <> '' then begin
+                        oCtrl   := TPanel(FindComponent(sTarget));
+                        if (oCtrl <> nil) and Assigned(oCtrl.OnEndDock) then begin
+                            bFound  := True;
+                        end;
+                    end;
+                end;
+
+                //根据是否有事件转移分别处理
+                if bFound then begin
+                    //为oCtrl写Hint, 主要是 __uploadsource 和 __uploadsources / __uploadfiles
+                    //取得JSON字符串备用
+                    joCtrl  := dwGetHintJson(TControl(oCtrl));
+                    joCtrl.__upload         := joHint.__upload;
+                    joCtrl.__uploadsource   := joHint.__uploadsource;
+                    joCtrl.__uploadsources  := _json(joHint.__uploadsources);
+                    joCtrl.__uploadfiles    := _json(joHint.__uploadfiles);
+                    oCtrl.Hint  := joCtrl;
+                    //
+                    oCtrl.OnEndDock(oCtrl,nil,0,0);
+                end else begin
+                    if Assigned(TForm(ACtrl).OnEndDock) then begin
+                        TForm(ACtrl).OnEndDock(TForm(ACtrl),nil,0,0);
+                    end;
                 end;
             end else if joData.e = 'onstartdock' then begin
-                if Assigned(TForm(ACtrl).OnStartDock) then begin
-                    TForm(ACtrl).OnStartDock(TForm(ACtrl),oObject);
+
+                //检查是否有触发事件转移的情况，主要是upload后不触发TForm，而是触发指定控件的
+                bFound  := False;
+                if joHint.Exists('__uploadinfo') then begin
+                    sTarget := dwGetStr(joHint.__uploadinfo,'target','');
+                    if sTarget <> '' then begin
+                        oCtrl   := TPanel(FindComponent(sTarget));
+                        if (oCtrl <> nil) and Assigned(oCtrl.OnStartDock) then begin
+                            bFound  := True;
+                        end;
+                    end;
+                end;
+
+                //根据是否有事件转移分别处理
+                if bFound then begin
+                    //为oCtrl写Hint, 主要是 __uploadsource 和 __uploadsources / __uploadfiles
+                    //取得JSON字符串备用
+                    joCtrl  := dwGetHintJson(TControl(oCtrl));
+                    joCtrl.__uploadsource   := joHint.__uploadsource;
+                    joCtrl.__uploadsources  := _json(joHint.__uploadsources);
+                    joCtrl.__uploadfiles    := _json(joHint.__uploadfiles);
+                    oCtrl.Hint  := joCtrl;
+                    //
+                    oCtrl.OnStartDock(oCtrl,oObject);
+                end else begin
+                    if Assigned(TForm(ACtrl).OnStartDock) then begin
+                        TForm(ACtrl).OnStartDock(TForm(ACtrl),oObject);
+                    end;
+                end;
+            end else if joData.e = 'ondragdrop' then begin
+                if Assigned(TForm(ACtrl).ondragdrop) then begin
+                    TForm(ACtrl).ondragdrop(TForm(ACtrl),nil,0,0);
+                end;
+            end else if joData.e = 'ondragover' then begin
+                if Assigned(TForm(ACtrl).ondragover) then begin
+                    TForm(ACtrl).ondragover(TForm(ACtrl),nil,0,0,oState,bAccept);
+                end;
+            end else if joData.e = 'onvar' then begin
+                //该消息用于通过JS向窗体传递变量（仅支持字符串类型），
+                //变量值保存的Form的Hint中__var中，如{"__var":"newValue"}
+
+                //保存变量值
+                joHint  := _Json(TForm(ACtrl).Hint);
+                if joHint = unassigned then begin
+                    joHint  := _json('{}');
+                end;
+                joHint.__var    := joData.v;
+                TForm(ACtrl).Hint   := joHint;
+
+                //激活事件
+                if Assigned(TForm(ACtrl).onContextPopup) then begin
+                    TForm(ACtrl).onContextPopup(TForm(ACtrl),Point(0,0),bAccept);
                 end;
             end;
         end;
@@ -316,8 +494,8 @@ begin
             joRes    := _Json('[]');
             //
             with TForm(ACtrl) do begin
-                joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-                joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
+                joRes.Add(dwFullName(Actrl)+'__lef:"0px",');
+                joRes.Add(dwFullName(Actrl)+'__top:"0px",');
                 joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
                 joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
                 //
@@ -368,8 +546,8 @@ begin
             joRes    := _Json('[]');
             //
             with TPanel(ACtrl) do begin
-                joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__lef="0px";');
+                joRes.Add('this.'+dwFullName(Actrl)+'__top="0px";');
                 joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
                 joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
                 //

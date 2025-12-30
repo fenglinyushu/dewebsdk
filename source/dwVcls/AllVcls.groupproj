@@ -1,21 +1,48 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{F4310D75-9140-4EC0-9372-E020CC400B44}</ProjectGuid>
+        <ProjectGuid>{84D775EA-2421-42C9-AC45-D028F6A25499}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="dwTBevel.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="dwTBitBtn.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="dwTButton.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTButton__comm.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTButton__simple.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTButtonGroup__category.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTButtonGroup__menu.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTCalendar.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCard.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCard__carousel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCard__page.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCard__turn.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCardPanel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCardPanel__carousel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCardPanel__page.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTCardPanel__turn.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTCheckBox.dproj">
@@ -33,13 +60,25 @@
         <Projects Include="dwTEdit__cleave.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTEdit__label.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTEdit__rate.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTEdit__tree.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTFlowPanel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTFlowPanel__auto.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTForm.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTGauge.dproj">
+        <Projects Include="dwTGridPanel.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTGroupBox.dproj">
@@ -54,6 +93,9 @@
         <Projects Include="dwTImage__captcha.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTImage__preview.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTLabel.dproj">
             <Dependencies/>
         </Projects>
@@ -63,22 +105,25 @@
         <Projects Include="dwTLabel__cool.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTLabeledEdit.dproj">
+        <Projects Include="dwTLabel__datetime.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTLabel__marquee.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTLabel__marquee2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTLabel__marqueev.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTLabel__simple.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTListBox.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTListView__crud.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="dwTListView__mobile.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="dwTListView__ww.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="dwTMainMenu.dproj">
+        <Projects Include="dwTListView__Combo.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTMediaPlayer.dproj">
@@ -87,19 +132,25 @@
         <Projects Include="dwTMediaPlayer__easyplayer.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTMediaPlayer__flv.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTMediaPlayer__m3u8.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTMediaPlayer__mp3.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTMediaPlayer_m3u8.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="dwTMediaPlayer_mp3.dproj">
+        <Projects Include="dwTMediaPlayer__xg.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTMemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTMemo__cascader.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTMemo__codemirror.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTMemo__dvflyline.dproj">
@@ -108,22 +159,34 @@
         <Projects Include="dwTMemo__echarts.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTMemo__echartsmap.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTMemo__googleads.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTMemo__highlight.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTMemo__html.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTMemo__markdown.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTMemo__markdownview.dproj">
+        <Projects Include="dwTMemo__md.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTMemo__mqtt.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTMemo__uses.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTPageControl.dproj">
+        <Projects Include="dwTMemo__usescomp.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTPageControl__carousel.dproj">
+        <Projects Include="dwTPageControl.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTPageControl__timeline.dproj">
@@ -138,7 +201,13 @@
         <Projects Include="dwTPanel__button.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTPanel__cesium.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTPanel__dialog.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTPanel__div.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTPanel__dvbox.dproj">
@@ -147,13 +216,37 @@
         <Projects Include="dwTPanel__dvdeco.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTPanel__elupload.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTPanel__float.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTPanel__Hint.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTPanel__hscroll.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTPanel__iframe.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTPanel__modal.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTPanel__ok.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTPanel__popup.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTPanel__scroll.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTPanel__selected.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTPanel__simple.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTProgressBar.dproj">
@@ -180,7 +273,16 @@
         <Projects Include="dwTShape.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTShape__amap.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTShape__bmap.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTShape__canvas.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTShape__menu.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTSpeedButton.dproj">
@@ -189,7 +291,16 @@
         <Projects Include="dwTSpinEdit.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTSplitter.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTStackPanel.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTStaticText.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTStaticText__map.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTStringGrid.dproj">
@@ -216,6 +327,9 @@
         <Projects Include="dwTStringGrid__luck.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTStringGrid__multi.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTStringGrid__noapple.dproj">
             <Dependencies/>
         </Projects>
@@ -231,9 +345,6 @@
         <Projects Include="dwTTabSheet.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="dwTTabSheet__carousel.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="dwTTabSheet__timeline.dproj">
             <Dependencies/>
         </Projects>
@@ -246,6 +357,9 @@
         <Projects Include="dwTTrackBar.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTTrackBar__mobile.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTTrackBar__page.dproj">
             <Dependencies/>
         </Projects>
@@ -253,6 +367,12 @@
             <Dependencies/>
         </Projects>
         <Projects Include="dwTTreeView.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTTreeView__combo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTTreeView__grid.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -263,24 +383,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="dwTBevel">
-        <MSBuild Projects="dwTBevel.dproj"/>
-    </Target>
-    <Target Name="dwTBevel:Clean">
-        <MSBuild Projects="dwTBevel.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTBevel:Make">
-        <MSBuild Projects="dwTBevel.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="dwTBitBtn">
-        <MSBuild Projects="dwTBitBtn.dproj"/>
-    </Target>
-    <Target Name="dwTBitBtn:Clean">
-        <MSBuild Projects="dwTBitBtn.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTBitBtn:Make">
-        <MSBuild Projects="dwTBitBtn.dproj" Targets="Make"/>
-    </Target>
     <Target Name="dwTButton">
         <MSBuild Projects="dwTButton.dproj"/>
     </Target>
@@ -289,6 +391,33 @@
     </Target>
     <Target Name="dwTButton:Make">
         <MSBuild Projects="dwTButton.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTButton__comm">
+        <MSBuild Projects="dwTButton__comm.dproj"/>
+    </Target>
+    <Target Name="dwTButton__comm:Clean">
+        <MSBuild Projects="dwTButton__comm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTButton__comm:Make">
+        <MSBuild Projects="dwTButton__comm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTButton__simple">
+        <MSBuild Projects="dwTButton__simple.dproj"/>
+    </Target>
+    <Target Name="dwTButton__simple:Clean">
+        <MSBuild Projects="dwTButton__simple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTButton__simple:Make">
+        <MSBuild Projects="dwTButton__simple.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTButtonGroup__category">
+        <MSBuild Projects="dwTButtonGroup__category.dproj"/>
+    </Target>
+    <Target Name="dwTButtonGroup__category:Clean">
+        <MSBuild Projects="dwTButtonGroup__category.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTButtonGroup__category:Make">
+        <MSBuild Projects="dwTButtonGroup__category.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTButtonGroup__menu">
         <MSBuild Projects="dwTButtonGroup__menu.dproj"/>
@@ -307,6 +436,78 @@
     </Target>
     <Target Name="dwTCalendar:Make">
         <MSBuild Projects="dwTCalendar.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCard">
+        <MSBuild Projects="dwTCard.dproj"/>
+    </Target>
+    <Target Name="dwTCard:Clean">
+        <MSBuild Projects="dwTCard.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCard:Make">
+        <MSBuild Projects="dwTCard.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCard__carousel">
+        <MSBuild Projects="dwTCard__carousel.dproj"/>
+    </Target>
+    <Target Name="dwTCard__carousel:Clean">
+        <MSBuild Projects="dwTCard__carousel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCard__carousel:Make">
+        <MSBuild Projects="dwTCard__carousel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCard__page">
+        <MSBuild Projects="dwTCard__page.dproj"/>
+    </Target>
+    <Target Name="dwTCard__page:Clean">
+        <MSBuild Projects="dwTCard__page.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCard__page:Make">
+        <MSBuild Projects="dwTCard__page.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCard__turn">
+        <MSBuild Projects="dwTCard__turn.dproj"/>
+    </Target>
+    <Target Name="dwTCard__turn:Clean">
+        <MSBuild Projects="dwTCard__turn.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCard__turn:Make">
+        <MSBuild Projects="dwTCard__turn.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCardPanel">
+        <MSBuild Projects="dwTCardPanel.dproj"/>
+    </Target>
+    <Target Name="dwTCardPanel:Clean">
+        <MSBuild Projects="dwTCardPanel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCardPanel:Make">
+        <MSBuild Projects="dwTCardPanel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCardPanel__carousel">
+        <MSBuild Projects="dwTCardPanel__carousel.dproj"/>
+    </Target>
+    <Target Name="dwTCardPanel__carousel:Clean">
+        <MSBuild Projects="dwTCardPanel__carousel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCardPanel__carousel:Make">
+        <MSBuild Projects="dwTCardPanel__carousel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCardPanel__page">
+        <MSBuild Projects="dwTCardPanel__page.dproj"/>
+    </Target>
+    <Target Name="dwTCardPanel__page:Clean">
+        <MSBuild Projects="dwTCardPanel__page.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCardPanel__page:Make">
+        <MSBuild Projects="dwTCardPanel__page.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTCardPanel__turn">
+        <MSBuild Projects="dwTCardPanel__turn.dproj"/>
+    </Target>
+    <Target Name="dwTCardPanel__turn:Clean">
+        <MSBuild Projects="dwTCardPanel__turn.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTCardPanel__turn:Make">
+        <MSBuild Projects="dwTCardPanel__turn.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTCheckBox">
         <MSBuild Projects="dwTCheckBox.dproj"/>
@@ -353,6 +554,15 @@
     <Target Name="dwTEdit__cleave:Make">
         <MSBuild Projects="dwTEdit__cleave.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTEdit__label">
+        <MSBuild Projects="dwTEdit__label.dproj"/>
+    </Target>
+    <Target Name="dwTEdit__label:Clean">
+        <MSBuild Projects="dwTEdit__label.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTEdit__label:Make">
+        <MSBuild Projects="dwTEdit__label.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTEdit__rate">
         <MSBuild Projects="dwTEdit__rate.dproj"/>
     </Target>
@@ -361,6 +571,33 @@
     </Target>
     <Target Name="dwTEdit__rate:Make">
         <MSBuild Projects="dwTEdit__rate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTEdit__tree">
+        <MSBuild Projects="dwTEdit__tree.dproj"/>
+    </Target>
+    <Target Name="dwTEdit__tree:Clean">
+        <MSBuild Projects="dwTEdit__tree.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTEdit__tree:Make">
+        <MSBuild Projects="dwTEdit__tree.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTFlowPanel">
+        <MSBuild Projects="dwTFlowPanel.dproj"/>
+    </Target>
+    <Target Name="dwTFlowPanel:Clean">
+        <MSBuild Projects="dwTFlowPanel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTFlowPanel:Make">
+        <MSBuild Projects="dwTFlowPanel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTFlowPanel__auto">
+        <MSBuild Projects="dwTFlowPanel__auto.dproj"/>
+    </Target>
+    <Target Name="dwTFlowPanel__auto:Clean">
+        <MSBuild Projects="dwTFlowPanel__auto.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTFlowPanel__auto:Make">
+        <MSBuild Projects="dwTFlowPanel__auto.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTForm">
         <MSBuild Projects="dwTForm.dproj"/>
@@ -371,14 +608,14 @@
     <Target Name="dwTForm:Make">
         <MSBuild Projects="dwTForm.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dwTGauge">
-        <MSBuild Projects="dwTGauge.dproj"/>
+    <Target Name="dwTGridPanel">
+        <MSBuild Projects="dwTGridPanel.dproj"/>
     </Target>
-    <Target Name="dwTGauge:Clean">
-        <MSBuild Projects="dwTGauge.dproj" Targets="Clean"/>
+    <Target Name="dwTGridPanel:Clean">
+        <MSBuild Projects="dwTGridPanel.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="dwTGauge:Make">
-        <MSBuild Projects="dwTGauge.dproj" Targets="Make"/>
+    <Target Name="dwTGridPanel:Make">
+        <MSBuild Projects="dwTGridPanel.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTGroupBox">
         <MSBuild Projects="dwTGroupBox.dproj"/>
@@ -416,6 +653,15 @@
     <Target Name="dwTImage__captcha:Make">
         <MSBuild Projects="dwTImage__captcha.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTImage__preview">
+        <MSBuild Projects="dwTImage__preview.dproj"/>
+    </Target>
+    <Target Name="dwTImage__preview:Clean">
+        <MSBuild Projects="dwTImage__preview.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTImage__preview:Make">
+        <MSBuild Projects="dwTImage__preview.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTLabel">
         <MSBuild Projects="dwTLabel.dproj"/>
     </Target>
@@ -443,14 +689,50 @@
     <Target Name="dwTLabel__cool:Make">
         <MSBuild Projects="dwTLabel__cool.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dwTLabeledEdit">
-        <MSBuild Projects="dwTLabeledEdit.dproj"/>
+    <Target Name="dwTLabel__datetime">
+        <MSBuild Projects="dwTLabel__datetime.dproj"/>
     </Target>
-    <Target Name="dwTLabeledEdit:Clean">
-        <MSBuild Projects="dwTLabeledEdit.dproj" Targets="Clean"/>
+    <Target Name="dwTLabel__datetime:Clean">
+        <MSBuild Projects="dwTLabel__datetime.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="dwTLabeledEdit:Make">
-        <MSBuild Projects="dwTLabeledEdit.dproj" Targets="Make"/>
+    <Target Name="dwTLabel__datetime:Make">
+        <MSBuild Projects="dwTLabel__datetime.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTLabel__marquee">
+        <MSBuild Projects="dwTLabel__marquee.dproj"/>
+    </Target>
+    <Target Name="dwTLabel__marquee:Clean">
+        <MSBuild Projects="dwTLabel__marquee.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTLabel__marquee:Make">
+        <MSBuild Projects="dwTLabel__marquee.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTLabel__marquee2">
+        <MSBuild Projects="dwTLabel__marquee2.dproj"/>
+    </Target>
+    <Target Name="dwTLabel__marquee2:Clean">
+        <MSBuild Projects="dwTLabel__marquee2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTLabel__marquee2:Make">
+        <MSBuild Projects="dwTLabel__marquee2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTLabel__marqueev">
+        <MSBuild Projects="dwTLabel__marqueev.dproj"/>
+    </Target>
+    <Target Name="dwTLabel__marqueev:Clean">
+        <MSBuild Projects="dwTLabel__marqueev.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTLabel__marqueev:Make">
+        <MSBuild Projects="dwTLabel__marqueev.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTLabel__simple">
+        <MSBuild Projects="dwTLabel__simple.dproj"/>
+    </Target>
+    <Target Name="dwTLabel__simple:Clean">
+        <MSBuild Projects="dwTLabel__simple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTLabel__simple:Make">
+        <MSBuild Projects="dwTLabel__simple.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTListBox">
         <MSBuild Projects="dwTListBox.dproj"/>
@@ -461,41 +743,14 @@
     <Target Name="dwTListBox:Make">
         <MSBuild Projects="dwTListBox.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dwTListView__crud">
-        <MSBuild Projects="dwTListView__crud.dproj"/>
+    <Target Name="dwTListView__Combo">
+        <MSBuild Projects="dwTListView__Combo.dproj"/>
     </Target>
-    <Target Name="dwTListView__crud:Clean">
-        <MSBuild Projects="dwTListView__crud.dproj" Targets="Clean"/>
+    <Target Name="dwTListView__Combo:Clean">
+        <MSBuild Projects="dwTListView__Combo.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="dwTListView__crud:Make">
-        <MSBuild Projects="dwTListView__crud.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="dwTListView__mobile">
-        <MSBuild Projects="dwTListView__mobile.dproj"/>
-    </Target>
-    <Target Name="dwTListView__mobile:Clean">
-        <MSBuild Projects="dwTListView__mobile.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTListView__mobile:Make">
-        <MSBuild Projects="dwTListView__mobile.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="dwTListView__ww">
-        <MSBuild Projects="dwTListView__ww.dproj"/>
-    </Target>
-    <Target Name="dwTListView__ww:Clean">
-        <MSBuild Projects="dwTListView__ww.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTListView__ww:Make">
-        <MSBuild Projects="dwTListView__ww.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="dwTMainMenu">
-        <MSBuild Projects="dwTMainMenu.dproj"/>
-    </Target>
-    <Target Name="dwTMainMenu:Clean">
-        <MSBuild Projects="dwTMainMenu.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTMainMenu:Make">
-        <MSBuild Projects="dwTMainMenu.dproj" Targets="Make"/>
+    <Target Name="dwTListView__Combo:Make">
+        <MSBuild Projects="dwTListView__Combo.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTMediaPlayer">
         <MSBuild Projects="dwTMediaPlayer.dproj"/>
@@ -515,6 +770,15 @@
     <Target Name="dwTMediaPlayer__easyplayer:Make">
         <MSBuild Projects="dwTMediaPlayer__easyplayer.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTMediaPlayer__flv">
+        <MSBuild Projects="dwTMediaPlayer__flv.dproj"/>
+    </Target>
+    <Target Name="dwTMediaPlayer__flv:Clean">
+        <MSBuild Projects="dwTMediaPlayer__flv.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMediaPlayer__flv:Make">
+        <MSBuild Projects="dwTMediaPlayer__flv.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTMediaPlayer__m3u8">
         <MSBuild Projects="dwTMediaPlayer__m3u8.dproj"/>
     </Target>
@@ -533,23 +797,14 @@
     <Target Name="dwTMediaPlayer__mp3:Make">
         <MSBuild Projects="dwTMediaPlayer__mp3.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dwTMediaPlayer_m3u8">
-        <MSBuild Projects="dwTMediaPlayer_m3u8.dproj"/>
+    <Target Name="dwTMediaPlayer__xg">
+        <MSBuild Projects="dwTMediaPlayer__xg.dproj"/>
     </Target>
-    <Target Name="dwTMediaPlayer_m3u8:Clean">
-        <MSBuild Projects="dwTMediaPlayer_m3u8.dproj" Targets="Clean"/>
+    <Target Name="dwTMediaPlayer__xg:Clean">
+        <MSBuild Projects="dwTMediaPlayer__xg.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="dwTMediaPlayer_m3u8:Make">
-        <MSBuild Projects="dwTMediaPlayer_m3u8.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="dwTMediaPlayer_mp3">
-        <MSBuild Projects="dwTMediaPlayer_mp3.dproj"/>
-    </Target>
-    <Target Name="dwTMediaPlayer_mp3:Clean">
-        <MSBuild Projects="dwTMediaPlayer_mp3.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTMediaPlayer_mp3:Make">
-        <MSBuild Projects="dwTMediaPlayer_mp3.dproj" Targets="Make"/>
+    <Target Name="dwTMediaPlayer__xg:Make">
+        <MSBuild Projects="dwTMediaPlayer__xg.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTMemo">
         <MSBuild Projects="dwTMemo.dproj"/>
@@ -559,6 +814,24 @@
     </Target>
     <Target Name="dwTMemo:Make">
         <MSBuild Projects="dwTMemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTMemo__cascader">
+        <MSBuild Projects="dwTMemo__cascader.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__cascader:Clean">
+        <MSBuild Projects="dwTMemo__cascader.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__cascader:Make">
+        <MSBuild Projects="dwTMemo__cascader.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTMemo__codemirror">
+        <MSBuild Projects="dwTMemo__codemirror.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__codemirror:Clean">
+        <MSBuild Projects="dwTMemo__codemirror.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__codemirror:Make">
+        <MSBuild Projects="dwTMemo__codemirror.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTMemo__dvflyline">
         <MSBuild Projects="dwTMemo__dvflyline.dproj"/>
@@ -578,6 +851,33 @@
     <Target Name="dwTMemo__echarts:Make">
         <MSBuild Projects="dwTMemo__echarts.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTMemo__echartsmap">
+        <MSBuild Projects="dwTMemo__echartsmap.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__echartsmap:Clean">
+        <MSBuild Projects="dwTMemo__echartsmap.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__echartsmap:Make">
+        <MSBuild Projects="dwTMemo__echartsmap.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTMemo__googleads">
+        <MSBuild Projects="dwTMemo__googleads.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__googleads:Clean">
+        <MSBuild Projects="dwTMemo__googleads.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__googleads:Make">
+        <MSBuild Projects="dwTMemo__googleads.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTMemo__highlight">
+        <MSBuild Projects="dwTMemo__highlight.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__highlight:Clean">
+        <MSBuild Projects="dwTMemo__highlight.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__highlight:Make">
+        <MSBuild Projects="dwTMemo__highlight.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTMemo__html">
         <MSBuild Projects="dwTMemo__html.dproj"/>
     </Target>
@@ -596,14 +896,23 @@
     <Target Name="dwTMemo__markdown:Make">
         <MSBuild Projects="dwTMemo__markdown.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dwTMemo__markdownview">
-        <MSBuild Projects="dwTMemo__markdownview.dproj"/>
+    <Target Name="dwTMemo__md">
+        <MSBuild Projects="dwTMemo__md.dproj"/>
     </Target>
-    <Target Name="dwTMemo__markdownview:Clean">
-        <MSBuild Projects="dwTMemo__markdownview.dproj" Targets="Clean"/>
+    <Target Name="dwTMemo__md:Clean">
+        <MSBuild Projects="dwTMemo__md.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="dwTMemo__markdownview:Make">
-        <MSBuild Projects="dwTMemo__markdownview.dproj" Targets="Make"/>
+    <Target Name="dwTMemo__md:Make">
+        <MSBuild Projects="dwTMemo__md.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTMemo__mqtt">
+        <MSBuild Projects="dwTMemo__mqtt.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__mqtt:Clean">
+        <MSBuild Projects="dwTMemo__mqtt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__mqtt:Make">
+        <MSBuild Projects="dwTMemo__mqtt.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTMemo__uses">
         <MSBuild Projects="dwTMemo__uses.dproj"/>
@@ -614,6 +923,15 @@
     <Target Name="dwTMemo__uses:Make">
         <MSBuild Projects="dwTMemo__uses.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTMemo__usescomp">
+        <MSBuild Projects="dwTMemo__usescomp.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__usescomp:Clean">
+        <MSBuild Projects="dwTMemo__usescomp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__usescomp:Make">
+        <MSBuild Projects="dwTMemo__usescomp.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTPageControl">
         <MSBuild Projects="dwTPageControl.dproj"/>
     </Target>
@@ -622,15 +940,6 @@
     </Target>
     <Target Name="dwTPageControl:Make">
         <MSBuild Projects="dwTPageControl.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="dwTPageControl__carousel">
-        <MSBuild Projects="dwTPageControl__carousel.dproj"/>
-    </Target>
-    <Target Name="dwTPageControl__carousel:Clean">
-        <MSBuild Projects="dwTPageControl__carousel.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTPageControl__carousel:Make">
-        <MSBuild Projects="dwTPageControl__carousel.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTPageControl__timeline">
         <MSBuild Projects="dwTPageControl__timeline.dproj"/>
@@ -668,6 +977,15 @@
     <Target Name="dwTPanel__button:Make">
         <MSBuild Projects="dwTPanel__button.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTPanel__cesium">
+        <MSBuild Projects="dwTPanel__cesium.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__cesium:Clean">
+        <MSBuild Projects="dwTPanel__cesium.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__cesium:Make">
+        <MSBuild Projects="dwTPanel__cesium.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTPanel__dialog">
         <MSBuild Projects="dwTPanel__dialog.dproj"/>
     </Target>
@@ -676,6 +994,15 @@
     </Target>
     <Target Name="dwTPanel__dialog:Make">
         <MSBuild Projects="dwTPanel__dialog.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTPanel__div">
+        <MSBuild Projects="dwTPanel__div.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__div:Clean">
+        <MSBuild Projects="dwTPanel__div.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__div:Make">
+        <MSBuild Projects="dwTPanel__div.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTPanel__dvbox">
         <MSBuild Projects="dwTPanel__dvbox.dproj"/>
@@ -695,6 +1022,42 @@
     <Target Name="dwTPanel__dvdeco:Make">
         <MSBuild Projects="dwTPanel__dvdeco.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTPanel__elupload">
+        <MSBuild Projects="dwTPanel__elupload.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__elupload:Clean">
+        <MSBuild Projects="dwTPanel__elupload.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__elupload:Make">
+        <MSBuild Projects="dwTPanel__elupload.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTPanel__float">
+        <MSBuild Projects="dwTPanel__float.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__float:Clean">
+        <MSBuild Projects="dwTPanel__float.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__float:Make">
+        <MSBuild Projects="dwTPanel__float.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTPanel__Hint">
+        <MSBuild Projects="dwTPanel__Hint.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__Hint:Clean">
+        <MSBuild Projects="dwTPanel__Hint.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__Hint:Make">
+        <MSBuild Projects="dwTPanel__Hint.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTPanel__hscroll">
+        <MSBuild Projects="dwTPanel__hscroll.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__hscroll:Clean">
+        <MSBuild Projects="dwTPanel__hscroll.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__hscroll:Make">
+        <MSBuild Projects="dwTPanel__hscroll.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTPanel__iframe">
         <MSBuild Projects="dwTPanel__iframe.dproj"/>
     </Target>
@@ -713,6 +1076,15 @@
     <Target Name="dwTPanel__modal:Make">
         <MSBuild Projects="dwTPanel__modal.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTPanel__ok">
+        <MSBuild Projects="dwTPanel__ok.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__ok:Clean">
+        <MSBuild Projects="dwTPanel__ok.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__ok:Make">
+        <MSBuild Projects="dwTPanel__ok.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTPanel__popup">
         <MSBuild Projects="dwTPanel__popup.dproj"/>
     </Target>
@@ -721,6 +1093,33 @@
     </Target>
     <Target Name="dwTPanel__popup:Make">
         <MSBuild Projects="dwTPanel__popup.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTPanel__scroll">
+        <MSBuild Projects="dwTPanel__scroll.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__scroll:Clean">
+        <MSBuild Projects="dwTPanel__scroll.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__scroll:Make">
+        <MSBuild Projects="dwTPanel__scroll.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTPanel__selected">
+        <MSBuild Projects="dwTPanel__selected.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__selected:Clean">
+        <MSBuild Projects="dwTPanel__selected.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__selected:Make">
+        <MSBuild Projects="dwTPanel__selected.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTPanel__simple">
+        <MSBuild Projects="dwTPanel__simple.dproj"/>
+    </Target>
+    <Target Name="dwTPanel__simple:Clean">
+        <MSBuild Projects="dwTPanel__simple.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTPanel__simple:Make">
+        <MSBuild Projects="dwTPanel__simple.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTProgressBar">
         <MSBuild Projects="dwTProgressBar.dproj"/>
@@ -794,6 +1193,15 @@
     <Target Name="dwTShape:Make">
         <MSBuild Projects="dwTShape.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTShape__amap">
+        <MSBuild Projects="dwTShape__amap.dproj"/>
+    </Target>
+    <Target Name="dwTShape__amap:Clean">
+        <MSBuild Projects="dwTShape__amap.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTShape__amap:Make">
+        <MSBuild Projects="dwTShape__amap.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTShape__bmap">
         <MSBuild Projects="dwTShape__bmap.dproj"/>
     </Target>
@@ -802,6 +1210,24 @@
     </Target>
     <Target Name="dwTShape__bmap:Make">
         <MSBuild Projects="dwTShape__bmap.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTShape__canvas">
+        <MSBuild Projects="dwTShape__canvas.dproj"/>
+    </Target>
+    <Target Name="dwTShape__canvas:Clean">
+        <MSBuild Projects="dwTShape__canvas.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTShape__canvas:Make">
+        <MSBuild Projects="dwTShape__canvas.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTShape__menu">
+        <MSBuild Projects="dwTShape__menu.dproj"/>
+    </Target>
+    <Target Name="dwTShape__menu:Clean">
+        <MSBuild Projects="dwTShape__menu.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTShape__menu:Make">
+        <MSBuild Projects="dwTShape__menu.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTSpeedButton">
         <MSBuild Projects="dwTSpeedButton.dproj"/>
@@ -821,6 +1247,24 @@
     <Target Name="dwTSpinEdit:Make">
         <MSBuild Projects="dwTSpinEdit.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTSplitter">
+        <MSBuild Projects="dwTSplitter.dproj"/>
+    </Target>
+    <Target Name="dwTSplitter:Clean">
+        <MSBuild Projects="dwTSplitter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTSplitter:Make">
+        <MSBuild Projects="dwTSplitter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTStackPanel">
+        <MSBuild Projects="dwTStackPanel.dproj"/>
+    </Target>
+    <Target Name="dwTStackPanel:Clean">
+        <MSBuild Projects="dwTStackPanel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTStackPanel:Make">
+        <MSBuild Projects="dwTStackPanel.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTStaticText">
         <MSBuild Projects="dwTStaticText.dproj"/>
     </Target>
@@ -829,6 +1273,15 @@
     </Target>
     <Target Name="dwTStaticText:Make">
         <MSBuild Projects="dwTStaticText.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTStaticText__map">
+        <MSBuild Projects="dwTStaticText__map.dproj"/>
+    </Target>
+    <Target Name="dwTStaticText__map:Clean">
+        <MSBuild Projects="dwTStaticText__map.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTStaticText__map:Make">
+        <MSBuild Projects="dwTStaticText__map.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTStringGrid">
         <MSBuild Projects="dwTStringGrid.dproj"/>
@@ -902,6 +1355,15 @@
     <Target Name="dwTStringGrid__luck:Make">
         <MSBuild Projects="dwTStringGrid__luck.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTStringGrid__multi">
+        <MSBuild Projects="dwTStringGrid__multi.dproj"/>
+    </Target>
+    <Target Name="dwTStringGrid__multi:Clean">
+        <MSBuild Projects="dwTStringGrid__multi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTStringGrid__multi:Make">
+        <MSBuild Projects="dwTStringGrid__multi.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTStringGrid__noapple">
         <MSBuild Projects="dwTStringGrid__noapple.dproj"/>
     </Target>
@@ -947,15 +1409,6 @@
     <Target Name="dwTTabSheet:Make">
         <MSBuild Projects="dwTTabSheet.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dwTTabSheet__carousel">
-        <MSBuild Projects="dwTTabSheet__carousel.dproj"/>
-    </Target>
-    <Target Name="dwTTabSheet__carousel:Clean">
-        <MSBuild Projects="dwTTabSheet__carousel.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dwTTabSheet__carousel:Make">
-        <MSBuild Projects="dwTTabSheet__carousel.dproj" Targets="Make"/>
-    </Target>
     <Target Name="dwTTabSheet__timeline">
         <MSBuild Projects="dwTTabSheet__timeline.dproj"/>
     </Target>
@@ -992,6 +1445,15 @@
     <Target Name="dwTTrackBar:Make">
         <MSBuild Projects="dwTTrackBar.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTTrackBar__mobile">
+        <MSBuild Projects="dwTTrackBar__mobile.dproj"/>
+    </Target>
+    <Target Name="dwTTrackBar__mobile:Clean">
+        <MSBuild Projects="dwTTrackBar__mobile.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTTrackBar__mobile:Make">
+        <MSBuild Projects="dwTTrackBar__mobile.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTTrackBar__page">
         <MSBuild Projects="dwTTrackBar__page.dproj"/>
     </Target>
@@ -1019,14 +1481,32 @@
     <Target Name="dwTTreeView:Make">
         <MSBuild Projects="dwTTreeView.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTTreeView__combo">
+        <MSBuild Projects="dwTTreeView__combo.dproj"/>
+    </Target>
+    <Target Name="dwTTreeView__combo:Clean">
+        <MSBuild Projects="dwTTreeView__combo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTTreeView__combo:Make">
+        <MSBuild Projects="dwTTreeView__combo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTTreeView__grid">
+        <MSBuild Projects="dwTTreeView__grid.dproj"/>
+    </Target>
+    <Target Name="dwTTreeView__grid:Clean">
+        <MSBuild Projects="dwTTreeView__grid.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTTreeView__grid:Make">
+        <MSBuild Projects="dwTTreeView__grid.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="dwTBevel;dwTBitBtn;dwTButton;dwTButtonGroup__menu;dwTCalendar;dwTCheckBox;dwTComboBox;dwTDateTimePicker;dwTEdit;dwTEdit__cleave;dwTEdit__rate;dwTForm;dwTGauge;dwTGroupBox;dwTHeaderControl;dwTImage;dwTImage__captcha;dwTLabel;dwTLabel__captcha;dwTLabel__cool;dwTLabeledEdit;dwTListBox;dwTListView__crud;dwTListView__mobile;dwTListView__ww;dwTMainMenu;dwTMediaPlayer;dwTMediaPlayer__easyplayer;dwTMediaPlayer__m3u8;dwTMediaPlayer__mp3;dwTMediaPlayer_m3u8;dwTMediaPlayer_mp3;dwTMemo;dwTMemo__dvflyline;dwTMemo__echarts;dwTMemo__html;dwTMemo__markdown;dwTMemo__markdownview;dwTMemo__uses;dwTPageControl;dwTPageControl__carousel;dwTPageControl__timeline;dwTPanel;dwTPanel__badge;dwTPanel__button;dwTPanel__dialog;dwTPanel__dvbox;dwTPanel__dvdeco;dwTPanel__iframe;dwTPanel__modal;dwTPanel__popup;dwTProgressBar;dwTProgressBar__dv;dwTProgressBar__dvpond;dwTProgressBar__dvwater;dwTRadioButton;dwTRadioGroup;dwTScrollBox;dwTShape;dwTShape__bmap;dwTSpeedButton;dwTSpinEdit;dwTStaticText;dwTStringGrid;dwTStringGrid__apple;dwTStringGrid__dvcapsule;dwTStringGrid__dvconical;dwTStringGrid__dvranking;dwTStringGrid__dvring;dwTStringGrid__dvscroll;dwTStringGrid__luck;dwTStringGrid__noapple;dwTStringGrid__vecandle;dwTStringGrid__vemap;dwTStringGrid__ww;dwTTabSheet;dwTTabSheet__carousel;dwTTabSheet__timeline;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTrackBar__page;dwTTrackBar__wwpage;dwTTreeView"/>
+        <CallTarget Targets="dwTButton;dwTButton__comm;dwTButton__simple;dwTButtonGroup__category;dwTButtonGroup__menu;dwTCalendar;dwTCard;dwTCard__carousel;dwTCard__page;dwTCard__turn;dwTCardPanel;dwTCardPanel__carousel;dwTCardPanel__page;dwTCardPanel__turn;dwTCheckBox;dwTComboBox;dwTDateTimePicker;dwTEdit;dwTEdit__cleave;dwTEdit__label;dwTEdit__rate;dwTEdit__tree;dwTFlowPanel;dwTFlowPanel__auto;dwTForm;dwTGridPanel;dwTGroupBox;dwTHeaderControl;dwTImage;dwTImage__captcha;dwTImage__preview;dwTLabel;dwTLabel__captcha;dwTLabel__cool;dwTLabel__datetime;dwTLabel__marquee;dwTLabel__marquee2;dwTLabel__marqueev;dwTLabel__simple;dwTListBox;dwTListView__Combo;dwTMediaPlayer;dwTMediaPlayer__easyplayer;dwTMediaPlayer__flv;dwTMediaPlayer__m3u8;dwTMediaPlayer__mp3;dwTMediaPlayer__xg;dwTMemo;dwTMemo__cascader;dwTMemo__codemirror;dwTMemo__dvflyline;dwTMemo__echarts;dwTMemo__echartsmap;dwTMemo__googleads;dwTMemo__highlight;dwTMemo__html;dwTMemo__markdown;dwTMemo__md;dwTMemo__mqtt;dwTMemo__uses;dwTMemo__usescomp;dwTPageControl;dwTPageControl__timeline;dwTPanel;dwTPanel__badge;dwTPanel__button;dwTPanel__cesium;dwTPanel__dialog;dwTPanel__div;dwTPanel__dvbox;dwTPanel__dvdeco;dwTPanel__elupload;dwTPanel__float;dwTPanel__Hint;dwTPanel__hscroll;dwTPanel__iframe;dwTPanel__modal;dwTPanel__ok;dwTPanel__popup;dwTPanel__scroll;dwTPanel__selected;dwTPanel__simple;dwTProgressBar;dwTProgressBar__dv;dwTProgressBar__dvpond;dwTProgressBar__dvwater;dwTRadioButton;dwTRadioGroup;dwTScrollBox;dwTShape;dwTShape__amap;dwTShape__bmap;dwTShape__canvas;dwTShape__menu;dwTSpeedButton;dwTSpinEdit;dwTSplitter;dwTStackPanel;dwTStaticText;dwTStaticText__map;dwTStringGrid;dwTStringGrid__apple;dwTStringGrid__dvcapsule;dwTStringGrid__dvconical;dwTStringGrid__dvranking;dwTStringGrid__dvring;dwTStringGrid__dvscroll;dwTStringGrid__luck;dwTStringGrid__multi;dwTStringGrid__noapple;dwTStringGrid__vecandle;dwTStringGrid__vemap;dwTStringGrid__ww;dwTTabSheet;dwTTabSheet__timeline;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTrackBar__mobile;dwTTrackBar__page;dwTTrackBar__wwpage;dwTTreeView;dwTTreeView__combo;dwTTreeView__grid"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="dwTBevel:Clean;dwTBitBtn:Clean;dwTButton:Clean;dwTButtonGroup__menu:Clean;dwTCalendar:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTEdit__cleave:Clean;dwTEdit__rate:Clean;dwTForm:Clean;dwTGauge:Clean;dwTGroupBox:Clean;dwTHeaderControl:Clean;dwTImage:Clean;dwTImage__captcha:Clean;dwTLabel:Clean;dwTLabel__captcha:Clean;dwTLabel__cool:Clean;dwTLabeledEdit:Clean;dwTListBox:Clean;dwTListView__crud:Clean;dwTListView__mobile:Clean;dwTListView__ww:Clean;dwTMainMenu:Clean;dwTMediaPlayer:Clean;dwTMediaPlayer__easyplayer:Clean;dwTMediaPlayer__m3u8:Clean;dwTMediaPlayer__mp3:Clean;dwTMediaPlayer_m3u8:Clean;dwTMediaPlayer_mp3:Clean;dwTMemo:Clean;dwTMemo__dvflyline:Clean;dwTMemo__echarts:Clean;dwTMemo__html:Clean;dwTMemo__markdown:Clean;dwTMemo__markdownview:Clean;dwTMemo__uses:Clean;dwTPageControl:Clean;dwTPageControl__carousel:Clean;dwTPageControl__timeline:Clean;dwTPanel:Clean;dwTPanel__badge:Clean;dwTPanel__button:Clean;dwTPanel__dialog:Clean;dwTPanel__dvbox:Clean;dwTPanel__dvdeco:Clean;dwTPanel__iframe:Clean;dwTPanel__modal:Clean;dwTPanel__popup:Clean;dwTProgressBar:Clean;dwTProgressBar__dv:Clean;dwTProgressBar__dvpond:Clean;dwTProgressBar__dvwater:Clean;dwTRadioButton:Clean;dwTRadioGroup:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTShape__bmap:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTStaticText:Clean;dwTStringGrid:Clean;dwTStringGrid__apple:Clean;dwTStringGrid__dvcapsule:Clean;dwTStringGrid__dvconical:Clean;dwTStringGrid__dvranking:Clean;dwTStringGrid__dvring:Clean;dwTStringGrid__dvscroll:Clean;dwTStringGrid__luck:Clean;dwTStringGrid__noapple:Clean;dwTStringGrid__vecandle:Clean;dwTStringGrid__vemap:Clean;dwTStringGrid__ww:Clean;dwTTabSheet:Clean;dwTTabSheet__carousel:Clean;dwTTabSheet__timeline:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTrackBar__page:Clean;dwTTrackBar__wwpage:Clean;dwTTreeView:Clean"/>
+        <CallTarget Targets="dwTButton:Clean;dwTButton__comm:Clean;dwTButton__simple:Clean;dwTButtonGroup__category:Clean;dwTButtonGroup__menu:Clean;dwTCalendar:Clean;dwTCard:Clean;dwTCard__carousel:Clean;dwTCard__page:Clean;dwTCard__turn:Clean;dwTCardPanel:Clean;dwTCardPanel__carousel:Clean;dwTCardPanel__page:Clean;dwTCardPanel__turn:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTEdit__cleave:Clean;dwTEdit__label:Clean;dwTEdit__rate:Clean;dwTEdit__tree:Clean;dwTFlowPanel:Clean;dwTFlowPanel__auto:Clean;dwTForm:Clean;dwTGridPanel:Clean;dwTGroupBox:Clean;dwTHeaderControl:Clean;dwTImage:Clean;dwTImage__captcha:Clean;dwTImage__preview:Clean;dwTLabel:Clean;dwTLabel__captcha:Clean;dwTLabel__cool:Clean;dwTLabel__datetime:Clean;dwTLabel__marquee:Clean;dwTLabel__marquee2:Clean;dwTLabel__marqueev:Clean;dwTLabel__simple:Clean;dwTListBox:Clean;dwTListView__Combo:Clean;dwTMediaPlayer:Clean;dwTMediaPlayer__easyplayer:Clean;dwTMediaPlayer__flv:Clean;dwTMediaPlayer__m3u8:Clean;dwTMediaPlayer__mp3:Clean;dwTMediaPlayer__xg:Clean;dwTMemo:Clean;dwTMemo__cascader:Clean;dwTMemo__codemirror:Clean;dwTMemo__dvflyline:Clean;dwTMemo__echarts:Clean;dwTMemo__echartsmap:Clean;dwTMemo__googleads:Clean;dwTMemo__highlight:Clean;dwTMemo__html:Clean;dwTMemo__markdown:Clean;dwTMemo__md:Clean;dwTMemo__mqtt:Clean;dwTMemo__uses:Clean;dwTMemo__usescomp:Clean;dwTPageControl:Clean;dwTPageControl__timeline:Clean;dwTPanel:Clean;dwTPanel__badge:Clean;dwTPanel__button:Clean;dwTPanel__cesium:Clean;dwTPanel__dialog:Clean;dwTPanel__div:Clean;dwTPanel__dvbox:Clean;dwTPanel__dvdeco:Clean;dwTPanel__elupload:Clean;dwTPanel__float:Clean;dwTPanel__Hint:Clean;dwTPanel__hscroll:Clean;dwTPanel__iframe:Clean;dwTPanel__modal:Clean;dwTPanel__ok:Clean;dwTPanel__popup:Clean;dwTPanel__scroll:Clean;dwTPanel__selected:Clean;dwTPanel__simple:Clean;dwTProgressBar:Clean;dwTProgressBar__dv:Clean;dwTProgressBar__dvpond:Clean;dwTProgressBar__dvwater:Clean;dwTRadioButton:Clean;dwTRadioGroup:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTShape__amap:Clean;dwTShape__bmap:Clean;dwTShape__canvas:Clean;dwTShape__menu:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTSplitter:Clean;dwTStackPanel:Clean;dwTStaticText:Clean;dwTStaticText__map:Clean;dwTStringGrid:Clean;dwTStringGrid__apple:Clean;dwTStringGrid__dvcapsule:Clean;dwTStringGrid__dvconical:Clean;dwTStringGrid__dvranking:Clean;dwTStringGrid__dvring:Clean;dwTStringGrid__dvscroll:Clean;dwTStringGrid__luck:Clean;dwTStringGrid__multi:Clean;dwTStringGrid__noapple:Clean;dwTStringGrid__vecandle:Clean;dwTStringGrid__vemap:Clean;dwTStringGrid__ww:Clean;dwTTabSheet:Clean;dwTTabSheet__timeline:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTrackBar__mobile:Clean;dwTTrackBar__page:Clean;dwTTrackBar__wwpage:Clean;dwTTreeView:Clean;dwTTreeView__combo:Clean;dwTTreeView__grid:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="dwTBevel:Make;dwTBitBtn:Make;dwTButton:Make;dwTButtonGroup__menu:Make;dwTCalendar:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTEdit__cleave:Make;dwTEdit__rate:Make;dwTForm:Make;dwTGauge:Make;dwTGroupBox:Make;dwTHeaderControl:Make;dwTImage:Make;dwTImage__captcha:Make;dwTLabel:Make;dwTLabel__captcha:Make;dwTLabel__cool:Make;dwTLabeledEdit:Make;dwTListBox:Make;dwTListView__crud:Make;dwTListView__mobile:Make;dwTListView__ww:Make;dwTMainMenu:Make;dwTMediaPlayer:Make;dwTMediaPlayer__easyplayer:Make;dwTMediaPlayer__m3u8:Make;dwTMediaPlayer__mp3:Make;dwTMediaPlayer_m3u8:Make;dwTMediaPlayer_mp3:Make;dwTMemo:Make;dwTMemo__dvflyline:Make;dwTMemo__echarts:Make;dwTMemo__html:Make;dwTMemo__markdown:Make;dwTMemo__markdownview:Make;dwTMemo__uses:Make;dwTPageControl:Make;dwTPageControl__carousel:Make;dwTPageControl__timeline:Make;dwTPanel:Make;dwTPanel__badge:Make;dwTPanel__button:Make;dwTPanel__dialog:Make;dwTPanel__dvbox:Make;dwTPanel__dvdeco:Make;dwTPanel__iframe:Make;dwTPanel__modal:Make;dwTPanel__popup:Make;dwTProgressBar:Make;dwTProgressBar__dv:Make;dwTProgressBar__dvpond:Make;dwTProgressBar__dvwater:Make;dwTRadioButton:Make;dwTRadioGroup:Make;dwTScrollBox:Make;dwTShape:Make;dwTShape__bmap:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTStaticText:Make;dwTStringGrid:Make;dwTStringGrid__apple:Make;dwTStringGrid__dvcapsule:Make;dwTStringGrid__dvconical:Make;dwTStringGrid__dvranking:Make;dwTStringGrid__dvring:Make;dwTStringGrid__dvscroll:Make;dwTStringGrid__luck:Make;dwTStringGrid__noapple:Make;dwTStringGrid__vecandle:Make;dwTStringGrid__vemap:Make;dwTStringGrid__ww:Make;dwTTabSheet:Make;dwTTabSheet__carousel:Make;dwTTabSheet__timeline:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTrackBar__page:Make;dwTTrackBar__wwpage:Make;dwTTreeView:Make"/>
+        <CallTarget Targets="dwTButton:Make;dwTButton__comm:Make;dwTButton__simple:Make;dwTButtonGroup__category:Make;dwTButtonGroup__menu:Make;dwTCalendar:Make;dwTCard:Make;dwTCard__carousel:Make;dwTCard__page:Make;dwTCard__turn:Make;dwTCardPanel:Make;dwTCardPanel__carousel:Make;dwTCardPanel__page:Make;dwTCardPanel__turn:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTEdit__cleave:Make;dwTEdit__label:Make;dwTEdit__rate:Make;dwTEdit__tree:Make;dwTFlowPanel:Make;dwTFlowPanel__auto:Make;dwTForm:Make;dwTGridPanel:Make;dwTGroupBox:Make;dwTHeaderControl:Make;dwTImage:Make;dwTImage__captcha:Make;dwTImage__preview:Make;dwTLabel:Make;dwTLabel__captcha:Make;dwTLabel__cool:Make;dwTLabel__datetime:Make;dwTLabel__marquee:Make;dwTLabel__marquee2:Make;dwTLabel__marqueev:Make;dwTLabel__simple:Make;dwTListBox:Make;dwTListView__Combo:Make;dwTMediaPlayer:Make;dwTMediaPlayer__easyplayer:Make;dwTMediaPlayer__flv:Make;dwTMediaPlayer__m3u8:Make;dwTMediaPlayer__mp3:Make;dwTMediaPlayer__xg:Make;dwTMemo:Make;dwTMemo__cascader:Make;dwTMemo__codemirror:Make;dwTMemo__dvflyline:Make;dwTMemo__echarts:Make;dwTMemo__echartsmap:Make;dwTMemo__googleads:Make;dwTMemo__highlight:Make;dwTMemo__html:Make;dwTMemo__markdown:Make;dwTMemo__md:Make;dwTMemo__mqtt:Make;dwTMemo__uses:Make;dwTMemo__usescomp:Make;dwTPageControl:Make;dwTPageControl__timeline:Make;dwTPanel:Make;dwTPanel__badge:Make;dwTPanel__button:Make;dwTPanel__cesium:Make;dwTPanel__dialog:Make;dwTPanel__div:Make;dwTPanel__dvbox:Make;dwTPanel__dvdeco:Make;dwTPanel__elupload:Make;dwTPanel__float:Make;dwTPanel__Hint:Make;dwTPanel__hscroll:Make;dwTPanel__iframe:Make;dwTPanel__modal:Make;dwTPanel__ok:Make;dwTPanel__popup:Make;dwTPanel__scroll:Make;dwTPanel__selected:Make;dwTPanel__simple:Make;dwTProgressBar:Make;dwTProgressBar__dv:Make;dwTProgressBar__dvpond:Make;dwTProgressBar__dvwater:Make;dwTRadioButton:Make;dwTRadioGroup:Make;dwTScrollBox:Make;dwTShape:Make;dwTShape__amap:Make;dwTShape__bmap:Make;dwTShape__canvas:Make;dwTShape__menu:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTSplitter:Make;dwTStackPanel:Make;dwTStaticText:Make;dwTStaticText__map:Make;dwTStringGrid:Make;dwTStringGrid__apple:Make;dwTStringGrid__dvcapsule:Make;dwTStringGrid__dvconical:Make;dwTStringGrid__dvranking:Make;dwTStringGrid__dvring:Make;dwTStringGrid__dvscroll:Make;dwTStringGrid__luck:Make;dwTStringGrid__multi:Make;dwTStringGrid__noapple:Make;dwTStringGrid__vecandle:Make;dwTStringGrid__vemap:Make;dwTStringGrid__ww:Make;dwTTabSheet:Make;dwTTabSheet__timeline:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTrackBar__mobile:Make;dwTTrackBar__page:Make;dwTTrackBar__wwpage:Make;dwTTreeView:Make;dwTTreeView__combo:Make;dwTTreeView__grid:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

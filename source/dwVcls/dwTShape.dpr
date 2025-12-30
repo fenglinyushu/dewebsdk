@@ -24,9 +24,9 @@ uses
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 const
      ss : array[0..2] of string = (
-          '<script type="text/javascript" src="ZXing_files/librarylatest"></script>',
-          '<link rel="stylesheet" as="style" href="ZXing_files/css.css">',
-          '<link rel="stylesheet" as="style" href="ZXing_files/normalize.css">'
+          '<script type="text/javascript" src="dist/_ZXing/librarylatest"></script>',
+          '<link rel="stylesheet" as="style" href="dist/_ZXing/css.css">',
+          '<link rel="stylesheet" as="style" href="dist/_ZXing/normalize.css">'
      );
 var
      joRes     : Variant;
@@ -51,7 +51,7 @@ begin
      joData    := _Json(AData);
 
      if joData.name = 'onenddock' then begin
-          TShape(ACtrl).HelpKeyword     := joData.v;
+          TShape(ACtrl).HelpKeyword     := dwEscape(joData.v);
           if Assigned(TShape(ACtrl).OnEndDock) then begin
                TShape(ACtrl).OnEndDock(TShape(ACtrl),nil,0,0);
           end;

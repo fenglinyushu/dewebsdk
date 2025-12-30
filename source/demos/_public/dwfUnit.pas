@@ -10,7 +10,7 @@ uses
     Graphics, Math,
     Winapi.Windows, Winapi.Messages, Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, System.Classes,
     DateUtils,SysUtils,Vcl.ExtCtrls, Vcl.Grids, Vcl.ComCtrls, Vcl.Imaging.pngimage, Vcl.Menus,
-    VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.TeeProcs, VCLTee.Chart, Vcl.Buttons;
+    Vcl.Buttons;
 
 
 //对Panel内的控件按TabOrder顺序进行水平等分排列
@@ -77,8 +77,6 @@ var
     iHeight : Integer;
     iRow    : Integer;
     iCol    : Integer;
-    iLeft   : Integer;
-    iTop    : Integer;
 begin
     //<异常检测
     //如果子控件为0，则退出
@@ -123,12 +121,9 @@ function dwfAlignHorzColPro(AParent:TPanel;AColCount:Integer):Integer;
 var
     iItem   : Integer;
     iWidth  : Integer;
-    iRCount : Integer;
     iHeight : Integer;
     iRow    : Integer;
     iCol    : Integer;
-    iLeft   : Integer;
-    iTop    : Integer;
 
     iMLeft      : Integer;
     iMTop       : Integer;
@@ -146,10 +141,6 @@ begin
     if AColCount<1 then begin
         AColCount   := 1;
     end;
-
-    //取得总行数
-    iRCount  := AParent.ControlCount;
-    iRCount  := Ceil(iRCount / AColCount);
 
     //
     iMLeft      := AParent.Controls[0].Margins.Left;

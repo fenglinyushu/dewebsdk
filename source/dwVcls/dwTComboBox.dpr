@@ -40,16 +40,15 @@ begin
 
             //更新值
             sValue    := dwUnescape(joData.v);
-            if TComboBox(ACtrl).Style = csDropDown then begin
-                TComboBox(ACtrl).Text    := sValue;
-            end else begin
-                for I := 0 to TComboBox(ACtrl).Items.Count-1 do begin
-                    if sValue = TComboBox(ACtrl).Items[I] then begin
-                        TComboBox(ACtrl).ItemIndex  := I;
-                        break;
-                    end;
+            //
+            TComboBox(ACtrl).ItemIndex  := -1;
+            for I := 0 to Items.Count-1 do begin
+                if sValue = Items[I] then begin
+                    TComboBox(ACtrl).ItemIndex  := I;
+                    break;
                 end;
             end;
+           Text    := sValue;
             //恢复事件
             OnChange  := oChange;
 
@@ -61,6 +60,7 @@ begin
         end else if joData.e = 'onblur' then begin
             //更新值
             sValue    := dwUnescape(joData.v);
+            //
             if sValue <> '' then begin
                 //保存事件
                 oChange := OnChange;
@@ -72,27 +72,40 @@ begin
                     sValue  := Text;
                 end;
 
-
-                if TComboBox(ACtrl).Style = csDropDown then begin
-                    Text    := sValue;
-                end else begin
-                    for I := 0 to Items.Count-1 do begin
-                        if sValue = Items[I] then begin
-                            TComboBox(ACtrl).ItemIndex  := I;
-                            break;
-                        end;
+                TComboBox(ACtrl).ItemIndex  := -1;
+                for I := 0 to Items.Count-1 do begin
+                    if sValue = Items[I] then begin
+                        TComboBox(ACtrl).ItemIndex  := I;
+                        break;
                     end;
                 end;
+               Text    := sValue;
                 //恢复事件
                 OnChange  := oChange;
 
                 //执行事件
-                if Assigned(OnChange) then begin
-                    OnChange(TComboBox(ACtrl));
+                if Assigned(OnCloseUp) then begin
+                    OnCloseUp(TComboBox(ACtrl));
                 end;
 
             end;
         end else if joData.e = 'ondropdown' then begin
+{
+            //保存事件
+            oChange := TComboBox(ACtrl).OnChange;
+            //清空事件,以防止自动执行
+            OnChange  := nil;
+
+            //更新值
+            sValue    := dwUnescape(joData.v);
+           //恢复事件
+            OnChange  := oChange;
+
+            //执行事件
+            if Assigned(OnChange) then begin
+                OnChange(TComboBox(ACtrl));
+            end;
+}
             if joData.v = 'true' then begin
                 if Assigned(OnDropDown) then begin
                     OnDropDown(TLabel(ACtrl));
@@ -165,11 +178,14 @@ begin
                     +'height:'+sFull+'__hei'
                 +'}"'
                 +' style="position:absolute;'
+                    +'overflow:hidden;'
                     +'border:1px solid #DCDFF0;'
                     +'border-radius:3px;'
+                    +'color:'+dwColor(Font.Color)+';'
+                    //+'line-height:'+IntToStr(Height)+'px;'
                     +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
-                    +dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //自定义背景色
-                    +dwGetHintStyle(joHint,'color','color','')             //自定义字体色
+                    //+dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //自定义背景色
+                    //+dwGetHintStyle(joHint,'color','color','')             //自定义字体色
                     +dwGetHintStyle(joHint,'fontsize','font-size','')      //自定义字体大小
                     +dwGetDWStyle(joHint)
                 +'"' //style 封闭
@@ -180,7 +196,18 @@ begin
 
                 +Format(_DWEVENT,['change',sFull,'this.'+sFull+'__txt','onchange',TForm(Owner).Handle])
                 +'>');
-        joRes.Add('    <el-option v-for="item in '+sFull+'__its" :key="item.value" :label="item.value" :value="item.value"/>');
+
+        //显示左侧图标
+        if joHint.Exists('icon') then begin
+             joRes.Add(
+                '<template slot="prefix" >'+
+                    '<span style="line-height:'+IntToStr(Height)+'px;padding-left: 5px;">'+
+                        '<i class="'+joHint.icon+'"></i>'+
+                    '</span>'+
+                '</template>');
+        end;
+
+        joRes.Add('<el-option v-for="(item,index) in '+sFull+'__its" :key="item.index" :label="item.value" :value="item.value"/>');
 
     end;
 
@@ -204,16 +231,23 @@ end;
 //取得Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     sCode     : string;
-     iItem     : Integer;
+    joRes       : Variant;
+    joHint      : Variant;
+    sCode       : string;
+    iItem       : Integer;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
+
+    //取得HINT对象JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
     //生成返回值数组
     joRes    := _Json('[]');
     //
     with TComboBox(ACtrl) do begin
         //添加选项
-        sCode     := dwFullName(Actrl)+'__its:[';
+        sCode     := sFull+'__its:[';
         for iItem := 0 to Items.Count-1 do begin
              sCode     := sCode + '{value:'''+Items[iItem]+'''},';
         end;
@@ -224,24 +258,24 @@ begin
         joRes.Add(sCode);
 
         //
-        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-        if dwGetProp(TControl(ACtrl),'height')='' then begin
-             joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+        if joHint.Exists('height') then begin
+             joRes.Add(sFull+'__hei:"'+IntToStr(dwGetInt(joHint,'height',30))+'px",');
         end else begin
-             joRes.Add(dwFullName(Actrl)+'__hei:"'+dwGetProp(TControl(ACtrl),'height')+'px",');
+             joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
         end;
         //
-        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
-        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
         //
-        joRes.Add(dwFullName(Actrl)+'__txt:"'+Text+'",');
+        joRes.Add(sFull+'__txt:"'+Text+'",');
         //
         if Color = clNone then begin
-            joRes.Add(dwFullName(Actrl)+'__col:"rgba(0,0,0,0)",');
+            joRes.Add(sFull+'__col:"rgba(0,0,0,0)",');
         end else begin
-            joRes.Add(dwFullName(Actrl)+'__col:"'+dwAlphaColor(TPanel(ACtrl))+'",');
+            joRes.Add(sFull+'__col:"'+dwAlphaColor(TPanel(ACtrl))+'",');
         end;
     end;
     //
@@ -252,16 +286,19 @@ end;
 function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
     joRes       : Variant;
+    joHint      : Variant;  //__eventcomponent
     sCode       : string;
     sEventComp  : string;       //用于读取事件发起控件名称
     iItem       : Integer;
-    joHint      : Variant;  //__eventcomponent
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
+
     //生成返回值数组
     joRes    := _Json('[]');
 
     //得到事件源控件
-    joHint  := dwGetHintJson(TControl(ACtrl.Owner));
+    joHint      := dwGetHintJson(TControl(ACtrl.Owner));
     sEventComp  := '';
     if joHint.Exists('__eventcomponent') then begin
         sEventComp  := LowerCase(joHint.__eventcomponent);
@@ -270,7 +307,7 @@ begin
     //
     with TComboBox(ACtrl) do begin
         //添加选项
-        sCode     := 'this.'+dwFullName(Actrl)+'__its=[';
+        sCode     := 'this.'+sFull+'__its=[';
         for iItem := 0 to Items.Count-1 do begin
              sCode     := sCode + '{value:'''+Items[iItem]+'''},';
         end;
@@ -280,29 +317,34 @@ begin
         sCode     := sCode + '];';
         joRes.Add(sCode);
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-        if dwGetProp(TControl(ACtrl),'height')='' then begin
-             joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        if joHint.Exists('height') then begin
+             joRes.Add('this.'+sFull+'__hei="'+IntToStr(dwGetInt(joHint,'height',30))+'px";');
         end else begin
-             joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+dwGetProp(TControl(ACtrl),'height')+'px";');
+             joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
+        end;
+        if dwGetProp(TControl(ACtrl),'height')='' then begin
+             joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
+        end else begin
+             joRes.Add('this.'+sFull+'__hei="'+dwGetProp(TControl(ACtrl),'height')+'px";');
         end;
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
         //
         //如果当前是事件源控件，则不处理
-        if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+Text+'";');
+        if (sEventComp <> sFull) or (TControl(ACtrl).ParentCustomHint=False) then begin
+            joRes.Add('this.'+sFull+'__txt="'+Text+'";');
         end else begin
             joRes.Add('');
         end;
         //
         if Color = clNone then begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__col="rgba(0,0,0,0)";');
+            joRes.Add('this.'+sFull+'__col="rgba(0,0,0,0)";');
         end else begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwAlphaColor(TPanel(ACtrl))+'";');
+            joRes.Add('this.'+sFull+'__col="'+dwAlphaColor(TPanel(ACtrl))+'";');
         end;
     //
     end;
@@ -320,13 +362,13 @@ begin
     joRes   := _Json('[]');
 
     //
-    sFull   := dwFullName(ACtrl);
+    sFull   := dwFullName(Actrl);
 
     with TComboBox(ACtrl) do begin
         //blur事件
         sCode   := sFull + '__blur(e){'
                     //+'console.log("onblur");'
-                    +'this.'+sFull+'__txt = e.target.value;'
+                    +'if (!(e.target.value == "")) this.'+sFull+'__txt = e.target.value;'
                     +'this.$forceUpdate();'
                     +'__empty__ = "__empty__";'
                     +'if(e.target.value == ""){'
@@ -341,7 +383,7 @@ begin
         //drop事件
         sCode   :=
                 sFull + '__drop(e){' +
-                    'console.log(e);' +
+                    //'console.log(e);' +
                     'if (e == true){'+
                         'this.dwevent(null,"'+sFull+'",''"true"'',''ondropdown'','''+IntToStr(TForm(Owner).Handle)+''');'+
                     '}else{' +

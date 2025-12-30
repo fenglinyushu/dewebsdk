@@ -10,7 +10,7 @@ uses
     Graphics, Math,
     Winapi.Windows, Winapi.Messages, Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, System.Classes,
     DateUtils,SysUtils,Vcl.ExtCtrls, Vcl.Grids, Vcl.ComCtrls, Vcl.Imaging.pngimage, Vcl.Menus,
-    VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.TeeProcs, VCLTee.Chart, Vcl.Buttons;
+    Vcl.Buttons;
 
 
 //对Panel内的控件按TabOrder顺序进行水平等分排列

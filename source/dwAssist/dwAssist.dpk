@@ -32,10 +32,10 @@ requires
   designide,
   dbrtl,
   vcldb,
-  VclSmp,
-  SynEditDR;
+  VclSmp;
 
 contains
-  Main in 'Main.pas' {MainForm};
+  Main in 'Main.pas' {MainForm},
+  dwaConsts in 'dwaConsts.pas';
 
 end.

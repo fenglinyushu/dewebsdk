@@ -23,13 +23,26 @@ end;
 
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
+var
+     joData    : Variant;
 begin
-    with TPageControl(TTabSheet(Actrl).PageControl) do begin
-        //用作Tabs控件---------------------------------------------------
+    with TTabSheet(Actrl) do begin
+        //
+        joData    := _Json(AData);
 
         //
-        if Assigned( TTabSheet(ACtrl).OnShow) then begin
-            TTabSheet(ACtrl).OnShow(TTabSheet(ACtrl));
+        if joData = unassigned then begin
+            Exit;
+        end;
+        if not joData.Exists('e') then begin
+            Exit;
+        end;
+
+        if joData.e = 'onclick' then begin
+            //
+            if Assigned(OnEnter) then begin
+                OnEnter(TTabSheet(Actrl));
+            end;
         end;
     end;
 end;
@@ -61,14 +74,21 @@ begin
                     +dwDisable(TControl(ACtrl))
                     +dwGetHintValue(joHint,'icon','icon','')
                     +dwGetDWAttr(joHint)
-                    +' :style="{left:'+dwFullName(Actrl)+'__lef,'
+                    +' :style="{'
+                            +'left:'+dwFullName(Actrl)+'__lef,'
                             +'top:'+dwFullName(Actrl)+'__ttp,'
                             +'width:'+dwFullName(Actrl)+'__wid,'
-                            +'height:'+dwFullName(Actrl)+'__hei}"'
-                    +' style="position:absolute;height:100%;overflow:hidden;'
-                    +dwGetDWStyle(joHint)
+                            +'height:'+dwFullName(Actrl)+'__hei'
+                    +'}"'
+                    +' style="'
+                        +'position:absolute;'
+                        //+'height:100%;'
+                        //禁止选择
+                        +'user-select: none;'
+                        +'overflow:hidden;'
+                        +dwGetDWStyle(joHint)
                     +'"' //style 封闭
-                    +dwIIF(Assigned(OnShow),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                    //+dwIIF(Assigned(OnEnter),Format(_DWEVENT,['tab-click',Name,'0','onclick',TForm(Owner).Handle]),'')
                     +'>';
             //添加到返回值数据
             joRes.Add(sCode);
@@ -145,6 +165,11 @@ begin
         end;
         joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
         joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
+        //修正可能存在的高度过大问题
+        if Height > PageControl.Height - 40 then begin
+            Height  := PageControl.Height - 40;
+        end;
+        //
         joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
         //
         joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(TabVisible,'true;','false;'));

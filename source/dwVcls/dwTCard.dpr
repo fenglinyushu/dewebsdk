@@ -292,7 +292,7 @@ begin
             joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
             joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
             //
-            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(CardPanel.ActiveCardIndex = CardIndex,'true,','false,'));
+            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF((CardPanel.ActiveCardIndex = CardIndex) and (Visible = True),'true,','false,'));
             joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
             //
             if TCard(ACtrl).Color = clNone then begin
@@ -331,7 +331,7 @@ begin
             joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
             joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
             //
-            joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(CardPanel.ActiveCardIndex = CardIndex,'true;','false;'));
+            joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF((CardPanel.ActiveCardIndex = CardIndex) and (Visible = True),'true;','false;'));
             joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
             //
             if TCard(ACtrl).Color = clNone then begin

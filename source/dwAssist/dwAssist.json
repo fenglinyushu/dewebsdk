@@ -1,598 +1,1088 @@
 [
-   {
-      "class" : "TBitBtn",
-      "items" : [
-         {
-            "name" : "type",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÏÔÊ¾ÑùÊ½",
-            "items" : [
-               [ "primary", "Ö÷Òª" ],
-               [ "success", "³É¹¦" ],
-               [ "info", "ĞÅÏ¢" ],
-               [ "warning", "¾¯¸æ" ],
-               [ "danger", "Î£ÏÕ" ],
-               [ "text", "ÎÄ±¾" ]
-            ]
-         },
-         {
-            "name" : "style",
-            "type" : "°´Å¥µÄÏÔÊ¾ĞÎ×´",
-            "items" : [
-               [ "plain", "ÆÓËØ" ],
-               [ "round", "Ô²½Ç" ],
-               [ "circle", "Ô²ĞÎ" ]
-            ]
-         },
-         {
-            "name" : "icon",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÍ¼±ê£¨×ó²à£©",
-            "items" : [
-               [ "el-icon-platform-eleme" ],
-               [ "el-icon-eleme" ],
-               [ "el-icon-delete-solid" ],
-               [ "el-icon-delete" ],
-               [ "el-icon-s-tools" ],
-               [ "el-icon-setting" ],
-               [ "el-icon-user-solid" ],
-               [ "el-icon-user" ],
-               [ "el-icon-phone" ],
-               [ "el-icon-phone-outline" ]
-            ]
-         },
-         {
-            "name" : "backgroundcolor",
-            "type" : "string",
-            "hint" : "°´Å¥µÄ±³¾°É«",
-            "items" : [
-               [ "#4CAF50" ],
-               [ "#00AC6A" ],
-               [ "#6CCF70" ],
-               [ "#008CBA" ],
-               [ "#0094D9" ],
-               [ "#00B4F4" ],
-               [ "#f44336" ],
-               [ "#FE5E08" ],
-               [ "#FF6356" ],
-               [ "#e7e7e7" ],
-               [ "#D71103" ],
-               [ "#156AA8" ],
-               [ "#555555" ]
-            ]
-         },
-         {
-            "name" : "radius",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÔ²½Ç°ë¾¶£¨ÊıÖµ¿É×ÔĞĞ¸ü¸Ä£©",
-            "items" : [
-               [ "5px", "5ÏñËØÔ²½Ç" ],
-               [ "50%", "50%Ô²½Ç" ],
-               [ "5px 5px 0px 0px", "×óÉÏ/ÓÒÉÏ½Ç5ÏñËØÔ²½Ç£¬×óÏÂ/ÓÒÏÂÖ±½Ç" ],
-               [ "10px 0 0 10px", "×óÉÏ/×óÏÂ½Ç5ÏñËØÔ²½Ç£¬ÓÒÉÏ/ÓÒÏÂÖ±½Ç" ],
-               [ "0 10px 10px 0", "×óÉÏ/×óÏÂ½ÇÖ±½Ç£¬ÓÒÉÏ/ÓÒÏÂ5ÏñËØÔ²½Ç" ]
-            ]
-         },
-         {
-            "name" : "accept",
-            "type" : "string",
-            "hint" : "Ö¸¶¨ÉÏ´«ÎÄ¼şµÄÀàĞÍ",
-            "items" : [
-               [ "image/*", "ÉÏ´«Í¼Æ¬" ],
-               [ "video/*", "ÉÏ´«ÊÓÆµ" ],
-               [ "image/gif, image/jpeg", "ÉÏ´«gifºÍjpeg" ],
-               [ ".doc,.docx,.xls,.xlsx,.pdf", "ÉÏ´«Ö¸¶¨À©Õ¹Ãû" ],
-               [ "application/msword", "WORDÎÄµµ" ],
-               [ "application/pdf", "ÉÏ´«PDF" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TButton",
-      "items" : [
-         {
-            "name" : "type",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÏÔÊ¾ÑùÊ½",
-            "items" : [
-               [ "primary", "Ö÷Òª" ],
-               [ "success", "³É¹¦" ],
-               [ "info", "ĞÅÏ¢" ],
-               [ "warning", "¾¯¸æ" ],
-               [ "danger", "Î£ÏÕ" ],
-               [ "text", "ÎÄ±¾" ]
-            ]
-         },
-         {
-            "name" : "style",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÏÔÊ¾ĞÎ×´",
-            "items" : [
-               [ "plain", "ÆÓËØ" ],
-               [ "round", "Ô²½Ç" ],
-               [ "circle", "Ô²ĞÎ" ]
-            ]
-         },
-         {
-            "name" : "icon",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÍ¼±ê£¨×ó²à£©",
-            "items" : [
-               [ "el-icon-platform-eleme" ],
-               [ "el-icon-eleme" ],
-               [ "el-icon-delete-solid" ],
-               [ "el-icon-delete" ],
-               [ "el-icon-s-tools" ],
-               [ "el-icon-setting" ],
-               [ "el-icon-user-solid" ],
-               [ "el-icon-user" ],
-               [ "el-icon-phone" ],
-               [ "el-icon-phone-outline" ]
-            ]
-         },
-         {
-            "name" : "backgroundcolor",
-            "type" : "string",
-            "hint" : "°´Å¥µÄ±³¾°É«",
-            "items" : [
-               [ "#4CAF50" ],
-               [ "#00AC6A" ],
-               [ "#6CCF70" ],
-               [ "#008CBA" ],
-               [ "#0094D9" ],
-               [ "#00B4F4" ],
-               [ "#f44336" ],
-               [ "#FE5E08" ],
-               [ "#FF6356" ],
-               [ "#e7e7e7" ],
-               [ "#D71103" ],
-               [ "#156AA8" ],
-               [ "#555555" ]
-            ]
-         },
-         {
-            "name" : "radius",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÔ²½Ç°ë¾¶£¨ÊıÖµ¿É×ÔĞĞ¸ü¸Ä£©",
-            "items" : [
-               [ "5px", "5ÏñËØÔ²½Ç" ],
-               [ "50%", "50%Ô²½Ç" ],
-               [ "5px 5px 0px 0px", "×óÉÏ/ÓÒÉÏ½Ç5ÏñËØÔ²½Ç£¬×óÏÂ/ÓÒÏÂÖ±½Ç" ],
-               [ "10px 0 0 10px", "×óÉÏ/×óÏÂ½Ç5ÏñËØÔ²½Ç£¬ÓÒÉÏ/ÓÒÏÂÖ±½Ç" ],
-               [ "0 10px 10px 0", "×óÉÏ/×óÏÂ½ÇÖ±½Ç£¬ÓÒÉÏ/ÓÒÏÂ5ÏñËØÔ²½Ç" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TColumnTitle",
-      "items" : [
-         {
-            "name" : "type",
-            "type" : "×Ö¶ÎÀàĞÍ",
-            "items" : [
-               [ "image", "ÏÔÊ¾Í¼Ïñ" ],
-               [ "rate", "ÏÔÊ¾Îª»ÕÕÂ" ]
-            ]
-         },
-         {
-            "name" : "left",
-            "type" : "integer",
-            "hint" : "left",
-            "items" : [
-               [ 10 ],
-               [ 20 ],
-               [ 30 ],
-               [ 40 ],
-               [ 50 ],
-               [ 60 ],
-               [ 80 ],
-               [ 100 ],
-               [ 150 ],
-               [ 200 ]
-            ]
-         },
-         {
-            "name" : "top",
-            "type" : "integer",
-            "hint" : "top",
-            "items" : [
-               [ 10 ],
-               [ 20 ],
-               [ 30 ],
-               [ 40 ],
-               [ 50 ],
-               [ 60 ],
-               [ 80 ],
-               [ 100 ]
-            ]
-         },
-         {
-            "name" : "width",
-            "type" : "integer",
-            "hint" : "width",
-            "items" : [
-               [ 40 ],
-               [ 60 ],
-               [ 80 ],
-               [ 100 ],
-               [ 120 ],
-               [ 150 ],
-               [ 180 ],
-               [ 200 ]
-            ]
-         },
-         {
-            "name" : "height",
-            "type" : "integer",
-            "hint" : "height",
-            "items" : [
-               [ 40 ],
-               [ 60 ],
-               [ 80 ],
-               [ 100 ],
-               [ 120 ],
-               [ 150 ],
-               [ 180 ],
-               [ 200 ]
-            ]
-         },
-         {
-            "name" : "right",
-            "type" : "integer",
-            "hint" : "right",
-            "items" : [
-               [ 10 ],
-               [ 20 ],
-               [ 30 ],
-               [ 40 ],
-               [ 50 ],
-               [ 60 ],
-               [ 80 ],
-               [ 100 ],
-               [ 150 ],
-               [ 200 ]
-            ]
-         },
-         {
-            "name" : "bottom",
-            "type" : "integer",
-            "hint" : "top",
-            "items" : [
-               [ 10 ],
-               [ 20 ],
-               [ 30 ],
-               [ 40 ],
-               [ 50 ],
-               [ 60 ],
-               [ 80 ],
-               [ 100 ]
-            ]
-         },
-         {
-            "name" : "nowidth",
-            "type" : "integer",
-            "hint" : "not use width",
-            "items" : [
-               [ 1 ]
-            ]
-         },
-         {
-            "name" : "noheight",
-            "type" : "integer",
-            "hint" : "not use height",
-            "items" : [
-               [ 1 ]
-            ]
-         },
-         {
-            "name" : "format",
-            "type" : "string",
-            "hint" : "ÓÃÓÚ¸ñÊ½»¯×Ö¶ÎÖµ",
-            "items" : [
-               [ "media/images/%s.png" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TComboBox",
-      "items" : [
-         {
-            "name" : "height",
-            "type" : "integer",
-            "hint" : "ÓÃÓÚ½â¾öTComboBoxµÄ¸ß¶ÈÎÊÌâ",
-            "items" : [
-               [ "25" ],
-               [ "30" ],
-               [ "35" ],
-               [ "40" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TEdit",
-      "items" : [
-         {
-            "name" : "prefix-icon",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÍ¼±ê£¨×ó²à£©",
-            "items" : [
-               [ "el-icon-platform-eleme" ],
-               [ "el-icon-eleme" ],
-               [ "el-icon-delete-solid" ],
-               [ "el-icon-delete" ],
-               [ "el-icon-s-tools" ],
-               [ "el-icon-setting" ],
-               [ "el-icon-user-solid" ],
-               [ "el-icon-user" ],
-               [ "el-icon-phone" ],
-               [ "el-icon-phone-outline" ]
-            ]
-         },
-         {
-            "name" : "suffix-icon",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÍ¼±ê£¨ÓÒ²à£©",
-            "items" : [
-               [ "el-icon-platform-eleme" ],
-               [ "el-icon-eleme" ],
-               [ "el-icon-delete-solid" ],
-               [ "el-icon-delete" ],
-               [ "el-icon-s-tools" ],
-               [ "el-icon-setting" ],
-               [ "el-icon-user-solid" ],
-               [ "el-icon-user" ],
-               [ "el-icon-phone" ],
-               [ "el-icon-phone-outline" ]
-            ]
-         },
-         {
-            "name" : "placeholder",
-            "type" : "string",
-            "hint" : "ÊäÈëÌáÊ¾",
-            "items" : [
-               [ "ÇëÊäÈëÓÃ»§Ãû" ],
-               [ "ÇëÊäÈëÃÜÂë" ],
-               [ "ËÑË÷" ],
-               [ "search" ]
-            ]
-         },
-         {
-            "name" : "dwattr",
-            "type" : "string",
-            "hint" : "Ö±½ÓHTML½ÚµãÊôĞÔ",
-            "items" : [
-               [ "type=\"number\"" ],
-               [ "type=\"color\"" ],
-               [ "type=\"date\"" ],
-               [ "type=\"email\"" ],
-               [ "type=\"week\"" ],
-               [ "type=\"time\"" ],
-               [ "type=\"datetime-local\"" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TForm",
-      "items" : [
-         {
-            "name" : "tablename",
-            "type" : "string",
-            "hint" : "ÓÃÓÚCRUDÊ±µÄ±íÃû",
-            "items" : [
-               [ "user" ],
-               [ "product" ],
-               [ "role" ]
-            ]
-         },
-         {
-            "name" : "pagesize",
-            "type" : "integer",
-            "hint" : "Ã¿Ò³ÏÔÊ¾¼ÇÂ¼ÊıÁ¿",
-            "items" : [
-               [ 5 ],
-               [ 10 ],
-               [ 15 ],
-               [ 20 ],
-               [ 30 ],
-               [ 50 ]
-            ]
-         },
-         {
-            "name" : "rowheight",
-            "type" : "integer",
-            "hint" : "ĞĞ¸ß",
-            "items" : [
-               [ 25 ],
-               [ 30 ],
-               [ 35 ],
-               [ 40 ],
-               [ 45 ],
-               [ 50 ]
-            ]
-         },
-         {
-            "name" : "fields",
-            "type" : "string",
-            "hint" : "×Ö¶ÎÁĞ±í",
-            "items" : [
-               [ "name" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TImage",
-      "items" : [
-         {
-            "name" : "src",
-            "type" : "string",
-            "hint" : "¶ÔÓ¦µÄÍ¼Æ¬ÎÄ¼şµØÖ·",
-            "items" : [
-               [ "media/images/mn/1.jpg" ],
-               [ "image/1.jpg" ]
-            ]
-         },
-         {
-            "name" : "radius",
-            "type" : "string",
-            "hint" : "Ô²½Ç°ë¾¶£¨ÊıÖµ¿É×ÔĞĞ¸ü¸Ä£©",
-            "items" : [
-               [ "5px", "5ÏñËØÔ²½Ç" ],
-               [ "50%", "50%Ô²½Ç" ],
-               [ "5px 5px 0px 0px", "×óÉÏ/ÓÒÉÏ½Ç5ÏñËØÔ²½Ç£¬×óÏÂ/ÓÒÏÂÖ±½Ç" ],
-               [ "10px 0 0 10px", "×óÉÏ/×óÏÂ½Ç5ÏñËØÔ²½Ç£¬ÓÒÉÏ/ÓÒÏÂÖ±½Ç" ],
-               [ "0 10px 10px 0", "×óÉÏ/×óÏÂ½ÇÖ±½Ç£¬ÓÒÉÏ/ÓÒÏÂ5ÏñËØÔ²½Ç" ]
-            ]
-         },
-         {
-            "name" : "href",
-            "type" : "string",
-            "hint" : "µã»÷Ìø×ªÍøÖ·£¨ÔÚĞÂÒ³Ãæ´ò¿ª£©",
-            "items" : [
-               [ "/hello" ]
-            ]
-         },
-         {
-            "name" : "hrefself",
-            "type" : "string",
-            "hint" : "µã»÷Ìø×ªÍøÖ·£¨ÔÚµ±Ç°Ò³Ãæ´ò¿ª£©",
-            "items" : [
-               [ "/hello" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TLabel",
-      "items" : []
-   },
-   {
-      "class" : "TListView",
-      "items" : [
-         {
-            "name" : "dataset",
-            "type" : "¶ÔÓ¦µÄFDQuery¿Ø¼ş£¬ÈçFDQuery1",
-            "items" : [
-               [ "FDQuery1" ],
-               [ "FDQuery2" ],
-               [ "FDQuery" ]
-            ]
-         },
-         {
-            "name" : "primarykey",
-            "type" : "DataSetµÄÖ÷¼ü£¬±ÈÈçid",
-            "items" : [
-               [ "id" ],
-               [ "uid" ]
-            ]
-         },
-         {
-            "name" : "topheight",
-            "type" : "integer",
-            "hint" : "¶¥²¿À¸¸ß¶È",
-            "items" : [
-               [ 30 ],
-               [ 40 ],
-               [ 50 ],
-               [ 60 ],
-               [ 70 ],
-               [ 80 ],
-               [ 90 ],
-               [ 100 ]
-            ]
-         },
-         {
-            "name" : "rowheight",
-            "type" : "integer",
-            "hint" : "¼ÇÂ¼ĞĞ¸ß¶È",
-            "items" : [
-               [ 30 ],
-               [ 35 ],
-               [ 40 ],
-               [ 45 ],
-               [ 50 ],
-               [ 60 ]
-            ]
-         },
-         {
-            "name" : "pagesize",
-            "type" : "integer",
-            "hint" : "Ã¿Ò³¼ÇÂ¼Êı",
-            "items" : [
-               [ 10 ],
-               [ 20 ],
-               [ 30 ],
-               [ 40 ],
-               [ 50 ],
-               [ 60 ],
-               [ 70 ],
-               [ 80 ],
-               [ 90 ],
-               [ 100 ]
-            ]
-         },
-         {
-            "name" : "db",
-            "type" : "Êı¾İ¿âÀàĞÍ",
-            "items" : [
-               [ "access" ],
-               [ "mssql2000" ],
-               [ "mssql2008" ],
-               [ "mssql2014" ],
-               [ "mysql" ],
-               [ "sqlite" ]
-            ]
-         }
-      ]
-   },
-   {
-      "class" : "TPanel",
-      "items" : [
-         {
-            "name" : "type",
-            "type" : "string",
-            "hint" : "»ÕÕÂÑùÊ½£¨HelpKeywordÎªbadgeÊ±ÓĞĞ§£©",
-            "items" : [
-               [ "primary" ],
-               [ "success" ],
-               [ "info" ],
-               [ "warning" ],
-               [ "danger" ],
-               [ "text" ]
-            ]
-         },
-         {
-            "name" : "radius",
-            "type" : "string",
-            "hint" : "°´Å¥µÄÔ²½Ç°ë¾¶£¨ÊıÖµ¿É×ÔĞĞ¸ü¸Ä£©",
-            "items" : [
-               [ "5px", "5ÏñËØÔ²½Ç" ],
-               [ "50%", "50%Ô²½Ç" ],
-               [ "5px 5px 0px 0px", "×óÉÏ/ÓÒÉÏ½Ç5ÏñËØÔ²½Ç£¬×óÏÂ/ÓÒÏÂÖ±½Ç" ],
-               [ "10px 0 0 10px", "×óÉÏ/×óÏÂ½Ç5ÏñËØÔ²½Ç£¬ÓÒÉÏ/ÓÒÏÂÖ±½Ç" ],
-               [ "0 10px 10px 0", "×óÉÏ/×óÏÂ½ÇÖ±½Ç£¬ÓÒÉÏ/ÓÒÏÂ5ÏñËØÔ²½Ç" ]
-            ]
-         },
-         {
-            "name" : "dwstyle",
-            "type" : "string",
-            "hint" : "Ö±½ÓÉèÖÃHTMLÔªËØstyle",
-            "items" : [
-               [
-                  "background-image: linear-gradient(#7A88FF, #7AFFAF);",
-                  "´ÓÉÏµ½ÏÂ½¥±ä"
-               ],
-               [
-                  "background-image: linear-gradient(to right , #7A88FF, #7AFFAF);",
-                  "´Ó×óµ½ÓÒ½¥±ä"
-               ]
-            ]
-         }
-      ]
-   }
+  {
+    "class": "TBitBtn",
+    "items": [
+      {
+        "name": "type",
+        "type": "type",
+        "hint": "æŒ‰é’®çš„æ˜¾ç¤ºæ ·å¼"
+      },
+      {
+        "name": "style",
+        "type": "concat",
+        "items": [[" plain","æœ´ç´ "],[" round","åœ†è§’"],[" circle","åœ†å½¢"]]
+      },
+      {
+        "name": "icon",
+        "type": "icon",
+        "hint": "æŒ‰é’®çš„å›¾æ ‡ï¼ˆå·¦ä¾§ï¼‰"
+      },
+      {
+        "name": "backgroundcolor",
+        "type": "color",
+        "hint": "æŒ‰é’®çš„èƒŒæ™¯è‰²"
+      },
+      {
+        "name": "radius",
+        "type": "radius",
+        "hint": "æŒ‰é’®çš„åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+      },
+      {
+        "name": "accept",
+        "type": "string",
+        "hint": "æŒ‡å®šä¸Šä¼ æ–‡ä»¶çš„ç±»å‹",
+        "items": [["image/*","ä¸Šä¼ å›¾ç‰‡"],["video/*","ä¸Šä¼ è§†é¢‘"],["image/gif, image/jpeg","ä¸Šä¼ gifå’Œjpeg"],[".doc,.docx,.xls,.xlsx,.pdf","ä¸Šä¼ æŒ‡å®šæ‰©å±•å"],["application/msword","WORDæ–‡æ¡£"],["application/pdf","ä¸Šä¼ PDF"]]
+      }
+    ]
+  },
+  {
+    "class": "TButton",
+    "items": [
+      {
+        "name": "type",
+        "type": "type",
+        "hint": "æŒ‰é’®çš„æ˜¾ç¤ºæ ·å¼"
+      },
+      {
+        "name": "style",
+        "type": "concat",
+        "hint": "æŒ‰é’®çš„æ˜¾ç¤ºå½¢çŠ¶",
+        "items": [[" plain","æœ´ç´ "],[" round","åœ†è§’"],[" circle","åœ†å½¢"]]
+      },
+      {
+        "name": "icon",
+        "type": "icon",
+        "hint": "æŒ‰é’®çš„å›¾æ ‡ï¼ˆå·¦ä¾§ï¼‰"
+      },
+      {
+        "name": "righticon",
+        "type": "icon",
+        "hint": "æŒ‰é’®çš„å›¾æ ‡ï¼ˆå³ä¾§ï¼‰"
+      },
+      {
+        "name": "backgroundcolor",
+        "type": "color",
+        "hint": "æŒ‰é’®çš„èƒŒæ™¯è‰²"
+      },
+      {
+        "name": "radius",
+        "type": "radius",
+        "hint": "æŒ‰é’®çš„åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+      }
+    ]
+  },
+  {
+    "class": "TButton",
+	"helpkeyword":"comm",
+    "items": [
+      {
+        "name": "baudrate",
+        "type": "integer",
+        "hint": "æ³¢ç‰¹ç‡",
+        "items": [[2400],[4800],[9600],[38400],[57600],[115200]]
+      },
+      {
+        "name": "databits",
+        "type": "integer",
+        "hint": "æ•°æ®ä½",
+        "items": [[8]]
+      },
+      {
+        "name": "stopbits",
+        "type": "integer",
+        "hint": "åœæ­¢ä½",
+        "items": [[8]]
+      },
+      {
+        "name": "parity",
+        "type": "string",
+        "hint": "å¥‡å¶æ ¡éªŒ",
+        "items": [["none","æ— æ ¡éªŒ"],["mark","æ ¡éªŒ"],["odd","å¥‡æ ¡éªŒ"],["even","å¶æ ¡éªŒ"]]
+		
+      }
+    ]
+  },
+  {
+    "class": "TButtonGroup",
+	"helpkeyword":"category",
+    "items": [
+      {
+        "name": "hot",
+        "type": "color",
+        "hint": "æ¿€æ´»ç±»åˆ«æ ‡ç­¾è‰²"
+      },
+      {
+        "name": "hotsize",
+        "type": "integer",
+        "hint": "æ¿€æ´»ç±»åˆ«æ ‡ç­¾åƒç´ ",
+        "items": [[1],[2],[3],[5]]
+      },
+      {
+        "name": "activebk",
+        "type": "color",
+        "hint": "æ¿€æ´»ç±»åˆ«èƒŒæ™¯è‰²"
+      },
+      {
+        "name": "activecolor",
+        "type": "color",
+        "hint": "æ¿€æ´»ç±»åˆ«å­—ä½“è‰²"
+      },
+      {
+        "name": "activesize",
+        "type": "integer",
+        "hint": "æ¿€æ´»ç±»åˆ«å­—ä½“å¤§å°åƒç´ ",
+        "items": [[8],[10],[12],[14]]
+      },
+      {
+        "name": "activebold",
+        "type": "integer",
+        "hint": "æ¿€æ´»ç±»åˆ«å­—ä½“ç²—ä½“",
+        "items": [[0]]
+      },
+      {
+        "name": "normalbk",
+        "type": "color",
+        "hint": "æ™®é€šç±»åˆ«èƒŒæ™¯è‰²"
+      },
+      {
+        "name": "normalcolor",
+        "type": "color",
+        "hint": "æ™®é€šç±»åˆ«å­—ä½“è‰²"
+      },
+      {
+        "name": "radius",
+        "type": "integer",
+        "hint": "åœ†è§’åŠå¾„",
+        "items": [[0]]
+      },
+      {
+        "name": "margin",
+        "type": "integer",
+        "hint": "è¾¹è·",
+        "items": [[0]]
+      }
+    ]
+  },
+  {
+    "class": "TCardPanel",
+    "items": [
+    ]
+  },
+  {
+    "class": "TColumnTitle",
+    "items": [
+      {
+        "name": "type",
+        "type": "å­—æ®µç±»å‹",
+        "items": [["image","æ˜¾ç¤ºå›¾åƒ"],["rate","æ˜¾ç¤ºä¸ºå¾½ç« "]]
+      },
+      {
+        "name": "left",
+        "type": "integer",
+        "hint": "left",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "top",
+        "type": "integer",
+        "hint": "top",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "hint": "width",
+        "items": [[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "hint": "height",
+        "items": [[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "right",
+        "type": "integer",
+        "hint": "right",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "bottom",
+        "type": "integer",
+        "hint": "top",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "nowidth",
+        "type": "integer",
+        "hint": "not use width",
+        "items": [[1]]
+      },
+      {
+        "name": "noheight",
+        "type": "integer",
+        "hint": "not use height",
+        "items": [[1]]
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "hint": "ç”¨äºæ ¼å¼åŒ–å­—æ®µå€¼",
+        "items": [["media/images/%s.png"]]
+      }
+    ]
+  },
+  {
+    "class": "TComboBox",
+    "items": [
+      {
+        "name": "height",
+        "type": "integer",
+        "hint": "é«˜åº¦ï¼ˆè§£å†³ComboBoxä¸èƒ½è®¾ç½®é«˜åº¦çš„é—®é¢˜ï¼‰",
+        "items": [[30]]
+      }
+    ]
+  },
+  {
+    "class": "TEdit",
+    "items": [
+      {
+        "name": "prefix-icon",
+        "type": "icon",
+        "hint": "æŒ‰é’®çš„å›¾æ ‡ï¼ˆå·¦ä¾§ï¼‰"
+      },
+      {
+        "name": "suffix-icon",
+        "type": "icon",
+        "hint": "æŒ‰é’®çš„å›¾æ ‡ï¼ˆå³ä¾§ï¼‰"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "hint": "è¾“å…¥æç¤º",
+        "items": [["è¯·è¾“å…¥ç”¨æˆ·å"],["è¯·è¾“å…¥å¯†ç "],["æœç´¢"],["search"]]
+      }
+    ]
+  },
+  {
+    "class": "TEdit",
+	"helpkeyword":"tree",
+    "items": [
+      {
+        "name": "multipe",
+        "type": "integer",
+        "hint": "æ˜¯å¦å¤šé€‰0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "clearable",
+        "type": "integer",
+        "hint": "æ˜¯å¦å¯æ¸…é™¤0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "searchable",
+        "type": "integer",
+        "hint": "æ˜¯å¦å¯æœç´¢0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "openonclick",
+        "type": "integer",
+        "hint": "æ˜¯å¦ç‚¹å‡»æ‰“å¼€0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "openonfocus",
+        "type": "integer",
+        "hint": "æ˜¯å¦è‡ªåŠ¨æ‰“å¼€0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "clearonselect",
+        "type": "integer",
+        "hint": "æ˜¯å¦é€‰æ‹©æ—¶æ¸…é™¤0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "closeonselect",
+        "type": "integer",
+        "hint": "æ˜¯å¦é€‰æ‹©åè‡ªåŠ¨å…³é—­0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "alwaysopen",
+        "type": "integer",
+        "hint": "æ˜¯å¦ä¿æŒæ‰“å¼€0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "appendtobody",
+        "type": "integer",
+        "hint": "æ˜¯å¦è¿½åŠ 0/1",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "hint": "é™åˆ¶",
+        "items": [[3],[5]]
+      },
+      {
+        "name": "maxheight",
+        "type": "integer",
+        "hint": "æœ€å¤§é«˜åº¦",
+        "items": [[100],[200]]
+      },
+      {
+        "name": "disablebranchnodes",
+        "type": "integer",
+        "hint": "ç¦æ­¢éæœ«èŠ‚ç‚¹0/1",
+        "items": [[0],[1]]
+      }
+    ]
+  },
+  {
+    "class": "TFlowPanel",
+    "items": [
+     {
+        "name": "radius",
+        "type": "radius",
+        "hint": "æŒ‰é’®çš„åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+      }
+    ]
+  },
+  {
+    "class": "THeaderControl",
+    "items": [
+      {
+        "name": "mode",
+        "type": "integer",
+        "hint": "æ ·å¼",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "hot",
+        "type": "color",
+        "hint": "æ¿€æ´»ç±»åˆ«æ ‡ç­¾è‰²"
+      },
+      {
+        "name": "hotsize",
+        "type": "integer",
+        "hint": "æ¿€æ´»ç±»åˆ«æ ‡ç­¾åƒç´ ",
+        "items": [[1],[2],[3],[5]]
+      },
+      {
+        "name": "activebk",
+        "type": "color",
+        "hint": "æ¿€æ´»ç±»åˆ«èƒŒæ™¯è‰²"
+      },
+      {
+        "name": "activecolor",
+        "type": "color",
+        "hint": "æ¿€æ´»ç±»åˆ«å­—ä½“è‰²"
+      },
+      {
+        "name": "activesize",
+        "type": "integer",
+        "hint": "æ¿€æ´»ç±»åˆ«å­—ä½“å¤§å°åƒç´ ",
+        "items": [[8],[10],[12],[14]]
+      },
+      {
+        "name": "activebold",
+        "type": "integer",
+        "hint": "æ¿€æ´»ç±»åˆ«å­—ä½“ç²—ä½“",
+        "items": [[0]]
+      },
+      {
+        "name": "normalbk",
+        "type": "color",
+        "hint": "æ™®é€šç±»åˆ«èƒŒæ™¯è‰²"
+      },
+      {
+        "name": "normalcolor",
+        "type": "color",
+        "hint": "æ™®é€šç±»åˆ«å­—ä½“è‰²"
+      },
+      {
+        "name": "radius",
+        "type": "integer",
+        "hint": "åœ†è§’åŠå¾„",
+        "items": [[0]]
+      },
+      {
+        "name": "margin",
+        "type": "integer",
+        "hint": "è¾¹è·",
+        "items": [[0]]
+      }
+    ]
+  },
+
+  {
+    "class": "TImage",
+    "items": [
+      {
+        "name": "src",
+        "type": "string",
+        "hint": "å¯¹åº”çš„å›¾ç‰‡æ–‡ä»¶åœ°å€",
+        "items": [["media/images/mn/1.jpg"],["image/1.jpg"]]
+      },
+      {
+        "name": "radius",
+        "type": "radius",
+        "hint": "åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "hint": "ç‚¹å‡»è·³è½¬ç½‘å€ï¼ˆåœ¨æ–°é¡µé¢æ‰“å¼€ï¼‰",
+        "items": [["/hello"]]
+      },
+      {
+        "name": "hrefself",
+        "type": "string",
+        "hint": "ç‚¹å‡»è·³è½¬ç½‘å€ï¼ˆåœ¨å½“å‰é¡µé¢æ‰“å¼€ï¼‰",
+        "items": [["/hello"]]
+      }
+    ]
+  },
+  {
+    "class": "TLabel",
+    "items": [
+      {
+        "name": "radius",
+        "type": "radius",
+        "hint": "åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+      }
+	]
+  },
+  {
+    "class": "TLabel",
+	"helpkeyword":"captcha",
+    "items": [
+	]
+  },
+  {
+    "class": "TLabel",
+	"helpkeyword":"cool",
+    "items": [
+	]
+  },
+  {
+    "class": "TLabel",
+	"helpkeyword":"marquee",
+    "items": [
+	]
+  },
+  {
+    "class": "TListBox",
+    "items": [
+	]
+  },
+  {
+    "class": "TListColumn",
+	"helpkeyword":"card",
+    "items": [
+      {
+        "name": "type",
+        "type": "string",
+        "hint": "å­—æ®µç±»å‹",
+        "items": [["boolean","å¸ƒå°”å‹"],["button","æŒ‰é’®"],["check","é€‰æ‹©æ¡†"],["image","å›¾ç‰‡"],["integer","æ•´å‹"],["label","æ ‡ç­¾"],["link","é“¾æ¥"],["rate","æ˜¾ç¤ºä¸ºå¾½ç« "]]
+      },
+      {
+        "name": "left",
+        "type": "integer",
+        "hint": "left",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "top",
+        "type": "integer",
+        "hint": "top",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "hint": "width",
+        "items": [[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "hint": "height",
+        "items": [[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "right",
+        "type": "integer",
+        "hint": "right",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "bottom",
+        "type": "integer",
+        "hint": "top",
+        "items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+      },
+      {
+        "name": "nowidth",
+        "type": "integer",
+        "hint": "not use width",
+        "items": [[0],[1]]
+      },
+      {
+        "name": "noheight",
+        "type": "integer",
+        "hint": "not use height",
+        "items": [[1]]
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "hint": "ç”¨äºæ ¼å¼åŒ–å­—æ®µå€¼",
+        "items": [["%f"]]
+      },
+      {
+        "name": "list",
+        "type": "string",
+        "hint": "Booleanå‹æ—¶ç”¨äºæ˜¾ç¤ºçš„å€¼ï¼Œ2ä¸ªå…ƒç´ çš„æ•°ç»„",
+        "items": [["çœŸ"],["å‡"]]
+      },
+      {
+        "name": "default",
+        "type": "integer",
+        "hint": "é»˜è®¤å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+        "items": [[0],[10],[20],[40]]
+      },
+      {
+        "name": "min",
+        "type": "integer",
+        "hint": "æœ€å°å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+        "items": [[0],[10],[20],[40]]
+      },
+      {
+        "name": "max",
+        "type": "integer",
+        "hint": "æœ€å¤§å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+        "items": [[100],[200],[999]]
+      },
+      {
+        "name": "scale",
+        "type": "integer",
+        "hint": "ç¼©æ”¾å€¼ï¼ˆä»…type=rateæœ‰æ•ˆï¼‰",
+        "items": [[1],[10],[1],[1]]
+      },
+      {
+        "name": "fontname",
+        "type": "å­—ä½“",
+        "items": [["å®‹ä½“"],["Tahoma"]]
+      },
+      {
+        "name": "fontsize",
+        "type": "integer",
+        "hint": "ç¼©æ”¾å€¼ï¼ˆä»…type=rateæœ‰æ•ˆï¼‰",
+        "items": [[8],[9],[10],[12],[14],[16],[20]]
+      },
+      {
+        "name": "fontcolor",
+        "type": "color",
+        "hint": "å­—ä½“è‰²"
+      },
+      {
+        "name": "fontbold",
+        "type": "å­—ä½“ç²—ä½“",
+        "items": [["normal"],["bold"],["bolder"],["lighter"],["inherit"]]
+      },
+      {
+        "name": "fontitalic",
+        "type": "å­—ä½“æ–œä½“",
+        "items": [["normal"],["italic"],["oblique"],["inherit"]]
+      },
+      {
+        "name": "fontdecoration",
+        "type": "å­—ä½“è£…é¥°",
+        "items": [["overline"],["underline"],["line-through"],["blink"],["none"]]
+      }
+    ]
+  },
+	{
+		"class": "TListColumn",
+		"helpkeyword":"crud",
+		"items": [
+			{
+				"name": "type",
+				"type": "string",
+				"hint": "å­—æ®µç±»å‹",
+				"items": [["autoinc","è‡ªå¢å‹"],["integer","æ•´å‹"],["boolean","å¸ƒå°”å‹"],["date","æ—¥æœŸå‹"],["image","å›¾ç‰‡"],["progress","è¿›åº¦æ¡"],["button","æŒ‰é’®"],["check","é€‰æ‹©æ¡†"]]
+			},
+			{
+				"name": "left",
+				"type": "integer",
+				"hint": "left",
+				"items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "top",
+				"type": "integer",
+				"hint": "top",
+				"items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "width",
+				"type": "integer",
+				"hint": "width",
+				"items": [[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "height",
+				"type": "integer",
+				"hint": "height",
+				"items": [[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "format",
+				"type": "string",
+				"hint": "ç”¨äºæ ¼å¼åŒ–å­—æ®µå€¼",
+				"items": [["%f"]]
+			},
+			{
+				"name": "list",
+				"type": "string",
+				"hint": "Booleanå‹æ—¶ç”¨äºæ˜¾ç¤ºçš„å€¼ï¼Œ2ä¸ªå…ƒç´ çš„æ•°ç»„",
+				"items": [["çœŸ"],["å‡"]]
+			},
+			{
+				"name": "default",
+				"type": "integer",
+				"hint": "é»˜è®¤å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+				"items": [[0],[10],[20],[40]]
+			},
+			{
+				"name": "min",
+				"type": "integer",
+				"hint": "æœ€å°å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+				"items": [[0],[10],[20],[40]]
+			},
+			{
+				"name": "max",
+				"type": "integer",
+				"hint": "æœ€å¤§å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+				"items": [[100],[200],[999]]
+			},
+			{
+				"name": "fieldname",
+				"type": "string",
+				"hint": "å­—æ®µå",
+				"items": [["id"]]
+			},
+			{
+				"name": "caption",
+				"type": "string",
+				"hint": "æ ‡é¢˜",
+				"items": [["id"]]
+			},
+			{
+				"name": "color",
+				"type": "color",
+				"hint": "å­—ä½“é¢œè‰²"
+			},
+			{
+				"name": "bkcolor",
+				"type": "color",
+				"hint": "å­—ä½“é¢œè‰²"
+			},
+			{
+				"name": "align",
+				"type": "string",
+				"hint": "å¯¹é½æ–¹å¼",
+				"items": [["left"],["center"],["right"]]
+			},
+			{
+				"name": "sort",
+				"type": "integer",
+				"hint": "æ’åº",
+				"items": [[0],[1]]
+			},
+			{
+				"name": "readonly",
+				"type": "integer",
+				"hint": "åªè¯»",
+				"items": [[0],[1]]
+			}
+		]
+	},
+	{
+		"class": "TListColumn",
+		"helpkeyword":"mobile",
+		"items": [
+			{
+				"name": "type",
+				"type": "string",
+				"hint": "å­—æ®µç±»å‹",
+				"items": [["autoinc","è‡ªå¢"],["label","æ–‡æœ¬"],["integer","æ•´å‹"],["boolean","å¸ƒå°”å‹"],["combo","ä¸‹æ‹‰æ¡†"],["date","æ—¥æœŸå‹"],["image","å›¾ç‰‡"],["rate","å¾½ç« "],["button","æŒ‰é’®"],["link","é“¾æ¥"]]
+			},
+			{
+				"name": "left",
+				"type": "integer",
+				"hint": "left",
+				"items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "top",
+				"type": "integer",
+				"hint": "top",
+				"items": [[10],[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "width",
+				"type": "integer",
+				"hint": "width",
+				"items": [[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "height",
+				"type": "integer",
+				"hint": "height",
+				"items": [[20],[30],[40],[50],[60],[80],[100],[150],[200]]
+			},
+			{
+				"name": "format",
+				"type": "string",
+				"hint": "ç”¨äºæ ¼å¼åŒ–å­—æ®µå€¼",
+				"items": [["%f"]]
+			},
+			{
+				"name": "list",
+				"type": "string",
+				"hint": "Booleanå‹æ—¶ç”¨äºæ˜¾ç¤ºçš„å€¼ï¼Œ2ä¸ªå…ƒç´ çš„æ•°ç»„",
+				"items": [["çœŸ"],["å‡"]]
+			},
+			{
+				"name": "default",
+				"type": "integer",
+				"hint": "é»˜è®¤å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+				"items": [[0],[10],[20],[40]]
+			},
+			{
+				"name": "min",
+				"type": "integer",
+				"hint": "æœ€å°å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+				"items": [[0],[10],[20],[40]]
+			},
+			{
+				"name": "max",
+				"type": "integer",
+				"hint": "æœ€å¤§å€¼ï¼ˆä»…type=integeræœ‰æ•ˆï¼‰",
+				"items": [[100],[200],[999]]
+			},
+			{
+				"name": "fieldname",
+				"type": "string",
+				"hint": "å­—æ®µå",
+				"items": [["id"]]
+			},
+			{
+				"name": "caption",
+				"type": "string",
+				"hint": "æ ‡é¢˜",
+				"items": [["id"]]
+			},
+			{
+				"name": "color",
+				"type": "color",
+				"hint": "å­—ä½“é¢œè‰²"
+			},
+			{
+				"name": "bkcolor",
+				"type": "color",
+				"hint": "å­—ä½“é¢œè‰²"
+			},
+			{
+				"name": "align",
+				"type": "string",
+				"hint": "å¯¹é½æ–¹å¼",
+				"items": [["left"],["center"],["right"]]
+			},
+			{
+				"name": "sort",
+				"type": "integer",
+				"hint": "æ’åº",
+				"items": [[0],[1]]
+			},
+			{
+				"name": "readonly",
+				"type": "integer",
+				"hint": "åªè¯»",
+				"items": [[0],[1]]
+			}
+		]
+	},
+	{
+		"class": "TListView",
+		"helpkeyword":"crud",
+		"items": [
+			{
+				"name": "topheight",
+				"type": "integer",
+				"hint": "é¡¶éƒ¨æ é«˜åº¦",
+				"items": [[40],[50]]
+			},
+			{
+				"name": "rowheight",
+				"type": "integer",
+				"hint": "è¡Œé«˜",
+				"items": [[40],[30],[50]]
+			},
+			{
+				"name": "pageheight",
+				"type": "integer",
+				"hint": "åˆ†é¡µæ é«˜åº¦",
+				"items": [[40],[30],[50]]
+			},
+			{
+				"name": "pagesize",
+				"type": "integer",
+				"hint": "æ¯é¡µè®°å½•æ¡æ•°",
+				"items": [[10],[20],[50]]
+			},
+			{
+				"name": "topbackground",
+				"type": "color",
+				"hint": "é¡¶éƒ¨æ èƒŒæ™¯è‰²"
+			},
+			{
+				"name": "headerbkcolor",
+				"type": "color",
+				"hint": "æ ‡é¢˜èƒŒæ™¯è‰²"
+			},
+			{
+				"name": "evenbkcolor",
+				"type": "color",
+				"hint": "å¥‡æ•°è¡ŒèƒŒæ™¯è‰²"
+			},
+			{
+				"name": "merge",
+				"type": "string",
+				"hint": "å¤šè¡¨å¤´",
+				"items":[[" "]]
+			},
+			{
+				"name": "summary",
+				"type": "string",
+				"hint": "æ±‡æ€»",
+				"items":[[" "]]
+			},
+			{
+				"name": "module",
+				"type": "string",
+				"hint": "åŠŸèƒ½æ¨¡å—",
+				"items":[[" "]]
+			}
+		]
+	},
+  {
+    "class": "TListView",
+	"helpkeyword":"card",
+    "items": [
+      {
+        "name": "dataset",
+        "type": "string",
+        "items": [["FDQuery1"],["FDQuery2"],["FDQuery"]]
+      },
+      {
+        "name": "topheight",
+        "type": "integer",
+        "hint": "é¡¶éƒ¨æ é«˜åº¦",
+        "items": [[30],[40],[50],[60],[70],[80],[90],[100]]
+      },
+      {
+        "name": "rowheight",
+        "type": "integer",
+        "hint": "è®°å½•è¡Œé«˜åº¦",
+        "items": [[30],[40],[50],[60],[70],[80],[90],[100]]
+      },
+      {
+        "name": "pagesize",
+        "type": "integer",
+        "hint": "æ¯é¡µè®°å½•æ•°",
+        "items": [[10],[20],[30],[50],[70],[80],[90],[100]]
+      },
+      {
+        "name": "db",
+        "hint": "æ•°æ®åº“ç±»å‹",
+        "items": [["access"],["mssql2000"],["mssql2008"],["mssql2014"],["mysql"],["sqlite"]]
+      }
+    ]
+  },
+	{
+		"class": "TListView",
+		"helpkeyword":"mobile",
+		"items": [
+			{
+				"name": "cardattr",
+				"type": "string",
+				"hint": "å¡ç‰‡å±æ€§",
+				"items": [[" "]]
+			},
+			{
+				"name": "cardattr",
+				"type": "concat",
+				"hint": "å¡ç‰‡æ ·å¼"
+			},
+			{
+				"name": "module",
+				"type": "string",
+				"hint": "åŠŸèƒ½æ¨¡å—",
+				"items":[[" "]]
+			}
+		]
+	},
+	{
+		"class": "TPanel",
+		"items": [
+			{
+				"name": "radius",
+				"type": "radius",
+				"hint": "æŒ‰é’®çš„åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+			}
+		]
+	},
+	{
+		"class": "TPanel",
+		"helpkeyword":"popup",
+		"items": [
+			{
+				"name": "radius",
+				"type": "radius",
+				"hint": "æŒ‰é’®çš„åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+			}
+		]
+	},
+	{
+		"class": "TPanel",
+		"helpkeyword":"modal",
+		"items": [
+			{
+				"name": "radius",
+				"type": "radius",
+				"hint": "æŒ‰é’®çš„åœ†è§’åŠå¾„ï¼ˆæ•°å€¼å¯è‡ªè¡Œæ›´æ”¹ï¼‰"
+			}
+		]
+	},
+	{
+		"class": "TShape",
+		"helpkeyword":"menu",
+		"items": [
+			{
+				"name": "menu",
+				"type": "string",
+				"hint": "ç»‘å®šçš„èœå•",
+				"items": [["MainMenu1"]]
+			},
+			{
+				"name": "activebkcolor",
+				"type": "color",
+				"hint": "æ¿€æ´»æ—¶èƒŒæ™¯è‰²"
+			},
+			{
+				"name": "activetextcolor",
+				"type": "color",
+				"hint": "æ¿€æ´»æ—¶å­—ä½“è‰²"
+			},
+			{
+				"name": "hovercolor",
+				"type": "color",
+				"hint": "Hoveré¢œè‰²"
+			}
+		]
+	},
+	{
+		"class": "TStringGrid",
+		"helpkeyword":"dvscroll",
+		"items": [
+			{
+				"name": "rowNum",
+				"type": "integer",
+				"hint": "è¡¨è¡Œæ•°",
+				"items": [[5],[6],[8],[10],[15],[20],[30]]
+			},
+			{
+				"name": "headerBGC",
+				"type": "color",
+				"hint": "è¡¨å¤´èƒŒæ™¯è‰²"
+			},
+			{
+				"name": "oddRowBGC",
+				"type": "color",
+				"hint": "å¥‡æ•°è¡ŒèƒŒæ™¯è‰²"
+			},
+			{
+				"name": "evenRowBGC",
+				"type": "color",
+				"hint": "å¶æ•°è¡ŒèƒŒæ™¯è‰²"
+			},
+			{
+				"name": "waitTime",
+				"type": "integer",
+				"hint": "è½®æ’­æ—¶é—´é—´éš”(ms)",
+				"items": [[3000],[2000],[5000],[10000]]
+			},
+			{
+				"name": "headerHeight",
+				"type": "integer",
+				"hint": "è¡¨å¤´é«˜åº¦",
+				"items": [[30],[35],[40],[50]]
+			},
+			{
+				"name": "carousel",
+				"type": "string",
+				"hint": "è½®æ’­æ–¹å¼",
+				"items": [["single","é€è¡Œè½®æ’­"],["page","æ•´é¡µè½®æ’­"]]
+			},
+			{
+				"name": "hoverPause",
+				"type": "boolean",
+				"hint": "æ‚¬æµ®æš‚åœè½®æ’­",
+				"items": [[true],[false]]
+			}
+		]
+	},
+	{
+		"class": "TStringGrid",
+		"helpkeyword":"lucky"
+	},
+	{
+		"class": "TStringGrid",
+		"helpkeyword":"ww"
+	},
+	{
+		"class": "TTrackBar",
+		"helpkeyword":"page",
+		"items": [
+			{
+				"name": "dwattr",
+				"type": "concat",
+				"items": [
+					[" background","å¸¦èƒŒæ™¯"],
+					[" :pager-count='5'","é¡µç æŒ‰é’®çš„æ•°é‡"],
+					[" layout='prev, pager, next, jumper, ->, total'","ç»„ä»¶å¸ƒå±€ï¼Œå­ç»„ä»¶åç”¨é€—å·åˆ†éš”"]]
+			},
+			{
+				"name": "hoverPause",
+				"type": "boolean",
+				"hint": "æ‚¬æµ®æš‚åœè½®æ’­",
+				"items": [[true],[false]]
+			}
+		]
+	},
+	{
+		"class": "TTrackBar",
+		"helpkeyword":"mobile"
+	},
+	{
+		"class": "TTrackBar",
+		"helpkeyword":"ww"
+	}
 ]

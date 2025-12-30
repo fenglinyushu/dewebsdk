@@ -186,10 +186,15 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-    sCode     : string;
-    joHint    : Variant;
-    joRes     : Variant;
+    sCode       : string;
+    joHint      : Variant;
+    joRes       : Variant;
+    sFull       : string;
 begin
+    //取得全名备用
+    sFull       := dwFullName(ACtrl);
+
+    //
     with TPanel(Actrl) do begin
         //
         if HelpContext = 0 then begin
@@ -205,7 +210,7 @@ begin
         with TPanel(ACtrl) do begin
             //
             sCode     := '<div'
-                    +' id="'+dwFullName(Actrl)+'"'
+                    +' id="'+sFull+'"'
                     +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                     +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                     +'"' // 封闭style
@@ -213,59 +218,105 @@ begin
             joRes.Add(sCode);
 
             //
-            sCode     := '    <dv-border-box-'+IntToStr(abs(HelpContext))
-                    +dwIIF(HelpContext<0,' :reverse="true"','')
-                    //+' class="dwdisselect"'
-                    +' id="'+dwFullName(Actrl)+'"'
-                    //+' name="'+dwFullName(Actrl)+'"'
-                    +dwIIF(HelpContext=11,' :title="'+dwFullName(Actrl)+'__cap"','')
-                    //+' v-html="'+dwFullName(Actrl)+'__cap"'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +dwGetDWAttr(joHint)
-                    //
-                    +' :style="{'
-                        +'width:'+dwFullName(Actrl)+'__wid,'
-                        +'height:'+dwFullName(Actrl)+'__hei,'
-                        +'backgroundColor:'+dwFullName(Actrl)+'__col,'
-                        +'color:'+dwFullName(Actrl)+'__fcl,'
-                        //+'''font-size'':'+dwFullName(Actrl)+'__fsz,'
-                        //+'''font-family'':'+dwFullName(Actrl)+'__ffm,'
-                        //+'''font-weight'':'+dwFullName(Actrl)+'__fwg,'
-                        //+'''font-style'':'+dwFullName(Actrl)+'__fsl,'
-                        //+'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'
-                        //+dwIIF((Layout=tlCenter)and(WordWrap=False),'''line-height'':'+dwFullName(Actrl)+'__hei,','')
-                        //+dwIIF(Layout=tlCenter,'''line-height'':'+dwFullName(Actrl)+'__hei,','')
-                        //+'left:'+dwFullName(Actrl)+'__lef,'
-                        //+'top:'+dwFullName(Actrl)+'__top,'
-                    +'}"'
-                    //
-                    +' style="position:absolute;'
-                    +dwIIF(Assigned(OnClick),'cursor: pointer;','')
-                    //+'justify-content: center;flex-direction: column;display: flex;'
-                    //+'text-align:center;'
-                    //+'left:0;'
-                    //+'top:0;'
-                    //+'width:100%;'
-                    //+'height:100%;'
-                    //+_GetFont(Font)
-                    //style
-                    +dwGetDWStyle(joHint)
-                    +'"'
-                    //style 封闭
+            if HelpContext = 20 then begin
+                sCode     := '<dv-water-level-pond'
 
-                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave',Name,'0','onexit',TForm(Owner).Handle]),'')
-                    +'>'
-                    +dwIIF(HelpContext=11,'','{{'+dwFullName(Actrl)+'__cap}}')
-                    //+'{{'+dwFullName(Actrl)+'__cap}}'
-                    //以下是标题
-                    //+dwIIF(ParentBidiMode,'{{'+dwFullName(Actrl)+'__cap}}','')
-                    //+dwIIF(ParentBidiMode,'{{'+dwFullName(Actrl)+'__cap}}','')
-                    ;
+                        //+' v-html="'+sFull+'__cap"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwGetDWAttr(joHint)
+                        //
+                        +' :style="{'
+                            +'width:'+sFull+'__wid,'
+                            +'height:'+sFull+'__hei,'
+                            +'backgroundColor:'+sFull+'__col,'
+                            +'color:'+sFull+'__fcl,'
+                        +'}"'
+                        //
+                        +' style="position:absolute;'
+                            +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                            +dwGetDWStyle(joHint)
+                        +'"'
+                        //style 封闭
+
+                        +':config="{ data: [56,33,20], shape: ''round''}"'
+
+                        +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter',Name,'0','onenter',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave',Name,'0','onexit',TForm(Owner).Handle]),'')
+                        +'>'
+                        //+dwIIF(HelpContext=11,'','{{'+sFull+'__cap}}')
+                        ;
+            end else begin
+                sCode     := '<dv-border-box-'+IntToStr(abs(HelpContext))
+                        +dwIIF(HelpContext<0,' :reverse="true"','')
+                        //+' class="dwdisselect"'
+                        //+' id="'+sFull+'"'
+                        //+' name="'+sFull+'"'
+                        +dwIIF(HelpContext in [11,14],' :title="'+sFull+'__cap"','')
+
+                        //样式11/14标题宽度
+                        +dwIIF(dwGetInt(joHint,'titlewidth')>0,' :title-width="'+ IntToStr(dwGetInt(joHint,'titlewidth'))+'"','')
+
+                        //样式11/14隐藏左右小方块
+                        +dwIIF(dwGetBoolean(joHint,'hidden')=True,' :hidden="true"','')
+
+                        //样式14隐藏边框
+                        +dwIIF(dwGetBoolean(joHint,'borderhidden')=True,' :borderhidden="true"','')
+
+                        //样式14标题栏背景
+                        +dwIIF(dwGetStr(joHint,'background')<>'',' background="'+dwGetStr(joHint,'background')+'"','')
+
+                        //+' v-html="'+sFull+'__cap"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwGetDWAttr(joHint)
+                        //
+                        +' :style="{'
+                            +'width:'+sFull+'__wid,'
+                            +'height:'+sFull+'__hei,'
+                            +'backgroundColor:'+sFull+'__col,'
+                            +'color:'+sFull+'__fcl,'
+                            +'''font-size'':'+sFull+'__fsz,'
+                            +'''font-family'':'+sFull+'__ffm,'
+                            +'''font-weight'':'+sFull+'__fwg,'
+                            +'''font-style'':'+sFull+'__fsl,'
+                            +'''text-decoration'':'+sFull+'__ftd,'
+                            //+dwIIF((Layout=tlCenter)and(WordWrap=False),'''line-height'':'+sFull+'__hei,','')
+                            //+dwIIF(Layout=tlCenter,'''line-height'':'+sFull+'__hei,','')
+                            //+'left:'+sFull+'__lef,'
+                            //+'top:'+sFull+'__top,'
+                        +'}"'
+                        //
+                        +' style="position:absolute;'
+                        +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                        //+'justify-content: center;flex-direction: column;display: flex;'
+                        //+'text-align:center;'
+                        //+'left:0;'
+                        //+'top:0;'
+                        //+'width:100%;'
+                        //+'height:100%;'
+                        //+_GetFont(Font)
+                        //style
+                        +dwGetDWStyle(joHint)
+                        +'"'
+                        //style 封闭
+
+                        +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter',Name,'0','onenter',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave',Name,'0','onexit',TForm(Owner).Handle]),'')
+                        +'>'
+                        //+dwIIF(HelpContext in [11,14],'','{{'+sFull+'__cap}}')
+                        //+'{{'+sFull+'__cap}}'
+                        //以下是标题
+                        //+dwIIF(ParentBidiMode,'{{'+sFull+'__cap}}','')
+                        //+dwIIF(ParentBidiMode,'{{'+sFull+'__cap}}','')
+                        ;
+            end;
             //添加到返回值数据
             joRes.Add(sCode);
         end;
@@ -279,48 +330,58 @@ function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
      joRes     : Variant;
 begin
-     with TPanel(Actrl) do begin
+    with TPanel(Actrl) do begin
 
-           //生成返回值数组
-           joRes    := _Json('[]');
-           //生成返回值数组
-           joRes.Add('    </dv-border-box-'+IntToStr(HelpContext)+'>');
-           //生成返回值数组
-           joRes.Add('</div>');
-           //
-           Result    := (joRes);
-     end;
+        //生成返回值数组
+        joRes    := _Json('[]');
+        //生成返回值数组
+        if HelpContext = 20 then begin
+            joRes.Add('</dv-water-level-pond>');
+        end else begin
+            joRes.Add('</dv-border-box-'+IntToStr(abs(HelpContext))+'>');
+        end;
+
+        //生成返回值数组
+        joRes.Add('</div>');
+        //
+        Result    := joRes;
+    end;
 end;
 
 //取得Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes       : Variant;
+    sFull       : string;
 begin
+    //取得全名备用
+    sFull       := dwFullName(ACtrl);
+
      with TPanel(Actrl) do begin
            //生成返回值数组
            joRes    := _Json('[]');
            //
            with TPanel(ACtrl) do begin
-                joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-                joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-                joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-                joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+                joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+                joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+                joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+                joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
                 //
-                joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
-                joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+                joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+                joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
                 //
-                joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
+                joRes.Add(sFull+'__cap:"'+dwProcessCaption(Caption)+'",');
                 //
-                joRes.Add(dwFullName(Actrl)+'__col:"'+dwColor(TPanel(ACtrl).Color)+'",');
+
+                joRes.Add(sFull+'__col:"'+dwColor(TPanel(ACtrl).Color)+'",');
                 //
-                joRes.Add(dwFullName(Actrl)+'__fcl:"'+dwColor(Font.Color)+'",');
-                joRes.Add(dwFullName(Actrl)+'__fsz:"'+IntToStr(Font.size+3)+'px",');
-                joRes.Add(dwFullName(Actrl)+'__ffm:"'+Font.Name+'",');
-                joRes.Add(dwFullName(Actrl)+'__fwg:"'+_GetFontWeight(Font)+'",');
-                joRes.Add(dwFullName(Actrl)+'__fsl:"'+_GetFontStyle(Font)+'",');
-                joRes.Add(dwFullName(Actrl)+'__ftd:"'+_GetTextDecoration(Font)+'",');
-                joRes.Add(dwFullName(Actrl)+'__fta:"'+_GetTextAlignment(TPanel(ACtrl))+'",');
+                joRes.Add(sFull+'__fcl:"'+dwColor(Font.Color)+'",');
+                joRes.Add(sFull+'__fsz:"'+IntToStr(Font.size+3)+'px",');
+                joRes.Add(sFull+'__ffm:"'+Font.Name+'",');
+                joRes.Add(sFull+'__fwg:"'+_GetFontWeight(Font)+'",');
+                joRes.Add(sFull+'__fsl:"'+_GetFontStyle(Font)+'",');
+                joRes.Add(sFull+'__ftd:"'+_GetTextDecoration(Font)+'",');
+                joRes.Add(sFull+'__fta:"'+_GetTextAlignment(TPanel(ACtrl))+'",');
            end;
            //
            Result    := (joRes);
@@ -329,33 +390,37 @@ end;
 
 function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes       : Variant;
+    sFull       : string;
 begin
+    //取得全名备用
+    sFull       := dwFullName(ACtrl);
+
      with TPanel(Actrl) do begin
 
            //生成返回值数组
            joRes    := _Json('[]');
            //
            with TPanel(ACtrl) do begin
-                joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+                joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+                joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+                joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+                joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
                 //
-                joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
-                joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+                joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+                joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
                 //
-                joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
+                joRes.Add('this.'+sFull+'__cap="'+dwProcessCaption(Caption)+'";');
                 //
-                joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwColor(TPanel(ACtrl).Color)+'";');
+                joRes.Add('this.'+sFull+'__col="'+dwColor(TPanel(ACtrl).Color)+'";');
                 //
-                joRes.Add('this.'+dwFullName(Actrl)+'__fcl="'+dwColor(Font.Color)+'";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__fsz="'+IntToStr(Font.size+3)+'px";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__ffm="'+Font.Name+'";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__fwg="'+_GetFontWeight(Font)+'";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__fsl="'+_GetFontStyle(Font)+'";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__ftd="'+_GetTextDecoration(Font)+'";');
-                joRes.Add('this.'+dwFullName(Actrl)+'__fta="'+_GetTextAlignment(TPanel(ACtrl))+'";');
+                joRes.Add('this.'+sFull+'__fcl="'+dwColor(Font.Color)+'";');
+                joRes.Add('this.'+sFull+'__fsz="'+IntToStr(Font.size+3)+'px";');
+                joRes.Add('this.'+sFull+'__ffm="'+Font.Name+'";');
+                joRes.Add('this.'+sFull+'__fwg="'+_GetFontWeight(Font)+'";');
+                joRes.Add('this.'+sFull+'__fsl="'+_GetFontStyle(Font)+'";');
+                joRes.Add('this.'+sFull+'__ftd="'+_GetTextDecoration(Font)+'";');
+                joRes.Add('this.'+sFull+'__fta="'+_GetTextAlignment(TPanel(ACtrl))+'";');
            end;
            //
            Result    := (joRes);

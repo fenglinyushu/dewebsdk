@@ -299,30 +299,30 @@ begin
                     +dwGetDWAttr(joHint)
                     //
                     +' :style="{'
-                    +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                        +'backgroundColor:'+dwFullName(Actrl)+'__col,'
 
-                    +dwIIF(HelpContext<>5,'color:'+dwFullName(Actrl)+'__fcl,','')
-                    +'''font-size'':'+dwFullName(Actrl)+'__fsz,'
-                    +'''font-family'':'+dwFullName(Actrl)+'__ffm,'
-                    +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'
-                    +'''font-style'':'+dwFullName(Actrl)+'__fsl,'
-                    +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'
-                    +'''text-align'':'+dwFullName(Actrl)+'__fta,'
-                    //+dwIIF((Layout=tlCenter)and(WordWrap=False),'''line-height'':'+dwFullName(Actrl)+'__hei,','')
-                    //+dwIIF(Layout=tlCenter,'''line-height'':'+dwFullName(Actrl)+'__hei,','')
-                    +'left:'+dwFullName(Actrl)+'__lef,'
-                    +'top:'+dwFullName(Actrl)+'__top,'
-                    +'width:'+dwFullName(Actrl)+'__wid,'
-                    +'height:'+dwFullName(Actrl)+'__hei'
+                        +dwIIF(HelpContext<>5,'color:'+dwFullName(Actrl)+'__fcl,','')
+                        +'''font-size'':'+dwFullName(Actrl)+'__fsz,'
+                        +'''font-family'':'+dwFullName(Actrl)+'__ffm,'
+                        +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'
+                        +'''font-style'':'+dwFullName(Actrl)+'__fsl,'
+                        +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'
+                        +'''text-align'':'+dwFullName(Actrl)+'__fta,'
+                        //+dwIIF((Layout=tlCenter)and(WordWrap=False),'''line-height'':'+dwFullName(Actrl)+'__hei,','')
+                        //+dwIIF(Layout=tlCenter,'''line-height'':'+dwFullName(Actrl)+'__hei,','')
+                        +'left:'+dwFullName(Actrl)+'__lef,'
+                        +'top:'+dwFullName(Actrl)+'__top,'
+                        +'width:'+dwFullName(Actrl)+'__wid,'
+                        +'height:'+dwFullName(Actrl)+'__hei'
                     +'}"'
                     //
                     +' style="position:absolute;'
-                    +dwIIF(Layout=tlCenter,'justify-content: center;flex-direction: column;display: flex;','')
-                    +dwIIF(Assigned(OnClick),'cursor: pointer;','')
-                    //+_GetFont(Font)
-                    //style
-                    +_GetAlignment(TControl(ACtrl))
-                    +dwGetDWStyle(joHint)
+                        +dwIIF(Layout=tlCenter,'justify-content: center;flex-direction: column;display: flex;','')
+                        +dwIIF(Assigned(OnClick),'cursor: pointer;','')
+                        //+_GetFont(Font)
+                        //style
+                        +_GetAlignment(TControl(ACtrl))
+                        +dwGetDWStyle(joHint)
                     +'"'
                     //style 封闭
 

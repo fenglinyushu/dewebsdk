@@ -105,8 +105,11 @@ var
     sEnter      : String;
     sExit       : String;
     sClick      : string;
+    //
+    sFull       : string;
 begin
-    //=============普通图片===================================================================
+    //取得全名备用
+    sFull   := dwFullName(ACtrl);
 
     //生成返回值数组
     joRes    := _Json('[]');
@@ -192,7 +195,7 @@ begin
     with TImage(ACtrl) do begin
         //如果没有手动设置图片源，则自动保存当前图片，并设置为图片源
         //if dwGetProp(TControl(ACtrl),'src')='' then begin
-        //    sName     := 'dist\webimages\'+dwFullName(Actrl)+'.jpg';
+        //    sName     := 'dist\webimages\'+sFull+'.jpg';
         //    //保存图片到本地
         //    if not FileExists(sName) then begin
         //        Picture.SaveToFile(sName);
@@ -201,7 +204,7 @@ begin
 
         //生成预览字符串
         if IncrementalDisplay then begin
-            sClick  := ' @click="image_preview_list=[];image_preview_list.push('+dwFullName(Actrl)+'__src);"';
+            sClick  := ' @click="image_preview_list=[];image_preview_list.push('+sFull+'__src);"';
         end;
 
         //2021-07-28 更改为可动态设置href
@@ -211,36 +214,17 @@ begin
         //    joRes.Add('<a href="'+String(joHint.hrefself+'">');
         //end;
         if joHint.Exists('href') then begin
-            joRes.Add('<a :href="'+dwFullName(Actrl)+'__hrf" target="_blank">');
+            joRes.Add('<a :href="'+sFull+'__hrf" target="_blank">');
         end else if joHint.Exists('hrefself') then begin
-            joRes.Add('<a :href="'+dwFullName(Actrl)+'__hrf">');
+            joRes.Add('<a :href="'+sFull+'__hrf">');
         end;
 
         //
         if Proportional then begin //Proportional:成比例的
-            joRes.Add('<el-image'
-                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
-                    //+dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    //+dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                    +' :src="'+dwFullName(Actrl)+'__src" fit="contain"'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
-                    +dwGetDWAttr(joHint)
-                    +dwLTWH(TControl(ACtrl))
-                    +sRadius
-                    +dwIIF(sClick<>'','cursor: pointer;','')
-                    +dwGetDWStyle(joHint)
-                    +'"'
-                    +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
-                    +sClick
-                    +sEnter
-                    +sExit
-                    +'>');
-        end else begin
             if Stretch then begin
-                joRes.Add('<el-image :src="'+dwFullName(Actrl)+'__src" fit="fill"'
+                joRes.Add('<el-image'
+                        +' id="'+sFull+'"'
+                        +' :src="'+sFull+'__src" fit="cover"'
                         +dwVisible(TControl(ACtrl))
                         +dwDisable(TControl(ACtrl))
                         +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
@@ -260,7 +244,55 @@ begin
                         +sExit
                         +'>');
             end else begin
-                joRes.Add('<el-image :src="'+dwFullName(Actrl)+'__src"  fit="none"'
+                joRes.Add('<el-image'
+                        +' id="'+sFull+'"'
+                        //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),sPreview)
+                        //+dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                        //+dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                        +' :src="'+sFull+'__src" fit="contain"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
+                        +dwGetDWAttr(joHint)
+                        +dwLTWH(TControl(ACtrl))
+                        +sRadius
+                        +dwIIF(sClick<>'','cursor: pointer;','')
+                        +dwGetDWStyle(joHint)
+                        +'"'
+                        +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                        +sClick
+                        +sEnter
+                        +sExit
+                        +'>');
+            end;
+        end else begin
+            if Stretch then begin
+                joRes.Add('<el-image'
+                        +' id="'+sFull+'"'
+                        +' :src="'+sFull+'__src" fit="fill"'
+                        +dwVisible(TControl(ACtrl))
+                        +dwDisable(TControl(ACtrl))
+                        +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
+                        +dwGetDWAttr(joHint)
+                        +dwLTWH(TControl(ACtrl))
+                        +sRadius
+                        +dwIIF(sClick<>'','cursor: pointer;','')
+                        +dwGetDWStyle(joHint)
+                        +'"'
+                        //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                        //+dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),sPreview)
+                        //+dwIIF(Assigned(OnMOuseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseDown),Format(_DWEVENT,['mousedown',Name,'event.offsetX*100000+event.offsetY','onmousedown',TForm(Owner).Handle]),'')
+                        +dwIIF(Assigned(OnMouseUp),Format(_DWEVENT,['mouseup',Name,'event.offsetX*100000+event.offsetY','onmouseup',TForm(Owner).Handle]),'')
+                        +sClick
+                        +sEnter
+                        +sExit
+                        +'>');
+            end else begin
+                joRes.Add('<el-image'
+                        +' id="'+sFull+'"'
+                        +' :src="'+sFull+'__src"  fit="none"'
                         +dwVisible(TControl(ACtrl))
                         +dwDisable(TControl(ACtrl))
                         +dwIIF(IncrementalDisplay,' :preview-src-list="image_preview_list"','')
@@ -292,8 +324,11 @@ function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
     joRes     : Variant;
     joHint      : Variant;
+    //
+    sFull       : string;
 begin
-    //=============普通图片===============================================
+    //取得全名备用
+    sFull   := dwFullName(ACtrl);
 
     //取得HINT对象JSON
     joHint    := dwGetHintJson(TControl(ACtrl));
@@ -316,8 +351,12 @@ function dwGetData(ACtrl:TComponent):string;StdCall;
 var
     joRes   : Variant;
     joHint  : Variant;
+    //
+    sFull       : string;
 begin
-    //=============普通图片===============================================
+    //取得全名备用
+    sFull   := dwFullName(ACtrl);
+
 
     //取得HINT对象JSON
     joHint    := dwGetHintJson(TControl(ACtrl));
@@ -326,25 +365,25 @@ begin
     joRes    := _Json('[]');
     //
     with TImage(ACtrl) do begin
-        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
         //
-        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
-        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
         //
         //if dwGetProp(TControl(ACtrl),'src')='' then begin
-        //    joRes.Add(dwFullName(Actrl)+'__src:"dist/webimages/'+dwFullName(Actrl)+'.jpg",');
+        //    joRes.Add(sFull+'__src:"dist/webimages/'+sFull+'.jpg",');
         //end else begin
-            joRes.Add(dwFullName(Actrl)+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
+            joRes.Add(sFull+'__src:"'+dwGetProp(TControl(ACtrl),'src')+'",');
         //end;
 
         //2021-07-28 更改为可动态设置href
         if joHint.Exists('href') then begin
-             joRes.Add(dwFullName(Actrl)+'__hrf:"'+String(joHint.href)+'",');
+             joRes.Add(sFull+'__hrf:"'+String(joHint.href)+'",');
         end else if joHint.Exists('hrefself') then begin
-             joRes.Add(dwFullName(Actrl)+'__hrf:"'+String(joHint.hrefself)+'",');
+             joRes.Add(sFull+'__hrf:"'+String(joHint.hrefself)+'",');
         end;
     end;
     //
@@ -355,8 +394,11 @@ function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
     joRes     : Variant;
     joHint    : Variant;
+    //
+    sFull       : string;
 begin
-    //=============普通图片===============================================
+    //取得全名备用
+    sFull   := dwFullName(ACtrl);
 
 
     //取得HINT对象JSON
@@ -366,30 +408,30 @@ begin
     joRes    := _Json('[]');
     //
     with TImage(ACtrl) do begin
-        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
 
-        //joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-        //joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-        //joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-        //joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        //joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        //joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        //joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        //joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
         //
         //if dwGetProp(TControl(ACtrl),'src')='' then begin
-        //    joRes.Add('this.'+dwFullName(Actrl)+'__src="dist/webimages/'+dwFullName(Actrl)+'.jpg";');
+        //    joRes.Add('this.'+sFull+'__src="dist/webimages/'+sFull+'.jpg";');
         //end else begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
+            joRes.Add('this.'+sFull+'__src="'+dwGetProp(TControl(ACtrl),'src')+'";');
         //end;
 
         //2021-07-28 更改为可动态设置href
         if joHint.Exists('href') then begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__hrf="'+String(joHint.href)+'";');
+            joRes.Add('this.'+sFull+'__hrf="'+String(joHint.href)+'";');
         end else if joHint.Exists('hrefself') then begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__hrf="'+String(joHint.hrefself)+'";');
+            joRes.Add('this.'+sFull+'__hrf="'+String(joHint.hrefself)+'";');
         end;
     end;
     //

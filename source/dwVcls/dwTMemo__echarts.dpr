@@ -49,6 +49,14 @@ begin
             if Assigned(TMemo(ACtrl).OnMouseUp) then begin
                 TMemo(ACtrl).OnMouseUp(TMemo(ACtrl),mbLeft,[],0,0);
             end;
+        end else if joData.e = 'onclick' then begin
+            //点击事件
+            //
+            if Assigned(TMemo(ACtrl).OnClick) then begin
+                StyleName   := dwUnescape(joData.v);
+                TMemo(ACtrl).OnClick(TMemo(ACtrl));
+            end;
+
         end else if joData.e = 'onchange' then begin
         end else if joData.e = 'onexit' then begin
         end else if joData.e = 'onmouseenter' then begin
@@ -145,6 +153,8 @@ begin
             //
             joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
             //
+            joRes.Add(sFull+'__chart:null,');
+            //
             if joHint.Exists('initdata') then begin
                 joRes.Add(joHint.initdata);
             end;
@@ -169,22 +179,59 @@ begin
         //生成返回值数组
         joRes    := _Json('[]');
         //
-        with TMemo(ACtrl) do begin
-            //用于当width/height发生变化时,重绘
-            sCode   := '/*real*/ '+
-                    'if ((this.'+sFull+'__wid != "'+IntToStr(Width)+'px") ||(this.'+sFull+'__hei != "'+IntToStr(Height)+'px")) {'+
-                        //'console.log("echarts resize!");'+
-                        'this.dwevent(null,"'+sFull+'","","onresize",'+IntToStr(TForm(Owner).Handle)+');'+
-                    '};';
+        //用于当width/height发生变化时,重绘
+        sCode   := '/*real*/ '+
+                'if ((this.'+sFull+'__wid != "'+IntToStr(Width)+'px") ||(this.'+sFull+'__hei != "'+IntToStr(Height)+'px")) {'+
+                    //'console.log("echarts resize!");'+
+                    'this.dwevent(null,"'+sFull+'","","onresize",'+IntToStr(TForm(Owner).Handle)+');'+
+                '};';
+        //
+        joRes.Add(sCode);
+        //
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+
+        //
+        if ShowHint then begin
+            sCode   := 'that = this;';
+
             //
+            for iItem := 0 to Lines.Count-1 do begin
+                sCode   := sCode + #13+Lines[iItem];
+            end;
+
+            //
+            sCode   := ''
+
+                    // 销毁旧的图表实例
+                    +'if (this.'+sFull+'__chart) {'
+                        +'this.'+sFull+'__chart.dispose();'
+                        //+'console.log("2disposed!");'
+                    +'}else{'
+                        +'console.log("2not existed!");'
+                    +'};'
+
+                    // 基于准备好的dom，初始化echarts实例
+                    //+'var '+sFull+'__chart;'
+                    //+sFull+'__chart.dispose();'
+                    +'this.'+sFull+'__chart = echarts.init(document.getElementById('''+sFull+'''), null, { width: '+IntToStr(Width)+', height: '+IntToStr(Height)+'});'
+
+                    // 指定图表的配置项和数据
+                    //'var option = '+
+                    +sCode +#13
+
+                // 使用刚指定的配置项和数据显示图表
+                +'this.'+sFull+'__chart.setOption(option);';
+
             joRes.Add(sCode);
             //
-            joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
-            joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
-            joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
-            joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
-            //
-            joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+            ShowHint    := False;
+        end else begin
+            joRes.Add('');
         end;
         //
         Result    := (joRes);
@@ -203,29 +250,43 @@ begin
     with TMemo(ACtrl) do begin
         //生成返回值数组
         joRes    := _Json('[]');
-        //
-        with TMemo(ACtrl) do begin
-            sCode   := '';
-            for iItem := 0 to Lines.Count-1 do begin
-                sCode   := sCode + #13+Lines[iItem];//StringReplace(Lines[iItem],'''','"',[rfReplaceAll]);
-            end;
 
-            //
-            sCode   :=
-                    // 基于准备好的dom，初始化echarts实例
-                    'var myChart = echarts.init(document.getElementById('''+sFull+'''));'+
-
-                    // 指定图表的配置项和数据
-                    //'var option = '+
-                    sCode +#13+
-
-                    // 使用刚指定的配置项和数据显示图表
-                    'myChart.setOption(option);';
-
-            joRes.Add(sCode);
-            //
-            joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        sCode   := 'that = this;';
+        for iItem := 0 to Lines.Count-1 do begin
+            sCode   := sCode + #13+Lines[iItem];//StringReplace(Lines[iItem],'''','"',[rfReplaceAll]);
         end;
+
+        //
+        sCode   :=
+                // 基于准备好的dom，初始化echarts实例
+                'this.'+sFull+'__chart = echarts.init(document.getElementById('''+sFull+'''), null, { width: '+IntToStr(Width)+', height: '+IntToStr(Height)+'});'
+
+                // 指定图表的配置项和数据
+                //'var option = '+
+                +sCode +#13
+
+                // 使用刚指定的配置项和数据显示图表
+                +'this.'+sFull+'__chart.setOption(option);'
+
+                // 当鼠标点击事件触发时，在控制台输出params
+                +'this.'+sFull+'__chart.on(''click'', function(params){'
+                    //+'alert("click");'
+                    +'let _p ={};'
+                    +'_p.name = params.name;'
+                    +'_p.data = params.data;'
+                    +'_p.seriesName = params.seriesName;'
+                    +'_p.seriesIndex = params.seriesIndex;'
+                    +'_p.dataIndex = params.dataIndex;'
+                    +'console.log(JSON.stringify(_p));'
+                    +'let _s = JSON.stringify(_p);'
+                    //
+                    +'that.dwevent("",'''+sFull+''',_s,''onclick'','''+IntToStr(TForm(Owner).Handle)+''');'
+                +'});';
+
+        joRes.Add(sCode);
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+
         //
         Result    := (joRes);
     end;
@@ -239,7 +300,7 @@ exports
      dwGetMounted,
      dwGetAction,
      dwGetData;
-     
+
 begin
 end.
  

@@ -1,4 +1,4 @@
-﻿library dwTMediaPlayer__m3u8;
+﻿library dwTMediaPlayer_m3u8;
 
 uses
      ShareMem,
@@ -33,8 +33,12 @@ begin
 
 
         //需要额外引的代码
-        joRes.Add('<link href="dist/_videom3u8/video-js.css" rel="stylesheet" />');
-        joRes.Add('<script src="dist/_videom3u8/video.js"></script>');
+        //joRes.Add('<link href="dist/_videom3u8/video-js.css" rel="stylesheet" />');
+        //joRes.Add('<script src="dist/_videom3u8/video.js"></script>');
+        joRes.Add('<link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet"> ');
+        joRes.Add('<script src="https://unpkg.com/video.js/dist/video.js"></script>');
+        joRes.Add('<script src="https://unpkg.com/@videojs/http-streaming"></script>');
+
 
         //
         Result    := joRes;
@@ -53,15 +57,16 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
-    sCode     : String;
-
+    sCode       : String;
+    sFull       : string;
     //
-    joHint    : Variant;
-    joRes     : Variant;
+    joHint      : Variant;
+    joRes       : Variant;
 begin
+    //取得控件全名备用
+    sFull   := dwFullName(ACtrl);
     //
     with TMediaPlayer(ACtrl) do begin
-        //============m3u8格式===========================================
 
         //生成返回值数组
         joRes    := _Json('[]');
@@ -71,7 +76,7 @@ begin
 
         //外框
         sCode     := '<div'
-                 +' id="'+dwFullName(Actrl)+'_frm"'
+                 +' id="'+sFull+'_frm"'
                  +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                  +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                  +'"' // 封闭style
@@ -81,16 +86,16 @@ begin
 
         //
         sCode     := '<video'
-            +' id="'+dwFullName(Actrl)+'"'
+            +' id="'+sFull+'"'
             +' class="video-js  vjs-big-play-centered"'
             +' controls'
             +' preload="auto"'
             +' style="width:100%;height:100%;left:0px;top:0px"'
-            //+' width="'+dwFullName(Actrl)+'__wid"'
-            //+' height="'+dwFullName(Actrl)+'__hei"'
+            //+' width="'+sFull+'__wid"'
+            //+' height="'+sFull+'__hei"'
             +' data-setup="{}"'
             +' >'
-            +'     <source :src="'+dwFullName(Actrl)+'__src"'
+            +'<source :src="'+sFull+'__src"'
             +' type="application/x-mpegURL"/>';
 
         joRes.Add(sCode);
@@ -122,7 +127,10 @@ end;
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
     joRes    : Variant;
+    sFull       : string;
 begin
+    //取得控件全名备用
+    sFull   := dwFullName(ACtrl);
     //
     with TMediaPlayer(ACtrl) do begin
         //============m3u8格式===============================================================
@@ -131,16 +139,16 @@ begin
         joRes    := _Json('[]');
         //
         with TMediaPlayer(ACtrl) do begin
-            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+            joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+            joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+            joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+            joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
             //
-            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+            joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
             //
-            joRes.Add(dwFullName(Actrl)+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
-            joRes.Add(dwFullName(Actrl)+'__aut:'+dwIIF(Enabled,'true,','false,'));
-            joRes.Add(dwFullName(Actrl)+'__src:"'+FileName+'",');
+            joRes.Add(sFull+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
+            joRes.Add(sFull+'__aut:'+dwIIF(Enabled,'true,','false,'));
+            joRes.Add(sFull+'__src:"'+StringReplace(FileName,'"','\"',[rfReplaceAll])+'",');
         end;
         //
         Result    := (joRes);
@@ -151,39 +159,49 @@ end;
 function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
     joRes     : Variant;
+    sFull       : string;
 begin
+    //取得控件全名备用
+    sFull   := dwFullName(ACtrl);
     //
     with TMediaPlayer(ACtrl) do begin
         //============m3u8格式===============================================================
         //生成返回值数组
         joRes    := _Json('[]');
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__loo='+dwIIF(AutoRewind,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__aut='+dwIIF(Enabled,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__src="'+FileName+'";');
+        joRes.Add('this.'+sFull+'__loo='+dwIIF(AutoRewind,'true;','false;'));
+        joRes.Add('this.'+sFull+'__aut='+dwIIF(Enabled,'true;','false;'));
+        joRes.Add('this.'+sFull+'__src="'+StringReplace(FileName,'"','\"',[rfReplaceAll])+'";');
 
         //
         if EnabledButtons  = [btPlay] then begin
-            joRes.Add('var player = videojs("'+dwFullName(Actrl)+'");  player.play();');
+            joRes.Add(
+                'var player = videojs("'+sFull+'");'#13
+                +'player.src({'#13
+                    +'src: "'+StringReplace(FileName,'"','\"',[rfReplaceAll])+'",'#13
+                    +'type: "application/x-mpegURL"'#13
+                +'});'#13
+                +'player.play();'#13
+                );
             EnabledButtons := [];
         end else begin
             joRes.Add('');      //增加一项空值，用于对齐
         end;
         if EnabledButtons  = [btPause] then begin
-            joRes.Add('var player = videojs("'+dwFullName(Actrl)+'"); player.pause();');
+            joRes.Add('var player = videojs("'+sFull+'"); player.pause();');
             EnabledButtons := [];
         end else begin
             joRes.Add('');
         end;
         if HelpContext > 0 then begin
-            joRes.Add('document.getElementById("'+dwFullName(Actrl)+'").currentTime = '+IntToStr(HelpContext-1)+';');
+            joRes.Add('document.getElementById("'+sFull+'").currentTime = '+IntToStr(HelpContext-1)+';');
             HelpContext    := 0;
         end else begin
             joRes.Add('');
@@ -204,4 +222,4 @@ exports
 
 begin
 end.
- 
+

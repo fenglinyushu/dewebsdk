@@ -88,6 +88,106 @@ begin
     //Result  := StringReplace(Result,'"','\"',[rfReplaceAll]);
 end;
 
+function _GetFont(AFont:TFont):string;
+begin
+
+    Result    := 'color:'+dwColor(AFont.color)+';'
+               +'font-family:'''+AFont.name+''';'
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
+
+     //粗体
+     if fsBold in AFont.Style then begin
+          Result    := Result+'font-weight:bold;';
+     end else begin
+          Result    := Result+'font-weight:normal;';
+     end;
+
+     //斜体
+     if fsItalic in AFont.Style then begin
+          Result    := Result+'font-style:italic;';
+     end else begin
+          Result    := Result+'font-style:normal;';
+     end;
+
+     //下划线
+     if fsUnderline in AFont.Style then begin
+          Result    := Result+'text-decoration:underline;';
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end;
+     end else begin
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end else begin
+               Result    := Result+'text-decoration:none;';
+          end;
+     end;
+end;
+
+function _GetFontWeight(AFont:TFont):String;
+begin
+     if fsBold in AFont.Style then begin
+          Result    := 'bold';
+     end else begin
+          Result    := 'normal';
+     end;
+
+end;
+function _GetFontStyle(AFont:TFont):String;
+begin
+     if fsItalic in AFont.Style then begin
+          Result    := 'italic';
+     end else begin
+          Result    := 'normal';
+     end;
+end;
+function _GetTextDecoration(AFont:TFont):String;
+begin
+     if fsUnderline in AFont.Style then begin
+          Result    :='underline';
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := 'line-through';
+          end;
+     end else begin
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := 'line-through';
+          end else begin
+               Result    := 'none';
+          end;
+     end;
+end;
+function _GetTextAlignment(ACtrl:TControl):string;
+begin
+     Result    := '';
+     case TPanel(ACtrl).Alignment of
+          taRightJustify : begin
+               Result    := 'right';
+          end;
+          taCenter : begin
+               Result    := 'center';
+          end;
+     end;
+end;
+
+
+
+
+function _GetAlignment(ACtrl:TControl):string;
+begin
+     Result    := '';
+     case TPanel(ACtrl).Alignment of
+          taRightJustify : begin
+               Result    := 'text-align:right;';
+          end;
+          taCenter : begin
+               Result    := 'text-align:center;';
+          end;
+     end;
+end;
 
 
 //==================================================================================================
@@ -178,6 +278,11 @@ begin
                 +dwDisable(TControl(ACtrl))
                 +dwGetDWAttr(joHint)
                 +' :style="{'
+                    +'''font-size'':'+dwFullName(Actrl)+'__fsz,'
+                    +'''font-family'':'+dwFullName(Actrl)+'__ffm,'
+                    +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'
+                    +'''font-style'':'+dwFullName(Actrl)+'__fsl,'
+                    +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'
                     +'left:'+sFull+'__lef,'
                     +'top:'+sFull+'__top,'
                     +'width:'+sFull+'__wid,'
@@ -193,7 +298,10 @@ begin
                     +'width:'+sFull+'__wid,'
                     +'height:'+sFull+'__hei'
                 +'}"'
-                +' style="position:absolute;left:0;top:0;'
+                +' style="'
+                    +'position:absolute;'
+                    +'left:0;'
+                    +'top:0;'
                     +dwGetDWStyle(joHint)
                 +'"' //style 封闭
                 +'>';
@@ -246,6 +354,13 @@ begin
             //
             joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
             joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+            //
+            joRes.Add(dwFullName(Actrl)+'__fcl:"'+dwColor(Font.Color)+'",');
+            joRes.Add(dwFullName(Actrl)+'__fsz:"'+IntToStr(Font.size+3)+'px",');
+            joRes.Add(dwFullName(Actrl)+'__ffm:"'+Font.Name+'",');
+            joRes.Add(dwFullName(Actrl)+'__fwg:"'+_GetFontWeight(Font)+'",');
+            joRes.Add(dwFullName(Actrl)+'__fsl:"'+_GetFontStyle(Font)+'",');
+            joRes.Add(dwFullName(Actrl)+'__ftd:"'+_GetTextDecoration(Font)+'",');
         end;
         //
         Result    := (joRes);
@@ -271,7 +386,7 @@ begin
             joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
             joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
             //
-            joRes.Add('this.$refs.'+dwFullName(Actrl)+'.innerHTML="'+text+'";');
+            joRes.Add('this.$refs.'+dwFullName(Actrl)+'.innerHTML=`'+text+'`;');
 
         end;
         //

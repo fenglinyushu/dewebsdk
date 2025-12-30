@@ -112,22 +112,26 @@ begin
 
     with THeaderControl(ACtrl) do begin
         //外框
-        sCode   := concat('<div',
-                ' id="'+sFull+'"',
-                dwVisible(TControl(ACtrl)),
-                dwDisable(TControl(ACtrl)),
-                ' :style="{',
-                    'left:'+sFull+'__lef,',
-                    'top:'+sFull+'__top,',
-                    'width:'+sFull+'__wid,',
-                    'height:'+sFull+'__hei',
-                '}"',
-                ' style="',
-                    'position:absolute;',
-                '"',
-                dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),''),
-                dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),''),
-                '>');
+        sCode   :=
+                '<div'
+                    +' id="'+sFull+'"'
+                    +dwVisible(TControl(ACtrl))
+                    +dwDisable(TControl(ACtrl))
+                    +dwGetDWAttr(joHint)
+                    +' :style="{'
+                        +'left:'+sFull+'__lef,'
+                        +'top:'+sFull+'__top,'
+                        +'width:'+sFull+'__wid,'
+                        +'height:'+sFull+'__hei'
+                    +'}"'
+                    +' style="'
+                        +'position:absolute;'
+                        +dwGetDWStyle(joHint)
+                    +'"'
+                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit', TForm(Owner).Handle]),'')
+                +'>';
+
         //添加到返回值数据
         joRes.Add(sCode);
 
@@ -136,7 +140,8 @@ begin
                 ' v-for="(item,index) in '+sFull+'__itm"',
                 ' :style="{',
                     'left:item.l,',
-                    'right:item.r,',
+                    //'right:item.r,',
+                    'width:item.w,',
                     'color:item.c,',
                     '''font-size'':item.fs,',
                     '''font-weight'':item.fb,',
@@ -185,6 +190,7 @@ end;
 function _dwGeneral(ACtrl:TComponent;AMode:string):string;StdCall;
 var
     iSect       : Integer;
+    iLeft       : Integer;  //计算每个标签的Left
     //
     sCode       : string;
     sFull       : string;
@@ -256,6 +262,7 @@ begin
 
         //
         sCode   := sFull + '__itm'+sMiddle+'[';
+        iLeft   := 0;
         for iSect := 0 to Sections.Count-1 do begin
             oSection    := Sections[iSect];
 
@@ -271,9 +278,11 @@ begin
             sCode   := Concat(sCode,
                     '{',
                         //left
-                        'l:"'+IntToStr(Round(iSect*100/Sections.Count))+'%",',
+                        'l:"'+IntToStr(iLeft)+'px",',
                         //right
                         'r:"'+dwIIF(iSect=Sections.Count-1,'0",',IntToStr(100-Round((iSect+1)*100/Sections.Count))+'%",'),
+                        //width
+                        'w:"'+IntToStr(oSection.Width)+'px",',
                         //color
                         'c:"'+dwIIF(iSect=HelpContext,sActiveClr,sNormalClr)+'",',
                         //font bold
@@ -295,6 +304,7 @@ begin
                         //text
                         'cp:"'+oSection.Text+'"',
                     '},');
+            iLeft   := iLeft + oSection.Width;
 
         end;
         if Sections.Count>0 then begin

@@ -1,0 +1,4 @@
+INSERT INTO [ePay]([pId], [pName], [pMode], [pSupplierId], [pReceiveUnitId], [pAmount], [pDate], [pUserId], [pRemark]) VALUES (1, N'飞行控制仿真项目', N'对方未付款', NULL, 2, 168000.00, '2024-01-27', 8, N'张小风负责'); GO
+INSERT INTO [ePay]([pId], [pName], [pMode], [pSupplierId], [pReceiveUnitId], [pAmount], [pDate], [pUserId], [pRemark]) VALUES (2, N'数智赋能DGT00项目', N'我方未付款', 5, NULL, 26800.00, '2025-01-14', 13, N''); GO
+INSERT INTO [ePay]([pId], [pName], [pMode], [pSupplierId], [pReceiveUnitId], [pAmount], [pDate], [pUserId], [pRemark]) VALUES (3, N'秋冬系列产品全渠道销售拓展项目', N'对方未付款', NULL, 6, 320000.00, '2024-04-18', 5, N''); GO
+INSERT INTO [ePay]([pId], [pName], [pMode], [pSupplierId], [pReceiveUnitId], [pAmount], [pDate], [pUserId], [pRemark]) VALUES (4, N'夏季校园渠道铺货及促销项目', N'已完成', 2, NULL, 98000.00, '2025-01-14', 19, N'校园渠道负责'); GO

@@ -11,6 +11,7 @@ uses
 
 
      //
+     Variants,
      MPlayer,
      SysUtils,
      Classes,
@@ -33,21 +34,47 @@ end;
 
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
 function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
+var
+    joData      : Variant;
 begin
-     //
-     //TMediaPlayer(ACtrl).OnClick(TMediaPlayer(ACtrl));
-end;
+    //
+    joData    := _Json(AData);
 
+    //异常处理
+    if joData = unassigned then begin
+        Exit;
+    end;
+    if not joData.Exists('e') then begin
+        Exit;
+    end;
+
+    if joData.e = 'onplay' then begin
+         //
+         if Assigned(TMediaPlayer(ACtrl).OnEnter) then begin
+              TMediaPlayer(ACtrl).OnEnter(TMediaPlayer(ACtrl));
+         end;
+    end else if joData.e = 'onpause' then begin
+        if Assigned(TMediaPlayer(ACtrl).OnNotify) then begin
+              TMediaPlayer(ACtrl).OnNotify(TMediaPlayer(ACtrl));
+         end;
+    end else if joData.e = 'onended' then begin
+        if Assigned(TMediaPlayer(ACtrl).OnExit) then begin
+              TMediaPlayer(ACtrl).OnExit(TMediaPlayer(ACtrl));
+         end;
+    end;
+end;
 
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
-    sCode     : String;
+    sCode       : String;
 
     //
-    joHint    : Variant;
-    joRes     : Variant;
+    joHint      : Variant;
+    joRes       : Variant;
+    sFull       : String;
 begin
+    sFull       := dwFullName(Actrl);
     //
     with TMediaPlayer(ACtrl) do begin
         //============mp4格式============================================
@@ -60,7 +87,7 @@ begin
 
         //
         sCode     := '<div'
-                 +' id="'+dwFullName(Actrl)+'__frm"'
+                 +' id="'+sFull+'__frm"'
                  +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                  +dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                  +'"' // 封闭style
@@ -70,13 +97,13 @@ begin
 
         //
         sCode     := '    <video'
-                +' id="'+dwFullName(Actrl)+'"'
+                +' id="'+sFull+'"'
                 +' class="video-js vjs-big-play-centered"'
                 +dwVisible(TControl(ACtrl))
                 +' :preload="true"'
-                +' :loop="'+dwFullName(Actrl)+'__loo"'
-                +' :autoplay="'+dwFullName(Actrl)+'__aut"'
-                +' :src="'+dwFullName(Actrl)+'__src"'
+                +' :loop="'+sFull+'__loo"'
+                +' :autoplay="'+sFull+'__aut"'
+                +' :src="'+sFull+'__src"'
                 //+' data-setup="{}"'
                 //+' controls'
                 +dwGetDWAttr(joHint)
@@ -87,6 +114,9 @@ begin
                 +' style="width:100%;height:100%;'
                 +dwGetDWStyle(joHint)
                 +'"' //style 封闭
+                +' onplay="window._this.dwevent('''','''+sFull+''',''0'',''onplay'','+IntToStr(TForm(Owner).Handle)+');"'
+                +' onpause="window._this.dwevent('''','''+sFull+''',''0'',''onpause'','+IntToStr(TForm(Owner).Handle)+');"'
+                +' onended="window._this.dwevent('''','''+sFull+''',''0'',''onended'','+IntToStr(TForm(Owner).Handle)+');"'
                 +'>';
         joRes.Add(sCode);
         //
@@ -116,8 +146,10 @@ end;
 //取得Data消息
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
-    joRes     : Variant;
+    joRes       : Variant;
+    sFull       : String;
 begin
+    sFull       := dwFullName(Actrl);
     //
     with TMediaPlayer(ACtrl) do begin
         //============mp4格式================================================================
@@ -125,16 +157,16 @@ begin
         joRes    := _Json('[]');
         //
         with TMediaPlayer(ACtrl) do begin
-            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+            joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+            joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+            joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+            joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
             //
-            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
+            joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
             //
-            joRes.Add(dwFullName(Actrl)+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
-            joRes.Add(dwFullName(Actrl)+'__aut:'+dwIIF(Enabled,'true,','false,'));
-            joRes.Add(dwFullName(Actrl)+'__src:"'+FileName+'",');
+            joRes.Add(sFull+'__loo:'+dwIIF(AutoRewind,'true,','false,'));
+            joRes.Add(sFull+'__aut:'+dwIIF(Enabled,'true,','false,'));
+            joRes.Add(sFull+'__src:"'+FileName+'",');
         end;
         //
         Result    := (joRes);
@@ -144,40 +176,42 @@ end;
 //取得事件
 function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
-    joRes     : Variant;
+    joRes       : Variant;
+    sFull       : String;
 begin
+    sFull       := dwFullName(Actrl);
     //
     with TMediaPlayer(ACtrl) do begin
         //============mp4格式================================================================
         //生成返回值数组
         joRes    := _Json('[]');
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__loo='+dwIIF(AutoRewind,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__aut='+dwIIF(Enabled,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__src="'+FileName+'";');
+        joRes.Add('this.'+sFull+'__loo='+dwIIF(AutoRewind,'true;','false;'));
+        joRes.Add('this.'+sFull+'__aut='+dwIIF(Enabled,'true;','false;'));
+        joRes.Add('this.'+sFull+'__src="'+FileName+'";');
 
         //
         if EnabledButtons  = [btPlay] then begin
-            joRes.Add('document.getElementById("'+dwFullName(Actrl)+'").play();');
+            joRes.Add('document.getElementById("'+sFull+'").play();');
             EnabledButtons := [];
         end else begin
             joRes.Add('');
         end;
         if EnabledButtons  = [btPause] then begin
-            joRes.Add('document.getElementById("'+dwFullName(Actrl)+'").pause();');
+            joRes.Add('document.getElementById("'+sFull+'").pause();');
             EnabledButtons := [];
         end else begin
             joRes.Add('');
         end;
         if HelpContext > 0 then begin
-            joRes.Add('document.getElementById("'+dwFullName(Actrl)+'").currentTime = '+IntToStr(HelpContext-1)+';');
+            joRes.Add('document.getElementById("'+sFull+'").currentTime = '+IntToStr(HelpContext-1)+';');
             HelpContext    := 0;
         end else begin
             joRes.Add('');

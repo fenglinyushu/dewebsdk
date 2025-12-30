@@ -147,7 +147,7 @@ begin
         sCode	:= concat('<el-menu',
                 ' id="'+sFull+'"',
                 ' :default-active="'+sFull+'__act"',        //默认选中状态
-                ' :default-openeds="'+sFull+'__opd"',       //默认打开的菜单项 openeds: ['1','2','3']
+                //' :default-openeds="'+sFull+'__opd"',       //默认打开的菜单项 openeds: ['1','2','3']
                 ' class="el-menu-demo"',
                 //dwIIF(ParentDoubleBuffered,'',' mode="horizontal"'),   //水平或垂直
                 ' :background-color="'+sFull+'__bkc"',      //背景色,bkcolor

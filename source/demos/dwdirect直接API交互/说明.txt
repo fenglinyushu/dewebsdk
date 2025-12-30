@@ -1,0 +1,5 @@
+这是一个直接通过api接口与服务器交互的例程，可以采用类似URL调试
+https://delphibbs.com/dwdirect.dll?name=WW&age=18
+
+正常服务器会回应
+You Name is WW Age is 18

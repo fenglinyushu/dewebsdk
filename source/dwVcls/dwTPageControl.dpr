@@ -16,12 +16,15 @@ uses
 
 //--------------一些自用函数------------------------------------------------------------------------
 function dwLTWHTab(ACtrl:TControl):String;  //可以更新位置的用法
+var
+    sFull       : string;
 begin
-     //只有W，H
-     with ACtrl do begin
-          Result    := ' :style="{width:'+dwFullName(Actrl)+'__wid,height:'+dwFullName(Actrl)+'__hei}"'
-                    +' style="position:absolute;left:0px;top:0px;';
-     end;
+    sFull       := dwFullName(Actrl);
+    //只有W，H
+    with ACtrl do begin
+        Result  := ' :style="{width:'+sFull+'__wid,height:'+sFull+'__hei}"'
+                +' style="position:absolute;left:0px;top:0px;';
+    end;
 end;
 
 
@@ -29,9 +32,52 @@ end;
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
     joRes   : Variant;
+    joHint  : Variant;
+    //
+    sStyle  : String;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
+    //
+    sStyle  :=
+            '<style lang="style" scoped>'+
+(*
+                .el-tabs__item.is-active {
+                    color: #fff !important;
+                    background: #2597DD !important;
+                    border-top:solid 1px #0f0;
+                }
+                .el-tabs__item{
+                    font-weight:bold;
+                    color: #2597DD !important;
+                    background: transparent !important;
+                }
+                .el-tabs__active-bar{
+                    display: none;
+                }
+                .el-tabs__nav-wrap::after{
+                    background: #2597DD !important;
+                }
+                .el-tabs__header{
+                    margin: 0;
+                    background: #ccc !important;
+                    height:40px;
+                }
+*)
+            '</style>';
+
     with TPageControl(Actrl) do begin
-        Result    := '[]';
+        joRes   := _json('[]');
+
+        //取得HINT对象JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
+
+        if joHint.Exists('style') then begin
+            sStyle  := '<style lang="style" scoped>'+joHint.style+'</style>';
+            joRes.Add(sStyle);
+        end;
+        //
+        Result  := joRes;
     end;
 end;
 
@@ -44,7 +90,9 @@ var
     sAction     : string;
     joData      : Variant;
     oTab        : TTabSheet;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
     with TPageControl(Actrl) do begin
         //用作Tabs控件---------------------------------------------------
 
@@ -52,28 +100,55 @@ begin
         joData    := _json(AData);
 
         if joData.e = 'onchange' then begin
-            //保存事件
-            TPageControl(ACtrl).OnExit    := TPageControl(ACtrl).OnChange;
+            //先执行PageControl的切换事件
+            if joData.v <> dwFullName(ActivePage) then begin
+                //保存事件
+                OnExit  := OnChange;
 
-            //清空事件,以防止自动执行
-            TPageControl(ACtrl).OnChange  := nil;
-            //更新值
-            for iTab := 0 to TPageControl(ACtrl).PageCount-1 do begin
-                if LowerCase(dwPrefix(ACtrl) + TPageControl(ACtrl).Pages[iTab].Name) = joData.v then begin
-                     TPageControl(ACtrl).ActivePageIndex     := iTab;
-                     break;
+                //清空事件,以防止自动执行
+                OnChange  := nil;
+                //更新值
+                for iTab := 0 to PageCount-1 do begin
+                    if dwFullName(Pages[iTab]) = joData.v then begin
+                         ActivePageIndex     := iTab;
+                         break;
+                    end;
                 end;
-            end;
-            //恢复事件
-            TPageControl(ACtrl).OnChange  := TPageControl(ACtrl).OnExit;
+                //恢复事件
+                OnChange    := OnExit;
 
-            //执行事件
-            if Assigned(TPageControl(ACtrl).OnChange) then begin
-                TPageControl(ACtrl).OnChange(TPageControl(ACtrl));
+                //执行事件
+                if Assigned(OnChange) then begin
+                    OnChange(TPageControl(ACtrl));
+                end;
+
+                //清空OnExit事件
+                OnExit  := nil;
+            end else begin
+
+                //<----- 再执行 tabsheet 的 点击事件
+                //先找到被点击的 tabsheet
+                oTab    := nil;
+                for iTab := 0 to PageCount-1 do begin
+                    if dwFullName(Pages[iTab]) = joData.v then begin
+                         oTab   := Pages[iTab];
+                         break;
+                    end;
+                end;
+
+                if oTab = nil then begin
+                    Exit;
+                end;
+
+                //
+                if Assigned(oTab.OnEnter) then begin
+                    oTab.OnEnter(oTab);
+                end;
+
+                //>-----
             end;
 
-            //清空OnExit事件
-            TPageControl(ACtrl).OnExit  := nil;
+
         end else if joData.e = 'onenddock' then begin
             //ShowMessage(joData.v);
             sAction := dwUnescape(joData.v);
@@ -126,13 +201,15 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode      : string;
-     sEdit      : string;   //增减TTabSheet的处理代码
-     joHint     : Variant;
-     joRes      : Variant;
-     joTabHint  : Variant;
-     iTab       : Integer;
+    sCode       : string;
+    sEdit       : string;   //增减TTabSheet的处理代码
+    joHint      : Variant;
+    joRes       : Variant;
+    joTabHint   : Variant;
+    iTab        : Integer;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
     with TPageControl(Actrl) do begin
         //用作Tabs控件--------------------------------------------------------------------------
 
@@ -148,30 +225,34 @@ begin
 
             sEdit   := ' @edit="function(targetName,action)'
                     //+'{var data=0;if (action === ''add'') {data=1};data = targetName*10+data;dwevent(this.$event,'''+Name+''',data,''onenddock'','''+IntToStr(TForm(Owner).Handle)+''')}"';
-                    +'{var data = new String(targetName+'',''+action);dwevent(this.$event,'''+Name+''',data,''onenddock'','''+IntToStr(TForm(Owner).Handle)+''')}"';
+                    +'{'
+                        +'var data = new String(targetName+'',''+action);'
+                        +'dwevent(this.$event,'''+Name+''',data,''onenddock'','''+IntToStr(TForm(Owner).Handle)+''')'
+                    +'}"';
             //sEdit   := ' @edit="function(targetName,action){var data=0;if (action === ''add'') {data=1};dwevent(this.$event,'''+Name+''',data,''onenddock'','''+IntToStr(TForm(Owner).Handle)+''')}"';
 
 
 
             //外框
             joRes.Add('<el-tabs'
-                    +' id="'+dwFullName(Actrl)+'"'
-                    +' ref="'+dwFullName(Actrl)+'__ref"'
+                    +' id="'+sFull+'"'
+                    +' ref="'+sFull+'__ref"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+dwFullName(Actrl)+'__apg"'        //ActivePage
-                    +' :tab-position="'+dwFullName(Actrl)+'__tps"'  //标题位置
+                    +' v-model="'+sFull+'__apg"'        //ActivePage
+                    +' :tab-position="'+sFull+'__tps"'  //标题位置
                     +dwIIF(ParentBiDiMode,dwIIF(ParentShowHint,' type="border-card"',' type="card"'),'')   //是否有外框
                     +dwGetDWAttr(joHint)
 
                     //:style 和 style
                     +dwLTWH(TControl(ACtrl))
+                    +'font-size:'+IntToStr(Font.Size+3)+'px;'
                     +dwGetDWStyle(joHint)
                     +'"' //style 封闭
 
                     //事件
-                    +Format(_DWEVENT,['tab-click',Name,'this.'+dwFullName(Actrl)+'__apg','onchange',TForm(Owner).Handle])
-                    //+Format(_DWEVENT,['edit',Name,'this.'+dwFullName(Actrl)+'__apg','onenddock',TForm(Owner).Handle])
+                    +Format(_DWEVENT,['tab-click',Name,'this.'+sFull+'__apg','onchange',TForm(Owner).Handle])
+                    //+Format(_DWEVENT,['edit',Name,'this.'+sFull+'__apg','onenddock',TForm(Owner).Handle])
                     +sEdit
                     +'>');
 
@@ -224,8 +305,10 @@ end;
 //取得HTML尾部消息
 function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes       : Variant;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
     with TPageControl(Actrl) do begin
         //用作Tabs控件---------------------------------------------------
 
@@ -242,9 +325,12 @@ end;
 //取得Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     iTab      : Integer;
+    joRes       : Variant;
+    iTab        : Integer;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
+
     with TPageControl(Actrl) do begin
         //用作Tabs控件---------------------------------------------------
 
@@ -252,28 +338,28 @@ begin
         joRes    := _Json('[]');
         //
         with TPageControl(ACtrl) do begin
-            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+            joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+            joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+            joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+            joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
             //
-            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
-            joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+            joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+            joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
             //
             if ActivePageIndex>=0 then begin
-                 joRes.Add(dwFullName(Actrl)+'__apg:"'+LowerCase(dwPrefix(Actrl)+ActivePage.Name)+'",');
+                 joRes.Add(sFull+'__apg:"'+LowerCase(dwPrefix(Actrl)+ActivePage.Name)+'",');
             end else begin
-                 joRes.Add(dwFullName(Actrl)+'__apg:"'+''+'",');
+                 joRes.Add(sFull+'__apg:"'+''+'",');
             end;
             //方向
             if TabPosition =  (tpTop) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"top",');
+                joRes.Add(sFull+'__tps:"top",');
             end else  if TabPosition =  (tpBottom) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"bottom",');
+                joRes.Add(sFull+'__tps:"bottom",');
             end else  if TabPosition =  (tpLeft) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"left",');
+                joRes.Add(sFull+'__tps:"left",');
             end else  if TabPosition =  (tpRight) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"right",');
+                joRes.Add(sFull+'__tps:"right",');
             end;
         end;
         //
@@ -283,9 +369,12 @@ end;
 
 function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     iTab      : Integer;
+    joRes       : Variant;
+    iTab        : Integer;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
+
     with TPageControl(Actrl) do begin
         //用作Tabs控件---------------------------------------------------
 
@@ -294,34 +383,34 @@ begin
         //
         //
         with TPageControl(ACtrl) do begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-            joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-            joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-            joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+            joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+            joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+            joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+            joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
             //
-            joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
-            joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+            joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+            joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
             //
             if ActivePageIndex>=0 then begin
-                 joRes.Add('this.'+dwFullName(Actrl)+'__apg="'+LowerCase(dwPrefix(Actrl)+ActivePage.Name)+'";');
+                 joRes.Add('this.'+sFull+'__apg="'+LowerCase(dwPrefix(Actrl)+ActivePage.Name)+'";');
             end else begin
-                 joRes.Add('this.'+dwFullName(Actrl)+'__apg="'+''+'";');
+                 joRes.Add('this.'+sFull+'__apg="'+''+'";');
             end;
 
             //方向
             if TabPosition =  (tpTop) then begin
-                 joRes.Add('this.'+dwFullName(Actrl)+'__tps="top";');
+                 joRes.Add('this.'+sFull+'__tps="top";');
             end else  if TabPosition =  (tpBottom) then begin
-                 joRes.Add('this.'+dwFullName(Actrl)+'__tps="bottom";');
+                 joRes.Add('this.'+sFull+'__tps="bottom";');
             end else  if TabPosition =  (tpLeft) then begin
-                 joRes.Add('this.'+dwFullName(Actrl)+'__tps="left";');
+                 joRes.Add('this.'+sFull+'__tps="left";');
             end else  if TabPosition =  (tpRight) then begin
-                 joRes.Add('this.'+dwFullName(Actrl)+'__tps="right";');
+                 joRes.Add('this.'+sFull+'__tps="right";');
             end;
             //各页面可见性
             for iTab := 0 to PageCount-1 do begin
-                joRes.Add('this.$refs.'+dwFullName(Actrl)+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = '''
-                    +dwIIF(Pages[iTab].TabVisible,'inline','none')+''';');
+                joRes.Add('this.$refs.'+sFull+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = '''
+                    +dwIIF(Pages[iTab].TabVisible,'inline-block','none')+''';');
             end;
         end;
         //
@@ -332,23 +421,35 @@ end;
 //取得Mounted
 function dwGetMounted(ACtrl:TComponent):String;StdCall;
 var
-    joRes   : Variant;
-    sCode   : string;
-    iTab    : Integer;
+    joRes       : Variant;
+    sCode       : string;
+    iTab        : Integer;
+    sFull       : string;
 begin
+    sFull       := dwFullName(Actrl);
+
     //生成返回值数组
     joRes    := _Json('[]');
-    //
+
+    //各页面可见性
     joRes.Add('this.$nextTick(() => {');
     with TPageControl(Actrl) do begin
-        //各页面可见性
+        //
         for iTab := 0 to PageCount-1 do begin
             if not Pages[iTab].TabVisible then begin
-                joRes.Add('this.$refs.'+dwFullName(Actrl)+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = ''none'';');
+                joRes.Add('this.$refs.'+sFull+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = ''none'';');
             end;
         end;
+        joRes.Add('});');
+
+        //标题栏高度
+        iTab    := dwIIFi(TabHeight=0, 20, TabHeight);
+        sCode   := '$("#'+sFull+' .el-tabs__header").css("height", "'+IntToStr(iTab)+'px");'
+                //+'$("#'+sFull+' .el-tabs__header .el-tab").css("line-height", "'+IntToStr(iTab)+'px");';
+                +'$("#'+sFull+' .el-tabs__nav").css({"line-height":"100%", "padding":"0"});';
+        //joRes.Add(sCode);
+
     end;
-    joRes.Add('});');
     //
     Result    := (joRes);
 end;

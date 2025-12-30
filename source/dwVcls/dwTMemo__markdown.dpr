@@ -304,7 +304,7 @@ begin
                         +'$("#output").html("onchange : this.id =>" + this.id + ", markdown =>" + this.getValue());'
                         +'console.log("onchange =>", this, this.id, this.settings, this.state);'
                         //+'console.log("onchangeasdfa");'
-                        +'me.dwevent(null,'''+dwFullName(Actrl)+''',''escape('+dwFullName(Actrl)+'__obj.getMarkdown())'',''onchange'','''+IntToStr(TForm(Owner).Handle)+''');'
+                        +'window._this.dwevent(null,'''+dwFullName(Actrl)+''',''escape('+dwFullName(Actrl)+'__obj.getMarkdown())'',''onchange'','''+IntToStr(TForm(Owner).Handle)+''');'
                         //+Format(_DWEVENT,['input',Name,'escape('+dwFullName(Actrl)+'__obj.getMarkdown())','onchange',TForm(Owner).Handle])
                     +'}'
                 +'});';

@@ -1,0 +1,636 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E69D4221-4A4D-4D28-8586-D5BAE2251312}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SendSSEMsg服务器端主动推送SSE消息\SendSSEMsg.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qrcode扫描二维码\qrcode.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Timers多种窗体下时钟控制\Timers.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="JsSetVar浏览器JS发送数据到Delphi\JSSetVar.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="glogin通用登录\glogin.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="03 MultiForm主窗体和子窗体上传文件和弹出窗体\MultiForm.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwFrame综合管理系统\dwFrame.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="StringGridMulti多类型表格\StringGridMulti.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwdirect直接API交互\dwdirect.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PanelCesium三维地球\PanelCesium.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="HotUpdate热更新\HotUpdate.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="coupon优惠券\coupon.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EditTree树形编辑框\EditTree.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="TreeViewGrid树形表格\TreeViewGrid.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ShapeMenu菜单\ShapeMenu.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Comm串口收发\Comm.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="GeoLocation获取地理位置\geolocation.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Marquee走马灯文字\Marquee.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PhotoPreivew图片预览\PhotoPreview.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FlowCard卡片式数据显示\FlowCardDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="TestSystem试题综合管理系统\ZHeart.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="02 DBHello数据库基础\dbhello.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Cascader省市区级联\Cascader.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="bdv002大屏看板2\bdv002.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="echartsmap地图下钻\echartsmap.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="bdv001大屏看板1\bdv001.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="echarts多种图表\echarts.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="StringGridWW超强表格\StringGridWW.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="kfc移动端仿肯德基点餐系统\kfc.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="progressbar进度条\progressbar.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="pdf显示PDF\pdf.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="01 Hello入门必看\hello.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="driver驾校理论考试\driver.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="button按钮样式\button.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EditStyle编辑框样式\editstyle.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EditType编辑框类型\EditType.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="HeaderControl多样式标签头\headercontrol.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="hrd华容道游戏\hrd.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="luckdraw幸运转盘\luckdraw.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MobileBase移动端基础\mobile0.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="mp3音频\mp3.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="mp4视频\mp4.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qrcodecreator生成二维码\QRcodeCreator.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="badge角标徽章\badge.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="bmap百度地图\bmap.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="captcha验证码\captcha.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="carousel走马灯\carousel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="carouselcard走马灯图片\carouselcard.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="CoolLabel炫酷文本效果\CoolLabel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="M00\M00.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="CardPanelTurn翻书效果\CardPanelTurn.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SendSSEMsg">
+        <MSBuild Projects="SendSSEMsg服务器端主动推送SSE消息\SendSSEMsg.dproj"/>
+    </Target>
+    <Target Name="SendSSEMsg:Clean">
+        <MSBuild Projects="SendSSEMsg服务器端主动推送SSE消息\SendSSEMsg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SendSSEMsg:Make">
+        <MSBuild Projects="SendSSEMsg服务器端主动推送SSE消息\SendSSEMsg.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="qrcode">
+        <MSBuild Projects="qrcode扫描二维码\qrcode.dproj"/>
+    </Target>
+    <Target Name="qrcode:Clean">
+        <MSBuild Projects="qrcode扫描二维码\qrcode.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qrcode:Make">
+        <MSBuild Projects="qrcode扫描二维码\qrcode.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Timers">
+        <MSBuild Projects="Timers多种窗体下时钟控制\Timers.dproj"/>
+    </Target>
+    <Target Name="Timers:Clean">
+        <MSBuild Projects="Timers多种窗体下时钟控制\Timers.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Timers:Make">
+        <MSBuild Projects="Timers多种窗体下时钟控制\Timers.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="JSSetVar">
+        <MSBuild Projects="JsSetVar浏览器JS发送数据到Delphi\JSSetVar.dproj"/>
+    </Target>
+    <Target Name="JSSetVar:Clean">
+        <MSBuild Projects="JsSetVar浏览器JS发送数据到Delphi\JSSetVar.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="JSSetVar:Make">
+        <MSBuild Projects="JsSetVar浏览器JS发送数据到Delphi\JSSetVar.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="glogin">
+        <MSBuild Projects="glogin通用登录\glogin.dproj"/>
+    </Target>
+    <Target Name="glogin:Clean">
+        <MSBuild Projects="glogin通用登录\glogin.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="glogin:Make">
+        <MSBuild Projects="glogin通用登录\glogin.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MultiForm">
+        <MSBuild Projects="03 MultiForm主窗体和子窗体上传文件和弹出窗体\MultiForm.dproj"/>
+    </Target>
+    <Target Name="MultiForm:Clean">
+        <MSBuild Projects="03 MultiForm主窗体和子窗体上传文件和弹出窗体\MultiForm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MultiForm:Make">
+        <MSBuild Projects="03 MultiForm主窗体和子窗体上传文件和弹出窗体\MultiForm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwFrame">
+        <MSBuild Projects="dwFrame综合管理系统\dwFrame.dproj"/>
+    </Target>
+    <Target Name="dwFrame:Clean">
+        <MSBuild Projects="dwFrame综合管理系统\dwFrame.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwFrame:Make">
+        <MSBuild Projects="dwFrame综合管理系统\dwFrame.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="StringGridMulti">
+        <MSBuild Projects="StringGridMulti多类型表格\StringGridMulti.dproj"/>
+    </Target>
+    <Target Name="StringGridMulti:Clean">
+        <MSBuild Projects="StringGridMulti多类型表格\StringGridMulti.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="StringGridMulti:Make">
+        <MSBuild Projects="StringGridMulti多类型表格\StringGridMulti.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwdirect">
+        <MSBuild Projects="dwdirect直接API交互\dwdirect.dproj"/>
+    </Target>
+    <Target Name="dwdirect:Clean">
+        <MSBuild Projects="dwdirect直接API交互\dwdirect.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwdirect:Make">
+        <MSBuild Projects="dwdirect直接API交互\dwdirect.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PanelCesium">
+        <MSBuild Projects="PanelCesium三维地球\PanelCesium.dproj"/>
+    </Target>
+    <Target Name="PanelCesium:Clean">
+        <MSBuild Projects="PanelCesium三维地球\PanelCesium.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PanelCesium:Make">
+        <MSBuild Projects="PanelCesium三维地球\PanelCesium.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="HotUpdate">
+        <MSBuild Projects="HotUpdate热更新\HotUpdate.dproj"/>
+    </Target>
+    <Target Name="HotUpdate:Clean">
+        <MSBuild Projects="HotUpdate热更新\HotUpdate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HotUpdate:Make">
+        <MSBuild Projects="HotUpdate热更新\HotUpdate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="coupon">
+        <MSBuild Projects="coupon优惠券\coupon.dproj"/>
+    </Target>
+    <Target Name="coupon:Clean">
+        <MSBuild Projects="coupon优惠券\coupon.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="coupon:Make">
+        <MSBuild Projects="coupon优惠券\coupon.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EditTree">
+        <MSBuild Projects="EditTree树形编辑框\EditTree.dproj"/>
+    </Target>
+    <Target Name="EditTree:Clean">
+        <MSBuild Projects="EditTree树形编辑框\EditTree.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EditTree:Make">
+        <MSBuild Projects="EditTree树形编辑框\EditTree.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TreeViewGrid">
+        <MSBuild Projects="TreeViewGrid树形表格\TreeViewGrid.dproj"/>
+    </Target>
+    <Target Name="TreeViewGrid:Clean">
+        <MSBuild Projects="TreeViewGrid树形表格\TreeViewGrid.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TreeViewGrid:Make">
+        <MSBuild Projects="TreeViewGrid树形表格\TreeViewGrid.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ShapeMenu">
+        <MSBuild Projects="ShapeMenu菜单\ShapeMenu.dproj"/>
+    </Target>
+    <Target Name="ShapeMenu:Clean">
+        <MSBuild Projects="ShapeMenu菜单\ShapeMenu.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ShapeMenu:Make">
+        <MSBuild Projects="ShapeMenu菜单\ShapeMenu.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Comm">
+        <MSBuild Projects="Comm串口收发\Comm.dproj"/>
+    </Target>
+    <Target Name="Comm:Clean">
+        <MSBuild Projects="Comm串口收发\Comm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Comm:Make">
+        <MSBuild Projects="Comm串口收发\Comm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="geolocation">
+        <MSBuild Projects="GeoLocation获取地理位置\geolocation.dproj"/>
+    </Target>
+    <Target Name="geolocation:Clean">
+        <MSBuild Projects="GeoLocation获取地理位置\geolocation.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="geolocation:Make">
+        <MSBuild Projects="GeoLocation获取地理位置\geolocation.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Marquee">
+        <MSBuild Projects="Marquee走马灯文字\Marquee.dproj"/>
+    </Target>
+    <Target Name="Marquee:Clean">
+        <MSBuild Projects="Marquee走马灯文字\Marquee.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Marquee:Make">
+        <MSBuild Projects="Marquee走马灯文字\Marquee.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PhotoPreview">
+        <MSBuild Projects="PhotoPreivew图片预览\PhotoPreview.dproj"/>
+    </Target>
+    <Target Name="PhotoPreview:Clean">
+        <MSBuild Projects="PhotoPreivew图片预览\PhotoPreview.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PhotoPreview:Make">
+        <MSBuild Projects="PhotoPreivew图片预览\PhotoPreview.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FlowCardDemo">
+        <MSBuild Projects="FlowCard卡片式数据显示\FlowCardDemo.dproj"/>
+    </Target>
+    <Target Name="FlowCardDemo:Clean">
+        <MSBuild Projects="FlowCard卡片式数据显示\FlowCardDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FlowCardDemo:Make">
+        <MSBuild Projects="FlowCard卡片式数据显示\FlowCardDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ZHeart">
+        <MSBuild Projects="TestSystem试题综合管理系统\ZHeart.dproj"/>
+    </Target>
+    <Target Name="ZHeart:Clean">
+        <MSBuild Projects="TestSystem试题综合管理系统\ZHeart.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ZHeart:Make">
+        <MSBuild Projects="TestSystem试题综合管理系统\ZHeart.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dbhello">
+        <MSBuild Projects="02 DBHello数据库基础\dbhello.dproj"/>
+    </Target>
+    <Target Name="dbhello:Clean">
+        <MSBuild Projects="02 DBHello数据库基础\dbhello.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dbhello:Make">
+        <MSBuild Projects="02 DBHello数据库基础\dbhello.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Cascader">
+        <MSBuild Projects="Cascader省市区级联\Cascader.dproj"/>
+    </Target>
+    <Target Name="Cascader:Clean">
+        <MSBuild Projects="Cascader省市区级联\Cascader.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Cascader:Make">
+        <MSBuild Projects="Cascader省市区级联\Cascader.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="bdv002">
+        <MSBuild Projects="bdv002大屏看板2\bdv002.dproj"/>
+    </Target>
+    <Target Name="bdv002:Clean">
+        <MSBuild Projects="bdv002大屏看板2\bdv002.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bdv002:Make">
+        <MSBuild Projects="bdv002大屏看板2\bdv002.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="echartsmap">
+        <MSBuild Projects="echartsmap地图下钻\echartsmap.dproj"/>
+    </Target>
+    <Target Name="echartsmap:Clean">
+        <MSBuild Projects="echartsmap地图下钻\echartsmap.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="echartsmap:Make">
+        <MSBuild Projects="echartsmap地图下钻\echartsmap.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="bdv001">
+        <MSBuild Projects="bdv001大屏看板1\bdv001.dproj"/>
+    </Target>
+    <Target Name="bdv001:Clean">
+        <MSBuild Projects="bdv001大屏看板1\bdv001.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bdv001:Make">
+        <MSBuild Projects="bdv001大屏看板1\bdv001.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="echarts">
+        <MSBuild Projects="echarts多种图表\echarts.dproj"/>
+    </Target>
+    <Target Name="echarts:Clean">
+        <MSBuild Projects="echarts多种图表\echarts.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="echarts:Make">
+        <MSBuild Projects="echarts多种图表\echarts.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="StringGridWW">
+        <MSBuild Projects="StringGridWW超强表格\StringGridWW.dproj"/>
+    </Target>
+    <Target Name="StringGridWW:Clean">
+        <MSBuild Projects="StringGridWW超强表格\StringGridWW.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="StringGridWW:Make">
+        <MSBuild Projects="StringGridWW超强表格\StringGridWW.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="kfc">
+        <MSBuild Projects="kfc移动端仿肯德基点餐系统\kfc.dproj"/>
+    </Target>
+    <Target Name="kfc:Clean">
+        <MSBuild Projects="kfc移动端仿肯德基点餐系统\kfc.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="kfc:Make">
+        <MSBuild Projects="kfc移动端仿肯德基点餐系统\kfc.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="progressbar">
+        <MSBuild Projects="progressbar进度条\progressbar.dproj"/>
+    </Target>
+    <Target Name="progressbar:Clean">
+        <MSBuild Projects="progressbar进度条\progressbar.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="progressbar:Make">
+        <MSBuild Projects="progressbar进度条\progressbar.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="pdf">
+        <MSBuild Projects="pdf显示PDF\pdf.dproj"/>
+    </Target>
+    <Target Name="pdf:Clean">
+        <MSBuild Projects="pdf显示PDF\pdf.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pdf:Make">
+        <MSBuild Projects="pdf显示PDF\pdf.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="hello">
+        <MSBuild Projects="01 Hello入门必看\hello.dproj"/>
+    </Target>
+    <Target Name="hello:Clean">
+        <MSBuild Projects="01 Hello入门必看\hello.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="hello:Make">
+        <MSBuild Projects="01 Hello入门必看\hello.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="driver">
+        <MSBuild Projects="driver驾校理论考试\driver.dproj"/>
+    </Target>
+    <Target Name="driver:Clean">
+        <MSBuild Projects="driver驾校理论考试\driver.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="driver:Make">
+        <MSBuild Projects="driver驾校理论考试\driver.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="button">
+        <MSBuild Projects="button按钮样式\button.dproj"/>
+    </Target>
+    <Target Name="button:Clean">
+        <MSBuild Projects="button按钮样式\button.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="button:Make">
+        <MSBuild Projects="button按钮样式\button.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="editstyle">
+        <MSBuild Projects="EditStyle编辑框样式\editstyle.dproj"/>
+    </Target>
+    <Target Name="editstyle:Clean">
+        <MSBuild Projects="EditStyle编辑框样式\editstyle.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="editstyle:Make">
+        <MSBuild Projects="EditStyle编辑框样式\editstyle.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EditType">
+        <MSBuild Projects="EditType编辑框类型\EditType.dproj"/>
+    </Target>
+    <Target Name="EditType:Clean">
+        <MSBuild Projects="EditType编辑框类型\EditType.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EditType:Make">
+        <MSBuild Projects="EditType编辑框类型\EditType.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="headercontrol">
+        <MSBuild Projects="HeaderControl多样式标签头\headercontrol.dproj"/>
+    </Target>
+    <Target Name="headercontrol:Clean">
+        <MSBuild Projects="HeaderControl多样式标签头\headercontrol.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="headercontrol:Make">
+        <MSBuild Projects="HeaderControl多样式标签头\headercontrol.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="hrd">
+        <MSBuild Projects="hrd华容道游戏\hrd.dproj"/>
+    </Target>
+    <Target Name="hrd:Clean">
+        <MSBuild Projects="hrd华容道游戏\hrd.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="hrd:Make">
+        <MSBuild Projects="hrd华容道游戏\hrd.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="luckdraw">
+        <MSBuild Projects="luckdraw幸运转盘\luckdraw.dproj"/>
+    </Target>
+    <Target Name="luckdraw:Clean">
+        <MSBuild Projects="luckdraw幸运转盘\luckdraw.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="luckdraw:Make">
+        <MSBuild Projects="luckdraw幸运转盘\luckdraw.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="mobile0">
+        <MSBuild Projects="MobileBase移动端基础\mobile0.dproj"/>
+    </Target>
+    <Target Name="mobile0:Clean">
+        <MSBuild Projects="MobileBase移动端基础\mobile0.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mobile0:Make">
+        <MSBuild Projects="MobileBase移动端基础\mobile0.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="mp3">
+        <MSBuild Projects="mp3音频\mp3.dproj"/>
+    </Target>
+    <Target Name="mp3:Clean">
+        <MSBuild Projects="mp3音频\mp3.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mp3:Make">
+        <MSBuild Projects="mp3音频\mp3.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="mp4">
+        <MSBuild Projects="mp4视频\mp4.dproj"/>
+    </Target>
+    <Target Name="mp4:Clean">
+        <MSBuild Projects="mp4视频\mp4.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mp4:Make">
+        <MSBuild Projects="mp4视频\mp4.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="QRcodeCreator">
+        <MSBuild Projects="qrcodecreator生成二维码\QRcodeCreator.dproj"/>
+    </Target>
+    <Target Name="QRcodeCreator:Clean">
+        <MSBuild Projects="qrcodecreator生成二维码\QRcodeCreator.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="QRcodeCreator:Make">
+        <MSBuild Projects="qrcodecreator生成二维码\QRcodeCreator.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="badge">
+        <MSBuild Projects="badge角标徽章\badge.dproj"/>
+    </Target>
+    <Target Name="badge:Clean">
+        <MSBuild Projects="badge角标徽章\badge.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="badge:Make">
+        <MSBuild Projects="badge角标徽章\badge.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="bmap">
+        <MSBuild Projects="bmap百度地图\bmap.dproj"/>
+    </Target>
+    <Target Name="bmap:Clean">
+        <MSBuild Projects="bmap百度地图\bmap.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bmap:Make">
+        <MSBuild Projects="bmap百度地图\bmap.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="captcha">
+        <MSBuild Projects="captcha验证码\captcha.dproj"/>
+    </Target>
+    <Target Name="captcha:Clean">
+        <MSBuild Projects="captcha验证码\captcha.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="captcha:Make">
+        <MSBuild Projects="captcha验证码\captcha.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="carousel">
+        <MSBuild Projects="carousel走马灯\carousel.dproj"/>
+    </Target>
+    <Target Name="carousel:Clean">
+        <MSBuild Projects="carousel走马灯\carousel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="carousel:Make">
+        <MSBuild Projects="carousel走马灯\carousel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="carouselcard">
+        <MSBuild Projects="carouselcard走马灯图片\carouselcard.dproj"/>
+    </Target>
+    <Target Name="carouselcard:Clean">
+        <MSBuild Projects="carouselcard走马灯图片\carouselcard.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="carouselcard:Make">
+        <MSBuild Projects="carouselcard走马灯图片\carouselcard.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CoolLabel">
+        <MSBuild Projects="CoolLabel炫酷文本效果\CoolLabel.dproj"/>
+    </Target>
+    <Target Name="CoolLabel:Clean">
+        <MSBuild Projects="CoolLabel炫酷文本效果\CoolLabel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CoolLabel:Make">
+        <MSBuild Projects="CoolLabel炫酷文本效果\CoolLabel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="M00">
+        <MSBuild Projects="M00\M00.dproj"/>
+    </Target>
+    <Target Name="M00:Clean">
+        <MSBuild Projects="M00\M00.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="M00:Make">
+        <MSBuild Projects="M00\M00.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CardPanelTurn">
+        <MSBuild Projects="CardPanelTurn翻书效果\CardPanelTurn.dproj"/>
+    </Target>
+    <Target Name="CardPanelTurn:Clean">
+        <MSBuild Projects="CardPanelTurn翻书效果\CardPanelTurn.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CardPanelTurn:Make">
+        <MSBuild Projects="CardPanelTurn翻书效果\CardPanelTurn.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SendSSEMsg;qrcode;Timers;JSSetVar;glogin;MultiForm;dwFrame;StringGridMulti;dwdirect;PanelCesium;HotUpdate;coupon;EditTree;TreeViewGrid;ShapeMenu;Comm;geolocation;Marquee;PhotoPreview;FlowCardDemo;ZHeart;dbhello;Cascader;bdv002;echartsmap;bdv001;echarts;StringGridWW;kfc;progressbar;pdf;hello;driver;button;editstyle;EditType;headercontrol;hrd;luckdraw;mobile0;mp3;mp4;QRcodeCreator;badge;bmap;captcha;carousel;carouselcard;CoolLabel;M00;CardPanelTurn"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SendSSEMsg:Clean;qrcode:Clean;Timers:Clean;JSSetVar:Clean;glogin:Clean;MultiForm:Clean;dwFrame:Clean;StringGridMulti:Clean;dwdirect:Clean;PanelCesium:Clean;HotUpdate:Clean;coupon:Clean;EditTree:Clean;TreeViewGrid:Clean;ShapeMenu:Clean;Comm:Clean;geolocation:Clean;Marquee:Clean;PhotoPreview:Clean;FlowCardDemo:Clean;ZHeart:Clean;dbhello:Clean;Cascader:Clean;bdv002:Clean;echartsmap:Clean;bdv001:Clean;echarts:Clean;StringGridWW:Clean;kfc:Clean;progressbar:Clean;pdf:Clean;hello:Clean;driver:Clean;button:Clean;editstyle:Clean;EditType:Clean;headercontrol:Clean;hrd:Clean;luckdraw:Clean;mobile0:Clean;mp3:Clean;mp4:Clean;QRcodeCreator:Clean;badge:Clean;bmap:Clean;captcha:Clean;carousel:Clean;carouselcard:Clean;CoolLabel:Clean;M00:Clean;CardPanelTurn:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SendSSEMsg:Make;qrcode:Make;Timers:Make;JSSetVar:Make;glogin:Make;MultiForm:Make;dwFrame:Make;StringGridMulti:Make;dwdirect:Make;PanelCesium:Make;HotUpdate:Make;coupon:Make;EditTree:Make;TreeViewGrid:Make;ShapeMenu:Make;Comm:Make;geolocation:Make;Marquee:Make;PhotoPreview:Make;FlowCardDemo:Make;ZHeart:Make;dbhello:Make;Cascader:Make;bdv002:Make;echartsmap:Make;bdv001:Make;echarts:Make;StringGridWW:Make;kfc:Make;progressbar:Make;pdf:Make;hello:Make;driver:Make;button:Make;editstyle:Make;EditType:Make;headercontrol:Make;hrd:Make;luckdraw:Make;mobile0:Make;mp3:Make;mp4:Make;QRcodeCreator:Make;badge:Make;bmap:Make;captcha:Make;carousel:Make;carouselcard:Make;CoolLabel:Make;M00:Make;CardPanelTurn:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

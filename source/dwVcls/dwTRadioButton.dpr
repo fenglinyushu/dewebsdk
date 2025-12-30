@@ -86,7 +86,7 @@ begin
                     +' v-model="'+dwFullName(Actrl)+'__chk"'
                     +dwLTWH(TControl(ACtrl))
                     +'"' //style 封闭
-                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click.native.prevent',Name,'(this.'+dwFullName(Actrl)+'__chk)','onclick',TForm(Owner).Handle]),'')
+                    +Format(_DWEVENT,['click.native.prevent',Name,'(this.'+dwFullName(Actrl)+'__chk)','onclick',TForm(Owner).Handle])
                     +'>{{'+dwFullName(Actrl)+'__cap}}';
           //添加到返回值数据
           joRes.Add(sCode);

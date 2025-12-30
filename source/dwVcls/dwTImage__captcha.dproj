@@ -4,11 +4,12 @@
         <MainSource>dwTImage__captcha.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <TargetedPlatforms>1</TargetedPlatforms>
+        <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Library</AppType>
         <FrameworkType>VCL</FrameworkType>
-        <ProjectVersion>19.4</ProjectVersion>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <ProjectVersion>20.3</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <ProjectName Condition="'$(ProjectName)'==''">dwTImage__captcha</ProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -54,7 +55,7 @@
         <DCC_ImageBase>00400000</DCC_ImageBase>
         <DCC_DebugInformation>1</DCC_DebugInformation>
         <DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
-        <DCC_ExeOutput>..\Runtime\dwVcls\</DCC_ExeOutput>
+        <DCC_ExeOutput>..\Runtime\vcls\</DCC_ExeOutput>
         <DCC_UnitSearchPath>E:\编程参考\D10.2.3\Steema TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi7\Lib;E:\Steema TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi7\Lib;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_UsePackage>vcl;rtl;vclx;vclshlctrls;dbrtl;vcldb;adortl;bdertl;vcldbx;VclSmp;PSysTray;dpkUDT;PTheadTimer;tb2k_d7;vclactnband;tbx_d7;PSplit;PMyDBGrid;RaizeComponentsVcl;RaizeComponentsVclDb;PSPComm;PXpBtn;TMSD7;TMSD7PERS;PngComponentsD7;SynEdit_D7;RxCtl7;VirtualTreesD7;FR7;RaudusD70;NxGridDsgn;NxGridRun;NxCommonRun;NxCollectionRun;NxCollectionDsgn;NxDBThirdpartyRun;NxInspectorDsgn;NxInspectorRun;NxSheetRun;NxTBX;SUIPackD7;cxLibraryVCLD7;dxEdtrD7;cxPageControlVCLD7;cxWebD7;cxWebSnapD7;cxWebPascalScriptD7;dxPSLnksD7;dxPSCoreD7;cxDataD7;dxPScxCommonD7;cxEditorsVCLD7;dxPScxExtCommonD7;cxExtEditorsVCLD7;dxThemeD7;dxPScxGridLnkD7;cxGridVCLD7;dxPScxScheduler2LnkD7;cxSchedulerVCLD7;dxPScxSSLnkD7;dxPScxTLLnkD7;cxTreeListVCLD7;dxPScxVGridLnkD7;cxVerticalGridVCLD7;dxPSdxDBOCLnkD7;dxdborD7;dxorgcD7;dxPSdxOCLnkD7;dxPSdxDBTVLnkD7;dxdbtrD7;dxPSdxFCLnkD7;dxFlowChartD7;dxPSdxLCLnkD7;dxLayoutControlD7;dxPSdxMVLnkD7;dxMasterViewD7;dxPsPrVwAdvD7;dxBarExtItemsD7;dxBarD7;dxComnD7;dxInsD7;dxDBEdD7;dxObjInsD7;dxForumLibD7;dxELibD7;ECQDBCD7;EQTLD7;EQDBTLD7;dxExELD7;EQGridD7;dxGrEdD7;TDBNavPlus;dxmdsD7;dxsbD7;dxDockingD7;dxBarExtDBItemsD7;dxBarDBNavD7;dxtrmdD7;dxNavBarD7;dxPScxPCProdD7;Tee97;TeeUI97;TeeDB97;TeePro97;TeeGL97;TeeImage97;TeeLanguage97;TeeWorld97;TeeImport97;SpTBXLib_d7;$(DCC_UsePackage)</DCC_UsePackage>
         <GenDll>true</GenDll>
@@ -135,9 +136,9 @@
             </Delphi.Personality>
             <Platforms>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
+                <Platform value="Win64">True</Platform>
             </Platforms>
-            <Deployment Version="3"/>
+            <Deployment Version="5"/>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

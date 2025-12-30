@@ -331,7 +331,7 @@ begin
                     +'{ radius: ''50px'', background: ''#d64737'' },'
                     +'{ radius: ''45px'', background: ''#fff'' },'
                     +'{ radius: ''41px'', background: ''#f6c66f'', pointer: true },'
-                    +'{ radius: ''35px'', background: ''#ffdea0'', imgs: [{ src: ''image/luck/button.png'', width: ''65%'', top: ''-50%'' }]}],';
+                    +'{ radius: ''35px'', background: ''#ffdea0'', imgs: [{ src: ''media/images/luck/button.png'', width: ''65%'', top: ''-50%'' }]}],';
             joRes.Add(sCode);
 
         end;

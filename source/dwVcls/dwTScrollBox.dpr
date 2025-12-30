@@ -70,51 +70,58 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):String;StdCall;
 var
-     sCode     : String;
+    sCode       : String;
 
-     //
-     joHint    : Variant;
-     joRes     : Variant;
+    //
+    joHint      : Variant;
+    joRes       : Variant;
+    //
+    sFull       : string;
 begin
-     //生成返回值数组
-     joRes    := _Json('[]');
+    sFull   := dwFullName(ACtrl);
 
-     //取得HINT对象JSON
-     joHint    := dwGetHintJson(TControl(ACtrl));
+    //生成返回值数组
+    joRes    := _Json('[]');
 
-     //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
-     //参数依次为: JS事件名称, 控件名称,控件值,Delphi事件名称,备用
+    //取得HINT对象JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+    //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%s'')"';
+    //参数依次为: JS事件名称, 控件名称,控件值,Delphi事件名称,备用
 
 
-     //
-     with TScrollBox(ACtrl) do begin
+    //
+    with TScrollBox(ACtrl) do begin
 
-          //
-          sCode     := '<div'
-                    +' id="'+dwFullName(Actrl)+'"'
-                    +dwVisible(TControl(ACtrl))
-                    +dwDisable(TControl(ACtrl))
-                    +dwLTWH(TControl(ACtrl))
-                    +dwGetDWStyle(joHint)
-                    +'"' //style 封闭
-                    //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
-                    +'>';
-          joRes.Add(sCode);
-          //
-          sCode     := '<el-scrollbar'
-                    +' ref="'+dwFullName(Actrl)+'"'
-                    +' style="height:100%;"'
-                    //此处不需要监听scroll事件，没用。放到mounted中处理了
-                    //+dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll',TForm(Owner).Handle]),'')
-                    +'>';
-          joRes.Add(sCode);
-     end;
+        //
+        sCode   := '<div'
+                +' id="'+sFull+'"'
+                +dwVisible(TControl(ACtrl))
+                +dwDisable(TControl(ACtrl))
+                +dwLTWH(TControl(ACtrl))
+                +dwGetDWStyle(joHint)
+                +'"' //style 封闭
+                //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
+                +dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
+                +dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
+                +'>';
+                joRes.Add(sCode);
+                //
+         sCode  := '<el-scrollbar'
+                +' ref="'+sFull+'"'
+                +' style="'
+                    +'height:100%;'
+                    +'backgroundColor:'+dwColor(TScrollBox(ACtrl).Color)+';'
+                +'"'
+                //此处不需要监听scroll事件，没用。放到mounted中处理了
+                //+dwIIF(True,Format(_DWEVENT,['scroll',Name,'0','onscroll',TForm(Owner).Handle]),'')
+                +'>';
+        joRes.Add(sCode);
+    end;
 
-     Result    := (joRes);
-     //
-     //@mouseenter.native=“enter”
+    Result    := (joRes);
+    //
+    //@mouseenter.native=“enter”
 end;
 
 //取得HTML尾部消息
@@ -134,54 +141,62 @@ end;
 //取得Data消息
 function dwGetData(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes       : Variant;
+    //
+    sFull       : string;
 begin
-     //生成返回值数组
-     joRes    := _Json('[]');
-     //
-     with TScrollBox(ACtrl) do begin
-          joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-          joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-          joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-          joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
-          //
-          joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
-          joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
-          //
-          //joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
-          //
-          joRes.Add(dwFullName(Actrl)+'__typ:"'+dwGetProp(TScrollBox(ACtrl),'type')+'",');
-          //保存oldscrolltop以确定滚动方向
-          joRes.Add(dwFullName(Actrl)+'__ost:0,');
-     end;
-     //
-     Result    := (joRes);
+    sFull   := dwFullName(ACtrl);
+
+    //生成返回值数组
+    joRes    := _Json('[]');
+    //
+    with TScrollBox(ACtrl) do begin
+        joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
+        //
+        joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        //
+        //joRes.Add(sFull+'__cap:"'+dwProcessCaption(Caption)+'",');
+        //
+        joRes.Add(sFull+'__typ:"'+dwGetProp(TScrollBox(ACtrl),'type')+'",');
+        //保存oldscrolltop以确定滚动方向
+        joRes.Add(sFull+'__ost:0,');
+    end;
+    //
+    Result    := (joRes);
 end;
 
 
 //取得事件
 function dwGetAction(ACtrl:TComponent):String;StdCall;
 var
-     joRes     : Variant;
+    joRes       : Variant;
+    //
+    sFull       : string;
 begin
-     //生成返回值数组
-     joRes    := _Json('[]');
-     //
-     with TScrollBox(ACtrl) do begin
-          joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-          joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-          joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-          joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
-          //
-          joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
-          joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
-          //
-          //joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
-          //
-          joRes.Add('this.'+dwFullName(Actrl)+'__typ="'+dwGetProp(TScrollBox(ACtrl),'type')+'";');
-     end;
-     //
-     Result    := (joRes);
+    sFull   := dwFullName(ACtrl);
+
+    //生成返回值数组
+    joRes    := _Json('[]');
+    //
+    with TScrollBox(ACtrl) do begin
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        //joRes.Add('this.'+sFull+'__cap="'+dwProcessCaption(Caption)+'";');
+        //
+        joRes.Add('this.'+sFull+'__typ="'+dwGetProp(TScrollBox(ACtrl),'type')+'";');
+    end;
+    //
+    Result    := (joRes);
 end;
 
 //取得Mounted
@@ -194,7 +209,7 @@ begin
     //生成返回值数组
     joRes   := _Json('[]');
     //
-    sFull   := dwFullName(Actrl);
+    sFull   := dwFullName(ACtrl);
     //
     with TScrollBox(ACtrl) do begin
         sCode   := ''

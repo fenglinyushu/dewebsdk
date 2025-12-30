@@ -28,10 +28,15 @@ end;
 //当前控件需要引入的第三方JS/CSS
 function dwGetExtra(ACtrl:TComponent):string;stdCall;
 var
-    joRes   : Variant;
+    iTab    : Integer;
 begin
     with TPageControl(Actrl) do begin
         //用作时间线控件-------------------------------------------------
+        for iTab := 0 to PageCount - 1 do begin
+            Pages[iTab].HelpKeyword := 'timeline';
+        end;
+
+
 
         Result    := '[]';
     end;
@@ -49,13 +54,13 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode      : string;
-     sEdit      : string;   //增减TTabSheet的处理代码
-     joHint     : Variant;
-     joRes      : Variant;
-     joTabHint  : Variant;
-     iTab       : Integer;
+    joHint      : Variant;
+    joRes       : Variant;
+    iTab        : Integer;
+    sFull       : String;
 begin
+    sFull       := dwFullName(ACtrl);
+    //
     with TPageControl(Actrl) do begin
            //用作时间线控件-------------------------------------------------
            (*
@@ -91,10 +96,23 @@ begin
 
             //外框
             joRes.Add('<div class="block"'
-                    +' id="'+dwFullName(Actrl)+'"'
+                    +' id="'+sFull+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +dwLTWH(TControl(ACtrl))
+                    //动态Style
+                    +' :style="{'
+                        +'left:'+sFull+'__lef,'
+                        +'top:'+sFull+'__top,'
+                        +'width:'+sFull+'__wid,'
+                        +'height:'+sFull+'__hei'
+                    +'}"'
+                    //静态style
+                    +' style="'
+                        +'position:absolute;'
+                        +'overflow-y:auto;'
+                        +'overflow-x:hidden;'
+                        //+_GetFont(Font)                   //字体
+                        +dwGetDWStyle(joHint)
                     +'"' //style 封闭
                     +'>');
             //外框
@@ -129,9 +147,13 @@ end;
 //取得Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     iTab      : Integer;
+    joRes   : Variant;
+    iTab    : Integer;
+    sFull   : String;
 begin
+    sFull       := dwFullName(ACtrl);
+
+    //
     with TPageControl(Actrl) do begin
         //用作时间线控件-------------------------------------------------
 
@@ -139,24 +161,28 @@ begin
         joRes    := _Json('[]');
         //
         with TPageControl(ACtrl) do begin
-            joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-            joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+            joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+            joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+            joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+            joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
             //
-            joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
-            joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+            joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+            joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
             //
-            joRes.Add(dwFullName(Actrl)+'__apg:"'+LowerCase(dwPrefix(Actrl)+ActivePage.Name)+'",');
+            if ActivePage = nil then begin
+                joRes.Add('');
+            end else begin
+                joRes.Add(sFull+'__apg:"'+LowerCase(dwPrefix(Actrl)+ActivePage.Name)+'",');
+            end;
             //方向
             if TabPosition =  (tpTop) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"top",');
+                joRes.Add(sFull+'__tps:"top",');
             end else  if TabPosition =  (tpBottom) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"bottom",');
+                joRes.Add(sFull+'__tps:"bottom",');
             end else  if TabPosition =  (tpLeft) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"left",');
+                joRes.Add(sFull+'__tps:"left",');
             end else  if TabPosition =  (tpRight) then begin
-                joRes.Add(dwFullName(Actrl)+'__tps:"right",');
+                joRes.Add(sFull+'__tps:"right",');
             end;
             //各页面可见性
             for iTab := 0 to PageCount-1 do begin
@@ -170,12 +196,50 @@ end;
 
 function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-    joRes     : Variant;
-    iTab      : Integer;
+    joRes   : Variant;
+    iTab    : Integer;
+    sFull   : String;
 begin
+    sFull   := dwFullName(Actrl);
+
+    //生成返回值数组
+    joRes    := _Json('[]');
+
+    //
     with TPageControl(Actrl) do begin
         //用作时间线控件-------------------------------------------------
-        Result    := '[]';
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
+        //
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        //
+        if ActivePage = nil then begin
+            joRes.Add('');
+        end else begin
+            joRes.Add('this.'+sFull+'__apg="'+LowerCase(dwPrefix(Actrl)+ActivePage.Name)+'";');
+        end;
+        //方向
+        if TabPosition =  (tpTop) then begin
+            joRes.Add('this.'+sFull+'__tps="top";');
+        end else  if TabPosition =  (tpBottom) then begin
+            joRes.Add('this.'+sFull+'__tps"bottom";');
+        end else  if TabPosition =  (tpLeft) then begin
+            joRes.Add('this.'+sFull+'__tps="left";');
+        end else  if TabPosition =  (tpRight) then begin
+            joRes.Add('this.'+sFull+'__tps="right";');
+        end;
+
+        //各页面可见性
+        for iTab := 0 to PageCount-1 do begin
+            joRes.Add('this.'+LowerCase(dwPrefix(Actrl)+Pages[iTab].Name)+'__tbv='+dwIIF(Pages[iTab].TabVisible,'true;','false;'));
+        end;
+
+        //-
+        Result    := joRes;
     end;
 end;
 

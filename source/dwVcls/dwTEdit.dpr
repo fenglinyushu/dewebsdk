@@ -40,10 +40,11 @@ end;
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
-     joData     : Variant;
-     oChange    : Procedure(Sender:TObject) of Object;
-     iKey       : Word;
-     cKey       : Char;
+    joData      : Variant;
+    oChange     : Procedure(Sender:TObject) of Object;
+    iKey        : Word;
+    cKey        : Char;
+    slDebug     : TStringList;
 begin
     //
     joData    := _Json(AData);
@@ -67,6 +68,32 @@ begin
         if Assigned(TEdit(ACtrl).OnChange) then begin
             TEdit(ACtrl).OnChange(TEdit(ACtrl));
         end;
+{
+        //
+        slDebug := TStringList.Create;
+        slDebug.Add(joData);
+        slDebug.Add(joData.v);
+        slDebug.Add(dwUnescape(joData.v));
+        slDebug.Add(dwUnescape(dwUnescape(joData.v)));
+        slDebug.Add(TEdit(ACtrl).Text);
+        slDebug.SaveToFile(ExtractFilePath(Application.exeName)+'edit'+FormatDateTime('YYYYMMDD_hhmmsszzz',Now)+'.txt');
+        slDebug.Destroy;
+}
+    end else if joData.e = 'onclear' then begin
+        //保存事件
+        oChange   := TEdit(ACtrl).OnChange;
+        //清空事件,以防止自动执行
+        TEdit(ACtrl).OnChange  := nil;
+        //更新值
+        TEdit(ACtrl).Text    := '';
+        //恢复事件
+        TEdit(ACtrl).OnChange  := oChange;
+
+        //执行事件
+        if Assigned(TEdit(ACtrl).OnChange) then begin
+            TEdit(ACtrl).OnChange(TEdit(ACtrl));
+        end;
+
     end else if joData.e = 'onexit' then begin
         if Assigned(TEdit(ACtrl).OnExit) then begin
             TEdit(ACtrl).OnExit(TEdit(ACtrl));
@@ -144,14 +171,15 @@ begin
         //
         sCode     := '<el-input'
                    +' id="'+dwFullName(Actrl)+'"'
+                   +' :readonly="'+dwFullName(Actrl)+'__rdo"'
                    +dwVisible(TControl(ACtrl))                            //用于控制可见性Visible
                    +dwDisable(TControl(ACtrl))                            //用于控制可用性Enabled(部分控件不支持)
                    +dwIIF(PasswordChar=#0,'',' show-password')            //是否为密码
+                   +dwIIF(dwGetInt(joHint,'clear',0)=1, ' clearable','')
                    +' v-model="'+dwFullName(Actrl)+'__txt"'                            //前置
                    +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,提示语
                    +dwGetHintValue(joHint,'prefix-icon','prefix-icon','') //前置Icon
                    +dwGetHintValue(joHint,'suffix-icon','suffix-icon','') //后置Icon
-                   +dwIIF(ReadOnly,' readonly','')                         //是否只读
                    +dwGetDWAttr(joHint)
                    //+dwLTWH(TControl(ACtrl))                               //Left/Top/Width/Height
                    +' :style="{'
@@ -176,6 +204,8 @@ begin
                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit',TForm(Owner).Handle]),'')
                    +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',            Name,'0','onenter',TForm(Owner).Handle]),'')
                    +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',             Name,'0','onexit',TForm(Owner).Handle]),'')
+                   //
+                   +dwIIF(dwGetInt(joHint,'clear',0)=1, Format(_DWEVENT,['clear', Name,'0','onclear',TForm(Owner).Handle]),'')
                    +'>';
          //添加到返回值数据
          joRes.Add(sCode);
@@ -214,7 +244,10 @@ begin
           joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
           joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
           //
-          joRes.Add(dwFullName(Actrl)+'__txt:"'+dwChangeChar(Text)+'",');
+          joRes.Add(dwFullName(Actrl)+'__rdo:'+dwIIF(ReadOnly,'true,','false,'));
+          //
+          //joRes.Add(dwFullName(Actrl)+'__txt:"'+dwChangeChar(Text)+'",');
+          joRes.Add(dwFullName(Actrl)+'__txt:`'+(Text)+'`,');
           //
           joRes.Add(dwFullName(Actrl)+'__col:"'+dwColor(Color)+'",');
      end;
@@ -247,9 +280,12 @@ begin
         //
         joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
         joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        //
+        joRes.Add('this.'+dwFullName(Actrl)+'__rdo='+dwIIF(readonly,'true;','false;'));
         //如果当前是事件源控件，则不处理
-        if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
-            joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+dwChangeChar(Text)+'";');
+        if (sEventComp <> dwFullName(Actrl)) or (TEdit(ACtrl).DoubleBuffered = True) then begin
+            //joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+dwChangeChar(Text)+'";');
+            joRes.Add('this.'+dwFullName(Actrl)+'__txt=`'+(Text)+'`;');
         end else begin
             joRes.Add('');
         end;

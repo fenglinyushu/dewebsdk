@@ -201,17 +201,24 @@ begin
 
           sCode     := sCode + '];';
           joRes.Add(sCode);
-          //
-          sCode     := '';
-          for iItem := 0 to Items.Count-1 do begin
-               if Selected[iItem] then begin
-                    sCode     := sCode + '''' + IntToStr(iItem)+''',';
-               end
+          //设置选中
+          if MultiSelect then begin
+              sCode     := '';
+              for iItem := 0 to Items.Count-1 do begin
+                   if Selected[iItem] then begin
+                        sCode     := sCode + '' + IntToStr(iItem)+',';
+                   end
+              end;
+              if sCode<>'' then begin
+                   Delete(sCode,Length(sCode),1);
+              end;
+              joRes.Add('this.'+dwFullName(Actrl)+'__val=['+sCode+'];');
+          end else begin
+              joRes.Add('this.'+dwFullName(Actrl)+'__val='+IntToStr(ItemIndex)+';');
           end;
-          if sCode<>'' then begin
-               Delete(sCode,Length(sCode),1);
-          end;
-          joRes.Add('this.'+dwFullName(Actrl)+'__val=['+sCode+'];');
+
+          //调试信息
+          //joRes.Add('/*real*/ console.log(this.'+dwFullName(Actrl)+'__val);');
      end;
      //
      Result    := (joRes);

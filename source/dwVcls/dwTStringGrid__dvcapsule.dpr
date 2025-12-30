@@ -11,12 +11,51 @@ uses
 
      //
      SysUtils,DateUtils,ComCtrls, ExtCtrls,
+     Graphics,
      Classes,Grids,
      Dialogs,
      StdCtrls,
      Windows,
      Controls,
      Forms;
+
+function _GetFont(AFont:TFont):string;
+begin
+     Result    := 'color:'+dwColor(AFont.color)+';'
+               +'font-family:'''+AFont.name+''';'
+               +'font-size:'+IntToStr(AFont.size+3)+'px;';
+
+     //粗体
+     if fsBold in AFont.Style then begin
+          Result    := Result+'font-weight:bold;';
+     end else begin
+          Result    := Result+'font-weight:normal;';
+     end;
+
+     //斜体
+     if fsItalic in AFont.Style then begin
+          Result    := Result+'font-style:italic;';
+     end else begin
+          Result    := Result+'font-style:normal;';
+     end;
+
+     //下划线
+     if fsUnderline in AFont.Style then begin
+          Result    := Result+'text-decoration:underline;';
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end;
+     end else begin
+          //删除线
+          if fsStrikeout in AFont.Style then begin
+               Result    := Result+'text-decoration:line-through;';
+          end else begin
+               Result    := Result+'text-decoration:none;';
+          end;
+     end;
+end;
+
 
 
 function _GetConfig(ACtrl:TComponent):string;
@@ -31,13 +70,13 @@ begin
 
 
     with TStringGrid(ACtrl) do begin
-        //<Get Data
+        //< 取得data
         Result  := Result + 'data:[';
         for iRow := 0 to RowCount-1 do begin
             if Cells[0,iRow]='' then begin
                 break;
             end;
-            Result  := Result + Format('{name:''%s'',value:%s},',[Cells[0,iRow],Cells[1,iRow]]);
+            Result  := Result + Format('{name:''%s'',value:%s},',[Cells[0,iRow],IntToStr(StrToIntDef(Cells[1,iRow],0))]);
         end;
         if Length(Result)>8 then begin
             Delete(Result,Length(Result),1);
@@ -47,7 +86,7 @@ begin
 
         //< Get Color
         if ColCount>2 then begin
-            Result  := Result + ',color:[';
+            Result  := Result + ',colors:[';
             for iRow := 0 to RowCount-1 do begin
                 if Cells[0,iRow]='' then begin
                     break;
@@ -58,13 +97,15 @@ begin
         end;
         //>
 
-        //
+        //单位
         if joHint.Exists('unit') then begin
             Result  := Result + Format(',unit:''%s''',[joHint.unit]);
         end;
 
-        //
-        Result  := Result + ',showValue: true';
+        //是否显示数值
+        if ShowHint then begin
+            Result  := Result + ',showValue: true';
+        end;
 
         Result  := Result + '}';
     end;
@@ -163,13 +204,16 @@ begin
                     +dwVisible(TControl(ACtrl))                 //是否可见
                     +dwGetDWAttr(joHint)                        //dwAttr
                     +' :style="{'
+                        +'backgroundColor:'+dwFullName(Actrl)+'__col,'
                         +'left:'+dwFullName(Actrl)+'__lef,'
                         +'top:'+dwFullName(Actrl)+'__top,'
                         +'width:'+dwFullName(Actrl)+'__wid,'
                         +'height:'+dwFullName(Actrl)+'__hei'
                     +'}"'
                     //
-                    +' style="position:absolute;'
+                    +' style="'
+                        +'position:absolute;'
+                        +_GetFont(Font)                   //字体
                         +dwGetDWStyle(joHint)
                     +'"'
                     +'>');
@@ -226,6 +270,13 @@ begin
             joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
 
             //
+            if TPanel(ACtrl).Color = clNone then begin
+                joRes.Add(dwFullName(Actrl)+'__col:"rgba(0,0,0,0)",');
+            end else begin
+                joRes.Add(dwFullName(Actrl)+'__col:"'+dwAlphaColor(TPanel(ACtrl))+'",');
+            end;
+
+            //
             joRes.Add(dwFullName(Actrl)+'__cfg :'+_GetConfig(ACtrl)+',');
             //joRes.Add(dwFullName(Actrl)+'__clr :["#00f","#0f0","f00","#888"],');//+_GetData(ACtrl)+',');
         end;
@@ -260,6 +311,13 @@ begin
             joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
             //
             joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+
+            //
+            if TPanel(ACtrl).Color = clNone then begin
+                joRes.Add('this.'+dwFullName(Actrl)+'__col="rgba(0,0,0,0)";');
+            end else begin
+                joRes.Add('this.'+dwFullName(Actrl)+'__col="'+dwAlphaColor(TPanel(ACtrl))+'";');
+            end;
 
             //
             joRes.Add('this.'+dwFullName(Actrl)+'__cfg ='+_GetConfig(ACtrl)+';');

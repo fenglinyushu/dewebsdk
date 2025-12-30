@@ -1,4 +1,12 @@
 ﻿library dwTProgressBar__dvwater;
+{
+    说明：
+
+    更新历史：
+        2023-08-11
+        -
+        1、增加了shape支持
+}
 
 uses
      ShareMem,      //必须添加
@@ -23,9 +31,20 @@ uses
 function _GetConfig(ACtrl:TComponent):string;
 var
     iRow    : Integer;
+    joHint  : Variant;
 begin
+    //取得HINT对象JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
     with TProgressBar(ACtrl) do begin
-        Result  := '{data: ['+IntToStr(Position)+']}'
+        Result  := '{data: ['+IntToStr(Position)+']';
+        //形状：矩形rect（默认）、圆角矩形roundRect、圆形round
+        if joHint.Exists('shape') then begin
+            Result  := Result + ',shape:'''+String(joHint.shape)+'''';
+        end;
+
+        //
+        Result  := Result + '}'
     end;
 
 end;

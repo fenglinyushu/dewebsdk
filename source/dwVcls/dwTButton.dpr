@@ -1,499 +1,457 @@
 ﻿library dwTButton;
+{
+功能说明:
+    jquery简化版的Button
+}
 
 uses
-    ShareMem,
+     ShareMem,
 
-    //
-    dwCtrlBase,
+     //
+     dwCtrlBase,
 
-    //
-    SynCommons,
+     //
+     SynCommons,
 
-    //
-    Messages, SysUtils, Variants, Classes, Graphics,
-    Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
-    StdCtrls, Windows;
-
-
-//--------------------------------------------------------------------------------------------------
-
-function _GetFont(AFont:TFont):string;
-begin
-     Result    := 'color:'+dwColor(AFont.color)+';'
-               +'font-family:'''+AFont.name+''';'
-               +'font-size:'+IntToStr(AFont.size+3)+'px;';
-
-     //粗体
-     if fsBold in AFont.Style then begin
-          Result    := Result+'font-weight:bold;';
-     end else begin
-          Result    := Result+'font-weight:normal;';
-     end;
-
-     //斜体
-     if fsItalic in AFont.Style then begin
-          Result    := Result+'font-style:italic;';
-     end else begin
-          Result    := Result+'font-style:normal;';
-     end;
-
-     //下划线
-     if fsUnderline in AFont.Style then begin
-          Result    := Result+'text-decoration:underline;';
-          //删除线
-          if fsStrikeout in AFont.Style then begin
-               Result    := Result+'text-decoration:line-through;';
-          end;
-     end else begin
-          //删除线
-          if fsStrikeout in AFont.Style then begin
-               Result    := Result+'text-decoration:line-through;';
-          end else begin
-               Result    := Result+'text-decoration:none;';
-          end;
-     end;
-end;
-function _GetFontWeight(AFont:TFont):String;
-begin
-     if fsBold in AFont.Style then begin
-          Result    := 'bold';
-     end else begin
-          Result    := 'normal';
-     end;
-
-end;
-function _GetFontStyle(AFont:TFont):String;
-begin
-     if fsItalic in AFont.Style then begin
-          Result    := 'italic';
-     end else begin
-          Result    := 'normal';
-     end;
-end;
-function _GetTextDecoration(AFont:TFont):String;
-begin
-     if fsUnderline in AFont.Style then begin
-          Result    :='underline';
-          //删除线
-          if fsStrikeout in AFont.Style then begin
-               Result    := 'line-through';
-          end;
-     end else begin
-          //删除线
-          if fsStrikeout in AFont.Style then begin
-               Result    := 'line-through';
-          end else begin
-               Result    := 'none';
-          end;
-     end;
-end;
-
-function  dwButtonFontStyle(ACtrl:TControl):String;
-begin
-    with ACtrl do begin
-        Result    := //'color:'+dwFullName(Actrl)+'__fcl,'+         //颜色
-            '''font-size'':'+dwFullName(Actrl)+'__fsz,'         //size
-            +'''font-family'':'+dwFullName(Actrl)+'__ffm,'       //字体
-            +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'       //bold
-            +'''font-style'':'+dwFullName(Actrl)+'__fsl,'        //italic
-            +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'   //下划线或贯穿线，只能选一种
-    end;
-end;
+     //
+     Messages, SysUtils, Variants, Classes, Graphics,
+     Controls, Forms, Dialogs, ComCtrls, ExtCtrls,
+     StdCtrls, Windows;
 
 
-//--------------------------------------------------------------------------------------------------
+
+//==================================================================================================
 
 //当前控件需要引入的第三方JS/CSS
-function dwGetExtra(ACtrl:TComponent):String;stdCall;
+function dwGetExtra(ACtrl:TComponent):string;stdCall;
+var
+    sCode   : String;
+    joRes   : Variant;
 begin
-     Result    := '[]';
+     //生成返回值数组
+    joRes   := _Json('[]');
+
+    //
+    sCode   := '<script src="dist/_zepto/zepto.min.js"></script>';
+    joRes.Add(sCode);
+
+    //
+    Result := joRes;
 end;
 
+
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
-function dwGetEvent(ACtrl:TComponent;AData:String):String;StdCall;
+function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
      joData    : Variant;
 begin
+    with TPanel(ACtrl) do begin
+        //
+        joData    := _Json(AData);
 
-     //
-     joData    := _Json(AData);
+        if joData.e = 'onclick' then begin
+            //通过panel.caption传递数据
+            if joData.v <> '0' then begin
+                Caption := joData.v;
+            end;
 
-     if joData.e = 'onclick' then begin
-          if Assigned(TButton(ACtrl).OnClick) then begin
-               TButton(ACtrl).OnClick(TButton(ACtrl));
-          end;
-     end else if joData.e = 'onenter' then begin
-          if Assigned(TButton(ACtrl).OnEnter) then begin
-               TButton(ACtrl).OnEnter(TButton(ACtrl));
-          end;
-     end else if joData.e = 'onexit' then begin
-          if Assigned(TButton(ACtrl).OnExit) then begin
-               TButton(ACtrl).OnExit(TButton(ACtrl));
-          end;
-     end;
+            //
+            TPanel(ACtrl).OnClick(TPanel(ACtrl));
+        end else if joData.e = 'onenter' then begin
+            TPanel(ACtrl).OnEnter(TPanel(ACtrl));
+        end else if joData.e = 'onexit' then begin
+            TPanel(ACtrl).OnExit(TPanel(ACtrl));
+        end;
+    end;
 end;
 
 
 //取得HTML头部消息
-function dwGetHead(ACtrl:TComponent):String;StdCall;
+function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-    sCode   : String;
-    sRIcon  : string;
-    sFull   : string;
-
+    sCode       : string;
+    sFull       : string;
     //
-    joHint  : Variant;
-    joRes   : Variant;
-    sEnter  : String;
-    sExit   : String;
-    sClick  : string;
+    joHint      : Variant;
+    joRes       : Variant;
 begin
-
-    //生成返回值数组
-    joRes    := _Json('[]');
-    //取得HINT对象JSON
-    joHint    := dwGetHintJson(TControl(ACtrl));
-    //
-    sFull   := dwFullName(ACtrl);
-
-    //_DWEVENT = ' @%s="dwevent($event,''%s'',''%s'',''%s'',''%d'')"';
-    //参数依次为: JS事件名称, 控件名称,控件值,Delphi事件名称,句柄
-
-
+    sFull       := dwFullName(Actrl);
     //
     with TButton(ACtrl) do begin
+        //生成返回值数组
+        joRes    := _Json('[]');
 
-        //进入事件代码----------------------------------------------------------------------------
-        sEnter  := '';
-        if joHint.Exists('onenter') then begin
-            sEnter  := 'dwexecute('''+String(joHint.onenter)+''');';    //取得OnEnter的JS代码
-        end;
-        if sEnter='' then begin
-            if Assigned(OnEnter) then begin
-                sEnter    := Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]);
-            end else begin
-            end;
-        end else begin
-            if Assigned(OnEnter) then begin
-                sEnter    := Format(_DWEVENTPlus,['mouseenter.native',sEnter,Name,'0','onenter',TForm(Owner).Handle])
-            end else begin
-                sEnter    := ' @mouseenter.native="'+sEnter+'"';
-            end;
-        end;
-
-
-        //退出事件代码----------------------------------------------------------------------------
-        sExit  := '';
-        if joHint.Exists('onexit') then begin
-            sExit  := 'dwexecute('''+String(joHint.onexit)+''');';
-        end;
-        if sExit='' then begin
-            if Assigned(OnExit) then begin
-                sExit    := Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]);
-            end else begin
-            end;
-        end else begin
-            if Assigned(OnExit) then begin
-                sExit    := Format(_DWEVENTPlus,['mouseleave.native',sExit,Name,'0','onexit',TForm(Owner).Handle])
-            end else begin
-                sExit    := ' @mouseleave.native="'+sExit+'"';
-            end;
-        end;
-
-        //单击事件的JS代码------------------------------------------------------------------------
-        sClick    := '';
-        if joHint.Exists('onclick') then begin
-            sClick := 'dwexecute('''+dwProcQuotation(String(joHint.onclick))+''');';
-        end;
-
-        //防多次点击设置(点击时同时设置不可用)
-        if ElevationRequired = True then begin
-            sClick  := sClick + dwFullName(Actrl)+'__dis=true;'
-        end;
-
-        //
-        if sClick='' then begin
-            if Assigned(OnClick) then begin
-                 //sClick    := Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]);
-                 sClick := ' @click="'
-                    +'dwevent($event,'''+Name+''',''0'',''onclick'','''+IntToStr(TForm(Owner).Handle)+''');'
-                    //+dwFullName(Actrl)+'__dis=false;'
-                    +'"';
-            end else begin
-
-            end;
-        end else begin
-            if Assigned(OnClick) then begin
-                //同时执行js和delphi
-                sClick    := Format(_DWEVENTPlus,['click',sClick,Name,'0','onclick',TForm(Owner).Handle])
-            end else begin
-                sClick    := ' @click="'+sClick+'"';
-            end;
-        end;
-
-        //<把事件写入到单独的methods中 2023-02-15
-        sClick  := '';
-        if joHint.Exists('onclick') or Assigned(OnClick) then begin
-            sClick  := ' @click="'+sFull+'__click()"';
-        end;
-        //>
-
-
-
-        //右侧图标字符串
-        sRIcon    := '';
-        if joHint.Exists('righticon') then begin
-            sRIcon  := '<i :class="'+sFull+'__rin"></i>'
-        end else if ( HotImageIndex >= 1 ) and (HotImageIndex <= 280) then begin
-            sRIcon  := '<i :class="'+sFull+'__rin"></i>'
-        end else begin
-            sRIcon  := '';
-        end;
-
-
+        //取得HINT对象JSON
+        joHint    := dwGetHintJson(TControl(ACtrl));
 
         //
         sCode   := '<el-button'
                 +' id="'+sFull+'"'
-                //+sSize
-                +dwVisible(TControl(ACtrl))
-                +dwDisable(TControl(ACtrl))
-                //+dwGetHintValue(joHint,'type','type',' type="default"')         //sButtonType
-                +' :type="'+sFull+'__typ"'
-                +' :icon="'+sFull+'__icn"'                                              //dwGetHintValue(joHint,'icon','icon','')         //ButtonIcon
-                +dwGetHintValue(joHint,'style','','')             //样式，空（默认）/plain/round/circle
                 +dwGetDWAttr(joHint)
-                //动态Style
-                +' :style="{'
-                    +dwIIF(joHint.Exists('type') and (joHint.type <>'text'),dwButtonFontStyle(TControl(ACtrl)),dwFontStyle(TControl(ACtrl)))
-                    +'left:'+sFull+'__lef,'
-                    +'top:'+sFull+'__top,'
-                    +'width:'+sFull+'__wid,'
-                    +'height:'+sFull+'__hei'
-                +'}"'
-                //静态style
-                +' style="position:absolute;'
-                    +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
-                    +dwGetHintStyle(joHint,'backgroundcolor','background-color','')       //自定义背景色
-                    //+_GetFont(Font)                   //字体
-                    +dwGetDWStyle(joHint)
-                +'"' //style 封闭
-
-                +sClick
-                //+sEnter
-                //+sExit
-                //+dwIIF(Assigned(OnClick),Format(_DWEVENT,['click',Name,'0','onclick',TForm(Owner).Handle]),'')
-                //+dwIIF(Assigned(OnEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onenter',TForm(Owner).Handle]),'')
-                //+dwIIF(Assigned(OnExit),Format(_DWEVENT,['mouseleave.native',Name,'0','onexit',TForm(Owner).Handle]),'')
                 +'>'
-                //以下当 (Cancel=True)and(Caption='') 不使用标题，以用于图标居中
-                +dwIIF((Cancel=True)and(Caption=''),'','{{'+sFull+'__cap}}')
-                //增加右侧图标
-                +sRIcon
-                ;
+                +StringReplace(Caption,'`','\`',[rfReplaceAll])
+                +'</el-button>';
 
+        //添加到返回值数据
+        joRes.Add(sCode);
+        //
+        Result    := (joRes);
     end;
-    joRes.Add(sCode);
-    Result    := (joRes);
-    //
-    //@mouseenter.native=“enter”
 end;
 
 //取得HTML尾部消息
-function dwGetTail(ACtrl:TComponent):String;StdCall;
+function dwGetTail(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
+    joRes     : Variant;
+    sCode     : String;
 begin
-
-     //生成返回值数组
-     joRes    := _Json('[]');
-     //生成返回值数组
-     joRes.Add('</el-button>');
-     //
-     Result    := (joRes);
+    with TButton(ACtrl) do begin
+        //生成返回值数组
+        joRes    := _Json('[]');
+        //生成返回值数组
+        //joRes.Add('</div>');
+        //
+        Result    := (joRes);
+    end;
 end;
 
-//取得Data消息
-function dwGetData(ACtrl:TComponent):String;StdCall;
+//取得Data
+function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-    sFull   : String;
-    joRes   : Variant;
-    joHint  : Variant;
+    joRes       : Variant;
+    joHint      : Variant;
+    sFull       : string;
 begin
-    //取得HINT对象JSON
-    joHint    := dwGetHintJson(TControl(ACtrl));
+    sFull       := dwFullName(Actrl);
 
+    with TButton(ACtrl) do begin
+        //生成返回值数组
+        joRes    := _Json('[]');
+        //
+        Result    := (joRes);
+    end;
+end;
+
+function dwGetAction(ACtrl:TComponent):string;StdCall;
+var
+    joRes       : Variant;
+    joHint      : Variant;
+    sFull       : string;
+    sCode       : string;
+    sTemp       : String;
+begin
+    sFull       := dwFullName(Actrl);
     //生成返回值数组
     joRes    := _Json('[]');
 
-    //
-    sFull   := dwFullName(ACtrl);
+    //取得HINT对象JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
 
-    //
+
     with TButton(ACtrl) do begin
-        joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
-        joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
-        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
-        joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
-        //
-        joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
-        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
-        //
-        joRes.Add(sFull+'__cap:"'+dwProcessCaption(Caption)+'",');
-        //
-        joRes.Add(sFull+'__typ:"'+dwGetProp(TButton(ACtrl),'type')+'",');
-        //图标
-        if joHint.Exists('icon') then begin
-            joRes.Add(sFull+'__icn:"'+String(joHint.icon)+'",');
-        end else if ( ImageIndex >= 1 ) and (ImageIndex <= 280) then begin
-            joRes.Add(sFull+'__icn:"'+dwIcons[ImageIndex]+'",');
-        end else begin
-            joRes.Add(sFull+'__icn:"",');
-        end;
-        if joHint.Exists('righticon') then begin
-            joRes.Add(sFull+'__rin:"'+String(joHint.righticon)+'",');
-        end else if ( HotImageIndex >= 1 ) and (HotImageIndex <= 280) then begin
-            joRes.Add(sFull+'__rin:"'+dwIcons[HotImageIndex]+'",');
-        end else begin
-            joRes.Add(sFull+'__rin:"",');
-        end;
+        //----- 文本 -----
+        joRes.Add('$("#'+sFull+' span").html(`'+StringReplace(Caption,'`','\`',[rfReplaceAll])+'`);');
+
+        //----- css -----
+        sCode   := '$("#'+sFull+'").css({';
+
         //字体
-        joRes.Add(sFull+'__fcl:"'+dwColor(Font.Color)+'",');
-        joRes.Add(sFull+'__fsz:"'+IntToStr(Font.size+3)+'px",');
-        joRes.Add(sFull+'__ffm:"'+Font.Name+'",');
-        joRes.Add(sFull+'__fwg:"'+_GetFontWeight(Font)+'",');
-        joRes.Add(sFull+'__fsl:"'+_GetFontStyle(Font)+'",');
-        joRes.Add(sFull+'__ftd:"'+_GetTextDecoration(Font)+'",');
+        if not ParentFont then begin
+            sCode   := sCode
+                    +'''font-family'': '+dwIIF(Font.name='''微软雅黑','"Microsoft YaHei", "PingFang SC", "Arial", sans-serif''',''''+Font.Name+'''')+','
+                    +'''font-size'': '''+IntToStr(Font.Size+3)+'px'','
+                    +'''font-weight'': '''+dwIIF(fsBold in Font.Style,'bold','normal')+''','
+                    +'''font-style'': '''+dwIIF(fsItalic in Font.Style,'italic','normal')+''','
+                    +dwIIF(joHint.Exists('type') and (dwGetStr(joHint,'type')<>'text'),'','''color'': '''+dwColor(Font.Color)+''',')
+                    +'''text-decoration'': '''+dwIIF(fsUnderLine in Font.Style,dwIIF(fsStrikeOut in Font.Style,'underline line-through','underline'),dwIIF(fsStrikeOut in Font.Style,'line-through','normal'))+''','
+        end;
+
+        //显示/隐藏
+        sCode   := sCode
+                    +'''display'': "'+dwIIF(Visible,'block','none')+'",';
+
+        //LTWH
+        sCode   := sCode
+                    +'''position'': ''absolute'','
+                    //+dwIIF(Transparent,'','"background-color": "'+dwColor(Color)+'",')
+                    +'''left'': '''+InttoStr(Left)+'px'','
+                    +'''top'': '''+InttoStr(top)+'px'','
+                    +'''width'': '''+InttoStr(width)+'px'','
+                    +'''height'': '''+InttoStr(height)+'px'''
+                +'});';
+
+        //添加到输出
+        joRes.Add(sCode);
+
+        //radius
+        if joHint.Exists('radius') then begin
+            joRes.Add('$("#'+sFull+'").css(''border-radius'', "'+dwGetStr(joHint,'radius')+'");');
+        end else begin
+            joRes.Add('');
+        end;
+
+        //radius
+        if joHint.Exists('dwstyle') then begin
+            joRes.Add('var curStyle = $("#'+sFull+'").attr(''style'');$("#'+sFull+'").attr("style", curStyle+"'+dwGetStr(joHint,'dwstyle')+'");');
+        end else begin
+            joRes.Add('');
+        end;
+
+        //----- 可用性 -----
+        if Enabled then begin
+            joRes.Add('$("#'+sFull+'").prop(''disabled'', false).removeClass("is-disabled");');
+        end else begin
+            joRes.Add('$("#'+sFull+'").prop(''disabled'', true).addClass("is-disabled");');
+        end;
+
+        //type
+        if joHint.Exists('type') then begin
+            joRes.Add('$("#'+sFull+'")'
+                    +'.removeClass("el-button--primary")'
+                    +'.removeClass("el-button--success")'
+                    +'.removeClass("el-button--warning")'
+                    +'.removeClass("el-button--danger")'
+                    +'.removeClass("el-button--info")'
+                    +'.removeClass("el-button--text")'
+                    +'.addClass("el-button--'+dwGetStr(joHint,'type')+'");');
+        end else begin
+            joRes.Add('');
+        end;
+
+        //style
+        if joHint.Exists('style') then begin
+            sCode   := '$("#'+sFull+'")'
+                    +'.removeClass("is-plain")'
+                    +'.removeClass("is-round")'
+                    +'.removeClass("is-circle")';
+            //
+            sTemp   := ' '+dwGetStr(joHint,'style')+' ';
+            if Pos(' plain ',sTemp)>0 then begin
+                sCode   := sCode + '.addClass("is-plain")';
+            end;
+            if Pos(' round ',sTemp)>0 then begin
+                sCode   := sCode + '.addClass("is-round")';
+            end;
+            if Pos(' circle ',sTemp)>0 then begin
+                sCode   := sCode + '.addClass("is-circle")';
+            end;
+            sCode   := sCode + ';';
+            joRes.Add(sCode);
+        end else begin
+            joRes.Add('');
+        end;
+
+        //icon
+        if joHint.Exists('icon') then begin
+           sCode   := ''
+                    +'$("#'+sFull+'").find("i:first-child").remove();'
+                    +'var $leftIcon = $("<i>")'
+                    +'.addClass("'+dwGetStr(joHint,'icon')+'")' // 替换所需图标类名
+                    +'.css("margin", "0 0px");'
+                    +'$("#'+sFull+'").prepend($leftIcon);';
+            joRes.Add(sCode);
+        end else begin
+            joRes.Add('');
+        end;
+
+        //righticon
+        if joHint.Exists('righticon') then begin
+           sCode   := '$("#'+sFull+'").find("i:last-child").remove();'
+                    +'var $rightIcon = $("<i>")'
+                    +'.addClass("'+dwGetStr(joHint,'righticon')+'")' // 替换所需图标类名
+                    +'.css("margin", "0 0px");'
+                    +'$("#'+sFull+'").append($rightIcon);';
+            joRes.Add(sCode);
+        end else begin
+            joRes.Add('');
+        end;
+
+        //
+        Result    := (joRes);
+    end;
+end;
+
+function dwGetMounted(ACtrl:TComponent):string;StdCall;
+var
+    joRes       : Variant;
+    joHint      : Variant;
+    sFull       : string;
+    sCode       : string;
+    sTemp       : string;
+begin
+    sFull       := dwFullName(Actrl);
+    //生成返回值数组
+    joRes    := _Json('[]');
+
+    //取得HINT对象JSON
+    joHint    := dwGetHintJson(TControl(ACtrl));
+
+
+    with TButton(ACtrl) do begin
+        //----- 文本 -----
+        joRes.Add('$("#'+sFull+' span").html(`'+StringReplace(Caption,'`','\`',[rfReplaceAll])+'`);');
+        //joRes.Add('$("#'+sFull+'").text(`'+StringReplace(Caption,'`','\`',[rfReplaceAll])+'`);');
+
+        //----- css -----
+        sCode   := '$("#'+sFull+'").css({';
+
+        //字体
+        if (not ParentFont)  then begin
+
+            sCode   := sCode
+                    +'''font-family'': '+dwIIF(Font.name='''微软雅黑','"Microsoft YaHei", "PingFang SC", "Arial", sans-serif''',''''+Font.Name+'''')+','
+                    +'''font-size'': '''+IntToStr(Font.Size+3)+'px'','
+                    +'''font-weight'': '''+dwIIF(fsBold in Font.Style,'bold','normal')+''','
+                    +'''font-style'': '''+dwIIF(fsItalic in Font.Style,'italic','normal')+''','
+                    +dwIIF(joHint.Exists('type') and (dwGetStr(joHint,'type')<>'text'),'','''color'': '''+dwColor(Font.Color)+''',')
+                    +'''text-decoration'': '''+dwIIF(fsUnderLine in Font.Style,dwIIF(fsStrikeOut in Font.Style,'underline line-through','underline'),dwIIF(fsStrikeOut in Font.Style,'line-through','normal'))+''','
+
+        end;
+
+        //显示/隐藏
+        sCode   := sCode
+                    +'''display'': "'+dwIIF(Visible,'block','none')+'",';
+
+        //LTWH
+        sCode   := sCode
+                    +'''position'': ''absolute'','
+                    +'''left'': '''+InttoStr(Left)+'px'','
+                    +'''top'': '''+InttoStr(top)+'px'','
+                    +'''width'': '''+InttoStr(width)+'px'','
+                    +'''height'': '''+InttoStr(height)+'px'''
+                +'});';
+
+        //添加到输出
+        joRes.Add(sCode);
+
+        //radius
+        if joHint.Exists('radius') then begin
+            joRes.Add('$("#'+sFull+'").css(''border-radius'', "'+dwGetStr(joHint,'radius')+'");');
+        end;
+
+        //radius
+        if joHint.Exists('dwstyle') then begin
+            joRes.Add('var curStyle = $("#'+sFull+'").attr(''style'');$("#'+sFull+'").attr("style", curStyle+"'+dwGetStr(joHint,'dwstyle')+'");');
+        end;
+
+        //----- 可用性 -----
+        if not Enabled then begin
+            joRes.Add('$("#'+sFull+'").prop(''disabled'', true).addClass("is-disabled");');
+        end;
+
+        //type
+        if joHint.Exists('type') then begin
+            joRes.Add('$("#'+sFull+'")'
+                    +'.removeClass("el-button--primary")'
+                    +'.removeClass("el-button--success")'
+                    +'.removeClass("el-button--warning")'
+                    +'.removeClass("el-button--danger")'
+                    +'.removeClass("el-button--info")'
+                    +'.removeClass("el-button--text")'
+                    +'.addClass("el-button--'+dwGetStr(joHint,'type')+'");');
+        end;
+
+        //style
+        if joHint.Exists('style') then begin
+            sCode   := '$("#'+sFull+'")'
+                    +'.removeClass("is-plain")'
+                    +'.removeClass("is-round")'
+                    +'.removeClass("is-circle")';
+            //
+            sTemp   := ' '+dwGetStr(joHint,'style')+' ';
+            if Pos(' plain ',sTemp)>0 then begin
+                sCode   := sCode + '.addClass("is-plain")';
+            end;
+            if Pos(' round ',sTemp)>0 then begin
+                sCode   := sCode + '.addClass("is-round")';
+            end;
+            if Pos(' circle ',sTemp)>0 then begin
+                sCode   := sCode + '.addClass("is-circle")';
+            end;
+            sCode   := sCode + ';';
+            joRes.Add(sCode);
+        end;
+
+        //icon
+        if joHint.Exists('icon') then begin
+           sCode    := ''
+                    +'$("#'+sFull+'").find("i:first-child").remove();'
+                    +'var $leftIcon = $("<i>")'
+                    +'.addClass("'+dwGetStr(joHint,'icon')+'")' // 替换所需图标类名
+                    +'.css("margin", "0 0px");'
+                    +'$("#'+sFull+'").prepend($leftIcon);';
+            joRes.Add(sCode);
+        end;
+
+        //righticon
+        if joHint.Exists('righticon') then begin
+           sCode   := '$("#'+sFull+'").find("i:last-child").remove();'
+                    +'var $rightIcon = $("<i>")'
+                    +'.addClass("'+dwGetStr(joHint,'righticon')+'")' // 替换所需图标类名
+                    +'.css("margin", "0 0px");'
+                    +'$("#'+sFull+'").append($rightIcon);';
+            joRes.Add(sCode);
+        end;
+
+        //----- 绑定事件 -----------------------------------------------------------------------------------------------
+
+        //click
+        if Assigned(OnClick) or joHint.Exists('onclick') then begin
+            sCode   := ''
+                    +'$("#'+sFull+'").on("click", function() {'
+                        //+'console.log("div 被点击");'
+                        //js的onclick, 可以直接执行
+                        +dwIIF(joHint.Exists('onclick'), dwGetStr(joHint,'onclick'), '')
+                        //delphi版的onclick
+                        +dwIIF(Assigned(OnClick), 'me.dwevent("","'+sFull+'","0","onclick","'+IntToStr(TForm(Owner).Handle)+'");', '')
+                    +'});';
+            joRes.Add(sCode);
+        end;
+
+        //enter
+        if Assigned(OnEnter) or joHint.Exists('onenter') then begin
+            sCode   := ''
+                    +'$("#'+sFull+'").on("mouseenter", function() {'
+                        //+'console.log("mouseenter");'
+                        //js的事件, 可以直接执行
+                        +dwIIF(joHint.Exists('onenter'), dwGetStr(joHint,'onenter'), '')
+
+                        //delphi的
+                        +dwIIF(Assigned(OnEnter), 'me.dwevent("","'+sFull+'","0","onenter","'+IntToStr(TForm(Owner).Handle)+'");', '')
+                    +'});';
+            joRes.Add(sCode);
+        end;
+
+        //leave
+        if Assigned(OnExit) or joHint.Exists('onexit') then begin
+            sCode   := ''
+                    +'$("#'+sFull+'").on("mouseleave", function() {'
+                        //+'console.log("mouseleave");'
+                        //js的事件, 可以直接执行
+                        +dwIIF(joHint.Exists('onexit'), dwGetStr(joHint,'onexit'), '')
+
+                        //delphi的
+                        +dwIIF(Assigned(OnExit), 'me.dwevent("","'+sFull+'","0","onexit","'+IntToStr(TForm(Owner).Handle)+'");', '')
+                    +'});';
+            joRes.Add(sCode);
+        end;
 
     end;
+
     //
     Result    := (joRes);
-end;
-
-//取得事件
-function dwGetAction(ACtrl:TComponent):String;StdCall;
-var
-    joRes   : Variant;
-    joHint  : Variant;
-    sRes    : String;
-    sFull   : string;
-    pRes    : PWideChar;
-begin
-    //取得HINT对象JSON
-    joHint    := dwGetHintJson(TControl(ACtrl));
-
-    //生成返回值数组
-    joRes    := _Json('[]');
-
-
-    //
-    sFull   := dwFullName(ACtrl);
-
-    //
-    with TButton(ACtrl) do begin
-        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
-        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
-        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
-        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height+2)+'px";');
-        //
-        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
-        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
-        //
-        joRes.Add('this.'+sFull+'__cap="'+dwProcessCaption(Caption)+'";');
-        //
-        joRes.Add('this.'+sFull+'__typ="'+dwGetProp(TButton(ACtrl),'type')+'";');
-
-
-
-        //图标
-        if joHint.Exists('icon') then begin
-            joRes.Add('this.'+sFull+'__icn="'+String(joHint.icon)+'";');
-        end else if ( ImageIndex >= 1 ) and (ImageIndex <= 280) then begin
-            joRes.Add(sFull+'__icn="'+dwIcons[ImageIndex]+'";');
-        end else begin
-            joRes.Add('this.'+sFull+'__icn="";');
-        end;
-
-        if joHint.Exists('righticon') then begin
-            joRes.Add('this.'+sFull+'__rin="'+String(joHint.righticon)+'";');
-        end else if ( HotImageIndex >= 1 ) and (HotImageIndex <= 280) then begin
-            joRes.Add(sFull+'__rin="'+dwIcons[HotImageIndex]+'";');
-        end else begin
-            joRes.Add('this.'+sFull+'__rin="";');
-        end;
-
-
-
-        //字体
-        joRes.Add('this.'+sFull+'__fcl="'+dwColor(Font.Color)+'";');
-        joRes.Add('this.'+sFull+'__fsz="'+IntToStr(Font.size+3)+'px";');
-        joRes.Add('this.'+sFull+'__ffm="'+Font.Name+'";');
-        joRes.Add('this.'+sFull+'__fwg="'+_GetFontWeight(Font)+'";');
-        joRes.Add('this.'+sFull+'__fsl="'+_GetFontStyle(Font)+'";');
-        joRes.Add('this.'+sFull+'__ftd="'+_GetTextDecoration(Font)+'";');
-
-    end;
-
-    //
-    Result    := joRes;
-{
-            Result := '["this.Button1__lef=\"8px\";","this.Button1__top=\"8px\";","this.Button1__wid=\"104px\";",'
-                +'"this.Button1__hei=\"35px\";","this.Button1__vis=true;","this.Button1__dis=false;",'
-                +'"this.Button1__cap=\"刷新\";","this.Button1__typ=\"primary\";","this.Button1__icn=\"\";",'
-                +'"this.Button1__rin=\"\";","this.Button1__fcl=\"#FFFFFF\";","this.Button1__fsz=\"11px\";",'
-                +'"this.Button1__ffm=\"Tahoma\";","this.Button1__fwg=\"normal\";","this.Button1__fsl=\"normal\";",'
-                +'"this.Button1__ftd=\"none\";"]';
-}
-end;
-
-function dwGetMethods(ACtrl:TControl):String;stdCall;
-var
-    //
-    sCode   : string;
-    sFull   : string;
-    //
-    joHint  : Variant;
-    joRes   : Variant;
-begin
-    //返回值 JSON对象，可以直接转换为字符串
-    joRes   := _json('[]');
-
-    //
-    sFull   := dwFullName(Actrl);
-
-    //取得HINT对象JSON
-    joHint    := dwGetHintJson(TControl(ACtrl));
-
-    with TButton(ACtrl) do begin
-        //函数头部
-        sCode   := sFull+'__click(event) {'#13;
-        //
-        if joHint.Exists('onclick') then begin
-            sCode   := sCode +joHint.onclick+#13;
-        end;
-
-        //
-        sCode   := sCode + 'this.dwevent("",'''+Name+''',''0'',''onclick'','''+IntToStr(TForm(Owner).Handle)+''');'
-                +'},';
-
-        //
-        joRes.Add(sCode);
-    end;
-
-    //
-    Result   := joRes;
 end;
 
 
 exports
-     //dwGetExtra,
+     dwGetExtra,
      dwGetEvent,
      dwGetHead,
+     dwGetMounted,
      dwGetTail,
      dwGetAction,
-     dwGetMethods,
      dwGetData;
-
+     
 begin
 end.
  

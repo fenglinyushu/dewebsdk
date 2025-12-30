@@ -1,0 +1,33 @@
+object Form_oth_empty: TForm_oth_empty
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = #31354#27169#22359
+  ClientHeight = 540
+  ClientWidth = 360
+  Color = clWhite
+  TransparentColor = True
+  TransparentColorValue = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -17
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  TextHeight = 23
+  object Label2: TLabel
+    AlignWithMargins = True
+    Left = 30
+    Top = 50
+    Width = 300
+    Height = 40
+    Margins.Left = 30
+    Margins.Top = 50
+    Margins.Right = 30
+    Align = alTop
+    AutoSize = False
+    Caption = #36825#20010#26159#19968#20010#31354#30333#27169#22359
+    Layout = tlCenter
+    ExplicitTop = 157
+    ExplicitWidth = 310
+  end
+end

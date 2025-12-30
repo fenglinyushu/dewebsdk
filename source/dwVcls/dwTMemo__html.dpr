@@ -166,7 +166,9 @@ begin
 
 
         //去掉所有换行符，以避免错误
-        sCode   := StringReplace(Text,#13#10,'',[rfReplaceAll]);
+        sCode   := Text;
+        //sCode   := StringReplace(sCode,#13#10,'',[rfReplaceAll]);
+
         //
         joRes.Add(sCode);
 

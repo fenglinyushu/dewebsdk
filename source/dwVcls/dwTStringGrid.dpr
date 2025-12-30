@@ -24,6 +24,7 @@ function _ProcessCell(ACell:String):String;
 begin
     Result  := ACell;
     Result  := StringReplace(Result,'\','\\',[rfReplaceAll]);
+    Result  := StringReplace(Result,'''','\''',[rfReplaceAll]);
     Result  := StringReplace(Result,'"','\"',[rfReplaceAll]);
     Result  := StringReplace(Result,#13,'',[rfReplaceAll]);     //去除换行
     Result  := StringReplace(Result,#10,'',[rfReplaceAll]);     //去除换行
@@ -147,8 +148,7 @@ end;
 //当前控件需要引入的第三方JS/CSS
 function dwGetExtra(ACtrl:TComponent):String;stdCall;
 var
-    joRes     : Variant;
-    sCode  : string;
+    joRes   : Variant;
 begin
     //
     with TStringGrid(ACtrl) do begin
@@ -163,6 +163,9 @@ begin
         joRes.Add('<script src="dist/charts/lib/index.min.js"></script>');
         joRes.Add('<link rel="stylesheet" href="dist/charts/lib/style.min.css">');
         }
+        //标题行颜色<el-table :header-cell-style="{background:'#eef1f6',color:'#606266'}">
+
+        //
         joRes.Add('<script src="dist/ex/dwStringGrid.js"></script>');
 
     end;
@@ -177,9 +180,9 @@ var
     joValue : Variant;
     joHint  : Variant;
     //
-    iValue  : Integer;
-    iRow    : Integer;
     iCol    : Integer;
+    iNewW   : Integer;
+    iOldW   : Integer;
     iOrder  : Integer;
     iP0,iP1 : Integer;
     sValue  : string;
@@ -246,25 +249,23 @@ begin
                 iOrder  := 9;
             end;
 
-            if iOrder < 2 then begin
-                //得到列号
-                sValue  := Copy(sValue,1,Pos('/',sValue)-1);
-                Delete(sValue,1,1);
-                iCol    := StrToIntDef(sValue,-1)-1;
+            //得到列号
+            sValue  := Copy(sValue,1,Pos('/',sValue)-1);
+            Delete(sValue,1,1);
+            iCol    := StrToIntDef(sValue,-1)-1;
 
-                if iCol >= 0 then begin
+            if iCol >= 0 then begin
+                //执行事件
+                if Assigned(TStringGrid(ACtrl).OnGetEditMask) then begin
+                    //生成返回值字符串
+                    joData          := _json('{}');
+                    joData.type     := 'sort';
+                    joData.col      := iCol;
+                    joData.order    := iOrder;
+
+                    sKeyword        := joData;
                     //执行事件
-                    if Assigned(TStringGrid(ACtrl).OnGetEditMask) then begin
-                        //生成返回值字符串
-                        joData          := _json('{}');
-                        joData.type     := 'sort';
-                        joData.col      := iCol;
-                        joData.order    := iOrder;
-
-                        sKeyword        := joData;
-                        //执行事件
-                        TStringGrid(ACtrl).OnGetEditMask(TStringGrid(ACtrl),iCol,iOrder,sKeyword);
-                    end;
+                    TStringGrid(ACtrl).OnGetEditMask(TStringGrid(ACtrl),iCol,iOrder,sKeyword);
                 end;
             end;
 
@@ -311,7 +312,7 @@ begin
 
                     sKeyword        := joData;
                     //执行事件
-                    TStringGrid(ACtrl).OnGetEditMask(TStringGrid(ACtrl),iCol,0,sKeyword);
+                    TStringGrid(ACtrl).OnGetEditMask(TStringGrid(ACtrl),iCol,-999,sKeyword);
                 end;
             end;
 
@@ -470,7 +471,38 @@ begin
             if Assigned(OnMouseUp) then begin
                 OnMouseUp(TStringGrid(ACtrl),mButton,mShift,mX,mY);
             end;
+        end else if joData.e = 'changecolwidth' then begin
+            //应为一个没有方括号的3维的数组，分别为newWidth, oldWidth, column
+            sValue  := dwUnescape(joData.v);
+
+            //转化为JSON对象
+            joValue := _json('['+sValue+']');
+
+            //如果非JSON，则退出
+            if joValue = unassigned then begin
+                Exit;
+            end;
+
+            //取得值
+            iNewW   := joValue._(0);    //新列宽
+            iOldW   := joValue._(1);    //老列宽
+            sCol    := joValue._(2);
+            Delete(sCol,1,1);
+            iCol    := StrToIntDef(sCol,0); //列序号
+
+            //
+            //
+            with TStringGrid(ACtrl) do begin
+                //更新列宽
+                ColWidths[iCol-1] := iNewW;
+
+                //修改后激活事件
+                if Assigned(OnColumnMoved) then begin
+                    OnColumnMoved(TStringGrid(ACtrl),iCol-1,iNewW);
+                end;
+            end;
         end;
+
     end;
 
 end;
@@ -487,8 +519,6 @@ var
     bColed      : Boolean;     //已添加表头信息
     //
     sRowStyle   : string;
-    sBack       : string;
-    sCode       : string;
     sFull       : string;
     //
     joHint      : Variant;
@@ -549,7 +579,7 @@ var
                        +sAlign   //对齐，align="right"'
                        +sFilter  //过滤  :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]
                        +' :label="'+sFull+'__col'+IntToStr(AColID)+'"'
-                       +' :width="'+sFull+'__cws'+IntToStr(AColID)+'"'
+                       +dwIIF(AColID<ASG.ColCount-1, ' :width="'+sFull+'__cws'+IntToStr(AColID)+'"','')
                        //+' width="'+IntToStr(ASG.ColWidths[AColID])+'"'
                        +'></el-table-column>');
              //
@@ -558,7 +588,7 @@ var
     end;
 begin
     //生成返回值数组
-    joRes    := _Json('[]');
+    joRes   := _Json('[]');
 
     //
     sFull   := dwFullName(ACtrl);
@@ -593,23 +623,22 @@ begin
             //添加主体
             joRes.Add('    <el-table'
                     +' id="'+sFull+'"'
-                    +' :data="'+sFull+'__ces"'      //行内数据
-                    +' highlight-current-row'                      //当前行高亮
-                    +sRowStyle                                     //行高和标题行背景色
-                    +' ref="'+sFull+'"'             //参考名?
+                    +' :data="'+sFull+'__ces"'                      //行内数据
+                    +' highlight-current-row'                       //当前行高亮
+                    +sRowStyle                                      //行高和标题行背景色
+                    +' ref="'+sFull+'"'                             //参考名?
                     +dwGetDWAttr(joHint)
-                    //+' stripe'                                   //斑马纹，改到dwattr中
-                    //+dwIIF(Borderstyle<>bsNone,' border','')     //是否边框 ，改到dwattr中
-                    +dwVisible(TControl(ACtrl))                    //是否可见
-                    +dwDisable(TControl(ACtrl))                    //是否可用
-                    +' :height="'+sFull+'__hei"' //高度, 有此值则显示滚动条，改到dwattr中
+                    +dwVisible(TControl(ACtrl))                     //是否可见
+                    +dwDisable(TControl(ACtrl))                     //是否可用
+                    +' :height="'+sFull+'__hei"'                    //高度, 有此值则显示滚动条，改到dwattr中
 
                     //2021-05-08屏蔽了以下行，主要是因为此行会导致苹果设备不能正确演示
                     //造成的损失是不能显示滚动条了
                     //+' :height="'+sFull+'__hei"' //高度, 有此值则显示滚动条
 
-                    +' style="width:100%;'          //宽度
-                    +dwGetDWStyle(joHint)
+                    +' style="'
+                        +'width:100%;'                              //宽度
+                        +dwGetDWStyle(joHint)
                     +'"'                                                                        //
                     //+' @selection-change=function(selection){this.alert(JSON.stringify(selection))}'
                     //+' @selection-change=function(selection){dwexecute(''console.log(JSON.stringify(this.$refs.'+sFull+'.selection))'')}'
@@ -651,7 +680,8 @@ begin
 
                     +Format(_DWEVENT,['row-click',Name,'val.d0','onclick',TForm(Owner).Handle])        //单击行
                     +Format(_DWEVENT,['row-dblclick',Name,'val.d0','ondblclick',TForm(Owner).Handle])  //双击行
-                    +'>');
+                    +' @header-dragend="'+sFull+'__changecolwidth"'   //拖动列宽事件
+                    +' >');
 
             //以下为生成各列信息 -----
 
@@ -707,7 +737,7 @@ begin
                             +_GetColSortFromJson(joColInfo)                             //根据文本,确定是否排序
                             +_GetColFilterFromJson(joColInfo,sFull,iItem,Owner)         //根据文本,确定是否过滤
                             +' :label="'+sFull+'__col'+IntToStr(iItem)+'"'   //
-                            +' :width="'+sFull+'__cws'+IntToStr(iItem)+'"'
+                            +dwIIF(iItem < ColCount-1,' :width="'+sFull+'__cws'+IntToStr(iItem)+'"','')
                             //+dwIIF((iItem=0)and(joColInfo.type='selection'),' @selection-change="'+sFull+'SelectionChange"','')
                             +'></el-table-column>');
 
@@ -723,7 +753,7 @@ begin
                             +' prop="d'+IntToStr(iItem+1)+'"'
                             +_GetColAlign(Cells[iItem,0])      //根据文本,确定对齐方式
                             +' :label="'+sFull+'__col'+IntToStr(iItem)+'"'
-                            +' :width="'+sFull+'__cws'+IntToStr(iItem)+'"'
+                            +dwIIF(iItem < ColCount-1,' :width="'+sFull+'__cws'+IntToStr(iItem)+'"','')
                             +'></el-table-column>');
                     end;
                 end;
@@ -739,7 +769,6 @@ end;
 function dwGetTail(ACtrl:TComponent):String;stdCall;
 var
     joRes     : Variant;
-    sCode  : string;
 begin
     //
     with TStringGrid(ACtrl) do begin
@@ -769,7 +798,6 @@ var
     iCol    : Integer;
     iTmp    : Integer;
     sCode   : String;
-    S       : String;
     sFull   : string;
 begin
     //
@@ -904,7 +932,7 @@ begin
 
              //列标题
              for iCol := 0 to ColCount-1 do begin
-                  joRes.Add('this.'+sFull+'__col'+IntToStr(iCol)+'="'+_ProcessCell(Cells[iCol,0])+'";');
+                  joRes.Add('this.'+sFull+'__col'+IntToStr(iCol)+'="'+_GetColCaption(Cells[iCol,0])+'";');
              end;
              //列宽
              for iCol := 0 to ColCount-1 do begin
@@ -930,8 +958,9 @@ begin
             end;
             sCode     := sCode + '];';
             joRes.Add(sCode);
-            //行号
-            joRes.Add('/*real*/ this.$refs.'+sFull+'.setCurrentRow(this.$refs.'+sFull+'.data['+IntToStr(Row-1)+']);');
+
+            //行号(一直显示行号)
+            //joRes.Add('/*real*/ this.$refs.'+sFull+'.setCurrentRow(this.$refs.'+sFull+'.data['+IntToStr(Row-1)+']);');
         end;
     end;
     //
@@ -944,6 +973,7 @@ function dwGetMethods(ACtrl:TControl):String;stdCall;
 var
     //
     sCode   : string;
+    iHandle : Integer;
     //
     joRes   : Variant;
     sFull   : string;
@@ -954,14 +984,21 @@ begin
     joRes   := _json('[]');
 
 
+    //取得句柄备用
+    iHandle := TForm(ACtrl.Owner).Handle;
+
     with TStringGrid(ACtrl) do begin
         //选择区切换事件
         sCode   := sFull+'__selectionchange(val) {'
                 //+'console.log(JSON.stringify(val));'
+                //+'console.log(JSON.stringify(val));'
                 +'var ssi=[];'
-                +'Array.prototype.forEach.call(val,function(item){ssi.push(item.d0)});'
+                +'Array.prototype.forEach.call(val,function(item){ssi.push(parseInt(item.d0))});'
                 //+'console.log(JSON.stringify(ssi));'
                 +'this.multipleSelection = val;'
+                //+'console.log(ssi);'
+                +'ssi.sort(function(a,b){return a>b?1:-1});'      //将序号数组从小到大正向排序
+                //+'console.log(ssi);'
                 +'snew=''"''+escape(JSON.stringify(ssi))+''"'';'
                 //+'console.log(snew);'
                 +'this.dwevent(null,"'+sFull+'",snew,"onselection",'+IntToStr(TForm(Owner).Handle)+');'
@@ -970,17 +1007,34 @@ begin
 
         //排序事件
         sCode   := sFull+'__sortchange(column) {'
-                +'console.log(column);'
+                //+'console.log(column);'
                 +'this.dwevent(null,'''+sFull+''',''"''+column.prop+''/''+column.order+''"'',''onsort'','+IntToStr(TForm(Owner).Handle)+');'
                 +'},';
         joRes.Add(sCode);
 
+        //筛选事件
         //function(filters){dwevent(null,'''+sFull+''',''"''+this.escape(JSON.stringify(filters))+''"'',''onfilter'','+IntToStr(TForm(Owner).Handle)+');}'//this.alert(JSON.stringify(filters))}
         sCode   := sFull+'__filterchange(filters) {'
-                +'this.dwevent(null,'''+sFull+''',''"''+this.escape(JSON.stringify(filters))+''"'',''onfilter'','+IntToStr(TForm(Owner).Handle)+');'
+                +'_this = this;'
+                +'this.dwevent(null,'''+sFull+''',''"''+escape(JSON.stringify(filters))+''"'',''onfilter'','+IntToStr(TForm(Owner).Handle)+');'
                 +'},';
         joRes.Add(sCode);
 
+
+        //拖动列宽函数
+        sCode   :=
+                sFull+'__changecolwidth(neww, oldw, col, event){'+  //newWidth, oldWidth, column, event
+                    //'console.log(col);'+
+                    'var jo={};'+
+                    'jo.m="event";'+
+                    'jo.c="'+sFull+'";'+
+                    'jo.i='+IntToStr(iHandle)+';'+
+                    'jo.v = neww+'',''+oldw+'',"''+col.property+''"'';'+
+                    'jo.e="changecolwidth";'+
+                    'axios.post(''/deweb/post'',escape(JSON.stringify(jo)),{headers:{shuntflag:2051}})'+
+                    '.then(resp =>{this.procResp(resp.data)});'+
+                '},';
+        joRes.Add(sCode);
     end;
 
     //

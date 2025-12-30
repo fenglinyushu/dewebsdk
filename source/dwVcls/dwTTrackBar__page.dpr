@@ -47,7 +47,6 @@ var
 begin
     with TTrackBar(Actrl) do begin
         //用作分页控件--------------------------------------------------------------------------
-
         //
         joData    := _Json(AData);
 
@@ -59,7 +58,7 @@ begin
             TTrackBar(ACtrl).OnChange  := nil;
             //更新值
             iTmp    := StrToIntDef(dwUnescape(joData.v),0);
-            TTrackBar(ACtrl).Position    := iTmp;//StrToIntDef(dwUnescape(joData.v),0);
+            TTrackBar(ACtrl).Position    := Math.Max(0,iTmp-1);//StrToIntDef(dwUnescape(joData.v),0);
             //恢复事件
             TTrackBar(ACtrl).OnChange  := oChange;
 
@@ -97,6 +96,9 @@ begin
         with TTrackBar(ACtrl) do begin
             //外框
             sCode     := '<div'
+                    +' id="'+sFull+'"'
+                    +dwVisible(TControl(ACtrl))
+                    +dwDisable(TControl(ACtrl))
                     +' :style="{left:'+sFull+'__lef,top:'+sFull+'__top,width:'+sFull+'__wid,height:'+sFull+'__hei}"'
                     +' style="position:absolute;'
                     +dwGetDWStyle(joHint)
@@ -141,7 +143,7 @@ begin
         joRes    := _Json('[]');
 
         //生成返回值数组
-        joRes.Add('    </el-pagination>');               //此处需要和dwGetHead对应
+        joRes.Add('</el-pagination>');               //此处需要和dwGetHead对应
         joRes.Add('</div>');               //此处需要和dwGetHead对应
         //
         Result    := (joRes);
@@ -184,7 +186,7 @@ begin
             //joRes.Add(sFull+':'+IntToStr(Position)+',');
             //
             joRes.Add(sFull+'__pgs:'+IntToStr(Math.Max(1,PageSize))+',');
-            joRes.Add(sFull+'__cpg:'+IntToStr(Position)+',');
+            joRes.Add(sFull+'__cpg:'+IntToStr(Position+1)+',');
             joRes.Add(sFull+'__tot:'+IntToStr(Max)+',');
         end;
         //
@@ -227,7 +229,7 @@ begin
             //joRes.Add('this.'+sFull+'='+IntToStr(Position)+';');
             //
             joRes.Add('this.'+sFull+'__pgs='+IntToStr(Math.Max(1,PageSize))+';');
-            joRes.Add('this.'+sFull+'__cpg='+IntToStr(Position)+';');
+            joRes.Add('this.'+sFull+'__cpg='+IntToStr(Position+1)+';');
             joRes.Add('this.'+sFull+'__tot='+IntToStr(Max)+';');
         end;
 

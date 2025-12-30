@@ -6,7 +6,7 @@ unit SynCommons;
 (*
     This file is part of Synopse framework.
 
-    Synopse framework. Copyright (C) 2021 Arnaud Bouchez
+    Synopse framework. Copyright (c) Arnaud Bouchez
       Synopse Informatique - https://synopse.info
 
   *** BEGIN LICENSE BLOCK *****
@@ -25,7 +25,7 @@ unit SynCommons;
 
   The Initial Developer of the Original Code is Arnaud Bouchez.
 
-  Portions created by the Initial Developer are Copyright (C) 2021
+  Portions created by the Initial Developer are Copyright (c)
   the Initial Developer. All Rights Reserved.
 
   Contributor(s):
@@ -1788,11 +1788,11 @@ type
 
 /// convert the endianness of a given unsigned 32-bit integer into BigEndian
 function bswap32(a: cardinal): cardinal;
-  {$ifndef CPUINTEL}inline;{$endif}
+  {$ifdef FPC}{$ifndef CPUINTEL}inline;{$endif}{$endif}
 
 /// convert the endianness of a given unsigned 64-bit integer into BigEndian
 function bswap64({$ifdef FPC_X86}constref{$else}const{$endif} a: QWord): QWord;
-  {$ifndef CPUINTEL}inline;{$endif}
+  {$ifdef FPC}{$ifndef CPUINTEL}inline;{$endif}{$endif}
 
 /// convert the endianness of an array of unsigned 64-bit integer into BigEndian
 // - n is required to be > 0
@@ -5071,10 +5071,17 @@ type
   /// internal set to specify some standard Delphi arrays
   TDynArrayKinds = set of TDynArrayKind;
 
-  /// internal integer type used for string/dynarray header reference counters
-  TRefCnt = {$ifdef FPC}SizeInt{$else}longint{$endif};
-  /// internal pointer integer type used for string/dynarray header reference counters
-  PRefCnt = ^TRefCnt;
+  /// cross-compiler type used for string reference counter
+  // - FPC and Delphi don't always use the same type
+  TStrCnt = {$ifdef STRCNT32} longint {$else} SizeInt {$endif};
+  /// pointer to cross-compiler type used for string reference counter
+  PStrCnt = ^TStrCnt;
+
+  /// cross-compiler type used for dynarray reference counter
+  // - FPC uses PtrInt/SizeInt, Delphi uses longint even on CPU64
+  TDACnt = {$ifdef DACNT32} longint {$else} SizeInt {$endif};
+  /// pointer to cross-compiler type used for dynarray reference counter
+  PDACnt = ^TDACnt;
 
   /// internal integer type used for string header length field
   TStrLen = {$ifdef FPC}SizeInt{$else}longint{$endif};
@@ -5090,7 +5097,7 @@ type
   // - match tdynarray type definition in dynarr.inc
   TDynArrayRec = {packed} record
     /// dynamic array reference count (basic memory management mechanism)
-    refCnt: TRefCnt;
+    refCnt: TDACnt;
     /// equals length-1
     high: tdynarrayindex;
     function GetLength: sizeint; inline;
@@ -5105,15 +5112,15 @@ const
   // - to be used inlined e.g. as PStrLen(p-_STRLEN)^
   _STRLEN = SizeOf(TStrLen);
   /// cross-compiler negative offset to TStrRec.refCnt field
-  // - to be used inlined e.g. as PRefCnt(p-_STRREFCNT)^
-  _STRREFCNT = Sizeof(TRefCnt)+_STRLEN;
+  // - to be used inlined e.g. as PStrCnt(p-_STRREFCNT)^
+  _STRREFCNT = Sizeof(TStrCnt)+_STRLEN;
 
   /// cross-compiler negative offset to TDynArrayRec.high/length field
   // - to be used inlined e.g. as PDALen(PtrUInt(Values)-_DALEN)^{$ifdef FPC}+1{$endif}
   _DALEN = SizeOf(PtrInt);
   /// cross-compiler negative offset to TDynArrayRec.refCnt field
-  // - to be used inlined e.g. as PRefCnt(PtrUInt(Values)-_DAREFCNT)^
-  _DAREFCNT = Sizeof(TRefCnt)+_DALEN;
+  // - to be used inlined e.g. as PDACnt(PtrUInt(Values)-_DAREFCNT)^
+  _DAREFCNT = Sizeof(TDACnt)+_DALEN;
 
 function ToText(k: TDynArrayKind): PShortString; overload;
 
@@ -6460,8 +6467,8 @@ type
   TSynLocker = object
   protected
     fSection: TRTLCriticalSection;
-    fSectionPadding: PtrInt; // paranoid to avoid FUTEX_WAKE_PRIVATE=EAGAIN
-    fLocked, fInitialized: boolean;
+    fLockCount: integer;
+    fInitialized: boolean;
     {$ifndef NOVARIANTS}
     function GetVariant(Index: integer): Variant;
     procedure SetVariant(Index: integer; const Value: Variant);
@@ -6475,8 +6482,14 @@ type
     procedure SetPointer(Index: integer; const Value: Pointer);
     function GetUTF8(Index: integer): RawUTF8;
     procedure SetUTF8(Index: integer; const Value: RawUTF8);
+    function GetIsLocked: boolean; {$ifdef HASINLINE}inline;{$endif}
     {$endif NOVARIANTS}
   public
+    /// number of values stored in the internal Padding[] array
+    // - equals 0 if no value is actually stored, or a 1..7 number otherwise
+    // - you should not have to use this field, but for optimized low-level
+    // direct access to Padding[] values, within a Lock/UnLock safe block
+    PaddingUsedCount: integer;
     /// internal padding data, also used to store up to 7 variant values
     // - this memory buffer will ensure no CPU cache line mixup occurs
     // - you should not use this field directly, but rather the Locked[],
@@ -6485,11 +6498,6 @@ type
     // using a Safe.Lock; try ... Padding[n] ... finally Safe.Unlock structure,
     // and maintain the PaddingUsedCount field accurately
     Padding: array[0..6] of TVarData;
-    /// number of values stored in the internal Padding[] array
-    // - equals 0 if no value is actually stored, or a 1..7 number otherwise
-    // - you should not have to use this field, but for optimized low-level
-    // direct access to Padding[] values, within a Lock/UnLock safe block
-    PaddingUsedCount: integer;
     /// initialize the mutex
     // - calling this method is mandatory (e.g. in the class constructor owning
     // the TSynLocker instance), otherwise you may encounter unexpected
@@ -6561,7 +6569,7 @@ type
     // !end;
     function ProtectMethod: IUnknown;
     /// returns true if the mutex is currently locked by another thread
-    property IsLocked: boolean read fLocked;
+    property IsLocked: boolean read GetIsLocked;
     /// returns true if the Init method has been called for this mutex
     // - is only relevant if the whole object has been previously filled with 0,
     // i.e. as part of a class or as global variable, but won't be accurate
@@ -8495,6 +8503,7 @@ type
   // - twoIgnoreDefaultInRecord will force custom record serialization to avoid
   // writing the fields with default values, i.e. enable soWriteIgnoreDefault
   // when TJSONCustomParserRTTI.WriteOneLevel is called
+  // - twoDateTimeWithZ appends an ending 'Z' to TDateTime/TDateTimeMS values
   TTextWriterOption = (
     twoStreamIsOwned,
     twoFlushToStreamNoAutoResize,
@@ -8506,7 +8515,8 @@ type
     twoForceJSONStandard,
     twoEndOfLineCRLF,
     twoBufferIsExternal,
-    twoIgnoreDefaultInRecord);
+    twoIgnoreDefaultInRecord,
+    twoDateTimeWithZ);
   /// options set for a TTextWriter instance
   // - allows to override e.g. AddRecordJSON() and AddDynArrayJSON() behavior;
   // or set global process customization for a TTextWriter
@@ -8645,17 +8655,20 @@ type
     procedure AddUnixMSTime(Value: PInt64; WithMS: boolean=false);
     /// append a TDateTime value, expanded as Iso-8601 encoded text
     // - use 'YYYY-MM-DDThh:mm:ss' format (with FirstChar='T')
+    // - if twoDateTimeWithZ CustomOption is set, will append an ending 'Z'
     // - if WithMS is TRUE, will append '.sss' for milliseconds resolution
     // - if QuoteChar is not #0, it will be written before and after the date
     procedure AddDateTime(Value: PDateTime; FirstChar: AnsiChar='T'; QuoteChar: AnsiChar=#0;
       WithMS: boolean=false); overload;
     /// append a TDateTime value, expanded as Iso-8601 encoded text
     // - use 'YYYY-MM-DDThh:mm:ss' format
+    // - if twoDateTimeWithZ CustomOption is set, will append an ending 'Z'
     // - append nothing if Value=0
     // - if WithMS is TRUE, will append '.sss' for milliseconds resolution
     procedure AddDateTime(const Value: TDateTime; WithMS: boolean=false); overload;
     /// append a TDateTime value, expanded as Iso-8601 text with milliseconds
     // and Time Zone designator
+    // - twoDateTimeWithZ CustomOption is ignored in favor of the TZD parameter
     // - i.e. 'YYYY-MM-DDThh:mm:ss.sssZ' format
     // - TZD is the ending time zone designator ('', 'Z' or '+hh:mm' or '-hh:mm')
     procedure AddDateTimeMS(const Value: TDateTime; Expanded: boolean=true;
@@ -11035,7 +11048,8 @@ type
     // - will handle vtPointer/vtClass/vtObject/vtVariant kind of arguments,
     // appending class name for any class or object, the hexa value for a
     // pointer, or the JSON representation of any supplied TDocVariant
-    constructor CreateLastOSError(const Format: RawUTF8; const Args: array of const);
+    constructor CreateLastOSError(const Format: RawUTF8; const Args: array of const;
+      const Trailer: RawUtf8 = 'OSError');
     {$ifndef NOEXCEPTIONINTERCEPT}
     /// can be used to customize how the exception is logged
     // - this default implementation will call the DefaultSynLogExceptionToStr()
@@ -13620,12 +13634,16 @@ function InterlockedDecrement(var I: Integer): Integer;
 
 {$endif FPC}
 
-/// low-level string/dynarray reference counter unprocess
+/// low-level string reference counter unprocess
 // - caller should have tested that refcnt>=0
 // - returns true if the managed variable should be released (i.e. refcnt was 1)
-// - on Delphi, RefCnt field is a 32-bit longint, whereas on FPC it is a SizeInt/PtrInt
-function RefCntDecFree(var refcnt: TRefCnt): boolean;
-  {$ifndef CPUINTEL}inline;{$endif}
+function StrCntDecFree(var refcnt: TStrCnt): boolean;
+  {$ifndef CPUINTEL} inline; {$endif}
+
+/// low-level dynarray reference counter unprocess
+// - caller should have tested that refcnt>=0
+function DACntDecFree(var refcnt: TDACnt): boolean;
+  {$ifndef CPUINTEL} inline; {$endif}
 
 type
   /// stores some global information about the current executable and computer
@@ -19855,7 +19873,7 @@ begin
     s := pointer(Value);
     d := s;
     for i := 1 to Safe.Padding[0].VInteger do begin
-      if PRefCnt(PAnsiChar(s^)-_STRREFCNT)^<=aMaxRefCount then begin
+      if PStrCnt(PAnsiChar(s^)-_STRREFCNT)^<=aMaxRefCount then begin
         {$ifdef FPC}
         Finalize(PRawUTF8(s)^);
         {$else}
@@ -20453,11 +20471,11 @@ type
   {$ifdef ISFPC27}
     codePage: TSystemCodePage; // =Word
     elemSize: Word;
+    {$ifndef STRCNT32}
     {$ifdef CPU64}
     _PaddingToQWord: DWord;
-    {$endif}
-  {$endif}
-    refCnt: TRefCnt; // =SizeInt
+    {$endif} {$endif} {$endif}
+    refCnt: TStrCnt; // =SizeInt on older FPC, =longint since FPC 3.4
     length: SizeInt;
   end;
 {$else FPC}
@@ -20468,7 +20486,7 @@ type
     _Padding: LongInt;
     {$endif}
     /// dynamic array reference count (basic garbage memory mechanism)
-    refCnt: TRefCnt;
+    refCnt: TDACnt;
     /// length in element count
     // - size in bytes = length*ElemSize
     length: PtrInt;
@@ -20494,7 +20512,7 @@ type
     elemSize: Word;
   {$endif UNICODE}
     /// COW string reference count (basic garbage memory mechanism)
-    refCnt: TRefCnt;
+    refCnt: TStrCnt;
     /// length in characters
     // - size in bytes = length*elemSize
     length: Longint;
@@ -20772,9 +20790,15 @@ asm
         jz      @z
         mov     qword ptr[p], rdx
         mov     p, rax
+        {$ifdef STRCNT32}
+        cmp     dword ptr[rax - _STRREFCNT], rdx
+        jl      @z
+lock    dec     dword ptr[rax - _STRREFCNT]
+        {$else}
         cmp     qword ptr[rax - _STRREFCNT], rdx
         jl      @z
 lock    dec     qword ptr[rax - _STRREFCNT]
+        {$endif STRCNT32}
         jbe     @free
 @z:     ret
 @free:  sub     p, STRRECSIZE
@@ -20785,9 +20809,15 @@ procedure _ansistr_incr_ref(p: pointer); nostackframe; assembler;
 asm
         test    p, p
         jz      @z
+        {$ifdef STRCNT32}
+        cmp     dword ptr[p - _STRREFCNT], 0
+        jl      @z
+lock    inc     dword ptr[p - _STRREFCNT]
+        {$else}
         cmp     qword ptr[p - _STRREFCNT], 0
         jl      @z
 lock    inc     qword ptr[p - _STRREFCNT]
+        {$endif STRCNT32}
 @z:
 end;
 
@@ -20798,6 +20828,19 @@ asm
         jz      @eq
         test    s, s
         jz      @ns
+        {$ifdef STRCNT32}
+        cmp     dword ptr[s - _STRREFCNT], 0
+        jl      @ns
+lock    inc     dword ptr[s - _STRREFCNT]
+@ns:    mov     qword ptr[d], s
+        test    rax, rax
+        jnz     @z
+@eq:    ret
+@z:     mov     d, rax
+        cmp     dword ptr[rax - _STRREFCNT], 0
+        jl      @n
+ lock   dec     dword ptr[rax - _STRREFCNT]
+        {$else}
         cmp     qword ptr[s - _STRREFCNT], 0
         jl      @ns
 lock    inc     qword ptr[s - _STRREFCNT]
@@ -20809,6 +20852,7 @@ lock    inc     qword ptr[s - _STRREFCNT]
         cmp     qword ptr[rax - _STRREFCNT], 0
         jl      @n
  lock   dec     qword ptr[rax - _STRREFCNT]
+        {$endif STRCNT32}
         ja      @n
 @free:  sub     d, STRRECSIZE
         jmp     _Freemem
@@ -20933,9 +20977,15 @@ asm
         test    rax, rax
         jz      @z
         mov     d, rax
+        {$ifdef STRCNT32}
+        cmp     dword ptr[rax - _STRREFCNT], 0
+        jl      @z
+lock    dec     dword ptr[rax - _STRREFCNT]
+        {$else}
         cmp     qword ptr[rax - _STRREFCNT], 0
         jl      @z
 lock    dec     qword ptr[rax - _STRREFCNT]
+        {$endif STRCNT32}
         jbe     @free
 @z:     ret
 @free:  sub     d, STRRECSIZE
@@ -20973,7 +21023,11 @@ asm
         jle     _ansistr_decr_ref
         test    rax, rax
         jz      _ansistr_setlength_new
+        {$ifdef STRCNT32}
+        cmp     dword ptr[rax - _STRREFCNT], 1
+        {$else}
         cmp     qword ptr[rax - _STRREFCNT], 1
+        {$endif STRCNT32}
         jne     _ansistr_setlength_new
         push    len
         push    s
@@ -21207,7 +21261,7 @@ begin
   if sr = nil then
     exit;
   dec(sr);
-  if (sr^.refcnt >= 0) and RefCntDecFree(sr^.refcnt) then
+  if (sr^.refcnt >= 0) and StrCntDecFree(sr^.refcnt) then
     FreeMem(sr);
 end;
 {$endif FPC_X64}
@@ -27624,23 +27678,43 @@ begin
   end;
 end;
 
-function RefCntDecFree(var refcnt: TRefCnt): boolean;
+function StrCntDecFree(var refcnt: TStrCnt): boolean;
 {$ifdef CPUINTEL} {$ifdef FPC}nostackframe; assembler; {$endif}
 asm {$ifdef CPU64DELPHI} .noframe {$endif}
-        {$ifdef FPC_64}
-        lock dec qword ptr[refcnt]  // TRefCnt=SizeInt=PtrInt=Int64 for FPC_64
+        {$ifdef STRCNT32}
+        lock dec dword ptr[refcnt]
         {$else}
-        lock dec dword ptr[refcnt]  // TRefCnt=longint on Delphi and FPC_32
-        {$endif}
+        lock dec qword ptr[refcnt]
+        {$endif STRCNT32}
         setbe   al
 end; // we don't check for ismultithread global since lock is cheap on new CPUs
 {$else}
 begin // fallback to RTL asm e.g. for ARM
-  {$ifdef FPC_64}
-  result := InterLockedDecrement64(refcnt)<=0;
-  {$else}
+  {$ifdef STRCNT32}
   result := InterLockedDecrement(refcnt)<=0;
-  {$endif FPC_64}
+  {$else}
+  result := InterLockedDecrement64(refcnt)<=0;
+  {$endif STRCNT32}
+end;
+{$endif CPUINTEL}
+
+function DACntDecFree(var refcnt: TDACnt): boolean;
+{$ifdef CPUINTEL} {$ifdef FPC}nostackframe; assembler; {$endif}
+asm {$ifdef CPU64DELPHI} .noframe {$endif}
+        {$ifdef DACNT32}
+        lock dec dword ptr[refcnt]
+        {$else}
+        lock dec qword ptr[refcnt]
+        {$endif DACNT32}
+        setbe   al
+end; // we don't check for ismultithread global since lock is cheap on new CPUs
+{$else}
+begin // fallback to RTL asm e.g. for ARM
+  {$ifdef DACNT32}
+  result := InterLockedDecrement(refcnt)<=0;
+  {$else}
+  result := InterLockedDecrement64(refcnt)<=0;
+  {$endif DACNT32}
 end;
 {$endif CPUINTEL}
 
@@ -31449,7 +31523,7 @@ begin
     exit; // wrong Index
   dec(n);
   if n>Index then begin
-    if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@Values,TypeInfo(TWordDynArray));
     MoveFast(Values[Index+1],Values[Index],(n-Index)*SizeOf(Word));
   end;
@@ -31464,7 +31538,7 @@ begin
     exit; // wrong Index
   dec(n);
   if n>Index then begin
-    if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@Values,TypeInfo(TIntegerDynArray));
     MoveFast(Values[Index+1],Values[Index],(n-Index)*SizeOf(Integer));
   end;
@@ -31479,7 +31553,7 @@ begin
     exit; // wrong Index
   dec(n,Index+1);
   if n>0 then begin
-    if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@Values,TypeInfo(TIntegerDynArray));
     MoveFast(Values[Index+1],Values[Index],n*SizeOf(Integer));
   end;
@@ -31494,7 +31568,7 @@ begin
     exit; // wrong Index
   dec(n);
   if n>Index then begin
-    if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@Values,TypeInfo(TInt64DynArray));
     MoveFast(Values[Index+1],Values[Index],(n-Index)*SizeOf(Int64));
   end;
@@ -31509,7 +31583,7 @@ begin
     exit; // wrong Index
   dec(n,Index+1);
   if n>0 then begin
-    if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@Values,TypeInfo(TInt64DynArray));
     MoveFast(Values[Index+1],Values[Index],n*SizeOf(Int64));
   end;
@@ -31521,9 +31595,9 @@ var i,v,x,n: PtrInt;
 begin
   if (Values=nil) or (Excluded=nil) then
     exit; // nothing to exclude
-  if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+  if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
     DynArrayMakeUnique(@Values,TypeInfo(TIntegerDynArray));
-  if PRefCnt(PtrUInt(Excluded)-_DAREFCNT)^>1 then
+  if PDACnt(PtrUInt(Excluded)-_DAREFCNT)^>1 then
     DynArrayMakeUnique(@Excluded,TypeInfo(TIntegerDynArray));
   v := length(Values);
   n := 0;
@@ -31556,9 +31630,9 @@ begin
     Values := nil;
     exit;
   end;
-  if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+  if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
     DynArrayMakeUnique(@Values,TypeInfo(TIntegerDynArray));
-  if PRefCnt(PtrUInt(Included)-_DAREFCNT)^>1 then
+  if PDACnt(PtrUInt(Included)-_DAREFCNT)^>1 then
     DynArrayMakeUnique(@Included,TypeInfo(TIntegerDynArray));
   v := length(Values);
   n := 0;
@@ -33770,14 +33844,14 @@ begin
     _80 := PtrUInt($8080808080808080); // use registers for constants
     _61 := $6161616161616161;
     _7b := $7b7b7b7b7b7b7b7b;
-    for i := 0 to sourceLen shr 3 do begin
+    for i := 0 to (sourceLen-1) shr 3 do begin
       c := PPtrUIntArray(source)^[i];
       d := c or _80;
       PPtrUIntArray(dest)^[i] := c-((d-PtrUInt(_61)) and not(d-_7b)) and
         ((not c) and _80)shr 2;
     end;
     {$else} // unbranched uppercase conversion of 4 chars blocks
-    for i := 0 to sourceLen shr 2 do begin
+    for i := 0 to (sourceLen-1) shr 2 do begin
       c := PPtrUIntArray(source)^[i];
       d := c or PtrUInt($80808080);
       PPtrUIntArray(dest)^[i] := c-((d-PtrUInt($61616161)) and not(d-PtrUInt($7b7b7b7b))) and
@@ -38075,6 +38149,7 @@ begin
   Date.Hour := (V shr (6+6)) and 31;
   Date.Minute := (V shr 6) and 63;
   Date.Second := V and 63;
+  Date.MilliSecond := 0;
 end;
 
 procedure TTimeLogBits.From(const S: RawUTF8);
@@ -40334,7 +40409,7 @@ function FastFindUpperPUTF8CharSorted(P: PPUTF8CharArray; R: PtrInt;
   Value: PUTF8Char; ValueLen: PtrInt): PtrInt;
 var tmp: array[byte] of AnsiChar;
 begin
-  UpperCopy255Buf(@tmp,Value,ValueLen);
+  UpperCopy255Buf(@tmp,Value,ValueLen)^ := #0;
   result := FastFindPUTF8CharSorted(P,R,@tmp);
 end;
 
@@ -40471,7 +40546,7 @@ begin
   if cardinal(Index)>=cardinal(n) then
     result := false else begin
     dec(n);
-    if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@Values,TypeInfo(TRawUTF8DynArray));
     Values[Index] := ''; // avoid GPF
     if n>Index then begin
@@ -40492,7 +40567,7 @@ begin
     result := false else begin
     dec(n);
     ValuesCount := n;
-    if PRefCnt(PtrUInt(Values)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(Values)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@Values,TypeInfo(TRawUTF8DynArray));
     Values[Index] := ''; // avoid GPF
     dec(n,Index);
@@ -43276,14 +43351,14 @@ asm // eax=source edx=dest ecx=count
       mov     esi, eax
       mov     edi, edx
       cld
-      rep movsb
+      rep movsb // (much) slower on small blocks moves
       pop     edi
       pop     esi
 @none:ret
 @down:lea     esi, [eax + ecx - 1]
       lea     edi, [edx + ecx - 1]
       std
-      rep     movsb
+      rep     movsb // backward move does not support ERMSB so is slow
       pop     edi
       pop     esi
       cld
@@ -44280,7 +44355,7 @@ begin
     UpperCaseCopy(TypeName,TypeNameLen,ItemTypeName^);
     up := pointer(ItemTypeName^);
   end else begin
-    UpperCopy255Buf(@tmp,TypeName,TypeNameLen);
+    UpperCopy255Buf(@tmp,TypeName,TypeNameLen)^ := #0;
     up := @tmp;
   end;
 //for ndx := 1 to SORTEDMAX do assert(StrComp(SORTEDNAMES[ndx],SORTEDNAMES[ndx-1])>0,SORTEDNAMES[ndx]);
@@ -44528,7 +44603,7 @@ begin
   p := pointer(Data);
   dec(p);
   Data := 0;
-  if (p^.refCnt>=0) and RefCntDecFree(p^.refCnt) then begin
+  if (p^.refCnt>=0) and DACntDecFree(p^.refCnt) then begin
     for i := 1 to p^.length do
       FinalizeNestedRecord(ItemData);
     FreeMem(p);
@@ -47754,11 +47829,11 @@ begin
     result := false else begin
     dec(VCount);
     if VName<>nil then begin
-      if PRefCnt(PtrUInt(VName)-_DAREFCNT)^>1 then
+      if PDACnt(PtrUInt(VName)-_DAREFCNT)^>1 then
         DynArrayMakeUnique(@VName,TypeInfo(TRawUTF8DynArray));
       VName[Index] := '';
     end;
-    if PRefCnt(PtrUInt(VValue)-_DAREFCNT)^>1 then
+    if PDACnt(PtrUInt(VValue)-_DAREFCNT)^>1 then
       DynArrayMakeUnique(@VValue,TypeInfo(TVariantDynArray));
     VarClear(VValue[Index]);
     if Index<VCount then begin
@@ -47846,7 +47921,7 @@ function TDocVariantData.GetValueIndex(aName: PUTF8Char; aNameLen: PtrInt;
   aCaseSensitive: boolean): integer;
 var err: integer;
 begin
-  if (integer(VType)=DocVariantVType) and (VCount>0) then
+  if (integer(VType)=DocVariantVType) and (VCount>0) and (aName<>nil) and(aNameLen>0) then
     if dvoIsArray in VOptions then begin // try index text in array document
       result := GetInteger(aName,err);
       if (err<>0) or (cardinal(result)>=cardinal(VCount)) then
@@ -49299,7 +49374,7 @@ begin
     if p<>nil then begin
       v^ := nil;
       dec(p);
-      if (p^.refCnt>=0) and RefCntDecFree(p^.refCnt) then
+      if (p^.refCnt>=0) and StrCntDecFree(p^.refCnt) then
         freemem(p);
     end;
     inc(v);
@@ -49364,7 +49439,7 @@ begin
     p := Value^;
     if p<>nil then begin
       dec(p);
-      if (p^.refCnt>=0) and RefCntDecFree(p^.refCnt) then begin
+      if (p^.refCnt>=0) and DACntDecFree(p^.refCnt) then begin
         if ElemTypeInfo<>nil then
           FastFinalizeArray(Value^,ElemTypeInfo,p^.length);
         Freemem(p);
@@ -49576,7 +49651,7 @@ begin
     end else
   if (AT<=varNull) or (BT<=varNull) then
     result := ord(AT>varNull)-ord(BT>varNull) else
-  if (AT<varString) and (BT<varString) then
+  if (AT<varString) and (BT<varString) and (AT<>varOleStr) and (BT<>varOleStr) then
     result := ICMP[VarCompareValue(variant(A),variant(B))] else
     result := CMP[caseInsensitive](variant(A),variant(B));
 end;
@@ -49722,7 +49797,7 @@ begin
   n := GetCount;
   if PtrUInt(aIndex)>=PtrUInt(n) then
     exit; // out of range
-  if PRefCnt(PtrUInt(fValue^)-_DAREFCNT)^>1 then
+  if PDACnt(PtrUInt(fValue^)-_DAREFCNT)^>1 then
     InternalSetLength(n,n); // unique
   dec(n);
   P := pointer(PtrUInt(fValue^)+PtrUInt(aIndex)*ElemSize);
@@ -49741,9 +49816,8 @@ begin
 end;
 
 function TDynArray.ElemPtr(index: PtrInt): pointer;
-label ok;
 var c: PtrUInt;
-begin // very efficient code on FPC and modern Delphi
+begin // no goto/label, because it does not properly inline on modern Delphi
   result := pointer(fValue);
   if result=nil then
     exit;
@@ -49751,17 +49825,17 @@ begin // very efficient code on FPC and modern Delphi
   if result=nil then
     exit;
   c := PtrUInt(fCountP);
-  if c<>0 then begin
+  if c<>0 then
     if PtrUInt(index)<PCardinal(c)^ then
-ok:   inc(PByte(result),PtrUInt(index)*ElemSize) else
+      inc(PByte(result),PtrUInt(index)*ElemSize) else
       result := nil
-  end else
+  else
     {$ifdef FPC}
     if PtrUInt(index)<=PPtrUInt(PtrUInt(result)-_DALEN)^ then
     {$else}
     if PtrUInt(index)<PPtrUInt(PtrUInt(result)-_DALEN)^ then
     {$endif FPC}
-      goto ok else
+      inc(PByte(result),PtrUInt(index)*ElemSize) else
       result := nil;
 end;
 
@@ -50391,7 +50465,7 @@ begin
   if (Source=nil) or (fValue=nil) then
     exit;
   // ignore legacy element size for cross-platform compatibility
-  if not FromVarUInt32(Source,SourceMax,n) or
+  if not FromVarUInt32(Source,SourceMax,n) or // n=0 from mORMot 2 anyway
      ((SourceMax<>nil) and (PAnsiChar(Source)>=PAnsiChar(SourceMax))) then
     exit;
   // check stored element type
@@ -51271,7 +51345,7 @@ begin // this method is faster than default System.DynArraySetLength() function
   if NewLength=0 then begin
     if p<>nil then begin // FastDynArrayClear() with ObjArray support
       dec(p);
-      if (p^.refCnt>=0) and RefCntDecFree(p^.refCnt) then begin
+      if (p^.refCnt>=0) and DACntDecFree(p^.refCnt) then begin
         if OldLength<>0 then
           if ElemType<>nil then
             FastFinalizeArray(fValue^,ElemType,OldLength) else
@@ -51296,7 +51370,7 @@ begin // this method is faster than default System.DynArraySetLength() function
     OldLength := NewLength;    // no FillcharFast() below
   end else begin
     dec(PtrUInt(p),SizeOf(TDynArrayRec)); // p^ = start of heap object
-    if (p^.refCnt>=0) and RefCntDecFree(p^.refCnt) then begin
+    if (p^.refCnt>=0) and DACntDecFree(p^.refCnt) then begin
       if NewLength<OldLength then // reduce array in-place
         if ElemType<>nil then // release managed types in trailing items
           FastFinalizeArray(pointer(PAnsiChar(p)+NeededSize),ElemType,OldLength-NewLength) else
@@ -53159,10 +53233,9 @@ const
 
 procedure TSynLocker.Init;
 begin
-  fSectionPadding := 0;
+  fLockCount := 0;
   PaddingUsedCount := 0;
   InitializeCriticalSection(fSection);
-  fLocked := false;
   fInitialized := true;
 end;
 
@@ -53182,22 +53255,28 @@ begin
   FreeMem(@self);
 end;
 
+function TSynLocker.GetIsLocked: boolean;
+begin
+  result := fLockCount <> 0;
+end;
+
 procedure TSynLocker.Lock;
 begin
   EnterCriticalSection(fSection);
-  fLocked := true;
+  inc(fLockCount);
 end;
 
 procedure TSynLocker.UnLock;
 begin
-  fLocked := false;
+  dec(fLockCount);
   LeaveCriticalSection(fSection);
 end;
 
 function TSynLocker.TryLock: boolean;
 begin
-  result := not fLocked and
-    (TryEnterCriticalSection(fSection){$ifdef LINUX}{$ifdef FPC}<>0{$endif}{$endif});
+  result := TryEnterCriticalSection(fSection){$ifdef LINUX}{$ifdef FPC}<>0{$endif}{$endif};
+  if result then
+    inc(fLockCount);
 end;
 
 function TSynLocker.TryLockMS(retryms: integer): boolean;
@@ -53222,12 +53301,10 @@ function TSynLocker.GetVariant(Index: integer): Variant;
 begin
   if cardinal(Index)<cardinal(PaddingUsedCount) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       result := variant(Padding[Index]);
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     VarClear(result);
 end;
@@ -53236,14 +53313,12 @@ procedure TSynLocker.SetVariant(Index: integer; const Value: Variant);
 begin
   if cardinal(Index)<=high(Padding) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       if Index>=PaddingUsedCount then
         PaddingUsedCount := Index+1;
       variant(Padding[Index]) := Value;
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end;
 end;
 
@@ -53251,13 +53326,11 @@ function TSynLocker.GetInt64(Index: integer): Int64;
 begin
   if cardinal(Index)<cardinal(PaddingUsedCount) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       if not VariantToInt64(variant(Padding[index]),result) then
         result := 0;
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     result := 0;
 end;
@@ -53271,13 +53344,11 @@ function TSynLocker.GetBool(Index: integer): boolean;
 begin
   if cardinal(Index)<cardinal(PaddingUsedCount) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       if not VariantToBoolean(variant(Padding[index]),result) then
         result := false;
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     result := false;
 end;
@@ -53307,15 +53378,13 @@ function TSynLocker.GetPointer(Index: integer): Pointer;
 begin
   if cardinal(Index)<cardinal(PaddingUsedCount) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       with Padding[index] do
         if VType=varUnknown then
           result := VUnknown else
           result := nil;
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     result := nil;
 end;
@@ -53324,8 +53393,7 @@ procedure TSynLocker.SetPointer(Index: integer; const Value: Pointer);
 begin
   if cardinal(Index)<=high(Padding) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       if Index>=PaddingUsedCount then
         PaddingUsedCount := Index+1;
       with Padding[index] do begin
@@ -53335,8 +53403,7 @@ begin
         VUnknown := Value;
       end;
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end;
 end;
 
@@ -53345,14 +53412,12 @@ var wasString: Boolean;
 begin
   if cardinal(Index)<cardinal(PaddingUsedCount) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       VariantToUTF8(variant(Padding[Index]),result,wasString);
       if not wasString then
         result := '';
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     result := '';
 end;
@@ -53361,14 +53426,12 @@ procedure TSynLocker.SetUTF8(Index: integer; const Value: RawUTF8);
 begin
   if cardinal(Index)<=high(Padding) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       if Index>=PaddingUsedCount then
         PaddingUsedCount := Index+1;
       RawUTF8ToVariant(Value,Padding[Index],varString);
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end;
 end;
 
@@ -53376,16 +53439,14 @@ function TSynLocker.LockedInt64Increment(Index: integer; const Increment: Int64)
 begin
   if cardinal(Index)<=high(Padding) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       result := 0;
       if Index<PaddingUsedCount then
         VariantToInt64(variant(Padding[index]),result) else
         PaddingUsedCount := Index+1;
       variant(Padding[Index]) := Int64(result+Increment);
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     result := 0;
 end;
@@ -53394,8 +53455,7 @@ function TSynLocker.LockedExchange(Index: integer; const Value: Variant): Varian
 begin
   if cardinal(Index)<=high(Padding) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       with Padding[index] do begin
         if Index<PaddingUsedCount then
           result := PVariant(@VType)^ else begin
@@ -53405,8 +53465,7 @@ begin
         PVariant(@VType)^ := Value;
       end;
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     VarClear(result);
 end;
@@ -53415,8 +53474,7 @@ function TSynLocker.LockedPointerExchange(Index: integer; Value: pointer): point
 begin
   if cardinal(Index)<=high(Padding) then
     try
-      EnterCriticalSection(fSection);
-      fLocked := true;
+      Lock;
       with Padding[index] do begin
         if Index<PaddingUsedCount then
           if VType=varUnknown then
@@ -53431,8 +53489,7 @@ begin
         VUnknown := Value;
       end;
     finally
-      fLocked := false;
-      LeaveCriticalSection(fSection);
+      UnLock;
     end else
     result := nil;
 end;
@@ -53869,7 +53926,7 @@ procedure TTextWriter.AddDateTime(Value: PDateTime; FirstChar: AnsiChar;
 begin
   if (Value^=0) and (QuoteChar=#0) then
     exit;
-  if BEnd-B<=25 then
+  if BEnd-B<=26 then
     FlushToStream;
   inc(B);
   if QuoteChar<>#0 then
@@ -53883,6 +53940,10 @@ begin
       B := TimeToIso8601PChar(Value^,B,true,FirstChar,WithMS);
     dec(B);
   end;
+  if twoDateTimeWithZ in fCustomOptions then begin
+    inc(B);
+    B^ := 'Z';
+  end;
   if QuoteChar<>#0 then begin
     inc(B);
     B^ := QuoteChar;
@@ -53893,14 +53954,16 @@ procedure TTextWriter.AddDateTime(const Value: TDateTime; WithMS: boolean);
 begin
   if Value=0 then
     exit;
-  if BEnd-B<=23 then
+  if BEnd-B<=24 then
     FlushToStream;
   inc(B);
   if trunc(Value)<>0 then
     B := DateToIso8601PChar(Value,B,true);
   if frac(Value)<>0 then
     B := TimeToIso8601PChar(Value,B,true,'T',WithMS);
-  dec(B);
+  if twoDateTimeWithZ in fCustomOptions then
+    B^ := 'Z' else
+    dec(B);
 end;
 
 procedure TTextWriter.AddDateTimeMS(const Value: TDateTime; Expanded: boolean;
@@ -58995,12 +59058,12 @@ end;
 
 procedure TAutoLocker.Enter;
 begin
-  EnterCriticalSection(fSafe.fSection);
+  fSafe.Lock;
 end;
 
 procedure TAutoLocker.Leave;
 begin
-  LeaveCriticalSection(fSafe.fSection);
+  fSafe.UnLock;
 end;
 
 function TAutoLocker.Safe: PSynLocker;
@@ -59253,7 +59316,9 @@ begin
     {$elseif defined(VER330)}'Delphi 10.3 Rio'
     {$elseif defined(VER340)}'Delphi 10.4 Sydney'
     {$elseif defined(VER350)}'Delphi 11 Alexandria'
-    {$elseif defined(VER360)}'Delphi 11.1 Next'
+    {$elseif defined(VER360)}'Delphi 12 Athens'
+    {$elseif defined(VER370)}'Delphi 13 Florence'
+    {$elseif defined(VER380)}'Delphi 14 Next'
     {$ifend}
   {$endif CONDITIONALEXPRESSIONS}
 {$endif FPC}
@@ -61960,13 +62025,14 @@ begin
   inherited Create(msg);
 end;
 
-constructor ESynException.CreateLastOSError(const Format: RawUTF8; const Args: array of const);
+constructor ESynException.CreateLastOSError(
+  const Format: RawUTF8; const Args: array of const; const Trailer: RawUtf8);
 var tmp: RawUTF8;
     error: integer;
 begin
   error := GetLastError;
   FormatUTF8(Format,Args,tmp);
-  CreateUTF8('OSError % [%] %',[error,SysErrorMessage(error),tmp]);
+  CreateUTF8('% % [%] %',[Trailer,error,SysErrorMessage(error),tmp]);
 end;
 
 {$ifndef NOEXCEPTIONINTERCEPT}

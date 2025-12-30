@@ -357,7 +357,7 @@ begin
             joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
             joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
             //
-            joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
+            joRes.Add('/*real*/ this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
             joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
             //
             if TPanel(ACtrl).Color = clNone then begin

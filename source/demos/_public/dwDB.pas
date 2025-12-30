@@ -63,7 +63,17 @@ function dwGetComboBoxItems(
         AQuery      : TFDQuery;
         ATable      : string;           //表名
         AField      : string;           //字段，例如：Name
+        AEmpty      : Boolean;          //是否支持空值
         AComboBox   : TComboBox
+        ):Integer;
+
+//根据表名,字段名，将当前字段的信息生成到ComboBox中
+function dwGetDISTINCTComboBoxItems(
+        AQuery      : TFDQuery;
+        ATable      : string;           //表名
+        AField      : string;           //字段，例如：Name
+        AComboBox   : TComboBox;
+        const AOrder    : String = ''
         ):Integer;
 
 //根据表名,字段名，将当前字段的信息生成到JSON数组中，形如["aaa","BBBB"]
@@ -76,13 +86,71 @@ function dwGetItemsJSON(
 
 procedure dwDBGridAppend(ACtrl:TDBGrid;AValues:Array of String);
 
+//根据数据表（关键字段为UniqueIdentifier类型）创建TreeView
+function dwDBUniqueIdentifierToTreeView(ATV:TTreeView;AQuery:TFDQuery;ATable,AID,APID,AName:String):Integer;
 
 
 implementation
 
+//根据数据表（关键字段为UniqueIdentifier类型）创建TreeView
+function dwDBUniqueIdentifierToTreeView(ATV:TTreeView;AQuery:TFDQuery;ATable,AID,APID,AName:String):Integer;
+type
+    PMyRc = ^TMyRc;
+    TMyRc = Record
+        id      : string;
+    end;
+var
+    oParentNode : TTreeNode;
+    iItem       : Integer;
+    sParentID   : string;
+    sID         : string;
+    sName       : string;
+    //
+    p           : PMyRc;
+begin
+    Result  := 0;
+    //
+    try
+
+        //
+        ATV.Items.Clear;
+        AQuery.Close;
+        AQuery.SQL.Text  := 'SELECT ['+AId+'],['+APID+'],['+AName+'] FROM '+ATable;
+        AQuery.Open;
+        AQuery.First;
+        //
+        while not AQuery.Eof do  begin
+            //
+            sId         := AQuery.Fields[0].Asstring;
+            sParentId   := AQuery.Fields[1].Asstring;
+            sName       := AQuery.Fields[2].Asstring;
+
+            //
+            oParentNode := Nil;
+            for iItem := ATV.Items.Count-1 downto 0 do begin
+                if Pmyrc(ATV.Items[iItem].Data)^.id = sParentId then begin
+                    oParentNode := ATV.Items[iItem];
+                    break;
+                end;
+            end;
+            if oParentNode = nil then begin
+                sParentId   := '{00000000-0000-0000-0000-000000000000}';
+            end;
+
+            New(p);
+            P.id    := sId;
+
+            //
+            AQuery.Next;
+        end;
+    except
+        Result  := -1;
+    end;
+end;
+
+
 procedure dwDBGridAppend(ACtrl:TDBGrid;AValues:Array of String);
 var
-    oDataSet    : TDataSet;
     sJS         : string;
     I           : Integer;
 begin
@@ -223,6 +291,7 @@ function dwGetComboBoxItems(
         AQuery      : TFDQuery;
         ATable      : string;           //表名
         AField      : string;           //字段，例如：Name
+        AEmpty      : Boolean;          //是否支持空值
         AComboBox   : TComboBox
         ):Integer;
 var
@@ -230,7 +299,42 @@ var
 begin
     //得到字段名
     AQuery.Close;
-    AQuery.SQL.Text := 'SELECT DISTINCT '+AField+' FROM '+ATable;
+    AQuery.SQL.Text := 'SELECT '+AField+' FROM '+ATable;
+    AQuery.Open;
+    AComboBox.Items.Clear;
+    if AEmpty then begin
+        AComboBox.Items.Add('');
+    end;
+    for iRec := 0 to AQuery.RecordCount-1 do begin
+        AComboBox.Items.Add(AQuery.Fields[0].AsString);
+        //
+        Aquery.Next;
+    end;
+    if AComboBox.Items.Count>0 then begin
+        AComboBox.ItemIndex := 0;
+    end;
+    //
+    Result  := 0;
+end;
+
+function dwGetDISTINCTComboBoxItems(
+        AQuery      : TFDQuery;
+        ATable      : string;           //表名
+        AField      : string;           //字段，例如：Name
+        AComboBox   : TComboBox;
+        const AOrder    : String = ''
+        ):Integer;
+var
+    iRec    : Integer;
+begin
+    //得到字段名
+    AQuery.Close;
+    if AOrder = '' then begin
+        AQuery.SQL.Text := 'SELECT DISTINCT '+AField+' FROM '+ATable;
+    end else begin
+        //此处后续还需要继续完善! 以支持多字段及DESC
+        AQuery.SQL.Text := 'SELECT DISTINCT '+AField+','+AOrder+' FROM '+ATable+' ORDER By '+AOrder;
+    end;
     AQuery.Open;
     AComboBox.Items.Clear;
     for iRec := 0 to AQuery.RecordCount-1 do begin
@@ -244,6 +348,7 @@ begin
     //
     Result  := 0;
 end;
+
 
 //根据表名,字段名，将当前字段的信息生成到JSON数组中，形如["aaa","BBBB"]
 function dwGetItemsJSON(

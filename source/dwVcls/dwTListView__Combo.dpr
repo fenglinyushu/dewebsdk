@@ -36,6 +36,7 @@ begin
 
     with TListView(ACtrl) do begin
         if joData.e = 'onchange' then begin
+
             //保存事件
             oChange := TListView(ACtrl).OnChange;
             //清空事件,以防止自动执行
@@ -54,10 +55,11 @@ begin
 
             //执行事件
             if Assigned(OnChange) then begin
-                OnChange(TListView(ACtrl),nil,ctText);
+                OnChange(TListView(ACtrl),Items[ItemIndex],ctText);
             end;
 
         end else if joData.e = 'onblur' then begin
+{
             //更新值
             sValue    := dwUnescape(joData.v);
             if sValue <> '' then begin
@@ -87,6 +89,7 @@ begin
                 end;
 
             end;
+}
         end else if joData.e = 'ondropdown' then begin
             if joData.v = 'true' then begin
             end else if joData.v = 'false' then begin
@@ -99,6 +102,7 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
+    iCol    : Integer;
     sCode   : string;
     sBlur   : String;
     sFull   : String;
@@ -149,8 +153,14 @@ begin
                 //+dwIIF(Assigned(OnDropDown) OR Assigned(OnCloseUp),'@visible-change="dwevent($event,'''+sFull+''',$event,''ondropdown'','''')"','')
                 +Format(_DWEVENT,['change',sFull,'this.'+sFull+'__txt','onchange',TForm(Owner).Handle])
                 +'>');
-        joRes.Add('    <el-option v-for="item in '+sFull+'__its" :key="item.value" :label="item.value" :value="item.value"/>');
-
+        joRes.Add('<el-option v-for="item in '+sFull+'__its" :key="item.value" :label="item.value" :value="item.value">');
+        //
+        joRes.Add('<span style="display : inline-block; width:'+IntToStr(Columns[0].Width)+'px;">{{ item.value }}</span>');
+        for iCol := 1 to Columns.Count-1 do begin
+            joRes.Add('<span style="display : inline-block;width:'+IntToStr(Columns[iCol].Width)+'px;">{{ item.col'+IntToStr(iCol)+' }}</span>');
+        end;
+        //
+        joRes.Add('</el-option>');
     end;
 
     //
@@ -176,6 +186,7 @@ var
      joRes     : Variant;
      sCode     : string;
      iItem     : Integer;
+     iCol      : Integer;
 begin
     //生成返回值数组
     joRes    := _Json('[]');
@@ -184,7 +195,11 @@ begin
         //添加选项
         sCode     := dwFullName(Actrl)+'__its:[';
         for iItem := 0 to Items.Count-1 do begin
-             sCode     := sCode + '{value:'''+Items[iItem].Caption+'''},';
+             sCode     := sCode + '{value:'''+Items[iItem].Caption+'''';
+             for iCol := 1 to Columns.Count-1 do begin
+                sCode     := sCode + ',col'+IntToStr(iCol)+':'''+Items[iItem].SubItems[iCol-1]+'''';
+             end;
+             sCode     := sCode + '},';
         end;
         if Items.Count>0 then begin
              Delete(sCode,Length(sCode),1);     //删除最后的逗号
@@ -205,7 +220,11 @@ begin
         joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
         joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
         //
-        joRes.Add(dwFullName(Actrl)+'__txt:"'+'Text'+'",');
+        if ItemIndex < 0 then begin
+            joRes.Add(dwFullName(Actrl)+'__txt:"'+''+'",');
+        end else begin
+            joRes.Add(dwFullName(Actrl)+'__txt:"'+Items[ItemIndex].Caption+'",');
+        end;
         //
         if Color = clNone then begin
             joRes.Add(dwFullName(Actrl)+'__col:"rgba(0,0,0,0)",');
@@ -224,6 +243,7 @@ var
     sCode       : string;
     sEventComp  : string;       //用于读取事件发起控件名称
     iItem       : Integer;
+    iCol        : Integer;
     joHint      : Variant;  //__eventcomponent
 begin
     //生成返回值数组
@@ -241,10 +261,14 @@ begin
         //添加选项
         sCode     := 'this.'+dwFullName(Actrl)+'__its=[';
         for iItem := 0 to Items.Count-1 do begin
-             sCode     := sCode + '{value:'''+Items[iItem].Caption+'''},';
+             sCode     := sCode + '{value:'''+Items[iItem].Caption+'''';
+             for iCol := 1 to Columns.Count-1 do begin
+                sCode     := sCode + ',col'+IntToStr(iCol)+':'''+Items[iItem].SubItems[iCol-1]+'''';
+             end;
+             sCode     := sCode + '},';
         end;
         if Items.Count>0 then begin
-             Delete(sCode,Length(sCode),1);
+             Delete(sCode,Length(sCode),1);     //删除最后的逗号
         end;
         sCode     := sCode + '];';
         joRes.Add(sCode);
@@ -262,10 +286,17 @@ begin
         joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
         //
         //如果当前是事件源控件，则不处理
-        if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
+        //if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
             //joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+Text+'";');
+        //end else begin
+        //    joRes.Add('');
+        //end;
+
+        //
+        if ItemIndex < 0 then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+''+'";');
         end else begin
-            joRes.Add('');
+            joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+Items[ItemIndex].Caption+'";');
         end;
         //
         if Color = clNone then begin

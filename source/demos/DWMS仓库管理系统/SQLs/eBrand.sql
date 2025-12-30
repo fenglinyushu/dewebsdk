@@ -1,0 +1,10 @@
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (1, N'g10', N'可口可乐', N'全球著名的饮料品牌，其产品包括可口可乐、雪碧、芬达等多种碳酸饮料，在超市的饮料区占据重要位置.'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (2, N'g11', N'宝洁', N'提供众多知名的日用品品牌，如汰渍、碧浪的洗衣液，海飞丝、飘柔、潘婷的洗发水，以及护舒宝卫生巾等，涵盖'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (3, N'g12', N'联合利华', N'旗下有立顿茶、和路雪冰淇淋、奥妙洗衣粉、清扬洗发水等品牌，产品涉及食品、饮料、清洁用品、个人护理等多'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (4, N'g13', N'雀巢', N'除了咖啡产品外，还有奶粉、巧克力、冰淇淋等多种食品，像雀巢奶粉、脆脆鲨巧克力威化等都是超市中的常见商'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (5, N'g14', N'康师傅', N'在方便面、饮料等领域有众多产品，如红烧牛肉面等经典方便面系列，以及冰红茶、绿茶等饮料，铺货广泛，是超'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (6, N'g15', N'统一', N'与康师傅类似，其方便面和饮料产品也深受消费者喜爱，如老坛酸菜牛肉面、统一鲜橙多等，在超市中具有较高的'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (7, N'g16', N'双汇', N'以肉类加工制品为主，如双汇火腿肠、午餐肉等，是超市冷柜区和食品货架上常见的品牌，为消费者提供了丰富的'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (8, N'g17', N'伊利', N'国内知名的乳制品品牌，产品包括牛奶、酸奶、奶粉、冰淇淋等，在超市的乳制品区占据较大的陈列空间，其金典'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (9, N'g18', N'蒙牛', N'重要的乳制品品牌之一，蒙牛纯牛奶、特仑苏牛奶以及各类酸奶产品在超市中随处可见，与伊利共同占据了国内乳'); GO
+INSERT INTO [eBrand]([bId], [bNo], [bName], [bRemark]) VALUES (10, N'g19', N'海天', N'作为调味品行业的领先品牌，海天酱油、醋、蚝油等产品在超市的调味品货架上必不可少，其高品质和丰富的产品'); GO

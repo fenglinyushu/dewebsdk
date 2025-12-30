@@ -32,15 +32,18 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-     sCode     : string;
-     joHint    : Variant;
-     joRes     : Variant;
-     iCtrl     : Integer;
-     oMemo     : TMemo;
-     iLine     : Integer;
+    joHint      : Variant;
+    joRes       : Variant;
+    oTab        : TTabsheet;
+    sFull       : string;
+    sType       : string;
+    sSize       : String;
 begin
+    //
+    sFull   := dwFullName(Actrl);
+
+    //
     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-        //用作时间线控件-------------------------------------------------
 
         //生成返回值数组
         joRes    := _Json('[]');
@@ -48,40 +51,41 @@ begin
         //取得HINT对象JSON
         joHint    := dwGetHintJson(TControl(ACtrl));
 
+        //取得当前tab
+        oTab    := TTabSheet(ACtrl);
+
+        //
+        sType   := '';
+        if joHint.Exists('type') then begin
+            sType   := ' type="'+dwGetStr(joHint,'type')+'"';
+        end;
+
+        //
+        sSize   := '';
+        if joHint.Exists('size') then begin
+            sSize   := ' size="'+dwGetStr(joHint,'size')+'"';
+        end;
+
         //
         joRes.Add('<el-timeline-item '
-                +' id="'+dwFullName(Actrl)+'"'
-                +' v-show="'+dwFullName(Actrl)+'__vis"'
-                +dwIIF(TTabSheet(Actrl).ImageIndex>0,'icon="'+dwIcons[Max(1,TTabSheet(Actrl).ImageIndex)]+'"','')
-                //+dwGetHintValue(joHint,'type','type','')
+                +' id="'+sFull+'"'
+                +' v-show="'+sFull+'__vis"'
+                +dwIIF(oTab.ImageIndex>0,'icon="'+dwIcons[Max(1,oTab.ImageIndex)]+'"','')
+                +sType
+                +sSize
                 +dwGetHintValue(joHint,'color','color','')
-                +' timestamp="'+IntToStr(TTabSheet(Actrl).Tag)+'" placement="top">');
+                +' timestamp="'+oTab.Caption+'"'
+                +' placement="top"'
+                //+' style="'
+                //    +'height:'+IntToStr(dwGetInt(joHint,'height',100))+'px;'
+                //+'"'
+                +'>');
 
         //是否带框
         if ParentBiDiMode = True then begin
-            joRes.Add('<el-card>');
+            joRes.Add('<el-card style="overflow:hidden;height:'+IntToStr(dwGetInt(joHint,'height',100))+'px;width:95%;">');
         end;
 
-        //
-        joRes.Add('<h4>'+TTabSheet(Actrl).Caption+'</h4>');
-        //
-        for iCtrl := 0 to TWinControl(Actrl).ControlCount-1 do begin
-            if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TLabel' then begin
-                //joRes.Add('<p>'+TLabel(TWinControl(Actrl).Controls[iCtrl]).Caption+'</p>');
-                joRes.Add('<p>{{'+TLabel(TWinControl(Actrl).Controls[iCtrl]).Name+'__cap}}</p>');
-            end else if TWinControl(Actrl).Controls[iCtrl].ClassName = 'TMemo' then begin
-                oMemo     := TMemo(TWinControl(Actrl).Controls[iCtrl]);
-                for iLine := 0 to oMemo.Lines.Count-1 do begin
-                    joRes.Add('<p>'+oMemo.Lines[iLine]+'</p>');
-                end;
-            end;
-        end;
-
-        //
-        if ParentBiDiMode = True then begin
-            joRes.Add('</el-card>');
-        end;
-        joRes.Add('</el-timeline-item>');
 
         //
         Result    := (joRes);
@@ -95,10 +99,15 @@ var
      joRes     : Variant;
 begin
     with TPageControl(TTabSheet(Actrl).PageControl) do begin
-        //用作时间线控件---------------------------------------------------------------------
 
         //生成返回值数组
         joRes    := _Json('[]');
+        //
+        if ParentBiDiMode = True then begin
+            joRes.Add('</el-card>');
+        end;
+        joRes.Add('</el-timeline-item>');
+
         //
         Result    := (joRes);
     end;
@@ -108,32 +117,23 @@ end;
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
     joRes       : Variant;
-    sKeyword    : String;
-    oControl    : TControl;
-    iCtrl       : Integer;
+    sFull       : string;
 begin
-    //用作时间线控件--------------------------------------------------------------------------
+    sFull       := dwFullName(Actrl);
 
     //生成返回值数组
-    joRes    := _Json('[]');
+    joRes       := _Json('[]');
     //
     with TTabSheet(ACtrl) do begin
-        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(0)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(0)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        joRes.Add(sFull+'__lef:"'+IntToStr(0)+'px",');
+        joRes.Add(sFull+'__top:"'+IntToStr(0)+'px",');
+        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
         //
-        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(TabVisible,'true,','false,'));
-        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        joRes.Add(sFull+'__vis:'+dwIIF(TabVisible,'true,','false,'));
+        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
         //
-        joRes.Add(dwFullName(Actrl)+'__cap:"'+dwProcessCaption(Caption)+'",');
-        //
-        for iCtrl := 0 to TWinControl(Actrl).ControlCount-1 do begin
-            oControl    := TWinControl(Actrl).Controls[iCtrl];
-            if oControl.ClassName = 'TLabel' then begin
-                joRes.Add(dwFullName(oControl)+'__cap:"'+dwProcessCaption(TLabel(oControl).Caption)+'",');
-            end;
-        end;
+        joRes.Add(sFull+'__cap:"'+dwProcessCaption(Caption)+'",');
     end;
     //
     Result    := (joRes);
@@ -141,33 +141,24 @@ end;
 
 function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
-    joRes     : Variant;
-    sKeyword  : String;
-    oControl    : TControl;
-    iCtrl       : Integer;
+    joRes       : Variant;
+    sFull       : string;
 begin
-    //用作时间线控件--------------------------------------------------------------------------
+    sFull       := dwFullName(Actrl);
 
     //生成返回值数组
     joRes    := _Json('[]');
     //
     with TTabSheet(ACtrl) do begin
-        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(TabVisible,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(TabVisible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__cap="'+dwProcessCaption(Caption)+'";');
-        //
-        for iCtrl := 0 to TWinControl(Actrl).ControlCount-1 do begin
-            oControl    := TWinControl(Actrl).Controls[iCtrl];
-            if oControl.ClassName = 'TLabel' then begin
-                joRes.Add('this.'+dwFullName(oControl)+'__cap="'+dwProcessCaption(TLabel(oControl).Caption)+'";');
-            end;
-        end;
+        joRes.Add('this.'+sFull+'__cap="'+dwProcessCaption(Caption)+'";');
     end;
     //
     Result    := (joRes);

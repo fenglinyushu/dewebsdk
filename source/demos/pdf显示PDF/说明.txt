@@ -1,0 +1,3 @@
+需要在url中指定拟显示的pdf
+如：
+http://127.0.0.1:8080/pdf?file=http://127.0.0.1:8080/media/filesystem/10.pdf

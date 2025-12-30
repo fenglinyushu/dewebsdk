@@ -545,7 +545,7 @@ var util_ = __webpack_require__(3);
     pagerCount: {
       type: Number,
       validator: function validator(value) {
-        return (value | 0) === value && value > 4 && value < 22 && value % 2 === 1;
+        return (value | 0) === value && value > 2 && value < 22 && value % 2 === 1;
       },
 
       default: 7

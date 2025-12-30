@@ -162,6 +162,10 @@ begin
             if Assigned(TMemo(ACtrl).OnMouseLeave) then begin
                 TMemo(ACtrl).OnMouseLeave(TMemo(ACtrl));
             end;
+        end else if joData.e = 'onclick' then begin
+            if Assigned(TMemo(ACtrl).OnClick) then begin
+                TMemo(ACtrl).OnClick(TMemo(ACtrl));
+            end;
         end;
     end;
 end;
@@ -170,11 +174,16 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-    sCode     : string;
-    joHint    : Variant;
-    joRes     : Variant;
-    sScroll   : string;
+    sCode       : string;
+    sScroll     : string;
+    sFull       : string;
+    sFontFamily : String;
+    //
+    joHint      : Variant;
+    joRes       : Variant;
 begin
+    sFull   := dwFullName(ACtrl);
+    //
     with TMemo(ACtrl) do begin
 
         //<处理PageControl做时间线的问题
@@ -196,10 +205,17 @@ begin
         joHint    := dwGetHintJson(TControl(ACtrl));
 
         with TMemo(ACtrl) do begin
-            //
-            sScroll   := '';
+            //取得滚动条
+            sScroll := '';
 
-            sCode     := '<el-input type="textarea"'
+            //取得字符设置
+            sFontFamily     := '';
+            if joHint.Exists('fontfamily') then begin
+                sFontFamily := 'font-family: '+dwGetStr(joHint,'fontfamily',Font.Name)+';';
+            end;
+
+            sCode   :=
+                    '<el-input type="textarea"'
                     +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
@@ -207,18 +223,23 @@ begin
                     +dwGetHintValue(joHint,'placeholder','placeholder','') //placeholder,提示语
                     +dwIIF(ReadOnly,' readonly','')
                     +dwGetDWAttr(joHint)
+
                     //style
                     +dwLTWH(TControl(ACtrl))
+                    +sFontFamily
                     +sScroll
                     +dwGetDWStyle(joHint)
                     +'"' //style 封闭
                     //
-                    +Format(_DWEVENT,['input',Name,'escape(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle])
-                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',Name,'(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',Name,'0','onmouseenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',Name,'0','onmouseexit',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',Name,'0','onenter',TForm(Owner).Handle]),'')
-                    +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',Name,'0','onexit',TForm(Owner).Handle]),'')
+                    +Format(_DWEVENT,['input',sFull,'escape(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle])
+                    //+dwIIF(Assigned(OnChange),    Format(_DWEVENT,['input',sFull,'(this.'+dwFullName(Actrl)+'__txt)','onchange',TForm(Owner).Handle]),'')
+
+                    +dwIIF(Assigned(OnClick),Format(_DWEVENT,['click.native',sFull,'0','onclick',TForm(Owner).Handle]),'')
+
+                    +dwIIF(Assigned(OnMouseEnter),Format(_DWEVENT,['mouseenter.native',sFull,'0','onmouseenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnMouseLeave),Format(_DWEVENT,['mouseleave.native',sFull,'0','onmouseexit',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnEnter),     Format(_DWEVENT,['focus',sFull,'0','onenter',TForm(Owner).Handle]),'')
+                    +dwIIF(Assigned(OnExit),      Format(_DWEVENT,['blur',sFull,'0','onexit',TForm(Owner).Handle]),'')
                     +'>';
                     //添加到返回值数据
             joRes.Add(sCode);
@@ -339,7 +360,17 @@ begin
             joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
             joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
             //
-            if (sEventComp <> dwFullName(Actrl)) or (TControl(ACtrl).ParentCustomHint=False) then begin
+(*
+        //如果当前是事件源控件，则不处理
+        if (sEventComp <> dwFullName(Actrl)) or (TEdit(ACtrl).DoubleBuffered = True) then begin
+            joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+dwChangeChar(Text)+'";');
+        end else begin
+            joRes.Add('');
+        end;
+
+
+*)
+            if (sEventComp <> dwFullName(Actrl)) or (TMemo(ACtrl).DoubleBuffered = True) then begin
                 joRes.Add('this.'+dwFullName(Actrl)+'__txt="'+dwTextToWeb(Text)+'";');
             end else begin
                 joRes.Add('');

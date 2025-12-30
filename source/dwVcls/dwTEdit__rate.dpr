@@ -74,6 +74,7 @@ begin
                 +' v-model="'+dwFullName(Actrl)+'__val"'
                 +dwVisible(TControl(ACtrl))
                 +dwDisable(TControl(ACtrl))
+                +dwIIF(dwGetInt(joHint,'showscore',0)=1,' show-score text-color="'+dwColor(Font.Color)+'"','')
                 +dwGetDWAttr(joHint)
                 +' :style="{'
                     +'backgroundColor:'+dwFullName(Actrl)+'__col,'

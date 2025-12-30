@@ -247,8 +247,8 @@ begin
             //
             joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
             joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
-            //
-            joRes.Add('this.$refs.'+dwFullName(Actrl)+'.innerHTML="'+text+'";');
+            //2023-12-29采用了``做引号，解决了更换text报错的bug
+            joRes.Add('this.$refs.'+dwFullName(Actrl)+'.innerHTML=`'+text+'`;');
 
         end;
         //

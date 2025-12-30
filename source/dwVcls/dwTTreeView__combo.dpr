@@ -36,20 +36,35 @@ begin
      Result    := 0 ;
 end;
 
+function _GetTreeNodeIndex(ATreeNode:TTreeNode):Integer;
+begin
+    Result  := 0;
+    while ATreeNode.GetPrev <> nil do begin
+        ATreeNode   := ATreeNode.GetPrev;
+        Inc(Result);
+    end;
+end;
+
+function _GetTreeViewValue(ATV:TTreeView):String;
+var
+	oTreeNode	: TTreeNode;
+begin
+	if ATV.selected = nil then begin
+		Result	:= '';
+	end else begin
+		oTreeNode	:= ATV.Selected;
+		Result		:= IntToStr(_GetTreeNodeIndex(oTreeNode));
+	end;
+end;
+
+
+
 function _GetTreeViewData(ATV:TTreeView):String;
 
     //取得节点的Value, 也就是其祖先辈节点的序号数组，如: 1,3,2
     function __GetNodeValue(ANode:TTreeNode):string;
     begin
         Result  := IntToStr(ANode.Index);
-{
-        while ANode.Parent <> nil do begin
-            Result  := IntToStr(ANode.Parent.Index )+ '-' + Result;
-            ANode   := ANode.Parent;
-        end;
-
-        Result  := '[' + Result + ']';
-}
     end;
 
     //
@@ -58,8 +73,8 @@ function _GetTreeViewData(ATV:TTreeView):String;
         II      : Integer;
     begin
         Result  := '{';
-        //Result  := Result + 'value:'''+__GetNodeValue(ANode)+''',';
-        Result  := Result + 'value:'''+IntToStr(ANode.Index)+''',';
+        //
+        Result  := Result + 'value:'''+IntToStr(_GetTreeNodeIndex(ANode))+''',';
         Result  := Result + 'label:'''+ANode.Text+'''';
         //
         if ANode.Count>0 then begin
@@ -131,12 +146,8 @@ begin
     joValue     := _json('['+sValue+']');
     //
     oTreeNode   := TTreeView(ACtrl).Items[0];
-    for iItem := 1 to joValue._(0) do begin
-        oTreeNode   := oTreeNode.getNextSibling;
-    end;
-    //
-    for iItem := 1 to joValue._Count-1 do begin
-        oTreeNode   := oTreeNode.Item[joValue._(iItem)];
+    for iItem := 1 to joValue._(joValue._Count-1) do begin
+        oTreeNode   := oTreeNode.getNext;
     end;
     oTreeNode.Selected  := True;
 
@@ -230,7 +241,7 @@ begin
     //
     with TTreeView(ACtrl) do begin
         //
-        joRes.Add(sFull+'__val:[],');
+        joRes.Add(sFull+'__val: "'+_GetTreeViewValue(TTreeView(ACtrl))+'",');
         //defaultProps
         joRes.Add(sFull+'__opt: '+_GetTreeViewData(TTreeView(ACtrl))+',');
         //
@@ -268,8 +279,8 @@ begin
         joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
         joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
         //
-        //joRes.Add('this.'+sFull+'__val='+_GetTreeViewData(TTreeView(ACtrl))+';');
-        joRes.Add('this.'+sFull+'__opt = '+_GetTreeViewData(TTreeView(ACtrl))+';');
+        joRes.Add('this.'+sFull+'__val="'+_GetTreeViewValue(TTreeView(ACtrl))+'";');
+        joRes.Add('this.'+sFull+'__opt='+_GetTreeViewData(TTreeView(ACtrl))+';');
     end;
     //
     Result    := (joRes);

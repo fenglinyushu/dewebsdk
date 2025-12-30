@@ -70,8 +70,16 @@ function dwDecryptKey (Src:String; Key:String):string;
 //Delphi 颜色转HTML 颜色字符串
 function dwColor(AColor:Integer):string;
 
+
 //Delphi 颜色转HTML 颜色字符串,带透明度
 function dwAlphaColor(ACtrl:TPanel):string;
+
+///----------------------------------------------------------------------------------------------------------------------------
+/// <summary>从JSON数组中取得颜色，输入如:[0,0,255],。</summary>
+/// <param name="AJson">JSON格式的颜色数组</param>
+/// <param name="ADefault">缺省颜色</param>
+/// <returns>返回RGB格式的颜色</returns>
+function dwGetColorFromJson(AJson:Variant;ADefault:TColor):TColor;
 
 //
 function dwEncodeURIComponent(S:AnsiString):AnsiString;
@@ -84,6 +92,8 @@ function dwConvertStr(AStr:String):String;
 
 //处理DELPHI中Caption的特殊字符
 function dwProcessCaption(AStr:String):String;
+//去除字符中上回车符和换行符
+function dwRemoveBreak(AStr:String):String;
 
 //用于对中文进行编码, 对应JS中的escape函数
 function dwEscape(const StrToEscape:string):String;
@@ -133,13 +143,18 @@ function dwLongStr(AText:String):String;
 procedure dwRealignPanel(APanel:TPanel;AHorz:Boolean);
 
 //检验当前字符串是否合法的JSON字符串
-function    dwStrIsJson(AText:String):Boolean;
+function  dwStrIsJson(AText:String):Boolean;
 
 //从JSON中读属性，如果不存在的话，取默认值
-function dwGetInt(AJson:Variant;AName:String;ADefault:Integer):Integer;
+function dwGetInt(AJson:Variant;AName:String;const ADefault:Integer=0):Integer;
+function dwGetDouble(AJson:Variant;AName:String;const ADefault:Double=0):Double;
 
 //从JSON中读属性，如果不存在的话，取默认值
-function dwGetStr(AJson:Variant;AName:String;ADefault:String):String;
+function dwGetStr(AJson:Variant;AName:String;const ADefault:String=''):String;
+
+//从JSON中读以0/1表示的boolean属性，1返回true,否则返回false，取默认值
+function dwGet01Bool(AJson:Variant;AName:String;const ADefault:String='false'):String;
+function dwGetBoolean(AJson:Variant;AName:String;const ADefault:Boolean=false):Boolean;
 
 const
      dwIcons : array[1..280] of string = (
@@ -534,18 +549,71 @@ begin
 end;
 
 //从JSON中读属性，如果不存在的话，取默认值
-function dwGetInt(AJson:Variant;AName:String;ADefault:Integer):Integer;
+function dwGetInt(AJson:Variant;AName:String;const ADefault:Integer=0):Integer;
 begin
     Result  := ADefault;
-    if AJson <> unassigned then begin
-        if AJson.Exists(AName) then begin
-            Result  := AJson._(AName);
+    try
+        if AJson <> unassigned then begin
+            if AJson.Exists(AName) then begin
+                Result  := StrToIntDef(String(AJson._(AName)),ADefault);
+            end;
         end;
+    except
+
     end;
 end;
 
 //从JSON中读属性，如果不存在的话，取默认值
-function dwGetStr(AJson:Variant;AName:String;ADefault:String):String;
+function dwGetDouble(AJson:Variant;AName:String;const ADefault:Double=0):Double;
+begin
+    Result  := ADefault;
+    try
+        if AJson <> unassigned then begin
+            if AJson.Exists(AName) then begin
+                if AJson._(AName) <> null then begin
+                    Result  := StrToFloatDef(String(AJson._(AName)),ADefault);
+                end;
+            end;
+        end;
+    except
+
+    end;
+end;
+
+//从JSON中读属性，如果不存在的话，取默认值
+function dwGetStr(AJson:Variant;AName:String;const ADefault:String=''):String;
+begin
+    Result  := ADefault;
+    try
+        if AJson <> unassigned then begin
+            if AJson.Exists(AName) then begin
+                if AJson._(AName) <> null then begin
+                    Result  := String(AJson._(AName));
+                end;
+            end;
+        end;
+    except
+
+    end;
+end;
+
+//从JSON中读以0/1表示的boolean属性，1返回true,否则返回false，取默认值
+function dwGet01Bool(AJson:Variant;AName:String;const ADefault:String='false'):String;
+begin
+    Result  := ADefault;
+    if AJson <> unassigned then begin
+        if AJson.Exists(AName) then begin
+            if AJson._(AName) = 1 then begin
+                Result  := 'true';
+            end else begin
+                Result  := 'false';
+            end;
+        end;
+    end;
+end;
+
+//从JSON中读boolean属性，1返回true,否则返回false，取默认值
+function dwGetBoolean(AJson:Variant;AName:String;const ADefault:Boolean=false):Boolean;
 begin
     Result  := ADefault;
     if AJson <> unassigned then begin
@@ -719,6 +787,7 @@ begin
      AText     := StringReplace(AText,'<','\<',[rfReplaceAll]);
      AText     := StringReplace(AText,'[!__!]','\<',[rfReplaceAll]);
      //>
+     AText     := StringReplace(AText,'\','\\',[rfReplaceAll]);
      //
      Result    := AText;
 end;
@@ -1080,7 +1149,6 @@ end;
 
 function dwGetProp(ACtrl:TControl;AAttr:String):String;
 var
-    sHint   : String;
     joHint  : Variant;
 begin
     joHint  := dwGetHintJson(ACtrl);
@@ -1104,7 +1172,6 @@ end;
 
 function dwSetProp(ACtrl:TControl;AAttr,AValue:String):Integer;
 var
-    sHint   : String;
     joHint  : Variant;
 begin
     Result  := 0;
@@ -1206,12 +1273,22 @@ begin
      Result    := StringReplace(Result,'''','\''',[rfReplaceAll]);
      Result    := StringReplace(Result,#13#10,'<br>',[rfReplaceAll]);
      Result    := StringReplace(Result,#13,'<br>',[rfReplaceAll]);
+     Result    := StringReplace(Result,#10,'<br>',[rfReplaceAll]);
      Result    := Trim(Result);
      //异常处理(中文乱码)
      if Length(Result)>800 then begin
           //Result    := dwGetText(Result,800);
      end;
 
+end;
+
+function dwRemoveBreak(AStr:String):String;
+begin
+     //替换空格
+     Result    := AStr;
+     Result    := StringReplace(Result,#13,'',[rfReplaceAll]);
+     Result    := StringReplace(Result,#10,'',[rfReplaceAll]);
+     Result    := Trim(Result);
 end;
 
 
@@ -1257,7 +1334,6 @@ begin
      Result    := HTTPEncodeEx(AnsiToUtf8(S));
 end;
 
-
 function dwColor(AColor:Integer):string;
 begin
     if AColor = clNone then begin
@@ -1268,6 +1344,24 @@ begin
      //Result := Format('#%.2x%.2x%.2x',[GetRValue(ColorToRGB(AColor)),GetGValue(ColorToRGB(AColor)),GetBValue(ColorToRGB(AColor))]);
 end;
 
+//从JSON数组中取得颜色，输入如:[0,0,255],
+function dwGetColorFromJson(AJson:Variant;ADefault:TColor):TColor;
+begin
+    Result  := ADefault;
+    //
+    try
+        if (AJson <> unassigned) and (AJson <> null) then begin
+            if AJson._Count >= 3 then begin
+                Result  := RGB(AJson._(0),AJson._(1),AJson._(2))
+            end;
+        end;
+    except
+
+    end;
+end;
+
+
+
 //Delphi 颜色转HTML 颜色字符串,带透明度
 function dwAlphaColor(ACtrl:TPanel):string;
 var
@@ -1275,18 +1369,24 @@ var
      iR,iG,iB  : Integer;
      iA        : Integer;     //0:完全透明，1-9半透明，10：不透明
 begin
-     RGB  := ColorToRGB(ACtrl.Color);
-     iR   := GetRValue(RGB);
-     iG   := GetGValue(RGB);
-     iB   := GetBValue(RGB);
-     //用HelpContext来控制透明度
-     iA   := ACtrl.HelpContext;
-     if iA>10 then begin
-          iA   := 10;
-     end;
-     iA   := 10-iA;
+    if ACtrl.Color = clNone then begin
+        Result  := 'transparent'
+    end else begin
+        RGB  := ColorToRGB(ACtrl.Color);
+        iR   := GetRValue(RGB);
+        iG   := GetGValue(RGB);
+        iB   := GetBValue(RGB);
 
-     Result    := Format('RGB(%d,%d,%d,%.1f)',[iR,iG,iB,iA/10]);
+        //用HelpContext来控制透明度
+        iA   := ACtrl.HelpContext;
+        if (iA<=10)and(iA>=0) then begin
+            iA   := 10-iA;
+        end else begin
+            iA := 10;
+        end;
+
+        Result    := Format('RGB(%d,%d,%d,%.1f)',[iR,iG,iB,iA/10]);
+    end;
 end;
 
 
@@ -1425,9 +1525,9 @@ begin
      if AHint<>null then begin
           if AHint.Exists(AJsonName) then begin
                if AHtmlName <> '' then begin
-                    Result    := (' '+AHtmlName+'="'+AHint._(AJsonName)+'"');
+                    Result    := ' '+AHtmlName+'="'+dwGetStr(AHint,AJsonName,'')+'"';
                end else begin
-                    Result    := (' '+AHint._(AJsonName));
+                    Result    := ' '+dwGetStr(AHint,AJsonName,'');
                end;
           end else begin
                Result    := ADefault;
@@ -1438,19 +1538,19 @@ begin
 end;
 function dwGetHintStyle(AHint:Variant;AJsonName,AHtmlName,ADefault:String):String;
 begin
-     if AHint<>null then begin
-          if AHint.Exists(AJsonName) then begin
-               if AHtmlName <> '' then begin
-                    Result    := (AHtmlName+':'+AHint._(AJsonName)+';');
-               end else begin
-                    Result    := (AHint._(AJsonName));
-               end;
-          end else begin
-               Result    := ADefault;
-          end;
-     end else begin
-          Result    := ADefault;
-     end;
+    if AHint <> unassigned then begin
+        if AHint.Exists(AJsonName) then begin
+            if AHtmlName <> '' then begin
+                Result    := AHtmlName+':'+dwGetStr(AHint,AJsonName,'')+';';
+            end else begin
+                Result    := dwGetStr(AHint,AJsonName,'');
+            end;
+        end else begin
+            Result    := ADefault;
+        end;
+    end else begin
+        Result    := ADefault;
+    end;
 end;
 
 function dwGetDWAttr(AHint:Variant):String;
@@ -1458,7 +1558,7 @@ begin
      Result    := '';
      if AHint<>null then begin
           if AHint.Exists('dwattr') then begin
-               Result    := ' '+(AHint.dwattr);
+               Result    := ' '+dwGetStr(AHint,'dwattr','');
           end;
      end;
 end;

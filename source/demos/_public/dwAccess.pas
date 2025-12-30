@@ -103,8 +103,6 @@ procedure dwaGetPageData(
         ACount:Integer;         //每页显示的记录数
         Var ARecordCount:Integer//记录总数
         );
-var
-    S0  : String;
 begin
 
     //----求总数------------------------------------------------------------------------------------
@@ -218,12 +216,18 @@ procedure dwaGetDataToGrid(
         ATrackBar:TTrackBar);
 var
     oEvent          : Procedure(Sender:TObject) of Object;
+
     iRecordCount    : Integer;
     iRow,iCol       : Integer;
+    iOldRecNo       : Integer;
 begin
     //保存事件，并清空，以防止循环处理
     oEvent  := ATrackBar.OnChange;
     ATrackBar.OnChange  := nil;
+
+    //保存原Recno
+    iOldRecNo   := AQuery.RecNo;
+    AQuery.DisableControls;
 
     //根据条件, 得出数据
     dwaGetPageData(
@@ -280,6 +284,12 @@ begin
     ATrackBar.OnChange  := oEvent;
     //FreeAndNil(oEvent);
 
+    //恢复原Recno
+    AQuery.RecNo    := iOldRecNo;
+    AQuery.EnableControls;
+
+
 end;
 
 end.
+
