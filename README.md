@@ -32,4 +32,6 @@ QQ Group: 120283369
 
 Email: fenglinyushu@163.com
 
+[![Donate](https://www.delphibbs.com/media/images/buy.jpg)](https://www.delphibbs.com/media/images/buy.jpg)
+
 
