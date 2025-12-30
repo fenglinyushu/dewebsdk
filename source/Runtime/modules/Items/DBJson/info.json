@@ -1,0 +1,5 @@
+{
+	"caption":"数据管理",
+	"icon":"el-icon-receiving",
+	"memo":"一个JSON语句完成增删改查，支持一主多从"
+}

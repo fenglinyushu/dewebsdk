@@ -1,4 +1,4 @@
-{*_* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Ôªø{*_* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ###############################################################################
                        I M P O R T A N T  R E A D
 ###############################################################################
@@ -42,7 +42,7 @@ OverbyteIcsLibrary.pas (i.e. for IcsIntToStrA()) .
 
 ################################################################################
 
-Author:       FranÁois PIETTE
+Author:       FranÈèæis PIETTE
 Object:       TPop3Cli class implements the POP3 protocol
               (RFC-1225, RFC-1939)
 Creation:     03 october 1997
@@ -51,7 +51,7 @@ Version:      6.06
 EMail:        francois.piette@overbyte.be  http://www.overbyte.be
 Support:      Use the mailing list twsocket@elists.org
               Follow "support" link at http://www.overbyte.be for subscription.
-Legal issues: Copyright (C) 1997-2010 by FranÁois PIETTE
+Legal issues: Copyright (C) 1997-2010 by FranÈèæis PIETTE
               Rue de Grady 24, 4053 Embourg, Belgium. Fax: +32-4-365.74.56
               <francois.piette@overbyte.be>
               SSL implementation includes code written by Arno Garrels,

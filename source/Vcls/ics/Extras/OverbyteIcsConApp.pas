@@ -1,7 +1,7 @@
-{* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Ôªø{* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 
-Author:       FranÁois PIETTE
+Author:       FranÈèæis PIETTE
 Creation:     May 01, 2003
 Version:      8.00 ALPHA
 Description:  A console mode application object for ICS
@@ -9,7 +9,7 @@ EMail:        francois.piette@overbyte.be  http://www.overbyte.be
               francois.piette@pophost.eunet.be
 Support:      Use the mailing list twsocket@elists.org
               Follow "support" link at http://www.overbyte.be for subscription.
-Legal issues: Copyright (C) 1996-2010 by FranÁois PIETTE
+Legal issues: Copyright (C) 1996-2010 by FranÈèæis PIETTE
               Rue de Grady 24, 4053 Embourg, Belgium. 
               <francois.piette@overbyte.be>
 

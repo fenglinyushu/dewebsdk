@@ -1,0 +1,1 @@
+windows系统默认打开的文件句柄数量的限制为512，可以通过函数 _getmaxstdio()和_setmaxstdio()获取和设置当前系统允许打开的最大句柄数

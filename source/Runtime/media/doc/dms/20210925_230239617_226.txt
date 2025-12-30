@@ -1,0 +1,5 @@
+rm -rf .git
+git add .
+git commit -m 'reset git log'
+git remote add origin [GIT_URL]
+git push --set-upstream origin master --force

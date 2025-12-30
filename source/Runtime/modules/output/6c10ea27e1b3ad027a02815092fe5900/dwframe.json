@@ -1,0 +1,81 @@
+{
+	"modules": 
+	[
+		{
+			"caption": "角色管理",
+			"module": "Card",
+			"name": "Card",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-wallet",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "数据浏览",
+			"module": "DB",
+			"name": "DB",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-receiving",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "资料管理",
+			"module": "Document",
+			"name": "Document",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-files",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "入门模块",
+			"module": "Hello",
+			"name": "Hello",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-reading",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "库存信息",
+			"module": "Inventory",
+			"name": "Inventory",
+			"view": "二级菜单项+首页",
+			"icon": "el-icon-box",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "商品信息",
+			"module": "Product",
+			"name": "Product",
+			"view": "一级菜单项",
+			"icon": "el-icon-s-opportunity",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "数据看板",
+			"module": "DataV",
+			"name": "DataV",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-coin",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "数据统计",
+			"module": "Stat",
+			"name": "Stat",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-pie-chart",
+			"memo": "用卡片的形式显示用户数据"
+		},
+		{
+			"caption": "角色管理role",
+			"module": "Role",
+			"name": "Role",
+			"view": "一级菜单项+首页",
+			"icon": "el-icon-brush",
+			"memo": "用卡片的形式显示用户数据"
+		}
+	],
+	"title": "Maxxua 综合业务管理框架",
+	"expand": 1,
+	"menus": [],
+	"shorts": []
+}

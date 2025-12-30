@@ -1,0 +1,8 @@
+1 图片被截取
+2 不显示点击框
+3 走马灯效果的指示条颜色
+4 speedbutton自带处理href
+
+{"m":"update","o":"this.Label1__wid=\"54px\";this.Label1__cap=\"DeWeb\";"}
+
+到get ishunt时停住了

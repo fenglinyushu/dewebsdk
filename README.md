@@ -1,39 +1,35 @@
 # DeWebSDK
 
-#### 介绍
-DeWeb : Delphi开发者的Web解决方案！  
-DeWeb是一个可以直接将Delphi程序快速转换为网页应用的工具！  
-使用DeWeb, 开发者不需要学习HTML、JavaScript、Java、PHP、ASP、C#等新知识，用Delphi搞定一切。   
-DeWeb开发的网页支持所有客户端，包括手机、平板等。  
+### Introduction
+DeWeb: A Web Solution for Delphi Developers!
+DeWeb is a tool that can quickly convert Delphi programs into web applications!
+Using DeWeb, developers don't need to learn new knowledge like HTML, JavaScript, Java, PHP, ASP, C#. Delphi handles everything.
+Web pages developed with DeWeb support all clients, including mobile phones, tablets, etc.
+
+[Homepage](https://delphibbs.com)  
+[Documentation](https://delphibbs.com/doc)  
+[Comprehensive Management System demo](https://delphibbs.com/dwFrame)  
 
 
-[首页](https://delphibbs.com)  
-[案例](https://delphibbs.com/demos)    
-[开发文档](https://delphibbs.com/doc)  
-[仓库管理系统](https://delphibbs.com/dwms)  
-[大富翁论坛（试运行）](https://delphibbs.com/bbs)  
+### Usage Instructions
+DeWeb is a tool that can quickly convert Delphi programs into web applications!
 
+Using DeWeb, developers don't need to learn new knowledge like HTML, JavaScript, Java, PHP, ASP, C#.
+Delphi handles everything.
 
+Web pages developed with DeWeb support all clients, including mobile phones, tablets, etc.
 
-#### 使用说明  
+Note: Currently supports development with Delphi 10/11/12/13
 
+For development examples, please refer to the demos folder.
 
-DeWeb是一个可以直接将Delphi程序快速转换为网页应用的工具！
+### Developer
+碧树西风 (WestWind)
 
-使用DeWeb, 开发者不需要学习HTML、JavaScript、Java、PHP、ASP、C#等新知识，
-用Delphi搞定一切。 
+Senior Delphi Developer
 
-DeWeb开发的网页支持所有客户端，包括手机、平板等。 
+QQ Group: 120283369
 
-!!!目前支持采用D 10.3/10.4/11.2开发！！！
+Email: fenglinyushu@163.com
 
-开发例程请参考demos中即可
-
-#### 开发者  
-碧树西风  
-
--  
-资深Delphi开发者  
-QQ讨论群:120283369  
-mail:fenglinyushu@163.com
 

@@ -1,13 +1,13 @@
-{*_* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Ôªø{*_* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-Author:       FranÁois PIETTE
+Author:       FranÈèæis PIETTE
 Description:
 Creation:     April 2004
 Version:      1.18
 EMail:        francois.piette@overbyte.be  http://www.overbyte.be
 Support:      Use the mailing list twsocket@elists.org
               Follow "support" link at http://www.overbyte.be for subscription.
-Legal issues: Copyright (C) 2004-2011 by FranÁois PIETTE
+Legal issues: Copyright (C) 2004-2011 by FranÈèæis PIETTE
               Rue de Grady 24, 4053 Embourg, Belgium.
               <francois.piette@overbyte.be>
 

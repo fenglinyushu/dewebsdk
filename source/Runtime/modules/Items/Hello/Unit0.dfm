@@ -1,0 +1,36 @@
+object Form_Item: TForm_Item
+  Left = 0
+  Top = 0
+  HelpKeyword = 'embed'
+  Caption = '[*caption*]'
+  ClientHeight = 619
+  ClientWidth = 883
+  Color = clWhite
+  Font.Charset = ANSI_CHARSET
+  Font.Color = 16117483
+  Font.Height = -15
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 20
+  object Label1: TLabel
+    Left = 0
+    Top = 0
+    Width = 883
+    Height = 105
+    Align = alTop
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Hello,world!'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
+end

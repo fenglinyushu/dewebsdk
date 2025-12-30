@@ -1,4 +1,4 @@
-{*_* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+﻿{*_* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 Author:       Francois Piette
               Original code by Arno Garrels, used with his permission.
@@ -9,7 +9,7 @@ Version:      1.01
 EMail:        francois.piette@overbyte.be  http://www.overbyte.be
 Support:      Use the mailing list twsocket@elists.org
               Follow "support" link at http://www.overbyte.be for subscription.
-Legal issues: Copyright (C) 2006 by Fran�ois PIETTE
+Legal issues: Copyright (C) 2006 by Fran鏾is PIETTE
               Rue de Grady 24, 4053 Embourg, Belgium.
               <francois.piette@overbyte.be>
 

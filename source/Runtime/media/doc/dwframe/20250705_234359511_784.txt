@@ -1,0 +1,97 @@
+mormot的JSON用法
+-
+	根据属性名字符串取值 
+Result    := joHint._(AAttr);
+
+	根据属性名字符串赋值 
+SSS         := 'name';
+jo.Add(SSS,'deweb');
+
+	根据删除属性 
+jo.Delete('name');
+
+	根据序号更新数值的值
+DocVariantData(aVariant).Value[i] := 
+
+	求数组的长度和引用数组内对象
+for iArray := 0 to joArray._Count-1 do begin
+    Result.Add(joArray._(iArray));
+end;
+
+	判断是否有某属性
+if joHint.Exists(AAttr) then begin
+
+	创建对象
+TDocVariant.New(jo); 
+
+	赋值 
+    jo.Name := 'This is a Str' + IntToStr(i);
+    jo.Age := i;
+jo.List:=_JSon('[1,"Hello",5,{"name":"c5soft","age":50}]');
+
+	转成字符串
+VariantSaveJSON(jo));
+
+
+	判断对象类型
+//_Kind:1-对象，2－数组
+
+ 	格式化
+        RichEdit.Lines.Text := JSONReformat(joData);
+
+	_Obj,   _Arr
+// !  o := _Obj(['name','John','doc',_Obj(['one',1,'two',_Arr(['one',2])])]);
+
+
+// !  VariantSaveJSON(o)='{"name":"John","doc":{"one":1,"two":["one",2]}}'
+// ! TDocVariant.NewFast(aVariant);
+// ! aVariant.Name := 'John';
+// ! aVariant.Age := 35;
+// ! writeln(aVariant.Name,' is ',aVariant.Age,' years old');
+
+// - it also supports a small set of pseudo-properties or pseudo-methods:
+// ! aVariant._Count = DocVariantData(aVariant).Count
+// ! aVariant._Kind = ord(DocVariantData(aVariant).Kind)
+// ! aVariant._JSON = DocVariantData(aVariant).JSON
+// ! aVariant._(i) = DocVariantData(aVariant).Value[i]
+// ! aVariant.Value(i) = DocVariantData(aVariant).Value[i]
+// ! aVariant.Value(aName) = DocVariantData(aVariant).Value[aName]
+// ! aVariant.Name(i) = DocVariantData(aVariant).Name[i]
+// ! aVariant.Add(aItem) = DocVariantData(aVariant).AddItem(aItem)
+// ! aVariant._ := aItem = DocVariantData(aVariant).AddItem(aItem)
+// ! aVariant.Add(aName,aValue) = DocVariantData(aVariant).AddValue(aName,aValue)
+// ! aVariant.Exists(aName) = DocVariantData(aVariant).GetValueIndex(aName)>=0
+// ! aVariant.Delete(i) = DocVariantData(aVariant).Delete(i)
+// ! aVariant.Delete(aName) = DocVariantData(aVariant).Delete(aName)
+// ! aVariant.NameIndex(aName) = DocVariantData(aVariant).GetValueIndex(aName)
+// - it features direct JSON serialization/unserialization, e.g.:
+// ! assert(_Json('["one",2,3]')._JSON='["one",2,3]');
+// - it features direct trans-typing into a string encoded as JSON, e.g.:
+// ! assert(_Json('["one",2,3]')='["one",2,3]');
+
+
+function dwLoadFromJson(var AJson:Variant;AFileName:String):Integer;
+begin
+    Result  := -1;
+    if FileExists(AFileName) then begin
+        AJson   := _Json('{}');
+        DocVariantData(AJson).InitJSONFromFile(AFileName);
+        //
+        if AJson <> unassigned then begin
+            Result  := 0;
+        end;
+    end;
+end;
+
+
+function dwSaveToJson(AJson:Variant;AFileName:String;ACompact:Boolean ):Integer;
+begin
+    if ACompact then begin
+        JSONReformatToFile(DocVariantData(AJson).ToJSON(),AFileName);
+    end else begin
+        JSONReformatToFile(DocVariantData(AJson).ToJSON('','',jsonHumanReadable),AFileName);
+    end;
+end;
+
+
+

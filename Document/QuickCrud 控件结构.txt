@@ -1,0 +1,137 @@
+说明：
+	该文档用于描述QuickCrud单元自动创建的多个控件名称以及控件结构，供深入开发使用。
+	比如：可以通过名称找到某panel控件，然后在其中创建新控件
+
+更新日期：
+	2024-04-17
+	注：由于陆续在进行精化，所以需要配合同一日期的dwQuickCrud.pas使用。
+
+更多问题请QQ45300355
+
+Form:TForm
+	.....
+	PQC : TPanel 	--- Panel_QuickCrud,即QuickCrud创建的主要数据面板
+		PMn : TPanel 	--- Panel_Main 主表面板
+			FQy : TFlowPanel 	--- FlowPanel_Query 多字段查询面板
+				PQ0 : TPanel 	--- Panel_Query 第一个查询字段
+					LF0 : TLabel 	--- Label_Field 第一个查询字段的标题
+					EQ0 : TEdit 	--- Edit_Query 查询字段的输入框
+				PQ1 : TPanel
+					LF1 : TLabel
+					EQ1 : TEdit
+				PQ2 : TPanel
+					LF2 : TLabel
+					DS2 : TDateTimePicker
+				PDT2 : TPanel
+					LQ2 : TLabel
+					DE2 : TDateTimePicker
+				PQ3 : TPanel
+					BQy : TButton
+					BQR : TButton
+			PQm : TPanel	--- Panel_Query 智能模糊查询面板
+				EKw : TEdit 	--- Edit_Keyword 智能模糊查询输入框
+			PMd : TPanel	--- Panel_MainData	主表数据显示面板
+				PBs : TPanel	--- Panel_Buttons 主表增删改按钮面板
+					BDe : TButton	--- Button_Delete	主表删除按钮
+					BNw : TButton	--- Button_New		主表新增按钮
+					BEt : TButton	--- Button_Edit		主表编辑按钮
+					BQm : TButton	--- Button_QueryMode主表查询模式切换按钮，多字段/智能模糊/无查询
+					BFz : TButton	--- Button_Fuzzy	主表模糊按钮，精确匹配/模糊匹配
+					BHd : TButton	--- Button_Hide		主表隐藏按钮
+				GMn : TStringGrid	--- StringGrid_Main	主表数据显示表
+				PTM : TPanel	--- 主表的分页栏面板
+					TMa : TTrackBar	--- 主表分布栏
+		PSv : TPanel	--- Panel_Slave 从表总面板
+			PCS : TPageControl	--- PageControl_Slave 从表多页面
+				TS0 : TTabSheet 	--- 从表0
+					SG0 : TStringGrid	--- 从表0数据显示表
+					TB0 : TTrackBar		--- 从表0分页栏
+				TS1 : TTabSheet
+					SG1 : TStringGrid
+					TB1 : TTrackBar
+				TS2 : TTabSheet
+					SG2 : TStringGrid
+					TB2 : TTrackBar
+			PSB : TPanel	--- Panel_SlaveButtons 从表增删改按钮面板
+				BSQ : TButton	--- Button_SlaveQuery 	从表查询按钮
+				BSD : TButton	--- Button_SlaveDelete	从表删除按钮
+				BSN : TButton	--- Button_SlaveNew		从表新增按钮
+				BSE : TButton	--- Button_SlaveEdit	从表编辑按钮
+				
+	PDe : TPanel	--- Panel_Delete 删除时弹出的确认面板
+		LCF : TLabel	--- Label_Confirm	确认信息
+		BDO : TButton	--- Button_DeleteOK	确认删除
+		BDC : TButton	--- Button_DeleteCancel	取消删除
+		
+	PEr : TPanel	--- Panel_Editor 编辑时弹出的数据面板
+		PET : TPanel	--- Panel_EditTitle 数据面板标题
+			BEL : TButton	--- Button_EditTitle	标题内容
+			BEM : TButton	--- Button_EditMax		最大化按钮
+			BEC : TButton	--- Button_EditClose	关闭按钮
+		PES : TPanel	--- Panel_EditButtons 编辑时的按钮面板
+			B_EK : TButton	--- Panel_EditOK 确认编辑
+			B_EA : TButton	--- Panel_EditCancel 取消编辑
+		CKB : TCheckBox	--- CheckBox_Batch 批量编辑
+		SB0 : TScrollBox	--- ScrollBox 第1个表（即主表）的数据编辑窗体
+			FC0 : TFlowPanel	--- FlowPanel_Content 容纳多个字段数据编辑的容器面板
+				PF00 : TPanel 		--- 第1个字段
+					LF00 : TLabel		--- 第1个字段的标题
+					F00 : TEdit			--- 第1个字段的输入框
+				PF01 : TPanel
+					LF01 : TLabel
+					F01 : TEdit
+				PF02 : TPanel
+					LF02 : TLabel
+					F02 : TEdit
+		SB1 : TScrollBox	--- ScrollBox 第2个表（即第1个从表）的数据编辑窗体
+			FC1 : TFlowPanel
+				PF10 : TPanel
+					LF10 : TLabel
+					F10 : TEdit
+				PF11 : TPanel
+					LF11 : TLabel
+					F11 : TEdit
+				PF12 : TPanel
+					LF12 : TLabel
+					F12 : TEdit
+				PF13 : TPanel
+					LF13 : TLabel
+					F13 : TEdit
+		SB2 : TScrollBox
+			...
+		SB3 : TScrollBox
+			...
+			
+	PQy : TPanel	--- Panel_Query 从表查询时的弹出面板
+		PQT : TPanel 	--- Panel_QueryTitle 弹出面板标题栏
+			BQT : TButton	--- Button_QueryTitle 标题
+			BQX : TButton	--- Button_QueryMax 最大化按钮		
+			BQC : TButton	--- Button_QueryClose 关闭按钮
+		PQB : TPanel	--- Panel_QueryButtons 用于容纳查询时“确认”和“重置”按钮的面板
+			BQU : TButton	--- Button_Query 查询时“确认”按钮
+			BRS : TButton	--- Button_Reset 查询时“重置”按钮
+		SBQ1 : TScrollBox	--- ScrollBox_Query 从表1的查询字段面板
+			FT1 : TFlowPanel	--- 查询字段面板的多字内容器 
+				PQ0_0 : TPanel		--- 第1个查询字段
+					LF0_0 : TLabel		--- 查询字段标题
+					EQ0_0 : TEdit		--- 查询字段输入框
+				PQ0_1 : TPanel
+					LF0_1 : TLabel
+					EQ0_1 : TEdit
+				PQ0_2 : TPanel
+					LF0_2 : TLabel
+					EQ0_2 : TEdit
+		SBQ2 : TScrollBox	--- ScrollBox_Query 从表2的查询字段面板
+			FT2 : TFlowPanel	--- 查询字段面板的多字内容器	
+				PQ1_0 : TPanel		--- 第1个查询字段
+					LF1_0 : TLabel	--- 查询字段标题
+					EQ1_0 : TEdit	--- 查询字段输入框
+				PQ1_1 : TPanel
+					LF1_1 : TLabel
+					EQ1_1 : TComboBox
+				PQ1_2 : TPanel
+					LF1_2 : TLabel
+					EQ1_2 : TEdit
+				PQ1_3 : TPanel
+					LF1_3 : TLabel
+					EQ1_3 : TEdit

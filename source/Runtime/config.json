@@ -1,0 +1,82 @@
+{
+	"port": 8080,
+	"resource": 0,
+	"third": "http://cdn.delphibbs.com",
+	"redir": [],
+	"upload_dir": "upload",
+	"max_upload_size": 80,
+	"errorhtml": "<html><body><br/><p style='text-align:center'>!!!deweb web not exist !</p></body></html>",
+	"disconnect": "Network is disconnected!",
+	"nightrestart": 0,
+	"simple": 0,
+	"database": 
+	[
+		{
+			"name": "dwAccess",
+			"string": "Database=.\\main.mdb;DriverID=MSAcc",
+			"remark": "",
+			"params": [],
+			"secret": 0,
+			"enabled": 1
+		},
+		{
+			"name": "dwFrame",
+			"string": "Server=127.0.0.1,8829;Database=dwFrame;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"remark": "",
+			"params": [],
+			"secret": 0,
+			"enabled": 1
+		},
+		{
+			"name": "dwDemo",
+			"secret": 0,
+			"string": "Database=.\\dwDemo.mdb;DriverID=MSAcc",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		},
+		{
+			"name": "dwQBank",
+			"secret": 0,
+			"string": "Server=127.0.0.1,8829;Database=QBank;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": 
+			[
+				"CharacterSet=UTF8"
+			]
+		},
+		{
+			"name": "dwDeWeb",
+			"secret": 0,
+			"string": "Server=127.0.0.1,8829;Database=deweb;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		},
+		{
+			"name": "dwHOEFON",
+			"secret": 0,
+			"string": "Server=127.0.0.1,8829;Database=HOEFON;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		},
+		{
+			"name": "dwGreen",
+			"secret": 0,
+			"string": "Server=127.0.0.1,8829;Database=Green;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		},
+		{
+			"name": "dwGMS",
+			"secret": 0,
+			"string": "Server=127.0.0.1,8829;Database=GMS;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		}
+	]
+}

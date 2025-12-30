@@ -1,0 +1,63 @@
+
+
+//自定义滚动条样式
+.dwscroll0{
+   /*要设置滚动条的容器样式*/
+ }
+.dwscroll::-webkit-scrollbar {/*滚动条整体样式*/
+   width: 2px;     /*高宽分别对应横竖滚动条的尺寸*/
+   height: 1px;
+}
+.dwscroll0::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+   border-radius: 10px;
+   -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+   background: #535353;
+}
+.dwscroll0::-webkit-scrollbar-track {/*滚动条里面轨道*/
+   -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+   border-radius: 10px;
+   background: #EDEDED;
+}
+
+//适用于深色主题的滚动条，与上面颜色 相反
+.dwscroll{
+   /*要设置滚动条的容器样式*/
+ }
+.dwscroll::-webkit-scrollbar {/*滚动条整体样式*/
+   width: 2px;     /*高宽分别对应横竖滚动条的尺寸*/
+   height: 1px;
+}
+.dwscroll::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+   border-radius: 10px;
+   -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+   background: #EDEDED;
+}
+.dwscroll::-webkit-scrollbar-track {/*滚动条里面轨道*/
+   -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+   border-radius: 10px;
+   background: #535353;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background: #bbb;
+}
+
+.dwloadingring {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: conic-gradient(
+		from 0deg,
+		transparent 0% 30%,
+		#00ccff 100%
+	);
+	-webkit-mask: radial-gradient(transparent 20px, black 23.5px);
+	mask: radial-gradient(transparent 20px, black 23.5px);
+	animation: spin 1.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

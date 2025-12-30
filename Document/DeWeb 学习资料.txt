@@ -1,0 +1,223 @@
+【DeWeb 学习资料】
+   2024-10-31整理
+
+
+视频
+-----------------------------------------------------------------------------------------------------
+bilibili
+=====
+
+用Delphi开发Web入门
+https://www.bilibili.com/video/BV1Lf4y1G7ch/?vd_source=09522b6a4f2294ada3d224907f59cc12
+
+5分钟学会用Delphi做出网页
+https://www.bilibili.com/video/BV12a4y177oT/?spm_id_from=333.999.0.0&vd_source=09522b6a4f2294ada3d224907f59cc12
+
+2 Delphi开发移动web
+https://www.bilibili.com/video/BV1k34y1B7Ug/?spm_id_from=333.999.0.0&vd_source=09522b6a4f2294ada3d224907f59cc12
+
+DeWeb调试办法(Delphi快速开发Web)
+https://www.bilibili.com/video/BV1Gf4y1t7Zq/?spm_id_from=333.999.0.0&vd_source=09522b6a4f2294ada3d224907f59cc12
+
+今日头条
+======
+
+DeWeb断点调试和启动事件顺序
+https://www.toutiao.com/video/7431405727367594506/?from_scene=video&log_from=8d8bb0ac0a592_1730379119073
+
+dwAssist使用！ 国产unigui开发助手
+https://www.toutiao.com/video/7356259608526062118/?from_scene=video&log_from=02913b41aa695_1730379136355
+
+dwFrame系统界面演示
+https://www.toutiao.com/video/7354392290372256310/?from_scene=video&log_from=41bc84b636449_1730379157124
+
+DeWeb开发入门
+https://www.toutiao.com/video/7234015343121957428/?from_scene=video&log_from=1b1b2e42d9334_1730379175335
+
+Delphi快速开发Web框架：dwFrame使用介绍
+https://www.toutiao.com/video/7216356843285807648/?from_scene=video&log_from=7bbb8958e7554_1730379196603
+
+
+文档
+-----------------------------------------------------------------------------------------------------
+
+今日头条
+=========
+
+[ DeWeb使用技巧 ] DeWeb服务器使用Nginx反向代理时如何实现sse?
+https://www.toutiao.com/article/7431184476154003978/?log_from=7166f8bb23ff_1730379257911
+
+[ DeWeb 使用技巧 ] 如何在js中向当前Form发送消息？
+https://www.toutiao.com/article/7431109707571446281/?log_from=81f94527677b3_1730379268702
+
+微信JSAPI支付完成后回调信息的delphi解密
+https://www.toutiao.com/article/7429979838045258280/?log_from=61427b53d4211_1730379289002
+
+[ DeWeb控件说明 ] Memo__usescomp ：附属文件引用控件
+https://www.toutiao.com/article/7428759026852413971/?log_from=fbe51af6b05d1_1730379305142
+
+[ DeWeb控件说明 ] FlowPanel__auto ： 自动排列控件
+https://www.toutiao.com/article/7428153616373940771/?log_from=2c84135669627_1730379327984
+
+[DeWeb] 如何上传？
+https://www.toutiao.com/article/7419994390178972197/?log_from=8c7cfc28d4c72_1730379345119
+
+QuickCrud配置生成程序更新 2024.09.14
+https://www.toutiao.com/article/7414415756198232587/?log_from=0e48ddc59f4eb_1730379365589
+
+DeWeb连接“达梦”数据库 笔记
+https://www.toutiao.com/article/7405966233809568307/?log_from=844c169d8bf5_1730379383564
+
+DeWeb之微信扫码支付
+https://www.toutiao.com/article/7386870357652783679/?log_from=7fbffba10de33_1730379403902
+
+手把手教你DeWeb调用微信扫一扫！
+https://www.toutiao.com/article/7383512830617698879/?log_from=8b675c9a5d08a_1730379430014
+
+DeWeb数据表格介绍
+https://www.toutiao.com/article/7381783061476508195/?log_from=cade495520e06_1730379444948
+
+DeWeb对比unigui的优点
+https://www.toutiao.com/article/7354767991034118691/?log_from=7613cd106c53c_1730379462481
+
+DeWeb通用登录模块gLogin设计与使用
+https://www.toutiao.com/article/7354289542444630562/?log_from=f65e6c4a3c267_1730379484262
+
+DeWeb : 基于dwFrame进一步开发指南
+https://www.toutiao.com/article/7353810443909022235/?log_from=92597f920a2f_1730379501148
+
+DeWeb中实现单用户多端登录限制
+https://www.toutiao.com/article/7343428110547059251/?log_from=98d347c27b5c1_1730379520204
+
+采用DeWeb苹果微信中wx.config错误的解决方案
+https://www.toutiao.com/article/7340295005380543016/?log_from=b39e89be327a1_1730379544185
+
+采用Delphi开发漂亮炫酷的大屏看板
+https://www.toutiao.com/article/7236948571864842767/?log_from=b44285198926a_1730379555336
+
+DeWeb中自动高度的控件显示时出理空白或交叠的解决方案
+https://www.toutiao.com/article/7286662527860130343/?log_from=de0f69183e75d_1730379574727
+
+firedac odbc sql server driver连接占线导致另一个hstmt
+https://www.toutiao.com/article/7285544805931827775/?log_from=ae6cb32ca8b7e_1730379595594
+
+DeWeb连接使用MySQL中文乱码解决方法
+https://www.toutiao.com/article/7283036940315083327/?log_from=44caee1062dc1_1730379616499
+
+Delphi快速开发微信公众号
+https://www.toutiao.com/article/7233415201545290252/?log_from=1f24b429a9241_1730379637546
+
+如何在DeWeb显示/隐藏 loading... ？
+https://www.toutiao.com/article/7229874875400602112/?log_from=97d34715152b5_1730379655558
+
+如何实现在DeWeb中弹出对话框？
+https://www.toutiao.com/article/7228759464839889464/?log_from=fe11d407fe157_1730379673035
+
+Delphi使用Echarts 数据可视化图表
+https://www.toutiao.com/article/7220617498663092771/?log_from=b4be4bcec3eef_1730379694685
+
+DeWeb 常见问题1 ：文件上传，支持最大上传多大的文件？
+https://www.toutiao.com/article/7219107495023985152/?log_from=23f61934f678b_1730379709982
+
+DeWeb开发：更改公用数据库
+https://www.toutiao.com/article/7217661703314965050/?log_from=74914a468f901_1730379749076
+
+Delphi快速开发Web —— QuickCRUD（快速增删改查）模块
+https://www.toutiao.com/article/7213560391983661608/?log_from=c750ff1aea3c2_1730379768457
+
+Delphi快速开发Web —— dwFrame框架
+https://www.toutiao.com/article/7208740374968418831/?log_from=caa7201983e85_1730379786718
+
+快速用Delphi开发Web！ DeWeb用户的真实感受
+https://www.toutiao.com/article/7207433211679605251/?log_from=6ecbad3c4c3c6_1730379807402
+
+如何采用DeWeb开发ECharts图表应用？
+https://www.toutiao.com/article/7089965847355146791/?log_from=0d4f2502e070b_1730379831349
+
+DeWeb——Delphi开发Web应用 - 入门篇
+https://www.toutiao.com/article/7073099453577658894/?log_from=033f3399e5c73_1730379852922
+
+使用Delphi开发echarts图表
+https://www.toutiao.com/article/7072528441060508195/?log_from=5fc22d0509242_1730379876397
+
+
+CSDN.net
+==========
+
+Delphi Deweb连接Mysql的一些小技巧
+https://blog.csdn.net/tradiance/article/details/131082757?ops_request_misc=%257B%2522request%255Fid%2522%253A%252287A99084-1801-4BEA-B94B-6024CF9E9FA5%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=87A99084-1801-4BEA-B94B-6024CF9E9FA5&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-131082757-null-null.142^v100^pc_search_result_base3&utm_term=deweb&spm=1018.2226.3001.4187
+
+Deweb 开发用户头像上传与读取功能
+https://blog.csdn.net/tradiance/article/details/131090454?ops_request_misc=%257B%2522request%255Fid%2522%253A%252287A99084-1801-4BEA-B94B-6024CF9E9FA5%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=87A99084-1801-4BEA-B94B-6024CF9E9FA5&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-131090454-null-null.142^v100^pc_search_result_base3&utm_term=deweb&spm=1018.2226.3001.4187
+
+[DeWeb控件] Panel__ok使用说明
+https://blog.csdn.net/FengLinYuShu/article/details/142868814?ops_request_misc=&request_id=&biz_id=102&utm_term=deweb&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-142868814.142^v100^pc_search_result_base3&spm=1018.2226.3001.4187
+
+Delphi Deweb导入与导出文件
+https://blog.csdn.net/tradiance/article/details/131100218?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522616B0B74-AE51-4DDB-80DD-23EF25E116C1%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=616B0B74-AE51-4DDB-80DD-23EF25E116C1&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-25-131100218-null-null.142^v100^pc_search_result_base3&utm_term=deweb&spm=1018.2226.3001.4187
+
+Delphi Deweb中弹出式对话框的应用
+https://blog.csdn.net/tradiance/article/details/130961318?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522616B0B74-AE51-4DDB-80DD-23EF25E116C1%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=616B0B74-AE51-4DDB-80DD-23EF25E116C1&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-26-130961318-null-null.142^v100^pc_search_result_base3&utm_term=deweb&spm=1018.2226.3001.4187
+
+Delphi Deweb开发中界面缩小自动出现滚动条
+https://blog.csdn.net/tradiance/article/details/131044792
+
+
+
+博客园
+==========
+
+DeWeb进阶 ：控件开发 --- 2 改造成DeWeb控件
+https://www.cnblogs.com/maxxua/p/15505621.html
+
+DeWeb 电脑和手机动态适配
+https://www.cnblogs.com/maxxua/p/14228943.html
+
+DeWeb 与 Unigui的区别
+https://www.cnblogs.com/maxxua/p/14230162.html
+
+DeWeb : 制作图片轮换效果
+https://www.cnblogs.com/maxxua/p/14249004.html
+
+DeWeb发展历程！ 从2015年开始
+https://www.cnblogs.com/maxxua/p/14288214.html
+
+DeWeb - 物资流转管理系统 - 开发1（未完成）
+https://www.cnblogs.com/maxxua/p/14322199.html
+
+Delphi的手机程序隐藏顶部信号栏
+https://www.cnblogs.com/maxxua/p/14323598.html
+
+DeWeb和WebXone的区别
+https://www.cnblogs.com/maxxua/p/14335904.html
+
+DeWeb第1个通用化模块：登录模块，仅需要修改一个配置文件即可实现登录功能
+https://www.cnblogs.com/maxxua/p/14383186.html
+
+DeWeb第2个通用化模块：主控模块。 手机/电脑自适应。通过修改配置文件即可实现进入不同模块
+https://www.cnblogs.com/maxxua/p/14387982.html
+
+DeWeb部署
+https://www.cnblogs.com/maxxua/p/14464867.html
+
+DeWeb配置SSL的方法，未亲测，供参考
+https://www.cnblogs.com/maxxua/p/15174978.html
+
+DeWeb进阶 ：控件开发 --- 1 完成一个纯html的demo
+https://www.cnblogs.com/maxxua/p/15504428.html
+
+DeWeb进阶 ：控件开发 --- 2 改造成DeWeb控件
+https://www.cnblogs.com/maxxua/p/15505621.html
+
+combobox,edit可以设置边框颜色不？
+https://www.cnblogs.com/maxxua/p/16026879.html
+
+DeWeb问答（Excel网络访问）
+https://www.cnblogs.com/maxxua/p/16615283.html
+
+DeWeb在Chrome下不能关闭页面的解决办法
+https://www.cnblogs.com/maxxua/p/16775352.html
+
+网站
+--------------------------------------------------------------------
+https://www.delphibbs.com/doc
