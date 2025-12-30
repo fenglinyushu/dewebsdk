@@ -7,6 +7,25 @@
 
 ##更新说明：
 ------------------------------------------------------------------------------------------------------------------------
+### 2025-12-30
+1. use Delphi 13 64
+2. change the hidewhensingle default value is 0
+3. remove empty row
+4. change page size supported
+5. auto summary supported
+
+### 2025-11-14
+1. 主从表的关联字段支持字符串类型
+
+### 2025-11-11
+1. 将事件名称由简写改为全称, 如EkwChange, 改为 EditKeywordChange等.控件名称未变
+
+### 2025-11-05
+1. 在新增时选中"批量处理"时, 不执行原来执行的 dwRemoveLastHistory(oForm);  主要排查dwERP 报的批量添加时自动退出的bug
+
+### 2025-10-30
+1. 统一处理了字段的format, 支持自动适应
+
 ### 2025-10-27
 1. 更新了配套的dwExcel, 解决了在导入从表数据时, 从表和主表对应的数据不对应的问题
 
@@ -2594,66 +2613,20 @@ var
 
     //
     function _ProcessFormat(AValue:String):String;  //处理可能存在的format
-    var
-        jjFData : Variant;
-        jjList  : Variant;
-        ssField : String;
-        ssFVal  : String;
-        ssFmt   : string;
-        ddVal   : Double;
-        iiItem  : Integer;
     begin
         //默认返回输入值
         Result  := AValue;
 
         //处理可能存在的format
         if AConfig.Exists('format') then begin
-            //取得format
-            ssFmt   := AConfig.format;
-
-            //
-            if ssFmt = 'field' then begin  //根据字段, 动态设置显示样式
-                ssFmt   := '%s';
-                if AConfig.Exists('formatdata') then begin
-                    jjFData := AConfig.formatdata;
-                    if jjFData.Exists('field') and jjFData.Exists('list') then begin
-                        //取得标识字段名称
-                        ssField := jjFData.field;
-                        //取得对比列表
-                        jjList  := jjFData.list;
-                        //默认format
-                        ssFmt   := jjList._(0)._(0);
-                        //取得标识字段的值
-                        ssFVal  := TFDQuery(AField.DataSet).FieldByName(ssField).AsString;
-                        //取得format
-                        for iiItem := 1 to jjList._Count - 1 do begin
-                            if jjList._(iiItem)._(0) = ssFVal then begin
-                                ssFmt   := jjList._(iiItem)._(1);
-                                break;
-                            end;
-                        end;
-                    end;
-                end;
-            end;
-
-            //
-            if ssFmt = 'seconds' then begin
-                ddVal   := abs(StrToFloatDef(Result,0));
-                if ddVal > 3600 then begin
-                    Result  := Format('%dh%.2d''%.2d"',[Trunc(ddVal/360),Trunc(ddVal) div 60, Trunc(ddVal) mod 60]);
-                end else if ddVal > 60 then begin
-                    Result  := Format('%.2d''%.2d"',[Trunc(ddVal) div 60, Trunc(ddVal) mod 60]);
-                end else begin
-                    Result  := Format('%.2f"',[ddVal]);
-                end;
-            end else if Pos('n',ssFmt) > 0 then begin
-                Result  := Format(ssFmt,[StrToFloatDef(Result,0)]);
-            end else if Pos('d',ssFmt) > 0 then begin
-                Result  := Format(ssFmt,[StrToIntDef(Result,0)]);
-            end else if Pos('f',ssFmt) > 0 then begin
-                Result  := Format(ssFmt,[StrToFloatDef(Result,0)]);
+            if Pos('n',AConfig.format) > 0 then begin
+                Result  := Format(AConfig.format,[StrToFloatDef(Result,0)]);
+            end else if Pos('d',AConfig.format) > 0 then begin
+                Result  := Format(AConfig.format,[StrToIntDef(Result,0)]);
+            end else if Pos('f',AConfig.format) > 0 then begin
+                Result  := Format(AConfig.format,[StrToFloatDef(Result,0)]);
             end else begin
-                Result  := Format(ssFmt,[Result]);
+                Result  := Format(AConfig.format,[Result]);
             end;
         end;
     end;
@@ -2912,6 +2885,7 @@ begin
     //删除结果中的特殊字符
     Result  := StringReplace(Result,#10,'',[rfReplaceAll]);
     Result  := StringReplace(Result,#13,'',[rfReplaceAll]);
+
 end;
 
 //根据表名、字段名，生成选项JSON数组
@@ -3655,6 +3629,9 @@ begin
         //标记为非空表
         ASG.DoubleBuffered  := False;
 
+        //设置行数
+        ASG.RowCount    := AQuery.RecordCount - AQuery.FetchOptions.RecsSkip + 1;
+
         //
         for iRow := 1 to ASG.RowCount-1 do begin
             for iCol := 0 to ASG.ColCount - 1 do begin
@@ -3842,7 +3819,7 @@ begin
 	if joConfig <> unassigned then begin
         //
         joConfig.Delete(AName);
-        DocVariantData(joConfig).AddValue(AName,AValue);
+        joConfig.Add(AName,AValue);
 
 	    //反写到Hint中
 	    APanel.Hint     := joConfig;
@@ -3881,31 +3858,24 @@ end;
 function  cpSetFieldByName(APanel:TPanel;AName,AAttr:String;AValue:Variant):Integer;
 var
     joConfig    : Variant;
-    joField     : variant;
     iField      : Integer;
 begin
     Result  := 0;
 
     //取得JSON配置
     joConfig    := _json(APanel.Hint);
-    //joConfig.Add(AAttr,AValue);
 
 	//
 	if joConfig <> unassigned then begin
         if joConfig.Exists('fields') then begin
             //
             for iField := 0 to joConfig.fields._Count - 1 do begin
-                //
-                joField := joConfig.fields._(iField);
-                //
-                if LowerCase(dwGetStr(joField,'name')) = LowerCase(AName) then begin
-                    //删除原属性
-                    joField.Delete(AAttr);
+                if LowerCase(dwGetStr(joConfig.fields._(iField),'name')) = LowerCase(AName) then begin
+                    //
+                    joConfig.fields._(iField).Delete(AAttr);
+                    joConfig.fields._(iField).Add(AAttr,AValue);
 
-                    //添加新属性
-                    DocVariantData(joField).AddValue(AAttr,AValue);
-
-                    //反写到 Hint
+                    //取得前缀备用,默认为空
                     APanel.Hint     := joConfig;
 
                     //
@@ -4328,7 +4298,7 @@ begin
 
 end;
 
-Procedure BExClick(Self: TObject; Sender: TObject);     //button export 导出按钮
+Procedure ButtonExportClick(Self: TObject; Sender: TObject);     //button export 导出按钮
 var
     //
     oForm       : TForm;
@@ -4514,7 +4484,7 @@ begin
     end;
 end;
 
-Procedure BFdClick(Self: TObject; Sender: TObject);     //"折叠",主要用于隐藏查询, 相比较模式切换, 保留了现在的查询条件
+Procedure ButtonFoldClick(Self: TObject; Sender: TObject);     //"折叠",主要用于隐藏查询, 相比较模式切换, 保留了现在的查询条件
 var
     //
     oForm       : TForm;
@@ -4611,7 +4581,7 @@ end;
 
 
 
-Procedure BImClick(Self: TObject; Sender: TObject); //button import
+Procedure ButtonImportClick(Self: TObject; Sender: TObject); //button import
 var
     //
     oCrudPanel  : TPanel;
@@ -4667,7 +4637,7 @@ end;
 
 
 //上传完成事件
-procedure BImEndDock(Self: TObject; Sender, Target: TObject; X, Y: Integer);
+procedure ButtonImportEndDock(Self: TObject; Sender, Target: TObject; X, Y: Integer);
 var
     oCrudPanel  : TPanel;
     oButton     : TButton;
@@ -4715,7 +4685,7 @@ end;
 
 
 
-Procedure BQmClick(Self: TObject; Sender: TObject);     //button query mode 查询模式
+Procedure ButtonQueryModeClick(Self: TObject; Sender: TObject);     //button query mode 查询模式
 var
     oButton     : TButton;
     //
@@ -4746,7 +4716,7 @@ begin
     cpSetQueryMode(oCrudPanel,oButton.Tag,True);
 end;
 
-Procedure BFzClick(Self: TObject; Sender: TObject);     //button fuzzy 模糊匹配/精确匹配
+Procedure ButtonFuzzyClick(Self: TObject; Sender: TObject);     //button fuzzy 模糊匹配/精确匹配
 var
     oButton     : TButton;
 begin
@@ -4766,7 +4736,7 @@ begin
     end;
 end;
 
-Procedure BDOClick(Self: TObject; Sender: TObject); //Button Delete OK
+Procedure ButtonDeleteOKClick(Self: TObject; Sender: TObject); //Button Delete OK
 var
     oCrudPanel  : TPanel;
     oButton     : TButton;
@@ -4937,7 +4907,7 @@ begin
     dwRemoveLastHistory(oForm);
 end;
 
-Procedure BDCClick(Self: TObject; Sender: TObject); //button Delete Cancel
+Procedure ButtonDeleteCancelClick(Self: TObject; Sender: TObject); //button Delete Cancel
 var
     oButton : TButton;
     oForm   : TForm;
@@ -4969,7 +4939,7 @@ begin
     dwRemoveLastHistory(oForm);
 end;
 
-Procedure BEAClick(Self: TObject; Sender: TObject);     //Button Edit Cancel
+Procedure ButtonEditCancelClick(Self: TObject; Sender: TObject);     //Button Edit Cancel
 var
     oCrudPanel  : TPanel;
     oButton     : TButton;
@@ -5058,7 +5028,7 @@ begin
     dwRemoveLastHistory(oForm);
 end;
 
-Procedure BEMClick(Self: TObject; Sender: TObject);     //button edit max
+Procedure ButtonEditorMaxClick(Self: TObject; Sender: TObject);     //button editor max
 var
     oCrudPanel  : TPanel;
     oButton     : TButton;
@@ -5136,7 +5106,7 @@ begin
 end;
 
 //点击"编辑"按钮时的事件
-Procedure BEtClick(Self: TObject; Sender: TObject);     //button edit
+Procedure ButtonEditClick(Self: TObject; Sender: TObject);     //button edit
 var
     oCrudPanel  : TPanel;
     oForm       : TForm;
@@ -5429,7 +5399,7 @@ begin
     dwAddShowHistory(oForm,[],[oPEr]);
 end;
 
-Procedure BEOClick(Self: TObject; Sender: TObject); //BEO : button Edit OK
+Procedure ButtonEditOKClick(Self: TObject; Sender: TObject); //BEO : button Edit OK
 var
     oButton     : TButton;
     oCrudPanel  : TPanel;
@@ -5610,10 +5580,10 @@ begin
         //取得各对象
         oButton     := TButton(Sender);
         oForm       := TForm(oButton.Owner);
-        oPEr        := TPanel(oForm.FindComponent(sPrefix+'PEr'));
-        oBEA        := TButton(oForm.FindComponent(sPrefix+'BEA'));   //取消按钮，用于记录是否批量新增过
-        oCKB        := TCheckBox(oForm.FindComponent(sPrefix+'CKB'));
-        oSGD        := TStringGrid(oForm.FindComponent(sPrefix+'SGD'));
+        oPEr        := TPanel(oForm.FindComponent(sPrefix+'PEr'));      //Panel Editor
+        oBEA        := TButton(oForm.FindComponent(sPrefix+'BEA'));     //button edit cancel 取消按钮，用于记录是否批量新增过
+        oCKB        := TCheckBox(oForm.FindComponent(sPrefix+'CKB'));   //checkbox batch 批量处理
+        oSGD        := TStringGrid(oForm.FindComponent(sPrefix+'SGD')); //stringgrid data
 
         //取得Query备用
         oFQTemp     := TFDQuery(oCrudPanel.FindComponent(sPrefix+'FQTemp'));
@@ -5716,8 +5686,12 @@ begin
                 //
                 oQuery.FetchOptions.RecsSkip  := -1;
                 oQuery.Post;
+
                 //关闭伪窗体
                 oPEr.Visible  := False;
+
+                //为当前操作删除记录, 包括2部分: 浏览器中的历史记录和gjoHistory数组中的记录
+                dwRemoveLastHistory(oForm);
 
                 // cpPostAfter 事件
                 bAccept := True;
@@ -5730,9 +5704,12 @@ begin
 
             end;
             100 : begin   //新增
+                //取得当前 FDQuery
                 oQuery  := TFDQuery(oCrudPanel.FindComponent(sPrefix+'FQMain'));
+
                 //更新数值
                 for iField := 0 to joConfig.fields._Count -1 do begin
+                    //取得当前字段 json 对象
                     joField := joConfig.fields._(ifield);
 
                     //取得当前JSON字段对应的数据表字段index
@@ -5846,6 +5823,9 @@ begin
                 end else begin
                     //关闭伪窗体
                     oPEr.Visible  := False;
+
+                    //为当前操作删除记录, 包括2部分: 浏览器中的历史记录和gjoHistory数组中的记录
+                    dwRemoveLastHistory(oForm);
                 end;
             end;
         end;
@@ -5891,12 +5871,9 @@ begin
 
     end;
 
-    //为当前操作删除记录, 包括2部分: 浏览器中的历史记录和gjoHistory数组中的记录
-    dwRemoveLastHistory(oForm);
-
 end;
 
-Procedure BNwClick(Self: TObject; Sender: TObject);
+Procedure ButtonNewClick(Self: TObject; Sender: TObject);
 var
     oCrudPanel  : TPanel;
     oForm       : TForm;
@@ -5982,7 +5959,7 @@ begin
     dwAddShowHistory(oForm,[],[oPEr]);
 end;
 
-Procedure BDeClick(Self: TObject; Sender: TObject);     //button delete
+Procedure ButtonDeleteClick(Self: TObject; Sender: TObject);     //button delete
 var
     //
     bHint       : Boolean;
@@ -6148,7 +6125,7 @@ begin
     dwAddShowHistory(oForm,[],[oPanel]);
 end;
 
-Procedure BQyClick(Self: TObject; Sender: TObject); //多字段查询中的"查询"按钮
+Procedure ButtonQueryClick(Self: TObject; Sender: TObject); //多字段查询中的"查询"按钮
 var
     oCrudPanel  : TPanel;
     oButton     : TButton;
@@ -6185,6 +6162,9 @@ begin
     oForm       := TForm(oButton.Owner);
     oTbP        := TTrackBar(oForm.FindComponent(sPrefix+'TbP'));
 
+    //清除loading
+    dwRunJS('window._this.dwloading = false;',oForm);
+
     //设置为第1页
     oTbP.Position   := 0;
 
@@ -6195,7 +6175,7 @@ begin
     cpUpdate(oCrudPanel,'');
 end;
 
-Procedure BRsClick(Self: TObject; Sender: TObject);     //button reset
+Procedure ButtonResetClick(Self: TObject; Sender: TObject);     //button reset
 var
     oCrudPanel  : TPanel;
     oButton     : TButton;
@@ -6390,7 +6370,7 @@ begin
 end;
 
 
-Procedure BUpClick(Self: TObject; Sender: TObject); //"图片上传"按钮 BUp - Button upload
+Procedure ButtonUploadClick(Self: TObject; Sender: TObject); //"图片上传"按钮 BUp - Button upload
 var
     oButton     : TButton;
     oForm       : TForm;
@@ -6441,7 +6421,7 @@ begin
 end;
 
 //上传完成事件
-procedure BUpEndDock(Self: TObject; Sender, Target: TObject; X, Y: Integer);
+procedure ButtonUploadEndDock(Self: TObject; Sender, Target: TObject; X, Y: Integer);
 var
     oCrudPanel  : TPanel;
     oButton     : TButton;
@@ -6487,7 +6467,7 @@ begin
 end;
 
 
-Procedure EKwChange(Self: TObject; Sender: TObject);    //EKw : Edit Keyword
+Procedure EditKeywordChange(Self: TObject; Sender: TObject);    //EKw : Edit Keyword
 var
     oEKw        : TEdit;
     oCrudPanel  : TPanel;
@@ -6532,7 +6512,7 @@ begin
     cpUpdate(oCrudPanel,'');
 end;
 
-Procedure FQyResize(Self: TObject; Sender: TObject);
+Procedure FlowPanelQueryResize(Self: TObject; Sender: TObject);
 var
     oFQy        : TFlowPanel;
     oChange     : Procedure(Sender:TObject) of Object;
@@ -6552,7 +6532,7 @@ begin
 end;
 
 //数据表双击
-Procedure SGDDblClick(Self: TObject; Sender: TObject); //Sgd - StringGrid data
+Procedure StringGridDataDblClick(Self: TObject; Sender: TObject); //Sgd - StringGrid data
 var
     iRow        : Integer;
     iSlave      : Integer;
@@ -6659,7 +6639,7 @@ begin
                                 if (oFDQuery.FieldByName(String(joSlave.masterfield)).DataType in cpstInteger) then begin
                                     sWhere  := String(joSlave.slavefield)+'='+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString;
                                 end else begin
-                                    sWhere  := String(joSlave.slavefield)+'="'+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'"';
+                                    sWhere  := String(joSlave.slavefield)+'='''+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'''';
                                 end;
                             end;
 
@@ -6677,7 +6657,7 @@ begin
                             if (oFDQuery.FieldByName(String(joSlave.masterfield)).DataType in cpstInteger) then begin
                                 cpUpdate(oSlavePanel,String(joSlave.slavefield)+'='+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString);
                             end else begin
-                                cpUpdate(oSlavePanel,String(joSlave.slavefield)+'="'+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'"');
+                                cpUpdate(oSlavePanel,String(joSlave.slavefield)+'='''+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'''');
                             end;
                         end;
                     end;
@@ -6696,7 +6676,7 @@ begin
 
 end;
 //数据表点击
-Procedure SGDClick(Self: TObject; Sender: TObject); //Sgd - StringGrid data
+Procedure StringGridDataClick(Self: TObject; Sender: TObject); //Sgd - StringGrid data
 var
     iRow        : Integer;
     iSlave      : Integer;
@@ -6802,7 +6782,7 @@ begin
                                 if (oFDQuery.FieldByName(String(joSlave.masterfield)).DataType in cpstInteger) then begin
                                     sWhere  := String(joSlave.slavefield)+'='+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString;
                                 end else begin
-                                    sWhere  := String(joSlave.slavefield)+'="'+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'"';
+                                    sWhere  := String(joSlave.slavefield)+'='''+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'''';
                                 end;
                             end;
 
@@ -6820,7 +6800,7 @@ begin
                             if (oFDQuery.FieldByName(String(joSlave.masterfield)).DataType in cpstInteger) then begin
                                 cpUpdate(oSlavePanel,String(joSlave.slavefield)+'='+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString);
                             end else begin
-                                cpUpdate(oSlavePanel,String(joSlave.slavefield)+'="'+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'"');
+                                cpUpdate(oSlavePanel,String(joSlave.slavefield)+'='''+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'''');
                             end;
                         end;
                     end;
@@ -6833,7 +6813,7 @@ begin
 end;
 
 
-Procedure SGDEndDock(Self: TObject; Sender, Target: TObject; X, Y: Integer);
+Procedure StringGridDataEndDock(Self: TObject; Sender, Target: TObject; X, Y: Integer);
 var
     iCol,iRow   : Integer;
     iButtonID   : Integer;
@@ -6948,7 +6928,7 @@ begin
 end;
 
 
-Procedure SGDGetEditMask(Self: TObject; Sender: TObject; ACol, ARow: Integer; var Value: string);
+Procedure StringGridDataGetEditMask(Self: TObject; Sender: TObject; ACol, ARow: Integer; var Value: string);
 var
     iField      : Integer;
     iFieldId    : Integer;  //根据列号取得字段序号，以用于排序。 原使用字段名排序时，多同名字段时会报错
@@ -7177,7 +7157,7 @@ end;
 
 
 
-Procedure TBPChange(Self: TObject; Sender: TObject);    //TbP TrackBar page
+Procedure TrackBarPageChange(Self: TObject; Sender: TObject);    //TbP TrackBar page
 var
 	bAccept		: boolean;
     sPrefix     : String;
@@ -7210,6 +7190,54 @@ begin
 
     //更新数据
     cpUpdate(cpGetCrudPanel(TControl(Sender)),'');
+end;
+
+//改变每页显示行数时的事件
+Procedure TrackBarPageDragOver(Self: TObject;Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
+var
+	bAccept		: boolean;
+    sPrefix     : String;
+    //
+    oCrudPanel  : TPanel;
+    oForm       : TForm;
+    oSgD        : TStringGrid;
+    oTbP        : TTrackBar;
+    //
+    joConfig    : Variant;
+begin
+    try
+        //取得源crud panel
+        oCrudPanel  := cpGetCrudPanel(TControl(Sender));
+
+        //取得JSON配置
+        joConfig    := cpGetConfig(oCrudPanel);
+
+        //改变当前每页行数的配置
+        joConfig.pagesize   := X;
+        oCrudpanel.Hint     := joConfig;
+
+        //取得前缀备用,默认为空
+        sPrefix     := dwGetStr(joConfig,'prefix','');
+
+        //取得Form备用
+        oForm       := TForm(oCrudPanel.Owner);
+        oSgD        := TStringGrid(oForm.FindComponent(sPrefix+'SgD'));     //主表显示StringGrid
+        oTbP        := TTrackBar(oForm.FindComponent(sPrefix+'TbP'));       //主表分页
+
+        //清除loading
+        dwRunJS('window._this.dwloading = true;',oForm);
+
+        //更新表格行数
+        oSgD.RowCount   := X + 1;
+
+        //默认为第1页
+        oTbP.Position   := 0;
+
+        //更新数据
+        cpUpdate(oCrudPanel,'');
+    except
+        dwRunJS('console.log("error when TrackBarPageDragOver");',oForm);
+    end;
 end;
 
 
@@ -7246,12 +7274,12 @@ begin
         Caption     := 'Are you sure ?';
 
         //确定事件
-        tM.Code         := @BDOClick;
+        tM.Code         := @ButtonDeleteOKClick;
         tM.Data         := Pointer(325); // 随便取的数
         OnEnter         := TNotifyEvent(tM);
 
         //取消事件
-        tM.Code         := @BDCClick;
+        tM.Code         := @ButtonDeleteCancelClick;
         tM.Data         := Pointer(325); // 随便取的数
         OnExit          := TNotifyEvent(tM);
     end;
@@ -7284,7 +7312,7 @@ var
     //
     tM,tM1,tM2  : TMethod;
 begin
-    //
+    //<初始化, 赋nil
     oForm       := nil;
     oP          := nil;
     oPIn        := nil;
@@ -7296,9 +7324,10 @@ begin
     oDT         := nil;
     oCB         := nil;
     oHint       := nil;
+    //>
 
-	  //取得前缀备用,默认为空
-	  sPrefix     := dwGetStr(AConfig,'prefix','');
+	//取得前缀备用,默认为空
+	sPrefix     := dwGetStr(AConfig,'prefix','');
 
     //取得移动端标志,以备用
     bMobile     := dwGetInt(AConfig,'mobile') = 1;
@@ -7767,11 +7796,11 @@ begin
                     +',"imgtype":'+dwGetStr(AField,'imgtype','["jpg","png","bmp","gif"]')
                     +'}';
             //
-            tM.Code         := @BUpClick;
+            tM.Code         := @ButtonUploadClick;
             tM.Data         := Pointer(325); // 随便取的数
             OnClick         := TNotifyEvent(tM);
             //
-            tM1.Code        := @BUpEndDock;
+            tM1.Code        := @ButtonUploadEndDock;
             tM1.Data        := Pointer(325); // 随便取的数
             OnEndDock       := TdwEndDock(tM1);
             //
@@ -8812,22 +8841,24 @@ var
     //用于指定事件
     tM          : TMethod;
 begin
-    //先置所有对象为nil, 以避免报错
-    oPEr        := nil;        //编辑/新增 总Panel
-    oPET        := nil;        //顶部Panel, 用于放置：标题、最大化、关闭
-    oBEL        := nil;        //标题
-    oBEM        := nil;        //最大化
-    oBEC        := nil;        //关闭
-    oPES        := nil;        //底部按钮Panel, 放置：取消，确定
-    oBEK        := nil;        //确定按钮
-    oBEA        := nil;        //取消按钮
-    oSB         := nil;        //滚动框，以放置更多字段编辑信息
-    oFC         := nil;        //多字段编辑信息的容器
-    oCK_Batch   := nil;        //批量新增checkbox
+    //<赋nil
+    oForm       := nil;
+    oForm1      := nil;
+    oPEr        := nil;
+    oPET        := nil;
+    oBEL        := nil;
+    oBEM        := nil;
+    oBEC        := nil;
+    oPES        := nil;
+    oBEK        := nil;
+    oBEA        := nil;
+    oSB         := nil;
+    oFC         := nil;
+    oCK_Batch   := nil;
+    //>
 
-
-	  //取得Form备用
-	  oForm   := TForm(APanel.Owner);
+	//取得Form备用
+	oForm   := TForm(APanel.Owner);
 
     //
     joConfig    := cpGetConfig(APanel);
@@ -8838,8 +8869,8 @@ begin
     //取得主窗体Form1备用
     oForm1  := dwGetForm1(oForm);
 
-	  //取得前缀备用,默认为空
-	  sPrefix     := dwGetStr(joConfig,'prefix','');
+	//取得前缀备用,默认为空
+	sPrefix     := dwGetStr(joConfig,'prefix','');
 
     //检查editwidth编辑面板宽度是否存在，默认为340
     if not joConfig.Exists('editwidth') then begin
@@ -8923,7 +8954,7 @@ begin
         AlignWithMargins:= True;
         Margins.Right   := 0;
         //
-        tM.Code         := @BEMClick;
+        tM.Code         := @ButtonEditorMaxClick;
         tM.Data         := Pointer(325); // 随便取的数
         OnClick         := TNotifyEvent(tM);
 
@@ -8939,7 +8970,7 @@ begin
         //>
     end;
 
-    //关闭 Button
+    //关闭 Button 右上角的
     oBEC  := TButton.Create(oForm);
     with oBEC do begin
         Name        := sPrefix + 'BEC';
@@ -8953,7 +8984,7 @@ begin
         AlignWithMargins:= True;
         Margins.Right    := 10;
         //
-        tM.Code         := @BEAClick;
+        tM.Code         := @ButtonEditCancelClick;
         tM.Data         := Pointer(325); // 随便取的数
         OnClick         := TNotifyEvent(tM);
 
@@ -8994,7 +9025,7 @@ begin
         Margins.left    := 50;
         Margins.Bottom  := 17;
         //
-        tM.Code         := @BEOClick;
+        tM.Code         := @ButtonEditOKClick;
         tM.Data         := Pointer(325); // 随便取的数
         OnClick         := TNotifyEvent(tM);
     end;
@@ -9018,7 +9049,7 @@ begin
         Margins.Left    := 10;
         Margins.Bottom  := 17;
         //
-        tM.Code         := @BEAClick;
+        tM.Code         := @ButtonEditCancelClick;
         tM.Data         := Pointer(325); // 随便取的数
         OnClick         := TNotifyEvent(tM);
     end;
@@ -9217,12 +9248,36 @@ var
     oFQMaster   : TFDQuery;
     oSlavePanel : TPanel;
     oPQm        : TPanel;
+    oLSm        : TLabel;
+    oField      : TField;
     //
     sPrefix     : String;
 	bAccept		: boolean;
     oClick      : Procedure(Sender:TObject) of Object;
 
 begin
+    //<初始化对象赋nil
+    oForm       := nil;
+    oFDQuery    := nil;
+    oTbP        := nil;
+    oSgD        := nil;
+    oEKw        := nil;
+    oFQy        := nil;
+    oPQF        := nil;
+    oE_Query    := nil;
+    oDT_Start   := nil;
+    oDT_End     := nil;
+    oCBQy       := nil;
+    oBFz        := nil;
+    oBQy        := nil;
+    oMasterPanel:= nil;
+    oFQMaster   := nil;
+    oSlavePanel := nil;
+    oPQm        := nil;
+    oLSm        := nil;
+    oField      := nil;
+    //>
+
     try
         //取得JSON配置
         joConfig    := cpGetConfig(APanel);
@@ -9232,6 +9287,9 @@ begin
 
         //取得Form备用
         oForm       := TForm(APanel.Owner);
+
+        //清除loading
+        dwRunJS('window._this.dwloading = false;',oForm);
 
         //取得字段名称列表，备用，返回值为sFields, 如：id,Name,age
         sFields     := cpGetFields(joConfig.fields,False);
@@ -9722,8 +9780,8 @@ begin
                                 sWhere  := sWhere + ' AND ('+String(joMaster.slavefield)+'='
                                         +IntToStr(oFQMaster.FieldByName(String(joMaster.masterfield)).AsInteger)+')';
                             end else begin
-                                sWhere  := sWhere + ' AND ('+String(joMaster.slavefield)+'="'
-                                        +oFQMaster.FieldByName(String(joMaster.masterfield)).AsString+'")';
+                                sWhere  := sWhere + ' AND ('+String(joMaster.slavefield)+'='''
+                                        +oFQMaster.FieldByName(String(joMaster.masterfield)).AsString+''')';
                             end;
                         end;
                     end;
@@ -9757,6 +9815,49 @@ begin
             sWhere  := sWhere + ' and ('+sTmp+')';
         end;
 
+        //计算汇总信息
+        if dwGetStr(joConfig,'summary') <> '' then begin
+            oLSm    := TLabel(oForm.FindComponent(sPrefix+'LSm'));         //汇总显示
+            oFDQuery.Open(String(joConfig.summary)+' '+sWhere);
+            sTmp    := '';
+            for iItem := 0 to oFDQuery.FieldCount - 1 do begin
+                oField  := oFDQuery.Fields[iItem];
+                case oField.DataType of
+                    ftInteger, ftSmallint, ftWord, ftLargeint, ftAutoInc:
+                        //ShowMessage('整型字段');
+                        sTmp    := sTmp + oField.FieldName + ' : ' + Format('<strong>%d</strong>, ',[oField.AsInteger]);
+                    ftFloat, ftBCD, ftFMTBcd:
+                        //ShowMessage('浮点型字段');
+                        sTmp    := sTmp + oField.FieldName + ' : ' + Format('<strong>%f</strong>, ',[oField.AsFloat]);
+
+                    ftString, ftWideString, ftFixedChar, ftFixedWideChar:
+                        //ShowMessage('字符串字段');
+                        sTmp    := sTmp + oField.FieldName + ' : ' + Format('<strong>%s</strong>, ',[oField.AsString]);
+
+                    ftDate :
+                        //ShowMessage('日期字段');
+                        sTmp    := sTmp + oField.FieldName + ' : ' + FormatDateTime('<strong>YYYY-MM-DD</strong>, ',oField.AsDateTime);
+
+                    ftDateTime, ftTimeStamp:
+                        //ShowMessage('日期时间字段');
+                        sTmp    := sTmp + oField.FieldName + ' : ' + FormatDateTime('<strong>YYYY-MM-DD hh:mm:ss</strong>, ',oField.AsDateTime);
+
+                    ftTime:
+                        //ShowMessage('时间字段');
+                        sTmp    := sTmp + oField.FieldName + ' : ' + FormatDateTime('<strong>hh:mm:ss</strong>, ',oField.AsDateTime);
+
+                    ftCurrency:
+                        //ShowMessage('货币字段');
+                        sTmp    := sTmp + oField.FieldName + ' : ' + Format('<strong>%n</strong>, ',[oField.AsFloat]);
+                else
+                        sTmp    := sTmp + oField.FieldName + ' : ' + Format('<strong>%s</strong>, ',[oField.AsString]);
+                end;
+            end;
+            //
+            Delete(sTmp,Length(sTmp)-1,2);
+            oLSm.Caption    := '<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+sTmp+'</p>';
+        end;
+
 
         //生成配置信息
         joDBConfig              := _json('{}');
@@ -9770,8 +9871,12 @@ begin
 
         //从数据表中取数据，置入StringGrid
         cpGetDataToGrid(oFDQuery, oSgD,oTbP, joDBConfig );
-        oFDQuery.RecNo  := 1;
-        oSgD.Row        := 1;
+        if oFDQuery.IsEmpty then begin
+            //oSgD.RowCount   := 1;
+        end else begin
+            oFDQuery.RecNo  := 1;
+            oSgD.Row        := 1;
+        end;
 
         // cpDataScroll 事件
         if AInited then begin
@@ -9789,7 +9894,7 @@ begin
         end;
 
         //如果仅有1页，则不显示分页栏
-        if dwGetInt(joConfig,'hidewhensingle',1) = 1 then begin
+        if dwGetInt(joConfig,'hidewhensingle',0) = 1 then begin
             oTbP.Visible    := (oTbP.Max / oTbP.PageSize) > 1;
         end else begin
             oTbP.Visible    := True;
@@ -9830,7 +9935,7 @@ begin
                                     if (oFDQuery.FieldByName(String(joSlave.masterfield)).DataType in cpstInteger) then begin
                                         sWhere  := String(joSlave.slavefield)+'='+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString;
                                     end else begin
-                                        sWhere  := String(joSlave.slavefield)+'="'+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'"';
+                                        sWhere  := String(joSlave.slavefield)+'='''+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'''';
                                     end;
                                 end;
 
@@ -9846,7 +9951,7 @@ begin
                                 if (oFDQuery.FieldByName(String(joSlave.masterfield)).DataType in cpstInteger) then begin
                                     cpUpdate(oSlavePanel,String(joSlave.slavefield)+'='+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString);
                                 end else begin
-                                    cpUpdate(oSlavePanel,String(joSlave.slavefield)+'="'+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'"');
+                                    cpUpdate(oSlavePanel,String(joSlave.slavefield)+'='''+oFDQuery.FieldByName(String(joSlave.masterfield)).AsString+'''');
                                 end;
                             end;
                         end;
@@ -9887,6 +9992,9 @@ var
     sPrefix     : String;
     sText       : string;
     sValue      : String;
+    sAttr       : String;
+    sSizes      : String;
+
     //
     oForm       : TForm;
     oBtnMargins : TMargins;
@@ -9908,6 +10016,7 @@ var
     oBFd        : TButton;      //button fold 折叠按钮
     //
     oEKw        : TEdit;
+    oLSm        : TLabel;       //Label summary
     oTbP        : TTrackBar;
     oSgD        : TStringGrid;  //主表
 
@@ -10149,7 +10258,7 @@ begin
                         joField.query       := 1;
 
                         //自动筛选
-                        joField.dbfilter    := 0;
+                        joField.dbfilter    := 1;
                     end;
 
                     //
@@ -10666,7 +10775,7 @@ begin
                         Margins.Left    := joConfig.margin;
                         Margins.Right   := joConfig.margin;
                         //
-                        tM.Code         := @FQyResize;
+                        tM.Code         := @FlowPanelQueryResize;
                         tM.Data         := Pointer(325); // 随便取的数
                         OnResize        := TNotifyEvent(tM);
                     end;
@@ -10704,7 +10813,7 @@ begin
                         width           := 70;
                         Height          := 30;
                         Caption         := '查询';
-                        Hint            := '{"type":"primary","icon":"el-icon-search"}';
+                        Hint            := '{"onclick":"window._this.dwloading = true;","type":"primary","icon":"el-icon-search"}';
                         //
                         AlignWithMargins:= True;
                         Margins.Top     := 5;
@@ -10712,7 +10821,7 @@ begin
                         Margins.Left    := 20;
                         Margins.Right   := 5;
                         //
-                        tM.Code         := @BQyClick;
+                        tM.Code         := @ButtonQueryClick;
                         tM.Data         := Pointer(325); // 随便取的数
                         OnClick         := TNotifyEvent(tM);
                     end;
@@ -10725,13 +10834,13 @@ begin
                         Height          := 30;
                         Left            := 100;
                         Caption         := '重置';
-                        Hint            := '{"icon":"el-icon-refresh"}';
+                        Hint            := '{"onclick":"window._this.dwloading = true;","icon":"el-icon-refresh"}';
                         //
                         AlignWithMargins:= True;
                         Margins         := oBQy.Margins;
                         Margins.Left    := 0;
                         //
-                        tM.Code         := @BRsClick;
+                        tM.Code         := @ButtonResetClick;
                         tM.Data         := Pointer(325); // 随便取的数
                         OnClick         := TNotifyEvent(tM);
                     end;
@@ -10790,7 +10899,7 @@ begin
                         +'"dwstyle":"padding-left:10px;'
                     +'"}';
                     //
-                    tM.Code         := @EKwChange;
+                    tM.Code         := @EditKeywordChange;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnChange        := TNotifyEvent(tM);
 
@@ -10870,7 +10979,7 @@ begin
                     Margins         := oBtnMargins;
                     Hint            := '{"type":"success","icon":"el-icon-circle-plus-outline"}';
                     //
-                    tM.Code         := @BNwClick;
+                    tM.Code         := @ButtonNewClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     //
@@ -10896,7 +11005,7 @@ begin
                     Margins         := oBtnMargins;
                     Hint            := '{"type":"primary","icon":"el-icon-edit-outline"}';
                     //
-                    tM.Code         := @BEtClick;
+                    tM.Code         := @ButtonEditClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     //
@@ -10922,7 +11031,7 @@ begin
                     Margins         := oBtnMargins;
                     Hint            := '{"type":"danger","icon":"el-icon-delete"}';
                     //
-                    tM.Code         := @BDeClick;
+                    tM.Code         := @ButtonDeleteClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     //
@@ -10948,7 +11057,7 @@ begin
                     Margins         := oBtnMargins;
                     Hint            := '{"type":"info","icon":"el-icon-takeaway-box"}';
                     //
-                    tM.Code         := @BExClick;
+                    tM.Code         := @ButtonExportClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     //
@@ -10974,11 +11083,11 @@ begin
                     Margins         := oBtnMargins;
                     Hint            := '{"type":"warning","icon":"el-icon-tickets"}';
                     //
-                    tM1.Code        := @BImEndDock;     //导入时的上传完成事件
+                    tM1.Code        := @ButtonImportEndDock;     //导入时的上传完成事件
                     tM1.Data        := Pointer(325);    // 随便取的数
                     OnEndDock       := TdwEndDock(tM1);
                     //
-                    tM.Code         := @BImClick;
+                    tM.Code         := @ButtonImportClick;
                     tM.Data         := Pointer(325);    // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     //
@@ -11006,7 +11115,7 @@ begin
                     AlignWithMargins:= True;
                     Margins         := oBtnMargins;
                     //
-                    tM.Code         := @BFdClick;
+                    tM.Code         := @ButtonFoldClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     Visible         := dwGetInt(joConfig,'fold',0) = 1;
@@ -11035,7 +11144,7 @@ begin
                     AlignWithMargins:= True;
                     Margins         := oBtnMargins;
                     //
-                    tM.Code         := @BQmClick;
+                    tM.Code         := @ButtonQueryModeClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     //
@@ -11065,7 +11174,7 @@ begin
                     AlignWithMargins:= True;
                     Margins         := oBtnMargins;
                     //
-                    tM.Code         := @BFzClick;
+                    tM.Code         := @ButtonFuzzyClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
                     //
@@ -11160,27 +11269,52 @@ begin
                     //
                     Font.Color      := $00969696;
                     //
-                    tM.Code         := @SgDClick;
+                    tM.Code         := @StringGridDataClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnClick         := TNotifyEvent(tM);
 
                     //
-                    tM.Code         := @SgDDblClick;
+                    tM.Code         := @StringGridDataDblClick;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnDblClick         := TNotifyEvent(tM);
 
                     //
-                    tM.Code         := @SgDGetEditMask;
+                    tM.Code         := @StringGridDataGetEditMask;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnGetEditMask   := TdwGetEditMask(tM);
 
                     //
-                    tM.Code         := @SgDEndDock;
+                    tM.Code         := @StringGridDataEndDock;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnEndDock       := TdwEndDock(tM);
                 end;
 
-                //分页       ===============================================================================================
+                //汇总       ===========================================================================================
+                if dwGetStr(joConfig,'summary') <> '' then begin
+                    oLSm    := TLabel.Create(oForm);
+                    with oLSm do begin
+                        Parent          := APanel;
+                        Name            := sPrefix + 'LSm';
+                        Align           := alBottom;
+                        AutoSize        := False;
+                        Height          := 30;
+                        Layout          := tlCenter;
+                        Font.Color      := $999390;
+                        Hint            := '{"dwstyle":"border-top:solid 1px #ebeef5;border-bottom:solid 1px #ebeef5;"}';
+                        Caption         := '';
+
+
+
+                        //
+                        AlignWithMargins:= True;
+                        Margins.Top     := 0;
+                        Margins.Bottom  := 5;
+                        Margins.Left    := 0;
+                        Margins.Right   := 0;
+                    end;
+                end;
+
+                //分页       ===========================================================================================
                 oTbP    := TTrackBar.Create(oForm);
                 with oTbP do begin
                     Parent          := APanel;
@@ -11188,13 +11322,28 @@ begin
                     Align           := alBottom;
                     HelpKeyword     := 'page';
                     Height          := 35;
+                    Top             := 99999;
+
+                    //
+                    sAttr   := '';
+                    sSizes  := '';
+                    if joConfig.Exists('pagesizes') then begin
+                        sAttr   := ':page-sizes='''+joConfig.pagesizes+''' ';
+                        sSizes  := 'sizes,';
+                    end;
 
                     //Hint            := '{"dwattr":"background hide-on-single-page layout=\"prev, pager, next, ->, total\""}';
                     //2025-03-19 (1) 增加了totalfirst设置支持 (2)采用了小图标, 以支持移动端
                     if dwGetInt(joConfig,'totalfirst',0)=1 then begin
-                        Hint            := '{"dwattr":"small :pager-count=5 background layout=\"total, ->, prev, pager, next\""}';
+                        Hint            := '{'
+                            +'"onpage":"window._this.dwloading=true;",'
+                            +'"dwattr":"'+sAttr+' small :pager-count=5 background layout=\"total,' + sSizes + ' ->, prev, pager, next\""'
+                        +'}';
                     end else begin
-                        Hint            := '{"dwattr":"small :pager-count=5 background layout=\"prev, pager, next, ->, total\""}';
+                        Hint            := '{'
+                            +'"onpage":"window._this.dwloading=true;",'
+                            +'"dwattr":"'+sAttr+' small :pager-count=5 background layout=\"prev, pager, next, ->,' + sSizes + ' total\""'
+                        +'}';
                     end;
 
                     //
@@ -11204,13 +11353,17 @@ begin
                     Margins.Left    := 0;
                     Margins.Right   := 10;
                     //
-                    tM.Code         := @TbPChange;
+                    tM.Code         := @TrackBarPageChange;
                     tM.Data         := Pointer(325); // 随便取的数
                     OnChange        := TNotifyEvent(tM);
+                    //
+                    tM1.Code        := @TrackBarPageDragOver;
+                    tM1.Data        := Pointer(325); // 随便取的数
+                    OnDragOver      := TDragOverEvent(tM1);
 
                     //移动端处理
                     if AMobile then begin
-                        Hint            := '{"dwattr":"background layout=\"prev, next,->, jumper, total\"","dwstyle":"background:#fff;"}';
+                        Hint            := '{"dwattr":"background layout=\"prev, next,->, jumper,' + sSizes + ' total\"","dwstyle":"background:#fff;"}';
                     end;
                 end;
             except

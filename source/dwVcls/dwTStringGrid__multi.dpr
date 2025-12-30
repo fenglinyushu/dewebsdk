@@ -1380,10 +1380,14 @@ begin
         //高亮当前行
         //joRes.Add('/*real*/ '+'const rowToSelect = this.'+sFull+'__dat['+IntToStr(Row-1)+'];this.$refs.'+sFull+'.setCurrentRow(rowToSelect, true);');
         if DoubleBuffered then begin
-            //joRes.Add('/*real*/ '+'this.$refs.'+sFull+'.setCurrentRow();');
+            joRes.Add('/*real*/ '+'this.$refs.'+sFull+'.setCurrentRow();');
         end else begin
-            //joRes.Add('/*real*/ '+'this.$refs.'+sFull+'.setCurrentRow(this.'+sFull+'__dat['+IntToStr(Row-1)+']);');
+            joRes.Add('/*real*/ '+'this.$refs.'+sFull+'.setCurrentRow(this.'+sFull+'__dat['+IntToStr(Row-1)+']);');
         end;
+
+        //动态控制行数
+        //joRes.Add('dwSetTableRowCount('''+sFull+''','+IntToStr(RowCount-1)+');');
+        //dwRunJS(sTmp,oForm);
     end;
     //
     Result    := (joRes);

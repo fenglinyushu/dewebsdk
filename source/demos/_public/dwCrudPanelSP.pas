@@ -306,15 +306,14 @@ begin
         joConfig.params := _json('{}');
     end;
 
-    //先删除同名
+    //更新参数
     for iItem := joConfig.params._Count - 1 downto 0 do begin
-        if String(joConfig.params.name(iItem)) = AName then begin
-            joConfig.params.Delete(iItem);
+        if String(joConfig.params._(iItem).name) = AName then begin
+            joConfig.params._(iItem).value := AValue;
+            break;
         end;
     end;
 
-    //
-    joConfig.params.Add(AName,AValue);
 
     //
     APanel.Hint := String(joConfig);
@@ -7586,16 +7585,6 @@ var
     //
     tM,tM1,tM2  : TMethod;
 begin
-    oP          := nil;
-    oPIn        := nil;
-    oL          := nil;
-    oE          := nil;
-    oM          := nil;
-    oI          := nil;
-    oB          := nil;
-    oDT         := nil;
-    oCB         := nil;
-    oHint       := nil;
 
 	//取得前缀备用,默认为空
 	sPrefix     := dwGetStr(AConfig,'prefix','');

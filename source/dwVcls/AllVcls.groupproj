@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{84D775EA-2421-42C9-AC45-D028F6A25499}</ProjectGuid>
+        <ProjectGuid>{1A186F46-796C-486C-A8A4-D7C7B1E97F65}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
         <Projects Include="dwTButton.dproj">
@@ -49,6 +49,9 @@
             <Dependencies/>
         </Projects>
         <Projects Include="dwTComboBox.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTComboBox__multi.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTDateTimePicker.dproj">
@@ -180,6 +183,12 @@
         <Projects Include="dwTMemo__mqtt.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="dwTMemo__toastuieditor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTMemo__toastuiviewer.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="dwTMemo__uses.dproj">
             <Dependencies/>
         </Projects>
@@ -280,6 +289,9 @@
             <Dependencies/>
         </Projects>
         <Projects Include="dwTShape__canvas.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dwTShape__dvwater.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="dwTShape__menu.dproj">
@@ -526,6 +538,15 @@
     </Target>
     <Target Name="dwTComboBox:Make">
         <MSBuild Projects="dwTComboBox.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTComboBox__multi">
+        <MSBuild Projects="dwTComboBox__multi.dproj"/>
+    </Target>
+    <Target Name="dwTComboBox__multi:Clean">
+        <MSBuild Projects="dwTComboBox__multi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTComboBox__multi:Make">
+        <MSBuild Projects="dwTComboBox__multi.dproj" Targets="Make"/>
     </Target>
     <Target Name="dwTDateTimePicker">
         <MSBuild Projects="dwTDateTimePicker.dproj"/>
@@ -914,6 +935,24 @@
     <Target Name="dwTMemo__mqtt:Make">
         <MSBuild Projects="dwTMemo__mqtt.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTMemo__toastuieditor">
+        <MSBuild Projects="dwTMemo__toastuieditor.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__toastuieditor:Clean">
+        <MSBuild Projects="dwTMemo__toastuieditor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__toastuieditor:Make">
+        <MSBuild Projects="dwTMemo__toastuieditor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwTMemo__toastuiviewer">
+        <MSBuild Projects="dwTMemo__toastuiviewer.dproj"/>
+    </Target>
+    <Target Name="dwTMemo__toastuiviewer:Clean">
+        <MSBuild Projects="dwTMemo__toastuiviewer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTMemo__toastuiviewer:Make">
+        <MSBuild Projects="dwTMemo__toastuiviewer.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTMemo__uses">
         <MSBuild Projects="dwTMemo__uses.dproj"/>
     </Target>
@@ -1220,6 +1259,15 @@
     <Target Name="dwTShape__canvas:Make">
         <MSBuild Projects="dwTShape__canvas.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dwTShape__dvwater">
+        <MSBuild Projects="dwTShape__dvwater.dproj"/>
+    </Target>
+    <Target Name="dwTShape__dvwater:Clean">
+        <MSBuild Projects="dwTShape__dvwater.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwTShape__dvwater:Make">
+        <MSBuild Projects="dwTShape__dvwater.dproj" Targets="Make"/>
+    </Target>
     <Target Name="dwTShape__menu">
         <MSBuild Projects="dwTShape__menu.dproj"/>
     </Target>
@@ -1500,13 +1548,13 @@
         <MSBuild Projects="dwTTreeView__grid.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="dwTButton;dwTButton__comm;dwTButton__simple;dwTButtonGroup__category;dwTButtonGroup__menu;dwTCalendar;dwTCard;dwTCard__carousel;dwTCard__page;dwTCard__turn;dwTCardPanel;dwTCardPanel__carousel;dwTCardPanel__page;dwTCardPanel__turn;dwTCheckBox;dwTComboBox;dwTDateTimePicker;dwTEdit;dwTEdit__cleave;dwTEdit__label;dwTEdit__rate;dwTEdit__tree;dwTFlowPanel;dwTFlowPanel__auto;dwTForm;dwTGridPanel;dwTGroupBox;dwTHeaderControl;dwTImage;dwTImage__captcha;dwTImage__preview;dwTLabel;dwTLabel__captcha;dwTLabel__cool;dwTLabel__datetime;dwTLabel__marquee;dwTLabel__marquee2;dwTLabel__marqueev;dwTLabel__simple;dwTListBox;dwTListView__Combo;dwTMediaPlayer;dwTMediaPlayer__easyplayer;dwTMediaPlayer__flv;dwTMediaPlayer__m3u8;dwTMediaPlayer__mp3;dwTMediaPlayer__xg;dwTMemo;dwTMemo__cascader;dwTMemo__codemirror;dwTMemo__dvflyline;dwTMemo__echarts;dwTMemo__echartsmap;dwTMemo__googleads;dwTMemo__highlight;dwTMemo__html;dwTMemo__markdown;dwTMemo__md;dwTMemo__mqtt;dwTMemo__uses;dwTMemo__usescomp;dwTPageControl;dwTPageControl__timeline;dwTPanel;dwTPanel__badge;dwTPanel__button;dwTPanel__cesium;dwTPanel__dialog;dwTPanel__div;dwTPanel__dvbox;dwTPanel__dvdeco;dwTPanel__elupload;dwTPanel__float;dwTPanel__Hint;dwTPanel__hscroll;dwTPanel__iframe;dwTPanel__modal;dwTPanel__ok;dwTPanel__popup;dwTPanel__scroll;dwTPanel__selected;dwTPanel__simple;dwTProgressBar;dwTProgressBar__dv;dwTProgressBar__dvpond;dwTProgressBar__dvwater;dwTRadioButton;dwTRadioGroup;dwTScrollBox;dwTShape;dwTShape__amap;dwTShape__bmap;dwTShape__canvas;dwTShape__menu;dwTSpeedButton;dwTSpinEdit;dwTSplitter;dwTStackPanel;dwTStaticText;dwTStaticText__map;dwTStringGrid;dwTStringGrid__apple;dwTStringGrid__dvcapsule;dwTStringGrid__dvconical;dwTStringGrid__dvranking;dwTStringGrid__dvring;dwTStringGrid__dvscroll;dwTStringGrid__luck;dwTStringGrid__multi;dwTStringGrid__noapple;dwTStringGrid__vecandle;dwTStringGrid__vemap;dwTStringGrid__ww;dwTTabSheet;dwTTabSheet__timeline;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTrackBar__mobile;dwTTrackBar__page;dwTTrackBar__wwpage;dwTTreeView;dwTTreeView__combo;dwTTreeView__grid"/>
+        <CallTarget Targets="dwTButton;dwTButton__comm;dwTButton__simple;dwTButtonGroup__category;dwTButtonGroup__menu;dwTCalendar;dwTCard;dwTCard__carousel;dwTCard__page;dwTCard__turn;dwTCardPanel;dwTCardPanel__carousel;dwTCardPanel__page;dwTCardPanel__turn;dwTCheckBox;dwTComboBox;dwTComboBox__multi;dwTDateTimePicker;dwTEdit;dwTEdit__cleave;dwTEdit__label;dwTEdit__rate;dwTEdit__tree;dwTFlowPanel;dwTFlowPanel__auto;dwTForm;dwTGridPanel;dwTGroupBox;dwTHeaderControl;dwTImage;dwTImage__captcha;dwTImage__preview;dwTLabel;dwTLabel__captcha;dwTLabel__cool;dwTLabel__datetime;dwTLabel__marquee;dwTLabel__marquee2;dwTLabel__marqueev;dwTLabel__simple;dwTListBox;dwTListView__Combo;dwTMediaPlayer;dwTMediaPlayer__easyplayer;dwTMediaPlayer__flv;dwTMediaPlayer__m3u8;dwTMediaPlayer__mp3;dwTMediaPlayer__xg;dwTMemo;dwTMemo__cascader;dwTMemo__codemirror;dwTMemo__dvflyline;dwTMemo__echarts;dwTMemo__echartsmap;dwTMemo__googleads;dwTMemo__highlight;dwTMemo__html;dwTMemo__markdown;dwTMemo__md;dwTMemo__mqtt;dwTMemo__toastuieditor;dwTMemo__toastuiviewer;dwTMemo__uses;dwTMemo__usescomp;dwTPageControl;dwTPageControl__timeline;dwTPanel;dwTPanel__badge;dwTPanel__button;dwTPanel__cesium;dwTPanel__dialog;dwTPanel__div;dwTPanel__dvbox;dwTPanel__dvdeco;dwTPanel__elupload;dwTPanel__float;dwTPanel__Hint;dwTPanel__hscroll;dwTPanel__iframe;dwTPanel__modal;dwTPanel__ok;dwTPanel__popup;dwTPanel__scroll;dwTPanel__selected;dwTPanel__simple;dwTProgressBar;dwTProgressBar__dv;dwTProgressBar__dvpond;dwTProgressBar__dvwater;dwTRadioButton;dwTRadioGroup;dwTScrollBox;dwTShape;dwTShape__amap;dwTShape__bmap;dwTShape__canvas;dwTShape__dvwater;dwTShape__menu;dwTSpeedButton;dwTSpinEdit;dwTSplitter;dwTStackPanel;dwTStaticText;dwTStaticText__map;dwTStringGrid;dwTStringGrid__apple;dwTStringGrid__dvcapsule;dwTStringGrid__dvconical;dwTStringGrid__dvranking;dwTStringGrid__dvring;dwTStringGrid__dvscroll;dwTStringGrid__luck;dwTStringGrid__multi;dwTStringGrid__noapple;dwTStringGrid__vecandle;dwTStringGrid__vemap;dwTStringGrid__ww;dwTTabSheet;dwTTabSheet__timeline;dwTTimer;dwTToggleSwitch;dwTTrackBar;dwTTrackBar__mobile;dwTTrackBar__page;dwTTrackBar__wwpage;dwTTreeView;dwTTreeView__combo;dwTTreeView__grid"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="dwTButton:Clean;dwTButton__comm:Clean;dwTButton__simple:Clean;dwTButtonGroup__category:Clean;dwTButtonGroup__menu:Clean;dwTCalendar:Clean;dwTCard:Clean;dwTCard__carousel:Clean;dwTCard__page:Clean;dwTCard__turn:Clean;dwTCardPanel:Clean;dwTCardPanel__carousel:Clean;dwTCardPanel__page:Clean;dwTCardPanel__turn:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTEdit__cleave:Clean;dwTEdit__label:Clean;dwTEdit__rate:Clean;dwTEdit__tree:Clean;dwTFlowPanel:Clean;dwTFlowPanel__auto:Clean;dwTForm:Clean;dwTGridPanel:Clean;dwTGroupBox:Clean;dwTHeaderControl:Clean;dwTImage:Clean;dwTImage__captcha:Clean;dwTImage__preview:Clean;dwTLabel:Clean;dwTLabel__captcha:Clean;dwTLabel__cool:Clean;dwTLabel__datetime:Clean;dwTLabel__marquee:Clean;dwTLabel__marquee2:Clean;dwTLabel__marqueev:Clean;dwTLabel__simple:Clean;dwTListBox:Clean;dwTListView__Combo:Clean;dwTMediaPlayer:Clean;dwTMediaPlayer__easyplayer:Clean;dwTMediaPlayer__flv:Clean;dwTMediaPlayer__m3u8:Clean;dwTMediaPlayer__mp3:Clean;dwTMediaPlayer__xg:Clean;dwTMemo:Clean;dwTMemo__cascader:Clean;dwTMemo__codemirror:Clean;dwTMemo__dvflyline:Clean;dwTMemo__echarts:Clean;dwTMemo__echartsmap:Clean;dwTMemo__googleads:Clean;dwTMemo__highlight:Clean;dwTMemo__html:Clean;dwTMemo__markdown:Clean;dwTMemo__md:Clean;dwTMemo__mqtt:Clean;dwTMemo__uses:Clean;dwTMemo__usescomp:Clean;dwTPageControl:Clean;dwTPageControl__timeline:Clean;dwTPanel:Clean;dwTPanel__badge:Clean;dwTPanel__button:Clean;dwTPanel__cesium:Clean;dwTPanel__dialog:Clean;dwTPanel__div:Clean;dwTPanel__dvbox:Clean;dwTPanel__dvdeco:Clean;dwTPanel__elupload:Clean;dwTPanel__float:Clean;dwTPanel__Hint:Clean;dwTPanel__hscroll:Clean;dwTPanel__iframe:Clean;dwTPanel__modal:Clean;dwTPanel__ok:Clean;dwTPanel__popup:Clean;dwTPanel__scroll:Clean;dwTPanel__selected:Clean;dwTPanel__simple:Clean;dwTProgressBar:Clean;dwTProgressBar__dv:Clean;dwTProgressBar__dvpond:Clean;dwTProgressBar__dvwater:Clean;dwTRadioButton:Clean;dwTRadioGroup:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTShape__amap:Clean;dwTShape__bmap:Clean;dwTShape__canvas:Clean;dwTShape__menu:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTSplitter:Clean;dwTStackPanel:Clean;dwTStaticText:Clean;dwTStaticText__map:Clean;dwTStringGrid:Clean;dwTStringGrid__apple:Clean;dwTStringGrid__dvcapsule:Clean;dwTStringGrid__dvconical:Clean;dwTStringGrid__dvranking:Clean;dwTStringGrid__dvring:Clean;dwTStringGrid__dvscroll:Clean;dwTStringGrid__luck:Clean;dwTStringGrid__multi:Clean;dwTStringGrid__noapple:Clean;dwTStringGrid__vecandle:Clean;dwTStringGrid__vemap:Clean;dwTStringGrid__ww:Clean;dwTTabSheet:Clean;dwTTabSheet__timeline:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTrackBar__mobile:Clean;dwTTrackBar__page:Clean;dwTTrackBar__wwpage:Clean;dwTTreeView:Clean;dwTTreeView__combo:Clean;dwTTreeView__grid:Clean"/>
+        <CallTarget Targets="dwTButton:Clean;dwTButton__comm:Clean;dwTButton__simple:Clean;dwTButtonGroup__category:Clean;dwTButtonGroup__menu:Clean;dwTCalendar:Clean;dwTCard:Clean;dwTCard__carousel:Clean;dwTCard__page:Clean;dwTCard__turn:Clean;dwTCardPanel:Clean;dwTCardPanel__carousel:Clean;dwTCardPanel__page:Clean;dwTCardPanel__turn:Clean;dwTCheckBox:Clean;dwTComboBox:Clean;dwTComboBox__multi:Clean;dwTDateTimePicker:Clean;dwTEdit:Clean;dwTEdit__cleave:Clean;dwTEdit__label:Clean;dwTEdit__rate:Clean;dwTEdit__tree:Clean;dwTFlowPanel:Clean;dwTFlowPanel__auto:Clean;dwTForm:Clean;dwTGridPanel:Clean;dwTGroupBox:Clean;dwTHeaderControl:Clean;dwTImage:Clean;dwTImage__captcha:Clean;dwTImage__preview:Clean;dwTLabel:Clean;dwTLabel__captcha:Clean;dwTLabel__cool:Clean;dwTLabel__datetime:Clean;dwTLabel__marquee:Clean;dwTLabel__marquee2:Clean;dwTLabel__marqueev:Clean;dwTLabel__simple:Clean;dwTListBox:Clean;dwTListView__Combo:Clean;dwTMediaPlayer:Clean;dwTMediaPlayer__easyplayer:Clean;dwTMediaPlayer__flv:Clean;dwTMediaPlayer__m3u8:Clean;dwTMediaPlayer__mp3:Clean;dwTMediaPlayer__xg:Clean;dwTMemo:Clean;dwTMemo__cascader:Clean;dwTMemo__codemirror:Clean;dwTMemo__dvflyline:Clean;dwTMemo__echarts:Clean;dwTMemo__echartsmap:Clean;dwTMemo__googleads:Clean;dwTMemo__highlight:Clean;dwTMemo__html:Clean;dwTMemo__markdown:Clean;dwTMemo__md:Clean;dwTMemo__mqtt:Clean;dwTMemo__toastuieditor:Clean;dwTMemo__toastuiviewer:Clean;dwTMemo__uses:Clean;dwTMemo__usescomp:Clean;dwTPageControl:Clean;dwTPageControl__timeline:Clean;dwTPanel:Clean;dwTPanel__badge:Clean;dwTPanel__button:Clean;dwTPanel__cesium:Clean;dwTPanel__dialog:Clean;dwTPanel__div:Clean;dwTPanel__dvbox:Clean;dwTPanel__dvdeco:Clean;dwTPanel__elupload:Clean;dwTPanel__float:Clean;dwTPanel__Hint:Clean;dwTPanel__hscroll:Clean;dwTPanel__iframe:Clean;dwTPanel__modal:Clean;dwTPanel__ok:Clean;dwTPanel__popup:Clean;dwTPanel__scroll:Clean;dwTPanel__selected:Clean;dwTPanel__simple:Clean;dwTProgressBar:Clean;dwTProgressBar__dv:Clean;dwTProgressBar__dvpond:Clean;dwTProgressBar__dvwater:Clean;dwTRadioButton:Clean;dwTRadioGroup:Clean;dwTScrollBox:Clean;dwTShape:Clean;dwTShape__amap:Clean;dwTShape__bmap:Clean;dwTShape__canvas:Clean;dwTShape__dvwater:Clean;dwTShape__menu:Clean;dwTSpeedButton:Clean;dwTSpinEdit:Clean;dwTSplitter:Clean;dwTStackPanel:Clean;dwTStaticText:Clean;dwTStaticText__map:Clean;dwTStringGrid:Clean;dwTStringGrid__apple:Clean;dwTStringGrid__dvcapsule:Clean;dwTStringGrid__dvconical:Clean;dwTStringGrid__dvranking:Clean;dwTStringGrid__dvring:Clean;dwTStringGrid__dvscroll:Clean;dwTStringGrid__luck:Clean;dwTStringGrid__multi:Clean;dwTStringGrid__noapple:Clean;dwTStringGrid__vecandle:Clean;dwTStringGrid__vemap:Clean;dwTStringGrid__ww:Clean;dwTTabSheet:Clean;dwTTabSheet__timeline:Clean;dwTTimer:Clean;dwTToggleSwitch:Clean;dwTTrackBar:Clean;dwTTrackBar__mobile:Clean;dwTTrackBar__page:Clean;dwTTrackBar__wwpage:Clean;dwTTreeView:Clean;dwTTreeView__combo:Clean;dwTTreeView__grid:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="dwTButton:Make;dwTButton__comm:Make;dwTButton__simple:Make;dwTButtonGroup__category:Make;dwTButtonGroup__menu:Make;dwTCalendar:Make;dwTCard:Make;dwTCard__carousel:Make;dwTCard__page:Make;dwTCard__turn:Make;dwTCardPanel:Make;dwTCardPanel__carousel:Make;dwTCardPanel__page:Make;dwTCardPanel__turn:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTEdit__cleave:Make;dwTEdit__label:Make;dwTEdit__rate:Make;dwTEdit__tree:Make;dwTFlowPanel:Make;dwTFlowPanel__auto:Make;dwTForm:Make;dwTGridPanel:Make;dwTGroupBox:Make;dwTHeaderControl:Make;dwTImage:Make;dwTImage__captcha:Make;dwTImage__preview:Make;dwTLabel:Make;dwTLabel__captcha:Make;dwTLabel__cool:Make;dwTLabel__datetime:Make;dwTLabel__marquee:Make;dwTLabel__marquee2:Make;dwTLabel__marqueev:Make;dwTLabel__simple:Make;dwTListBox:Make;dwTListView__Combo:Make;dwTMediaPlayer:Make;dwTMediaPlayer__easyplayer:Make;dwTMediaPlayer__flv:Make;dwTMediaPlayer__m3u8:Make;dwTMediaPlayer__mp3:Make;dwTMediaPlayer__xg:Make;dwTMemo:Make;dwTMemo__cascader:Make;dwTMemo__codemirror:Make;dwTMemo__dvflyline:Make;dwTMemo__echarts:Make;dwTMemo__echartsmap:Make;dwTMemo__googleads:Make;dwTMemo__highlight:Make;dwTMemo__html:Make;dwTMemo__markdown:Make;dwTMemo__md:Make;dwTMemo__mqtt:Make;dwTMemo__uses:Make;dwTMemo__usescomp:Make;dwTPageControl:Make;dwTPageControl__timeline:Make;dwTPanel:Make;dwTPanel__badge:Make;dwTPanel__button:Make;dwTPanel__cesium:Make;dwTPanel__dialog:Make;dwTPanel__div:Make;dwTPanel__dvbox:Make;dwTPanel__dvdeco:Make;dwTPanel__elupload:Make;dwTPanel__float:Make;dwTPanel__Hint:Make;dwTPanel__hscroll:Make;dwTPanel__iframe:Make;dwTPanel__modal:Make;dwTPanel__ok:Make;dwTPanel__popup:Make;dwTPanel__scroll:Make;dwTPanel__selected:Make;dwTPanel__simple:Make;dwTProgressBar:Make;dwTProgressBar__dv:Make;dwTProgressBar__dvpond:Make;dwTProgressBar__dvwater:Make;dwTRadioButton:Make;dwTRadioGroup:Make;dwTScrollBox:Make;dwTShape:Make;dwTShape__amap:Make;dwTShape__bmap:Make;dwTShape__canvas:Make;dwTShape__menu:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTSplitter:Make;dwTStackPanel:Make;dwTStaticText:Make;dwTStaticText__map:Make;dwTStringGrid:Make;dwTStringGrid__apple:Make;dwTStringGrid__dvcapsule:Make;dwTStringGrid__dvconical:Make;dwTStringGrid__dvranking:Make;dwTStringGrid__dvring:Make;dwTStringGrid__dvscroll:Make;dwTStringGrid__luck:Make;dwTStringGrid__multi:Make;dwTStringGrid__noapple:Make;dwTStringGrid__vecandle:Make;dwTStringGrid__vemap:Make;dwTStringGrid__ww:Make;dwTTabSheet:Make;dwTTabSheet__timeline:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTrackBar__mobile:Make;dwTTrackBar__page:Make;dwTTrackBar__wwpage:Make;dwTTreeView:Make;dwTTreeView__combo:Make;dwTTreeView__grid:Make"/>
+        <CallTarget Targets="dwTButton:Make;dwTButton__comm:Make;dwTButton__simple:Make;dwTButtonGroup__category:Make;dwTButtonGroup__menu:Make;dwTCalendar:Make;dwTCard:Make;dwTCard__carousel:Make;dwTCard__page:Make;dwTCard__turn:Make;dwTCardPanel:Make;dwTCardPanel__carousel:Make;dwTCardPanel__page:Make;dwTCardPanel__turn:Make;dwTCheckBox:Make;dwTComboBox:Make;dwTComboBox__multi:Make;dwTDateTimePicker:Make;dwTEdit:Make;dwTEdit__cleave:Make;dwTEdit__label:Make;dwTEdit__rate:Make;dwTEdit__tree:Make;dwTFlowPanel:Make;dwTFlowPanel__auto:Make;dwTForm:Make;dwTGridPanel:Make;dwTGroupBox:Make;dwTHeaderControl:Make;dwTImage:Make;dwTImage__captcha:Make;dwTImage__preview:Make;dwTLabel:Make;dwTLabel__captcha:Make;dwTLabel__cool:Make;dwTLabel__datetime:Make;dwTLabel__marquee:Make;dwTLabel__marquee2:Make;dwTLabel__marqueev:Make;dwTLabel__simple:Make;dwTListBox:Make;dwTListView__Combo:Make;dwTMediaPlayer:Make;dwTMediaPlayer__easyplayer:Make;dwTMediaPlayer__flv:Make;dwTMediaPlayer__m3u8:Make;dwTMediaPlayer__mp3:Make;dwTMediaPlayer__xg:Make;dwTMemo:Make;dwTMemo__cascader:Make;dwTMemo__codemirror:Make;dwTMemo__dvflyline:Make;dwTMemo__echarts:Make;dwTMemo__echartsmap:Make;dwTMemo__googleads:Make;dwTMemo__highlight:Make;dwTMemo__html:Make;dwTMemo__markdown:Make;dwTMemo__md:Make;dwTMemo__mqtt:Make;dwTMemo__toastuieditor:Make;dwTMemo__toastuiviewer:Make;dwTMemo__uses:Make;dwTMemo__usescomp:Make;dwTPageControl:Make;dwTPageControl__timeline:Make;dwTPanel:Make;dwTPanel__badge:Make;dwTPanel__button:Make;dwTPanel__cesium:Make;dwTPanel__dialog:Make;dwTPanel__div:Make;dwTPanel__dvbox:Make;dwTPanel__dvdeco:Make;dwTPanel__elupload:Make;dwTPanel__float:Make;dwTPanel__Hint:Make;dwTPanel__hscroll:Make;dwTPanel__iframe:Make;dwTPanel__modal:Make;dwTPanel__ok:Make;dwTPanel__popup:Make;dwTPanel__scroll:Make;dwTPanel__selected:Make;dwTPanel__simple:Make;dwTProgressBar:Make;dwTProgressBar__dv:Make;dwTProgressBar__dvpond:Make;dwTProgressBar__dvwater:Make;dwTRadioButton:Make;dwTRadioGroup:Make;dwTScrollBox:Make;dwTShape:Make;dwTShape__amap:Make;dwTShape__bmap:Make;dwTShape__canvas:Make;dwTShape__dvwater:Make;dwTShape__menu:Make;dwTSpeedButton:Make;dwTSpinEdit:Make;dwTSplitter:Make;dwTStackPanel:Make;dwTStaticText:Make;dwTStaticText__map:Make;dwTStringGrid:Make;dwTStringGrid__apple:Make;dwTStringGrid__dvcapsule:Make;dwTStringGrid__dvconical:Make;dwTStringGrid__dvranking:Make;dwTStringGrid__dvring:Make;dwTStringGrid__dvscroll:Make;dwTStringGrid__luck:Make;dwTStringGrid__multi:Make;dwTStringGrid__noapple:Make;dwTStringGrid__vecandle:Make;dwTStringGrid__vemap:Make;dwTStringGrid__ww:Make;dwTTabSheet:Make;dwTTabSheet__timeline:Make;dwTTimer:Make;dwTToggleSwitch:Make;dwTTrackBar:Make;dwTTrackBar__mobile:Make;dwTTrackBar__page:Make;dwTTrackBar__wwpage:Make;dwTTreeView:Make;dwTTreeView__combo:Make;dwTTreeView__grid:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

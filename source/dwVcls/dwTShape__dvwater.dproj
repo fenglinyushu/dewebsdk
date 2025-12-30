@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{639E6591-9E90-4F36-A05B-5862A21413CF}</ProjectGuid>
+        <ProjectGuid>{88CB5BEA-06ED-4D74-B4E0-A8A8F0A029C0}</ProjectGuid>
         <MainSource>dwTShape__dvwater.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>

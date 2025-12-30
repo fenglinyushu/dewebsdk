@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{319FA672-8C9D-441B-81D0-AE3266A75107}</ProjectGuid>
+        <ProjectGuid>{506F9233-7F46-433C-BE1F-9A6367C77B69}</ProjectGuid>
         <MainSource>dwTMemo__toastuiviewer.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>

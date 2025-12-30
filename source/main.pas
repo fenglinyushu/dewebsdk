@@ -213,7 +213,6 @@ type
     ProgressBar: TProgressBar;
     Panel_Top: TPanel;
     SpeedButton_Exit: TSpeedButton;
-    ImageList_Pngs: TImageList;
     SpeedButton_Stop: TSpeedButton;
     SpeedButton_Start: TSpeedButton;
     Panel_TopLine: TPanel;
@@ -248,6 +247,7 @@ type
     Panel2: TPanel;
     Label_Version: TLabel;
     FileListBox_publics: TFileListBox;
+    ImageListMain: TImageList;
     procedure ProcessPostedData_FileUpload(ClientCnx : TDWHttpConnection);
     procedure ProcessPosteData_FileUploadMultipartFormData(ClientCnx : TDWHttpConnection;const AFileName : String);
     procedure ProcessPosteData_FileUploadBinaryData( ClientCnx : TDWHttpConnection; const FileName : String);
@@ -312,7 +312,7 @@ var
     {$IFDEF _STD}
         gsTitle     : string = 'DeWeb Standard v2.2.20250701'; //用于显示系统版本
     {$ELSE}
-        gsTitle     : string = 'DeWeb64 v20251218 个人免费版 '; //用于显示系统版本
+        gsTitle     : string = 'DeWebServer v20251230'; //用于显示系统版本
     {$ENDIF}
 
     goSSEs          : array of TDWHttpConnection;
@@ -1733,7 +1733,7 @@ begin
     TTimer(Sender).Enabled   := False;
 
     //载入支持控件------------------------------------------------------------------------------------------------------
-    Panel_Title.Caption      := '支持控件载入中...';
+    Panel_Title.Caption      := 'DeWeb Component Loading ...';
     Panel_Progress.Visible   := True;
 
     //查找所有支持的控件
@@ -1742,7 +1742,7 @@ begin
 
     //一次性读入支持控件的DLL
     if FileListBox_Vcls.Count = 0 then begin
-        ShowMessage('没有找到DeWeb的支持控件！ 请编译 Source\dwVcls 文件夹内所有 dpr !');
+        ShowMessage('no DeWeb Component! Please compile all .dpr in Source\dwVcls!');
     end else begin
         SetLength(grDWVcls, FileListBox_Vcls.Count);
         //同时创建字典，以快速查找控件
@@ -1868,11 +1868,11 @@ begin
         //更新持续工作时间
         iSecs   := Floor((Now-gfStartTime)*24*3600);
         if iSecs<60 then begin
-            Label_Hours.Caption := '已运行 '+IntToStr(iSecs)+' 秒';
+            Label_Hours.Caption := 'last '+IntToStr(iSecs)+' secs';
         end else if iSecs<3600 then begin
-            Label_Hours.Caption := '已运行 '+IntToStr((iSecs div 60))+' 分钟';
+            Label_Hours.Caption := 'last '+IntToStr((iSecs div 60))+' mins';
         end else begin
-            Label_Hours.Caption := '已运行 '+Format('%.1f',[iSecs/3600])+' 小时';
+            Label_Hours.Caption := 'last '+Format('%.1f',[iSecs/3600])+' hours';
         end;
 
         //如果启动了空闲时关闭系统, 则关闭

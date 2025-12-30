@@ -3937,6 +3937,7 @@ begin
 
     //
     oTbP.Position   := 0;
+
     //
     dcUpdate(oDBCard,'');
 end;
@@ -4482,6 +4483,7 @@ begin
         with oE do begin
             Name            := sPrefix + 'F'+ASuffix;
             Parent          := oP;
+            AutoSize        := false;
             Align           := alClient;
             Alignment       := taRightJustify;
             AlignWithMargins:= True;
@@ -4670,6 +4672,7 @@ begin
         with oE do begin
             Name            := sPrefix + 'F'+ASuffix;
             HelpKeyword     := 'tree';
+            AutoSize        := false;
             Parent          := oP;
             Align           := alClient;
             //Alignment       := taRightJustify;
@@ -4701,6 +4704,7 @@ begin
             HelpKeyword     := 'tree';
             Parent          := oP;
             Align           := alClient;
+            AutoSize        := false;
             //Alignment       := taRightJustify;
             AlignWithMargins:= True;
             Margins.Right   := 18;
@@ -4726,6 +4730,7 @@ begin
             Name            := sPrefix + 'F'+ASuffix;
             Parent          := oP;
             Align           := alClient;
+            AutoSize        := false;
             AlignWithMargins:= True;
             Margins.Right   := 20;
             Margins.Bottom  := 6;
@@ -4802,6 +4807,7 @@ begin
             Margins.Right   := 18;
             Margins.Bottom  := 5;
             Margins.Top     := 5;
+            Height          := 30;
         end;
         //先显示一个图片
         oI := TImage.Create(oForm);
@@ -4817,7 +4823,7 @@ begin
             Width           := 34;
             Stretch         := True;
             Proportional    := True;
-            Hint            := '{"dwstyle":"border-radius:3px;"}';
+            Hint            := '{"dwstyle":"border-radius:2px;"}';
             //是否预览
             IncrementalDisplay  := dwGetInt(AField,'preview')=1;
         end;
@@ -4836,6 +4842,7 @@ begin
             Cancel          := True;
             Font.Color      := rgb(192, 196, 204);
             Caption         := '';
+            Top             := 2;
             Hint            := '{'
                     +'"icon":"el-icon-upload2"'
                     +',"type":"text"'
@@ -4862,6 +4869,7 @@ begin
             Name            := sPrefix + 'F'+ASuffix;
             Parent          := oP;
             Align           := alClient;
+            AutoSize        := false;
             AlignWithMargins:= True;
             Margins.Right   := 20;
             Margins.Bottom  := 6;
@@ -4948,6 +4956,7 @@ begin
             Name            := sPrefix + 'F'+ASuffix;
             Parent          := oP;
             Align           := alClient;
+            AutoSize        := false;
             AlignWithMargins:= True;
             Margins.Right   := 20;
             Margins.Bottom  := 6;
@@ -5014,6 +5023,7 @@ begin
         with oE do begin
             Name            := sPrefix + 'F'+ASuffix;
             Parent          := oP;
+            AutoSize        := false;
             Align           := alClient;
             //Alignment       := taRightJustify;
             AlignWithMargins:= True;
@@ -5021,6 +5031,7 @@ begin
             Margins.Bottom  := 6;
             Margins.Top     := 6;
             Text            := '';
+            //Height          := 40;
             Color           := clNone;
             //
             Hint            := '{"dwstyle":""}';
@@ -5057,6 +5068,7 @@ begin
             HelpKeyword     := 'tree';
             Parent          := oP;
             Align           := alClient;
+            AutoSize        := false;
             //Alignment       := taRightJustify;
             AlignWithMargins:= True;
             Margins.Right   := 18;
@@ -5086,6 +5098,7 @@ begin
             HelpKeyword     := 'tree';
             Parent          := oP;
             Align           := alClient;
+            AutoSize        := false;
             //Alignment       := taRightJustify;
             AlignWithMargins:= True;
             Margins.Right   := 18;
@@ -5112,6 +5125,7 @@ begin
             Parent          := oP;
             Align           := alClient;
             //Alignment       := taRightJustify;
+            AutoSize        := false;
             AlignWithMargins:= True;
             Margins.Right   := 20;
             Margins.Bottom  := 6;
@@ -5868,7 +5882,7 @@ begin
             //
             AlignWithMargins:= True;
             Margins.left    := 50;
-            Margins.Bottom  := 19;
+            Margins.Bottom  := 14;
             //
             tM.Code         := @BEOClick;
             tM.Data         := Pointer(325); // 随便取的数
@@ -5892,7 +5906,7 @@ begin
             //
             AlignWithMargins:= True;
             Margins.Left    := 10;
-            Margins.Bottom  := 19;
+            Margins.Bottom  := 14;
             //
             tM.Code         := @BEAClick;
             tM.Data         := Pointer(325); // 随便取的数
@@ -5920,7 +5934,7 @@ begin
             BorderStyle := bsNone;
             Align       := alClient;
             Color       := clNone;
-            Hint        := '{"dwstyle":"overflow-y:auto;"}';
+            Hint        := '{"dwstyle":"overflow-y:auto;overflow-x:hidden;"}';
         end;
 
         //创建主表各字段的编辑框
@@ -5952,6 +5966,10 @@ begin
                 end;
             end;
         end;
+
+        //
+        oPEr.Visible    := True;
+        oPEr.Visible    := False;
     //except
         //ShowMessage('error when dcCreateEditorPanel');
     //end;
@@ -6022,6 +6040,7 @@ var
     oEKw        : TEdit;
     oFQy        : TFlowPanel;
     oPQF        : TPanel;
+    oFPs        : TFlowPanel;
     oPCs        : TPanel;               //多个数据卡片的容器面板, 其tag为当前页码, 从0始
     oPCd        : TPanel;               //数据卡片
     oTbP        : TTrackBar;            //分页栏
@@ -6062,6 +6081,7 @@ begin
     oEKw        := TEdit(oForm.FindComponent(sPrefix+'EKw'));           //查询关键字
     oBQy        := TButton(oForm.FindComponent(sPrefix+'BQy'));         //查询按钮
     oFQy        := TFlowPanel(oForm.FindComponent(sPrefix+'FQy'));      //分字段查询字段的流式布局容器面板
+    oFPs        := TFlowPanel(oForm.FindComponent(sPrefix+'FPs'));      //面板容器
     oPCs        := TPanel(oForm.FindComponent(sPrefix+'PCs'));          //多数据卡片的容器面板
     oTbP        := TTrackbar(oForm.FindComponent(sPrefix+'TbP'));       //分页栏
 
@@ -6494,7 +6514,26 @@ begin
     end;
 
     //控制滚动条到顶部
-    dwRunJS('document.getElementById("'+dwFullName(oPCs)+'").scrollTop = 0;',oForm);
+    if joConfig.mobile = 1 then begin
+        if oFPs <> nil then begin
+            dwRunJS('document.getElementById("'+dwFullName(oFPs)+'").scrollTop = 0;',oForm);
+        end else begin
+            dwRunJS('document.getElementById("'+dwFullName(oPCs)+'").scrollTop = 0;',oForm);
+            //强制刷新, 以解决未自动出现滚动条的bug
+            sText   := dwFullName(oPCs);
+            dwRunJS(
+                'const div = document.getElementById('''+sText+''');'
+                +'div.style.display = ''none'';'
+                +'div.offsetHeight; '
+                +'div.style.display = ''block'';',
+                oForm
+            );
+        end;
+    end else begin
+        if oFPs <> nil then begin
+            dwRunJS('document.getElementById("'+dwFullName(oFPs)+'").scrollTop = 0;',oForm);
+        end;
+    end;
 
     // dcDataScroll 事件
     bAccept := True;
@@ -6504,6 +6543,8 @@ begin
             Exit;
         end;
     end;
+
+
 
 end;
 
@@ -6596,31 +6637,6 @@ begin
     //默认返回值
     Result  := 0;
 
-    //置所有对象为nil
-    //
-    oForm       := nil;
-    oPQy        := nil;
-    oPQF        := nil;
-    oPQm        := nil;
-    oPBs        := nil;
-    oBQm        := nil;
-    oBFz        := nil;
-    oFPs        := nil;
-    oPCs        := nil;
-    oPCd        := nil;
-    oTbP        := nil;
-    oBtn        := nil;
-    oChk        := nil;
-    oImg        := nil;
-    oLbl        := nil;
-    oBNw        := nil;
-    oBEt        := nil;
-    oBDe        := nil;
-    oBFi        := nil;
-    oCSo        := nil;
-    oEKw        := nil;
-
-
     try
         //
         //LockWindowUpdate(APanel.Handle);
@@ -6636,6 +6652,9 @@ begin
 
             //取得配置json
             joConfig    := dcGetConfig(APanel);
+
+            //保存是否移动端标志
+            joConfig.mobile := dwIIFi(AMobile,1,0);
 
             //取得前缀备用,默认为空
             sPrefix     := dwGetStr(joConfig,'prefix','');
@@ -6754,21 +6773,22 @@ begin
                     joConfig.fields.Add(joField);
                 end;
 
-
-                //反写回
-                APanel.Hint := joConfig;
-
                 //重新读取，取得配置json
                 joConfig    := dcGetConfig(APanel);
 
                 //重新得到字段名列表
-                sFields := dcGetFields(joConfig.fields);
+                sFields     := dcGetFields(joConfig.fields);
             end;
+
+            //反写回
+            APanel.Hint := joConfig;
+
             //>
         except
             //异常时调试使用
             Result  := -1;
         end;
+
 
         //-----------------主要是创建各DB字段的list-------------------------------------------------------------------------
         if Result = 0 then begin
@@ -7113,8 +7133,7 @@ begin
                         Color       := dwGetColorFromJson(joConfig.topcolor,clBtnFace);
                     end;
                     //
-                    //Visible         := (iCount = 0) and (joConfig.defaultquerymode <> 0);
-                    Visible         := joConfig.defaultquerymode <> 0;
+                    Visible         := (iCount = 0) and (joConfig.defaultquerymode <> 0);
 
                     //
                     tM.Code         := @PQmUndock;
@@ -7294,11 +7313,11 @@ begin
                     oFPs    := TFlowPanel.Create(oForm);
                     with oFPs do begin
                         Parent          := APanel;
-                        Name            := sPrefix + 'Pcs';
+                        Name            := sPrefix + 'FPs';
                         Align           := alClient;
                         BevelOuter      := bvNone;
-                        if joConfig.Exists('datacolor') then begin
-                            Color       := dwGetColorFromJson(joConfig.backgroundcolor,clWhite);
+                        if joConfig.Exists('backgroundcolor') then begin
+                            Color       := dwGetColorFromJson(joConfig.backgroundcolor,APanel.Color);
                         end else begin
                             Color       := APanel.Color;
                         end;
@@ -7318,11 +7337,11 @@ begin
                         Align           := alClient;
                         BevelOuter      := bvNone;
                         if joConfig.Exists('backgroundcolor') then begin
-                            Color       := dwGetColorFromJson(joConfig.backgroundcolor,clWhite);
+                            Color       := dwGetColorFromJson(joConfig.backgroundcolor,APanel.Color);
                         end else begin
-                            Color       := clWhite;
+                            Color       := APanel.Color;
                         end;
-                        Hint            := '{"dwstyle":"overflow-y:auto;"}';
+                        Hint            := '{"dwstyle":"overflow-y:auto;overflow-x:hidden;"}';
                     end;
                 end;
 
@@ -7345,6 +7364,13 @@ begin
                             Parent          := oFPs;
                         end else begin
                             Parent          := oPCs;
+                        end;
+
+                        //
+                        if joConfig.Exists('cardcolor') then begin
+                            Color       := dwGetColorFromJson(joConfig.cardcolor,clWhite);
+                        end else begin
+                            Color       := APanel.Color;
                         end;
 
                         //
@@ -7569,7 +7595,7 @@ begin
                     Margins.Top     := 5;
                     Margins.Bottom  := 0;
                     Margins.Left    := 0;
-                    Margins.Right   := 20;
+                    Margins.Right   := 0;
 
                     //
                     tM.Code         := @TbPChange;
@@ -7578,7 +7604,7 @@ begin
 
                     //移动端处理
                     if AMobile then begin
-                        Hint            := '{"dwattr":"layout=\"total ,->, prev, next\"","dwstyle":"background:#fff;"}';
+                        Hint            := '{"dwattr":"background layout=\"prev, next, ->, total\"","dwstyle":"background:#fff;"}';
                     end;
 
                 end;

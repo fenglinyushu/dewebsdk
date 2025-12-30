@@ -12841,7 +12841,7 @@
 .el-input__prefix,
 .el-input__suffix {
     position: absolute;
-    top: 18%;
+    top: calc(50% - 0.85em);
     -webkit-transition: all .3s;
     color: #c0c4cc;
     text-align: center

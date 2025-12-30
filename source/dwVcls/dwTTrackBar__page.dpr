@@ -43,6 +43,7 @@ function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
 var
     joData  : Variant;
     iTmp    : Integer;
+    bTmp    : Boolean;
     oChange : Procedure(Sender:TObject) of Object;
 begin
     with TTrackBar(Actrl) do begin
@@ -66,6 +67,14 @@ begin
             if Assigned(TTrackBar(ACtrl).OnChange) then begin
                 TTrackBar(ACtrl).OnChange(TTrackBar(ACtrl));
             end;
+        end else if joData.e = 'onsizechange' then begin
+
+            //执行事件
+            if Assigned(TTrackBar(ACtrl).OnDragOver) then begin
+                //更新值
+                iTmp    := StrToIntDef(dwUnescape(joData.v),0);
+                TTrackBar(ACtrl).OnDragOver(TTrackBar(ACtrl),nil,iTmp,0,dsDragEnter,bTmp);
+            end;
         end;
     end;
 end;
@@ -77,6 +86,7 @@ var
     sCode   : string;
     sType   : string;
     sFull   : string;
+    sPages  : string;
     //
     joHint  : Variant;
     joRes   : Variant;
@@ -85,13 +95,19 @@ begin
         //用作分页控件--------------------------------------------------------------------------
 
         //生成返回值数组
-        joRes    := _Json('[]');
+        joRes       := _Json('[]');
 
         //
-        sFull   := dwFullName(ACtrl);
+        sFull       := dwFullName(ACtrl);
 
         //取得HINT对象JSON
-        joHint    := dwGetHintJson(TControl(ACtrl));
+        joHint      := dwGetHintJson(TControl(ACtrl));
+
+        //取得每页行数列表
+        sPages      := '';
+        if joHint.Exists('pagesizes') then begin
+            sPages  := ' :page-sizes ="'+joHint.pagesizes+'"';
+        end;
 
         with TTrackBar(ACtrl) do begin
             //外框
@@ -108,7 +124,7 @@ begin
             joRes.Add(sCode);
 
             //
-            sCode     := '    <el-pagination'
+            sCode     := '<el-pagination'
                     //+' id="'+sFull+'"'
                     //+dwVisible(TControl(ACtrl))
                     //+dwDisable(TControl(ACtrl))
@@ -116,11 +132,12 @@ begin
                     +' :total="'+sFull+'__tot"'
                     +' :page-size="'+sFull+'__pgs"'
                     +' :current-page="'+sFull+'__cpg"'
+                    +sPages
                     +dwGetDWAttr(joHint)
-                    +dwIIF(Assigned(OnChange),
-                        ' @current-change="'+sFull+'__currentchange"','')
-
-                        //' @current-change="function(val){dwevent(this.$event,'''+Name+''',val,''onchange'','''+IntToStr(TForm(Owner).Handle)+''')}"','')
+                    //currentPage 改变时会触发
+                    +dwIIF(Assigned(OnChange), ' @current-change="'+sFull+'__currentchange"','')
+                    //pageSize 改变时会触发
+                    +dwIIF(Assigned(OnDragOver), ' @size-change="'+sFull+'__sizechange"','')
                     +'>';
             //添加到返回值数据
             joRes.Add(sCode);
@@ -244,22 +261,46 @@ var
     sCode   : string;
     sFull   : string;
     sName   : string;
+    sOnPage : string;   //页面切换时执行的额外事件
     //
     joRes   : variant;
+    joHint  : variant;
 begin
     //生成返回值数组
     joRes   := _Json('[]');
+
+    //取得HINT对象JSON
+    joHint  := dwGetHintJson(TControl(ACtrl));
 
     //
     sFull   := dwFullName(ACtrl);
     sName   := ACtrl.Name;
 
-    with TComboBox(ACtrl) do begin
-        sCode   := sFull + '__currentchange(e){'
-                    //     dwevent(e,'''+Name+''',v,''onchange'','''+IntToStr(TForm(Owner).Handle)+''')
-                    +'this.dwevent(e,"'+sName+'",e,''onchange'','''+IntToStr(TForm(Owner).Handle)+''');'
-                +'},';
-        joRes.Add(sCode);
+
+    with TTrackBar(ACtrl) do begin
+        //页面切换时执行的额外JS代码, 通过Hint中的onpage设置
+        sOnPage := dwGetStr(joHint,'onpage');
+
+        //currentPage 改变时会触发
+        if Assigned(OnChange) then begin
+            sCode   := sFull + '__currentchange(e){'
+                        //
+                        +sOnPage
+                        +'this.dwevent(e,"'+sName+'",e,''onchange'','''+IntToStr(TForm(Owner).Handle)+''');'
+                    +'},';
+            joRes.Add(sCode);
+        end;
+
+        //pageSize 改变时会触发
+        if Assigned(OnDragover) then begin
+            sCode   := sFull + '__sizechange(e){'
+                        //
+                        +sOnPage
+                        //+'console.log(e);'
+                        +'this.dwevent(e,"'+sName+'",e,''onsizechange'','''+IntToStr(TForm(Owner).Handle)+''');'
+                    +'},';
+            joRes.Add(sCode);
+        end;
     end;
 
     //
