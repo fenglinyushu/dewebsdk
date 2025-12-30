@@ -32,8 +32,8 @@ QQ Group: 120283369
 
 Email: fenglinyushu@163.com
 
-### 请我喝杯咖啡
-#### 开发不易，您的支持将激励我持续更新和完善项目！
+#### 请我喝杯咖啡
+开发不易，您的支持将激励我持续更新和完善项目！
 
 [![Donate](https://www.delphibbs.com/media/images/buy.jpg)](https://www.delphibbs.com/media/images/buy.jpg)
 
