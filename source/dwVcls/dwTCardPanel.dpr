@@ -89,59 +89,34 @@ begin
         joData    := _json(AData);
 
         if joData.e = 'onchange' then begin
-            //先执行PageControl的切换事件
-            if joData.v <> dwFullName(ActiveCard) then begin
-                //保存事件
-                oChange := TCardPanel(ACtrl).OnCardChange;
+            //保存事件
+            oChange := TCardPanel(ACtrl).OnCardChange;
 
-                //
-                iOld    := TCardPanel(ACtrl).ActiveCardIndex;
+            //
+            iOld    := TCardPanel(ACtrl).ActiveCardIndex;
 
-                //清空事件,以防止自动执行
-                TCardPanel(ACtrl).OnCardChange  := nil;
-                //更新值
-                for iTab := 0 to TCardPanel(ACtrl).CardCount-1 do begin
-                    if LowerCase(dwPrefix(ACtrl) + TCardPanel(ACtrl).Cards[iTab].Name) = joData.v then begin
-                         TCardPanel(ACtrl).ActiveCardIndex  := iTab;
-                         break;
-                    end;
+            //清空事件,以防止自动执行
+            TCardPanel(ACtrl).OnCardChange  := nil;
+            //更新值
+            for iTab := 0 to TCardPanel(ACtrl).CardCount-1 do begin
+                if LowerCase(dwPrefix(ACtrl) + TCardPanel(ACtrl).Cards[iTab].Name) = joData.v then begin
+                     TCardPanel(ACtrl).ActiveCardIndex  := iTab;
+                     break;
                 end;
-                //恢复事件
-                TCardPanel(ACtrl).OnCardChange  := oChange;
-
-                //执行事件
-                if Assigned(TCardPanel(ACtrl).OnCardChange) then begin
-                    //
-                    iNew    := TCardPanel(ACtrl).ActiveCardIndex;
-
-                    TCardPanel(ACtrl).OnCardChange(TCardPanel(ACtrl),TCardPanel(ACtrl).Cards[iOld],TCardPanel(ACtrl).Cards[iNew]);
-                end;
-
-                //清空OnExit事件
-                TCardPanel(ACtrl).OnExit  := nil;
-            end else begin
-
-                //<----- 再执行 tabsheet 的 点击事件
-                //先找到被点击的 tabsheet
-                oTab    := nil;
-                for iTab := 0 to CardCount-1 do begin
-                    if dwFullName(Cards[iTab]) = joData.v then begin
-                         oTab   := Cards[iTab];
-                         break;
-                    end;
-                end;
-
-                if oTab = nil then begin
-                    Exit;
-                end;
-
-                //
-                if Assigned(oTab.OnEnter) then begin
-                    oTab.OnEnter(oTab);
-                end;
-
-                //>-----
             end;
+            //恢复事件
+            TCardPanel(ACtrl).OnCardChange  := oChange;
+
+            //执行事件
+            if Assigned(TCardPanel(ACtrl).OnCardChange) then begin
+                //
+                iNew    := TCardPanel(ACtrl).ActiveCardIndex;
+
+                TCardPanel(ACtrl).OnCardChange(TCardPanel(ACtrl),TCardPanel(ACtrl).Cards[iOld],TCardPanel(ACtrl).Cards[iNew]);
+            end;
+
+            //清空OnExit事件
+            TCardPanel(ACtrl).OnExit  := nil;
         end else if joData.e = 'onenddock' then begin
         end;
     end;
@@ -152,15 +127,13 @@ end;
 //取得HTML头部消息
 function dwGetHead(ACtrl:TComponent):string;StdCall;
 var
-    sCode       : string;
-    sEdit       : string;   //增减TTabSheet的处理代码
-    joHint      : Variant;
-    joRes       : Variant;
-    joTabHint   : Variant;
-    iTab        : Integer;
-    sFull       : string;
+     sCode      : string;
+     sEdit      : string;   //增减TTabSheet的处理代码
+     joHint     : Variant;
+     joRes      : Variant;
+     joTabHint  : Variant;
+     iTab       : Integer;
 begin
-    sFull       := dwFullName(Actrl);
     with TCardPanel(Actrl) do begin
         //用作Tabs控件--------------------------------------------------------------------------
 
@@ -171,81 +144,52 @@ begin
         joHint    := dwGetHintJson(TControl(ACtrl));
 
         with TCardPanel(ACtrl) do begin
-            //增减事件处理代码
-            //@edit="function(targetName,action){var data=0;if (action === 'add') {data=1};data = targetName*10+data; dwevent(this.$event,'PageControl1',data,'onenddock','10095742')}">>
-
-            sEdit   := ' @edit="function(targetName,action)'
-                    //+'{var data=0;if (action === ''add'') {data=1};data = targetName*10+data;dwevent(this.$event,'''+Name+''',data,''onenddock'','''+IntToStr(TForm(Owner).Handle)+''')}"';
-                    +'{'
-                        +'var data = new String(targetName+'',''+action);'
-                        +'dwevent(this.$event,'''+Name+''',data,''onenddock'','''+IntToStr(TForm(Owner).Handle)+''')'
-                    +'}"';
-            //sEdit   := ' @edit="function(targetName,action){var data=0;if (action === ''add'') {data=1};dwevent(this.$event,'''+Name+''',data,''onenddock'','''+IntToStr(TForm(Owner).Handle)+''')}"';
 
 
-
-            //外框
-            joRes.Add('<el-tabs'
-                    +' id="'+sFull+'"'
-                    +' ref="'+sFull+'__ref"'
+            //
+            sCode   := '<div'
+                    +' id="'+dwFullName(Actrl)+'"'
                     +dwVisible(TControl(ACtrl))
                     +dwDisable(TControl(ACtrl))
-                    +' v-model="'+sFull+'__apg"'        //ActivePage
-                    +' :tab-position="'+sFull+'__tps"'  //标题位置
-                    +dwIIF(ParentBiDiMode,dwIIF(ParentShowHint,' type="border-card"',' type="card"'),'')   //是否有外框
-                    +dwGetDWAttr(joHint)
+                    //+dwGetHintValue(joHint,'type','type',' type="default"')
+                    //+dwGetHintValue(joHint,'icon','icon','')
+                    +' :style="{'
+                        +'backgroundColor:'+dwFullName(Actrl)+'__col,'
+                        //Font
+                        +'color:'+dwFullName(Actrl)+'__fcl,'
+                        +'''font-size'':'+dwFullName(Actrl)+'__fsz,'
+                        +'''font-family'':'+dwFullName(Actrl)+'__ffm,'
+                        +'''font-weight'':'+dwFullName(Actrl)+'__fwg,'
+                        +'''font-style'':'+dwFullName(Actrl)+'__fsl,'
+                        +'''text-decoration'':'+dwFullName(Actrl)+'__ftd,'
 
-                    //:style 和 style
-                    +dwLTWH(TControl(ACtrl))
-                    +'font-size:'+IntToStr(Font.Size+3)+'px;'
-                    +dwGetDWStyle(joHint)
+                        +'transform:''rotateZ({'+dwFullName(Actrl)+'__rtz}deg)'','
+                        +'left:'+dwFullName(Actrl)+'__lef,top:'+dwFullName(Actrl)+'__top,width:'+dwFullName(Actrl)+'__wid,height:'+dwFullName(Actrl)+'__hei}"'
+                        //+' style="position:'+dwIIF(Parent.ControlCount=1,'relative','absolute')+';overflow:hidden;'
+                        +' style="position:'+dwIIF((Parent.ControlCount=1)and(Parent.ClassName='TScrollBox'),'relative','absolute')+';overflow:hidden;'
+                        +dwIIF(BorderStyle=bsSingle,'border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);','')
+                        +dwGetHintStyle(joHint,'radius','border-radius','')   //border-radius
+                        +dwGetDWStyle(joHint)
                     +'"' //style 封闭
+                    +'>';
+            //添加到返回值数据
+            joRes.Add(sCode);
 
-                    //事件
-                    +Format(_DWEVENT,['tab-click',Name,'this.'+sFull+'__apg','onchange',TForm(Owner).Handle])
-                    //+Format(_DWEVENT,['edit',Name,'this.'+sFull+'__apg','onenddock',TForm(Owner).Handle])
-                    +sEdit
-                    +'>');
-
-
-
-            //添加选项卡(标题)
+            //添加Card
             for iTab := 0 to CardCount-1 do begin
                 joTabHint   := dwGetHintJson(Cards[iTab]);
-                //根据是否有图标分别处理
-                if (Cards[iTab].Tag>0)and(Cards[iTab].Tag<=280) then begin
-                    joRes.Add('    <el-tab-pane'
-                            +dwGetDWAttr(joTabHint)
-                            +' name="'+LowerCase(dwPrefix(Actrl)+Cards[iTab].Name)+'"'
-                            +' style="'
-                                //+dwIIF(Pages[iTab].TabVisible,'','display:none;')
-                                //+dwIIF(CardWidth>0,'width:'+IntToStr(CardWidth)+'px;','')
-                            +'"'
-                            +'>');
-                            //+' name="'+IntToStr(iTab)+'">');
-                    joRes.Add('        <span slot="label">'
-                            +'<i class="'+dwIcons[Cards[iTab].Tag]+'"></i>'
-                            +' {{'+LowerCase(dwPrefix(Actrl)+Cards[iTab].Name)+'__cap}}'
-                            +'</span>');
-                end else begin
-                    joRes.Add('    <el-tab-pane'
-                            +dwGetDWAttr(joTabHint)
-                            +' :label="'+LowerCase(dwPrefix(Actrl)+Cards[iTab].Name)+'__cap"'
-                            +' name="'+LowerCase(dwPrefix(Actrl)+Cards[iTab].Name)+'"'
-                            +' style="'
-                                //+dwIIF(Pages[iTab].TabVisible,'','display:none;')
-                                //+dwIIF(CardWidth>0,'width:'+IntToStr(CardWidth)+'px;','')
-                            +'"'
-                            +'>');
-                end;
                 //
-                joRes.Add('    </el-tab-pane>');
+                {
+                joRes.Add('<div'
+                        +dwGetDWAttr(joTabHint)
+                        +' style="'
+                        +dwGetDWStyle(joTabHint)
+                        +'"' //style 封闭
+                        +'>');
+                //
+                joRes.Add('</div>');
+                }
             end;
-
-
-            //body框
-            joRes.Add('    <div'+dwLTWHTab(TControl(ACtrl))+'">');
-
         end;
         //
         Result    := (joRes);
@@ -362,4 +306,5 @@ exports
 
 begin
 end.
- 
+
+

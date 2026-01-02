@@ -30,7 +30,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 532
     object P0: TPanel
       AlignWithMargins = True
       Left = 10
@@ -129,7 +128,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'C0'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S0: TSpinEdit
         AlignWithMargins = True
@@ -147,7 +145,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
     object P1: TPanel
@@ -248,7 +245,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'C1'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S1: TSpinEdit
         AlignWithMargins = True
@@ -266,7 +262,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
     object P2: TPanel
@@ -367,7 +362,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'C2'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S2: TSpinEdit
         AlignWithMargins = True
@@ -385,7 +379,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
     object P3: TPanel
@@ -486,7 +479,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'ComboBox1'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S3: TSpinEdit
         AlignWithMargins = True
@@ -504,7 +496,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
     object P4: TPanel
@@ -606,7 +597,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'ComboBox1'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S4: TSpinEdit
         AlignWithMargins = True
@@ -624,7 +614,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
     object P5: TPanel
@@ -726,7 +715,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'ComboBox1'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S5: TSpinEdit
         AlignWithMargins = True
@@ -744,7 +732,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
     object P6: TPanel
@@ -844,7 +831,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'ComboBox1'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S6: TSpinEdit
         AlignWithMargins = True
@@ -862,7 +848,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
     object P7: TPanel
@@ -962,7 +947,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 1
         Text = 'ComboBox1'
         OnChange = C0Change
-        ExplicitTop = 142
       end
       object S7: TSpinEdit
         AlignWithMargins = True
@@ -980,7 +964,6 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         TabOrder = 2
         Value = 1
         OnChange = S0Change
-        ExplicitTop = 208
       end
     end
   end
@@ -1041,7 +1024,9 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
   end
   object FDQuery1: TFDQuery
     Connection = Form1.FDConnection1
-    Left = 40
-    Top = 312
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    Left = 272
+    Top = 32
   end
 end

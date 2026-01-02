@@ -7,7 +7,7 @@ object MainForm: TMainForm
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -15
+  Font.Height = -13
   Font.Name = #24494#36719#38597#40657
   Font.Style = []
   Icon.Data = {
@@ -2680,13 +2680,13 @@ object MainForm: TMainForm
   OnDestroy = FormDestroy
   OnResize = FormResize
   OnShow = FormShow
-  TextHeight = 20
+  TextHeight = 19
   object PageControl: TPageControl
     Left = 0
     Top = 51
     Width = 784
     Height = 390
-    ActivePage = TabSheet_Account
+    ActivePage = TabSheet_Apps
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -2877,7 +2877,7 @@ object MainForm: TMainForm
           Margins.Left = 5
           Margins.Right = 5
           Align = alLeft
-          Caption = #26684#24335#21270
+          Caption = 'Format'
           Flat = True
           Layout = blGlyphTop
           Visible = False
@@ -2893,7 +2893,7 @@ object MainForm: TMainForm
           Margins.Left = 5
           Margins.Right = 5
           Align = alLeft
-          Caption = #28165#31354
+          Caption = 'Clear'
           Flat = True
           Layout = blGlyphTop
           OnClick = SpeedButton_ClearClick
@@ -2908,7 +2908,7 @@ object MainForm: TMainForm
           Margins.Left = 5
           Margins.Right = 5
           Align = alLeft
-          Caption = #23548#20986
+          Caption = 'Export'
           Flat = True
           Layout = blGlyphTop
           Visible = False
@@ -2950,7 +2950,7 @@ object MainForm: TMainForm
           Margins.Left = 5
           Margins.Right = 5
           Align = alLeft
-          Caption = #21024#38500#36134#22871
+          Caption = 'Delete'
           Flat = True
           Layout = blGlyphTop
           OnClick = SpeedButton_AccountDeleteClick
@@ -2966,7 +2966,7 @@ object MainForm: TMainForm
           Margins.Left = 5
           Margins.Right = 5
           Align = alLeft
-          Caption = #22686#21152#36134#22871
+          Caption = 'New'
           Flat = True
           Layout = blGlyphTop
           OnClick = SpeedButton_AccountAddClick
@@ -2982,7 +2982,7 @@ object MainForm: TMainForm
           Margins.Left = 5
           Margins.Right = 5
           Align = alLeft
-          Caption = #32534#36753#36134#22871
+          Caption = 'Edit'
           Flat = True
           Layout = blGlyphTop
           OnClick = SpeedButton_AccountEditClick
@@ -3024,35 +3024,6 @@ object MainForm: TMainForm
     object TabSheet_Help: TTabSheet
       Caption = 'Help'
       ImageIndex = 3
-      object Memo1: TMemo
-        Left = 0
-        Top = 0
-        Width = 776
-        Height = 345
-        Align = alClient
-        BorderStyle = bsNone
-        Lines.Strings = (
-          '# DeWebSDK'
-          ''
-          '-'
-          'DeWeb : Delphi'#24320#21457#32773#30340'Web'#35299#20915#26041#26696#65281'  '
-          'DeWeb'#26159#19968#20010#21487#20197#30452#25509#23558'Delphi'#31243#24207#24555#36895#36716#25442#20026#32593#39029#24212#29992#30340#24037#20855#65281'  '
-          
-            #20351#29992'DeWeb, '#24320#21457#32773#19981#38656#35201#23398#20064'HTML'#12289'JavaScript'#12289'Java'#12289'PHP'#12289'ASP'#12289'C#'#31561#26032#30693#35782#65292#29992'Delphi'#25630#23450#19968#20999 +
-            #12290'   '
-          'DeWeb'#25903#25345#24320#21457'Web'#12289#20844#20247#21495#21644#23567#31243#24207#12290'  '
-          ''
-          '['#39318#39029'](https://delphibbs.com)  '
-          '['#26696#20363'](https://delphibbs.com/demos)    '
-          '['#24320#21457#25991#26723'](https://delphibbs.com/doc)  '
-          '['#20179#24211#31649#29702#31995#32479'](https://delphibbs.com/dwms)  '
-          '['#22823#23500#32705#35770#22363#65288#35797#36816#34892#65289'](https://delphibbs.com/bbs)  '
-          ''
-          '                                                '#30887#26641#35199#39118' '#20986#21697
-          '                                                 QQ:45300355')
-        ScrollBars = ssBoth
-        TabOrder = 0
-      end
     end
   end
   object FileListBox_Vcls: TFileListBox
@@ -3060,7 +3031,7 @@ object MainForm: TMainForm
     Top = 272
     Width = 185
     Height = 54
-    ItemHeight = 20
+    ItemHeight = 19
     Mask = '*.dll'
     TabOrder = 0
     Visible = False
@@ -3070,7 +3041,7 @@ object MainForm: TMainForm
     Top = 272
     Width = 187
     Height = 54
-    ItemHeight = 20
+    ItemHeight = 19
     Mask = '*.dll'
     TabOrder = 1
     Visible = False
@@ -3161,21 +3132,19 @@ object MainForm: TMainForm
     end
     object SpeedButton_Exit: TSpeedButton
       AlignWithMargins = True
-      Left = 676
+      Left = 691
       Top = 4
-      Width = 105
+      Width = 90
       Height = 43
       Hint = 'show / hide debug messages'
       Align = alRight
       Caption = 'Exit'
-      ImageIndex = 17
+      ImageIndex = 4
       Images = ImageListMain
       Flat = True
       Transparent = False
       OnClick = SpeedButton_ExitClick
-      ExplicitLeft = 624
-      ExplicitTop = 5
-      ExplicitHeight = 26
+      ExplicitLeft = 676
     end
     object SpeedButton_demos: TSpeedButton
       AlignWithMargins = True
@@ -3196,7 +3165,7 @@ object MainForm: TMainForm
     end
     object Label_Hours: TLabel
       AlignWithMargins = True
-      Left = 580
+      Left = 595
       Top = 4
       Width = 90
       Height = 43
@@ -3221,10 +3190,10 @@ object MainForm: TMainForm
       AlignWithMargins = True
       Left = 291
       Top = 4
-      Width = 120
+      Width = 90
       Height = 43
       Align = alLeft
-      Caption = 'Document'
+      Caption = 'Doc'
       ImageIndex = 3
       Images = ImageListMain
       Flat = True
@@ -3244,7 +3213,7 @@ object MainForm: TMainForm
     end
     object Panel_Port: TPanel
       AlignWithMargins = True
-      Left = 414
+      Left = 384
       Top = 1
       Width = 125
       Height = 48
@@ -3257,7 +3226,6 @@ object MainForm: TMainForm
       ParentBackground = False
       ParentColor = True
       TabOrder = 1
-      ExplicitLeft = 384
       object Label2: TLabel
         Left = 0
         Top = 0
@@ -3276,7 +3244,7 @@ object MainForm: TMainForm
         Left = 53
         Top = 10
         Width = 69
-        Height = 30
+        Height = 29
         Margins.Top = 10
         Margins.Bottom = 10
         Align = alClient

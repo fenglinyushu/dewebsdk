@@ -477,7 +477,7 @@ begin
                 *)
 
 
-                //先写入字段名列表
+                //先写入字段名列表,  第一行为曲线名称, 从数据表中读取字段名, 从序号1(非0)开始. 第0个字段用于横坐标
                 sTemp   := '[';
                 for iCol := 1 to AFQUpdate.FieldCount - 1 do begin
                     sTemp   := sTemp + '''' + AFQUpdate.Fields[iCol].FieldName +''','
@@ -486,7 +486,7 @@ begin
                 sTemp   := sTemp + '],';
                 Lines.Insert(iStart + 1,sTemp);
 
-                //写第一个字段的值,即横坐标
+                //写第0个字段的值,一般为横坐标(horz时为纵坐标)
                 sTemp   := '[';
                 AFQUpdate.First;
                 while not AFQUpdate.Eof do begin
@@ -498,7 +498,7 @@ begin
                 Lines.Insert(iStart + 2,sTemp);
 
 
-                //写入新数据
+                //写入新数据, 依次为其他字段的值
                 for iCol := 1 to AFQUpdate.FieldCount - 1 do begin
                     sTemp   := '[';
                     AFQUpdate.First;

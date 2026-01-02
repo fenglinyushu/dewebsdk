@@ -85,6 +85,12 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UnitSearchPath>..\_public;..\..\demos\_public;..\_wxpublic;..\..\demoWechat\_wxpublic;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_ExeOutput>..\..\Runtime\Apps\</DCC_ExeOutput>
+        <Debugger_HostApplication>..\..\runtime\DeWebServer.exe</Debugger_HostApplication>
+        <Debugger_CWD>..\..\runtime\</Debugger_CWD>
+        <Manifest_File>(None)</Manifest_File>
+        <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -106,13 +112,10 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <DCC_ExeOutput>..\..\runtime\apps</DCC_ExeOutput>
-        <DCC_UnitSearchPath>..\_public;..\..\demos\_public;..\_wxpublic;..\..\demoWechat\_wxpublic;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>(None)</Manifest_File>
         <Debugger_HostApplication>..\..\Runtime\DeWebServer.exe</Debugger_HostApplication>
         <Debugger_CWD>..\..\Runtime\</Debugger_CWD>
-        <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -130,13 +133,8 @@
         <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <DCC_UnitSearchPath>..\_public;..\..\demos\_public;..\_wxpublic;..\..\demoWechat\_wxpublic;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_ExeOutput>..\..\Runtime\Apps\</DCC_ExeOutput>
-        <Debugger_HostApplication>..\..\runtime\DeWebServer.exe</Debugger_HostApplication>
-        <Debugger_CWD>..\..\runtime\</Debugger_CWD>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>(None)</Manifest_File>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
     </PropertyGroup>
     <ItemGroup>
@@ -153,14 +151,8 @@
         <DCCReference Include="unit_sys_User.pas">
             <Form>Form_sys_User</Form>
         </DCCReference>
-        <DCCReference Include="unit_sys_ChangePsd.pas">
-            <Form>Form_sys_ChangePsd</Form>
-        </DCCReference>
-        <DCCReference Include="unit_bop_ClassManager.pas">
-            <Form>Form_bop_ClassManager</Form>
-        </DCCReference>
-        <DCCReference Include="unit_sys_Department.pas">
-            <Form>Form_sys_Department</Form>
+        <DCCReference Include="unit_bop_ExamSyn.pas">
+            <Form>Form_bop_ExamSyn</Form>
         </DCCReference>
         <DCCReference Include="Unit_sys_Home.pas">
             <Form>Form_sys_Home</Form>
@@ -169,61 +161,68 @@
             <Form>Form_sys_QuickBtn</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_Entry.pas">
-            <Form>Form_bop_Entry</Form>
+        <DCCReference Include="unit_bop_Select.pas">
+            <Form>Form_bop_Select</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_Test.pas">
-            <Form>Form_bop_Test</Form>
+        <DCCReference Include="unit_bop_Judge.pas">
+            <Form>Form_bop_Judge</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_GetGroup.pas">
-            <Form>Form_bop_GetGroup</Form>
+        <DCCReference Include="unit_bop_JudgeSel.pas">
+            <Form>Form_bop_JudgeSel</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_ScoreTotal.pas">
-            <Form>Form_bop_ScoreTotal</Form>
+        <DCCReference Include="unit_bop_SelectSel.pas">
+            <Form>Form_bop_SelectSel</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_sys_Student.pas">
-            <Form>Form_sys_Student</Form>
+        <DCCReference Include="unit_bop_Ranking.pas">
+            <Form>Form_bop_Ranking</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_SuperSQL.pas">
-            <Form>Form_bop_SuperSQL</Form>
+        <DCCReference Include="unit_bop_ShortSel.pas">
+            <Form>Form_bop_ShortSel</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\_public\dwHistory.pas"/>
-        <DCCReference Include="unit_dic_Location.pas">
-            <Form>Form_dic_Location</Form>
+        <DCCReference Include="unit_bop_Foot.pas">
+            <Form>Form_bop_Foot</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_sys_Me.pas">
-            <Form>Form_sys_Me</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_TestGroup.pas">
-            <Form>Form_bop_TestGroup</Form>
+        <DCCReference Include="unit_bop_Full.pas">
+            <Form>Form_bop_Full</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="unit_bop_Score.pas">
             <Form>Form_bop_Score</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_ScoreEvery.pas">
-            <Form>Form_bop_ScoreEvery</Form>
+        <DCCReference Include="unit_bop_WeekExam.pas">
+            <Form>Form_bop_WeekExam</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_dic_Item.pas">
-            <Form>Form_dic_Item</Form>
+        <DCCReference Include="unit_sys_Me.pas">
+            <Form>Form_sys_Me</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_sys_Log.pas">
-            <Form>Form_sys_Log</Form>
+        <DCCReference Include="unit_sys_ChangePsd.pas">
+            <Form>Form_sys_ChangePsd</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_dic_ItemCode.pas">
-            <Form>Form_dic_ItemCode</Form>
+        <DCCReference Include="unit_dem_DBHello.pas">
+            <Form>Form_dem_DBHello</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_bop_Short.pas">
+            <Form>Form_bop_Short</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_dem_Hello.pas">
+            <Form>Form_dem_Hello</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_bop_head.pas">
+            <Form>Form_bop_Head</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
@@ -258,12 +257,6 @@
                 <DeployFile LocalName="..\..\Runtime\Apps\default.dll" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="..\..\Runtime\Apps\default.dll" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="..\..\Runtime\Apps\dwFrame.dll" Configuration="Release" Class="ProjectOutput"/>
-                <DeployFile LocalName="..\..\Runtime\Apps\dwFrame.dll" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>dwFrame.dll</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="..\..\Runtime\Apps\dwFrame.dll" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>dwFrame.dll</RemoteName>

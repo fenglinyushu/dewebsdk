@@ -231,7 +231,6 @@ type
     SpeedButton_AccountAdd: TSpeedButton;
     StringGrid_Account: TStringGrid;
     SpeedButton_AccountEdit: TSpeedButton;
-    Memo1: TMemo;
     Panel4: TPanel;
     Panel_Info: TPanel;
     Label3: TLabel;
@@ -1733,7 +1732,7 @@ begin
     TTimer(Sender).Enabled   := False;
 
     //载入支持控件------------------------------------------------------------------------------------------------------
-    Panel_Title.Caption      := 'DeWeb Component Loading ...';
+    Panel_Title.Caption      := 'Component Loading ......';
     Panel_Progress.Visible   := True;
 
     //查找所有支持的控件

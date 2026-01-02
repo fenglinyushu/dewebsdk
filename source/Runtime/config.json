@@ -12,39 +12,12 @@
 	"database": 
 	[
 		{
-			"name": "dwAccess",
-			"string": "Database=.\\main.mdb;DriverID=MSAcc",
-			"remark": "",
-			"params": [],
-			"secret": 0,
-			"enabled": 1
-		},
-		{
 			"name": "dwFrame",
-			"string": "Server=127.0.0.1,8829;Database=dwFrame;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"string": "Database=postgres;User_Name=postgres;Password=postgres;DriverID=PG",
 			"remark": "",
 			"params": [],
 			"secret": 0,
 			"enabled": 1
-		},
-		{
-			"name": "dwDemo",
-			"secret": 0,
-			"string": "Database=.\\dwDemo.mdb;DriverID=MSAcc",
-			"enabled": 1,
-			"remark": "",
-			"params": []
-		},
-		{
-			"name": "dwQBank",
-			"secret": 0,
-			"string": "Server=127.0.0.1,8829;Database=QBank;User_Name=sa;Password={593106};DriverID=MSSQL",
-			"enabled": 1,
-			"remark": "",
-			"params": 
-			[
-				"CharacterSet=UTF8"
-			]
 		},
 		{
 			"name": "dwDeWeb",
@@ -57,23 +30,15 @@
 		{
 			"name": "dwHOEFON",
 			"secret": 0,
-			"string": "Server=127.0.0.1,8829;Database=HOEFON;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"string": "Database=.\\demo.db;DriverID=SQLite",
 			"enabled": 1,
 			"remark": "",
 			"params": []
 		},
 		{
-			"name": "dwGreen",
+			"name": "dwDeWeb",
 			"secret": 0,
-			"string": "Server=127.0.0.1,8829;Database=Green;User_Name=sa;Password={593106};DriverID=MSSQL",
-			"enabled": 1,
-			"remark": "",
-			"params": []
-		},
-		{
-			"name": "dwGMS",
-			"secret": 0,
-			"string": "Server=127.0.0.1,8829;Database=GMS;User_Name=sa;Password={593106};DriverID=MSSQL",
+			"string": "Database=postgres;User_Name=postgres;Password=postgres;DriverID=PG",
 			"enabled": 1,
 			"remark": "",
 			"params": []

@@ -1,10 +1,13 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  Hint = 
+    '{"normal":"media/system/dwFrame/svg/home.svg","active":"media/sy' +
+    'stem/dwFrame/svg/homef.svg"}'
   VertScrollBar.Visible = False
   AlphaBlend = True
   BorderStyle = bsNone
-  Caption = 'Grade Manage System'
+  Caption = 'Delphi Web Framework'
   ClientHeight = 789
   ClientWidth = 1200
   Color = clWhite
@@ -76,7 +79,7 @@ object Form1: TForm1
         Margins.Right = 20
         Align = alLeft
         AutoSize = False
-        Caption = 'GMS '#25104#32489#31649#29702#31995#32479
+        Caption = 'Delphi Web Framework'
         Font.Charset = ANSI_CHARSET
         Font.Color = 4210752
         Font.Height = -19
@@ -109,9 +112,9 @@ object Form1: TForm1
       end
       object BtThm: TButton
         AlignWithMargins = True
-        Left = 950
+        Left = 930
         Top = 10
-        Width = 40
+        Width = 60
         Height = 24
         Hint = '{"type":"text"}'
         Margins.Left = 0
@@ -119,7 +122,7 @@ object Form1: TForm1
         Margins.Right = 10
         Margins.Bottom = 6
         Align = alRight
-        Caption = #20027#39064
+        Caption = 'theme'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -131,9 +134,9 @@ object Form1: TForm1
       end
       object BtLogout: TButton
         AlignWithMargins = True
-        Left = 909
+        Left = 869
         Top = 10
-        Width = 40
+        Width = 60
         Height = 24
         Hint = '{"type":"text"}'
         Margins.Left = 0
@@ -141,7 +144,7 @@ object Form1: TForm1
         Margins.Right = 1
         Margins.Bottom = 6
         Align = alRight
-        Caption = #36864#20986
+        Caption = 'Logout'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -154,7 +157,7 @@ object Form1: TForm1
       end
       object PnB: TPanel
         AlignWithMargins = True
-        Left = 805
+        Left = 765
         Top = 10
         Width = 84
         Height = 24
@@ -258,7 +261,7 @@ object Form1: TForm1
       Align = alTop
       Alignment = taCenter
       AutoSize = False
-      Caption = '.G.M.S.'
+      Caption = '.D.W.F.'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -23
@@ -268,6 +271,8 @@ object Form1: TForm1
       Transparent = False
       Layout = tlCenter
       WordWrap = True
+      ExplicitLeft = -3
+      ExplicitTop = -6
     end
   end
   object PnH: TPanel
@@ -301,7 +306,13 @@ object Form1: TForm1
       Margins.Top = 8
       Margins.Right = 8
       Align = alTop
-      Caption = #40664#35748#20027#39064
+      Caption = 'Default theme'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24605#28304#40657#20307' CN'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
       OnClick = BTThemeClick
     end
@@ -317,11 +328,11 @@ object Form1: TForm1
     HelpType = htKeyword
     HelpKeyword = 'ok'
     BevelOuter = bvNone
-    Caption = #30830#23450#35201#27880#38144#30331#24405#21527#65311
+    Caption = 'Are you sure you want to log out?'
     Color = clWhite
     Font.Charset = ANSI_CHARSET
     Font.Color = clGray
-    Font.Height = -17
+    Font.Height = -15
     Font.Name = #24494#36719#38597#40657
     Font.Style = []
     ParentBackground = False
@@ -330,96 +341,6 @@ object Form1: TForm1
     Visible = False
     OnEnter = PnLogoutEnter
     OnExit = PnLogoutExit
-  end
-  object PnSuperSQL: TPanel
-    Left = 424
-    Top = 200
-    Width = 497
-    Height = 257
-    Hint = 
-      '{"ok":"'#30830#23450'","cancel":"'#21462#28040'","dwstyle":"border-radius:8px;box-shadow' +
-      ': rgba(0, 0, 0, 0.35) 0px 5px 15px;"}'
-    HelpType = htKeyword
-    HelpKeyword = 'ok'
-    BevelOuter = bvNone
-    Color = clWhite
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clGray
-    Font.Height = -17
-    Font.Name = #24494#36719#38597#40657
-    Font.Style = []
-    ParentBackground = False
-    ParentFont = False
-    TabOrder = 4
-    Visible = False
-    OnEnter = PnSuperSQLEnter
-    object Label1: TLabel
-      Left = 0
-      Top = 0
-      Width = 497
-      Height = 40
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = #35831#36755#20837#26597#35810'SQL'
-      Color = 16752192
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -17
-      Font.Name = #24494#36719#38597#40657
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-      ExplicitWidth = 316
-    end
-    object LaNote: TLabel
-      AlignWithMargins = True
-      Left = 15
-      Top = 163
-      Width = 462
-      Height = 34
-      Margins.Left = 15
-      Margins.Top = 0
-      Margins.Right = 20
-      Margins.Bottom = 60
-      Align = alBottom
-      AutoSize = False
-      Caption = '<p><b>'#27880#65306'</b>'#19981#25903#25345'order by'#65281#65281#65281'</p>'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clGray
-      Font.Height = -12
-      Font.Name = #24494#36719#38597#40657
-      Font.Style = []
-      ParentFont = False
-      Layout = tlCenter
-      ExplicitLeft = 10
-      ExplicitTop = 186
-      ExplicitWidth = 457
-    end
-    object MmSuperSQL: TMemo
-      AlignWithMargins = True
-      Left = 10
-      Top = 50
-      Width = 477
-      Height = 113
-      Margins.Left = 10
-      Margins.Top = 10
-      Margins.Right = 10
-      Margins.Bottom = 0
-      Align = alClient
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clGray
-      Font.Height = -12
-      Font.Name = #24494#36719#38597#40657
-      Font.Style = []
-      Lines.Strings = (
-        'SELECT * FROM sys_User')
-      ParentFont = False
-      ScrollBars = ssBoth
-      TabOrder = 0
-    end
   end
   object ImageList_dw: TImageList
     Left = 280
@@ -9810,6 +9731,8 @@ object Form1: TForm1
     Top = 305
   end
   object FDConnection1: TFDConnection
+    FetchOptions.AssignedValues = [evRecordCountMode]
+    FetchOptions.RecordCountMode = cmTotal
     Left = 282
     Top = 361
   end
@@ -9819,95 +9742,122 @@ object Form1: TForm1
     Left = 280
     Top = 182
     object MIHome: TMenuItem
-      Caption = #39318#39029
+      Caption = 'Home'
       Checked = True
       Hint = 
-        '{"normal":"media/system/gms/svg/home.svg","active":"media/system' +
-        '/gms/svg/homef.svg"}'
+        '{"normal":"media/system/dwFrame/svg/home.svg","active":"media/sy' +
+        'stem/dwframe/svg/homef.svg"}'
       ImageIndex = 56
       OnClick = MIHomeClick
     end
-    object N2: TMenuItem
-      Caption = #20307#36136#27979#35797
-      Checked = True
-      Hint = 
-        '{"normal":"media/system/gms/svg/test.svg","active":"media/system' +
-        '/gms/svg/testf.svg"}'
-      ImageIndex = 66
-      OnClick = N2Click
-    end
-    object N8: TMenuItem
-      Caption = #20307#27979#20998#32452
-      Checked = True
-      Hint = 
-        '{"normal":"media/system/gms/svg/group.svg","active":"media/syste' +
-        'm/gms/svg/groupf.svg"}'
-      ImageIndex = 72
-      OnClick = N8Click
-    end
-    object N12: TMenuItem
-      Caption = #23398#29983#32452#21035
-      ImageIndex = 72
-      OnClick = N12Click
-    end
-    object N9: TMenuItem
-      Caption = #25968#25454#31649#29702
-      ImageIndex = 147
-      object MiItemCode: TMenuItem
-        Caption = #39033#30446#32534#30721
-        ImageIndex = 197
-        OnClick = MiItemCodeClick
+    object Demo1: TMenuItem
+      Caption = 'Demo'
+      ImageIndex = 68
+      object Hello1: TMenuItem
+        Caption = 'Hello'
+        ImageIndex = 115
+        OnClick = Hello1Click
       end
-      object N5: TMenuItem
-        Caption = #39033#30446#26631#20934
-        Checked = True
-        Hint = 
-          '{"normal":"media/system/gms/svg/standard.svg","active":"media/sy' +
-          'stem/gms/svg/standardf.svg"}'
-        ImageIndex = 105
-        OnClick = N5Click
-      end
-      object N10: TMenuItem
-        Caption = #27979#35797#22320#28857
-        ImageIndex = 55
-        OnClick = N10Click
-      end
-      object MiClassManager: TMenuItem
-        Caption = #29677#32423#36127#36131#20154
-        ImageIndex = 67
-        OnClick = MiClassManagerClick
-      end
-      object N4: TMenuItem
-        Caption = #23398#29983#31649#29702
-        Hint = 
-          '{"normal":"media/system/gms/svg/user.svg","active":"media/system' +
-          '/gms/svg/userf.svg"}'
-        ImageIndex = 67
-        OnClick = N4Click
+      object DataBaseHello1: TMenuItem
+        Caption = 'DBHello'
+        ImageIndex = 168
+        OnClick = DataBaseHello1Click
       end
       object N3: TMenuItem
-        Caption = #25968#25454#19978#25253
-        ImageIndex = 55
+        Caption = 'FullScreen'
+        ImageIndex = 126
+        OnClick = N3Click
+      end
+      object N4: TMenuItem
+        Caption = 'HideTitle'
+        ImageIndex = 70
+        OnClick = N4Click
+      end
+      object N5: TMenuItem
+        Caption = 'HideNav'
+        ImageIndex = 128
+        OnClick = N5Click
       end
     end
-    object N14: TMenuItem
-      Caption = #25104#32489#26597#30475
+    object MISingle: TMenuItem
+      Caption = #21333#36873#39064
+      Checked = True
+      Hint = 
+        '{"normal":"media/system/dwFrame/svg/single.svg","active":"media/' +
+        'system/dwFrame/svg/singlef.svg"}'
+      ImageIndex = 66
+      OnClick = MISingleClick
+    end
+    object MIJudge: TMenuItem
+      Caption = #21028#26029#39064
+      Checked = True
+      Hint = 
+        '{"normal":"media/system/dwFrame/svg/judge.svg","active":"media/s' +
+        'ystem/dwFrame/svg/judgef.svg"}'
+      ImageIndex = 72
+      OnClick = MIJudgeClick
+    end
+    object MiShort: TMenuItem
+      Caption = #31616#31572#39064
+      Checked = True
+      Hint = 
+        '{"normal":"media/system/dwFrame/svg/short.svg","active":"media/s' +
+        'ystem/dwFrame/svg/shortf.svg"}'
+      ImageIndex = 105
+      OnClick = MiShortClick
+    end
+    object N9: TMenuItem
+      Caption = #35797#39064#23457#26680
+      ImageIndex = 147
+      object MISingleS: TMenuItem
+        Caption = #21333#36873#23457#26680
+        Hint = 
+          '{"normal":"media/system/dwFrame/svg/singles.svg","active":"media' +
+          '/system/dwFrame/svg/singlesf.svg"}'
+        ImageIndex = 67
+        OnClick = MISingleSClick
+      end
+      object MIJudgeS: TMenuItem
+        Caption = #21028#26029#23457#26680
+        Hint = 
+          '{"normal":"media/system/dwFrame/svg/judges.svg","active":"media/' +
+          'system/dwFrame/svg/judgesf.svg"}'
+        ImageIndex = 105
+        OnClick = MIJudgeSClick
+      end
+      object MiShortS: TMenuItem
+        Caption = #31616#31572#23457#26680
+        Hint = 
+          '{"normal":"media/system/dwFrame/svg/shorts.svg","active":"media/' +
+          'system/dwFrame/svg/shortsf.svg"}'
+        ImageIndex = 55
+        OnClick = MiShortSClick
+      end
+    end
+    object N10: TMenuItem
+      Caption = #27169#25311#32771#35797
+      ImageIndex = 108
+      OnClick = N10Click
+    end
+    object MiSyn: TMenuItem
+      Caption = #32508#21512#32771#35797
+      ImageIndex = 67
+      OnClick = MiSynClick
+    end
+    object N11: TMenuItem
+      Caption = #26597#30475#25104#32489
       ImageIndex = 137
-      object N11: TMenuItem
-        Caption = #27979#35797#25104#32489
-        ImageIndex = 115
-        OnClick = N11Click
-      end
-      object N13: TMenuItem
-        Caption = #36880#27425#25104#32489
-        ImageIndex = 63
-        OnClick = N13Click
-      end
-      object N15: TMenuItem
-        Caption = #24635#25104#32489
-        ImageIndex = 132
-        OnClick = N15Click
-      end
+      OnClick = N11Click
+    end
+    object N12: TMenuItem
+      Caption = #27599#21608#25968#25454
+      ImageIndex = 106
+      OnClick = N12Click
+    end
+    object N8: TMenuItem
+      Caption = #33521#38596#27036
+      ImageIndex = 208
+      OnClick = N8Click
     end
     object N6: TMenuItem
       Caption = #29992#25143#31649#29702
@@ -9937,18 +9887,17 @@ object Form1: TForm1
         ImageIndex = 176
         OnClick = N16Click
       end
-      object N17: TMenuItem
-        Caption = #36229#32423#26597#30475
-        ImageIndex = 55
-        OnClick = N17Click
-      end
+    end
+    object N2: TMenuItem
+      Caption = #21151#33021#27169#22359
+      ImageIndex = 71
     end
     object N1: TMenuItem
       Caption = #25105
       Checked = True
       Hint = 
-        '{"normal":"media/system/gms/svg/user.svg","active":"media/system' +
-        '/gms/svg/userf.svg"}'
+        '{"normal":"media/system/dwFrame/svg/user.svg","active":"media/sy' +
+        'stem/dwFrame/svg/userf.svg"}'
       ImageIndex = 30
       OnClick = N1Click
     end
@@ -9965,13 +9914,13 @@ object Form1: TForm1
   end
   object TS: TTimer
     Enabled = False
-    Interval = 10000
+    Interval = 60000
     OnTimer = TSTimer
     Left = 280
     Top = 416
   end
-  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+  object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
     Left = 280
-    Top = 472
+    Top = 480
   end
 end

@@ -23,27 +23,8 @@ end;
 
 //根据JSON对象AData执行当前控件的事件, 并返回结果字符串
 function dwGetEvent(ACtrl:TComponent;AData:String):string;StdCall;
-var
-     joData    : Variant;
 begin
-    with TTabSheet(Actrl) do begin
-        //
-        joData    := _Json(AData);
-
-        //
-        if joData = unassigned then begin
-            Exit;
-        end;
-        if not joData.Exists('e') then begin
-            Exit;
-        end;
-
-        if joData.e = 'onclick' then begin
-            //
-            if Assigned(OnEnter) then begin
-                OnEnter(TTabSheet(Actrl));
-            end;
-        end;
+    with TCardPanel(TCard(Actrl).CardPanel) do begin
     end;
 end;
 

@@ -275,14 +275,14 @@ begin
     with TForm1(AForm1) do begin
         //将当前登录信息保存到日志表dwLog中
         FQ_Temp.Close;
-        FQ_Temp.SQL.Text    := 'INSERT INTO sys_Log(lMode,lDate,lUserName,lCanvasId,lIp)'
-                +' VALUES('
-                +''''+AMode+''','
-                +''''+FormatDateTime('yyyy-MM-DD hh:mm:ss',Now)+''','
-                +''''+dwGetStr(gjoUserInfo,'username')+''','
-                +''''+dwGetStr(gjoUserInfo,'canvasid')+''','
-                +''''+''+''''
-                +')';
+        FQ_Temp.SQL.Text    := 'INSERT INTO sys_log(lmode,ldate,lusername,lcanvasid)'
+                +' VALUES(:mode,:date,:username,:canvasid)';
+        FQ_Temp.ParamByName('mode').AsWideString    := AMode;
+        FQ_Temp.ParamByName('date').AsDateTime      := Now;
+        FQ_Temp.ParamByName('username').AsString    := dwGetStr(gjoUserInfo,'username');
+        FQ_Temp.ParamByName('canvasid').AsString    := dwGetStr(gjoUserInfo,'canvasid');
+
+        //FQ_Temp.ParamByName('ip').AsString          := '';
         FQ_Temp.ExecSQL;
     end;
 end;
@@ -572,12 +572,7 @@ begin
                                 '{"icon":"el-icon-s-unfold","type":"text","color":"#EEE"}');
 
         //项目LOGO
-        LL.Caption      := dwIIF(AExpand, '.G.M.S.', '.G.');
-
-        //头像
-        //IA.Margins.Left     := dwIIFi(AExpand,72,2);
-        //IA.Margins.Right    := dwIIFi(AExpand,78,6);
-        //IA.Height           := dwIIFi(AExpand,50,40);
+        LL.Caption      := dwIIF(AExpand, '.D.W.F.', '.W.');
 
         //更新各TabSheet中内嵌Form的大小
         for iTab := 1 to CP.CardCount-1 do begin
@@ -596,7 +591,7 @@ begin
         Result  := 0;
 
         //将当前展开/合拢信息写入cookie以备用
-        dwSetCookie(AForm1,'dwdExpand',dwIIF(AExpand,'1','0'),24*30);
+        dwSetCookie(AForm1,'dwfExpand',dwIIF(AExpand,'1','0'),24*30);
     end;
 end;
 
@@ -604,8 +599,10 @@ end;
 function dwfShowForm(AForm1:TForm; AClass: TFormClass; var AForm:TForm;AMenu:TMenuItem;const ARefresh:Boolean = True; const AClosable: Boolean=True): Integer;
 var
     iCard       : Integer;
-    oCard       : TCard;
     iForm       : Integer;
+    oCard       : TCard;
+    oFPTool     : TFlowPanel;
+    oPanel      : TPanel;
     //
     bFound      : Boolean;
 	//
@@ -619,8 +616,8 @@ var
     //
     joHistory   : Variant;
     joHint      : Variant;
+    joPanel     : Variant;
 begin
-
     //如果有进度条， 关闭载入中进度条
     dwRunJS('this.dwloading=false;',AForm1);
     try
@@ -629,7 +626,6 @@ begin
 
             //<移动端处理
             if gbMobile then begin
-                //隐藏顶部栏
                 PL.Visible  := False;
             end;
             //>
@@ -649,31 +645,16 @@ begin
             gjoHistory.Add(joHistory);
             //>
 
-            //先检查当前模块是否打开，
-            if ARefresh then begin
-                //如果ARefresh, 且已打开，则设置当前模块 CardVisible   := False;
-                //
-                if AForm <> nil then begin
-                    for iCard := 0 to CP.CardCount-1 do begin
-                        oCard   := CP.Cards[iCard];
-                        if (oCard.CardVisible) and (oCard.Name = 'TS_'+AClass.ClassName) then begin
-                            oCard.CardVisible   := False;
-                        end;
-                    end;
-                end;
-            end else begin
-                //如果非ARefresh, 且已打开，则直接切换到当前模块
+            //先检查当前模块是否打开，如果打开，则直接切换到当前模块
+            if AForm <> nil then begin
+                for iCard := 0 to CP.CardCount-1 do begin
+                    oCard   := CP.Cards[iCard];
+                    if (oCard.CardVisible) and (oCard.Name = 'TS_'+AClass.ClassName) then begin
+                        CP.ActiveCard       := oCard;
+                        oCard.CardVisible   := True;
 
-                if AForm <> nil then begin
-                    for iCard := 0 to CP.CardCount-1 do begin
-                        oCard   := CP.Cards[iCard];
-                        if (oCard.CardVisible) and (oCard.Name = 'TS_'+AClass.ClassName) then begin
-                            CP.ActiveCard       := oCard;
-                            oCard.CardVisible   := True;
-
-                            //
-                            Exit;
-                        end;
+                        //
+                        Exit;
                     end;
                 end;
             end;
@@ -751,7 +732,7 @@ begin
                 end;
 
                 //赋给双击事件, 以双击时重载模块
-                oCard.OnEnter   := TForm1(AForm1).CardClick;
+                oCard.OnEnter       := TForm1(AForm1).Ts1Enter;
 
                 //用窗体的HelpContext 来设置嵌入式窗体的对应TabSheet的图标，图标序号见文档
                 oCard.HelpContext   := AForm.HelpContext;
@@ -836,10 +817,65 @@ begin
                 dwSetProp(oCard,'menu',AMenu.Name);
             end;
 
+            //<----- 如果是移动端, 处理底部工具栏 ----------------------------------------------------------------------
+
+            //移动端处理
+            if gbMobile then begin
+                if (AMenu = nil) then begin
+                    //取得底部工具栏面板
+                    oFPTool := TFlowPanel(FindComponent('FPTool'));
+
+                    //
+                    if oFPTool <> nil then begin
+                        //除当前同等的标题, 全部设置为非选中状态
+                        for iItem := 0 to oFPTool.ControlCount - 1 do begin
+                            oPanel  := TPanel(oFPTool.Controls[iItem]);
+                            joPanel := _json(oPanel.Hint);
+                            oPanel.Hint :=
+                                        '{'
+                                            +'"src":"'+joPanel.normal+'"'
+                                            +',"normal":"'+joPanel.normal+'"'
+                                            +',"active":"'+joPanel.active+'"'
+                                        +'}';
+                        end;
+                    end;
+                end else begin
+                    //取得底部工具栏面板
+                    oFPTool := TFlowPanel(FindComponent('FPTool'));
+
+                    //
+                    if oFPTool <> nil then begin
+                        //除当前同等的标题, 全部设置为非选中状态
+                        for iItem := 0 to oFPTool.ControlCount - 1 do begin
+                            oPanel  := TPanel(oFPTool.Controls[iItem]);
+                            joPanel := _json(oPanel.Hint);
+                            if oPanel.Caption = AMenu.Caption then begin
+                                oPanel.Hint :=
+                                            '{'
+                                                +'"src":"'+joPanel.active+'"'
+                                                +',"normal":"'+joPanel.normal+'"'
+                                                +',"active":"'+joPanel.active+'"'
+                                            +'}';
+                            end else begin
+                                oPanel.Hint :=
+                                            '{'
+                                                +'"src":"'+joPanel.normal+'"'
+                                                +',"normal":"'+joPanel.normal+'"'
+                                                +',"active":"'+joPanel.active+'"'
+                                            +'}';
+                            end;
+                        end;
+                    end;
+                end;
+            end;
+            //>---------------------------------------------------------------------------------------------------------
+
+
             //控制界面刷新（新增/删除控件后需要）
             DockSite    := True;
         end;
-    finally
+    except
+        dwMessage('error when dwfShowForm','error',AForm1);
         //TForm1(AForm1).CP.Visible  := True;
     end;
 end;
@@ -853,8 +889,6 @@ var
     //
     bFound      : Boolean;
 	//
-    sRights     : string;       //当前权限
-    iRight      : Integer;
     iItem       : Integer;
     //
     joHint      : variant;
@@ -914,7 +948,7 @@ begin
             oCard.Parent := CP;
 
             //赋给双击事件, 以双击时重载模块
-            oCard.OnEnter        := TForm1(AForm1).CardClick;
+            oCard.OnEnter        := TForm1(AForm1).Ts1Enter;
 
             //用窗体的HelpContext 来设置嵌入式窗体的对应TabSheet的图标，图标序号见文档
             oCard.HelpContext     := AForm.HelpContext;
@@ -936,7 +970,7 @@ begin
 
             //移动端时, 更新标题
             if gbMobile then begin
-                //LT.Caption  := AForm.Caption;
+                LT.Caption  := AForm.Caption;
             end;
 
         end;

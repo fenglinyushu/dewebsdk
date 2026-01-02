@@ -5,7 +5,6 @@ interface
 uses
     //deweb基本单元
     dwBase,
-    dwHistory,
 
     //dwFrame基本函数
     dwfBase,
@@ -88,6 +87,10 @@ var
     iYear       : Integer;
     iCurYear    : Integer;
     iItem       : Integer;
+    iIndex      : Integer;
+    iTemp       : Integer;
+    bFound      : Boolean;
+    //
     sJS         : String;
     sJS0        : String;
     sJS1        : String;
@@ -96,6 +99,9 @@ var
     //
     oPanel      : TPanel;
     slMenu      : TStringList;
+    //
+    joMenus     : Variant;
+    joMenu      : Variant;
 
 begin
     //设置数据查询组件连接
@@ -104,32 +110,50 @@ begin
     //取得菜单项所有叶节点
     dwfGetMenuLeafs(TForm1(self.Owner).MainMenu1,slMenu);
 
-    //显示欢迎用户
-    LaWelcome.Caption   := '欢迎您, '+TForm1(self.Owner).gjoUserinfo.username+'!';
-    //显示角色
-    LaRole.Caption      := TForm1(self.Owner).gjoUserinfo.rolename;
-    //显示头像
-    ImAvatar.Hint       := '{"src":"media/system/GMS/'+TForm1(self.Owner).gjoUserInfo.avatar+'","radius":"50%","dwstyle":"border:solid 2px #ddd;"}';
+    //取得菜单项所有叶节点
+    dwfGetMenuLeafJson(TForm1(self.Owner).MainMenu1,joMenus);
 
     //更新快捷按钮
+    iIndex  := 0;   //序号, 略过0 , 即"首页"
     for iItem := 0 to 7 do begin
+        //
+        bFound  := False;
+        for iTemp := iIndex + 1 to joMenus._Count - 1 do begin
+            joMenu  := joMenus._(iTemp);
+            if (joMenu.count = 0) and (joMenu.visible = 1) and (joMenu.enabled = 1) then begin
+                iIndex  := iTemp;
+                bFound  := True;
+                break;
+            end;
+        end;
+
+        //取得用作按钮的panel
         oPanel  := TPanel(FindComponent('PnM'+IntToStr(iItem)));
 
         //
-        with TForm1(self.Owner) do begin
-            if iItem < gjoUserInfo.quickbutton._Count then begin
-                oPanel.Caption  := gjoUserInfo.quickbutton._(iItem)._(0);
-                oPanel.Hint     := '{"radius":"5px","src":"media/images/32/a ('+IntToStr(gjoUserInfo.quickbutton._(iItem)._(1))+').png","dwstyle":"border:solid 1px #eee;"}';
-                oPanel.Visible  := oPanel.Caption <> '';
+        if bFound then begin
 
-                //<移动端处理
-                if TForm1(self.Owner).gbMobile then begin
-                    oPanel.Height   := 80;
-                    oPanel.Margins.SetBounds(5,10,5,10);
+            //
+            with TForm1(self.Owner) do begin
+
+                if iIndex < joMenus._Count then begin
+                    oPanel.Caption  := joMenu.caption;
+                    oPanel.Hint     := '{'
+                        +'"radius":"5px",'
+                        +'"dwattr": "onmouseover=\"this.style.backgroundColor=''#edeaea''; this.style.color=''#2c3e50''\" onmouseout=\"this.style.backgroundColor=''white''; this.style.color=''#808080''\"",'
+                        +'"src":"media/images/32/a ('+IntToStr(joMenu.imageindex mod 100)+').png","dwstyle":"border:solid 1px #eee;cursor: pointer;"'
+                    +'}';
+                    oPanel.Visible  := True;
+
+                    //<移动端处理
+                    if TForm1(self.Owner).gbMobile then begin
+                        oPanel.Height   := 80;
+                        oPanel.Margins.SetBounds(5,10,5,10);
+                    end;
+                    //>
+                end else begin
+                    oPanel.Visible  := False;
                 end;
-                //>
-            end else begin
-                oPanel.Visible  := False;
             end;
         end;
     end;
@@ -145,13 +169,6 @@ begin
         PnD2.Height     := 80;
     end;
 
-    //显示统计值
-    FDQuery1.Open('SELECT COUNT(DISTINCT sClassnum) AS UniqueClassCount FROM sys_Student;');
-    LaV0.Caption    := IntToStr(FDQuery1.Fields[0].AsInteger)+' 个';
-    FDQuery1.Open('SELECT COUNT(*) AS TotalRecords FROM sys_Student;');
-    LaV1.Caption    := IntToStr(FDQuery1.Fields[0].AsInteger)+' 个';
-    FDQuery1.Open('SELECT COUNT(DISTINCT cName) AS UniqueClassCount FROM dic_ItemCode;');
-    LaV2.Caption    := IntToStr(FDQuery1.Fields[0].AsInteger)+' 项';
 end;
 
 procedure TForm_sys_Home.P10Click(Sender: TObject);
@@ -169,12 +186,12 @@ begin
     // 遍历 MainMenu1 中的所有菜单项，找到与caption相同的，执行菜单事件
     for iButton := 0 to oForm1.MainMenu1.Items.Count - 1 do begin
         if oForm1.MainMenu1.Items[iButton].Caption = sCaption then begin
-            // 执行找到的菜单项的事件处理
-            oForm1.MainMenu1.Items[iButton].Click;
-        end else begin
-            // 在子菜单中查找
-            FindMenuItemAndClick(sCaption, oForm1.MainMenu1.Items[iButton]);
-        end;
+        // 执行找到的菜单项的事件处理
+        oForm1.MainMenu1.Items[iButton].Click;
+    end else begin
+        // 在子菜单中查找
+        FindMenuItemAndClick(sCaption, oForm1.MainMenu1.Items[iButton]);
+    end;
     end;
 end;
 

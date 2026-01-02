@@ -92,7 +92,7 @@ begin
 
         //将当前登录信息保存到日志表dwLog中
         FDQuery1.Close;
-        FDQuery1.SQL.Text    := 'INSERT INTO sys_Log(lMode,lDate,lUserName,lCanvasId,lIp)'
+        FDQuery1.SQL.Text    := 'INSERT INTO sys_log(lmode,ldate,lusername,lcanvasid,lip)'
                 +' VALUES('
                 +''''+'logout'+''','
                 +''''+FormatDateTime('yyyy-MM-DD hh:mm:ss',Now)+''','

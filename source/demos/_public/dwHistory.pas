@@ -22,8 +22,10 @@ uses
 //AVisible  为弹出面板前可见,弹出面板后不可见的控件, 用于返回时, 自动显示该控件
 //AHidden   为弹出面板前不可见,弹出面板后可见的控件, 用于返回时, 自动隐藏该控件, 与 AVisible 正好相反
 //ACaption  为弹出面板前的标题, 弹出面板前后标题不改变, 则可以不填该项
+//AType     is control/main. 'control' is use to child form; 'main' use to Form1
 //注:  AVisible / AHidden 中不填入 弹出面板前后 可见性不变的控件
-function  dwAddShowHistory(AForm:TForm;AVisible : array  of TControl;AHidden:array  of TControl; const ACaption : String = '_none_'):Integer;
+function  dwAddShowHistory(AForm:TForm;AVisible : array  of TControl;AHidden:array  of TControl; const ACaption : String = '_none_';
+        const AType : String = 'control'):Integer;
 
 //移动端开发时, 当需要打开功能模块(新建一个页面)时, 执行当前操作
 //AForm     为当前窗体,一般用self即可
@@ -87,12 +89,16 @@ begin
 end;
 
 
-function  dwAddShowHistory(AForm:TForm;AVisible : array  of TControl;AHidden:array  of TControl; const ACaption : String = '_none_'):Integer;
+function  dwAddShowHistory(AForm:TForm;AVisible : array  of TControl;AHidden:array  of TControl; const ACaption : String = '_none_';
+        const AType : String = 'control'):Integer;
 var
     oForm1      : TForm1;
     joHistory   : Variant;
     iCtrl       : Integer;
 begin
+    //use to save the show history for back
+    //include hidden controls and show controls
+
     Result  := 0;
 
     try
@@ -106,7 +112,7 @@ begin
         joHistory           := _json('{}');
 
         //设置类型
-        joHistory.type      := 'control';
+        joHistory.type      := AType;
 
         //设置窗体名称
         joHistory.form      := AForm.Name;
@@ -118,6 +124,7 @@ begin
                 joHistory.visible.Add(AVisible[iCtrl].Name);
             end;
         end;
+
         //设置  弹出面板前不可见,弹出面板后可见的控件
         if Length(Ahidden) > 0 then begin
             joHistory.hidden   := _json('[]');

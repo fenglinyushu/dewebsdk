@@ -1,6 +1,7 @@
 object Form_sys_ChangePsd: TForm_sys_ChangePsd
   Left = 0
   Top = 0
+  Hint = '{"hidefoot":1}'
   HelpKeyword = 'embed'
   Caption = #20462#25913#23494#30721
   ClientHeight = 619
@@ -18,8 +19,8 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
     619)
   TextHeight = 20
   object P0: TPanel
-    Left = 120
-    Top = 10
+    Left = 200
+    Top = 8
     Width = 400
     Height = 497
     Anchors = [akTop]
@@ -175,7 +176,7 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
       Left = 160
       Top = 184
       Width = 161
-      Height = 30
+      Height = 35
       PasswordChar = '*'
       TabOrder = 0
     end
@@ -183,7 +184,7 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
       Left = 160
       Top = 240
       Width = 161
-      Height = 30
+      Height = 35
       PasswordChar = '*'
       TabOrder = 1
     end
@@ -191,15 +192,15 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
       Left = 160
       Top = 293
       Width = 161
-      Height = 30
+      Height = 35
       PasswordChar = '*'
       TabOrder = 2
     end
     object B0: TButton
       Left = 88
-      Top = 352
+      Top = 368
       Width = 235
-      Height = 33
+      Height = 40
       Hint = '{"type":"primary"}'
       Caption = #30830#23450
       TabOrder = 3

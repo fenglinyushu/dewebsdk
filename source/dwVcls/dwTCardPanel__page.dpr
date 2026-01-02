@@ -16,12 +16,16 @@ uses
 
 //--------------一些自用函数------------------------------------------------------------------------
 function dwLTWHTab(ACtrl:TControl):String;  //可以更新位置的用法
+var
+    sFull       : string;
 begin
-     //只有W，H
-     with ACtrl do begin
-          Result    := ' :style="{width:'+dwFullName(Actrl)+'__wid,height:'+dwFullName(Actrl)+'__hei}"'
-                    +' style="position:absolute;left:0px;top:0px;';
-     end;
+    sFull       := dwFullName(ACtrl);
+
+    //只有W，H
+    with ACtrl do begin
+        Result    := ' :style="{width:'+sFull+'__wid,height:'+sFull+'__hei}"'
+                  +' style="position:absolute;left:0px;top:0px;';
+    end;
 end;
 
 
@@ -34,7 +38,10 @@ var
     iCard       : Integer;
     sStyle      : String;
     oChange     : Procedure(Sender:TObject; PrevCard, NextCard: TCard) of Object;
+    sFull       : string;
 begin
+    sFull       := dwFullName(ACtrl);
+
     with TCardPanel(Actrl) do begin
 
         //设置所有card的helpkeyword为page
@@ -67,7 +74,10 @@ var
     joData      : Variant;
     oTab        : TCard;
     oChange     : Procedure(Sender:TObject; PrevCard, NextCard: TCard) of Object;
+    sFull       : string;
 begin
+    sFull       := dwFullName(ACtrl);
+
     with TCardPanel(Actrl) do begin
         //用作Tabs控件---------------------------------------------------
 
@@ -152,7 +162,7 @@ var
     iTab        : Integer;
 begin
     //
-    sFull       := dwFullName(ACtrl);
+    sFull       := sFull;
 
     with TCardPanel(Actrl) do begin
         //用作Tabs控件--------------------------------------------------------------------------
@@ -177,12 +187,12 @@ begin
 
         //外框
         joRes.Add('<el-tabs'
-                +' id="'+dwFullName(Actrl)+'"'
-                +' ref="'+dwFullName(Actrl)+'__ref"'
+                +' id="'+sFull+'"'
+                +' ref="'+sFull+'__ref"'
                 +dwVisible(TControl(ACtrl))
                 +dwDisable(TControl(ACtrl))
-                +' v-model="'+dwFullName(Actrl)+'__apg"'        //ActivePage
-                +' :tab-position="'+dwFullName(Actrl)+'__tps"'  //标题位置
+                +' v-model="'+sFull+'__apg"'        //ActivePage
+                //+' :tab-position="'+sFull+'__tps"'  //标题位置
                 +dwIIF(joHint.Exists('type'),' type="'+dwGetStr(joHint,'type')+'"','type="border-card"')   //是否有card/border-card
                 +dwGetDWAttr(joHint)
 
@@ -193,10 +203,10 @@ begin
                 +'"' //style 封闭
 
                 //事件
-                //+Format(_DWEVENT,['tab-click',Name,'this.'+dwFullName(Actrl)+'__apg','oncardchange',TForm(Owner).Handle])
+                //+Format(_DWEVENT,['tab-click',Name,'this.'+sFull+'__apg','oncardchange',TForm(Owner).Handle])
                 //+' @tab-click="console.log(''tabclick'');"'
                 +' @tab-click="'+sFull+'__tabclick($event)"'
-                //+Format(_DWEVENT,['edit',Name,'this.'+dwFullName(Actrl)+'__apg','onenddock',TForm(Owner).Handle])
+                //+Format(_DWEVENT,['edit',Name,'this.'+sFull+'__apg','onenddock',TForm(Owner).Handle])
                 +sEdit
                 +'>');
 
@@ -269,30 +279,33 @@ end;
 //取得Data
 function dwGetData(ACtrl:TComponent):string;StdCall;
 var
-     joRes     : Variant;
-     iTab      : Integer;
+    joRes       : Variant;
+    iTab        : Integer;
+    sFull       : string;
 begin
+    sFull       := dwFullName(ACtrl);
+
     with TCardPanel(Actrl) do begin
         //用作Tabs控件---------------------------------------------------
 
         //生成返回值数组
         joRes    := _Json('[]');
         //
-        joRes.Add(dwFullName(Actrl)+'__lef:"'+IntToStr(Left)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__top:"'+IntToStr(Top)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__wid:"'+IntToStr(Width)+'px",');
-        joRes.Add(dwFullName(Actrl)+'__hei:"'+IntToStr(Height)+'px",');
+        joRes.Add(sFull+'__lef:"'+IntToStr(Left)+'px",');
+        joRes.Add(sFull+'__top:"'+IntToStr(Top)+'px",');
+        joRes.Add(sFull+'__wid:"'+IntToStr(Width)+'px",');
+        joRes.Add(sFull+'__hei:"'+IntToStr(Height)+'px",');
         //
-        joRes.Add(dwFullName(Actrl)+'__vis:'+dwIIF(Visible,'true,','false,'));
-        joRes.Add(dwFullName(Actrl)+'__dis:'+dwIIF(Enabled,'false,','true,'));
+        joRes.Add(sFull+'__vis:'+dwIIF(Visible,'true,','false,'));
+        joRes.Add(sFull+'__dis:'+dwIIF(Enabled,'false,','true,'));
         //
         if ActiveCardIndex>=0 then begin
-             joRes.Add(dwFullName(Actrl)+'__apg:"'+LowerCase(dwPrefix(Actrl)+ActiveCard.Name)+'",');
+             joRes.Add(sFull+'__apg:"'+LowerCase(dwPrefix(Actrl)+ActiveCard.Name)+'",');
         end else begin
-             joRes.Add(dwFullName(Actrl)+'__apg:"'+''+'",');
+             joRes.Add(sFull+'__apg:"'+''+'",');
         end;
         //方向
-        joRes.Add(dwFullName(Actrl)+'__tps:"top",');
+        //joRes.Add(sFull+'__tps:"top",');
 
         //
         Result    := (joRes);
@@ -303,7 +316,10 @@ function dwGetAction(ACtrl:TComponent):string;StdCall;
 var
     joRes       : Variant;
     iTab        : Integer;
+    sFull       : string;
 begin
+    sFull       := dwFullName(ACtrl);
+
     with TCardPanel(Actrl) do begin
         //用作Tabs控件---------------------------------------------------
 
@@ -311,25 +327,25 @@ begin
         joRes    := _Json('[]');
 
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__lef="'+IntToStr(Left)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__top="'+IntToStr(Top)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__wid="'+IntToStr(Width)+'px";');
-        joRes.Add('this.'+dwFullName(Actrl)+'__hei="'+IntToStr(Height)+'px";');
+        joRes.Add('this.'+sFull+'__lef="'+IntToStr(Left)+'px";');
+        joRes.Add('this.'+sFull+'__top="'+IntToStr(Top)+'px";');
+        joRes.Add('this.'+sFull+'__wid="'+IntToStr(Width)+'px";');
+        joRes.Add('this.'+sFull+'__hei="'+IntToStr(Height)+'px";');
         //
-        joRes.Add('this.'+dwFullName(Actrl)+'__vis='+dwIIF(Visible,'true;','false;'));
-        joRes.Add('this.'+dwFullName(Actrl)+'__dis='+dwIIF(Enabled,'false;','true;'));
+        joRes.Add('this.'+sFull+'__vis='+dwIIF(Visible,'true;','false;'));
+        joRes.Add('this.'+sFull+'__dis='+dwIIF(Enabled,'false;','true;'));
         //
         if ActiveCardIndex>=0 then begin
-             joRes.Add('this.'+dwFullName(Actrl)+'__apg="'+LowerCase(dwPrefix(Actrl)+ActiveCard.Name)+'";');
+             joRes.Add('this.'+sFull+'__apg="'+LowerCase(dwPrefix(Actrl)+ActiveCard.Name)+'";');
         end else begin
-             joRes.Add('this.'+dwFullName(Actrl)+'__apg="'+''+'";');
+             joRes.Add('this.'+sFull+'__apg="'+''+'";');
         end;
 
         //方向
-        joRes.Add('this.'+dwFullName(Actrl)+'__tps="top";');
+        //joRes.Add('this.'+sFull+'__tps="top";');
         //各页面可见性
         for iTab := 0 to CardCount-1 do begin
-            joRes.Add('this.$refs.'+dwFullName(Actrl)+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = '''
+            joRes.Add('this.$refs.'+sFull+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = '''
                 +dwIIF(Cards[iTab].CardVisible,'inline-block','none')+''';');
         end;
 
@@ -348,12 +364,10 @@ var
     //
     joHint      : Variant;
     joRes       : Variant;
-
 begin
-    joRes   := _json('[]');
+    sFull       := dwFullName(ACtrl);
 
-    //
-    sFull   := dwFullName(ACtrl);
+    joRes   := _json('[]');
 
     //取得HINT对象JSON
     joHint := dwGetHintJson(TControl(ACtrl));
@@ -385,8 +399,11 @@ function dwGetMounted(ACtrl:TComponent):String;StdCall;
 var
     joRes       : Variant;
     sCode       : string;
+    sFull       : string;
     iTab        : Integer;
 begin
+    sFull       := dwFullName(ACtrl);
+
     //生成返回值数组
     joRes    := _Json('[]');
     //
@@ -395,7 +412,7 @@ begin
         //各页面可见性
         for iTab := 0 to CardCount-1 do begin
             if not Cards[iTab].CardVisible then begin
-                joRes.Add('this.$refs.'+dwFullName(Actrl)+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = ''none'';');
+                joRes.Add('this.$refs.'+sFull+'__ref.$children[0].$refs.tabs['+IntToStr(iTab)+'].style.display = ''none'';');
             end;
         end;
     end;

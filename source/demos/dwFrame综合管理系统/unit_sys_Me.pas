@@ -88,10 +88,10 @@ begin
     TForm1(self.Owner).FDConnection1.ExecSQL(sSQL);
 
     //更新当前界面的头像显示
-    Im1.Hint    := '{"dwstyle":"border-radius:8px;","src":"media/system/gms/'+sFile+'"}';
+    Im1.Hint    := '{"dwstyle":"border-radius:8px;","src":"media/system/dw'+TForm1(self.Owner).gsName+'/head/'+sFile+'"}';
 
     //更新"首页"界面的头像显示
-    TForm1(self.Owner).Form_sys_Home.ImAvatar.Hint := '{"src":"media/system/gms/'+sFile+'","radius":"50%","dwstyle":"border:solid 2px #ddd;"}';
+    TForm1(self.Owner).Form_sys_Home.ImAvatar.Hint := '{"src":"media/system/dw'+TForm1(self.Owner).gsName+'/head/'+sFile+'","radius":"50%","dwstyle":"border:solid 2px #ddd;"}';
 end;
 
 procedure TForm_sys_Me.FormShow(Sender: TObject);
@@ -105,7 +105,7 @@ begin
     //更新显示
     LaName.Caption      := TForm1(self.Owner).gjoUserInfo.username;
     LaNo.Caption        := '编号：'+IntToStr(TForm1(self.Owner).gjoUserInfo.id);
-    Im1.Hint            := '{"dwstyle":"border-radius:8px;","src":"media/system/gms/'+FDQuery1.FieldByName('uAvatar').AsString+'"}';
+    Im1.Hint            := '{"dwstyle":"border-radius:8px;","src":"media/system/dw'+TForm1(self.Owner).gsName+'/head/'+FDQuery1.FieldByName('uAvatar').AsString+'"}';
 
 end;
 
@@ -118,7 +118,7 @@ end;
 procedure TForm_sys_Me.PnAvatarClick(Sender: TObject);
 begin
     //修改头像
-    dwUpload(Self,'image/gif, image/jpeg, image/png','media/system/gms');
+    dwUpload(Self,'image/gif, image/jpeg, image/png','media/system/dw'+TForm1(self.Owner).gsName+'/head/');
 end;
 
 procedure TForm_sys_Me.PnOptionClick(Sender: TObject);

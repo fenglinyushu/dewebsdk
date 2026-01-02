@@ -10,7 +10,6 @@ uses
     dwBase,
     dwHistory,
 
-
     //增删改查单元
     dwCrudPanel,
 
@@ -22,8 +21,6 @@ uses
 
     //系统功能
     unit_sys_ChangePsd,         //更改密码
-    unit_sys_Department,        //班级管理
-    unit_sys_Student,           //学生管理
     unit_sys_Home,              //首页
     unit_sys_Log,               //系统日志
     unit_sys_Me,                //我
@@ -31,21 +28,28 @@ uses
     unit_sys_User,              //用户管理
     unit_sys_QuickBtn,          //快速按钮设置
 
+    //demos
+    unit_dem_Hello,             //hello, world!
+    unit_dem_DBHello,           //DataBase hello, world!
+
+
     //功能模块
-    unit_bop_ClassManager,      //班级负责人
-    unit_bop_GetGroup,          //学生组别
-    unit_bop_Score,             //测试成绩
-    unit_bop_ScoreEvery,        //逐次成绩
-    unit_bop_ScoreTotal,        //总成绩
-    unit_bop_SuperSQL,          //超级查看
-    unit_bop_Test,              //体质测试
-    unit_bop_TestGroup,         //体测分组
-    unit_bop_Entry,             //成绩录入
+    unit_bop_Exam,              //模拟考试
+    unit_bop_ExamSyn,           //综合考试
+    unit_bop_Foot,              //隐藏标题栏模块(用于示例)
+    unit_bop_Full,              //全屏模块(用于示例)
+    unit_bop_Head,              //隐藏导航栏模块(用于示例)
+    unit_bop_Judge,             //判断题
+    unit_bop_JudgeSel,          //判断题审核
+    unit_bop_Ranking,           //英雄榜
+    unit_bop_Score,             //查看成绩
+    unit_bop_Select,            //单选题
+    unit_bop_SelectSel,         //单选题审核
+    unit_bop_Short,             //简答题
+    unit_bop_ShortSel,          //简答题审核
+    unit_bop_WeekExam,          //每周数据
 
     //字典模块
-    unit_dic_Item,              //项目标准
-    unit_dic_ItemCode,          //项目编码
-    unit_dic_Location,          //测试地点
 
     //第三方单元
     SynCommons,     //JSON解析单元，来自mormot
@@ -59,7 +63,7 @@ uses
     Data.Win.ADODB,
     Variants,
 	Rtti,
-    Math,  dialogs,
+    Math,
     //
     FireDAC.Stan.Intf,
     FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
@@ -71,7 +75,8 @@ uses
     Winapi.Windows, Winapi.Messages, Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, System.Classes,
     DateUtils,SysUtils,Vcl.ExtCtrls, Vcl.Grids, Vcl.ComCtrls, Vcl.Imaging.pngimage, Vcl.Menus,
     Vcl.Buttons, Data.DB, System.ImageList, Vcl.ImgList, Vcl.ButtonGroup, FireDAC.Phys.MSSQLDef, FireDAC.Phys.MSSQL,
-    Vcl.WinXPanels;
+    Vcl.WinXPanels, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat,
+  FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite;
 
 type
   TForm1 = class(TForm)
@@ -97,7 +102,6 @@ type
     BTTheme: TButton;
     FDQuery_Timer: TFDQuery;
     TS: TTimer;
-    FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
     N16: TMenuItem;
     PnB: TPanel;
     LaUser: TLabel;
@@ -105,27 +109,28 @@ type
     N36: TMenuItem;
     Ms: TMemo;
     CP: TCardPanel;
-    N2: TMenuItem;
-    N4: TMenuItem;
-    N8: TMenuItem;
+    MISingle: TMenuItem;
+    MISingleS: TMenuItem;
+    MIJudge: TMenuItem;
     N1: TMenuItem;
-    N5: TMenuItem;
+    MIJudgeS: TMenuItem;
     N9: TMenuItem;
-    N10: TMenuItem;
-    N3: TMenuItem;
+    MiShortS: TMenuItem;
+    MiShort: TMenuItem;
     PnLogout: TPanel;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N8: TMenuItem;
+    N10: TMenuItem;
     N11: TMenuItem;
+    MiSyn: TMenuItem;
     N12: TMenuItem;
-    N13: TMenuItem;
-    N14: TMenuItem;
-    N15: TMenuItem;
-    MiItemCode: TMenuItem;
-    MiClassManager: TMenuItem;
-    N17: TMenuItem;
-    PnSuperSQL: TPanel;
-    Label1: TLabel;
-    MmSuperSQL: TMemo;
-    LaNote: TLabel;
+    FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
+    Demo1: TMenuItem;
+    Hello1: TMenuItem;
+    DataBaseHello1: TMenuItem;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BEClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -137,7 +142,6 @@ type
     procedure N6Click(Sender: TObject);
     procedure N7Click(Sender: TObject);
     procedure Mu3Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure MIHomeClick(Sender: TObject);
     procedure MIQuickClick(Sender: TObject);
@@ -145,61 +149,67 @@ type
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure P10Click(Sender: TObject);
     procedure PMChange(Sender: TObject);
+    procedure Ts1Enter(Sender: TObject);
     procedure N36Click(Sender: TObject);
     procedure N16Click(Sender: TObject);
     procedure CPEndDock(Sender, Target: TObject; X, Y: Integer);
-    procedure N2Click(Sender: TObject);
     procedure CPCardChange(Sender: TObject; PrevCard, NextCard: TCard);
-    procedure N3Click(Sender: TObject);
-    procedure N4Click(Sender: TObject);
-    procedure N8Click(Sender: TObject);
     procedure N1Click(Sender: TObject);
-    procedure N5Click(Sender: TObject);
-    procedure N10Click(Sender: TObject);
     procedure FormUnDock(Sender: TObject; Client: TControl; NewTarget: TWinControl; var Allow: Boolean);
+
 
     procedure OnClickMenuByName(Sender: TObject);
     procedure OnBack(Sender: TObject);
+    procedure MISingleClick(Sender: TObject);
+    procedure MIJudgeClick(Sender: TObject);
+    procedure MiShortClick(Sender: TObject);
+    procedure MiShortSClick(Sender: TObject);
+    procedure MISingleSClick(Sender: TObject);
+    procedure MIJudgeSClick(Sender: TObject);
     procedure PnLogoutExit(Sender: TObject);
     procedure PnLogoutEnter(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure N5Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
+    procedure N10Click(Sender: TObject);
     procedure N11Click(Sender: TObject);
+    procedure MiSynClick(Sender: TObject);
     procedure N12Click(Sender: TObject);
-    procedure N13Click(Sender: TObject);
-    procedure N15Click(Sender: TObject);
-    procedure MiItemCodeClick(Sender: TObject);
-    procedure MiClassManagerClick(Sender: TObject);
-    procedure N17Click(Sender: TObject);
-    procedure PnSuperSQLEnter(Sender: TObject);  //统一回退事件
-    procedure CardClick(Sender: TObject);
+    procedure Hello1Click(Sender: TObject);
+    procedure DataBaseHello1Click(Sender: TObject);  //统一回退事件
   private
     { Private declarations }
   public
-    //系统功能
+    //system
     Form_sys_ChangePsd      : TForm_sys_ChangePsd;      //更改密码
-    Form_sys_Department     : TForm_sys_Department;     //部门管理
     Form_sys_Home           : TForm_sys_Home;           //首页
     Form_sys_Log            : TForm_sys_Log;            //系统日志
-    Form_sys_Me             : TForm_sys_Me;             //我
+    Form_sys_Me             : TForm_sys_Me;             //我 模块
     Form_sys_QuickBtn       : TForm_sys_QuickBtn;       //快捷按钮
     Form_sys_Role           : TForm_sys_Role;           //角色权限
-    Form_sys_Student        : TForm_sys_Student;        //学生管理
     Form_sys_User           : TForm_sys_User;           //用户管理
 
-    //
-    Form_bop_ClassManager   : TForm_bop_ClassManager;   //班级负责人
-    Form_bop_GetGroup       : TForm_bop_GetGroup;       //学生组别
-    Form_bop_Score          : TForm_bop_Score;          //测试成绩
-    Form_bop_ScoreEvery     : TForm_bop_ScoreEvery;     //逐次成绩
-    Form_bop_ScoreTotal     : TForm_bop_ScoreTotal;     //总成绩
-    Form_bop_SuperSQL       : TForm_bop_SuperSQL;       //超级查看,
-    Form_bop_Test           : TForm_bop_Test;           //体质测试
-    Form_bop_TestGroup      : TForm_bop_TestGroup;      //体测分组
-    Form_bop_Entry          : TForm_bop_Entry;          //成绩录入
+    //demos
+    Form_dem_Hello          : TForm_dem_Hello;          //Hello,world
+    Form_dem_DBHello        : TForm_dem_DBHello;        //DataBase Hello,world
 
     //
-    Form_dic_Item           : TForm_dic_Item;           //项目标准
-    Form_dic_ItemCode       : TForm_dic_ItemCode;       //项目编码
-    Form_dic_Location       : TForm_dic_Location;       //测试地点
+    Form_bop_Exam           : TForm_bop_Exam;           //模拟考试
+    Form_bop_ExamSyn        : TForm_bop_ExamSyn;        //综合考试
+    Form_bop_Foot           : TForm_bop_Foot;           //隐藏标题栏模块示例
+    Form_bop_Full           : TForm_bop_Full;           //全屏模块示例
+    Form_bop_Head           : TForm_bop_Head;           //隐藏导航栏模块示例
+    Form_bop_Judge          : TForm_bop_Judge;          //判断题
+    Form_bop_JudgeSel       : TForm_bop_JudgeSel;       //判断题审核
+    Form_bop_Ranking        : TForm_bop_Ranking;        //英雄榜
+    Form_bop_Score          : TForm_bop_Score;          //查看成绩
+    Form_bop_Select         : TForm_bop_Select;         //单选题
+    Form_bop_SelectSel      : TForm_bop_SelectSel;      //单选题审核
+    Form_bop_Short          : TForm_bop_Short;          //简答题
+    Form_bop_ShortSel       : TForm_bop_ShortSel;       //简答题审核
+    Form_bop_WeekExam       : TForm_bop_WeekExam;       //每周数据
+    //
 
 
     //------公用变量--------------------------------------------------------------------------------
@@ -220,16 +230,10 @@ type
     gjoThemes           : Variant;
 
     //点击标题的时间, 用于人工检查是否双击
-    giCardClick          : Integer;
+    giTabClick          : Integer;
 
-    //当前测试的组id, where, order, 用于控制"上一组","下一组"
+    //当前测试的组id
     giTestId            : Integer;
-    gsTestSQL           : string;
-    gsItemName          : string;
-    gsItemUnit          : string;
-    gsLocation          : string;
-    gsManager           : string;
-    gsTestName          : string;
 
     //用于管理移动端回退时的变量, 类似:
     //[
@@ -251,8 +255,9 @@ type
     //菜单项的JSON
     gjoMenus            : Variant;      //用于保存Checked菜单的所有叶节点的Name
 
-    //用于超级查看的sql
-    gsSuperSQL          : String;
+    const
+        gsName          = 'Frame';      //名称
+
   end;
 
 var
@@ -264,60 +269,9 @@ implementation
 
 
 
-//菜单折叠按钮
-procedure TForm1.Button1Click(Sender: TObject);
-begin
-    if FDConnection1.SharedCliHandle = nil then begin
-        dwMessage('false','',self);
-    end else begin
-        dwMessage('true','',self);
-    end;
-end;
-
-procedure TForm1.CardClick(Sender: TObject);
-var
-    oCard       : TCard;
-    oMenu       : TMenuItem;
-    //
-    sMenuName   : String;
-begin
-    //检查是否双击, 如果双击, 则重载当前模块
-    if GetTickCount - giCardClick < 400 then begin
-        //dwMessage('Double click!','',self);
-
-        //取得当前 tabsheet
-        oCard       := TCard(Sender);
-
-        //取得菜单项名称
-        sMenuName   := dwGetProp(oCard,'menu');
-
-        //取得菜单
-        oMenu       := TMenuItem(FindComponent(sMenuName));
-
-        //异常处理
-        if oMenu = nil then begin
-            Exit;
-        end;
-
-        //先删除当前模块
-        dwDeleteControl(oCard);
-
-        //重新打开
-        if Assigned(oMenu.OnClick) then begin
-            oMenu.OnClick(oMenu);
-        end else begin
-            dwMessage('no menuitem onclick!','error',self);
-        end;
-
-
-    end;
-    //记录当前点击时间
-    giCardClick  := GetTickCount;
-end;
-
 procedure TForm1.CPCardChange(Sender: TObject; PrevCard, NextCard: TCard);
 var
-    joHint      : variant;
+    joHint      : Variant;
 begin
     //
 
@@ -328,23 +282,28 @@ begin
             LT.Margins.SetBounds(0,0,46,0);
 
             //
-            BE.Hint     := '{"icon":"el-icon-arrow-left","type":"text"};';
+            BE.Hint     := '{"icon":"el-icon-arrow-left","type":"text"}';
             BE.Align    := alLeft;
 
         end else begin
             //首页,则标题栏显示固定标题, 且不显示返回按钮
-            LT.Caption  := 'GMS 成绩管理系统';
+            LT.Caption  := Caption;
             LT.Margins.SetBounds(46,0,0,0);
 
             //
-            BE.Hint     := '{"icon":"el-icon-menu","type":"text"};';
+            BE.Hint     := '{"icon":"el-icon-menu","type":"text"}';
             BE.Align    := alRight;
         end;
 
         //控制隐藏标题栏或导航栏
         if CP.ActiveCard.ControlCount > 0 then begin
+            //取得当前显示模块的Hint的JSON
             joHint  := dwJson(TForm(CP.ActiveCard.Controls[0]).Hint);
+
+            //是否隐藏标题栏
             PT.Visible  := dwGetInt(joHint,'hidehead') = 0;
+
+            //是否隐藏底部导航栏
             if TFlowPanel(FindComponent('FPTool')) <> nil then begin
                 TFlowPanel(FindComponent('FPTool')).Visible  := dwGetInt(joHint,'hidefoot') = 0;
             end;
@@ -354,7 +313,9 @@ end;
 
 procedure TForm1.CPEndDock(Sender, Target: TObject; X, Y: Integer);
 begin
-    //此处为标签页（TabSheet）的关闭事件 ,参数值：X = 0 为删除Tab, Y为待删除Tab的序号（从0开始）
+    //=====此处为标签页（TabSheet）的关闭事件 ,参数值：X = 0 为删除Tab, Y为待删除Tab的序号（从0开始）
+
+
     //
     if X = 0 then begin     //X=0表示执行删除操作
         //Y为待删除Tab的序号（从0开始）
@@ -373,23 +334,32 @@ begin
 
 end;
 
-procedure TForm1.BEClick(Sender: TObject);
+procedure TForm1.DataBaseHello1Click(Sender: TObject);
 begin
-    if gbMobile then begin
-        //===== 移动端状态下, 如果在首页, 则弹出菜单
-        //如果非首页, 则为返回键
+    //The first demo : Hello, world!
+    dwfShowForm(self,TForm_dem_DBHello, TForm(Form_dem_DBHello),TMenuItem(Sender));
+end;
 
+procedure TForm1.BEClick(Sender: TObject);  //button expand 折叠按钮事件. 在移动端时用作:返回/主菜单
+begin
+    //多功能按钮
+    //PC状态下, 用于合拢/展开菜单
+    //移动状态下,
+    //1 主界面时, 用作呼出菜单按钮
+    //2 用作子模块中返回主界面按钮
+    //3 主菜单模式下, 用于关闭主菜单
+
+    if gbMobile then begin
         //
         if CP.ActiveCardIndex = 0 then begin
+            //显示菜单
             PL.Align    := alNone;
-            PL.Left     := 0;
-            PL.Top      := 0;
             PL.Width    := Width;
             PL.Height   := Height;
             PL.Visible  := True;
 
             //
-            dwAddShowHistory(Self,[],[PL]);
+            dwAddShowHistory(Self,[],[PL],LT.Caption,'main');
         end else begin
             OnBack(Self);
         end;
@@ -406,37 +376,36 @@ begin
     dwfShowForm(self,TForm_sys_ChangePsd, TForm(Form_sys_ChangePsd),TMenuItem(Sender));
 end;
 
+procedure TForm1.MiShortSClick(Sender: TObject);
+begin
+    //简答题
+    dwfShowForm(self,TForm_bop_ShortSel, TForm(Form_bop_ShortSel),TMenuItem(Sender));
+end;
+
+procedure TForm1.MiShortClick(Sender: TObject);
+begin
+    //简答题
+    dwfShowForm(self,TForm_bop_Short, TForm(Form_bop_Short),TMenuItem(Sender));
+
+end;
+
 procedure TForm1.N10Click(Sender: TObject);
 begin
-    //测试地点
-    dwfShowForm(self,TForm_dic_Location, TForm(Form_dic_Location),TMenuItem(Sender));
-
+    //模拟考试
+    dwfShowForm(self,TForm_bop_Exam, TForm(Form_bop_Exam),TMenuItem(Sender));
 end;
 
 procedure TForm1.N11Click(Sender: TObject);
 begin
-    //测试成绩
+    //查看成绩
     dwfShowForm(self,TForm_bop_Score, TForm(Form_bop_Score),TMenuItem(Sender));
 end;
 
 procedure TForm1.N12Click(Sender: TObject);
 begin
-    //学生组别
-    dwfShowForm(self,TForm_bop_GetGroup, TForm(Form_bop_GetGroup),TMenuItem(Sender));
+    //每周数据
+    dwfShowForm(self,TForm_bop_WeekExam, TForm(Form_bop_WeekExam),TMenuItem(Sender));
 
-end;
-
-procedure TForm1.N13Click(Sender: TObject);
-begin
-    //逐次成绩
-    dwfShowForm(self,TForm_bop_ScoreEvery, TForm(Form_bop_ScoreEvery),TMenuItem(Sender));
-
-end;
-
-procedure TForm1.N15Click(Sender: TObject);
-begin
-    //总成绩
-    dwfShowForm(self,TForm_bop_ScoreTotal, TForm(Form_bop_ScoreTotal),TMenuItem(Sender));
 end;
 
 procedure TForm1.N16Click(Sender: TObject);
@@ -445,29 +414,19 @@ begin
     dwfShowForm(self,TForm_sys_QuickBtn, TForm(Form_sys_QuickBtn),TMenuItem(Sender));
 end;
 
-procedure TForm1.N17Click(Sender: TObject);
-begin
-    //
-    PnSuperSQL.Top      := 100;
-    PnSuperSQL.Visible  := True;
-end;
-
 procedure TForm1.N1Click(Sender: TObject);
 begin
     //PnLogout.Visible    := True;
-
-    //为当前操作添加记录
-    //dwAddShowHistory(Self,[],[PnLogout]);
-
-
-    //体质测试
+    //单选题
     dwfShowForm(self,TForm_sys_Me, TForm(Form_sys_Me),TMenuItem(Sender));
 end;
 
-procedure TForm1.N2Click(Sender: TObject);
+procedure TForm1.MISingleClick(Sender: TObject);
 begin
-    //体质测试
-    dwfShowForm(self,TForm_bop_Test, TForm(Form_bop_Test),TMenuItem(Sender));
+
+    //单选题
+    dwfShowForm(self,TForm_bop_Select, TForm(Form_bop_Select),TMenuItem(Sender));
+
 end;
 
 procedure TForm1.N36Click(Sender: TObject);
@@ -479,45 +438,50 @@ end;
 
 procedure TForm1.N3Click(Sender: TObject);
 begin
-    //班级管理
-    dwfShowForm(self,TForm_sys_Department, TForm(Form_sys_Department),TMenuItem(Sender));
-
+    //全屏模块
+    dwfShowForm(self,TForm_bop_Full, TForm(Form_bop_Full),TMenuItem(Sender));
 end;
 
 procedure TForm1.N4Click(Sender: TObject);
 begin
-    //班级管理
-    dwfShowForm(self,TForm_sys_Student, TForm(Form_sys_Student),TMenuItem(Sender));
-
+    //隐藏标题
+    dwfShowForm(self,TForm_bop_Foot, TForm(Form_bop_Foot),TMenuItem(Sender));
 end;
 
 procedure TForm1.N5Click(Sender: TObject);
 begin
-    //用户管理
-    dwfShowForm(self,TForm_dic_Item, TForm(Form_dic_Item),TMenuItem(Sender));
+    //隐藏导航
+    dwfShowForm(self,TForm_bop_Head, TForm(Form_bop_Head),TMenuItem(Sender));
+
 end;
 
-procedure TForm1.MiClassManagerClick(Sender: TObject);
+procedure TForm1.MISingleSClick(Sender: TObject);
 begin
-    //项目编码
-    dwfShowForm(self,TForm_bop_ClassManager, TForm(Form_bop_ClassManager),TMenuItem(Sender));
+    //单选题
+    dwfShowForm(self,TForm_bop_SelectSel, TForm(Form_bop_SelectSel),TMenuItem(Sender));
+end;
 
+procedure TForm1.MiSynClick(Sender: TObject);
+begin
+    //判断题
+    dwfShowForm(self,TForm_bop_ExamSyn, TForm(Form_bop_ExamSyn),TMenuItem(Sender));
+end;
+
+procedure TForm1.MIJudgeSClick(Sender: TObject);
+begin
+    //判断题
+    dwfShowForm(self,TForm_bop_JudgeSel, TForm(Form_bop_JudgeSel),TMenuItem(Sender));
 end;
 
 procedure TForm1.MIHomeClick(Sender: TObject);
+var
+    joHint      : Variant;
 begin
     //首页
     CP.ActiveCardIndex  := 0;
 
     //如果有进度条， 关闭载入中进度条
     dwRunJS('this.dwloading=false;',self);
-end;
-
-procedure TForm1.MiItemCodeClick(Sender: TObject);
-begin
-    //项目编码
-    dwfShowForm(self,TForm_dic_ItemCode, TForm(Form_dic_ItemCode),TMenuItem(Sender));
-
 end;
 
 procedure TForm1.MIQuickClick(Sender: TObject);
@@ -530,7 +494,6 @@ procedure TForm1.N6Click(Sender: TObject);
 begin
     //用户管理
     dwfShowForm(self,TForm_sys_User, TForm(Form_sys_User),TMenuItem(Sender));
-
 end;
 
 procedure TForm1.N7Click(Sender: TObject);
@@ -541,19 +504,24 @@ end;
 
 procedure TForm1.N8Click(Sender: TObject);
 begin
-    //用户管理
-    dwfShowForm(self,TForm_bop_TestGroup, TForm(Form_bop_TestGroup),TMenuItem(Sender));
-
+    //英雄榜
+    dwfShowForm(self,TForm_bop_Ranking, TForm(Form_bop_Ranking),TMenuItem(Sender));
 end;
 
-procedure TForm1.OnBack(Sender: TObject);
+procedure TForm1.MIJudgeClick(Sender: TObject);
+begin
+    //判断题
+    dwfShowForm(self,TForm_bop_Judge, TForm(Form_bop_Judge),TMenuItem(Sender));
+end;
+
+procedure TForm1.OnBack(Sender: TObject);   //浏览器返回事件, 主要处理移动端浏览器右滑返回
 var
     joHistory   : Variant;
+    joHint      : Variant;
     joItem      : Variant;
     sType       : string;
     oForm       : TForm;
     oComp       : TComponent;
-    iForm       : Integer;
     iComp       : Integer;
     iItem       : Integer;
 begin
@@ -592,12 +560,40 @@ begin
             //===== control	将”visible”数组中的控件的visible设置为true, ”hidden”数组中的控件的visible设置为false
 
             //取得窗体
-            for iForm := 0 to Screen.FormCount -1 do begin
-                oForm   := Screen.Forms[iForm];
-                if oForm.Name = dwGetStr(joHistory,'form') then begin
-                    break;
+            oForm   := TForm(CP.ActiveCard.Controls[0]);
+
+            //逐个处理拟控制显隐的控件
+            for iComp := 0 to oForm.ComponentCount - 1 do begin
+                oComp   := oForm.Components[iComp];
+
+                //将”visible”数组中的控件的visible设置为true
+                if joHistory.Exists('visible') then begin
+                    for iItem := 0 to joHistory.visible._Count - 1 do begin
+                        if LowerCase(joHistory.visible._(iItem)) = LowerCase(oComp.Name) then begin
+                            TControl(oComp).Visible := True;
+                        end;
+                    end;
+                end;
+
+                //”hidden”数组中的控件的visible设置为false
+                if joHistory.Exists('hidden') then begin
+                    for iItem := 0 to joHistory.hidden._Count - 1 do begin
+                        if LowerCase(joHistory.hidden._(iItem)) = LowerCase(oComp.Name) then begin
+                            TControl(oComp).Visible := False;
+                        end;
+                    end;
                 end;
             end;
+
+            //处理标题
+            if joHistory.Exists('caption') then begin
+                LT.Caption := dwGetStr(joHistory,'caption',LT.Caption);
+            end;
+        end else if sType = 'main' then begin
+            //===== control	将”visible”数组中的控件的visible设置为true, ”hidden”数组中的控件的visible设置为false
+
+            //取得窗体
+            oForm   := TForm(self);
 
             //逐个处理拟控制显隐的控件
             for iComp := 0 to oForm.ComponentCount - 1 do begin
@@ -631,9 +627,19 @@ begin
 
     //删除数组中最后一个元素
     gjoHistory.Delete(gjoHistory._Count - 1);
+
+    //根据当前ActiveCard中的Form的Hint, 显隐 head /foot
+    joHint  := dwJson(TForm(CP.ActiveCard.Controls[0]).Hint);
+    PT.Visible  := dwGetInt(joHint,'hidehead') = 0;
+
+    //移动端状态下, 根据设置隐藏底部工具栏
+    if gbMobile then begin
+        TFlowPanel(FindComponent('FPTool')).Visible := dwGetInt(joHint,'hidefoot') = 0;
+    end;
+
 end;
 
-procedure TForm1.OnClickMenuByName(Sender: TObject);
+procedure TForm1.OnClickMenuByName(Sender: TObject);    //通过当前控件的caption, 自动查找菜单项, 并点击
 var
     iItem       : Integer;
     sCaption    : string;
@@ -660,7 +666,12 @@ begin
         //全部设置为非选中状态
         for iItem := 0 to oFPTool.ControlCount - 1 do begin
             oPanel  := TPanel(oFPTool.Controls[iItem]);
-            oPanel.Hint := '{"src":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'normal')+'"}';
+            oPanel.Hint :=
+                        '{'
+                            +'"src":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'normal')+'"'
+                            +',"normal":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'normal')+'"'
+                            +',"active":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'active')+'"'
+                        +'}';
         end;
 
     end;
@@ -672,13 +683,19 @@ begin
             oMenu   := TMenuItem(FindComponent(gjoMenus._(iItem).name));
             if oMenu <> nil then begin
                 oMenu.Click;
+                break;
             end;
         end;
     end;
 
     //
     oPanel  := TPanel(Sender);
-    oPanel.Hint := '{"src":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'active')+'"}';
+    oPanel.Hint :=
+                '{'
+                    +'"src":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'active')+'"'
+                    +',"normal":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'normal')+'"'
+                    +',"active":"'+dwGetStr(gjoMenus._(oPanel.Tag).hint,'active')+'"'
+                +'}';
 end;
 
 //选择主题按钮事件
@@ -705,17 +722,13 @@ begin
     PnH.Visible    := False;
 
     //写入cookie以备用
-    dwSetCookie(self,'dwdTheme',IntToStr(iTheme),30*24);
+    dwSetCookie(self,'dwqTheme',IntToStr(iTheme),30*24);
 end;
 
 //登出按钮事件
 procedure TForm1.BtLogoutClick(Sender: TObject);
 begin
     PnLogout.Visible    := True;
-
-    //为当前操作添加记录
-    dwAddShowHistory(Self,[],[PnLogout]);
-
 end;
 
 //重新登录
@@ -723,7 +736,7 @@ procedure TForm1.BRClick(Sender: TObject);
 begin
     gjoUserInfo := null;
     //如果没找到登录信息，则重新登录（调用通用登录模块）
-    dwOpenUrl(self,'/glogin?dwGMS','_self');
+    dwOpenUrl(self,'/glogin?gl'+gsName,'_self');
 end;
 //avatar有点问题!
 
@@ -746,11 +759,11 @@ var
 begin
     if not gbMobile then begin
         //读取保存的主题序号
-        sCookie := dwGetCookie(self,'dwdTheme');
+        sCookie := dwGetCookie(self,'dwqTheme');
         dwfChangeTheme(self,StrToIntDef(SCookie,0),0);
 
         //设置菜单默认的折叠状态
-        sCookie := dwGetCookie(self,'dwdExpand');
+        sCookie := dwGetCookie(self,'dwqExpand');
         dwfSetMenuExpand(self,sCookie <> '0');
     end;
 
@@ -775,7 +788,7 @@ begin
 
         //针对移动端荣耀/360浏览器的处理
         if gbMobile then begin
-            if Width > 1000 then begin
+            if (Width > 1024) and (Width*1.5 < Height) then begin
                 fdpr    := StrToFloatDef(dwGetProp(Self,'devicepixelratio'),-1);
                 if fdpr > 0 then begin
                     Width   := Round(Width/fdpr);
@@ -834,9 +847,9 @@ var
     oFPTool     : TFlowPanel;
 
 begin
-
     //取得是否为移动端
     gbMobile    := dwIsMobile(Self);
+
 
     //
     if gbMobile then begin    //移动端的操作--------------------------------------------------------------------------
@@ -885,7 +898,7 @@ begin
     //否则返回空
     //参数1为登录配置文件名，默认存入在Runtime|Data目录
     //参数2为当前数据库连接
-    sInfo       := glCheckLoginInfo('dwGMS',FDConnection1);
+    sInfo       := glCheckLoginInfo('gl'+gsName,FDConnection1);
 
     //将登录信息转换为JSON
     gjoUserInfo := _json(sInfo);
@@ -907,30 +920,30 @@ begin
 
         //查看用户表数据 ，取得uAvatar, uRole, uQuickButton 等信息
         FQ_Temp.Close;
-        FQ_Temp.SQL.Text    := 'SELECT * FROM sys_User WHERE uId = '+gjoUserInfo.id;
+        FQ_Temp.SQL.Text        := 'SELECT * FROM sys_user WHERE uid = '+gjoUserInfo.id;
         FQ_Temp.Open;
 
         //取得用户头像avatar
-        gjoUserInfo.avatar      := FQ_Temp.FieldByName('uAvatar').AsString;
+        gjoUserInfo.avatar      := FQ_Temp.FieldByName('uavatar').AsString;
 
         //取得角色名称
-        gjoUserInfo.rolename    := FQ_Temp.FieldByName('uRole').AsString;;
+        gjoUserInfo.rolename    := FQ_Temp.FieldByName('urole').AsString;;
 
         //取得用户的快捷按钮设置
-        gjoUserInfo.quickbutton := _json(FQ_Temp.FieldByName('uQuickButton').AsString);
+        gjoUserInfo.quickbutton := _json(FQ_Temp.FieldByName('uquickbutton').AsString);
 
         //将当前设备id即canvasid写入eUser表的userdevice字段，以实现单点登录
         FQ_Temp.Edit;
-        FQ_Temp.FieldByName('uDevice').AsString  := gjoUserInfo.canvasid;
+        FQ_Temp.FieldByName('udevice').AsString  := gjoUserInfo.canvasid;
         FQ_Temp.Post;
 
         //取当前权限，赋给gjoRights
         FQ_Temp.Close;
-        FQ_Temp.SQL.Text    := 'SELECT rData FROM sys_Role WHERE rName='''+String(gjoUserInfo.rolename)+'''';
+        FQ_Temp.SQL.Text    := 'SELECT rdata FROM sys_role WHERE rname='''+String(gjoUserInfo.rolename)+'''';
         FQ_Temp.Open;
 
         //取得当前角色的权限
-        gjoRights           := _json(FQ_Temp.FieldByName('rData').AsString);
+        gjoRights           := _json(FQ_Temp.FieldByName('rdata').AsString);
         if gjoRights = unassigned then begin
             gjoRights   := _json('[]');
         end;
@@ -938,6 +951,17 @@ begin
         //显示用户名称
         LaUser.Caption  := gjoUserInfo.username;
         PnB.Left        := 0;
+
+        //如果角色是管理员, 则默认底部功能按钮是单选/判断/简答审核
+        if gjoUserInfo.rolename = '管理员' then begin
+            MISingle.Checked    := False;
+            MIJudge.Checked     := False;
+            MiShort.Checked     := False;
+            //
+            MISingleS.Checked   := True;
+            MIJudgeS.Checked    := True;
+            MiShortS.Checked    := True;
+        end;
 
         //先将所有菜单项->json数组,
         //形如:[{"count":3,"name":"xxx","caption":"xxx",checked:0,"imageindex":12,"hint":{"normal":"xxx","active":"xxxx"}},....]
@@ -1042,7 +1066,9 @@ begin
         //启动系统时钟
         TS.Enabled      := True;
 
-        if gbMobile then begin    //移动端的操作--------------------------------------------------------------------------
+        if gbMobile then begin    //移动端的操作------------------------------------------------------------------------
+
+
             //隐藏左侧面板
             PL.Visible          := False;
 
@@ -1101,11 +1127,21 @@ begin
                     HelpKeyword := 'button';
                     Height      := 50;
                     Color       := clNone;      //透明色
-                    Font.Size   := 8;
+                    Font.Size   := 9;
                     if I = 0 then begin
-                        Hint        := '{"src":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'active')+'"}';
+                        Hint    :=
+                                '{'
+                                    +'"src":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'active')+'"'
+                                    +',"active":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'active')+'"'
+                                    +',"normal":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'normal')+'"'
+                                +'}';
                     end else begin
-                        Hint        := '{"src":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'normal')+'"}';
+                        Hint    :=
+                                '{'
+                                    +'"src":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'normal')+'"'
+                                    +',"active":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'active')+'"'
+                                    +',"normal":"'+dwGetStr(gjoMenus._(iCheckeds[I]).hint,'normal')+'"'
+                                +'}';
                     end;
                     OnClick     := OnClickMenuByName;
 
@@ -1122,10 +1158,17 @@ begin
         //显示首页
         dwfShowHome(Form1, TForm_sys_Home, TForm(Form1.Form_sys_Home));
 
+        //更新首页中的用户名, 角色, avatar等
+        with Form_sys_Home do begin
+            LaWelcome.Caption   := 'Hi! '+gjoUserinfo.username+'!';
+            LaRole.Caption      := gjoUserinfo.rolename;
+            //
+            ImAvatar.Hint       := '{"src":"media/system/dw'+gsName+'/head/'+gjoUserInfo.avatar+'","radius":"50%","dwstyle":"border:solid 2px #ddd;"}';
+        end;
     end else begin
         gjoUserInfo     := null;
         //如果没找到登录信息，则重新登录（调用通用登录模块）
-        dwOpenUrl(self,'/glogin?dwGMS','_self');
+        dwOpenUrl(self,'/glogin?gl'+gsName,'_self');
     end;
 end;
 
@@ -1133,6 +1176,12 @@ procedure TForm1.FormUnDock(Sender: TObject; Client: TControl; NewTarget: TWinCo
 begin
     //统一回退事件
     OnBack(Self);
+end;
+
+procedure TForm1.Hello1Click(Sender: TObject);
+begin
+    //The first demo : Hello, world!
+    dwfShowForm(self,TForm_dem_Hello, TForm(Form_dem_Hello),TMenuItem(Sender));
 end;
 
 procedure TForm1.P10Click(Sender: TObject);
@@ -1194,53 +1243,76 @@ end;
 
 procedure TForm1.PnLogoutEnter(Sender: TObject);
 begin
-    try
-        //将当前登录信息保存到日志表dwLog中
-        FQ_Temp.Close;
-        FQ_Temp.SQL.Text    := 'INSERT INTO sys_Log(lMode,lDate,lUserName,lCanvasId,lIp)'
-                +' VALUES('
-                +''''+'logout'+''','
-                +''''+FormatDateTime('yyyy-MM-DD hh:mm:ss',Now)+''','
-                +''''+gjoUserInfo.username+''','
-                +''''+gjoUserInfo.canvasid+''','
-                +''''+dwGetProp(self,'ip')+''''
-                +')';
-        FQ_Temp.ExecSQL;
+    //===== 确认退出登录事件 =====
 
-        //清除COOKIE
-        glClearLoginInfo('dwGMS',self);
+    //将当前登录信息保存到日志表dwLog中
+    FQ_Temp.Close;
+    FQ_Temp.SQL.Text    := 'INSERT INTO sys_log(lmode,ldate,luserName,lcanvasid,lip)'
+            +' VALUES('
+            +''''+'logout'+''','
+            +''''+FormatDateTime('yyyy-MM-DD hh:mm:ss',Now)+''','
+            +''''+gjoUserInfo.username+''','
+            +''''+gjoUserInfo.canvasid+''','
+            +''''+dwGetProp(self,'ip')+''''
+            +')';
+    FQ_Temp.ExecSQL;
 
-        //如果没找到登录信息，则重新登录（调用通用登录模块）
-        dwOpenUrl(self,'/glogin?dwGMS','_self');
-    except
+    //清除COOKIE
+    glClearLoginInfo('gl'+gsName,self);
 
-    end;
+    //跳转到重新登录模块（调用通用登录模块）
+    dwOpenUrl(self,'/glogin?gl'+gsName,'_self');
+
 end;
 
 procedure TForm1.PnLogoutExit(Sender: TObject);
 begin
-
-    //为当前操作删除历史记录
-    dwRemoveLastHistory(self);
-
-end;
-
-procedure TForm1.PnSuperSQLEnter(Sender: TObject);
-begin
     //
-    gsSuperSQL  := Trim(MmSuperSQL.Text);
-    if Length(gsSuperSQl) > 10 then begin
-        //超级查看
-        dwfShowForm(self,TForm_bop_SuperSQL, TForm(Form_bop_SuperSQL),TMenuItem(Sender));
-    end;
 end;
 
+//检查是否双击, 如果双击, 则重载当前模块
+//Tabsheet的标题 Click 时 激活 OnEnter事件
+procedure TForm1.Ts1Enter(Sender: TObject);
+var
+    oTab        : TCard;
+    oMenu       : TMenuItem;
+    //
+    sMenuName   : String;
+begin
+    //检查是否双击, 如果双击, 则重载当前模块
+    if GetTickCount - giTabClick < 400 then begin
+
+        //取得当前 tabsheet
+        oTab        := TCard(Sender);
+
+        //取得菜单项名称
+        sMenuName   := dwGetProp(oTab,'menu');
+
+        //取得菜单
+        oMenu       := TMenuItem(FindComponent(sMenuName));
+
+        //异常处理
+        if oMenu = nil then begin
+            Exit;
+        end;
+
+        //先删除当前模块
+        dwDeleteControl(oTab);
+
+        //重新打开
+        oMenu.OnClick(oMenu);
+    end;
+
+    //记录当前点击时间, 以下次击时检查是否双击
+    giTabClick  := GetTickCount;
+end;
 
 procedure TForm1.TSTimer(Sender: TObject);
 var
     iItem       : Integer;
     oTab        : TCard;
 begin
+
 {
     //如果当前用户已登录, 则写入用户表
     if gjoUserInfo.Exists('id') then begin

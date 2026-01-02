@@ -103,11 +103,16 @@ var
     oComboBox   : TComboBox;
     oSpinEdit   : TSpinEdit;
     oPanel      : TPanel;
+    iError      : Integer;  //异常检测代码
 begin
     //===== 保存 事件
 
     try
+        iError  := 0;
         oForm1  := TForm1(self.Owner);
+
+        //异常检测
+        Inc(iError);
 
         //<先将当前配置保存到gjoUserInfo.quickbutton
         //清空原来的
@@ -125,15 +130,26 @@ begin
             oForm1.gjoUserInfo.quickbutton.Add(joQuickBtn);
         end;
         //>
+        //异常检测
+        Inc(iError);
+
 
         //<保存到数据表
         //查看用户表数据 ，保存gjoUserInfo.rolename
         FDQuery1.Close;
         FDQuery1.SQL.Text   := 'UPDATE sys_User'
-                +' SET uQuickButton='''+VariantSaveJson(oForm1.gjoUserInfo.quickbutton)+''''
-                +' WHERE uId = '+oForm1.gjoUserInfo.id;
+                +' SET uQuickButton= :qb'       //''+String(oForm1.gjoUserInfo.quickbutton)+''''
+                +' WHERE uId = '+IntToStr(oForm1.gjoUserInfo.id);
+        FDQuery1.Params.ParamByName('qb').AsString  := VariantSaveJson(oForm1.gjoUserInfo.quickbutton);
+        //异常检测
+        Inc(iError);
+
         FDQuery1.ExecSQL;
         //>
+
+        //异常检测
+        Inc(iError);
+
 
         //<更新首页快捷按钮
         for iItem := 0 to 7 do begin
@@ -148,11 +164,15 @@ begin
             oPanel.Visible  := oPanel.Caption <> '';
         end;
         //>
+        //异常检测
+        Inc(iError);
+
 
         //
-        dwMessage('保存成功！','',self);
+        dwMessage('保存成功！','success',self);
     except
-
+        //
+        dwMessage('保存失败！'+IntToStr(iError),'error',self);
     end;
 
 end;
@@ -179,6 +199,8 @@ var
     iDebug      : Integer;
 begin
     try
+        FDQuery1.Connection := TForm1(self.Owner).FDConnection1;
+
         //异常监测标识
         iDebug  := 0;
 
@@ -200,13 +222,23 @@ begin
 
             //
             with TForm1(self.Owner) do begin
-                oPanel.Caption  := gjoUserInfo.quickbutton._(iItem)._(0);
-                oPanel.Hint     := '{"radius":"5px","src":"media/images/32/a ('+IntToStr(gjoUserInfo.quickbutton._(iItem)._(1))+').png","dwstyle":"border:solid 1px #eee;"}';
-                oComboBox.Items.Clear;
-                oComboBox.Items.Add('');
-                oComboBox.Items.AddStrings(slMenu);
-                oComboBox.Text      := oPanel.Caption;
-                oSpinEdit.Value     := gjoUserInfo.quickbutton._(iItem)._(1);
+                if gjoUserInfo.quickbutton._Count > iItem then begin
+                    oPanel.Caption  := gjoUserInfo.quickbutton._(iItem)._(0);
+                    oPanel.Hint     := '{"radius":"5px","src":"media/images/32/a ('+IntToStr(gjoUserInfo.quickbutton._(iItem)._(1))+').png","dwstyle":"border:solid 1px #eee;"}';
+                    oComboBox.Items.Clear;
+                    oComboBox.Items.Add('');
+                    oComboBox.Items.AddStrings(slMenu);
+                    oComboBox.Text      := oPanel.Caption;
+                    oSpinEdit.Value     := gjoUserInfo.quickbutton._(iItem)._(1);
+                end else begin
+                    oPanel.Caption  := '';
+                    oPanel.Hint     := '{"radius":"5px","src":"media/images/32/a ('+'1'+').png","dwstyle":"border:solid 1px #eee;"}';
+                    oComboBox.Items.Clear;
+                    oComboBox.Items.Add('');
+                    oComboBox.Items.AddStrings(slMenu);
+                    oComboBox.Text      := oPanel.Caption;
+                    oSpinEdit.Value     := 1;
+                end;
             end;
         end;
     except

@@ -48,7 +48,7 @@ uses
 procedure TForm_sys_User.FormShow(Sender: TObject);
 begin
     //UpdateView;
-    cpInit(Pn1,TForm1(Self.Owner).FDConnection1,TForm1(self.Owner).gbMobile,'');
+    cpInit(Pn1,TForm1(Self.Owner).FDConnection1,TForm1(Self.Owner).gbMobile,'');
 end;
 
 

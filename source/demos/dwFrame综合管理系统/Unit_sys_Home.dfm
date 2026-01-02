@@ -5,7 +5,7 @@ object Form_sys_Home: TForm_sys_Home
   VertScrollBar.Visible = False
   Align = alClient
   BorderStyle = bsNone
-  Caption = #39318#39029
+  Caption = 'HOME'
   ClientHeight = 629
   ClientWidth = 900
   Color = clWhite
@@ -14,24 +14,24 @@ object Form_sys_Home: TForm_sys_Home
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
-  Font.Name = #24494#36719#38597#40657
+  Font.Name = #24605#28304#40657#20307' CN'
   Font.Style = []
   Position = poDesigned
   OnShow = FormShow
-  TextHeight = 21
+  TextHeight = 23
   object P0: TPanel
     AlignWithMargins = True
-    Left = 18
-    Top = 28
-    Width = 864
+    Left = 20
+    Top = 20
+    Width = 860
     Height = 130
     Hint = 
       '{"radius":"7px","dwstyle":"background-image: linear-gradient(135' +
       'deg, #667eea 0%, #764ba2 100%);"}'
-    Margins.Left = 18
-    Margins.Top = 28
-    Margins.Right = 18
-    Margins.Bottom = 18
+    Margins.Left = 20
+    Margins.Top = 20
+    Margins.Right = 20
+    Margins.Bottom = 5
     Align = alTop
     BevelOuter = bvNone
     ParentBackground = False
@@ -39,7 +39,7 @@ object Form_sys_Home: TForm_sys_Home
     object P0C: TPanel
       Left = 100
       Top = 0
-      Width = 764
+      Width = 760
       Height = 130
       Align = alClient
       BevelOuter = bvNone
@@ -48,46 +48,45 @@ object Form_sys_Home: TForm_sys_Home
       TabOrder = 0
       object LaWelcome: TLabel
         AlignWithMargins = True
-        Left = 20
+        Left = 10
         Top = 10
-        Width = 724
-        Height = 27
-        Margins.Left = 20
+        Width = 740
+        Height = 29
+        Margins.Left = 10
         Margins.Top = 10
-        Margins.Right = 20
+        Margins.Right = 10
         Margins.Bottom = 10
         Align = alTop
-        Caption = #27426#36814#24744'!  '#24352#26223#23398
+        Caption = 'HI!  Billows'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -20
-        Font.Name = #24494#36719#38597#40657
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        WordWrap = True
-        ExplicitWidth = 138
+        ExplicitWidth = 103
       end
       object LaIntra: TLabel
         AlignWithMargins = True
-        Left = 20
-        Top = 47
-        Width = 724
-        Height = 21
-        Margins.Left = 20
+        Left = 10
+        Top = 49
+        Width = 740
+        Height = 46
+        Margins.Left = 10
         Margins.Top = 0
-        Margins.Right = 20
+        Margins.Right = 10
         Margins.Bottom = 20
         Align = alTop
-        Caption = '<b>GMS</b>'#8212#8212#20307#27979#25104#32489#31649#29702#31995#32479
+        Caption = '<b>dwFrame</b> '#13#10'Delphi Web Framework'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -16
-        Font.Name = #24494#36719#38597#40657
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = []
         ParentFont = False
         WordWrap = True
-        ExplicitWidth = 274
+        ExplicitWidth = 176
       end
     end
     object P0L: TPanel
@@ -354,11 +353,11 @@ object Form_sys_Home: TForm_sys_Home
         Align = alClient
         Alignment = taCenter
         AutoSize = False
-        Caption = #26410#30331#24405
+        Caption = 'unkown'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -16
-        Font.Name = #24494#36719#38597#40657
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = []
         ParentFont = False
         ExplicitLeft = -3
@@ -370,7 +369,7 @@ object Form_sys_Home: TForm_sys_Home
   object Fp1: TFlowPanel
     AlignWithMargins = True
     Left = 10
-    Top = 181
+    Top = 160
     Width = 880
     Height = 110
     HelpType = htKeyword
@@ -384,8 +383,8 @@ object Form_sys_Home: TForm_sys_Home
     Color = clNone
     Font.Charset = ANSI_CHARSET
     Font.Color = clGray
-    Font.Height = -15
-    Font.Name = #24494#36719#38597#40657
+    Font.Height = -13
+    Font.Name = #24605#28304#40657#20307' CN'
     Font.Style = []
     ParentBackground = False
     ParentFont = False
@@ -408,7 +407,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #23458#25143#20449#24687
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
@@ -432,7 +431,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #29992#25143#20449#24687
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
@@ -456,7 +455,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #35282#33394#26435#38480
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 2
@@ -480,7 +479,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #31995#32479#26085#24535
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 3
@@ -504,7 +503,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #31354#27169#22359
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 4
@@ -528,7 +527,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #25968#25454#24211#25805#20316
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 5
@@ -552,7 +551,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #24555#25463#27169#22359
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 6
@@ -576,7 +575,7 @@ object Form_sys_Home: TForm_sys_Home
       Align = alLeft
       BevelOuter = bvNone
       BorderStyle = bsSingle
-      Caption = #31995#32479#28040#24687
+      Caption = 'none'
       Color = clWhite
       ParentBackground = False
       TabOrder = 7
@@ -585,15 +584,15 @@ object Form_sys_Home: TForm_sys_Home
   end
   object Fp2: TFlowPanel
     AlignWithMargins = True
-    Left = 5
-    Top = 296
-    Width = 890
+    Left = 10
+    Top = 275
+    Width = 880
     Height = 130
+    HelpType = htKeyword
     HelpKeyword = 'auto'
-    HelpContext = 10003
-    Margins.Left = 5
+    Margins.Left = 10
     Margins.Top = 5
-    Margins.Right = 5
+    Margins.Right = 10
     Margins.Bottom = 0
     Align = alTop
     BevelOuter = bvNone
@@ -618,22 +617,22 @@ object Form_sys_Home: TForm_sys_Home
       TabOrder = 0
       object LaT0: TLabel
         AlignWithMargins = True
-        Left = 10
+        Left = 20
         Top = 5
-        Width = 280
+        Width = 260
         Height = 41
-        Margins.Left = 10
+        Margins.Left = 20
         Margins.Top = 5
-        Margins.Right = 10
+        Margins.Right = 20
         Margins.Bottom = 0
         Align = alTop
         Alignment = taCenter
         AutoSize = False
-        Caption = #29677#32423
+        Caption = 'Data'
         Font.Charset = ANSI_CHARSET
         Font.Color = 13158600
         Font.Height = -15
-        Font.Name = #24494#36719#38597#40657
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
@@ -653,11 +652,11 @@ object Form_sys_Home: TForm_sys_Home
         Align = alClient
         Alignment = taCenter
         AutoSize = False
-        Caption = '2312'#20214
+        Caption = '2312'
         Font.Charset = ANSI_CHARSET
         Font.Color = 13158600
-        Font.Height = -17
-        Font.Name = #24494#36719#38597#40657
+        Font.Height = -15
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = [fsBold]
         ParentFont = False
         WordWrap = True
@@ -685,25 +684,26 @@ object Form_sys_Home: TForm_sys_Home
       TabOrder = 1
       object LaT1: TLabel
         AlignWithMargins = True
-        Left = 10
+        Left = 0
         Top = 5
-        Width = 260
+        Width = 280
         Height = 41
-        Margins.Left = 10
+        Margins.Left = 0
         Margins.Top = 5
-        Margins.Right = 10
+        Margins.Right = 0
         Margins.Bottom = 0
         Align = alTop
         Alignment = taCenter
         AutoSize = False
-        Caption = #23398#29983
+        Caption = 'Value'
         Font.Charset = ANSI_CHARSET
         Font.Color = 13158600
         Font.Height = -15
-        Font.Name = #24494#36719#38597#40657
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 10
         ExplicitTop = 8
         ExplicitWidth = 137
       end
@@ -719,11 +719,11 @@ object Form_sys_Home: TForm_sys_Home
         Align = alClient
         Alignment = taCenter
         AutoSize = False
-        Caption = '3,206'#20803
+        Caption = '3,206.00'
         Font.Charset = ANSI_CHARSET
         Font.Color = 13158600
-        Font.Height = -17
-        Font.Name = #24494#36719#38597#40657
+        Font.Height = -15
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = [fsBold]
         ParentFont = False
         WordWrap = True
@@ -751,22 +751,22 @@ object Form_sys_Home: TForm_sys_Home
       TabOrder = 2
       object LaT2: TLabel
         AlignWithMargins = True
-        Left = 10
+        Left = 0
         Top = 5
-        Width = 215
+        Width = 235
         Height = 41
-        Margins.Left = 10
+        Margins.Left = 0
         Margins.Top = 5
-        Margins.Right = 10
+        Margins.Right = 0
         Margins.Bottom = 0
         Align = alTop
         Alignment = taCenter
         AutoSize = False
-        Caption = #31185#30446
+        Caption = 'Summary'
         Font.Charset = ANSI_CHARSET
         Font.Color = 13158600
         Font.Height = -15
-        Font.Name = #24494#36719#38597#40657
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
@@ -776,21 +776,21 @@ object Form_sys_Home: TForm_sys_Home
       end
       object LaV2: TLabel
         AlignWithMargins = True
-        Left = 10
+        Left = 0
         Top = 46
-        Width = 215
+        Width = 235
         Height = 61
-        Margins.Left = 10
+        Margins.Left = 0
         Margins.Top = 0
-        Margins.Right = 10
+        Margins.Right = 0
         Align = alClient
         Alignment = taCenter
         AutoSize = False
-        Caption = '283,216'#20803
+        Caption = '283,216.00'
         Font.Charset = ANSI_CHARSET
         Font.Color = 13158600
-        Font.Height = -17
-        Font.Name = #24494#36719#38597#40657
+        Font.Height = -15
+        Font.Name = #24605#28304#40657#20307' CN'
         Font.Style = [fsBold]
         ParentFont = False
         WordWrap = True
@@ -802,7 +802,10 @@ object Form_sys_Home: TForm_sys_Home
     end
   end
   object FDQuery1: TFDQuery
-    Left = 496
-    Top = 24
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    Left = 440
+    Top = 32
   end
 end

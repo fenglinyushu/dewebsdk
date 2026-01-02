@@ -3,10 +3,9 @@ object Form_sys_User: TForm_sys_User
   Top = 0
   HelpType = htKeyword
   HelpKeyword = 'embed'
-  BorderStyle = bsNone
   Caption = #29992#25143#31649#29702
-  ClientHeight = 538
-  ClientWidth = 947
+  ClientHeight = 499
+  ClientWidth = 931
   Color = clWhite
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -31,20 +30,20 @@ object Form_sys_User: TForm_sys_User
   object Pn1: TPanel
     Left = 0
     Top = 0
-    Width = 947
-    Height = 538
+    Width = 931
+    Height = 499
     Hint = 
       '{"table":"sys_User","defaultquerymode":1,"select":40,"visiblecol' +
-      '":2,"defaulteditmax":0,"fields":[{"name":"uAvatar","caption":"'#30456#29255 +
-      '","type":"image","imgdir":"media/system/gms/","imgtype":["jpg","' +
-      'png","gif"],"imgheight":45,"imgwidth":45,"preview":0,"dwstyle":"' +
-      'top:1px;border-radius:4px;","align":"center","width":55},{"name"' +
-      ':"uName","caption":"'#29992#25143#21517'","query":1,"sort":1,"must":1,"width":100' +
-      '},{"name":"uRole","caption":"'#35282#33394'","type":"dbcombo","sort":1,"widt' +
-      'h":100,"align":"center","table":"sys_Role","datafield":"rName"},' +
-      '{"name":"uRemark","caption":"'#22791#27880'","query":1,"sort":1,"width":60},' +
-      '{"name":"uId","view":2},{"name":"uDepartmentId","view":2},{"name' +
-      '":"uPassword","default":"123456","view":4}]}'
+      '":2,"defaulteditmax":0,"deletecols":[2],"fields":[{"name":"uAvat' +
+      'ar","caption":"'#30456#29255'","type":"image","imgdir":"media/system/qbank/"' +
+      ',"imgtype":["jpg","png","gif"],"imgheight":45,"imgwidth":45,"pre' +
+      'view":1,"align":"center","default":"00.jpg","width":55},{"name":' +
+      '"uName","caption":"'#29992#25143#21517'","query":1,"sort":1,"must":1,"width":100}' +
+      ',{"name":"uRole","caption":"'#35282#33394'","type":"dbcombo","sort":1,"width' +
+      '":100,"align":"center","table":"sys_Role","datafield":"rName","d' +
+      'efault":"'#21629#39064#21592'"},{"name":"uRemark","caption":"'#22791#27880'","query":1,"sort"' +
+      ':1,"width":80},{"name":"uId","view":2},{"name":"uDepartmentId","' +
+      'view":2},{"name":"uPassword","default":"123456","view":4}]}'
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Pn1'

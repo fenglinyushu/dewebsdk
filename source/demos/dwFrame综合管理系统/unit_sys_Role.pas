@@ -269,7 +269,7 @@ procedure TForm_sys_Role.FormShow(Sender: TObject);
 begin
 
     //创建Crud
-    cpInit(Pn1,TForm1(Self.Owner).FDConnection1,TForm1(self.Owner).gbMobile,'');
+    cpInit(Pn1,TForm1(Self.Owner).FDConnection1,TForm1(Self.Owner).gbMobile,'');
 
     //调整E_Keyword的宽度
     //with TEdit(FindComponent('EKw')) do begin

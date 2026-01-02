@@ -1,0 +1,244 @@
+2025-12-31 16:26:15.409 CST [12532] »’÷æ:  ’˝‘⁄∆Ù∂Ø PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2025-12-31 16:26:15.416 CST [12532] »’÷æ:  ’˝‘⁄º‡Ã˝IPv6µÿ÷∑"::1"£¨∂Àø⁄ 5432
+2025-12-31 16:26:15.417 CST [12532] »’÷æ:  ’˝‘⁄º‡Ã˝IPv4µÿ÷∑"127.0.0.1"£¨∂Àø⁄ 5432
+2025-12-31 16:26:15.617 CST [12468] »’÷æ:   ˝æ›ø‚…œ¥Œπÿ±’ ±º‰Œ™ 2025-12-31 16:26:06 CST
+2025-12-31 16:26:15.629 CST [12532] »’÷æ:   ˝æ›ø‚œµÕ≥◊º±∏Ω” ‹¡¨Ω”
+2025-12-31 16:26:29.719 CST [12532] »’÷æ:  ∫ÛÃ®π§◊˜Ω¯≥Ã "logical replication launcher" (PID 6000) ±ª“Ï≥£ 0xC000013A ÷’÷π
+2025-12-31 16:26:29.719 CST [12532] Ã· æ:  πÿ”⁄∂‘16Ω¯÷∆÷µµƒ√Ë ˆ£¨ ≤Œº˚C”Ô—‘µƒ“˝”√Œƒº˛ "ntstatus.h" 
+2025-12-31 16:26:29.720 CST [12532] »’÷æ:  ÷–∂œ»Œ∫Œ∆‰À¸“—º§ªÓµƒ∑˛ŒÒ∆˜Ω¯≥Ã
+2025-12-31 16:26:29.728 CST [12532] »’÷æ:  Ω” ’µΩøÏÀŸ (fast) Õ£÷π«Î«Û
+^C2025-12-31 16:28:27.363 CST [8784] »’÷æ:  ’˝‘⁄∆Ù∂Ø PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2025-12-31 16:28:27.369 CST [8784] »’÷æ:  ’˝‘⁄º‡Ã˝IPv6µÿ÷∑"::1"£¨∂Àø⁄ 5432
+2025-12-31 16:28:27.369 CST [8784] »’÷æ:  ’˝‘⁄º‡Ã˝IPv4µÿ÷∑"127.0.0.1"£¨∂Àø⁄ 5432
+2025-12-31 16:28:27.536 CST [7364] »’÷æ:   ˝æ›ø‚œµÕ≥÷–∂œ£ª…œ“ª¥Œµƒ∆Ù∂Ø ±º‰ «‘⁄2025-12-31 16:26:15 CST
+2025-12-31 16:28:27.670 CST [7364] »’÷æ:   ˝æ›ø‚œµÕ≥√ª”–’˝»∑µƒπÿ±’; ¥¶”⁄◊‘∂Øª÷∏¥◊¥Ã¨÷–
+2025-12-31 16:28:27.673 CST [7364] »’÷æ:  invalid record length at 0/17F16C0: expected at least 24, got 0
+2025-12-31 16:28:27.673 CST [7364] »’÷æ:  ≤ª–Ë“™ redo
+2025-12-31 16:28:27.677 CST [13592] »’÷æ:  checkpoint starting: end-of-recovery immediate wait
+2025-12-31 16:28:27.686 CST [13592] »’÷æ:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.002 s, total=0.012 s; sync files=2, longest=0.002 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/17F16C0, redo lsn=0/17F16C0
+2025-12-31 16:28:27.692 CST [8784] »’÷æ:   ˝æ›ø‚œµÕ≥◊º±∏Ω” ‹¡¨Ω”
+2025-12-31 16:28:39.831 CST [1288] ÷¬√¸¥ÌŒÛ:  ”√ªß "postgres" Password »œ÷§ ß∞‹
+2025-12-31 16:28:39.831 CST [1288] œÍœ∏–≈œ¢:  ”√ªß "postgres" µƒø⁄¡Ó≤ª∆•≈‰°£
+	Connection matched file "E:/GitHub2/dewebsdk/DataBase/postgresql18/data/pg_hba.conf" line 117: "host    all             all             ::1/128                 md5"
+2025-12-31 16:33:27.702 CST [13592] »’÷æ:  checkpoint starting: time
+2025-12-31 16:33:41.035 CST [13592] »’÷æ:  checkpoint complete: wrote 120 buffers (0.7%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=13.191 s, sync=0.122 s, total=13.333 s; sync files=54, longest=0.012 s, average=0.003 s; distance=926 kB, estimate=926 kB; lsn=0/192EC40, redo lsn=0/18D9068
+2025-12-31 16:33:49.132 CST [7964] ÈîôËØØ:  Á±ªÂûã "serial" ‰∏çÂ≠òÂú® Á¨¨ 85 ‰∏™Â≠óÁ¨¶Â§Ñ
+2025-12-31 16:33:49.132 CST [7964] ËØ≠Âè•:  ALTER TABLE "public"."bop_Question" 
+	  ALTER COLUMN "qId" TYPE serial USING "qId"::serial
+2025-12-31 16:38:25.695 CST [15792] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2025-12-31 16:38:25.695 CST [7964] Êó•Âøó:  Êó†Ê≥ï‰ªéÂÆ¢Êà∑Á´ØËé∑ÂæóÊï∞ÊçÆ: An existing connection was forcibly closed by the remote host.
+	
+2025-12-31 16:38:25.699 CST [5972] Êó•Âøó:  Êó†Ê≥ï‰ªéÂÆ¢Êà∑Á´ØËé∑ÂæóÊï∞ÊçÆ: An existing connection was forcibly closed by the remote host.
+	
+2025-12-31 16:38:27.043 CST [13592] »’÷æ:  checkpoint starting: time
+2025-12-31 16:38:29.567 CST [13592] »’÷æ:  checkpoint complete: wrote 23 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.474 s, sync=0.033 s, total=2.524 s; sync files=11, longest=0.011 s, average=0.003 s; distance=343 kB, estimate=868 kB; lsn=0/192EDD8, redo lsn=0/192ED80
+2025-12-31 16:53:27.591 CST [13592] »’÷æ:  checkpoint starting: time
+2025-12-31 16:53:27.740 CST [13592] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.118 s, sync=0.003 s, total=0.149 s; sync files=1, longest=0.003 s, average=0.003 s; distance=8 kB, estimate=782 kB; lsn=0/1930F48, redo lsn=0/1930EB8
+2025-12-31 17:28:07.567 CST [15004] ERROR:  column "uid" of relation "bop_Question" contains null values
+2025-12-31 17:28:07.567 CST [15004] STATEMENT:  ALTER TABLE public."bop_Question" ADD uid int NOT NULL
+2025-12-31 17:28:27.774 CST [13592] »’÷æ:  checkpoint starting: time
+2025-12-31 17:28:30.139 CST [13592] »’÷æ:  checkpoint complete: wrote 21 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.323 s, sync=0.023 s, total=2.366 s; sync files=16, longest=0.009 s, average=0.002 s; distance=117 kB, estimate=715 kB; lsn=0/194E320, redo lsn=0/194E2C8
+2025-12-31 17:29:59.414 CST [12028] ÈîôËØØ:  Á±ªÂûã "serial" ‰∏çÂ≠òÂú® Á¨¨ 79 ‰∏™Â≠óÁ¨¶Â§Ñ
+2025-12-31 17:29:59.414 CST [12028] ËØ≠Âè•:  ALTER TABLE public."bop_Question" ALTER COLUMN "qId" TYPE serial USING "qId"::serial
+2025-12-31 17:30:59.673 CST [12028] ÈîôËØØ:  Á±ªÂûã "serial" ‰∏çÂ≠òÂú® Á¨¨ 79 ‰∏™Â≠óÁ¨¶Â§Ñ
+2025-12-31 17:30:59.673 CST [12028] ËØ≠Âè•:  ALTER TABLE public."bop_Question" ALTER COLUMN "qId" TYPE serial USING "qId"::serial
+2025-12-31 17:33:27.151 CST [13592] »’÷æ:  checkpoint starting: time
+2025-12-31 17:33:35.248 CST [13592] »’÷æ:  checkpoint complete: wrote 73 buffers (0.4%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=8.058 s, sync=0.028 s, total=8.098 s; sync files=38, longest=0.002 s, average=0.001 s; distance=422 kB, estimate=686 kB; lsn=0/19B7C58, redo lsn=0/19B7BC8
+2025-12-31 17:34:49.497 CST [8784] »’÷æ:  ∫ÛÃ®π§◊˜Ω¯≥Ã "logical replication launcher" (PID 12596) ±ª“Ï≥£ 0xC000013A ÷’÷π
+2025-12-31 17:34:49.497 CST [8784] Ã· æ:  πÿ”⁄∂‘16Ω¯÷∆÷µµƒ√Ë ˆ£¨ ≤Œº˚C”Ô—‘µƒ“˝”√Œƒº˛ "ntstatus.h" 
+2025-12-31 17:34:49.498 CST [8784] »’÷æ:  ÷–∂œ»Œ∫Œ∆‰À¸“—º§ªÓµƒ∑˛ŒÒ∆˜Ω¯≥Ã
+2026-01-01 09:52:21.594 CST [13360] »’÷æ:  ’˝‘⁄∆Ù∂Ø PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-01 09:52:21.600 CST [13360] »’÷æ:  ’˝‘⁄º‡Ã˝IPv6µÿ÷∑"::1"£¨∂Àø⁄ 5432
+2026-01-01 09:52:21.600 CST [13360] »’÷æ:  ’˝‘⁄º‡Ã˝IPv4µÿ÷∑"127.0.0.1"£¨∂Àø⁄ 5432
+2026-01-01 09:52:21.787 CST [6596] »’÷æ:   ˝æ›ø‚œµÕ≥÷–∂œ£ª…œ“ª¥Œµƒ∆Ù∂Ø ±º‰ «‘⁄2025-12-31 17:33:35 CST
+2026-01-01 09:52:22.220 CST [6596] »’÷æ:   ˝æ›ø‚œµÕ≥√ª”–’˝»∑µƒπÿ±’; ¥¶”⁄◊‘∂Øª÷∏¥◊¥Ã¨÷–
+2026-01-01 09:52:22.228 CST [6596] »’÷æ:  redo ‘⁄ 0/19B7BC8 ø™ º
+2026-01-01 09:52:22.229 CST [6596] »’÷æ:  invalid record length at 0/19B7D08: expected at least 24, got 0
+2026-01-01 09:52:22.229 CST [6596] »’÷æ:  redo done at 0/19B7CD0 system usage: CPU:”√ªß£∫0.00 s£¨œµÕ≥£∫0.00 s£¨“—”√ ±º‰£∫0.00 s
+2026-01-01 09:52:22.239 CST [904] »’÷æ:  checkpoint starting: end-of-recovery immediate wait
+2026-01-01 09:52:22.268 CST [904] »’÷æ:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.007 s, total=0.035 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/19B7D08, redo lsn=0/19B7D08
+2026-01-01 09:52:22.278 CST [13360] »’÷æ:   ˝æ›ø‚œµÕ≥◊º±∏Ω” ‹¡¨Ω”
+2026-01-01 09:57:22.279 CST [904] »’÷æ:  checkpoint starting: time
+2026-01-01 09:57:22.960 CST [904] »’÷æ:  checkpoint complete: wrote 6 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.659 s, sync=0.004 s, total=0.681 s; sync files=3, longest=0.002 s, average=0.002 s; distance=37 kB, estimate=37 kB; lsn=0/19C1298, redo lsn=0/19C1240
+2026-01-01 10:12:53.436 CST [12660] ÈîôËØØ:  ËØ≠Ê≥ïÈîôËØØ Âú® "NONCLUSTERED" ÊàñÈôÑËøëÁöÑ Á¨¨ 8 ‰∏™Â≠óÁ¨¶Â§Ñ
+2026-01-01 10:12:53.436 CST [12660] ËØ≠Âè•:  CREATE NONCLUSTERED INDEX [_WA_Sys_username_77BFCB91]
+	ON [dbo].[eUser] (
+	  [uName] ASC
+	)
+	WITH (
+	  FILLFACTOR = 100
+	)
+	GO
+2026-01-02 08:40:30.031 CST [13360] »’÷æ:  client backend (PID 15748) ±ª“Ï≥£ 0xC000013A ÷’÷π
+2026-01-02 08:40:30.031 CST [13360] œÍœ∏–≈œ¢:   ß∞‹Ω¯≥Ã:SELECT spcname AS name FROM pg_tablespace ORDER BY spcname ASC’˝‘⁄‘À––
+2026-01-02 08:40:30.031 CST [13360] Ã· æ:  πÿ”⁄∂‘16Ω¯÷∆÷µµƒ√Ë ˆ£¨ ≤Œº˚C”Ô—‘µƒ“˝”√Œƒº˛ "ntstatus.h" 
+2026-01-02 08:40:30.033 CST [13360] »’÷æ:  ÷–∂œ»Œ∫Œ∆‰À¸“—º§ªÓµƒ∑˛ŒÒ∆˜Ω¯≥Ã
+2026-01-02 08:40:30.042 CST [13360] »’÷æ:  Ω” ’µΩøÏÀŸ (fast) Õ£÷π«Î«Û
+^C2026-01-02 08:40:49.137 CST [16576] »’÷æ:  ’˝‘⁄∆Ù∂Ø PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-02 08:40:49.144 CST [16576] »’÷æ:  ’˝‘⁄º‡Ã˝IPv6µÿ÷∑"::1"£¨∂Àø⁄ 5432
+2026-01-02 08:40:49.144 CST [16576] »’÷æ:  ’˝‘⁄º‡Ã˝IPv4µÿ÷∑"127.0.0.1"£¨∂Àø⁄ 5432
+2026-01-02 08:40:49.300 CST [21396] »’÷æ:   ˝æ›ø‚œµÕ≥÷–∂œ£ª…œ“ª¥Œµƒ∆Ù∂Ø ±º‰ «‘⁄2026-01-01 09:57:22 CST
+2026-01-02 08:40:49.632 CST [21396] »’÷æ:   ˝æ›ø‚œµÕ≥√ª”–’˝»∑µƒπÿ±’; ¥¶”⁄◊‘∂Øª÷∏¥◊¥Ã¨÷–
+2026-01-02 08:40:49.640 CST [21396] »’÷æ:  redo ‘⁄ 0/19C1240 ø™ º
+2026-01-02 08:40:49.640 CST [21396] »’÷æ:  invalid record length at 0/19C1348: expected at least 24, got 0
+2026-01-02 08:40:49.640 CST [21396] »’÷æ:  redo done at 0/19C1310 system usage: CPU:”√ªß£∫0.00 s£¨œµÕ≥£∫0.00 s£¨“—”√ ±º‰£∫0.00 s
+2026-01-02 08:40:49.649 CST [4412] »’÷æ:  checkpoint starting: end-of-recovery immediate wait
+2026-01-02 08:40:49.681 CST [4412] »’÷æ:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.007 s, total=0.038 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/19C1348, redo lsn=0/19C1348
+2026-01-02 08:40:49.690 CST [16576] »’÷æ:   ˝æ›ø‚œµÕ≥◊º±∏Ω” ‹¡¨Ω”
+2026-01-02 08:56:41.753 CST [10284] ÈîôËØØ:  Á±ªÂûã "serial" ‰∏çÂ≠òÂú® Á¨¨ 81 ‰∏™Â≠óÁ¨¶Â§Ñ
+2026-01-02 08:56:41.753 CST [10284] ËØ≠Âè•:  ALTER TABLE "public"."sys_User" 
+	  ALTER COLUMN "uId" TYPE serial USING "uId"::serial
+2026-01-02 09:00:49.721 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 09:00:54.715 CST [4412] »’÷æ:  checkpoint complete: wrote 45 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.947 s, sync=0.028 s, total=5.000 s; sync files=34, longest=0.009 s, average=0.001 s; distance=234 kB, estimate=234 kB; lsn=0/19FBC80, redo lsn=0/19FBC28
+2026-01-02 09:05:49.725 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 09:05:50.723 CST [4412] »’÷æ:  checkpoint complete: wrote 9 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.965 s, sync=0.015 s, total=0.998 s; sync files=8, longest=0.011 s, average=0.002 s; distance=52 kB, estimate=216 kB; lsn=0/1A08DC0, redo lsn=0/1A08D68
+2026-01-02 09:10:49.750 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 09:10:52.739 CST [4412] »’÷æ:  checkpoint complete: wrote 27 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.949 s, sync=0.026 s, total=2.992 s; sync files=24, longest=0.003 s, average=0.002 s; distance=143 kB, estimate=208 kB; lsn=0/1A2CC58, redo lsn=0/1A2CBC8
+2026-01-02 10:09:08.606 CST [6588] ERROR:  relation "sys_log" does not exist at character 13
+2026-01-02 10:09:08.606 CST [6588] STATEMENT:  INSERT INTO sys_log(lmode,ldate,lusername,lcanvasid) VALUES($1,$2,$3,$4)
+2026-01-02 10:10:49.832 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 10:10:51.427 CST [4412] »’÷æ:  checkpoint complete: wrote 14 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.557 s, sync=0.021 s, total=1.598 s; sync files=13, longest=0.009 s, average=0.002 s; distance=91 kB, estimate=197 kB; lsn=0/1A43898, redo lsn=0/1A43840
+2026-01-02 10:11:46.813 CST [6332] ERROR:  column "lcanvasid" of relation "sys_log" does not exist at character 43
+2026-01-02 10:11:46.813 CST [6332] STATEMENT:  INSERT INTO sys_log(lmode,ldate,lusername,lcanvasid) VALUES($1,$2,$3,$4)
+2026-01-02 10:15:37.531 CST [11164] ERROR:  column "lcanvasid" of relation "sys_log" does not exist at character 43
+2026-01-02 10:15:37.531 CST [11164] STATEMENT:  INSERT INTO sys_log(lmode,ldate,lusername,lcanvasid) VALUES($1,$2,$3,$4)
+2026-01-02 10:15:49.436 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 10:15:50.252 CST [4412] »’÷æ:  checkpoint complete: wrote 7 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.772 s, sync=0.033 s, total=0.816 s; sync files=5, longest=0.029 s, average=0.007 s; distance=39 kB, estimate=181 kB; lsn=0/1A4D6B8, redo lsn=0/1A4D660
+2026-01-02 10:17:05.422 CST [16056] ERROR:  relation "bop_question" does not exist at character 29
+2026-01-02 10:17:05.422 CST [16056] STATEMENT:  SELECT COUNT(*) AS AAA FROM bop_Question WHERE (qType='ÈÄâÊã©È¢ò') AND (qCreatorId=1)
+2026-01-02 10:18:54.720 CST [20904] ERROR:  relation "bop_question" does not exist at character 29
+2026-01-02 10:18:54.720 CST [20904] STATEMENT:  SELECT COUNT(*) AS AAA FROM bop_Question WHERE (qType='ÈÄâÊã©È¢ò') AND (qCreatorId=1)
+2026-01-02 10:20:49.257 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 10:20:49.913 CST [4412] »’÷æ:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.633 s, sync=0.008 s, total=0.657 s; sync files=7, longest=0.002 s, average=0.002 s; distance=26 kB, estimate=165 kB; lsn=0/1A540E8, redo lsn=0/1A54090
+2026-01-02 10:25:49.918 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 10:25:50.053 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.107 s, sync=0.007 s, total=0.136 s; sync files=2, longest=0.004 s, average=0.004 s; distance=4 kB, estimate=149 kB; lsn=0/1A55340, redo lsn=0/1A552E8
+2026-01-02 11:00:49.082 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 11:00:49.232 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.114 s, sync=0.007 s, total=0.151 s; sync files=2, longest=0.005 s, average=0.004 s; distance=4 kB, estimate=135 kB; lsn=0/1A566C8, redo lsn=0/1A56670
+2026-01-02 11:30:49.269 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 11:30:49.429 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.126 s, sync=0.007 s, total=0.166 s; sync files=2, longest=0.004 s, average=0.004 s; distance=6 kB, estimate=122 kB; lsn=0/1A580B8, redo lsn=0/1A58060
+2026-01-02 13:02:43.254 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:02:43.405 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.115 s, sync=0.008 s, total=0.152 s; sync files=2, longest=0.005 s, average=0.004 s; distance=7 kB, estimate=110 kB; lsn=0/1A59D88, redo lsn=0/1A59D30
+2026-01-02 13:07:43.414 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:07:43.556 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.110 s, sync=0.007 s, total=0.143 s; sync files=2, longest=0.004 s, average=0.004 s; distance=7 kB, estimate=100 kB; lsn=0/1A5B9D0, redo lsn=0/1A5B978
+2026-01-02 13:12:43.566 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:12:43.692 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.103 s, sync=0.004 s, total=0.126 s; sync files=2, longest=0.003 s, average=0.002 s; distance=7 kB, estimate=91 kB; lsn=0/1A5D730, redo lsn=0/1A5D6D8
+2026-01-02 13:17:43.689 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:17:43.824 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.103 s, sync=0.007 s, total=0.136 s; sync files=2, longest=0.004 s, average=0.004 s; distance=7 kB, estimate=82 kB; lsn=0/1A5F5A8, redo lsn=0/1A5F550
+2026-01-02 13:22:43.837 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:22:43.992 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.117 s, sync=0.008 s, total=0.156 s; sync files=2, longest=0.005 s, average=0.004 s; distance=7 kB, estimate=75 kB; lsn=0/1A61538, redo lsn=0/1A614E0
+2026-01-02 13:37:44.015 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:37:44.163 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.115 s, sync=0.007 s, total=0.157 s; sync files=2, longest=0.005 s, average=0.004 s; distance=8 kB, estimate=68 kB; lsn=0/1A635E0, redo lsn=0/1A63588
+2026-01-02 13:42:44.163 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:42:44.756 CST [4412] »’÷æ:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.541 s, sync=0.017 s, total=0.594 s; sync files=3, longest=0.012 s, average=0.006 s; distance=32 kB, estimate=65 kB; lsn=0/1A6B998, redo lsn=0/1A6B940
+2026-01-02 13:47:44.780 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:47:44.937 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.122 s, sync=0.008 s, total=0.161 s; sync files=2, longest=0.005 s, average=0.004 s; distance=1 kB, estimate=58 kB; lsn=0/1A6BE08, redo lsn=0/1A6BDB0
+2026-01-02 13:52:44.949 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:52:45.081 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.112 s, sync=0.003 s, total=0.132 s; sync files=2, longest=0.003 s, average=0.002 s; distance=1 kB, estimate=52 kB; lsn=0/1A6C578, redo lsn=0/1A6C520
+2026-01-02 13:57:44.093 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 13:57:44.236 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.110 s, sync=0.013 s, total=0.144 s; sync files=2, longest=0.010 s, average=0.007 s; distance=1 kB, estimate=47 kB; lsn=0/1A6CD18, redo lsn=0/1A6CC88
+2026-01-02 14:02:44.246 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 14:02:44.828 CST [4412] »’÷æ:  checkpoint complete: wrote 5 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.547 s, sync=0.008 s, total=0.582 s; sync files=3, longest=0.003 s, average=0.003 s; distance=20 kB, estimate=45 kB; lsn=0/1A71D90, redo lsn=0/1A71D38
+2026-01-02 14:07:44.840 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 14:07:47.759 CST [4412] »’÷æ:  checkpoint complete: wrote 26 buffers (0.2%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.852 s, sync=0.042 s, total=2.920 s; sync files=12, longest=0.011 s, average=0.004 s; distance=189 kB, estimate=189 kB; lsn=0/1AA11D8, redo lsn=0/1AA1180
+2026-01-02 14:17:44.771 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 14:17:46.563 CST [4412] »’÷æ:  checkpoint complete: wrote 16 buffers (0.1%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.768 s, sync=0.006 s, total=1.792 s; sync files=2, longest=0.003 s, average=0.003 s; distance=117 kB, estimate=181 kB; lsn=0/1ABE748, redo lsn=0/1ABE6F0
+2026-01-02 14:30:10.710 CST [3624] ÈîôËØØ:  Â≠óÊÆµ sys_user.id ‰∏çÂ≠òÂú® Á¨¨ 868 ‰∏™Â≠óÁ¨¶Â§Ñ
+2026-01-02 14:30:10.710 CST [3624] ÊèêÁ§∫:  ‰πüËÆ∏ÊÇ®ÊÉ≥Ë¶ÅÂºïÁî®Âàó"sys_user.uid"„ÄÇ
+2026-01-02 14:30:10.710 CST [3624] ËØ≠Âè•:  -- ‰ΩøÁî®Â∏∏Áî®Ëã±ÊñáÂêç + ÂßìÊ∞è
+	UPDATE sys_user 
+	SET uname = 
+	    first_names[floor(random() * array_length(first_names, 1)) + 1] || 
+	    last_names[floor(random() * array_length(last_names, 1)) + 1] ||
+	    CASE WHEN random() > 0.7 THEN floor(random() * 1000)::text ELSE '' END
+	FROM (
+	    SELECT 
+	        ARRAY['John', 'Mike', 'David', 'Tom', 'James', 'Robert', 'Michael', 'William', 'Richard', 'Charles', 'Joseph', 'Thomas', 'Christopher', 'Daniel', 'Paul', 'Mark', 'Donald', 'George', 'Kenneth', 'Steven', 'Edward', 'Brian', 'Ronald', 'Anthony', 'Kevin'] as first_names,
+	        ARRAY['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Lewis', 'Lee', 'Walker'] as last_names
+	) as names
+	WHERE sys_user.id = sys_user.id
+2026-01-02 14:32:44.580 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 14:32:46.935 CST [4412] »’÷æ:  checkpoint complete: wrote 21 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.332 s, sync=0.011 s, total=2.355 s; sync files=11, longest=0.002 s, average=0.001 s; distance=166 kB, estimate=180 kB; lsn=0/1AE8210, redo lsn=0/1AE81B8
+2026-01-02 14:37:29.092 CST [3624] ÈîôËØØ:  Â≠óÊÆµ "id" ‰∏çÂ≠òÂú® Á¨¨ 129 ‰∏™Â≠óÁ¨¶Â§Ñ
+2026-01-02 14:37:29.092 CST [3624] ÊèêÁ§∫:  ‰πüËÆ∏ÊÇ®ÊÉ≥Ë¶ÅÂºïÁî®Âàó"sys_user.uid"ÊàñËÄÖÂàó"sys_user.uid"„ÄÇ
+2026-01-02 14:37:29.092 CST [3624] ËØ≠Âè•:  -- ÁÆÄÂçïÂæ™ÁéØÂàÜÈÖç 0.jpg Âà∞ 12.jpg
+	UPDATE sys_user 
+	SET uavatar = 
+	    ((row_number - 1) % 13) || '.jpg'
+	FROM (
+	    SELECT 
+	        id,
+	        ROW_NUMBER() OVER (ORDER BY id) as row_number
+	    FROM sys_user
+	) as numbered
+	WHERE sys_user.id = numbered.id
+2026-01-02 14:37:38.521 CST [3624] ÈîôËØØ:  Â≠óÊÆµ "id" ‰∏çÂ≠òÂú® Á¨¨ 129 ‰∏™Â≠óÁ¨¶Â§Ñ
+2026-01-02 14:37:38.521 CST [3624] ÊèêÁ§∫:  ‰πüËÆ∏ÊÇ®ÊÉ≥Ë¶ÅÂºïÁî®Âàó"sys_user.uid"ÊàñËÄÖÂàó"sys_user.uid"„ÄÇ
+2026-01-02 14:37:38.521 CST [3624] ËØ≠Âè•:  -- ÁÆÄÂçïÂæ™ÁéØÂàÜÈÖç 0.jpg Âà∞ 12.jpg
+	UPDATE sys_user 
+	SET uavatar = 
+	    ((row_number - 1) % 13) || '.jpg'
+	FROM (
+	    SELECT 
+	        id,
+	        ROW_NUMBER() OVER (ORDER BY id) as row_number
+	    FROM sys_user
+	) as numbered
+	WHERE sys_user.uid = numbered.uid
+2026-01-02 14:37:41.272 CST [3624] ÈîôËØØ:  Â≠óÊÆµ "id" ‰∏çÂ≠òÂú® Á¨¨ 129 ‰∏™Â≠óÁ¨¶Â§Ñ
+2026-01-02 14:37:41.272 CST [3624] ÊèêÁ§∫:  ‰πüËÆ∏ÊÇ®ÊÉ≥Ë¶ÅÂºïÁî®Âàó"sys_user.uid"ÊàñËÄÖÂàó"sys_user.uid"„ÄÇ
+2026-01-02 14:37:41.272 CST [3624] ËØ≠Âè•:  -- ÁÆÄÂçïÂæ™ÁéØÂàÜÈÖç 0.jpg Âà∞ 12.jpg
+	UPDATE sys_user 
+	SET uavatar = 
+	    ((row_number - 1) % 13) || '.jpg'
+	FROM (
+	    SELECT 
+	        id,
+	        ROW_NUMBER() OVER (ORDER BY id) as row_number
+	    FROM sys_user
+	) as numbered
+	WHERE sys_user.uid = numbered.uid
+2026-01-02 14:37:44.945 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 14:37:47.167 CST [4412] »’÷æ:  checkpoint complete: wrote 20 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.204 s, sync=0.008 s, total=2.222 s; sync files=11, longest=0.002 s, average=0.001 s; distance=141 kB, estimate=176 kB; lsn=0/1B0B990, redo lsn=0/1B0B938
+2026-01-02 19:40:35.234 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 19:40:37.357 CST [4412] »’÷æ:  checkpoint complete: wrote 19 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.094 s, sync=0.016 s, total=2.125 s; sync files=10, longest=0.010 s, average=0.002 s; distance=138 kB, estimate=172 kB; lsn=0/1B2E2B8, redo lsn=0/1B2E260
+2026-01-02 19:45:35.368 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 19:45:35.484 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.103 s, sync=0.003 s, total=0.116 s; sync files=2, longest=0.002 s, average=0.002 s; distance=4 kB, estimate=155 kB; lsn=0/1B2F518, redo lsn=0/1B2F4C0
+2026-01-02 19:50:35.496 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 19:50:37.617 CST [4412] »’÷æ:  checkpoint complete: wrote 19 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.083 s, sync=0.017 s, total=2.121 s; sync files=9, longest=0.009 s, average=0.002 s; distance=124 kB, estimate=152 kB; lsn=0/1B4E520, redo lsn=0/1B4E4C8
+2026-01-02 19:55:35.618 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 19:55:36.772 CST [4412] »’÷æ:  checkpoint complete: wrote 10 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.104 s, sync=0.022 s, total=1.155 s; sync files=5, longest=0.011 s, average=0.005 s; distance=45 kB, estimate=141 kB; lsn=0/1B59B30, redo lsn=0/1B59AD8
+2026-01-02 20:00:35.773 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 20:00:35.929 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.117 s, sync=0.008 s, total=0.156 s; sync files=2, longest=0.005 s, average=0.004 s; distance=5 kB, estimate=128 kB; lsn=0/1B5B188, redo lsn=0/1B5B130
+2026-01-02 20:13:06.185 CST [22164] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-02 20:15:35.953 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 20:15:36.220 CST [4412] »’÷æ:  checkpoint complete: wrote 2 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.229 s, sync=0.010 s, total=0.273 s; sync files=3, longest=0.004 s, average=0.004 s; distance=10 kB, estimate=116 kB; lsn=0/1B5DB20, redo lsn=0/1B5DAC8
+2026-01-02 20:17:15.223 CST [3204] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-02 20:20:34.692 CST [8264] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-02 20:20:35.229 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 20:20:35.342 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.105 s, sync=0.003 s, total=0.114 s; sync files=2, longest=0.002 s, average=0.002 s; distance=7 kB, estimate=105 kB; lsn=0/1B5F8B8, redo lsn=0/1B5F860
+2026-01-02 20:30:35.360 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 20:30:35.513 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.109 s, sync=0.009 s, total=0.154 s; sync files=2, longest=0.006 s, average=0.005 s; distance=7 kB, estimate=95 kB; lsn=0/1B61740, redo lsn=0/1B616E8
+2026-01-02 21:30:34.516 CST [12796] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-02 22:00:35.696 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:00:36.063 CST [4412] »’÷æ:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.337 s, sync=0.012 s, total=0.370 s; sync files=3, longest=0.009 s, average=0.004 s; distance=18 kB, estimate=88 kB; lsn=0/1B66180, redo lsn=0/1B66128
+2026-01-02 22:05:35.067 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:05:35.195 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.113 s, sync=0.003 s, total=0.129 s; sync files=2, longest=0.002 s, average=0.002 s; distance=1 kB, estimate=79 kB; lsn=0/1B66878, redo lsn=0/1B66820
+2026-01-02 22:10:35.199 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:10:35.350 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.122 s, sync=0.006 s, total=0.154 s; sync files=2, longest=0.004 s, average=0.003 s; distance=2 kB, estimate=71 kB; lsn=0/1B67088, redo lsn=0/1B67030
+2026-01-02 22:15:35.354 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:15:35.508 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.115 s, sync=0.008 s, total=0.155 s; sync files=2, longest=0.005 s, average=0.004 s; distance=2 kB, estimate=64 kB; lsn=0/1B679B0, redo lsn=0/1B67958
+2026-01-02 22:20:35.526 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:20:35.701 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.133 s, sync=0.008 s, total=0.186 s; sync files=2, longest=0.005 s, average=0.004 s; distance=3 kB, estimate=58 kB; lsn=0/1B685E0, redo lsn=0/1B68588
+2026-01-02 22:25:35.707 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:25:35.853 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.118 s, sync=0.005 s, total=0.147 s; sync files=2, longest=0.004 s, average=0.003 s; distance=3 kB, estimate=53 kB; lsn=0/1B69530, redo lsn=0/1B694D8
+2026-01-02 22:30:35.858 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:30:36.010 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.112 s, sync=0.007 s, total=0.153 s; sync files=2, longest=0.004 s, average=0.004 s; distance=3 kB, estimate=48 kB; lsn=0/1B6A478, redo lsn=0/1B6A420
+2026-01-02 22:35:35.018 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:35:35.152 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.105 s, sync=0.006 s, total=0.136 s; sync files=2, longest=0.003 s, average=0.003 s; distance=4 kB, estimate=43 kB; lsn=0/1B6B698, redo lsn=0/1B6B640
+2026-01-02 22:40:35.155 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:40:35.270 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.105 s, sync=0.003 s, total=0.116 s; sync files=2, longest=0.002 s, average=0.002 s; distance=5 kB, estimate=39 kB; lsn=0/1B6CB00, redo lsn=0/1B6CAA8
+2026-01-02 22:45:35.280 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:45:35.403 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.105 s, sync=0.003 s, total=0.125 s; sync files=2, longest=0.002 s, average=0.002 s; distance=5 kB, estimate=36 kB; lsn=0/1B6E230, redo lsn=0/1B6E1D8
+2026-01-02 22:50:35.416 CST [4412] »’÷æ:  checkpoint starting: time
+2026-01-02 22:50:35.535 CST [4412] »’÷æ:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.102 s, sync=0.005 s, total=0.120 s; sync files=2, longest=0.003 s, average=0.003 s; distance=7 kB, estimate=33 kB; lsn=0/1B6FEE0, redo lsn=0/1B6FE88

@@ -464,7 +464,7 @@ function dwGetProp(ACtrl:TControl;AAttr:String):String;
 /// <para>调用例子：</para>
 /// <code>dwSetProp(Self,'interactionmethod','insert');</code>
 /// </remarks>
-function dwSetProp(ACtrl:TControl;AAttr,AValue:String):Integer;
+function dwSetProp(ACtrl:TControl;AAttr:String;AValue:Variant):Integer;
 
 ///----------------------------------------------------------------------------------------------------------------------------
 /// <summary>计算MD5</summary>
@@ -868,6 +868,22 @@ function dwAlignByColCount(AParent:TPanel;AColCount:Integer):Integer;
 function dwGetInt(AJson:Variant;AName:String;const ADefault:Integer = 0):Integer;
 
 ///----------------------------------------------------------------------------------------------------------------------------
+/// <summary>从JSON中读属性(数值)，如果不存在的话，取默认值。</summary>
+/// <param name="AJson">JSON对象</param>
+/// <param name="AName">需要取值的属性</param>
+/// <param name="ADefault">默认值</param>
+/// <returns>返回JSON中属性值</returns>
+function dwGetDouble(AJson:Variant;AName:String;const ADefault:Double = 0):Double;
+
+///----------------------------------------------------------------------------------------------------------------------------
+/// <summary>从JSON中读属性(数值)，如果不存在的话，取默认值。</summary>
+/// <param name="AJson">JSON对象</param>
+/// <param name="AName">需要取值的属性</param>
+/// <param name="ADefault">默认值</param>
+/// <returns>返回JSON中属性值</returns>
+function dwGetBoolean(AJson:Variant;AName:String;const ADefault:Boolean = false):Boolean;
+
+///----------------------------------------------------------------------------------------------------------------------------
 /// <summary>从JSON中读属性(字符串)，如果不存在的话，取默认值。</summary>
 /// <param name="AJson">JSON对象</param>
 /// <param name="AName">需要取值的属性</param>
@@ -1061,10 +1077,7 @@ var
 begin
     Result  := False;
     sUA := lowercase(dwGetProp(AForm,'requestuseragent'));
-    if (Pos('iphone',sUA)>0)
-            or (Pos('ipod',sUA)>0)
-            //or (Pos('macintosh',sUA)>0)
-            or (Pos('micromessenger',sUA)>0)
+    if (Pos('iphone',sUA)>0) or (Pos('ipod',sUA)>0) or (Pos('macintosh',sUA)>0)
             or (Pos('android',sUA)>0)
             or (Pos('windows phone',sUA)>0)
             or (Pos('harmonyos',sUA)>0) or (Pos('arkweb',sUA)>0)
@@ -1471,7 +1484,11 @@ begin
                     Result  := RGB(AJson._(0),AJson._(1),AJson._(1));
                 end;
                 3 : begin
-                    Result  := RGB(AJson._(0),AJson._(1),AJson._(2));
+                    if (AJson._(0)=254) and (AJson._(1)=254) and (AJson._(2)=254) then begin
+                        Result  := clNone;
+                    end else begin
+                        Result  := RGB(AJson._(0),AJson._(1),AJson._(2));
+                    end;
                 end;
             end;
         end;
@@ -1632,12 +1649,6 @@ begin
     if FileExists(AFileName) then begin
         AJson   := _Json('{}');
         DocVariantData(AJson).InitJSONFromFile(AFileName);
-
-        //
-        if String(AJson)  = 'null' then begin
-            AJson   := unassigned;
-        end;
-
         //
         if AJson <> unassigned then begin
             Result  := 0;
@@ -1707,6 +1718,32 @@ begin
     end;
 end;
 
+
+//从JSON中读属性，如果不存在的话，取默认值
+function dwGetBoolean(AJson:Variant;AName:String;const ADefault:Boolean = false):Boolean;
+begin
+    Result  := ADefault;
+    if AJson <> unassigned then begin
+        if AJson.Exists(AName) then begin
+            if AJson._(AName) <> null then begin
+                Result  := AJson._(AName);
+            end;
+        end;
+    end;
+end;
+
+//从JSON中读属性，如果不存在的话，取默认值
+function dwGetDouble(AJson:Variant;AName:String;const ADefault:Double = 0):Double;
+begin
+    Result  := ADefault;
+    if AJson <> unassigned then begin
+        if AJson.Exists(AName) then begin
+            if AJson._(AName) <> null then begin
+                Result  := AJson._(AName);
+            end;
+        end;
+    end;
+end;
 
 //从JSON中读属性，如果不存在的话，取默认值
 function dwGetInt(AJson:Variant;AName:String;const ADefault:Integer = 0):Integer;
@@ -3367,7 +3404,7 @@ begin
     end;
 end;
 
-function dwSetProp(ACtrl:TControl;AAttr,AValue:String):Integer;
+function dwSetProp(ACtrl:TControl;AAttr:String;AValue:Variant):Integer;
 var
     sHint     : String;
     joHint    : Variant;

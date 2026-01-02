@@ -1,7 +1,7 @@
 object Form_Account: TForm_Account
   Left = 0
   Top = 0
-  Caption = #36134#22871#20449#24687
+  Caption = 'Account infomation'
   ClientHeight = 501
   ClientWidth = 584
   Color = clBtnFace
@@ -25,7 +25,7 @@ object Form_Account: TForm_Account
       AlignWithMargins = True
       Left = 3
       Top = 0
-      Width = 50
+      Width = 90
       Height = 40
       Margins.Top = 0
       Margins.Right = 15
@@ -33,40 +33,41 @@ object Form_Account: TForm_Account
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
-      Caption = ' '#36134#22871' '#21517#31216
+      Caption = 'Name'
       Layout = tlCenter
       WordWrap = True
-      ExplicitTop = 3
-      ExplicitHeight = 34
     end
     object Edit_Name: TEdit
       AlignWithMargins = True
-      Left = 71
+      Left = 111
       Top = 5
-      Width = 431
+      Width = 391
       Height = 30
       Margins.Top = 5
       Margins.Right = 76
       Margins.Bottom = 5
       Align = alClient
       TabOrder = 0
+      ExplicitLeft = 71
+      ExplicitWidth = 431
       ExplicitHeight = 28
     end
   end
   object Panel3: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 292
+    Top = 298
     Width = 578
     Height = 103
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitTop = 292
     object Label3: TLabel
       AlignWithMargins = True
       Left = 3
       Top = 0
-      Width = 50
+      Width = 90
       Height = 103
       Margins.Top = 0
       Margins.Right = 15
@@ -74,23 +75,23 @@ object Form_Account: TForm_Account
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
-      Caption = ' '#21442#25968' Params'
+      Caption = 'Params'
       Layout = tlCenter
       WordWrap = True
-      ExplicitTop = 3
-      ExplicitHeight = 34
     end
     object Memo_Params: TMemo
       AlignWithMargins = True
-      Left = 71
+      Left = 111
       Top = 5
-      Width = 431
+      Width = 391
       Height = 93
       Margins.Top = 5
       Margins.Right = 76
       Margins.Bottom = 5
       Align = alClient
       TabOrder = 0
+      ExplicitLeft = 71
+      ExplicitWidth = 431
     end
   end
   object Panel4: TPanel
@@ -106,26 +107,28 @@ object Form_Account: TForm_Account
       AlignWithMargins = True
       Left = 3
       Top = 3
-      Width = 50
+      Width = 90
       Height = 134
       Margins.Right = 15
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
-      Caption = ' '#36830#25509' '#23383#31526#20018
+      Caption = 'Connection String'
       Layout = tlCenter
       WordWrap = True
     end
     object Memo_String: TMemo
       AlignWithMargins = True
-      Left = 71
+      Left = 111
       Top = 5
-      Width = 431
+      Width = 391
       Height = 130
       Margins.Top = 5
       Margins.Bottom = 5
       Align = alClient
       TabOrder = 0
+      ExplicitLeft = 71
+      ExplicitWidth = 431
     end
     object Button_Test: TButton
       AlignWithMargins = True
@@ -136,7 +139,7 @@ object Form_Account: TForm_Account
       Margins.Right = 10
       Margins.Bottom = 102
       Align = alRight
-      Caption = #37197#32622
+      Caption = 'Config'
       TabOrder = 1
       OnClick = Button_TestClick
     end
@@ -144,36 +147,39 @@ object Form_Account: TForm_Account
   object Panel5: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 401
+    Top = 407
     Width = 578
     Height = 40
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 3
+    ExplicitTop = 401
     object Label5: TLabel
       AlignWithMargins = True
       Left = 3
       Top = 3
-      Width = 50
+      Width = 90
       Height = 34
       Margins.Right = 15
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
-      Caption = #22791#27880
+      Caption = 'Remark'
       Layout = tlCenter
     end
     object Edit_Remark: TEdit
       AlignWithMargins = True
-      Left = 71
+      Left = 111
       Top = 5
-      Width = 431
+      Width = 391
       Height = 30
       Margins.Top = 5
       Margins.Right = 76
       Margins.Bottom = 5
       Align = alClient
       TabOrder = 0
+      ExplicitLeft = 71
+      ExplicitWidth = 431
       ExplicitHeight = 28
     end
   end
@@ -186,7 +192,6 @@ object Form_Account: TForm_Account
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 4
-    ExplicitTop = 452
     object Button_OK: TButton
       AlignWithMargins = True
       Left = 362
@@ -218,7 +223,7 @@ object Form_Account: TForm_Account
     Left = 3
     Top = 202
     Width = 578
-    Height = 39
+    Height = 45
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 5
@@ -226,60 +231,65 @@ object Form_Account: TForm_Account
       AlignWithMargins = True
       Left = 3
       Top = 0
-      Width = 50
-      Height = 39
+      Width = 90
+      Height = 45
       Margins.Top = 0
       Margins.Right = 15
       Margins.Bottom = 0
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
-      Caption = #21152#23494
+      Caption = 'Encrypt'
       Layout = tlCenter
       WordWrap = True
-      ExplicitTop = 3
-      ExplicitHeight = 34
+      ExplicitHeight = 39
     end
     object Label6: TLabel
       AlignWithMargins = True
-      Left = 119
+      Left = 159
       Top = 0
-      Width = 250
-      Height = 39
+      Width = 386
+      Height = 45
       Margins.Top = 0
       Margins.Right = 15
       Margins.Bottom = 0
       Align = alLeft
       AutoSize = False
-      Caption = #27880#65306#21152#23494#21518#36134#22871#20449#24687#19981#33021#20877#27425#32534#36753
+      Caption = 
+        'Note: Once encrypted, account set information cannot be edited a' +
+        'gain.'
       Layout = tlCenter
       WordWrap = True
+      ExplicitHeight = 39
     end
     object CheckBox_Secret: TCheckBox
       AlignWithMargins = True
-      Left = 73
+      Left = 113
       Top = 3
       Width = 40
-      Height = 33
+      Height = 39
       Margins.Left = 5
       Align = alLeft
       TabOrder = 0
+      ExplicitLeft = 73
+      ExplicitHeight = 33
     end
   end
   object Panel7: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 247
+    Top = 253
     Width = 578
     Height = 39
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 6
+    ExplicitTop = 247
     object Label7: TLabel
       AlignWithMargins = True
       Left = 3
       Top = 0
-      Width = 50
+      Width = 90
       Height = 39
       Margins.Top = 0
       Margins.Right = 15
@@ -287,21 +297,20 @@ object Form_Account: TForm_Account
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
-      Caption = #20572#29992
+      Caption = 'Disabled'
       Layout = tlCenter
       WordWrap = True
-      ExplicitTop = 3
-      ExplicitHeight = 34
     end
     object CheckBox_Disable: TCheckBox
       AlignWithMargins = True
-      Left = 73
+      Left = 113
       Top = 3
       Width = 40
       Height = 33
       Margins.Left = 5
       Align = alLeft
       TabOrder = 0
+      ExplicitLeft = 73
     end
   end
   object FDConnection1: TFDConnection
