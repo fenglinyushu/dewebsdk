@@ -18,30 +18,6 @@
 			"params": [],
 			"secret": 0,
 			"enabled": 1
-		},
-		{
-			"name": "dwDeWeb",
-			"secret": 0,
-			"string": "Server=127.0.0.1,8829;Database=deweb;User_Name=sa;Password={593106};DriverID=MSSQL",
-			"enabled": 1,
-			"remark": "",
-			"params": []
-		},
-		{
-			"name": "dwHOEFON",
-			"secret": 0,
-			"string": "Database=.\\demo.db;DriverID=SQLite",
-			"enabled": 1,
-			"remark": "",
-			"params": []
-		},
-		{
-			"name": "dwDeWeb",
-			"secret": 0,
-			"string": "Database=postgres;User_Name=postgres;Password=postgres;DriverID=PG",
-			"enabled": 1,
-			"remark": "",
-			"params": []
 		}
 	]
 }

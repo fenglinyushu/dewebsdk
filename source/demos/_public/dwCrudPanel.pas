@@ -3630,7 +3630,8 @@ begin
         ASG.DoubleBuffered  := False;
 
         //设置行数
-        ASG.RowCount    := AQuery.RecordCount - AQuery.FetchOptions.RecsSkip + 1;
+        //ASG.RowCount    := AQuery.RecordCount - AQuery.FetchOptions.RecsSkip + 1;
+        ASG.RowCount    := AQuery.RecordCount + 1;
 
         //
         for iRow := 1 to ASG.RowCount-1 do begin
@@ -6163,7 +6164,7 @@ begin
     oTbP        := TTrackBar(oForm.FindComponent(sPrefix+'TbP'));
 
     //清除loading
-    dwRunJS('window._this.dwloading = false;',oForm);
+    dwRunJS('this.dwloading = false;',oForm);
 
     //设置为第1页
     oTbP.Position   := 0;
@@ -7225,7 +7226,7 @@ begin
         oTbP        := TTrackBar(oForm.FindComponent(sPrefix+'TbP'));       //主表分页
 
         //清除loading
-        dwRunJS('window._this.dwloading = true;',oForm);
+        dwRunJS('this.dwloading = true;',oForm);
 
         //更新表格行数
         oSgD.RowCount   := X + 1;
@@ -9233,6 +9234,7 @@ var
     //
     oForm       : TForm;
     oFDQuery    : TFDQuery;
+    oFDTemp     : TFDQuery;
     oTbP        : TTrackBar;
     oSgD        : TStringGrid;
     oEKw        : TEdit;
@@ -9289,13 +9291,14 @@ begin
         oForm       := TForm(APanel.Owner);
 
         //清除loading
-        dwRunJS('window._this.dwloading = false;',oForm);
+        dwRunJS('this.dwloading = false;',oForm);
 
         //取得字段名称列表，备用，返回值为sFields, 如：id,Name,age
         sFields     := cpGetFields(joConfig.fields,False);
 
         //取得各控件备用
         oFDQuery    := TFDQuery(APanel.FindComponent(sPrefix+'FQMain'));    //主表数据库
+        oFDTemp     := TFDQuery(APanel.FindComponent(sPrefix+'FQTemp'));    //临时表
         oEKw        := TEdit(oForm.FindComponent(sPrefix+'EKw'));           //查询关键字
         oSgD        := TStringGrid(oForm.FindComponent(sPrefix+'SgD'));     //主表显示StringGrid
         oTbP        := TTrackBar(oForm.FindComponent(sPrefix+'TbP'));       //主表分页
@@ -9817,11 +9820,24 @@ begin
 
         //计算汇总信息
         if dwGetStr(joConfig,'summary') <> '' then begin
+            //get the summary label named "LSm"
             oLSm    := TLabel(oForm.FindComponent(sPrefix+'LSm'));         //汇总显示
-            oFDQuery.Open(String(joConfig.summary)+' '+sWhere);
+
+            //get the summary SQL with 'WHERE ....'
+            sTmp    := String(joConfig.summary)+' '+sWhere;
+
+            //reopen FDQuery with summary SQL
+            oFDTemp.Close;
+            oFDTemp.Disconnect;
+            oFDTemp.Open(sTmp);
+
+            //调试信息
+            //dwRUnJS('console.log("'+sTmp+'");' ,oForm);
+
+            //get the Summary Text
             sTmp    := '';
-            for iItem := 0 to oFDQuery.FieldCount - 1 do begin
-                oField  := oFDQuery.Fields[iItem];
+            for iItem := 0 to oFDTemp.FieldCount - 1 do begin
+                oField  := oFDTemp.Fields[iItem];
                 case oField.DataType of
                     ftInteger, ftSmallint, ftWord, ftLargeint, ftAutoInc:
                         //ShowMessage('整型字段');
@@ -9856,6 +9872,9 @@ begin
             //
             Delete(sTmp,Length(sTmp)-1,2);
             oLSm.Caption    := '<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+sTmp+'</p>';
+
+            //调试信息
+            //dwRUnJS('console.log("'+oLSm.Caption+'");' ,oForm);
         end;
 
 
@@ -11336,12 +11355,12 @@ begin
                     //2025-03-19 (1) 增加了totalfirst设置支持 (2)采用了小图标, 以支持移动端
                     if dwGetInt(joConfig,'totalfirst',0)=1 then begin
                         Hint            := '{'
-                            +'"onpage":"window._this.dwloading=true;",'
+                            +'"onpage":"this.dwloading=true;",'
                             +'"dwattr":"'+sAttr+' small :pager-count=5 background layout=\"total,' + sSizes + ' ->, prev, pager, next\""'
                         +'}';
                     end else begin
                         Hint            := '{'
-                            +'"onpage":"window._this.dwloading=true;",'
+                            +'"onpage":"this.dwloading=true;",'
                             +'"dwattr":"'+sAttr+' small :pager-count=5 background layout=\"prev, pager, next, ->,' + sSizes + ' total\""'
                         +'}';
                     end;
