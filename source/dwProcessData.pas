@@ -647,7 +647,7 @@ begin
                                     
                                     // 调用函数
                                     oForm     := fLoad(_J2S(gjoConnections),
-                                        TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
+                                        0,//TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
                                         Application,
                                         Screen);
                                     
@@ -1273,7 +1273,7 @@ begin
                                         
                                         // 调用函数
                                         oForm     := fLoad(_J2S(gjoConnections),
-                                            TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
+                                            0,//TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
                                             Application,
                                             Screen);
                                         
@@ -1282,7 +1282,7 @@ begin
                                         if iFormCount = Screen.FormCount then begin
                                             //创建Form
                                             oForm     := fLoad(_J2S(gjoConnections),
-                                                TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
+                                                0,//TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
                                                 Application,
                                                 Screen);
                                             
@@ -1640,7 +1640,7 @@ begin
 
                                     // 调用函数
                                     oForm     := fLoad(_J2S(gjoConnections),
-                                        TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
+                                        0,//TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
                                         Application,
                                         Screen);
                                     
@@ -1649,7 +1649,7 @@ begin
                                     if iFormCount = Screen.FormCount then begin
                                         //创建Form
                                         oForm     := fLoad(_J2S(gjoConnections),
-                                            TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
+                                            0,//TFDConnection(MainForm.FindComponent('FDConnection_0_'+IntToStr(Random(5)))).CliHandle,
                                             Application,
                                             Screen);
                                         

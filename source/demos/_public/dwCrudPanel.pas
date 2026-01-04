@@ -9394,10 +9394,18 @@ begin
                         oCBQy   := TComboBox(oPQF.Controls[1]);
                         if Trim(oCBQy.Text) <> '' then begin
                             //
-                            if oCBQy.Text = joField.list._(0) then begin
-                                sWhere  := sWhere + '('+joField.name +' = 0 ) AND ';
+                            if lowercase(joConfig.database) = 'pg' then begin
+                                if oCBQy.Text = joField.list._(0) then begin
+                                    sWhere  := sWhere + '('+joField.name +' = false ) AND ';
+                                end else begin
+                                    sWhere  := sWhere + '('+joField.name +' = true  ) AND ';
+                                end;
                             end else begin
-                                sWhere  := sWhere + '('+joField.name +' = 1  ) AND ';
+                                if oCBQy.Text = joField.list._(0) then begin
+                                    sWhere  := sWhere + '('+joField.name +' = 0 ) AND ';
+                                end else begin
+                                    sWhere  := sWhere + '('+joField.name +' = 1  ) AND ';
+                                end;
                             end;
                         end;
 

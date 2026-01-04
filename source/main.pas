@@ -6,6 +6,9 @@
 
 
 {
+2026-01-04
+    1 Fixed a bug when no DBAccount
+
 2025-07-01(具体日期不定)
     1 由原来的5分钟释放无心跳的Form, 改为30分钟, 更合理
 
@@ -311,7 +314,7 @@ var
     {$IFDEF _STD}
         gsTitle     : string = 'DeWeb Standard v2.2.20250701'; //用于显示系统版本
     {$ELSE}
-        gsTitle     : string = 'DeWebServer v20251230'; //用于显示系统版本
+        gsTitle     : string = 'DeWebServer v20260104'; //用于显示系统版本
     {$ENDIF}
 
     goSSEs          : array of TDWHttpConnection;

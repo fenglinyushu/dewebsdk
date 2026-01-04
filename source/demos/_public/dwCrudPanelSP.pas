@@ -9584,6 +9584,7 @@ var
     sText       : String;
     sTmp        : String;
     sPrefix     : String;
+    sPf         : string;       //查询参数的前缀
 
     //
     joConfig    : variant;
@@ -9668,12 +9669,6 @@ begin
         //保存表格的click事件
         oClick          := oSgD.OnClick;
         oSgD.OnClick    := nil;
-
-        //数据库类型
-        if not joConfig.Exists('database') then begin
-            joConfig.database   := lowerCase(oFDQuery.Connection.DriverName); //'access';
-            APanel.Hint	        := joConfig;
-        end;
 
         //取得WHERE, 区分“智能模糊查询”和“分字段查询”2种情况
         //结果类似:  WHERE ((model like '%ljt%') and (name like '%west%'))
@@ -10234,6 +10229,13 @@ begin
         oFDQuery.IndexFieldNames  := dwGetStr(joStyleName,'ordername','');
         oFDQuery.Prepare;
 
+        //
+        if joConfig.database = 'pg' then begin
+            sPf := '';
+        end else begin
+            sPf := '@';
+        end;
+
         //传参 csUpdate
         if joConfig.Exists('params') then begin
 
@@ -10249,15 +10251,15 @@ begin
 
                     //根据是否指定type, 分开处理
                     if sType = 'boolean' then begin
-                        oFDQuery.Params.ParamByName('@'+sName).Value := joParam.value;
+                        oFDQuery.Params.ParamByName(sPf+sName).Value := joParam.value;
                     end else if sType = 'date' then begin
-                        oFDQuery.Params.ParamByName('@'+sName).Value := StrToDateDef(joParam.value,Now);
+                        oFDQuery.Params.ParamByName(sPf+sName).Value := StrToDateDef(joParam.value,Now);
                     end else if sType = 'datetime' then begin
-                        oFDQuery.Params.ParamByName('@'+sName).Value := StrToDateTimeDef(joParam.value,Now);
+                        oFDQuery.Params.ParamByName(sPf+sName).Value := StrToDateTimeDef(joParam.value,Now);
                     end else if sType = 'integer' then begin
-                        oFDQuery.Params.ParamByName('@'+sName).Value := joParam.value;
+                        oFDQuery.Params.ParamByName(sPf+sName).Value := joParam.value;
                     end else begin
-                        oFDQuery.Params.ParamByName('@'+sName).Value := joParam.value;
+                        oFDQuery.Params.ParamByName(sPf+sName).Value := joParam.value;
                     end;
                 end;
             end;
@@ -10265,6 +10267,11 @@ begin
 
         //
         oFDQuery.Open;
+        //if joConfig.database = 'pg' then begin
+        //    oFDQuery.ExecProc;
+        //end else begin
+        //    oFDQuery.Open;
+        //end;
         //>
 
         //记录总数
@@ -10556,6 +10563,7 @@ var
     sValue      : String;
     sType       : string;
     sName       : String;
+    sPf         : string;       //查询参数的前缀
 
     //
     oForm       : TForm;
@@ -10738,6 +10746,19 @@ begin
             oFQMain.StoredProcName      := joConfig.name;
             oFQMain.Prepare;
 
+            //数据库类型
+            if not joConfig.Exists('database') then begin
+                joConfig.database   := lowerCase(oFQMain.Connection.DriverName); //'access';
+                APanel.Hint	        := joConfig;
+            end;
+
+            //
+            if joConfig.database = 'pg' then begin
+                sPf := '';
+            end else begin
+                sPf := '@';
+            end;
+
             //传参
             if joConfig.Exists('params') then begin
 
@@ -10754,21 +10775,27 @@ begin
 
                         //根据是否指定type, 分开处理
                         if sType = 'boolean' then begin
-                            oFQMain.Params.ParamByName('@'+sName).Value := joParam.value;
+                            oFQMain.Params.ParamByName(sPf+sName).Value := joParam.value;
                         end else if sType = 'date' then begin
-                            oFQMain.Params.ParamByName('@'+sName).Value := StrToDateDef(joParam.value,Now);
+                            oFQMain.Params.ParamByName(sPf+sName).Value := StrToDateDef(joParam.value,Now);
                         end else if sType = 'datetime' then begin
-                            oFQMain.Params.ParamByName('@'+sName).Value := StrToDateTimeDef(joParam.value,Now);
+                            oFQMain.Params.ParamByName(sPf+sName).Value := StrToDateTimeDef(joParam.value,Now);
                         end else if sType = 'integer' then begin
-                            oFQMain.Params.ParamByName('@'+sName).Value := joParam.value;
+                            oFQMain.Params.ParamByName(sPf+sName).Value := joParam.value;
                         end else begin
-                            oFQMain.Params.ParamByName('@'+sName).Value := joParam.value;
+                            oFQMain.Params.ParamByName(sPf+sName).Value := joParam.value;
                         end;
                     end;
                 end;
             end;
 
+
             oFQMain.Open;
+            //if joConfig.database = 'pg' then begin
+            //    oFQMain.ExecProc;
+            //end else begin
+            //    oFQMain.Open;
+            //end;
 
             //得到字段名列表, 同时设置fieldid
             sFields := csGetFields(joConfig.fields,False);

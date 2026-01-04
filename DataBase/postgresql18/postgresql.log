@@ -242,3 +242,201 @@
 2026-01-02 22:45:35.403 CST [4412] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.105 s, sync=0.003 s, total=0.125 s; sync files=2, longest=0.002 s, average=0.002 s; distance=5 kB, estimate=36 kB; lsn=0/1B6E230, redo lsn=0/1B6E1D8
 2026-01-02 22:50:35.416 CST [4412] ÈÕÖ¾:  checkpoint starting: time
 2026-01-02 22:50:35.535 CST [4412] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.102 s, sync=0.005 s, total=0.120 s; sync files=2, longest=0.003 s, average=0.003 s; distance=7 kB, estimate=33 kB; lsn=0/1B6FEE0, redo lsn=0/1B6FE88
+2026-01-02 22:55:35.535 CST [4412] ÈÕÖ¾:  checkpoint starting: time
+2026-01-02 22:55:39.604 CST [4412] ÈÕÖ¾:  checkpoint complete: wrote 37 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.046 s, sync=0.016 s, total=4.070 s; sync files=22, longest=0.002 s, average=0.001 s; distance=227 kB, estimate=227 kB; lsn=0/1BA8E28, redo lsn=0/1BA8D98
+2026-01-03 16:27:35.680 CST [22980] ERROR:  column "usex" does not exist at character 28
+2026-01-03 16:27:35.680 CST [22980] STATEMENT:  SELECT uId as a0,uId,uName,uSex,uAge,uRole,uRemark FROM sys_User WHERE 1=0
+2026-01-03 17:19:59.056 CST [23200] ERROR:  operator does not exist: boolean = integer at character 85
+2026-01-03 17:19:59.056 CST [23200] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2026-01-03 17:19:59.056 CST [23200] STATEMENT:  SELECT max(uage) as æœ€å¤§å¹´é¾„, avg(uage) as å¹³å‡å¹´é¾„ FROM sys_user WHERE ((1=1) AND (ugender = 0 ) AND (urole = 'admin' ) )
+	LIMIT 200
+2026-01-04 08:16:25.000 CST [17880] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-04 08:16:25.007 CST [22228] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-04 08:16:25.010 CST [20644] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-04 08:16:26.147 CST [16576] ÈÕÖ¾:  ºóÌ¨¹¤×÷½ø³Ì "logical replication launcher" (PID 21488) ±»Òì³£ 0xC000013A ÖÕÖ¹
+2026-01-04 08:16:26.147 CST [16576] ÌáÊ¾:  ¹ØÓÚ¶Ô16½øÖÆÖµµÄÃèÊö£¬ ²Î¼ûCÓïÑÔµÄÒıÓÃÎÄ¼ş "ntstatus.h" 
+2026-01-04 08:16:26.148 CST [16576] ÈÕÖ¾:  ÖĞ¶ÏÈÎºÎÆäËüÒÑ¼¤»îµÄ·şÎñÆ÷½ø³Ì
+2026-01-04 08:16:26.161 CST [16576] ÈÕÖ¾:  ½ÓÊÕµ½¿ìËÙ (fast) Í£Ö¹ÇëÇó
+^C2026-01-04 08:28:22.562 CST [6748] ÈÕÖ¾:  ÕıÔÚÆô¶¯ PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-04 08:28:22.567 CST [6748] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv6µØÖ·"::1"£¬¶Ë¿Ú 5432
+2026-01-04 08:28:22.567 CST [6748] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv4µØÖ·"127.0.0.1"£¬¶Ë¿Ú 5432
+2026-01-04 08:28:22.726 CST [5688] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³ÖĞ¶Ï£»ÉÏÒ»´ÎµÄÆô¶¯Ê±¼äÊÇÔÚ2026-01-02 22:55:39 CST
+2026-01-04 08:28:23.052 CST [5688] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³Ã»ÓĞÕıÈ·µÄ¹Ø±Õ; ´¦ÓÚ×Ô¶¯»Ö¸´×´Ì¬ÖĞ
+2026-01-04 08:28:23.055 CST [5688] ÈÕÖ¾:  redo ÔÚ 0/1BA8D98 ¿ªÊ¼
+2026-01-04 08:28:23.055 CST [5688] ÈÕÖ¾:  invalid record length at 0/1BA8ED8: expected at least 24, got 0
+2026-01-04 08:28:23.055 CST [5688] ÈÕÖ¾:  redo done at 0/1BA8EA0 system usage: CPU:ÓÃ»§£º0.00 s£¬ÏµÍ³£º0.00 s£¬ÒÑÓÃÊ±¼ä£º0.00 s
+2026-01-04 08:28:23.062 CST [9284] ÈÕÖ¾:  checkpoint starting: end-of-recovery immediate wait
+2026-01-04 08:28:23.075 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.003 s, total=0.017 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1BA8ED8, redo lsn=0/1BA8ED8
+2026-01-04 08:28:23.081 CST [6748] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³×¼±¸½ÓÊÜÁ¬½Ó
+2026-01-04 08:33:23.084 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 08:33:23.213 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.110 s, sync=0.002 s, total=0.134 s; sync files=1, longest=0.002 s, average=0.002 s; distance=6 kB, estimate=6 kB; lsn=0/1BAA780, redo lsn=0/1BAA728
+2026-01-04 08:38:44.204 CST [7308] ERROR:  operator does not exist: boolean = integer at character 85
+2026-01-04 08:38:44.204 CST [7308] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2026-01-04 08:38:44.204 CST [7308] STATEMENT:  SELECT max(uage) as æœ€å¤§å¹´é¾„, avg(uage) as å¹³å‡å¹´é¾„ FROM sys_user WHERE ((1=1) AND (ugender = 0 ) )
+	LIMIT 200
+2026-01-04 08:53:23.250 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 08:53:24.833 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 14 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.538 s, sync=0.022 s, total=1.585 s; sync files=4, longest=0.011 s, average=0.006 s; distance=81 kB, estimate=81 kB; lsn=0/1BBEBE0, redo lsn=0/1BBEB88
+2026-01-04 08:58:23.849 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 08:58:25.121 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 11 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.225 s, sync=0.025 s, total=1.273 s; sync files=8, longest=0.004 s, average=0.004 s; distance=52 kB, estimate=78 kB; lsn=0/1BCBCD0, redo lsn=0/1BCBC78
+2026-01-04 09:03:23.115 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 09:03:24.240 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 10 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.109 s, sync=0.008 s, total=1.126 s; sync files=9, longest=0.002 s, average=0.001 s; distance=57 kB, estimate=76 kB; lsn=0/1BDA138, redo lsn=0/1BDA0E0
+2026-01-04 09:23:23.265 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 09:23:23.508 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 2 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.223 s, sync=0.005 s, total=0.243 s; sync files=3, longest=0.003 s, average=0.002 s; distance=11 kB, estimate=69 kB; lsn=0/1BDCDF8, redo lsn=0/1BDCDA0
+2026-01-04 09:28:23.514 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 09:28:25.485 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 18 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.934 s, sync=0.018 s, total=1.971 s; sync files=9, longest=0.010 s, average=0.002 s; distance=109 kB, estimate=109 kB; lsn=0/1BF85E8, redo lsn=0/1BF8590
+2026-01-04 09:58:23.523 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 09:58:27.009 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 30 buffers (0.2%), wrote 1 SLRU buffers; 1 WAL file(s) added, 0 removed, 0 recycled; write=3.355 s, sync=0.022 s, total=3.492 s; sync files=23, longest=0.002 s, average=0.001 s; distance=194 kB, estimate=194 kB; lsn=0/1C2B2A8, redo lsn=0/1C28FF0
+2026-01-04 10:03:24.009 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:03:24.704 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.649 s, sync=0.022 s, total=0.696 s; sync files=7, longest=0.005 s, average=0.004 s; distance=35 kB, estimate=178 kB; lsn=0/1C31DA8, redo lsn=0/1C31D50
+2026-01-04 10:08:24.707 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:08:28.949 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 38 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.207 s, sync=0.018 s, total=4.243 s; sync files=23, longest=0.002 s, average=0.001 s; distance=235 kB, estimate=235 kB; lsn=0/1C6DC58, redo lsn=0/1C6CAA0
+2026-01-04 10:13:24.949 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:13:30.250 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 47 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=5.256 s, sync=0.031 s, total=5.302 s; sync files=28, longest=0.009 s, average=0.002 s; distance=300 kB, estimate=300 kB; lsn=0/1CB7DC8, redo lsn=0/1CB7D70
+2026-01-04 10:17:58.819 CST [7828] é”™è¯¯:  è¯­æ³•é”™è¯¯ åœ¨ "END" æˆ–é™„è¿‘çš„ ç¬¬ 651 ä¸ªå­—ç¬¦å¤„
+2026-01-04 10:17:58.819 CST [7828] è¯­å¥:  CREATE OR REPLACE PROCEDURE "public"."getuserbyuid"("gender" bool, "key" text, "mindate" date, "minuid" int4, "maxuid" int4)
+	 AS $BODY$
+	BEGIN
+	    -- åˆ›å»ºä¸´æ—¶è¡¨å­˜å‚¨ç»“æœï¼ˆPostgreSQL å­˜å‚¨è¿‡ç¨‹ä¸ç›´æ¥è¿”å›ç»“æœé›†ï¼‰
+	    CREATE TEMP TABLE IF NOT EXISTS temuser_result AS
+	    SELECT *
+	    FROM sys_user
+	    WHERE false; -- åˆå§‹åŒ–ä¸ºç©ºç»“æ„
+	    
+	    TRUNCATE TABLE temuser_result;
+	    
+	    -- æ‰§è¡ŒæŸ¥è¯¢æ“ä½œï¼Œè¿”å›uIdå¤§äºè¾“å…¥å‚æ•°çš„è®°å½•
+	    INSERT INTO temuser_result
+	    SELECT *
+	    FROM sys_user
+	    WHERE (uId > minuid) 
+	      AND (uId < maxuid) 
+	      AND (uLastLive > minDate) 
+	     
+	      AND (ugender = gender)
+	      AND (uName LIKE '%' || key || '%');
+	    SELECT * FROM temuser_result
+	END;
+	$BODY$
+	  LANGUAGE plpgsql
+2026-01-04 10:18:10.556 CST [7828] é”™è¯¯:  è¯­æ³•é”™è¯¯ åœ¨ "END" æˆ–é™„è¿‘çš„ ç¬¬ 651 ä¸ªå­—ç¬¦å¤„
+2026-01-04 10:18:10.556 CST [7828] è¯­å¥:  CREATE OR REPLACE PROCEDURE "public"."getuserbyuid"("gender" bool, "key" text, "mindate" date, "minuid" int4, "maxuid" int4)
+	 AS $BODY$
+	BEGIN
+	    -- åˆ›å»ºä¸´æ—¶è¡¨å­˜å‚¨ç»“æœï¼ˆPostgreSQL å­˜å‚¨è¿‡ç¨‹ä¸ç›´æ¥è¿”å›ç»“æœé›†ï¼‰
+	    CREATE TEMP TABLE IF NOT EXISTS temuser_result AS
+	    SELECT *
+	    FROM sys_user
+	    WHERE false; -- åˆå§‹åŒ–ä¸ºç©ºç»“æ„
+	    
+	    TRUNCATE TABLE temuser_result;
+	    
+	    -- æ‰§è¡ŒæŸ¥è¯¢æ“ä½œï¼Œè¿”å›uIdå¤§äºè¾“å…¥å‚æ•°çš„è®°å½•
+	    INSERT INTO temuser_result
+	    SELECT *
+	    FROM sys_user
+	    WHERE (uId > minuid) 
+	      AND (uId < maxuid) 
+	      AND (uLastLive > minDate) 
+	     
+	      AND (ugender = gender)
+	      AND (uName LIKE '%' || key || '%');
+	    SELECT * FROM temuser_result
+	END;
+	$BODY$
+	  LANGUAGE plpgsql
+2026-01-04 10:18:24.258 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:18:27.798 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 32 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=3.508 s, sync=0.023 s, total=3.541 s; sync files=26, longest=0.002 s, average=0.001 s; distance=196 kB, estimate=290 kB; lsn=0/1CE8F68, redo lsn=0/1CE8ED8
+2026-01-04 10:22:13.815 CST [2560] ERROR:  query has no destination for result data
+2026-01-04 10:22:13.815 CST [2560] HINT:  If you want to discard the results of a SELECT, use PERFORM instead.
+2026-01-04 10:22:13.815 CST [2560] CONTEXT:  PL/pgSQL function getuserbyuid(boolean,text,date,integer,integer) line 21 at SQL statement
+2026-01-04 10:22:13.815 CST [2560] STATEMENT:  CALL "public"."getuserbyuid"(gender := $1, key := $2, mindate := $3, minuid := $4, maxuid := $5)
+2026-01-04 10:23:24.802 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:23:29.318 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 40 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.416 s, sync=0.065 s, total=4.517 s; sync files=22, longest=0.004 s, average=0.003 s; distance=246 kB, estimate=285 kB; lsn=0/1D2A7B8, redo lsn=0/1D26A90
+2026-01-04 10:38:03.650 CST [7828] é”™è¯¯:  å­—æ®µ "utestdate" ä¸å­˜åœ¨ ç¬¬ 388 ä¸ªå­—ç¬¦å¤„
+2026-01-04 10:38:03.650 CST [7828] è¯­å¥:  -- æ–¹æ³•2ï¼šä½¿ç”¨ SQL è¯­è¨€å‡½æ•°ï¼ˆæ›´é«˜æ•ˆï¼‰
+	CREATE OR REPLACE FUNCTION GetUserByUid_sql(
+	    p_sex BOOLEAN,
+	    p_key TEXT,
+	    p_minDate TIMESTAMP,
+	    p_testDate DATE,
+	    p_minUId INTEGER,
+	    p_maxUId INTEGER
+	)
+	RETURNS SETOF sys_User
+	LANGUAGE sql
+	AS $$
+	    SELECT *
+	    FROM sys_User
+	    WHERE (uId > p_minUId) 
+	      AND (uId < p_maxUId) 
+	      AND (uLastLive > p_minDate) 
+	      AND (uTestDate > p_testDate) 
+	      AND (uSex = p_sex)
+	      AND (uName LIKE '%' || p_key || '%');
+	$$
+2026-01-04 10:38:24.344 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:38:25.915 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 14 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.541 s, sync=0.017 s, total=1.571 s; sync files=13, longest=0.003 s, average=0.002 s; distance=76 kB, estimate=264 kB; lsn=0/1D39B28, redo lsn=0/1D39AD0
+2026-01-04 10:39:49.489 CST [7828] é”™è¯¯:  å­—æ®µ "p_gener" ä¸å­˜åœ¨ ç¬¬ 392 ä¸ªå­—ç¬¦å¤„
+2026-01-04 10:39:49.489 CST [7828] æç¤º:  ä¹Ÿè®¸æ‚¨æƒ³è¦å¼•ç”¨åˆ—"sys_user.ugender"ã€‚
+2026-01-04 10:39:49.489 CST [7828] è¯­å¥:  -- æ–¹æ³•2ï¼šä½¿ç”¨ SQL è¯­è¨€å‡½æ•°ï¼ˆæ›´é«˜æ•ˆï¼‰
+	CREATE OR REPLACE FUNCTION getuserbyuid_sql(
+	    p_gender BOOLEAN,
+	    p_key TEXT,
+	    p_mindate TIMESTAMP,
+	   
+	    p_minuid INTEGER,
+	    p_maxuid INTEGER
+	)
+	RETURNS SETOF sys_user
+	LANGUAGE sql
+	AS $$
+	    SELECT *
+	    FROM sys_user
+	    WHERE (uid > p_minuid) 
+	      AND (uid < p_maxuid) 
+	      AND (ulastlive > p_mindate) 
+	      
+	      AND (ugender = p_gener)
+	      AND (uname LIKE '%' || p_key || '%');
+	$$
+2026-01-04 10:40:15.350 CST [7828] é”™è¯¯:  å­—æ®µ "p_gener" ä¸å­˜åœ¨ ç¬¬ 380 ä¸ªå­—ç¬¦å¤„
+2026-01-04 10:40:15.350 CST [7828] æç¤º:  ä¹Ÿè®¸æ‚¨æƒ³è¦å¼•ç”¨åˆ—"sys_user.ugender"ã€‚
+2026-01-04 10:40:15.350 CST [7828] è¯­å¥:  -- æ–¹æ³•2ï¼šä½¿ç”¨ SQL è¯­è¨€å‡½æ•°ï¼ˆæ›´é«˜æ•ˆï¼‰
+	CREATE OR REPLACE FUNCTION getuserbyuid_sql(
+	    p_gender BOOLEAN,
+	    p_key TEXT,
+	    p_mindate TIMESTAMP,
+	    p_minuid INTEGER,
+	    p_maxuid INTEGER
+	)
+	RETURNS SETOF sys_user
+	LANGUAGE sql
+	AS $$
+	    SELECT *
+	    FROM sys_user
+	    WHERE (uid > p_minuid) 
+	      AND (uid < p_maxuid) 
+	      AND (ulastlive > p_mindate) 
+	       AND (ugender = p_gener)
+	      AND (uname LIKE '%' || p_key || '%');
+	$$
+2026-01-04 10:43:24.929 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:43:25.870 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 8 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.898 s, sync=0.029 s, total=0.943 s; sync files=8, longest=0.021 s, average=0.004 s; distance=54 kB, estimate=243 kB; lsn=0/1D475C8, redo lsn=0/1D47570
+2026-01-04 10:48:24.881 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 10:48:25.135 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 2 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.235 s, sync=0.003 s, total=0.256 s; sync files=2, longest=0.002 s, average=0.002 s; distance=16 kB, estimate=221 kB; lsn=0/1D4B600, redo lsn=0/1D4B5A8
+2026-01-04 11:32:36.677 CST [5192] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-04 11:33:24.203 CST [9284] ÈÕÖ¾:  checkpoint starting: time
+2026-01-04 11:33:24.345 CST [9284] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.124 s, sync=0.001 s, total=0.146 s; sync files=1, longest=0.001 s, average=0.001 s; distance=4 kB, estimate=199 kB; lsn=0/1D4C8A8, redo lsn=0/1D4C850
+2026-01-04 11:35:40.738 CST [6048] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-04 11:47:13.923 CST [3028] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-04 11:47:13.923 CST [6188] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-04 11:47:25.606 CST [6748] ÈÕÖ¾:  ºóÌ¨¹¤×÷½ø³Ì "logical replication launcher" (PID 3552) ±»Òì³£ 0xC000013A ÖÕÖ¹
+2026-01-04 11:47:25.606 CST [6748] ÌáÊ¾:  ¹ØÓÚ¶Ô16½øÖÆÖµµÄÃèÊö£¬ ²Î¼ûCÓïÑÔµÄÒıÓÃÎÄ¼ş "ntstatus.h" 
+2026-01-04 11:47:25.606 CST [6748] ÈÕÖ¾:  ÖĞ¶ÏÈÎºÎÆäËüÒÑ¼¤»îµÄ·şÎñÆ÷½ø³Ì
+2026-01-04 11:47:25.622 CST [6748] ÈÕÖ¾:  ËùÓĞµÄ·şÎñÆ÷½ø³Ì±»ÖĞÖ¹; ÖØĞÂ³õÊ¼»¯
+^C
