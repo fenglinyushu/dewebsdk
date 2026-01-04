@@ -1,6 +1,0 @@
-该例程用于演示DeWeb如何使用FastReport进行报表打印。
-
-基本思路：
-1FastReport生成报表后
-2 导出到pdf
-3 调用DeWeb的pdf模块（也可以调用支持PDF查看的浏览器直接打开）

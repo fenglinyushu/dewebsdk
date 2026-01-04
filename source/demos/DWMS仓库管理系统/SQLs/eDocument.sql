@@ -1,8 +1,0 @@
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (24, 'IT数字化生产流程图', '魏景学', '私密', '2024-03-29 23:38:28.000', NULL, 'xlsx', NULL); GO
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (25, 'Format用法', '魏景学', '私密', '2024-03-29 23:39:07.000', NULL, 'txt', NULL); GO
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (21, '2', '魏景学', '私密', '2024-03-29 16:15:46.980', NULL, 'jpg', ''); GO
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (26, 'DELPHI-表格控件DBGridEh史上最全使用资料101页', '魏景学', '私密', '2024-03-29 23:40:53.000', NULL, 'pdf', NULL); GO
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (27, '微信图片_20220307224429', '魏景学', '私密', '2024-03-29 23:41:27.000', NULL, 'jpg', NULL); GO
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (28, 'DELPHI-表格控件DBGridEh史上最全使用资料101页', 'admin', '私密', '2024-11-20 16:38:02.000', NULL, 'pdf', NULL); GO
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (29, 'QQ图片20241101081907', 'admin', '私密', '2024-11-20 16:39:41.000', NULL, 'jpg', NULL); GO
-INSERT INTO [eDocument]([dId], [dFileName], [dUserName], [dMode], [dDate], [dSize], [dFileType], [dRemark]) VALUES (30, '2ac842296b7e86822fb06a2f12e85', 'admin', '私密', '2025-01-14 16:10:43.000', NULL, 'jpg', NULL); GO

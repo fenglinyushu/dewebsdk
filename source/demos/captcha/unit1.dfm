@@ -1,0 +1,57 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Hint = '{"type":"primary"}'
+  BorderStyle = bsNone
+  BorderWidth = 5
+  Caption = 'DeWeb'
+  ClientHeight = 519
+  ClientWidth = 350
+  Color = clWhite
+  TransparentColor = True
+  TransparentColorValue = 16448250
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  Position = poDesigned
+  TextHeight = 20
+  object Image1: TImage
+    Left = 215
+    Top = 56
+    Width = 100
+    Height = 40
+    HelpType = htKeyword
+    HelpKeyword = 'captcha'
+    OnClick = Image1Click
+  end
+  object Label1: TLabel
+    Left = 8
+    Top = 56
+    Width = 90
+    Height = 40
+    AutoSize = False
+    Caption = #35831#36755#20837#39564#35777#30721
+    Layout = tlCenter
+  end
+  object Edit1: TEdit
+    Left = 115
+    Top = 56
+    Width = 94
+    Height = 40
+    Hint = '{"placeholder":"'#21491#22270#28857#20987#21047#26032'"}'
+    AutoSize = False
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 8
+    Top = 120
+    Width = 307
+    Height = 40
+    Hint = '{"type":"success"}'
+    Caption = 'OK'
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+end

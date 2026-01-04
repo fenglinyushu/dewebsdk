@@ -1,0 +1,87 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Hint = '{"type":"primary"}'
+  BorderStyle = bsNone
+  Caption = 'QRCode by DeWeb'
+  ClientHeight = 584
+  ClientWidth = 320
+  Color = clWhite
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  OldCreateOrder = False
+  OnMouseUp = FormMouseUp
+  PixelsPerInch = 96
+  TextHeight = 20
+  object Shape1: TShape
+    AlignWithMargins = True
+    Left = 10
+    Top = 10
+    Width = 300
+    Height = 367
+    Margins.Left = 10
+    Margins.Top = 10
+    Margins.Right = 10
+    Margins.Bottom = 10
+    Align = alClient
+    Pen.Color = clAqua
+    OnEndDock = Shape1EndDock
+    ExplicitLeft = 5
+    ExplicitHeight = 232
+  end
+  object Button_Start: TButton
+    AlignWithMargins = True
+    Left = 10
+    Top = 390
+    Width = 300
+    Height = 41
+    Hint = '{"type":"success"}'
+    Margins.Left = 10
+    Margins.Right = 10
+    Margins.Bottom = 10
+    Align = alBottom
+    Caption = 'Start'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = Button_StartClick
+  end
+  object Button_Stop: TButton
+    AlignWithMargins = True
+    Left = 10
+    Top = 444
+    Width = 300
+    Height = 41
+    Hint = '{"type":"success"}'
+    Margins.Left = 10
+    Margins.Right = 10
+    Margins.Bottom = 10
+    Align = alBottom
+    Caption = 'Stop'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = #24494#36719#38597#40657
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = Button_StopClick
+  end
+  object Memo1: TMemo
+    Left = 0
+    Top = 495
+    Width = 320
+    Height = 89
+    Align = alBottom
+    Lines.Strings = (
+      '')
+    TabOrder = 2
+  end
+end

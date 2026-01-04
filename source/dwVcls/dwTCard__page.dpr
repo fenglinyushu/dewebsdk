@@ -53,7 +53,7 @@ begin
         with TCard(ACtrl) do begin
             sCode   := '<el-main'
                     +' id="'+sFull+'"'
-                    +' v-show="'+LowerCase(dwPrefix(Actrl)+CardPanel.Name)+'__apg=='''+sFull+'''"'
+                    +' v-show="'+dwFullName(CardPanel)+'__apg=='''+sFull+'''"'
                     +dwDisable(TControl(ACtrl))
                     +dwGetHintValue(joHint,'icon','icon','')
                     +dwGetDWAttr(joHint)

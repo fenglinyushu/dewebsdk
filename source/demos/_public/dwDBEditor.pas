@@ -7579,7 +7579,39 @@ var
     end;
 
 begin
-
+    //<set object to nil first
+    oForm       := nil;
+    oBtnMargins := nil;
+    oPQy        := nil;
+    oFQy        := nil;
+    oPQF        := nil;
+    oPQm        := nil;
+    oPBs        := nil;
+    oBQm        := nil;
+    oBFz        := nil;
+    oBQy        := nil;
+    oBQR        := nil;
+    oBHd        := nil;
+    //
+    oBNw        := nil;
+    oBDe        := nil;
+    oBSa        := nil;
+    oBCc        := nil;
+    //
+    oEKw        := nil;
+    oTbP        := nil;
+    //
+    oFFd        := nil;
+    oPFd        := nil;
+    oLFx        := nil;
+    oEFx        := nil;
+    oMFx        := nil;
+    oIFx        := nil;
+    oBFx        := nil;
+    oDFx        := nil;
+    oCFx        := nil;
+    oPIn        := nil;
+    //>
 
     //默认返回值
     Result  := 0;

@@ -162,7 +162,7 @@ var
     iTab        : Integer;
 begin
     //
-    sFull       := sFull;
+    sFull       := dwFullName(Actrl);
 
     with TCardPanel(Actrl) do begin
         //用作Tabs控件--------------------------------------------------------------------------

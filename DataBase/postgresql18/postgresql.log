@@ -439,4 +439,121 @@
 2026-01-04 11:47:25.606 CST [6748] 提示:  关于对16进制值的描述， 参见C语言的引用文件 "ntstatus.h" 
 2026-01-04 11:47:25.606 CST [6748] 日志:  中断任何其它已激活的服务器进程
 2026-01-04 11:47:25.622 CST [6748] 日志:  所有的服务器进程被中止; 重新初始化
-^C
+^C2026-01-04 17:33:09.530 CST [13840] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-04 17:33:09.537 CST [13840] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-04 17:33:09.537 CST [13840] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-04 17:33:09.706 CST [5076] 日志:  数据库系统中断；上一次的启动时间是在2026-01-04 11:33:24 CST
+2026-01-04 17:33:10.068 CST [5076] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-04 17:33:10.073 CST [5076] 日志:  redo 在 0/1D4C850 开始
+2026-01-04 17:33:10.073 CST [5076] 日志:  invalid record length at 0/1D4C958: expected at least 24, got 0
+2026-01-04 17:33:10.073 CST [5076] 日志:  redo done at 0/1D4C920 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-04 17:33:10.078 CST [17660] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-04 17:33:10.088 CST [17660] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.002 s, total=0.013 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1D4C958, redo lsn=0/1D4C958
+2026-01-04 17:33:10.093 CST [13840] 日志:  数据库系统准备接受连接
+2026-01-04 17:38:10.091 CST [17660] 日志:  checkpoint starting: time
+2026-01-04 17:38:10.345 CST [17660] 日志:  checkpoint complete: wrote 2 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.225 s, sync=0.010 s, total=0.255 s; sync files=2, longest=0.009 s, average=0.005 s; distance=7 kB, estimate=7 kB; lsn=0/1D4E758, redo lsn=0/1D4E700
+2026-01-04 17:41:59.532 CST [17548] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-04 19:43:30.093 CST [17592] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-04 19:43:30.099 CST [17592] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-04 19:43:30.099 CST [17592] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-04 19:43:30.273 CST [4336] 日志:  数据库系统中断；上一次的启动时间是在2026-01-04 17:38:10 CST
+2026-01-04 19:43:30.593 CST [4336] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-04 19:43:30.598 CST [4336] 日志:  redo 在 0/1D4E700 开始
+2026-01-04 19:43:30.599 CST [4336] 日志:  invalid record length at 0/1D4E868: expected at least 24, got 0
+2026-01-04 19:43:30.599 CST [4336] 日志:  redo done at 0/1D4E830 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-04 19:43:30.604 CST [5500] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-04 19:43:30.618 CST [5500] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.004 s, total=0.017 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1D4E868, redo lsn=0/1D4E868
+2026-01-04 19:43:30.625 CST [17592] 日志:  数据库系统准备接受连接
+2026-01-04 19:53:20.062 CST [17592] 日志:  client backend (PID 1188) 被异常 0xC000013A 终止
+2026-01-04 19:53:20.062 CST [17592] 详细信息:  失败进程:DEALLOCATE "2STM"正在运行
+2026-01-04 19:53:20.062 CST [17592] 提示:  关于对16进制值的描述， 参见C语言的引用文件 "ntstatus.h" 
+2026-01-04 19:53:20.062 CST [17592] 日志:  中断任何其它已激活的服务器进程
+2026-01-04 19:53:20.083 CST [17592] 日志:  所有的服务器进程被中止; 重新初始化
+^C2026-01-04 21:10:45.328 CST [1052] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-04 21:10:45.334 CST [1052] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-04 21:10:45.334 CST [1052] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-04 21:10:45.506 CST [14172] 日志:  数据库系统中断；上一次的启动时间是在2026-01-04 19:43:30 CST
+2026-01-04 21:10:45.824 CST [14172] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-04 21:10:45.832 CST [14172] 日志:  redo 在 0/1D4E8E0 开始
+2026-01-04 21:10:45.832 CST [14172] 日志:  invalid record length at 0/1D4E918: expected at least 24, got 0
+2026-01-04 21:10:45.833 CST [14172] 日志:  redo done at 0/1D4E8E0 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-04 21:10:45.843 CST [9180] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-04 21:10:45.870 CST [9180] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.006 s, total=0.032 s; sync files=2, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=0 kB; lsn=0/1D4E918, redo lsn=0/1D4E918
+2026-01-04 21:10:45.877 CST [1052] 日志:  数据库系统准备接受连接
+2026-01-04 21:15:45.884 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 21:15:46.014 CST [9180] 日志:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.111 s, sync=0.003 s, total=0.133 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1D4ED48, redo lsn=0/1D4ECF0
+2026-01-04 21:25:45.034 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 21:25:45.189 CST [9180] 日志:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.120 s, sync=0.007 s, total=0.155 s; sync files=2, longest=0.004 s, average=0.004 s; distance=1 kB, estimate=1 kB; lsn=0/1D4F290, redo lsn=0/1D4F238
+2026-01-04 21:30:45.185 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 21:30:45.302 CST [9180] 日志:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.101 s, sync=0.004 s, total=0.118 s; sync files=2, longest=0.002 s, average=0.002 s; distance=2 kB, estimate=2 kB; lsn=0/1D4FCD0, redo lsn=0/1D4FC78
+2026-01-04 21:30:48.335 CST [17040] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-04 21:35:45.312 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 21:35:45.334 CST [9180] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.002 s, total=0.023 s; sync files=1, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=2 kB; lsn=0/1D4FE00, redo lsn=0/1D4FDA8
+2026-01-04 21:47:22.658 CST [2300] ERROR:  relation "fwstore" does not exist at character 85
+2026-01-04 21:47:22.658 CST [2300] STATEMENT:  SELECT sId,sName,sCode,sManagerId,sPhone,sAddress,sStatus,sCreatedTime,sRemark FROM fwStore WHERE 1=0
+2026-01-04 21:47:37.295 CST [2300] ERROR:  relation "fwstore" does not exist at character 76
+2026-01-04 21:47:37.295 CST [2300] STATEMENT:  DECLARE "34STM" NO SCROLL CURSOR WITH HOLD FOR SELECT sCode,sName,sId FROM fwStore ORDER BY sCode
+2026-01-04 21:50:45.369 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 21:50:45.507 CST [9180] 日志:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.109 s, sync=0.007 s, total=0.139 s; sync files=2, longest=0.004 s, average=0.004 s; distance=5 kB, estimate=5 kB; lsn=0/1D51228, redo lsn=0/1D511D0
+2026-01-04 21:55:45.496 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 21:55:45.944 CST [9180] 日志:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.436 s, sync=0.005 s, total=0.450 s; sync files=4, longest=0.002 s, average=0.002 s; distance=25 kB, estimate=25 kB; lsn=0/1D576A0, redo lsn=0/1D57648
+2026-01-04 22:00:19.585 CST [13540] ERROR:  column "dcode" does not exist at character 18
+2026-01-04 22:00:19.585 CST [13540] STATEMENT:  SELECT did,dname,dcode,dmanagerid,dphone,daddress,dstatus,dcreatetime,dremark FROM sys_department WHERE 1=0
+2026-01-04 22:00:43.373 CST [13540] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2026-01-04 22:00:43.373 CST [13540] STATEMENT:  SET cursor_tuple_fraction TO 1.0
+2026-01-04 22:00:45.949 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:00:47.268 CST [9180] 日志:  checkpoint complete: wrote 12 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.272 s, sync=0.028 s, total=1.319 s; sync files=11, longest=0.003 s, average=0.003 s; distance=64 kB, estimate=64 kB; lsn=0/1D67968, redo lsn=0/1D67910
+2026-01-04 22:01:15.352 CST [10108] ERROR:  column "dmanagerid" does not exist at character 24
+2026-01-04 22:01:15.352 CST [10108] STATEMENT:  SELECT did,dname,dcode,dmanagerid,dphone,daddress,dstatus,dcreatetime,dremark FROM sys_department WHERE 1=0
+2026-01-04 22:02:03.197 CST [10108] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2026-01-04 22:02:03.197 CST [10108] STATEMENT:  SET cursor_tuple_fraction TO 1.0
+2026-01-04 22:02:34.135 CST [17580] ERROR:  column "daddress" does not exist at character 42
+2026-01-04 22:02:34.135 CST [17580] STATEMENT:  SELECT did,dname,dcode,dmanagerid,dphone,daddress,dstatus,dcreatetime,dremark FROM sys_department WHERE 1=0
+2026-01-04 22:03:25.600 CST [17580] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2026-01-04 22:03:25.600 CST [17580] STATEMENT:  SET cursor_tuple_fraction TO 1.0
+2026-01-04 22:03:56.110 CST [14172] ERROR:  relation "fwstore" does not exist at character 76
+2026-01-04 22:03:56.110 CST [14172] STATEMENT:  DECLARE "28STM" NO SCROLL CURSOR WITH HOLD FOR SELECT sCode,sName,sId FROM fwStore ORDER BY sCode
+2026-01-04 22:05:45.275 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:05:47.588 CST [9180] 日志:  checkpoint complete: wrote 21 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.255 s, sync=0.041 s, total=2.314 s; sync files=19, longest=0.003 s, average=0.003 s; distance=102 kB, estimate=102 kB; lsn=0/1D81520, redo lsn=0/1D814C8
+2026-01-04 22:10:45.602 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:10:46.174 CST [9180] 日志:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.538 s, sync=0.017 s, total=0.574 s; sync files=6, longest=0.004 s, average=0.003 s; distance=22 kB, estimate=94 kB; lsn=0/1D86E30, redo lsn=0/1D86DA0
+2026-01-04 22:10:49.526 CST [17780] ERROR:  column "dcode" does not exist at character 45
+2026-01-04 22:10:49.526 CST [17780] STATEMENT:  DECLARE "42STM" NO SCROLL CURSOR FOR SELECT dcode,dname,did FROM sys_user ORDER BY dcode
+2026-01-04 22:11:49.494 CST [1244] ERROR:  column "dcode" does not exist at character 55
+2026-01-04 22:11:49.494 CST [1244] STATEMENT:  DECLARE "47STM" NO SCROLL CURSOR WITH HOLD FOR SELECT dcode,dname,did FROM sys_user ORDER BY dcode
+2026-01-04 22:15:45.182 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:15:46.127 CST [9180] 日志:  checkpoint complete: wrote 8 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.891 s, sync=0.020 s, total=0.946 s; sync files=7, longest=0.005 s, average=0.003 s; distance=37 kB, estimate=89 kB; lsn=0/1D90570, redo lsn=0/1D90518
+2026-01-04 22:33:15.776 CST [2788] ERROR:  column "dcode" does not exist at character 55
+2026-01-04 22:33:15.776 CST [2788] STATEMENT:  DECLARE "52STM" NO SCROLL CURSOR WITH HOLD FOR SELECT dcode,dname,did FROM sys_user ORDER BY dcode
+2026-01-04 22:34:22.709 CST [18208] ERROR:  column "dcode" does not exist at character 55
+2026-01-04 22:34:22.709 CST [18208] STATEMENT:  DECLARE "28STM" NO SCROLL CURSOR WITH HOLD FOR SELECT dcode,dname,did FROM sys_user ORDER BY dcode
+2026-01-04 22:35:45.155 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:35:45.628 CST [9180] 日志:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.447 s, sync=0.011 s, total=0.473 s; sync files=4, longest=0.009 s, average=0.003 s; distance=24 kB, estimate=82 kB; lsn=0/1D965F0, redo lsn=0/1D96598
+2026-01-04 22:39:38.905 CST [12868] ERROR:  column "dcode" does not exist at character 55
+2026-01-04 22:39:38.905 CST [12868] STATEMENT:  DECLARE "29STM" NO SCROLL CURSOR WITH HOLD FOR SELECT dcode,dname,did FROM sys_user ORDER BY dcode
+2026-01-04 22:40:45.629 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:40:45.769 CST [9180] 日志:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.119 s, sync=0.004 s, total=0.141 s; sync files=2, longest=0.003 s, average=0.002 s; distance=6 kB, estimate=75 kB; lsn=0/1D97EE0, redo lsn=0/1D97E88
+2026-01-04 22:41:07.991 CST [15536] ERROR:  column "dcode" does not exist at character 55
+2026-01-04 22:41:07.991 CST [15536] STATEMENT:  DECLARE "41STM" NO SCROLL CURSOR WITH HOLD FOR SELECT dcode,dname,did FROM sys_user ORDER BY dcode
+2026-01-04 22:44:03.041 CST [11156] ERROR:  column "dame" does not exist at character 55
+2026-01-04 22:44:03.041 CST [11156] HINT:  Perhaps you meant to reference the column "sys_department.dname".
+2026-01-04 22:44:03.041 CST [11156] STATEMENT:  DECLARE "47STM" NO SCROLL CURSOR WITH HOLD FOR SELECT dame,dtype,dregion,daddress,dphone,dstatus FROM sys_department WHERE did = 1
+2026-01-04 22:45:45.773 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:45:45.911 CST [9180] 日志:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.110 s, sync=0.007 s, total=0.140 s; sync files=2, longest=0.004 s, average=0.004 s; distance=7 kB, estimate=68 kB; lsn=0/1D99E98, redo lsn=0/1D99E40
+2026-01-04 22:47:01.473 CST [1792] ERROR:  column "sid" does not exist at character 119
+2026-01-04 22:47:01.473 CST [1792] HINT:  Perhaps you meant to reference the column "sys_department.did".
+2026-01-04 22:47:01.473 CST [1792] STATEMENT:  SELECT did,dname,dcode,dmanagerid,dphone,daddress,dstatus,dcreatetime,dremark FROM sys_department  WHERE (1=1)  AND ((sId = 64))
+	LIMIT 2147483647
+2026-01-04 22:49:24.086 CST [18344] ERROR:  column "dname" does not exist at character 55
+2026-01-04 22:49:24.086 CST [18344] HINT:  Perhaps you meant to reference the column "sys_user.uname".
+2026-01-04 22:49:24.086 CST [18344] STATEMENT:  DECLARE "83STM" NO SCROLL CURSOR WITH HOLD FOR SELECT dname,dtype,dregion,daddress,dphone,dstatus FROM sys_user WHERE did = 66
+2026-01-04 22:50:45.908 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:50:46.267 CST [9180] 日志:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.339 s, sync=0.004 s, total=0.359 s; sync files=3, longest=0.002 s, average=0.002 s; distance=18 kB, estimate=63 kB; lsn=0/1D9E848, redo lsn=0/1D9E7F0
+2026-01-04 22:55:45.275 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 22:55:45.534 CST [9180] 日志:  checkpoint complete: wrote 2 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.216 s, sync=0.016 s, total=0.259 s; sync files=3, longest=0.011 s, average=0.006 s; distance=7 kB, estimate=57 kB; lsn=0/1DA0728, redo lsn=0/1DA06D0
+2026-01-04 22:57:04.698 CST [14140] ERROR:  column "sid" does not exist at character 119
+2026-01-04 22:57:04.698 CST [14140] HINT:  Perhaps you meant to reference the column "sys_department.did".
+2026-01-04 22:57:04.698 CST [14140] STATEMENT:  SELECT did,dname,dcode,dmanagerid,dphone,daddress,dstatus,dcreatetime,dremark FROM sys_department  WHERE (1=1)  AND ((sId = 70))
+	LIMIT 2147483647
+2026-01-04 23:00:45.532 CST [9180] 日志:  checkpoint starting: time
+2026-01-04 23:00:46.096 CST [9180] 日志:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.539 s, sync=0.014 s, total=0.565 s; sync files=6, longest=0.009 s, average=0.003 s; distance=26 kB, estimate=54 kB; lsn=0/1DA6FB8, redo lsn=0/1DA6F60

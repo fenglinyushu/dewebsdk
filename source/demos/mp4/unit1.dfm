@@ -1,0 +1,32 @@
+﻿object Form1: TForm1
+  Left = 0
+  Top = 0
+  Hint = '{"type":"primary"}'
+  Caption = 'MP4'
+  ClientHeight = 525
+  ClientWidth = 534
+  Color = clWhite
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 20
+  object MediaPlayer1: TMediaPlayer
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 523
+    Height = 321
+    Hint = '{"dwattr":"controls"}'
+    Align = alTop
+    EnabledButtons = []
+    DoubleBuffered = True
+    FileName = '/media/video/ocean.mp4'
+    ParentDoubleBuffered = False
+    TabOrder = 0
+  end
+end
