@@ -557,3 +557,246 @@
 	LIMIT 2147483647
 2026-01-04 23:00:45.532 CST [9180] ÈÕÖ¾:  checkpoint starting: time
 2026-01-04 23:00:46.096 CST [9180] ÈÕÖ¾:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.539 s, sync=0.014 s, total=0.565 s; sync files=6, longest=0.009 s, average=0.003 s; distance=26 kB, estimate=54 kB; lsn=0/1DA6FB8, redo lsn=0/1DA6F60
+2026-01-04 23:03:43.056 CST [1868] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-01-04 23:03:43.063 CST [13428] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-04 23:03:43.076 CST [2188] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-05 08:11:28.660 CST [10164] ÈÕÖ¾:  ÕıÔÚÆô¶¯ PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-05 08:11:28.668 CST [10164] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv6µØÖ·"::1"£¬¶Ë¿Ú 5432
+2026-01-05 08:11:28.668 CST [10164] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv4µØÖ·"127.0.0.1"£¬¶Ë¿Ú 5432
+2026-01-05 08:11:28.860 CST [7280] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³ÖĞ¶Ï£»ÉÏÒ»´ÎµÄÆô¶¯Ê±¼äÊÇÔÚ2026-01-04 23:00:46 CST
+2026-01-05 08:11:29.815 CST [7280] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³Ã»ÓĞÕıÈ·µÄ¹Ø±Õ; ´¦ÓÚ×Ô¶¯»Ö¸´×´Ì¬ÖĞ
+2026-01-05 08:11:29.824 CST [7280] ÈÕÖ¾:  redo ÔÚ 0/1DA6F60 ¿ªÊ¼
+2026-01-05 08:11:29.824 CST [7280] ÈÕÖ¾:  invalid record length at 0/1DA7068: expected at least 24, got 0
+2026-01-05 08:11:29.824 CST [7280] ÈÕÖ¾:  redo done at 0/1DA7030 system usage: CPU:ÓÃ»§£º0.00 s£¬ÏµÍ³£º0.00 s£¬ÒÑÓÃÊ±¼ä£º0.00 s
+2026-01-05 08:11:29.832 CST [19428] ÈÕÖ¾:  checkpoint starting: end-of-recovery immediate wait
+2026-01-05 08:11:29.862 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.007 s, total=0.036 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/1DA7068, redo lsn=0/1DA7068
+2026-01-05 08:11:29.872 CST [10164] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³×¼±¸½ÓÊÜÁ¬½Ó
+2026-01-05 08:16:29.876 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 08:16:30.021 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.111 s, sync=0.004 s, total=0.155 s; sync files=1, longest=0.004 s, average=0.004 s; distance=7 kB, estimate=7 kB; lsn=0/1DA8FF8, redo lsn=0/1DA8FA0
+2026-01-05 08:21:29.021 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 08:21:29.165 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.102 s, sync=0.009 s, total=0.145 s; sync files=2, longest=0.005 s, average=0.005 s; distance=3 kB, estimate=7 kB; lsn=0/1DA9F28, redo lsn=0/1DA9ED0
+2026-01-05 08:26:29.167 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 08:26:29.299 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.112 s, sync=0.005 s, total=0.133 s; sync files=2, longest=0.003 s, average=0.003 s; distance=4 kB, estimate=7 kB; lsn=0/1DAAFF8, redo lsn=0/1DAAFA0
+2026-01-05 08:31:29.304 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 08:31:35.781 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 58 buffers (0.4%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=6.361 s, sync=0.093 s, total=6.477 s; sync files=40, longest=0.004 s, average=0.003 s; distance=296 kB, estimate=296 kB; lsn=0/1DF5348, redo lsn=0/1DF52B8
+2026-01-05 08:41:29.798 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 08:41:29.951 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.114 s, sync=0.007 s, total=0.155 s; sync files=2, longest=0.004 s, average=0.004 s; distance=5 kB, estimate=267 kB; lsn=0/1DF6730, redo lsn=0/1DF66D8
+2026-01-05 08:51:29.963 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 08:51:30.116 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.112 s, sync=0.008 s, total=0.155 s; sync files=2, longest=0.004 s, average=0.004 s; distance=5 kB, estimate=241 kB; lsn=0/1DF7CC8, redo lsn=0/1DF7C70
+2026-01-05 08:56:29.128 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 08:56:29.281 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.118 s, sync=0.007 s, total=0.154 s; sync files=2, longest=0.004 s, average=0.004 s; distance=5 kB, estimate=217 kB; lsn=0/1DF93C8, redo lsn=0/1DF9370
+2026-01-05 09:01:29.290 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:01:29.444 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.114 s, sync=0.008 s, total=0.155 s; sync files=2, longest=0.004 s, average=0.004 s; distance=6 kB, estimate=196 kB; lsn=0/1DFAEE8, redo lsn=0/1DFAE90
+2026-01-05 09:06:29.453 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:06:29.587 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.107 s, sync=0.004 s, total=0.135 s; sync files=2, longest=0.002 s, average=0.002 s; distance=8 kB, estimate=177 kB; lsn=0/1DFCF20, redo lsn=0/1DFCEC8
+2026-01-05 09:11:29.596 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:11:30.099 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.435 s, sync=0.031 s, total=0.503 s; sync files=5, longest=0.020 s, average=0.007 s; distance=21 kB, estimate=162 kB; lsn=0/1E02440, redo lsn=0/1E023E8
+2026-01-05 09:21:29.108 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:21:34.189 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 46 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=5.042 s, sync=0.025 s, total=5.081 s; sync files=36, longest=0.001 s, average=0.001 s; distance=236 kB, estimate=236 kB; lsn=0/1E3D680, redo lsn=0/1E3D5F0
+2026-01-05 09:36:29.233 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:36:29.708 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.437 s, sync=0.015 s, total=0.477 s; sync files=5, longest=0.010 s, average=0.003 s; distance=11 kB, estimate=214 kB; lsn=0/1E40500, redo lsn=0/1E404A8
+2026-01-05 09:43:06.744 CST [16056] LOG:  unexpected EOF on client connection with an open transaction
+2026-01-05 09:46:29.727 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:46:30.105 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.333 s, sync=0.021 s, total=0.388 s; sync files=4, longest=0.011 s, average=0.006 s; distance=8 kB, estimate=193 kB; lsn=0/1E42508, redo lsn=0/1E424B0
+2026-01-05 09:51:29.118 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:51:30.030 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 8 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.880 s, sync=0.010 s, total=0.912 s; sync files=7, longest=0.003 s, average=0.002 s; distance=36 kB, estimate=177 kB; lsn=0/1E4B640, redo lsn=0/1E4B5E8
+2026-01-05 09:56:29.037 CST [19428] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 09:56:30.491 CST [19428] ÈÕÖ¾:  checkpoint complete: wrote 13 buffers (0.1%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.424 s, sync=0.016 s, total=1.455 s; sync files=8, longest=0.009 s, average=0.002 s; distance=58 kB, estimate=165 kB; lsn=0/1E59F18, redo lsn=0/1E59EC0
+2026-01-05 11:52:27.477 CST [10164] ÈÕÖ¾:  client backend (PID 14188) ±»Òì³£ 0xC000013A ÖÕÖ¹
+2026-01-05 11:52:27.477 CST [10164] ÏêÏ¸ĞÅÏ¢:  Ê§°Ü½ø³Ì:SELECT opr.oid, opr.oprname, nsp.nspname FROM pg_operator opr, pg_namespace nsp WHERE opr.oprnamespace = nsp.oidÕıÔÚÔËĞĞ
+2026-01-05 11:52:27.477 CST [10164] ÌáÊ¾:  ¹ØÓÚ¶Ô16½øÖÆÖµµÄÃèÊö£¬ ²Î¼ûCÓïÑÔµÄÒıÓÃÎÄ¼ş "ntstatus.h" 
+2026-01-05 11:52:27.477 CST [10164] ÈÕÖ¾:  ÖĞ¶ÏÈÎºÎÆäËüÒÑ¼¤»îµÄ·şÎñÆ÷½ø³Ì
+2026-01-05 11:52:27.498 CST [10164] ÈÕÖ¾:  ËùÓĞµÄ·şÎñÆ÷½ø³Ì±»ÖĞÖ¹; ÖØĞÂ³õÊ¼»¯
+2026-01-05 14:59:38.769 CST [1456] ÈÕÖ¾:  ÕıÔÚÆô¶¯ PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-05 14:59:38.775 CST [1456] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv6µØÖ·"::1"£¬¶Ë¿Ú 5432
+2026-01-05 14:59:38.775 CST [1456] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv4µØÖ·"127.0.0.1"£¬¶Ë¿Ú 5432
+2026-01-05 14:59:38.952 CST [16656] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³ÖĞ¶Ï£»ÉÏÒ»´ÎµÄÆô¶¯Ê±¼äÊÇÔÚ2026-01-05 09:56:30 CST
+2026-01-05 14:59:39.359 CST [16656] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³Ã»ÓĞÕıÈ·µÄ¹Ø±Õ; ´¦ÓÚ×Ô¶¯»Ö¸´×´Ì¬ÖĞ
+2026-01-05 14:59:39.366 CST [16656] ÈÕÖ¾:  redo ÔÚ 0/1E59EC0 ¿ªÊ¼
+2026-01-05 14:59:39.366 CST [16656] ÈÕÖ¾:  invalid record length at 0/1E59FC8: expected at least 24, got 0
+2026-01-05 14:59:39.367 CST [16656] ÈÕÖ¾:  redo done at 0/1E59F90 system usage: CPU:ÓÃ»§£º0.00 s£¬ÏµÍ³£º0.00 s£¬ÒÑÓÃÊ±¼ä£º0.00 s
+2026-01-05 14:59:39.375 CST [18024] ÈÕÖ¾:  checkpoint starting: end-of-recovery immediate wait
+2026-01-05 14:59:39.391 CST [18024] ÈÕÖ¾:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.003 s, total=0.021 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1E59FC8, redo lsn=0/1E59FC8
+2026-01-05 14:59:39.399 CST [1456] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³×¼±¸½ÓÊÜÁ¬½Ó
+2026-01-05 14:59:46.544 CST [1456] ÈÕÖ¾:  ºóÌ¨¹¤×÷½ø³Ì "logical replication launcher" (PID 16340) ±»Òì³£ 0xC000013A ÖÕÖ¹
+2026-01-05 14:59:46.544 CST [1456] ÌáÊ¾:  ¹ØÓÚ¶Ô16½øÖÆÖµµÄÃèÊö£¬ ²Î¼ûCÓïÑÔµÄÒıÓÃÎÄ¼ş "ntstatus.h" 
+2026-01-05 14:59:46.544 CST [1456] ÈÕÖ¾:  ÖĞ¶ÏÈÎºÎÆäËüÒÑ¼¤»îµÄ·şÎñÆ÷½ø³Ì
+2026-01-05 14:59:46.553 CST [1456] ÈÕÖ¾:  ½ÓÊÕµ½¿ìËÙ (fast) Í£Ö¹ÇëÇó
+^C2026-01-05 15:00:02.253 CST [15048] ÈÕÖ¾:  ÕıÔÚÆô¶¯ PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-05 15:00:02.259 CST [15048] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv6µØÖ·"::1"£¬¶Ë¿Ú 5432
+2026-01-05 15:00:02.260 CST [15048] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv4µØÖ·"127.0.0.1"£¬¶Ë¿Ú 5432
+2026-01-05 15:00:02.382 CST [12936] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³ÖĞ¶Ï£»ÉÏÒ»´ÎµÄÆô¶¯Ê±¼äÊÇÔÚ2026-01-05 14:59:39 CST
+2026-01-05 15:00:02.647 CST [12936] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³Ã»ÓĞÕıÈ·µÄ¹Ø±Õ; ´¦ÓÚ×Ô¶¯»Ö¸´×´Ì¬ÖĞ
+2026-01-05 15:00:02.649 CST [12936] ÈÕÖ¾:  invalid record length at 0/1E5A058: expected at least 24, got 0
+2026-01-05 15:00:02.649 CST [12936] ÈÕÖ¾:  ²»ĞèÒª redo
+2026-01-05 15:00:02.655 CST [720] ÈÕÖ¾:  checkpoint starting: end-of-recovery immediate wait
+2026-01-05 15:00:02.666 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.002 s, total=0.014 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1E5A058, redo lsn=0/1E5A058
+2026-01-05 15:00:02.672 CST [15048] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³×¼±¸½ÓÊÜÁ¬½Ó
+2026-01-05 15:05:02.676 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:05:02.807 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.106 s, sync=0.002 s, total=0.132 s; sync files=1, longest=0.002 s, average=0.002 s; distance=6 kB, estimate=6 kB; lsn=0/1E5BBD0, redo lsn=0/1E5BB78
+2026-01-05 15:10:02.809 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:10:37.987 CST [18244] é”™è¯¯:  å…³ç³» "public.bop_contract" ä¸å­˜åœ¨ ç¬¬ 18 ä¸ªå­—ç¬¦å¤„
+2026-01-05 15:10:37.987 CST [18244] è¯­å¥:  SELECT bc.* FROM public.bop_contract AS bc
+2026-01-05 15:11:05.720 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 574 buffers (3.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=62.785 s, sync=0.096 s, total=62.912 s; sync files=119, longest=0.011 s, average=0.001 s; distance=5296 kB, estimate=5296 kB; lsn=0/239B8E8, redo lsn=0/2387D38
+2026-01-05 15:15:02.729 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:15:09.866 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 65 buffers (0.4%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=7.100 s, sync=0.018 s, total=7.137 s; sync files=24, longest=0.002 s, average=0.001 s; distance=500 kB, estimate=4816 kB; lsn=0/241B5D0, redo lsn=0/2404E48
+2026-01-05 15:20:02.874 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:20:04.808 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 17 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.891 s, sync=0.025 s, total=1.935 s; sync files=9, longest=0.004 s, average=0.003 s; distance=158 kB, estimate=4351 kB; lsn=0/242CA48, redo lsn=0/242C9F0
+2026-01-05 15:20:45.390 CST [12428] ERROR:  relation "euser" does not exist at character 32
+2026-01-05 15:20:45.390 CST [12428] STATEMENT:  SELECT Distinct uId,uName FROM eUser
+	LIMIT 500
+2026-01-05 15:25:02.815 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:25:03.519 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.666 s, sync=0.022 s, total=0.704 s; sync files=5, longest=0.011 s, average=0.005 s; distance=32 kB, estimate=3919 kB; lsn=0/2434BD0, redo lsn=0/2434B78
+2026-01-05 15:28:16.215 CST [16312] é”™è¯¯:  æ— æ³•æŠŠç±»å‹ bit è½¬æ¢ä¸º boolean ç¬¬ 87 ä¸ªå­—ç¬¦å¤„
+2026-01-05 15:28:16.215 CST [16312] è¯­å¥:  ALTER TABLE "public"."bop_contract" 
+	  ALTER COLUMN "ctaxed" TYPE bool USING "ctaxed"::bool
+2026-01-05 15:28:21.891 CST [16312] é”™è¯¯:  æ— æ³•æŠŠç±»å‹ bit è½¬æ¢ä¸º boolean ç¬¬ 87 ä¸ªå­—ç¬¦å¤„
+2026-01-05 15:28:21.891 CST [16312] è¯­å¥:  ALTER TABLE "public"."bop_contract" 
+	  ALTER COLUMN "ctaxed" TYPE bool USING "ctaxed"::bool
+2026-01-05 15:28:57.879 CST [16312] é”™è¯¯:  bitå­—ç¬¦ä¸²çš„é•¿åº¦(0)ä¸bitç±»å‹(1)ä¸åŒ¹é….
+2026-01-05 15:28:57.879 CST [16312] è¯­å¥:  UPDATE "public"."bop_contract" SET "ctaxed" = '' WHERE "cid" = 273 AND "cname" IS NULL AND "cuserid" = 1 AND "cproductionsupervisorid" = 20 AND "cpi_no" = 'HF000125128' AND "ccustomerid" = 61 AND "cendcustomer" = 'caitac' AND "cpaymentmethod" = 'TT 45å¤©' AND "cpaymentterms" = 'FOB' AND "ctaxed" = '1' AND "ctaxrefundrate" = '13.00' AND "ctaxrefundamount" = '0.00' AND "centrydate" = '2025-11-17 00:00:00' AND "cetd" = '2026-01-01 00:00:00' AND "cproductid" IS NULL AND "cproductquantity" IS NULL AND "cproductpackage" IS NULL AND "cfullinspection" = 'æ˜¯' AND "ccommission" = '0.00' AND "cpriceunit" = 'ç¾å…ƒ' AND "ccurrency" = 'USD' AND "cexchangerate" = '0' AND "cproductunit" IS NULL AND "corderstatus" = 'å¯ç‰¹æ®Šå…ˆè¡Œ' AND "cfactorycost" = '0.00' AND "creimbursecost" = '20000.00' AND "ctotalsales" = '0.00' AND "cgrossprofit" = '0.00' AND "cgrossmargin" = '0' AND "cfollowid" IS NULL AND "cdepositpaydate" IS NULL AND "cfactorydeliverydate" IS NULL AND "cinspectiondeliverydate" IS NULL AND "cnotes" IS NULL AND "cinspectioncompany" = 'ä¿¡é•¿æ£€å“' AND "cdetail" = 'HF000125128 - å¤©æ³½-ä½• - å‡‰é‹ (è€å®é‹ä¸š)' AND "cremark" = 'è€å®å¸¦ç¯å‡‰é‹'
+2026-01-05 15:29:01.397 CST [16312] é”™è¯¯:  bitå­—ç¬¦ä¸²çš„é•¿åº¦(0)ä¸bitç±»å‹(1)ä¸åŒ¹é….
+2026-01-05 15:29:01.397 CST [16312] è¯­å¥:  UPDATE "public"."bop_contract" SET "ctaxed" = '' WHERE "cid" = 273 AND "cname" IS NULL AND "cuserid" = 1 AND "cproductionsupervisorid" = 20 AND "cpi_no" = 'HF000125128' AND "ccustomerid" = 61 AND "cendcustomer" = 'caitac' AND "cpaymentmethod" = 'TT 45å¤©' AND "cpaymentterms" = 'FOB' AND "ctaxed" = '1' AND "ctaxrefundrate" = '13.00' AND "ctaxrefundamount" = '0.00' AND "centrydate" = '2025-11-17 00:00:00' AND "cetd" = '2026-01-01 00:00:00' AND "cproductid" IS NULL AND "cproductquantity" IS NULL AND "cproductpackage" IS NULL AND "cfullinspection" = 'æ˜¯' AND "ccommission" = '0.00' AND "cpriceunit" = 'ç¾å…ƒ' AND "ccurrency" = 'USD' AND "cexchangerate" = '0' AND "cproductunit" IS NULL AND "corderstatus" = 'å¯ç‰¹æ®Šå…ˆè¡Œ' AND "cfactorycost" = '0.00' AND "creimbursecost" = '20000.00' AND "ctotalsales" = '0.00' AND "cgrossprofit" = '0.00' AND "cgrossmargin" = '0' AND "cfollowid" IS NULL AND "cdepositpaydate" IS NULL AND "cfactorydeliverydate" IS NULL AND "cinspectiondeliverydate" IS NULL AND "cnotes" IS NULL AND "cinspectioncompany" = 'ä¿¡é•¿æ£€å“' AND "cdetail" = 'HF000125128 - å¤©æ³½-ä½• - å‡‰é‹ (è€å®é‹ä¸š)' AND "cremark" = 'è€å®å¸¦ç¯å‡‰é‹'
+2026-01-05 15:30:02.530 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:30:04.637 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 19 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.078 s, sync=0.015 s, total=2.109 s; sync files=12, longest=0.003 s, average=0.002 s; distance=108 kB, estimate=3538 kB; lsn=0/244FF38, redo lsn=0/244FEE0
+2026-01-05 15:31:52.499 CST [16312] é”™è¯¯:  è¯­æ³•é”™è¯¯ åœ¨ "when" æˆ–é™„è¿‘çš„ ç¬¬ 50 ä¸ªå­—ç¬¦å¤„
+2026-01-05 15:31:52.499 CST [16312] è¯­å¥:  UPDATE "public"."bop_contract" set ctaxed = true when ctaxed0=1
+2026-01-05 15:31:59.728 CST [16312] é”™è¯¯:  æ“ä½œç¬¦ä¸å­˜åœ¨: bit = integer ç¬¬ 63 ä¸ªå­—ç¬¦å¤„
+2026-01-05 15:31:59.728 CST [16312] æç¤º:  æ²¡æœ‰åŒ¹é…æŒ‡å®šåç§°å’Œå‚æ•°ç±»å‹çš„æ“ä½œç¬¦. æ‚¨ä¹Ÿè®¸éœ€è¦å¢åŠ æ˜ç¡®çš„ç±»å‹è½¬æ¢.
+2026-01-05 15:31:59.728 CST [16312] è¯­å¥:  UPDATE "public"."bop_contract" set ctaxed = true where ctaxed0=1
+2026-01-05 15:33:44.876 CST [16312] é”™è¯¯:  æ“ä½œç¬¦ä¸å­˜åœ¨: bit = integer ç¬¬ 71 ä¸ªå­—ç¬¦å¤„
+2026-01-05 15:33:44.876 CST [16312] æç¤º:  æ²¡æœ‰åŒ¹é…æŒ‡å®šåç§°å’Œå‚æ•°ç±»å‹çš„æ“ä½œç¬¦. æ‚¨ä¹Ÿè®¸éœ€è¦å¢åŠ æ˜ç¡®çš„ç±»å‹è½¬æ¢.
+2026-01-05 15:33:44.876 CST [16312] è¯­å¥:  UPDATE "public"."bop_contract" 
+	SET ctaxed = CASE 
+	    WHEN ctaxed0 = 1 THEN true
+	    ELSE false
+	END
+2026-01-05 15:49:51.718 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:49:52.767 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 9 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.006 s, sync=0.020 s, total=1.049 s; sync files=8, longest=0.003 s, average=0.003 s; distance=54 kB, estimate=3189 kB; lsn=0/245D8B0, redo lsn=0/245D858
+2026-01-05 15:54:51.768 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:54:54.081 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 21 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.294 s, sync=0.011 s, total=2.314 s; sync files=11, longest=0.002 s, average=0.001 s; distance=142 kB, estimate=2885 kB; lsn=0/249F570, redo lsn=0/2481400
+2026-01-05 15:59:51.096 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 15:59:53.748 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 24 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.616 s, sync=0.015 s, total=2.653 s; sync files=14, longest=0.002 s, average=0.002 s; distance=169 kB, estimate=2613 kB; lsn=0/24AD8A0, redo lsn=0/24AB800
+2026-01-05 16:08:08.929 CST [13084] ÈÕÖ¾:  ÎŞ·¨´Ó¿Í»§¶Ë»ñµÃÊı¾İ: An established connection was aborted by the software in your host machine.
+	
+2026-01-05 16:14:51.781 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 16:14:53.616 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 16 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.773 s, sync=0.035 s, total=1.850 s; sync files=9, longest=0.011 s, average=0.004 s; distance=103 kB, estimate=2362 kB; lsn=0/24C5518, redo lsn=0/24C54C0
+2026-01-05 16:44:51.687 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 16:44:52.408 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.694 s, sync=0.005 s, total=0.721 s; sync files=5, longest=0.002 s, average=0.001 s; distance=43 kB, estimate=2130 kB; lsn=0/24D0290, redo lsn=0/24D0238
+2026-01-05 16:49:22.852 CST [15316] ERROR:  relation "econtractdetail" does not exist at character 100
+2026-01-05 16:49:22.852 CST [15316] STATEMENT:  SELECT dId,dPId,dSpec,dColor,dStyleNo,dQuantity,dUnit,dPriceFactory,dPriceCustomer,dPriceUnit FROM eContractDetail WHERE 1=0
+2026-01-05 16:49:51.422 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 16:49:51.925 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.435 s, sync=0.032 s, total=0.504 s; sync files=5, longest=0.021 s, average=0.007 s; distance=17 kB, estimate=1919 kB; lsn=0/24D4A48, redo lsn=0/24D49F0
+2026-01-05 16:55:44.746 CST [10388] ERROR:  relation "ecolor" does not exist at character 28
+2026-01-05 16:55:44.746 CST [10388] STATEMENT:  SELECT Distinct cName FROM eColor
+	LIMIT 500
+2026-01-05 16:59:51.931 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 16:59:52.759 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 7 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.767 s, sync=0.031 s, total=0.829 s; sync files=8, longest=0.011 s, average=0.004 s; distance=34 kB, estimate=1730 kB; lsn=0/24DD5D0, redo lsn=0/24DD578
+2026-01-05 17:04:51.768 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:04:51.916 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.116 s, sync=0.004 s, total=0.148 s; sync files=1, longest=0.004 s, average=0.004 s; distance=8 kB, estimate=1558 kB; lsn=0/24DF720, redo lsn=0/24DF6C8
+2026-01-05 17:09:51.927 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:09:54.373 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 22 buffers (0.1%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.416 s, sync=0.011 s, total=2.446 s; sync files=9, longest=0.002 s, average=0.002 s; distance=153 kB, estimate=1418 kB; lsn=0/2505E30, redo lsn=0/2505DD8
+2026-01-05 17:14:51.377 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:15:03.124 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 107 buffers (0.7%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=11.702 s, sync=0.025 s, total=11.747 s; sync files=19, longest=0.010 s, average=0.002 s; distance=846 kB, estimate=1360 kB; lsn=0/25D98A0, redo lsn=0/25D9810
+2026-01-05 17:24:51.140 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:24:51.635 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.444 s, sync=0.020 s, total=0.496 s; sync files=5, longest=0.011 s, average=0.004 s; distance=14 kB, estimate=1226 kB; lsn=0/25DD2C0, redo lsn=0/25DD268
+2026-01-05 17:29:51.635 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:29:51.970 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.324 s, sync=0.004 s, total=0.336 s; sync files=4, longest=0.002 s, average=0.001 s; distance=6 kB, estimate=1104 kB; lsn=0/25DEE88, redo lsn=0/25DEE30
+2026-01-05 17:34:51.983 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:34:52.472 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.448 s, sync=0.016 s, total=0.491 s; sync files=5, longest=0.004 s, average=0.004 s; distance=15 kB, estimate=995 kB; lsn=0/25E2B68, redo lsn=0/25E2B10
+2026-01-05 17:39:51.492 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:39:56.070 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 41 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.496 s, sync=0.057 s, total=4.579 s; sync files=21, longest=0.004 s, average=0.003 s; distance=380 kB, estimate=933 kB; lsn=0/2641E38, redo lsn=0/2641DE0
+2026-01-05 17:43:40.112 CST [3716] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-01-05 17:43:40.141 CST [9652] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-01-05 17:43:40.144 CST [6836] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-05 17:44:51.082 CST [720] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 17:44:52.456 CST [720] ÈÕÖ¾:  checkpoint complete: wrote 12 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.322 s, sync=0.026 s, total=1.374 s; sync files=10, longest=0.004 s, average=0.003 s; distance=65 kB, estimate=847 kB; lsn=0/2652510, redo lsn=0/26524B8
+2026-01-05 17:45:28.439 CST [15048] ÈÕÖ¾:  ºóÌ¨¹¤×÷½ø³Ì "logical replication launcher" (PID 18552) ±»Òì³£ 0xC000013A ÖÕÖ¹
+2026-01-05 17:45:28.439 CST [15048] ÌáÊ¾:  ¹ØÓÚ¶Ô16½øÖÆÖµµÄÃèÊö£¬ ²Î¼ûCÓïÑÔµÄÒıÓÃÎÄ¼ş "ntstatus.h" 
+2026-01-05 17:45:28.440 CST [15048] ÈÕÖ¾:  ÖĞ¶ÏÈÎºÎÆäËüÒÑ¼¤»îµÄ·şÎñÆ÷½ø³Ì
+2026-01-05 17:45:28.454 CST [15048] ÈÕÖ¾:  ½ÓÊÕµ½¿ìËÙ (fast) Í£Ö¹ÇëÇó
+^C2026-01-05 20:12:15.876 CST [16560] ÈÕÖ¾:  ÕıÔÚÆô¶¯ PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-05 20:12:15.882 CST [16560] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv6µØÖ·"::1"£¬¶Ë¿Ú 5432
+2026-01-05 20:12:15.882 CST [16560] ÈÕÖ¾:  ÕıÔÚ¼àÌıIPv4µØÖ·"127.0.0.1"£¬¶Ë¿Ú 5432
+2026-01-05 20:12:16.077 CST [11764] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³ÖĞ¶Ï£»ÉÏÒ»´ÎµÄÆô¶¯Ê±¼äÊÇÔÚ2026-01-05 17:44:52 CST
+2026-01-05 20:12:17.360 CST [11764] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³Ã»ÓĞÕıÈ·µÄ¹Ø±Õ; ´¦ÓÚ×Ô¶¯»Ö¸´×´Ì¬ÖĞ
+2026-01-05 20:12:17.376 CST [11764] ÈÕÖ¾:  redo ÔÚ 0/26524B8 ¿ªÊ¼
+2026-01-05 20:12:17.377 CST [11764] ÈÕÖ¾:  invalid record length at 0/26525C0: expected at least 24, got 0
+2026-01-05 20:12:17.377 CST [11764] ÈÕÖ¾:  redo done at 0/2652588 system usage: CPU:ÓÃ»§£º0.00 s£¬ÏµÍ³£º0.00 s£¬ÒÑÓÃÊ±¼ä£º0.00 s
+2026-01-05 20:12:17.394 CST [15524] ÈÕÖ¾:  checkpoint starting: end-of-recovery immediate wait
+2026-01-05 20:12:17.432 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.008 s, total=0.047 s; sync files=2, longest=0.005 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/26525C0, redo lsn=0/26525C0
+2026-01-05 20:12:17.443 CST [16560] ÈÕÖ¾:  Êı¾İ¿âÏµÍ³×¼±¸½ÓÊÜÁ¬½Ó
+2026-01-05 20:17:17.444 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:17:20.269 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 25 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.756 s, sync=0.049 s, total=2.826 s; sync files=15, longest=0.011 s, average=0.004 s; distance=121 kB, estimate=121 kB; lsn=0/2670AC8, redo lsn=0/2670A70
+2026-01-05 20:22:17.281 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:22:19.554 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 20 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.195 s, sync=0.050 s, total=2.274 s; sync files=14, longest=0.011 s, average=0.004 s; distance=130 kB, estimate=130 kB; lsn=0/2691320, redo lsn=0/26912C8
+2026-01-05 20:23:07.287 CST [20988] é”™è¯¯:  è¯­æ³•é”™è¯¯ åœ¨ "PDATE" æˆ–é™„è¿‘çš„ ç¬¬ 1 ä¸ªå­—ç¬¦å¤„
+2026-01-05 20:23:07.287 CST [20988] è¯­å¥:  PDATE dic_incomeexpense
+	SET iaccount = (
+	    CASE (random() * 4)::int
+	        WHEN 0 THEN '6217-8654-3210-5678'
+	        WHEN 1 THEN '6228-9032-1546-7890'
+	        WHEN 2 THEN '4367-4256-8912-3456'
+	        WHEN 3 THEN '5123-4567-8901-2345'
+	        ELSE '6011-2233-4455-6677'
+	    END
+	)
+2026-01-05 20:27:17.569 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:27:19.950 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 21 buffers (0.1%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.318 s, sync=0.037 s, total=2.381 s; sync files=16, longest=0.004 s, average=0.003 s; distance=334 kB, estimate=334 kB; lsn=0/26E6E80, redo lsn=0/26E4E88
+2026-01-05 20:32:17.965 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:32:27.024 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 82 buffers (0.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=8.978 s, sync=0.053 s, total=9.060 s; sync files=18, longest=0.011 s, average=0.003 s; distance=661 kB, estimate=661 kB; lsn=0/2797050, redo lsn=0/278A600
+2026-01-05 20:37:17.034 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:37:19.192 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 19 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=2.093 s, sync=0.036 s, total=2.159 s; sync files=10, longest=0.005 s, average=0.004 s; distance=127 kB, estimate=608 kB; lsn=0/27AA430, redo lsn=0/27AA3D8
+2026-01-05 20:43:38.635 CST [18612] ERROR:  relation "espec" does not exist at character 28
+2026-01-05 20:43:38.635 CST [18612] STATEMENT:  SELECT Distinct sName FROM eSpec
+	LIMIT 500
+2026-01-05 20:47:17.218 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:47:18.492 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 11 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.224 s, sync=0.025 s, total=1.276 s; sync files=11, longest=0.003 s, average=0.003 s; distance=59 kB, estimate=553 kB; lsn=0/27BAEC8, redo lsn=0/27B92D8
+2026-01-05 20:52:17.496 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:52:18.432 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 8 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.899 s, sync=0.020 s, total=0.938 s; sync files=8, longest=0.010 s, average=0.003 s; distance=45 kB, estimate=502 kB; lsn=0/27C49E0, redo lsn=0/27C4988
+2026-01-05 20:57:17.430 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 20:57:18.007 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.550 s, sync=0.008 s, total=0.578 s; sync files=5, longest=0.002 s, average=0.002 s; distance=23 kB, estimate=454 kB; lsn=0/27CA990, redo lsn=0/27CA938
+2026-01-05 21:57:17.153 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 21:59:05.655 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 985 buffers (6.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=107.801 s, sync=0.676 s, total=108.506 s; sync files=304, longest=0.013 s, average=0.003 s; distance=4666 kB, estimate=4666 kB; lsn=0/2C7B2D0, redo lsn=0/2C59198
+2026-01-05 22:07:17.686 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 22:07:23.633 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 54 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=5.904 s, sync=0.031 s, total=5.958 s; sync files=41, longest=0.009 s, average=0.001 s; distance=287 kB, estimate=4228 kB; lsn=0/2CA0E40, redo lsn=0/2CA0DB0
+2026-01-05 22:09:22.202 CST [15496] ERROR:  column "spec" does not exist at character 52
+2026-01-05 22:09:22.202 CST [15496] HINT:  Perhaps you meant to reference the column "dwgoods.Spec".
+2026-01-05 22:09:22.202 CST [15496] STATEMENT:  SELECT id,goodsname,goodscode,description,provider,Spec,gclass,Unit,InPrice,Price,UpdateTime,add_time,add_userid FROM dwgoods WHERE 1=0
+2026-01-05 22:09:45.982 CST [2008] ERROR:  column "spec" does not exist at character 52
+2026-01-05 22:09:45.982 CST [2008] HINT:  Perhaps you meant to reference the column "dwgoods.Spec".
+2026-01-05 22:09:45.982 CST [2008] STATEMENT:  SELECT id,goodsname,goodscode,description,provider,Spec,gclass,Unit,InPrice,Price,UpdateTime,add_time,add_userid FROM dwgoods WHERE 1=0
+2026-01-05 22:11:19.848 CST [16000] ERROR:  syntax error at or near "[" at character 23
+2026-01-05 22:11:19.848 CST [16000] STATEMENT:  SELECT gid,Title,Type,[Value] FROM dwf_goodsEx WHERE 1=0
+2026-01-05 22:12:17.647 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 22:12:18.672 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 9 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.991 s, sync=0.018 s, total=1.025 s; sync files=7, longest=0.003 s, average=0.003 s; distance=55 kB, estimate=3810 kB; lsn=0/2CAEE10, redo lsn=0/2CAED80
+2026-01-05 22:14:55.634 CST [6236] ERROR:  syntax error at or near "[" at character 23
+2026-01-05 22:14:55.634 CST [6236] STATEMENT:  SELECT gid,Title,Type,[Value] FROM dwgoodsex WHERE 1=0
+2026-01-05 22:17:17.677 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 22:17:21.168 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 31 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=3.395 s, sync=0.077 s, total=3.492 s; sync files=29, longest=0.011 s, average=0.003 s; distance=150 kB, estimate=3444 kB; lsn=0/2CD45F0, redo lsn=0/2CD4598
+2026-01-05 22:20:34.548 CST [11360] ERROR:  column "gid" does not exist at character 8
+2026-01-05 22:20:34.548 CST [11360] HINT:  Perhaps you meant to reference the column "dwgoods.id".
+2026-01-05 22:20:34.548 CST [11360] STATEMENT:  SELECT gId,gName,gActive,gCode,gCreateTime,gCategoryid FROM dwGoods WHERE 1=0
+2026-01-05 22:23:40.219 CST [16816] ERROR:  column "updateime" does not exist at character 31
+2026-01-05 22:23:40.219 CST [16816] HINT:  Perhaps you meant to reference the column "dwgoods.updatetime".
+2026-01-05 22:23:40.219 CST [16816] STATEMENT:  SELECT Id,goodsName,goodsCode,updateime FROM dwGoods WHERE 1=0
+2026-01-05 22:25:14.460 CST [5872] ERROR:  column "gid" does not exist at character 55
+2026-01-05 22:25:14.460 CST [5872] HINT:  Perhaps you meant to reference the column "dwgoods.id".
+2026-01-05 22:25:14.460 CST [5872] STATEMENT:  SELECT Count(*) AS AA FROM dwGoods  WHERE (1=1)  AND (gId>50)
+	LIMIT 2147483647
+2026-01-05 22:42:17.229 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 22:42:17.608 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.346 s, sync=0.013 s, total=0.391 s; sync files=4, longest=0.009 s, average=0.004 s; distance=7 kB, estimate=3101 kB; lsn=0/2CD6378, redo lsn=0/2CD6320
+2026-01-05 22:46:15.175 CST [19112] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-05 22:46:15.175 CST [10356] æ—¥å¿—:  æ— æ³•ä»å®¢æˆ·ç«¯è·å¾—æ•°æ®: An existing connection was forcibly closed by the remote host.
+	
+2026-01-05 22:46:15.204 CST [9064] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-01-05 22:47:17.622 CST [15524] ÈÕÖ¾:  checkpoint starting: time
+2026-01-05 22:47:18.341 CST [15524] ÈÕÖ¾:  checkpoint complete: wrote 6 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.665 s, sync=0.026 s, total=0.720 s; sync files=6, longest=0.011 s, average=0.005 s; distance=35 kB, estimate=2794 kB; lsn=0/2CDF168, redo lsn=0/2CDF110

@@ -31,24 +31,18 @@ uses
 
     //demos
     unit_dem_Hello,             //hello, world!
+    unit_dem_CrudAuto,          //
+    unit_dem_CrudButton,        //Custom Button
+    unit_dem_CrudMS,            //
+    unit_dem_CrudMSS,           //
+    unit_dem_CrudNormal,        //
+    unit_dem_CrudStyle,        //Custom Button
     unit_dem_DBHello,           //DataBase hello, world!
     unit_dem_Foot,              //hide title bar
     unit_dem_Full,              //full screen
     unit_dem_Head,              //hide nav bar
 
 
-    //功能模块
-    unit_bop_Exam,              //模拟考试
-    unit_bop_ExamSyn,           //综合考试
-    unit_bop_Judge,             //判断题
-    unit_bop_JudgeSel,          //判断题审核
-    unit_bop_Ranking,           //英雄榜
-    unit_bop_Score,             //查看成绩
-    unit_bop_Select,            //单选题
-    unit_bop_SelectSel,         //单选题审核
-    unit_bop_Short,             //简答题
-    unit_bop_ShortSel,          //简答题审核
-    unit_bop_WeekExam,          //每周数据
 
     //字典模块
 
@@ -120,6 +114,13 @@ type
     Base1: TMenuItem;
     User1: TMenuItem;
     Department1: TMenuItem;
+    Crud1: TMenuItem;
+    Crud2: TMenuItem;
+    Auto1: TMenuItem;
+    MasterSlave1: TMenuItem;
+    MainSubSub1: TMenuItem;
+    CustomButton1: TMenuItem;
+    CellStyle1: TMenuItem;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BEClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -148,7 +149,6 @@ type
 
     procedure OnClickMenuByName(Sender: TObject);
     procedure OnBack(Sender: TObject);
-    procedure MiShortSClick(Sender: TObject);
     procedure PnLogoutExit(Sender: TObject);
     procedure PnLogoutEnter(Sender: TObject);
     procedure N3Click(Sender: TObject);
@@ -157,7 +157,13 @@ type
     procedure Hello1Click(Sender: TObject);
     procedure DataBaseHello1Click(Sender: TObject);
     procedure User1Click(Sender: TObject);
-    procedure Department1Click(Sender: TObject);  //统一回退事件
+    procedure Department1Click(Sender: TObject);
+    procedure Crud2Click(Sender: TObject);
+    procedure MasterSlave1Click(Sender: TObject);
+    procedure MainSubSub1Click(Sender: TObject);
+    procedure Auto1Click(Sender: TObject);
+    procedure CustomButton1Click(Sender: TObject);
+    procedure CellStyle1Click(Sender: TObject);  //统一回退事件
   private
     { Private declarations }
   public
@@ -173,24 +179,17 @@ type
 
     //demos
     Form_dem_Hello          : TForm_dem_Hello;          //Hello,world
+    Form_dem_CrudAuto       : TForm_dem_CrudAuto;       //
+    Form_dem_CrudButton     : TForm_dem_CrudButton;     //
+    Form_dem_CrudMS         : TForm_dem_CrudMS;         //
+    Form_dem_CrudMSS        : TForm_dem_CrudMSS;        //
+    Form_dem_CrudNormal     : TForm_dem_CrudNormal;     //
+    Form_dem_CrudStyle      : TForm_dem_CrudStyle;      //
     Form_dem_DBHello        : TForm_dem_DBHello;        //DataBase Hello,world
     Form_dem_Foot           : TForm_dem_Foot;           //
     Form_dem_Full           : TForm_dem_Full;           //
     Form_dem_Head           : TForm_dem_Head;           //
 
-    //
-    Form_bop_Exam           : TForm_bop_Exam;           //
-    Form_bop_ExamSyn        : TForm_bop_ExamSyn;        //
-    Form_bop_Judge          : TForm_bop_Judge;          //
-    Form_bop_JudgeSel       : TForm_bop_JudgeSel;       //
-    Form_bop_Ranking        : TForm_bop_Ranking;        //
-    Form_bop_Score          : TForm_bop_Score;          //
-    Form_bop_Select         : TForm_bop_Select;         //
-    Form_bop_SelectSel      : TForm_bop_SelectSel;      //
-    Form_bop_Short          : TForm_bop_Short;          //
-    Form_bop_ShortSel       : TForm_bop_ShortSel;       //
-    Form_bop_WeekExam       : TForm_bop_WeekExam;       //
-    //
 
 
     //------公用变量--------------------------------------------------------------------------------
@@ -249,6 +248,13 @@ implementation
 {$R *.dfm}
 
 
+
+procedure TForm1.CellStyle1Click(Sender: TObject);
+begin
+    //crud button
+    dwfShowForm(self,TForm_dem_CrudStyle, TForm(Form_dem_CrudStyle),TMenuItem(Sender));
+
+end;
 
 procedure TForm1.CPCardChange(Sender: TObject; PrevCard, NextCard: TCard);
 var
@@ -315,6 +321,20 @@ begin
 
 end;
 
+procedure TForm1.Crud2Click(Sender: TObject);
+begin
+    //crud normal
+    dwfShowForm(self,TForm_dem_CrudNormal, TForm(Form_dem_CrudNormal),TMenuItem(Sender));
+
+end;
+
+procedure TForm1.CustomButton1Click(Sender: TObject);
+begin
+    //crud button
+    dwfShowForm(self,TForm_dem_CrudButton, TForm(Form_dem_CrudButton),TMenuItem(Sender));
+
+end;
+
 procedure TForm1.DataBaseHello1Click(Sender: TObject);
 begin
     //The first demo : Hello, world!
@@ -325,6 +345,13 @@ procedure TForm1.Department1Click(Sender: TObject);
 begin
     //Department
     dwfShowForm(self,TForm_sys_Department, TForm(Form_sys_Department),TMenuItem(Sender));
+
+end;
+
+procedure TForm1.Auto1Click(Sender: TObject);
+begin
+    //crud auto
+    dwfShowForm(self,TForm_dem_CrudAuto, TForm(Form_dem_CrudAuto),TMenuItem(Sender));
 
 end;
 
@@ -364,12 +391,6 @@ begin
     dwfShowForm(self,TForm_sys_ChangePsd, TForm(Form_sys_ChangePsd),TMenuItem(Sender));
 end;
 
-procedure TForm1.MiShortSClick(Sender: TObject);
-begin
-    //简答题
-    dwfShowForm(self,TForm_bop_ShortSel, TForm(Form_bop_ShortSel),TMenuItem(Sender));
-end;
-
 procedure TForm1.N16Click(Sender: TObject);
 begin
     //Quick Button
@@ -407,6 +428,19 @@ begin
     //隐藏导航
     dwfShowForm(self,TForm_dem_Head, TForm(Form_dem_Head),TMenuItem(Sender));
 
+end;
+
+procedure TForm1.MainSubSub1Click(Sender: TObject);
+begin
+    //crud Main-sub-sub
+    dwfShowForm(self,TForm_dem_CrudMSS, TForm(Form_dem_CrudMSS),TMenuItem(Sender));
+
+end;
+
+procedure TForm1.MasterSlave1Click(Sender: TObject);
+begin
+    //crud Main-sub
+    dwfShowForm(self,TForm_dem_CrudMS, TForm(Form_dem_CrudMS),TMenuItem(Sender));
 end;
 
 procedure TForm1.MIHomeClick(Sender: TObject);

@@ -44,6 +44,7 @@
 /document/*.pptx
 /source/runtime/download/
 /source/vcls/zeosdbo-7.2.6.1-stable
+/source/demos/_RemoveTemp/
 
 # DeWeb Applications
 /source/runtime/apps/*

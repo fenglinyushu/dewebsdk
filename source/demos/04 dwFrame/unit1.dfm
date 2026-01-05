@@ -183,7 +183,7 @@ object Form1: TForm1
           Left = 5
           Top = 4
           Width = 69
-          Height = 17
+          Height = 20
           Hint = '{"dwstyle":"user-select: none;"}'
           Margins.Left = 5
           Margins.Top = 4
@@ -198,7 +198,6 @@ object Form1: TForm1
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 20
         end
       end
     end
@@ -323,8 +322,8 @@ object Form1: TForm1
     Width = 320
     Height = 180
     Hint = 
-      '{"ok":"'#30830#23450'","cancel":"'#21462#28040'","dwstyle":"border-radius:8px;box-shadow' +
-      ': rgba(0, 0, 0, 0.35) 0px 5px 15px;"}'
+      '{"dwstyle":"border-radius:8px;box-shadow: rgba(0, 0, 0, 0.35) 0p' +
+      'x 5px 15px;"}'
     HelpType = htKeyword
     HelpKeyword = 'ok'
     BevelOuter = bvNone
@@ -9777,6 +9776,40 @@ object Form1: TForm1
         Caption = 'HideNav(Mobile)'
         ImageIndex = 128
         OnClick = N5Click
+      end
+    end
+    object Crud1: TMenuItem
+      Caption = 'Crud'
+      ImageIndex = 55
+      object Crud2: TMenuItem
+        Caption = 'Normal'
+        ImageIndex = 126
+        OnClick = Crud2Click
+      end
+      object Auto1: TMenuItem
+        Caption = 'Auto'
+        ImageIndex = 55
+        OnClick = Auto1Click
+      end
+      object MasterSlave1: TMenuItem
+        Caption = 'Main-Sub'
+        ImageIndex = 145
+        OnClick = MasterSlave1Click
+      end
+      object MainSubSub1: TMenuItem
+        Caption = 'Main-Sub-Sub'
+        ImageIndex = 142
+        OnClick = MainSubSub1Click
+      end
+      object CustomButton1: TMenuItem
+        Caption = 'CustomButton'
+        ImageIndex = 133
+        OnClick = CustomButton1Click
+      end
+      object CellStyle1: TMenuItem
+        Caption = 'CustomStyle'
+        ImageIndex = 134
+        OnClick = CellStyle1Click
       end
     end
     object Base1: TMenuItem

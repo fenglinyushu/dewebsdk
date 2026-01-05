@@ -6634,6 +6634,36 @@ var
         end;
     end;
 begin
+    //<set all object to nil
+    //
+    oForm       := nil;
+    oPQy        := nil;
+    oPQF        := nil;
+    oPQm        := nil;
+    oPBs        := nil;
+    oBQm        := nil;
+    oBFz        := nil;
+    oFPs        := nil;
+    oPCs        := nil;
+    oPCd        := nil;
+    oTbP        := nil;
+    oBtn        := nil;
+    oChk        := nil;
+    oImg        := nil;
+    oLbl        := nil;
+
+    //
+    oBNw        := nil;
+    oBEt        := nil;
+    oBDe        := nil;
+    oBFi        := nil;
+    oCSo        := nil;
+    //
+    oEKw        := nil;
+
+    //>
+
+
     //默认返回值
     Result  := 0;
 

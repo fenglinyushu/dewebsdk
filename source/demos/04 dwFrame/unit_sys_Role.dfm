@@ -97,29 +97,31 @@ object Form_sys_Role: TForm_sys_Role
       end
       object B_True: TButton
         AlignWithMargins = True
-        Left = 483
+        Left = 423
         Top = 8
-        Width = 60
+        Width = 90
         Height = 29
         Margins.Top = 8
         Margins.Bottom = 8
         Align = alRight
-        Caption = #20840#36873
+        Caption = 'CheckAll'
         TabOrder = 1
         OnClick = B_TrueClick
+        ExplicitLeft = 443
       end
       object B_False: TButton
         AlignWithMargins = True
-        Left = 549
+        Left = 519
         Top = 8
-        Width = 60
+        Width = 90
         Height = 29
         Margins.Top = 8
         Margins.Bottom = 8
         Align = alRight
-        Caption = #20840#19981#36873
+        Caption = 'UncheckAll'
         TabOrder = 2
         OnClick = B_FalseClick
+        ExplicitLeft = 529
       end
     end
     object TV_Permission: TTreeView
@@ -129,19 +131,18 @@ object Form_sys_Role: TForm_sys_Role
       Width = 699
       Height = 600
       Hint = 
-        '{"dwattr":"stripe","columns":[{"type":"label","caption":"'#21151#33021#33756#21333'","' +
-        'width":140},{"type":"check","caption":"'#21487#35265'","width":40},{"type":"' +
-        'check","caption":"'#21487#29992'","width":40},{"type":"check","caption":"'#22686#21152'"' +
-        ',"width":40},{"type":"check","caption":"'#21024#38500'","width":40},{"type":' +
-        '"check","caption":"'#20462#25913'","width":40},{"type":"check","caption":"'#26597#35810 +
-        '","width":40},{"type":"check","caption":"'#23548#20986'","width":40},{"type"' +
-        ':"check","caption":"'#23548#20837'","width":40},{"type":"check","caption":"'#26597 +
-        #30475#20840#37096'","width":40},{"type":"check","caption":"'#22791'1","width":40},{"ty' +
-        'pe":"check","caption":"'#22791'2","width":40},{"type":"check","caption"' +
-        ':"'#22791'3","width":40},{"type":"check","caption":"'#22791'4","width":40},{"t' +
-        'ype":"check","caption":"'#22791'5","width":40},{"type":"buttongroup","c' +
-        'aption":"","count":2,"width":150,"items":[["'#20840#36873'","text",50],["'#20840#19981#36873 +
-        '","text",50]]}]}'
+        '{"dwattr":"stripe","columns":[{"type":"label","caption":"Menu","' +
+        'width":200},{"type":"check","caption":"Visible","width":60},{"ty' +
+        'pe":"check","caption":"Enable","width":60},{"type":"check","capt' +
+        'ion":"New","width":60},{"type":"check","caption":"Delete","width' +
+        '":60},{"type":"check","caption":"Edit","width":60},{"type":"chec' +
+        'k","caption":"Query","width":60},{"type":"check","caption":"Expo' +
+        'rt","width":60},{"type":"check","caption":"Import","width":60},{' +
+        '"type":"check","caption":"All","width":45},{"type":"check","capt' +
+        'ion":"Bak1","width":45},{"type":"check","caption":"Bak2","width"' +
+        ':45},{"type":"check","caption":"Bak3","width":45},{"type":"butto' +
+        'ngroup","caption":"","count":2,"width":150,"items":[["All","text' +
+        '",40],["Unall","text",50]]}]}'
       HelpType = htKeyword
       HelpKeyword = 'grid'
       Margins.Left = 0
@@ -263,11 +264,11 @@ object Form_sys_Role: TForm_sys_Role
     Width = 270
     Height = 649
     Hint = 
-      '{"acount":"dwFrame","table":"sys_Role","pagesize":10,"margin":0,' +
+      '{"acount":"dwFrame","table":"sys_role","pagesize":10,"margin":0,' +
       '"switch":0,"border":0,"export":0,"import":0,"buttoncaption":1,"d' +
       'efaulteditmax":0,"rowheight":40,"deletecols":[1],"fields":[{"nam' +
       'e":"rid","caption":"id","type":"auto","align":"center","sort":1,' +
-      '"width":60},{"name":"rname","caption":"'#35282#33394#21517#31216'","sort":1,"width":20' +
+      '"width":60},{"name":"rname","caption":"Role","sort":1,"width":20' +
       '5},{"name":"rdata","readonly":1,"default":"[]","view":2}]}'
     Align = alLeft
     BevelOuter = bvNone

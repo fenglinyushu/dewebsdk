@@ -17,9 +17,9 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
   TextHeight = 23
   object FP: TFlowPanel
     Left = 0
-    Top = 40
+    Top = 35
     Width = 757
-    Height = 589
+    Height = 594
     Hint = '{"dwstyle":"overflow-y:auto;"}'
     HelpKeyword = 'auto'
     HelpContext = -150
@@ -30,8 +30,8 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 50
-    ExplicitHeight = 579
+    ExplicitTop = 40
+    ExplicitHeight = 589
     object P0: TPanel
       AlignWithMargins = True
       Left = 10
@@ -57,7 +57,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -79,7 +79,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -174,7 +174,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -196,7 +196,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -291,7 +291,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -313,7 +313,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -408,7 +408,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -430,7 +430,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -525,7 +525,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -547,7 +547,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -643,7 +643,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -665,7 +665,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -761,7 +761,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -783,7 +783,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -877,7 +877,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #21151#33021
+        Caption = 'Module'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -899,7 +899,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
         Margins.Bottom = 0
         Align = alTop
         AutoSize = False
-        Caption = #22270#29255
+        Caption = 'Icon'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Height = -15
@@ -973,7 +973,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
     Left = 0
     Top = 0
     Width = 757
-    Height = 40
+    Height = 35
     Hint = '{"dwstyle":"border-bottom:solid 1px #ddd;"}'
     Align = alTop
     BevelOuter = bvNone
@@ -985,7 +985,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
       Left = 0
       Top = 0
       Width = 100
-      Height = 40
+      Height = 35
       Hint = '{"type":"primary","icon":"el-icon-check","radius":"0"}'
       Margins.Left = 0
       Margins.Top = 0
@@ -1001,16 +1001,14 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
       ParentFont = False
       TabOrder = 0
       OnClick = BSClick
-      ExplicitLeft = 20
-      ExplicitTop = 10
-      ExplicitHeight = 30
+      ExplicitHeight = 40
     end
     object BC: TButton
       AlignWithMargins = True
       Left = 101
       Top = 0
       Width = 100
-      Height = 40
+      Height = 35
       Hint = '{"type":"primary","icon":"el-icon-close","radius":"0"}'
       Margins.Left = 1
       Margins.Top = 0
@@ -1025,9 +1023,7 @@ object Form_sys_QuickBtn: TForm_sys_QuickBtn
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 130
-      ExplicitTop = 10
-      ExplicitHeight = 30
+      ExplicitHeight = 40
     end
   end
   object FDQuery1: TFDQuery

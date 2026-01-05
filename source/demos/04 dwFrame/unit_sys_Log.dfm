@@ -2,7 +2,7 @@ object Form_sys_Log: TForm_sys_Log
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = #31995#32479#26085#24535
+  Caption = 'Log'
   ClientHeight = 540
   ClientWidth = 627
   Color = clWhite

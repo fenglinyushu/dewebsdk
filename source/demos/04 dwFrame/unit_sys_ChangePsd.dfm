@@ -29,28 +29,28 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
     ParentBackground = False
     TabOrder = 0
     object L1: TLabel
-      Left = 88
+      Left = 53
       Top = 243
-      Width = 70
+      Width = 120
       Height = 20
       AutoSize = False
-      Caption = #26032#23494#30721
+      Caption = 'Password'
     end
     object L2: TLabel
-      Left = 88
+      Left = 53
       Top = 296
-      Width = 70
+      Width = 120
       Height = 20
       AutoSize = False
-      Caption = #30830#35748#23494#30721
+      Caption = 'Confirm password'
     end
     object L0: TLabel
-      Left = 88
+      Left = 53
       Top = 187
-      Width = 70
+      Width = 120
       Height = 20
       AutoSize = False
-      Caption = #21407#23494#30721
+      Caption = 'Old password'
     end
     object Image1: TImage
       Left = 144
@@ -173,7 +173,7 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
         5474BF93DF6CA3FC1F371DB95A0CE3D5C60000000049454E44AE426082}
     end
     object E0: TEdit
-      Left = 160
+      Left = 183
       Top = 184
       Width = 161
       Height = 28
@@ -181,7 +181,7 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
       TabOrder = 0
     end
     object E1: TEdit
-      Left = 160
+      Left = 183
       Top = 240
       Width = 161
       Height = 28
@@ -189,7 +189,7 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
       TabOrder = 1
     end
     object E2: TEdit
-      Left = 160
+      Left = 183
       Top = 293
       Width = 161
       Height = 28
@@ -202,7 +202,7 @@ object Form_sys_ChangePsd: TForm_sys_ChangePsd
       Width = 235
       Height = 40
       Hint = '{"type":"primary"}'
-      Caption = #30830#23450
+      Caption = 'OK'
       TabOrder = 3
       OnClick = B0Click
     end

@@ -18,6 +18,14 @@
 			"params": [],
 			"secret": 0,
 			"enabled": 1
+		},
+		{
+			"name": "dwDemo",
+			"secret": 0,
+			"string": "Database=demo;User_Name=postgres;Password=postgres;DriverID=PG",
+			"enabled": 1,
+			"remark": "",
+			"params": []
 		}
 	]
 }

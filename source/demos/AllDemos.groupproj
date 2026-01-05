@@ -1,0 +1,264 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{08EE2943-887D-423C-899A-36DFE422CF1D}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="01 Hello,World\hello.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="02 DBHello_DataBase Hello,world\dbhello.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="03 gLogin_GeneralLogin\glogin.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="04 dwFrame\dwFrame.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="05 Amap\Amap.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="06 badge\badge.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07 bdv001_Kanban\bdv001.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="08 bdv002_Kanban\bdv002.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="09 echarts\echarts.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="10 button\button.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="11 Upload\dwUpload.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="12 carousel\carousel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="13 carouselcard\carouselcard.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="14 Cascader\Cascader.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="15 CoolLabel\CoolLabel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="16 coupon\coupon.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="17 CrudPanel\CrudPanel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="18 CrudPanelMS\CrudPanelMS.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="19 CrudPanelSet\CrudPanelSet.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="20 DBCard\DBCardDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="hello">
+        <MSBuild Projects="01 Hello,World\hello.dproj"/>
+    </Target>
+    <Target Name="hello:Clean">
+        <MSBuild Projects="01 Hello,World\hello.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="hello:Make">
+        <MSBuild Projects="01 Hello,World\hello.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dbhello">
+        <MSBuild Projects="02 DBHello_DataBase Hello,world\dbhello.dproj"/>
+    </Target>
+    <Target Name="dbhello:Clean">
+        <MSBuild Projects="02 DBHello_DataBase Hello,world\dbhello.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dbhello:Make">
+        <MSBuild Projects="02 DBHello_DataBase Hello,world\dbhello.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="glogin">
+        <MSBuild Projects="03 gLogin_GeneralLogin\glogin.dproj"/>
+    </Target>
+    <Target Name="glogin:Clean">
+        <MSBuild Projects="03 gLogin_GeneralLogin\glogin.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="glogin:Make">
+        <MSBuild Projects="03 gLogin_GeneralLogin\glogin.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwFrame">
+        <MSBuild Projects="04 dwFrame\dwFrame.dproj"/>
+    </Target>
+    <Target Name="dwFrame:Clean">
+        <MSBuild Projects="04 dwFrame\dwFrame.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwFrame:Make">
+        <MSBuild Projects="04 dwFrame\dwFrame.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Amap">
+        <MSBuild Projects="05 Amap\Amap.dproj"/>
+    </Target>
+    <Target Name="Amap:Clean">
+        <MSBuild Projects="05 Amap\Amap.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Amap:Make">
+        <MSBuild Projects="05 Amap\Amap.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="badge">
+        <MSBuild Projects="06 badge\badge.dproj"/>
+    </Target>
+    <Target Name="badge:Clean">
+        <MSBuild Projects="06 badge\badge.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="badge:Make">
+        <MSBuild Projects="06 badge\badge.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="bdv001">
+        <MSBuild Projects="07 bdv001_Kanban\bdv001.dproj"/>
+    </Target>
+    <Target Name="bdv001:Clean">
+        <MSBuild Projects="07 bdv001_Kanban\bdv001.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bdv001:Make">
+        <MSBuild Projects="07 bdv001_Kanban\bdv001.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="bdv002">
+        <MSBuild Projects="08 bdv002_Kanban\bdv002.dproj"/>
+    </Target>
+    <Target Name="bdv002:Clean">
+        <MSBuild Projects="08 bdv002_Kanban\bdv002.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bdv002:Make">
+        <MSBuild Projects="08 bdv002_Kanban\bdv002.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="echarts">
+        <MSBuild Projects="09 echarts\echarts.dproj"/>
+    </Target>
+    <Target Name="echarts:Clean">
+        <MSBuild Projects="09 echarts\echarts.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="echarts:Make">
+        <MSBuild Projects="09 echarts\echarts.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="button">
+        <MSBuild Projects="10 button\button.dproj"/>
+    </Target>
+    <Target Name="button:Clean">
+        <MSBuild Projects="10 button\button.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="button:Make">
+        <MSBuild Projects="10 button\button.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwUpload">
+        <MSBuild Projects="11 Upload\dwUpload.dproj"/>
+    </Target>
+    <Target Name="dwUpload:Clean">
+        <MSBuild Projects="11 Upload\dwUpload.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwUpload:Make">
+        <MSBuild Projects="11 Upload\dwUpload.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="carousel">
+        <MSBuild Projects="12 carousel\carousel.dproj"/>
+    </Target>
+    <Target Name="carousel:Clean">
+        <MSBuild Projects="12 carousel\carousel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="carousel:Make">
+        <MSBuild Projects="12 carousel\carousel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="carouselcard">
+        <MSBuild Projects="13 carouselcard\carouselcard.dproj"/>
+    </Target>
+    <Target Name="carouselcard:Clean">
+        <MSBuild Projects="13 carouselcard\carouselcard.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="carouselcard:Make">
+        <MSBuild Projects="13 carouselcard\carouselcard.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Cascader">
+        <MSBuild Projects="14 Cascader\Cascader.dproj"/>
+    </Target>
+    <Target Name="Cascader:Clean">
+        <MSBuild Projects="14 Cascader\Cascader.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Cascader:Make">
+        <MSBuild Projects="14 Cascader\Cascader.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CoolLabel">
+        <MSBuild Projects="15 CoolLabel\CoolLabel.dproj"/>
+    </Target>
+    <Target Name="CoolLabel:Clean">
+        <MSBuild Projects="15 CoolLabel\CoolLabel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CoolLabel:Make">
+        <MSBuild Projects="15 CoolLabel\CoolLabel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="coupon">
+        <MSBuild Projects="16 coupon\coupon.dproj"/>
+    </Target>
+    <Target Name="coupon:Clean">
+        <MSBuild Projects="16 coupon\coupon.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="coupon:Make">
+        <MSBuild Projects="16 coupon\coupon.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CrudPanel">
+        <MSBuild Projects="17 CrudPanel\CrudPanel.dproj"/>
+    </Target>
+    <Target Name="CrudPanel:Clean">
+        <MSBuild Projects="17 CrudPanel\CrudPanel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CrudPanel:Make">
+        <MSBuild Projects="17 CrudPanel\CrudPanel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CrudPanelMS">
+        <MSBuild Projects="18 CrudPanelMS\CrudPanelMS.dproj"/>
+    </Target>
+    <Target Name="CrudPanelMS:Clean">
+        <MSBuild Projects="18 CrudPanelMS\CrudPanelMS.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CrudPanelMS:Make">
+        <MSBuild Projects="18 CrudPanelMS\CrudPanelMS.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CrudPanelSet">
+        <MSBuild Projects="19 CrudPanelSet\CrudPanelSet.dproj"/>
+    </Target>
+    <Target Name="CrudPanelSet:Clean">
+        <MSBuild Projects="19 CrudPanelSet\CrudPanelSet.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CrudPanelSet:Make">
+        <MSBuild Projects="19 CrudPanelSet\CrudPanelSet.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DBCardDemo">
+        <MSBuild Projects="20 DBCard\DBCardDemo.dproj"/>
+    </Target>
+    <Target Name="DBCardDemo:Clean">
+        <MSBuild Projects="20 DBCard\DBCardDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DBCardDemo:Make">
+        <MSBuild Projects="20 DBCard\DBCardDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="hello;dbhello;glogin;dwFrame;Amap;badge;bdv001;bdv002;echarts;button;dwUpload;carousel;carouselcard;Cascader;CoolLabel;coupon;CrudPanel;CrudPanelMS;CrudPanelSet;DBCardDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="hello:Clean;dbhello:Clean;glogin:Clean;dwFrame:Clean;Amap:Clean;badge:Clean;bdv001:Clean;bdv002:Clean;echarts:Clean;button:Clean;dwUpload:Clean;carousel:Clean;carouselcard:Clean;Cascader:Clean;CoolLabel:Clean;coupon:Clean;CrudPanel:Clean;CrudPanelMS:Clean;CrudPanelSet:Clean;DBCardDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="hello:Make;dbhello:Make;glogin:Make;dwFrame:Make;Amap:Make;badge:Make;bdv001:Make;bdv002:Make;echarts:Make;button:Make;dwUpload:Make;carousel:Make;carouselcard:Make;Cascader:Make;CoolLabel:Make;coupon:Make;CrudPanel:Make;CrudPanelMS:Make;CrudPanelSet:Make;DBCardDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

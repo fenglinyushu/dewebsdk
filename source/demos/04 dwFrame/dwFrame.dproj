@@ -148,11 +148,8 @@
         <DCCReference Include="unit_sys_Role.pas">
             <Form>Form_sys_Role</Form>
         </DCCReference>
-        <DCCReference Include="unit_sys_User.pas">
-            <Form>Form_sys_User</Form>
-        </DCCReference>
-        <DCCReference Include="unit_bop_ExamSyn.pas">
-            <Form>Form_bop_ExamSyn</Form>
+        <DCCReference Include="unit_dem_CrudButton.pas">
+            <Form>Form_dem_CrudButton</Form>
         </DCCReference>
         <DCCReference Include="Unit_sys_Home.pas">
             <Form>Form_sys_Home</Form>
@@ -161,44 +158,12 @@
             <Form>Form_sys_QuickBtn</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_Select.pas">
-            <Form>Form_bop_Select</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_Judge.pas">
-            <Form>Form_bop_Judge</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_JudgeSel.pas">
-            <Form>Form_bop_JudgeSel</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_SelectSel.pas">
-            <Form>Form_bop_SelectSel</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_Ranking.pas">
-            <Form>Form_bop_Ranking</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_ShortSel.pas">
-            <Form>Form_bop_ShortSel</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="unit_dem_Foot.pas">
             <Form>Form_dem_Foot</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="unit_dem_Full.pas">
             <Form>Form_dem_Full</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_Score.pas">
-            <Form>Form_bop_Score</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="unit_bop_WeekExam.pas">
-            <Form>Form_bop_WeekExam</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="unit_sys_Me.pas">
@@ -213,10 +178,6 @@
             <Form>Form_dem_DBHello</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="unit_bop_Short.pas">
-            <Form>Form_bop_Short</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="unit_dem_Hello.pas">
             <Form>Form_dem_Hello</Form>
             <FormType>dfm</FormType>
@@ -227,6 +188,30 @@
         </DCCReference>
         <DCCReference Include="unit_sys_Department.pas">
             <Form>Form_sys_Department</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_sys_Log.pas">
+            <Form>Form_sys_Log</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_dem_CrudMS.pas">
+            <Form>Form_dem_CrudMS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_dem_CrudMSS.pas">
+            <Form>Form_dem_CrudMSS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_dem_CrudAuto.pas">
+            <Form>Form_dem_CrudAuto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_sys_User.pas">
+            <Form>Form_sys_User</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="unit_dem_CrudNormal.pas">
+            <Form>Form_dem_CrudNormal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

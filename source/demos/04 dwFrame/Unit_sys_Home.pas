@@ -138,6 +138,10 @@ begin
 
                 if iIndex < joMenus._Count then begin
                     oPanel.Caption  := joMenu.caption;
+                    if Pos('(',oPanel.Caption)>0 then begin
+                        oPanel.Caption  := Copy(oPanel.Caption,1,Pos('(',oPanel.Caption)-1);
+                    end;
+
                     oPanel.Hint     := '{'
                         +'"radius":"5px",'
                         +'"dwattr": "onmouseover=\"this.style.backgroundColor=''#edeaea''; this.style.color=''#2c3e50''\" onmouseout=\"this.style.backgroundColor=''white''; this.style.color=''#808080''\"",'

@@ -34,16 +34,23 @@ object Form_sys_User: TForm_sys_User
     Height = 499
     Hint = 
       '{"table":"sys_user","defaultquerymode":1,"select":40,"visiblecol' +
-      '":2,"defaulteditmax":0,"deletecols":[2],"fields":[{"name":"uavat' +
-      'ar","caption":"'#30456#29255'","type":"image","imgdir":"media/system/qbank/"' +
-      ',"imgtype":["jpg","png","gif"],"imgheight":45,"imgwidth":45,"pre' +
-      'view":1,"align":"center","default":"00.jpg","width":55},{"name":' +
-      '"uname","caption":"'#29992#25143#21517'","query":1,"sort":1,"must":1,"width":100}' +
-      ',{"name":"urole","caption":"'#35282#33394'","type":"dbcombo","sort":1,"width' +
-      '":100,"align":"center","table":"sys_Role","datafield":"rName","d' +
-      'efault":"'#21629#39064#21592'"},{"name":"uremark","caption":"'#22791#27880'","query":1,"sort"' +
-      ':1,"width":80},{"name":"uId","view":2},{"name":"udepartmentId","' +
-      'view":2},{"name":"upassword","default":"123456","view":4}]}'
+      '":3,"defaulteditmax":0,"deletecols":[2],"fields":[{"name":"uId",' +
+      '"type":"totalindex","width":40},{"name":"uavatar","caption":"ava' +
+      'tar","type":"image","imgdir":"media/system/dwframe/head/","imgty' +
+      'pe":["jpg","png","gif"],"imgheight":45,"imgwidth":45,"preview":1' +
+      ',"align":"center","default":"00.jpg","width":55},{"name":"uname"' +
+      ',"caption":"Name","query":1,"sort":1,"must":1,"width":100},{"nam' +
+      'e":"ugender","caption":"Gender","sort":1,"width":100,"type":"boo' +
+      'lean","align":"center","query":1,"list":["false","male"]},{"name' +
+      '":"uage","caption":"Age","sort":1,"width":100,"type":"integer","' +
+      'align":"right"},{"name":"urole","caption":"Role","type":"dbcombo' +
+      '","sort":1,"width":100,"align":"center","table":"sys_role","data' +
+      'field":"rname","default":"guest"},{"name":"udepartmentId","type"' +
+      ':"dbcombopair","table":"sys_department","datafield":"did","viewf' +
+      'ield":"dname","viewdefault":""},{"name":"ulastlive","caption":"L' +
+      'astLive","type":"datetime","align":"center","width":160,"sort":1' +
+      '},{"name":"uremark","caption":"Remark","query":1,"sort":1,"width' +
+      '":80},{"name":"upassword","default":"123456","view":4}]}'
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Pn1'
