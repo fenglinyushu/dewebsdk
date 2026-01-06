@@ -1,0 +1,224 @@
+[
+    {
+        "name": "name",
+        "caption": "名称",
+        "type": "combo",
+        "width": 90,
+        "check": 0,
+        "list": [],
+        "input": 0
+    },
+    {
+        "name": "caption",
+        "caption": "标题",
+        "type": "edit",
+        "width": 80
+    },
+    {
+        "name": "type",
+        "caption": "类型",
+        "type": "combo",
+        "width": 80,
+		"list":["string","auto","boolean","button","check","combo","combopair","dbcombo","image","rate"]
+    },
+    {
+        "name": "align",
+        "caption": "对齐",
+        "type": "combo",
+        "check": 1,
+		"list":["left","center","right"],
+        "width": 70
+    },
+    {
+        "name": "default",
+        "caption": "默认",
+        "type": "edit",
+        "width": 70
+    },
+    {
+        "name": "format",
+        "type": "edit",
+        "width": 70
+    },
+    {
+        "name": "left",
+		"caption":"左距",
+        "type": "spin",
+        "check": 1,
+        "width": 40
+    },
+    {
+        "name": "width",
+		"caption":"宽度",
+        "type": "spin",
+        "check": 1,
+        "width": 40
+    },
+    {
+        "name": "right",
+		"caption":"右距",
+        "type": "spin",
+        "check": 1,
+        "width": 40
+    },
+    {
+        "name": "top",
+		"caption":"顶距",
+        "type": "spin",
+        "check": 1,
+        "width": 40
+    },
+    {
+        "name": "height",
+		"caption":"高度",
+        "type": "spin",
+        "check": 1,
+        "width": 40
+    },
+    {
+        "name": "bottom",
+		"caption":"底距",
+        "type": "spin",
+        "check": 1,
+        "width": 40
+    },
+	
+    {
+        "name": "fontname",
+        "caption": "字体",
+        "type": "combo",
+        "check": 1,
+        "input": 1,
+        "list": ["微软雅黑","黑体","宋体","楷体3212","仿宋","Arial","Arial Black","Arial Narrow","Consolas","Georgia"],
+        "width": 40
+    },
+    {
+        "name": "fontsize",
+        "caption": "大小",
+        "type": "spin",
+        "check": 1,
+        "width": 40
+    },
+    {
+        "name": "fontcolor",
+        "caption": "字色",
+        "type": "color",
+        "check": 1,
+        "width": 40
+    },
+    {
+        "name": "bold",
+        "caption": "粗体",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 25
+    },
+    {
+        "name": "italic",
+        "caption": "斜体",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 25
+    },
+    {
+        "name": "underline",
+        "caption": "下划",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 25
+    },
+    {
+        "name": "strike",
+        "caption": "删线",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 25
+    },
+    {
+        "name": "view",
+        "caption": "显示",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 30
+    },
+    {
+        "name": "must",
+        "caption": "必须",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 30
+    },
+    {
+        "name": "query",
+        "caption": "查询",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 30
+    },
+    {
+        "name": "sort",
+        "caption": "排序",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 30
+    },
+    {
+        "name": "readonly",
+        "caption": "只读",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 30
+    },
+    {
+        "name": "unique",
+        "caption": "唯一",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 30
+    },
+    {
+        "name": "filter",
+        "caption": "筛选",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 30
+    },
+    {
+        "name": "dbfilter",
+        "caption": "DB筛选",
+        "type": "boolean",
+        "list": [0,1],
+        "width": 40
+    },
+    {
+        "name": "list",
+        "caption": "列表",
+        "type": "json",
+        "width": 80
+    },
+    {
+        "name": "filterlist",
+        "caption": "筛选列表",
+        "type": "json",
+        "width": 80
+    },
+    {
+        "name": "dwstyle",
+        "caption": "CSS样式",
+        "type": "edit",
+        "width": 80
+    },
+    {
+        "name": "min",
+        "type": "spin",
+        "check": 1,
+        "width": 45
+    },
+    {
+        "name": "max",
+        "type": "spin",
+        "check": 1,
+        "width": 45
+    }
+]
+

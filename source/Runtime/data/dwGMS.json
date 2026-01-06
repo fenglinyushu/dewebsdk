@@ -1,0 +1,29 @@
+{
+	"accountname":"dwGMS",
+	"tablename":"sys_User",
+	"username":"uName",
+	"password":"uPassword",
+	"id":"uId",
+	"listuser":1,
+	
+	"successurl":"/",
+	"defaultusername":"admin",
+	"defaultpassword":"123456",
+
+	"salt":"uSalt",
+	"logo":"media/system/gms/logo.jpg",
+	"backgroud":"media/system/gms/bg.jpg",
+	"left":70,
+	"top":40,
+	"caption":"Welcome to GMS!",
+	"captcha":2,
+	"wrongtimes":5,
+	"remember":1,
+	"expire":30,
+	"cookieprefix":"gms_", 
+	"domain":"delphibbs.com",
+	"key":"dwf@12345",
+	"secret":0,
+	"errormessage":"请输入有效的用户信息！",
+	"disablemessage":"由于多次输入错误，请稍晚些再试！"
+}

@@ -1,0 +1,56 @@
+{
+	"account": "dwAccess",
+	"table": "qcGoods",
+	"pagesize": 5,
+	"rowheight": 45,
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"defaultquerymode": 1,
+	"switch": 1,
+	"border": 1,
+	"buttons": 1,
+	"margin": 10,
+	"radius": 5,
+	"editwidth": 320,
+	"buttoncaption": 1,
+	"defaulteditmax": 0,
+	"fields": 
+	[
+		{
+			"name": "goodsname",
+			"caption": "货品名称",
+			"width": 120,
+			"type": "string",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left"
+		},
+		{
+			"name": "photo",
+			"caption": "图片",
+			"width": 80,
+			"type": "image",
+			"align": "center",
+			"preview":0,
+			"dwstyle":"border-radius:3px;",
+			"dwattr":"fit='cover'",
+			"imgdir":"media/images/quickcrud/",
+			"imgtype":["jpg","png","gif"]
+		},
+		{
+			"name": "file",
+			"caption": "文档",
+			"width": 280,
+			"type": "file",
+			"preview":0,
+			"readonly": 1,
+			"imgdir":"media/images/quickcrud/",
+			"imgtype":["doc","docx","pdf"]
+		}
+	]
+}

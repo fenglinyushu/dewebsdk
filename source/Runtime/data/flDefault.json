@@ -1,0 +1,38 @@
+{
+	"color":[240,240,240],
+	"caption" : "费用报销流程",	
+	"items" : [
+		{
+			"type" : "node",
+			"status": "approved",
+			"title":"业务主管 张广才已通过",
+			"text":"业务审批",
+			"remark":"[注] 严格按照规定",
+			"datetime":"2025-05-30"
+		},
+		{
+			"type" : "node",
+			"status": "approving",
+			"title":"业务主管 张广才已通过",
+			"text":"已通过!  [注] 吉林紧急任务",
+			"remark":"[注] 吉林紧急任务",
+			"datetime":"2025-05-30 08:20:30"
+		},
+		{
+			"type" : "node",
+			"status": "pending",
+			"title":"业务主管 张广才已通过",
+			"text":"业务审批",
+			"remark":"[注] 按紧急任务处理",
+			"datetime":"2025-05-30 <br>附件: <a href=\"https://www.baidu.com\"> 按紧急任务处理</a>"
+		},
+		{
+			"type" : "node",
+			"status": "rejected",
+			"title":"业务主管 张广才已通过",
+			"text":"业务审批",
+			"remark":"[注] 不符合规定",
+			"datetime":""
+		}
+	]
+}

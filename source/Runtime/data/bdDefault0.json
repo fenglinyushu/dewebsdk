@@ -1,0 +1,1411 @@
+{
+   "connectionstring" : "Server=127.0.0.1,8829;Database=dwERP;User_Name=sa;Password={593106};DriverID=MSSQL",
+   "image" : "media/images/board/bk001.jpg",
+   "interval" : 5,
+   "caption" : "国家体质健康大数据可视化展示平台",
+   "items" : [
+      {
+         "name" : "第一列",
+         "top" : 200,
+         "width" : 200,
+         "height" : 250,
+         "margins" : [ 3, 30, 30, 10 ],
+         "align" : "left",
+         "type" : "panel",
+         "items" : [
+            {
+               "name" : "左",
+               "width" : 300,
+               "align" : "left",
+               "type" : "panel",
+               "margins" : [ 3, 3, 3, 3 ],
+               "items" : [
+                  {
+                     "name" : "左上",
+                     "width" : 300,
+                     "height" : 180,
+                     "border" : {
+                        "size" : 2,
+                        "color" : [ 23, 139, 165 ],
+                        "radius" : "5px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "top",
+                     "type" : "panel",
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 35,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "各自然村服务情况数据",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 200, 200, 200 ]
+                           },
+                           "color" : [ 29, 53, 99 ],
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "name" : "第二行-横柱图",
+                           "width" : 300,
+                           "height" : 150,
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "client",
+                           "type" : "echarts",
+                           "option" : {
+                              "xAxis" : {
+                                 "type" : "value",
+                                 "boundaryGap" : [ 0, 0.01 ]
+                              },
+                              "yAxis" : {
+                                 "type" : "category",
+                                 "data" : [ "黄集", "欧庙", "陈河", "柳林桥" ]
+                              },
+                              "series" : [
+                                 {
+                                    "name" : "2011",
+                                    "type" : "bar",
+                                    "data" : [ 183, 239, 294, 170 ]
+                                 },
+                                 {
+                                    "name" : "2012",
+                                    "type" : "bar",
+                                    "data" : [ 195, 238, 310, 294 ]
+                                 }
+                              ],
+                              "grid" : {
+                                 "top" : "10%",
+                                 "left" : "3%",
+                                 "right" : "10%",
+                                 "bottom" : "3%",
+                                 "containLabel" : true
+                              },
+                              "legend" : {
+                                 "show" : false
+                              }
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     "name" : "左下",
+                     "width" : 300,
+                     "height" : 150,
+                     "margins" : [ 3, 0, 3, 15 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 165 ],
+                        "radius" : "5px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "client",
+                     "type" : "panel",
+                     "dwstyle" : "background-image:radial-gradient(#165280, #1380A2);border:solid 2px #CDDBEA; box-shadow: 0px 0px 5px #fff;",
+                     "items" : [
+                        {
+                           "name" : "中",
+                           "left" : 20,
+                           "top" : 5,
+                           "width" : 100,
+                           "height" : 30,
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 13,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "type" : "label",
+                           "caption" : "服务对象"
+                        },
+                        {
+                           "name" : "中",
+                           "left" : 20,
+                           "top" : 5,
+                           "width" : 200,
+                           "height" : 30,
+                           "margins" : [ 3, 60, 3, 1 ],
+                           "font" : {
+                              "size" : 27,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label",
+                           "caption" : "567",
+                           "align" : "client",
+                           "layout" : "center",
+                           "alignment" : "center"
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "name" : "中",
+               "margins" : [ 3, 3, 3, 1 ],
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "client",
+               "type" : "panel",
+               "items" : [
+                  {
+                     "name" : "echarts图表",
+                     "align" : "left",
+                     "type" : "pie",
+                     "width" : -70,
+                     "option" : {
+                        "tooltip" : {
+                           "trigger" : "item"
+                        },
+                        "legend" : {
+                           "show" : false
+                        },
+                        "series" : [
+                           {
+                              "name" : "Access From",
+                              "type" : "pie",
+                              "radius" : [ "40%", "70%" ],
+                              "data" : [
+                                 {
+                                    "value" : 1048,
+                                    "name" : "大营"
+                                 },
+                                 {
+                                    "value" : 735,
+                                    "name" : "章洲"
+                                 },
+                                 {
+                                    "value" : 580,
+                                    "name" : "李佬"
+                                 },
+                                 {
+                                    "value" : 484,
+                                    "name" : "散洲"
+                                 },
+                                 {
+                                    "value" : 300,
+                                    "name" : "康湾"
+                                 }
+                              ],
+                              "emphasis" : {
+                                 "itemStyle" : {
+                                    "shadowBlur" : 10,
+                                    "shadowOffsetX" : 0,
+                                    "shadowColor" : "rgba(0, 0, 0, 0.5)"
+                                 }
+                              },
+                              "center" : [ "50%", "50%" ],
+                              "label" : {
+                                 "textStyle" : {
+                                    "color" : "#fff"
+                                 }
+                              }
+                           }
+                        ]
+                     },
+                     "update" : {
+                        "sql" : "SELECT TOP 5 gName, SUM(gQuantity) AS totalQuantity\r\nFROM eGoods\r\nGROUP BY gName\r\nORDER BY totalQuantity DESC;"
+                     }
+                  },
+                  {
+                     "name" : "echarts图表",
+                     "align" : "right",
+                     "type" : "pie",
+                     "width" : -30,
+                     "option" : {
+                        "tooltip" : {
+                           "trigger" : "item"
+                        },
+                        "legend" : {
+                           "show" : true,
+                           "left" : "right",
+                           "top" : "center",
+                           "orient" : "vertical",
+                           "textStyle" : {
+                              "color" : "#fff"
+                           }
+                        },
+                        "series" : [
+                           {
+                              "name" : "Access From",
+                              "type" : "pie",
+                              "radius" : [ "40%", "70%" ],
+                              "data" : [
+                                 {
+                                    "value" : 648,
+                                    "name" : "道路"
+                                 },
+                                 {
+                                    "value" : 735,
+                                    "name" : "卫生"
+                                 },
+                                 {
+                                    "value" : 680,
+                                    "name" : "教育"
+                                 },
+                                 {
+                                    "value" : 484,
+                                    "name" : "服务"
+                                 }
+                              ],
+                              "emphasis" : {
+                                 "itemStyle" : {
+                                    "shadowBlur" : 10,
+                                    "shadowOffsetX" : 0,
+                                    "shadowColor" : "rgba(0, 0, 0, 0.5)"
+                                 }
+                              },
+                              "center" : [ "60%", "50%" ],
+                              "label" : {
+                                 "textStyle" : {
+                                    "color" : "#fff"
+                                 }
+                              }
+                           }
+                        ]
+                     },
+                     "update" : {
+                        "sql" : "SELECT gName,gQuantity FROM eGoods WHERE gId <6"
+                     }
+                  }
+               ]
+            },
+            {
+               "name" : "右",
+               "width" : 300,
+               "align" : "right",
+               "type" : "panel",
+               "margins" : [ 3, 3, 3, 3 ],
+               "items" : [
+                  {
+                     "name" : "右",
+                     "width" : 300,
+                     "height" : 180,
+                     "border" : {
+                        "size" : 2,
+                        "color" : [ 23, 139, 165 ],
+                        "radius" : "5px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "top",
+                     "type" : "panel",
+                     "items" : [
+                        {
+                           "align" : "top",
+                           "height" : 35,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "待公开数据",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 200, 200, 200 ]
+                           },
+                           "color" : [ 29, 53, 99 ],
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-top"
+                        },
+                        {
+                           "align" : "client",
+                           "height" : 54,
+                           "margins" : [ 3, 3, 3, 3 ],
+                           "type" : "panel",
+                           "name" : "P-top-left-client",
+                           "items" : [
+                              {
+                                 "align" : "left",
+                                 "width" : 90,
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "caption" : "3268<br>用户数",
+                                 "color" : [ 55, 200, 200 ],
+                                 "margins" : [ 0, 0, 3, 0 ],
+                                 "border" : {
+                                    "size" : 1,
+                                    "color" : [ 23, 139, 165 ],
+                                    "style" : "solid",
+                                    "side" : [ 1, 0, 0, 0 ]
+                                 },
+                                 "type" : "label",
+                                 "name" : "p-top-left-client-left"
+                              },
+                              {
+                                 "align" : "client",
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "color" : [ 25, 202, 136 ],
+                                 "caption" : "1276<br>应用系统",
+                                 "margins" : [ 0, 3, 3, 0 ],
+                                 "border" : {
+                                    "size" : 1,
+                                    "color" : [ 23, 139, 165 ],
+                                    "style" : "solid",
+                                    "side" : [ 1, 0, 0, 0 ]
+                                 },
+                                 "type" : "label",
+                                 "name" : "p-top-left-client-client"
+                              },
+                              {
+                                 "align" : "right",
+                                 "width" : 90,
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "caption" : "560,324<br>项目效益",
+                                 "color" : [ 133, 143, 248 ],
+                                 "margins" : [ 0, 3, 0, 0 ],
+                                 "border" : {
+                                    "size" : 1,
+                                    "color" : [ 23, 139, 165 ],
+                                    "style" : "solid",
+                                    "side" : [ 1, 0, 0, 0 ]
+                                 },
+                                 "type" : "label",
+                                 "name" : "p-top-left-client-right"
+                              }
+                           ]
+                        },
+                        {
+                           "align" : "bottom",
+                           "height" : 65,
+                           "margins" : [ 8, 3, 3, 0 ],
+                           "type" : "panel",
+                           "name" : "P-top-left-client",
+                           "items" : [
+                              {
+                                 "align" : "left",
+                                 "width" : 67,
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "caption" : "363<br>村务公开",
+                                 "color" : [ 253, 145, 51 ],
+                                 "margins" : [ 0, 0, 3, 0 ],
+                                 "border" : {
+                                    "size" : 1,
+                                    "color" : [ 23, 139, 165 ],
+                                    "style" : "solid",
+                                    "side" : [ 1, 0, 0, 0 ]
+                                 },
+                                 "type" : "label",
+                                 "name" : "p-top-left-client-left"
+                              },
+                              {
+                                 "align" : "left",
+                                 "width" : 67,
+                                 "left" : 200,
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "caption" : "363<br>居务公开",
+                                 "color" : [ 246, 209, 14 ],
+                                 "margins" : [ 0, 3, 3, 0 ],
+                                 "border" : {
+                                    "size" : 1,
+                                    "color" : [ 23, 139, 165 ],
+                                    "style" : "solid",
+                                    "side" : [ 1, 0, 0, 0 ]
+                                 },
+                                 "type" : "label",
+                                 "name" : "p-top-left-client-left"
+                              },
+                              {
+                                 "align" : "client",
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "color" : [ 46, 140, 255 ],
+                                 "caption" : "128<br>债务公开",
+                                 "margins" : [ 0, 3, 3, 0 ],
+                                 "border" : {
+                                    "size" : 1,
+                                    "color" : [ 23, 139, 165 ],
+                                    "style" : "solid",
+                                    "side" : [ 1, 0, 0, 0 ]
+                                 },
+                                 "type" : "label",
+                                 "name" : "p-top-left-client-client"
+                              },
+                              {
+                                 "align" : "right",
+                                 "width" : 67,
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "caption" : "32<br>权力公开",
+                                 "color" : [ 246, 88, 14 ],
+                                 "margins" : [ 0, 3, 0, 0 ],
+                                 "border" : {
+                                    "size" : 1,
+                                    "color" : [ 23, 139, 165 ],
+                                    "style" : "solid",
+                                    "side" : [ 1, 0, 0, 0 ]
+                                 },
+                                 "type" : "label",
+                                 "name" : "p-top-left-client-right"
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     "name" : "左下",
+                     "width" : 300,
+                     "height" : 150,
+                     "margins" : [ 3, 0, 3, 15 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 165 ],
+                        "radius" : "5px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "client",
+                     "type" : "panel",
+                     "dwstyle" : "background-image:radial-gradient(#165280, #1380A2);border:solid 2px #CDDBEA; box-shadow: 0px 0px 5px #fff;",
+                     "items" : [
+                        {
+                           "name" : "中",
+                           "left" : 20,
+                           "top" : 5,
+                           "width" : 100,
+                           "height" : 30,
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 13,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "type" : "label",
+                           "caption" : "应用类型"
+                        },
+                        {
+                           "name" : "中",
+                           "left" : 20,
+                           "top" : 5,
+                           "width" : 200,
+                           "height" : 30,
+                           "margins" : [ 3, 60, 3, 1 ],
+                           "font" : {
+                              "size" : 27,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label",
+                           "caption" : "186",
+                           "align" : "client",
+                           "layout" : "center",
+                           "alignment" : "center"
+                        }
+                     ]
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name" : "第一行",
+         "top" : 10,
+         "width" : 200,
+         "height" : 200,
+         "margins" : [ 3, 30, 30, 10 ],
+         "align" : "top",
+         "type" : "panel",
+         "items" : [
+            {
+               "name" : "第一行左",
+               "width" : 300,
+               "height" : 150,
+               "margins" : [ 3, 3, 3, 1 ],
+               "border" : {
+                  "size" : 2,
+                  "color" : [ 23, 139, 165 ],
+                  "radius" : "5px",
+                  "style" : "solid"
+               },
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "left",
+               "type" : "panel",
+               "items" : [
+                  {
+                     "align" : "top",
+                     "height" : 35,
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "caption" : "公开数据展示",
+                     "font" : {
+                        "size" : 17,
+                        "color" : [ 200, 200, 200 ]
+                     },
+                     "color" : [ 29, 53, 99 ],
+                     "margins" : [ 0, 3, 3, 0 ],
+                     "border" : {
+                        "size" : 2,
+                        "color" : [ 23, 139, 165 ],
+                        "style" : "solid",
+                        "side" : [ 1, 0, 0, 0 ]
+                     },
+                     "type" : "label",
+                     "name" : "p-top-left-top"
+                  },
+                  {
+                     "align" : "client",
+                     "height" : 54,
+                     "margins" : [ 3, 3, 3, 3 ],
+                     "type" : "panel",
+                     "name" : "P-top-left-client",
+                     "items" : [
+                        {
+                           "align" : "left",
+                           "width" : 90,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "500<br>常务公开",
+                           "color" : [ 55, 200, 200 ],
+                           "margins" : [ 0, 0, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-left",
+                           "update" : {
+                              "sql" : "SELECT gQuantity FROM eGoods WHERE gId=8",
+                              "format" : "%s<br>洗发水"
+                           }
+                        },
+                        {
+                           "align" : "client",
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "color" : [ 25, 202, 136 ],
+                           "caption" : "368<br>正务公开",
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-client"
+                        },
+                        {
+                           "align" : "right",
+                           "width" : 90,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "250<br>财务公开",
+                           "color" : [ 133, 143, 248 ],
+                           "margins" : [ 0, 3, 0, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-right"
+                        }
+                     ]
+                  },
+                  {
+                     "align" : "bottom",
+                     "height" : 50,
+                     "margins" : [ 8, 3, 3, 0 ],
+                     "type" : "panel",
+                     "name" : "P-top-left-client",
+                     "items" : [
+                        {
+                           "align" : "left",
+                           "width" : 67,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "363<br>村务公开",
+                           "color" : [ 253, 145, 51 ],
+                           "margins" : [ 0, 0, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-left"
+                        },
+                        {
+                           "align" : "left",
+                           "width" : 67,
+                           "left" : 200,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "363<br>居务公开",
+                           "color" : [ 246, 209, 14 ],
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-left"
+                        },
+                        {
+                           "align" : "client",
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "color" : [ 46, 140, 255 ],
+                           "caption" : "128<br>债务公开",
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-client"
+                        },
+                        {
+                           "align" : "right",
+                           "width" : 50,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "32<br>权力公开",
+                           "color" : [ 246, 88, 14 ],
+                           "margins" : [ 0, 3, 0, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-right"
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "name" : "第一行中",
+               "width" : 300,
+               "height" : 150,
+               "margins" : [ 3, 3, 3, 1 ],
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "client",
+               "type" : "panel",
+               "items" : [
+                  {
+                     "none" : "第一行:中上,标题",
+                     "align" : "top",
+                     "height" : 70,
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "margins" : [ 0, 3, 8, 0 ],
+                     "type" : "panel",
+                     "name" : "p-top-left-top",
+                     "image" : "media/images/bdv/title_bg01.png",
+                     "items" : [
+                        {
+                           "align" : "client",
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "贵阳市观山湖区外国语实验中学",
+                           "font" : {
+                              "size" : 31,
+                              "color" : [ 17, 228, 241 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        }
+                     ]
+                  },
+                  {
+                     "none" : "第一行:中下",
+                     "align" : "client",
+                     "font" : {
+                        "size" : 25,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "type" : "panel",
+                     "name" : "P-top-left-client",
+                     "margins" : [ 10, 0, 0, 10 ],
+                     "items" : [
+                        {
+                           "align" : "client",
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "QQ讨论群",
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "style" : 0,
+                           "type" : "panel",
+                           "width" : 200,
+                           "items" : [
+                              {
+                                 "align" : "top",
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "总体情况（单位：人）",
+                                 "style" : 0,
+                                 "font" : {
+                                    "size" : 16,
+                                    "color" : [ 17, 228, 241 ]
+                                 },
+                                 "margins" : [ 0, 3, 3, 0 ],
+                                 "height" : 60,
+                                 "type" : "label",
+                                 "width" : 55,
+                                 "left" : 99999
+                              },
+                              {
+                                 "align" : "client",
+                                 "font" : {
+                                    "size" : 40,
+                                    "color" : [ 254, 240, 0 ],
+                                    "bold" : 1
+                                 },
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "1272",
+                                 "margins" : [ 0, 3, 3, 0 ],
+                                 "type" : "label"
+                              }
+                           ]
+                        },
+                        {
+                           "name" : "第一行-中-下-右",
+                           "width" : 120,
+                           "left" : "9999",
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "right",
+                           "type" : "echarts",
+                           "option" : {
+                              "title" : {
+                                 "text" : "{a|优良率}\\n{b|占比68%}",
+                                 "left" : "center",
+                                 "top" : "center",
+                                 "textStyle" : {
+                                    "fontSize" : 30,
+                                    "fontWeight" : "normal",
+                                    "color" : "#333",
+                                    "rich" : {
+                                       "a" : {
+                                          "fontSize" : 14,
+                                          "color" : "#fff"
+                                       },
+                                       "b" : {
+                                          "fontSize" : 14,
+                                          "color" : "#6B7289"
+                                       }
+                                    }
+                                 }
+                              },
+                              "series" : [
+                                 {
+                                    "name" : "数据",
+                                    "type" : "pie",
+                                    "data" : [
+                                       {
+                                          "value" : 750,
+                                          "name" : "A"
+                                       },
+                                       {
+                                          "value" : 250,
+                                          "name" : "B"
+                                       }
+                                    ],
+                                    "radius" : [ "70%", "80%" ],
+                                    "label" : {
+                                       "show" : false
+                                    },
+                                    "emphasis" : {
+                                       "label" : {
+                                          "show" : true
+                                       }
+                                    }
+                                 }
+                              ]
+                           }
+                        },
+                        {
+                           "name" : "第一行-中-下-右",
+                           "width" : 120,
+                           "left" : "9999",
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "right",
+                           "type" : "echarts",
+                           "option" : {
+                              "title" : {
+                                 "text" : "{a|优秀率}\\n{b|占比68%}",
+                                 "left" : "center",
+                                 "top" : "center",
+                                 "textStyle" : {
+                                    "fontSize" : 40,
+                                    "fontWeight" : "normal",
+                                    "color" : "#333",
+                                    "rich" : {
+                                       "a" : {
+                                          "fontSize" : 14,
+                                          "color" : "#fff"
+                                       },
+                                       "b" : {
+                                          "fontSize" : 14,
+                                          "color" : "#6B7289"
+                                       }
+                                    }
+                                 }
+                              },
+                              "series" : [
+                                 {
+                                    "name" : "数据",
+                                    "type" : "pie",
+                                    "data" : [
+                                       {
+                                          "value" : 750,
+                                          "name" : "A"
+                                       },
+                                       {
+                                          "value" : 250,
+                                          "name" : "B"
+                                       }
+                                    ],
+                                    "radius" : [ "70%", "80%" ],
+                                    "label" : {
+                                       "show" : false
+                                    },
+                                    "emphasis" : {
+                                       "label" : {
+                                          "show" : true
+                                       }
+                                    }
+                                 }
+                              ]
+                           }
+                        },
+                        {
+                           "name" : "第一行-中-下-右",
+                           "width" : 120,
+                           "left" : "9999",
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "right",
+                           "type" : "echarts",
+                           "option" : {
+                              "title" : {
+                                 "text" : "{a|良好率}\\n{b|占比68%}",
+                                 "left" : "center",
+                                 "top" : "center",
+                                 "textStyle" : {
+                                    "fontSize" : 40,
+                                    "fontWeight" : "normal",
+                                    "color" : "#333",
+                                    "rich" : {
+                                       "a" : {
+                                          "fontSize" : 14,
+                                          "color" : "#fff"
+                                       },
+                                       "b" : {
+                                          "fontSize" : 14,
+                                          "color" : "#6B7289"
+                                       }
+                                    }
+                                 }
+                              },
+                              "series" : [
+                                 {
+                                    "name" : "数据",
+                                    "type" : "pie",
+                                    "data" : [
+                                       {
+                                          "value" : 750,
+                                          "name" : "A"
+                                       },
+                                       {
+                                          "value" : 250,
+                                          "name" : "B"
+                                       }
+                                    ],
+                                    "radius" : [ "70%", "80%" ],
+                                    "label" : {
+                                       "show" : false
+                                    },
+                                    "emphasis" : {
+                                       "label" : {
+                                          "show" : true
+                                       }
+                                    }
+                                 }
+                              ]
+                           }
+                        },
+                        {
+                           "name" : "第一行-中-下-右",
+                           "left" : "9999",
+                           "width" : 120,
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "right",
+                           "type" : "echarts",
+                           "option" : {
+                              "title" : {
+                                 "text" : "{a|及格率}\\n{b|占比68%}",
+                                 "left" : "center",
+                                 "top" : "center",
+                                 "textStyle" : {
+                                    "fontSize" : 40,
+                                    "fontWeight" : "normal",
+                                    "color" : "#333",
+                                    "rich" : {
+                                       "a" : {
+                                          "fontSize" : 14,
+                                          "color" : "#fff"
+                                       },
+                                       "b" : {
+                                          "fontSize" : 14,
+                                          "color" : "#6B7289"
+                                       }
+                                    }
+                                 }
+                              },
+                              "series" : [
+                                 {
+                                    "name" : "数据",
+                                    "type" : "pie",
+                                    "data" : [
+                                       {
+                                          "value" : 750,
+                                          "name" : "A"
+                                       },
+                                       {
+                                          "value" : 250,
+                                          "name" : "B"
+                                       }
+                                    ],
+                                    "radius" : [ "70%", "80%" ],
+                                    "label" : {
+                                       "show" : false
+                                    },
+                                    "emphasis" : {
+                                       "label" : {
+                                          "show" : true
+                                       }
+                                    }
+                                 }
+                              ]
+                           }
+                        },
+                        {
+                           "name" : "第一行-中-下-右",
+                           "width" : 120,
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "right",
+                           "type" : "echarts",
+                           "option" : {
+                              "title" : {
+                                 "text" : "{a|不及格率}\\n{b|占比68%}",
+                                 "left" : "center",
+                                 "top" : "center",
+                                 "textStyle" : {
+                                    "fontSize" : 14,
+                                    "fontWeight" : "normal",
+                                    "color" : "#fff",
+                                    "rich" : {
+                                       "a" : {
+                                          "color" : "#fff"
+                                       },
+                                       "b" : {
+                                          "color" : "#6B7289"
+                                       }
+                                    }
+                                 }
+                              },
+                              "series" : [
+                                 {
+                                    "name" : "数据",
+                                    "type" : "pie",
+                                    "data" : [
+                                       {
+                                          "value" : 750,
+                                          "name" : "A"
+                                       },
+                                       {
+                                          "value" : 250,
+                                          "name" : "B"
+                                       }
+                                    ],
+                                    "radius" : [ "70%", "80%" ],
+                                    "label" : {
+                                       "show" : false
+                                    },
+                                    "emphasis" : {
+                                       "label" : {
+                                          "show" : true
+                                       }
+                                    }
+                                 }
+                              ]
+                           },
+                           "left" : "9999"
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "name" : "第一行-右",
+               "width" : 300,
+               "height" : 150,
+               "margins" : [ 3, 3, 3, 1 ],
+               "border" : {
+                  "size" : 2,
+                  "color" : [ 23, 139, 165 ],
+                  "radius" : "5px",
+                  "style" : "solid"
+               },
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "right",
+               "type" : "panel",
+               "items" : [
+                  {
+                     "align" : "top",
+                     "height" : 35,
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "caption" : "DeWeb数据展示",
+                     "font" : {
+                        "size" : 17,
+                        "color" : [ 200, 200, 200 ]
+                     },
+                     "color" : [ 29, 53, 99 ],
+                     "margins" : [ 0, 3, 3, 0 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 165 ],
+                        "style" : "solid",
+                        "side" : [ 1, 0, 0, 0 ]
+                     },
+                     "type" : "label",
+                     "name" : "p-top-left-top"
+                  },
+                  {
+                     "align" : "client",
+                     "height" : 54,
+                     "margins" : [ 3, 3, 3, 3 ],
+                     "type" : "panel",
+                     "name" : "P-top-left-client",
+                     "items" : [
+                        {
+                           "align" : "left",
+                           "width" : 90,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "3268<br>用户数",
+                           "color" : [ 55, 200, 200 ],
+                           "margins" : [ 0, 0, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-left"
+                        },
+                        {
+                           "align" : "client",
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "color" : [ 25, 202, 136 ],
+                           "caption" : "1276<br>应用系统",
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-client"
+                        },
+                        {
+                           "align" : "right",
+                           "width" : 90,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "560,324<br>项目效益",
+                           "color" : [ 133, 143, 248 ],
+                           "margins" : [ 0, 3, 0, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-right"
+                        }
+                     ]
+                  },
+                  {
+                     "align" : "bottom",
+                     "height" : 50,
+                     "margins" : [ 8, 3, 3, 0 ],
+                     "type" : "panel",
+                     "name" : "P-top-left-client",
+                     "items" : [
+                        {
+                           "align" : "left",
+                           "width" : 67,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "363<br>村务公开",
+                           "color" : [ 253, 145, 51 ],
+                           "margins" : [ 0, 0, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-left"
+                        },
+                        {
+                           "align" : "left",
+                           "width" : 67,
+                           "left" : 200,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "363<br>居务公开",
+                           "color" : [ 246, 209, 14 ],
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-left"
+                        },
+                        {
+                           "align" : "client",
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "color" : [ 46, 140, 255 ],
+                           "caption" : "128<br>债务公开",
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-client"
+                        },
+                        {
+                           "align" : "right",
+                           "width" : 67,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "32<br>权力公开",
+                           "color" : [ 246, 88, 14 ],
+                           "margins" : [ 0, 3, 0, 0 ],
+                           "border" : {
+                              "size" : 1,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "type" : "label",
+                           "name" : "p-top-left-client-right"
+                        }
+                     ]
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name" : "第三行",
+         "top" : 900,
+         "width" : 200,
+         "height" : 50,
+         "margins" : [ 3, 30, 30, 10 ],
+         "align" : "client",
+         "type" : "panel",
+         "items" : [
+            {
+               "name" : "左",
+               "width" : 360,
+               "height" : 150,
+               "margins" : [ 3, 0, 3, 1 ],
+               "font" : {
+                  "size" : 19,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "left",
+               "type" : "panel",
+               "style" : 10,
+               "caption" : "并发监控",
+               "items" : [
+                  {
+                     "name" : "轮播表",
+                     "type" : "stringgrid",
+                     "align" : "client",
+                     "margins" : [ 10, 10, 10, 10 ],
+                     "font" : {
+                        "size" : 13,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "cells" : [
+                        [ "姓名", "年龄", "特长" ],
+                        [ "王小雨", "18", "羽毛球" ],
+                        [ "张明芳", "22", "音乐" ],
+                        [ "王小呢", "32", "舞蹈" ],
+                        [ "张小芳", "26", "跳水" ],
+                        [ "王明芳", "22", "音乐" ],
+                        [ "张小呢", "32", "舞蹈" ],
+                        [ "李小芳", "26", "跳水" ],
+                        [ "马雨", "38", "羽球" ],
+                        [ "赵小雨", "32", "跑步" ],
+                        [ "刘江涛", "32", "跑步" ],
+                        [ "张云政", "32", "音乐" ],
+                        [ "马付出", "32", "跑步" ],
+                        [ "李艳", "32", "街舞" ]
+                     ],
+                     "colwidths" : [ 120, "80", "140" ],
+                     "border" : {
+                        "radius" : "5px",
+                        "size" : 0
+                     },
+                     "rownum" : "8",
+                     "update" : {
+                        "sql" : "SELECT uName,uAge,uRole FROM eUser "
+                     }
+                  }
+               ]
+            },
+            {
+               "name" : "中",
+               "width" : 300,
+               "height" : 150,
+               "margins" : [ 3, 3, 3, 0 ],
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "client",
+               "type" : "panel",
+               "style" : 11,
+               "caption" : "应用地图",
+               "items" : [
+                  {
+                     "align" : "client",
+                     "margins" : [ 3, 3, 3, 30 ],
+                     "data" : "main",
+                     "dir" : "media/geojson/china/",
+                     "type" : "map",
+                     "border" : {
+                        "radius" : "5px",
+                        "size" : 0
+                     },
+                     "width" : 500,
+                     "height" : "500"
+                  }
+               ]
+            },
+            {
+               "name" : "右",
+               "width" : 360,
+               "height" : 150,
+               "margins" : [ 3, 3, 0, 1 ],
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "right",
+               "type" : "panel",
+               "style" : 12,
+               "items" : [
+                  {
+                     "align" : "client",
+                     "margins" : [ 15, 15, 15, 15 ],
+                     "image" : "media/images/mn/11.png",
+                     "fit" : "fill",
+                     "type" : "image",
+                     "border" : {
+                        "radius" : "5px",
+                        "size" : 0
+                     },
+                     "update" : {
+                        "sql" : "SELECT uAvatar FROM eUser WHERE uId=18",
+                        "format" : "media/images/dwERP/%s"
+                     }
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

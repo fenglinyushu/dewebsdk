@@ -1,0 +1,86 @@
+{
+	"account": "dwHOEFON",
+	"table": "eReimburseAttach",
+	"margins": 
+	[
+		0,
+		5,
+		8,
+		10
+	],
+	"editbuttonleft": 160,
+	"editbuttontop": 8,
+	"deletebuttonleft": 185,
+	"deletebuttontop": 8,
+	"export": 0,
+	"import": 0,
+	"switch": 0,
+	"prefix": "x",
+	"edittop": 150,
+	"editwidth": 360,
+	"editheight": 360,
+	"cardwidth": 220,
+	"cardheight": 148,
+	"defaultquerymode": 0,
+	"buttons": 0,
+	"new": 1,
+	"edit": 1,
+	"delete": 1,
+	"totalfirst": 1,
+	"pagesize": 5,
+	"uploadsuccess":"upload success!",
+	"cardstyle": "border:solid 1px #ddd;overflow:hidden;border-radius:5px;background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);",
+	"master": {
+		"panel": "Pn1",
+		"masterfield": "rId",
+		"slavefield": "aReimburseId"
+	},
+	"fields": 
+	[
+		{
+			"name": "aReimburseId",
+			"view": 2
+		},
+		{
+			"name": "aName",
+			"caption": "名称",
+			"left": 15,
+			"top": 10,
+			"right": 20,
+			"height": 20,
+			"font": {
+				"size": 11,
+				"color": 
+				[
+					140
+				]
+			},
+			"sort": 1
+		},
+		{
+			"name": "aAttach",
+			"caption": "票据",
+			"sort": 1,
+			"top": 40,
+			"bottom": 0,
+			"right": 0,
+			"left": 0,
+			"preview": 0,
+			"onclick": 1,
+			"type": "image",
+			"imgdir": "media/images/dwERPtim/",
+			"imgtype": 
+			[
+				"jpg",
+				"png",
+				"xls",
+				"xlsx",
+				"pdf"
+			]
+		},
+		{
+			"name": "aSource",
+			"view": 2
+		}
+	]
+}

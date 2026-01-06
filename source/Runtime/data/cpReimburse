@@ -1,0 +1,106 @@
+{
+	"account": "dwHOEFON",
+	"table": "eReimburse",
+	"slave0": 
+	[
+		{
+			"panel": "PnS",
+			"masterfield": "rid",
+			"slavefield": "aReimburseId"
+		}
+	],
+	"fields": 
+	[
+		{
+			"name": "rId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "rName",
+			"caption": "名称",
+			"query": 1,
+			"sort": 1,
+			"must": 1,
+			"width": 200
+		},
+		{
+			"name": "rCreatorId",
+			"caption": "创建人",
+			"query": 1,
+			"align": "center",
+			"type": "dbcombopair",
+			"table": "eUser",
+			"datafield": "uId",
+			"viewfield": "uName"
+		},
+		{
+			"name": "rFlowId",
+			"caption": "报销流程",
+			"query": 1,
+			"align": "center",
+			"type": "dbcombopair",
+			"table": "eFlow",
+			"datafield": "fId",
+			"viewfield": "fName"
+		},
+		{
+			"name": "rAmount",
+			"caption": "金额",
+			"type": "money",
+			"align": "right",
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "rStartDate",
+			"caption": "开始时间",
+			"sort": 1,
+			"width": 160,
+			"type": "datetime",
+			"align": "center"
+		},
+		{
+			"name": "rEndDate",
+			"caption": "结束时间",
+			"sort": 1,
+			"view":2,
+			"width": 160,
+			"type": "datetime",
+			"align": "center"
+		},
+		{
+			"name": "rStatus",
+			"caption": "状态",
+			"sort": 1,
+			"width": 100,
+			"type": "combo",
+			"query": 1,
+			"dbfilter": 1,
+			"align": "center",
+			"list": 
+			[
+				"待审批",
+				"部分审批",
+				"已审批"
+			]
+		},
+		{
+			"name": "rApproverIds",
+			"view": 2
+		},
+		{
+			"name": "rCurrApproverId",
+			"view": 2
+		},
+		{
+			"name": "rRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

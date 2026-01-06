@@ -1,0 +1,67 @@
+{
+	"account": "dwDeWeb",
+	"table": "dwLogin",
+	"where": "",
+	"pagesize": 10,
+	"rowheight": 45,
+	"defaultquerymode": 1,
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"query": 1,
+	"switch": 1,
+	"buttons": 1,
+	"border": 1,
+	"fields": 
+	[
+		{
+			"name": "lId",
+			"caption": "id",
+			"sort": 1,
+			"width": "50",
+			"type": "auto",
+			"align": "center",
+			"caption": "gId",
+			"fuzzy": 1,
+			"query": 0,
+			"datatype": 14
+		},
+		{
+			"name": "lPara",
+			"caption": "URL参数",
+			"sort": 1,
+			"width": "160",
+			"type": "string",
+			"query": 1,
+			"fuzzy": 1,
+			"align": "center",
+			"datatype": 24
+		},
+		{
+			"name": "lRedirectUrl",
+			"caption": "编码",
+			"sort": 1,
+			"width": "280",
+			"type": "string",
+			"query": 1
+		},
+		{
+			"name": "lBkImage",
+			"caption": "背景图片",
+			"sort": 1,
+			"width": "280",
+			"type": "string",
+			"query": 1
+		},
+		{
+			"name": "lRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": "150",
+			"type": "string",
+			"query": 1,
+			"align": "left",
+			"datatype": 16
+		}
+	]
+}

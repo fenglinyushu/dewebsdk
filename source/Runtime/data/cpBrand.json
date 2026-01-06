@@ -1,0 +1,47 @@
+{
+	"account":"dwERP",
+	"table": "eBrand",
+	"fields": 
+	[
+		{
+			"name": "bId",
+			"caption": "id",
+			"sort": 1,
+			"width": 60,
+			"type": "auto",
+			"align": "center"
+		},
+		{
+            "name": "bName",
+            "caption": "创建者",
+            "type": "string",
+            "default": "admin",
+            "sort": 1,
+            "width": 120
+        },
+		{
+			"name": "bNo",
+			"caption": "编码",
+			"type":"combopair",
+			"align": "center",
+			"sort": 1,
+			"width": 150,
+			"query": 1,
+			"default":"Good2",
+			"list":[
+				["g10","Good0"],
+				["g11","Good1"],
+				["g12","Good2"],
+				["g13","Good3"]
+				
+			]
+		},
+		{
+			"name": "bRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 750,
+			"query": 1
+		}
+	]
+}

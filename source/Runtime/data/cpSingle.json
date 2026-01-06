@@ -1,0 +1,70 @@
+{
+	"account":"dwAccess",
+	"table": "zh_Single",
+	"defaulteditmax":0,
+	"editwidth":800,
+	"fields": 
+	[
+		{
+			"name": "sId",
+			"view":2
+		},
+		{
+            "name": "sTitle",
+            "caption": "题干",
+            "type": "memo",
+			"must":1,
+            "sort": 1,
+			"height":65,
+            "width": 500
+        },
+		{
+            "name": "sA",
+            "caption": "备选A",
+            "type": "memo",
+			"must":1,
+            "sort": 1,
+            "width": 180
+        },
+		{
+            "name": "sB",
+            "caption": "备选B",
+            "type": "memo",
+			"must":1,
+            "sort": 1,
+            "width": 180
+        },
+		{
+            "name": "sC",
+            "caption": "备选C",
+            "type": "memo",
+			"must":1,
+            "sort": 1,
+            "width": 180
+        },
+		{
+            "name": "sD",
+            "caption": "备选D",
+            "type": "memo",
+			"must":1,
+            "sort": 1,
+            "width": 180
+        },
+		{
+			"name": "sAnswer",
+			"caption": "答案",
+			"type":"combo",
+			"align": "center",
+			"width": 80,
+			"query": 1,
+			"list":["A","B","C","D"]
+		},
+		{
+			"name": "sRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

@@ -1,0 +1,107 @@
+{
+	"account": "dwERP",
+	"table": "eInboundOrderTemp",
+	"defaultquerymode": 0,
+	"buttons": 0,
+	"fixed": 
+	[
+		1,
+		1
+	],
+	"fields": 
+	[
+		{
+			"name": "tId",
+			"caption": "序号",
+			"full": 1,
+			"width": 40,
+			"type": "index",
+			"align": "center"
+		},
+		{
+			"name": "tName",
+			"caption": "商品名称",
+			"sort": 1,
+			"width": 150
+		},
+		{
+			"name": "tSpecification",
+			"caption": "规格",
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "tUnit",
+			"caption": "单位",
+			"sort": 1,
+			"align": "center",
+			"width": 80
+		},
+		{
+			"name": "tQuantity",
+			"caption": "数量",
+			"sort": 1,
+			"query": 1,
+			"type": "integer",
+			"align": "right",
+			"width": 80
+		},
+		{
+			"name": "tPrice",
+			"caption": "单价",
+			"sort": 1,
+			"type": "money",
+			"align": "right",
+			"width": 80
+		},
+		{
+			"name": "tAmount",
+			"caption": "金额",
+			"sort": 1,
+			"type": "money",
+			"align": "right",
+			"width": 80
+		},
+		{
+			"name": "tRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 120,
+			"query": 1
+		},
+		{
+			"name": "tRemark",
+			"caption": "操作",
+			"type": "button",
+			"sort": 1,
+			"width": 150,
+			"list": 
+			[
+				{
+					"caption": "新增",
+					"type": "info",
+					"dwattr":"plain",
+					"width": 50,
+					"image": "el-icon-delete",
+					"method": "new"
+				},
+				{
+					"caption": "删除",
+					"type": "danger",
+					"dwattr":"plain",
+					"width": 50,
+					"image": "el-icon-delete",
+					"method": "delete"
+				},
+				{
+					"caption": "编辑",
+					"type": "primary",
+					"dwattr":"plain",
+					"width": 50,
+					"image": "el-icon-edit",
+					"method": "edit"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,42 @@
+{
+  "table": "sys_account",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 10,
+  "defaulteditmax":1,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "aname",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":150,
+      "caption": "账户名称"
+    },
+    {
+      "name": "abank",
+      "caption": "开户银行",
+	  "width":150,
+	  "type":"combo",
+	  "list":["中国工商银行","中国农业银行","中国建设银行","中国银行","交通银行","中国邮政储蓄银行",
+	  "招商银行","兴业银行","中信银行","光大银行","上海银行","北京银行","广州银行","上海农商行","广州农商行","北京农商行"],
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "aaccount",
+      "caption": "银行账号",
+	  "width":200,
+      "sort": 1
+    },
+    {
+      "name": "aremark",
+      "caption": "备注",
+	  "query":1,
+      "width": 120
+    }
+  ]
+}

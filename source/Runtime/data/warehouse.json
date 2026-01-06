@@ -1,0 +1,51 @@
+{
+  "table": "sys_warehouse",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "wname",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+     "width": 250,
+      "caption": "仓库名称"
+    },
+    {
+      "name": "wno",
+      "sort": 1,
+	  "query":1,
+      "caption": "仓库编号"
+    },
+    {
+      "name": "wleader",
+      "caption": "负责人",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "wphone",
+      "caption": "联系电话",
+     "width": 200,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "waddress",
+      "caption": "仓库地址",
+	  "query":1,
+      "width": 250,
+      "sort": 1
+    },
+    {
+      "name": "wremark",
+      "caption": "备注",
+	  "query":1,
+      "width": 120
+    }
+  ]
+}

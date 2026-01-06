@@ -1,0 +1,237 @@
+{
+   "connectionstring" : "Server=127.0.0.1,8829;Database=dwERP;User_Name=sa;Password={593106};DriverID=MSSQL",
+   "interval" : 3,
+   "caption" : "DeWeb图表显示",
+   "color" : [ 2, 44, 92 ],
+   "image0" : "media/images/board/bk001.gif",
+   "items" : [
+      {
+         "type" : "panel",
+         "align" : "top",
+         "height" : 400,
+         "items" : [
+            {
+               "margins" : [ 0, 20, 20, 20 ],
+               "align" : "left",
+               "type" : "panel",
+               "width" : 400,
+               "name" : "line",
+               "height" : 360,
+               "color" : [ 4, 12, 72 ],
+               "border" : {
+                  "radius" : "6px"
+               },
+               "items" : [
+                  {
+                     "name" : "line",
+                     "align" : "client",
+                     "type" : "bar",
+                     "width" : 400,
+                     "left" : 400,
+                     "margins" : [ 3, 3, 3, 3 ],
+                     "height" : 360,
+                     "option" : {
+                        "xAxis" : {
+                           "type" : "category",
+                           "data" : [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" ]
+                        },
+                        "yAxis" : {
+                           "type" : "value"
+                        },
+                        "series" : [
+                           {
+                              "data" : [ 120, 200, 150, 80, 70, 110, 130 ],
+                              "type" : "line"
+                           }
+                        ]
+                     },
+                     "update" : {
+                        "sql" : "SELECT TOP 6 gName, ABS(CHECKSUM(NEWID())) % 100 AS RandomInteger\r\nFROM eGoods WHERE gName  IS NOT NULL\r\nORDER BY NEWID()"
+                     }
+                  }
+               ]
+            },
+            {
+               "margins" : [ 0, 0, 20, 20 ],
+               "align" : "left",
+               "type" : "panel",
+               "width" : 400,
+               "name" : "line",
+               "height" : 360,
+               "color" : [ 4, 12, 72 ],
+               "border" : {
+                  "radius" : "6px"
+               },
+               "items" : [
+                  {
+                     "name" : "bar",
+                     "align" : "client",
+                     "type" : "bar",
+                     "width" : 400,
+                     "left" : 400,
+                     "margins" : [ 3, 3, 3, 3 ],
+                     "height" : 360,
+                     "option" : {
+                        "xAxis" : {
+                           "type" : "category",
+                           "data" : [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" ]
+                        },
+                        "yAxis" : {
+                           "type" : "value"
+                        },
+                        "series" : [
+                           {
+                              "data" : [ 120, 200, 150, 80, 70, 110, 130 ],
+                              "type" : "bar"
+                           }
+                        ]
+                     },
+                     "update" : {
+                        "sql" : "SELECT TOP 6 gName, ABS(CHECKSUM(NEWID())) % 100 AS RandomInteger\r\nFROM eGoods WHERE gName  IS NOT NULL\r\nORDER BY NEWID()"
+                     }
+                  }
+               ],
+               "left" : 500
+            },
+            {
+               "margins" : [ 0, 0, 20, 20 ],
+               "align" : "left",
+               "type" : "panel",
+               "width" : 400,
+               "name" : "line",
+               "height" : 360,
+               "color" : [ 4, 12, 72 ],
+               "left" : 900,
+               "border" : {
+                  "radius" : "6px"
+               },
+               "items" : [
+                  {
+                     "name" : "pie",
+                     "align" : "client",
+                     "type" : "pie",
+                     "margins" : [ 3, 3, 3, 3 ],
+                     "width" : 400,
+                     "height" : 360,
+                     "color1" : [ 3, 46, 91 ],
+                     "option" : {
+                        "tooltip" : {
+                           "trigger" : "item"
+                        },
+                        "legend" : {
+                           "show" : false
+                        },
+                        "series" : [
+                           {
+                              "type" : "pie",
+                              "radius" : "50%",
+                              "data" : [
+                                 {
+                                    "value" : 1048,
+                                    "name" : "Search Engine"
+                                 },
+                                 {
+                                    "value" : 735,
+                                    "name" : "Direct"
+                                 },
+                                 {
+                                    "value" : 580,
+                                    "name" : "Email"
+                                 },
+                                 {
+                                    "value" : 484,
+                                    "name" : "Union Ads"
+                                 },
+                                 {
+                                    "value" : 300,
+                                    "name" : "Video Ads"
+                                 }
+                              ],
+                              "label" : {
+                                 "textStyle" : {
+                                    "color" : "#fff"
+                                 }
+                              }
+                           }
+                        ]
+                     },
+                     "update" : {
+                        "sql" : "SELECT TOP 5 gName, ABS(CHECKSUM(NEWID())) % 100 AS RandomInteger\r\nFROM eGoods WHERE gName  IS NOT NULL\r\nORDER BY NEWID()"
+                     }
+                  }
+               ]
+            },
+            {
+               "margins" : [ 0, 0, 20, 20 ],
+               "align" : "left",
+               "type" : "panel",
+               "width" : 400,
+               "name" : "line",
+               "height" : 360,
+               "color" : [ 4, 12, 72 ],
+               "left" : 1300,
+               "border" : {
+                  "radius" : "6px"
+               },
+               "items" : [
+                  {
+                     "name" : "radar",
+                     "height" : 360,
+                     "margins" : [ 3, 3, 3, 3 ],
+                     "align" : "client",
+                     "type" : "radar",
+                     "color1" : [ 3, 46, 91 ],
+                     "option" : {
+                        "series" : [
+                           {
+                              "data" : [
+                                 {
+                                    "value" : [ 50, 84, 78, 56, 42, 70 ],
+                                    "name" : "Actual Spending"
+                                 }
+                              ],
+                              "type" : "radar",
+                              "name" : "Budget vs spending"
+                           }
+                        ],
+                        "radar" : {
+                           "indicator" : [
+                              {
+                                 "name" : "Sales",
+                                 "max" : 100
+                              },
+                              {
+                                 "name" : "Administration",
+                                 "max" : 100
+                              },
+                              {
+                                 "name" : "Information Technology",
+                                 "max" : 100
+                              },
+                              {
+                                 "name" : "Customer Support",
+                                 "max" : 100
+                              },
+                              {
+                                 "name" : "Development",
+                                 "max" : 100
+                              },
+                              {
+                                 "name" : "Marketing",
+                                 "max" : 100
+                              }
+                           ]
+                        }
+                     },
+                     "width" : 400,
+                     "left" : 1300,
+                     "update" : {
+                        "sql" : "SELECT TOP 6 gName, ABS(CHECKSUM(NEWID())) % 100 AS RandomInteger\r\nFROM eGoods WHERE gName  IS NOT NULL\r\nORDER BY NEWID()"
+                     }
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

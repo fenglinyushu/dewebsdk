@@ -1,0 +1,107 @@
+{
+  "table": "dwgoods",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "defaulteditmax":1,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "gname",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":150,
+      "caption": "名称"
+    },
+    {
+      "name": "gno",
+      "sort": 1,
+	  "query":1,
+	  "width":80,
+      "caption": "编号"
+    },
+    {
+      "name": "gspec",
+      "caption": "规格",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "gclass",
+      "caption": "类别",
+	  "width":80,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "gbrand",
+      "caption": "品牌",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "gunit",
+      "caption": "单位",
+	  "type":"combo",
+	  "list":["个","台","部","套","辆","支","双","只","袋"],
+	  "width":80,
+      "sort": 1
+    },
+    {
+      "name": "ginprice",
+      "caption": "购货价格",
+      "sort": 1
+    },
+    {
+      "name": "goutprice",
+      "caption": "销货价格",
+      "sort": 1
+    },
+    {
+      "name": "gretailprice",
+      "caption": "零售价格",
+      "sort": 1
+    },
+    {
+      "name": "gpoints",
+      "caption": "积分",
+	  "width":80,
+      "sort": 1
+    },
+    {
+      "name": "gqrcode",
+      "caption": "条形码",
+      "sort": 1
+    },
+    {
+      "name": "gwarehouse",
+      "caption": "仓库",
+	  "type":"dbcombo",
+	  "table":"dwwarehouse",
+	  "field":"wname",
+	  "width":80,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "gposition",
+      "caption": "货位",
+	  "width":80,
+      "sort": 1
+    },
+    {
+      "name": "gthreshold",
+      "caption": "库存阈值",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "gremark",
+      "caption": "备注",
+	  "query":1
+    }
+  ]
+}

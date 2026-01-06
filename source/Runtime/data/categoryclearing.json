@@ -1,0 +1,31 @@
+{
+  "table": "sys_categoryclearing",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "defaulteditmax":0,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "cid",
+      "sort": 1,
+	  "width":60,
+	  "type":"auto",
+      "caption": "id"
+    },
+    {
+      "name": "cname",
+      "must": 1,
+      "sort": 1,
+	  "width":200,
+      "caption": "名称"
+    },
+    {
+      "name": "cremark",
+      "caption": "备注",
+	  "align":"left"
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+	"account": "dwHOEFON",
+	"table": "eReimburse",
+	"defaultorder": "rStartDate DESC",
+	"pagesize": 10,
+	"rowheight": 40,
+	"visiblecol": 1,
+	"defaulteditmax": 1,
+	"select": 40,
+	"deletecols": 
+	[
+		1,
+		2
+	],
+	"slave": 
+	[
+		{
+			"panel": "PnS",
+			"masterfield": "rid",
+			"slavefield": "aReimburseId"
+		}
+	],
+	"fields": 
+	[
+		{
+			"name": "rId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"view": 2,
+			"type": "auto"
+		},
+		{
+			"name": "rName",
+			"caption": "名称",
+			"query": 1,
+			"sort": 1,
+			"must": 1,
+			"width": 180
+		},
+		{
+			"name": "rContractId",
+			"caption": "PI号",
+			"query": 1,
+			"type": "dbcombopair",
+			"table": "eContract",
+			"datafield": "cId",
+			"viewfield": "cDetail",
+			"width": 120
+		},
+		{
+			"name": "rCreatorId",
+			"caption": "经办人",
+			"view": 3,
+			"query": 1,
+			"align": "center",
+			"type": "dbcombopair",
+			"table": "eUser",
+			"datafield": "uId",
+			"viewfield": "uName",
+			"width": 100
+		},
+		{
+			"name": "rFlowId",
+			"caption": "报销流程",
+			"align": "center",
+			"query": 1,
+			"must": 1,
+			"type": "dbcombopair",
+			"table": "eFlow",
+			"datafield": "fId",
+			"viewfield": "fName",
+			"width": 80
+		},
+		{
+			"name": "rFeeTypeId",
+			"caption": "费用类型",
+			"query": 1,
+			"must": 1,
+			"type": "dbcombopair",
+			"table": "eFeeType",
+			"datafield": "fId",
+			"viewfield": "fName",
+			"viewdefault": "",
+			"width": 80
+		},
+		{
+			"name": "rAmount",
+			"caption": "金额",
+			"type": "float",
+			"format": "￥%n",
+			"align": "right",
+			"sort": 1,
+			"width": 120
+		},
+		{
+			"name": "rStartDate",
+			"caption": "录入时间",
+			"sort": 1,
+			"width": 150,
+			"type": "datetime",
+			"align": "center"
+		},
+		{
+			"name": "rStatus",
+			"caption": "状态",
+			"view": 3,
+			"sort": 1,
+			"width": 80,
+			"type": "combo",
+			"readonly": 1,
+			"query": 1,
+			"filter": 1,
+			"align": "center",
+			"filterlist": 
+			[
+				"待提交",
+				"待审批",
+				"审批中",
+				"已完成",
+				"已驳回"
+			]
+		},
+		{
+			"name": "rPayPublic",
+			"caption": "账户类型",
+			"sort": 1,
+			"width": 120,
+			"type": "combo",
+			"query": 1,
+			"dbfilter": 1,
+			"list": 
+			[
+				"对公",
+				"对私"
+			]
+		},
+		{
+			"name": "rPayMode",
+			"caption": "付款方式",
+			"sort": 1,
+			"width": 120,
+			"type": "combo",
+			"query": 1,
+			"dbfilter": 1,
+			"list": 
+			[
+				"电汇",
+				"支付宝",
+				"微信",
+				"现金"
+			]
+		},
+		{
+			"name": "rPayName",
+			"caption": "收款人",
+			"query": 1,
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "rPayAccount",
+			"caption": "收款账号",
+			"query": 1,
+			"sort": 1,
+			"width": 160
+		},
+		{
+			"name": "rPayBank",
+			"caption": "收款银行",
+			"query": 1,
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "rPayBankLocation",
+			"caption": "银行所在地",
+			"query": 1,
+			"sort": 1,
+			"width": 120
+		},
+		{
+			"name": "rApproverIds",
+			"view": 2
+		},
+		{
+			"name": "rCurrApproverId",
+			"view": 2
+		},
+		{
+			"name": "rCopyIds",
+			"view": 2
+		},
+		{
+			"name": "rDetail",
+			"view": 2
+		},
+		{
+			"name": "rRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		},
+		{
+			"name": "rId as btn",
+			"caption": "",
+			"type": "button",
+			"width": 70,
+			"list": 
+			[
+				{
+					"caption": "提交",
+					"type": "primary",
+					"width": 60,
+					"method": "custom"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"account":"dwDeWeb",
+	"table": "dwUser1k",
+	"primarykey":"uId",
+	"pagesize": 10,
+	"fields": 
+	[
+		{
+			"name": "uId",
+			"caption": "id",
+			"sort": 1,
+			"width": 120,
+			"type": "auto",
+			"align": "center",
+			"query": 0
+		},
+		{
+			"name": "uName",
+			"caption": "Name",
+			"sort": 1,
+			"width": 120,
+			"align": "center",
+			"query": 1
+		},{
+			"name": "uAge",
+			"caption": "Age",
+			"sort": 1,
+			"width": 100
+		}
+	]
+}

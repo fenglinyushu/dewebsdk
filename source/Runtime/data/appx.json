@@ -1,0 +1,135 @@
+{
+	"name":"appx",
+    "uid":"1",
+	"items":[
+		{
+			"name":"main",
+			"caption":"AppX综合管理系统",
+			"ad":{
+				"height":120,
+				"interval":2,
+				"items":[
+					{
+						"img":"media/images/appx/ad1.jpg",
+						"href":"/onecity"
+					},
+					{
+						"img":"media/images/appx/ad2.jpg",
+						"href":"/qrcode"
+					},
+					{
+						"img":"media/images/appx/ad3.jpg",
+						"href":"/hello"
+					},
+					{
+						"img":"media/images/appx/ad4.jpg",
+						"href":"/hello"
+					}
+				]
+			},
+			"search":{
+				"visible":true,
+				"height":50,
+				"color":[240,240,240],
+				"placeholder":"搜索"
+			},
+			"module":{
+				"colcount":4,
+				"itemheight":100,
+				"items":[
+					{
+						"caption":"我的第一次",
+						"img":"media/images/appx/m (1).png",
+						"href":"/hello"
+					},
+					{
+						"caption":"同城管家",
+						"img":"media/images/appx/m (2).png",
+						"href":"/onecity"
+					},
+					{
+						"caption":"疫苗预约",
+						"img":"media/images/appx/m (3).png",
+						"href":"/ymyy"
+					},
+					{
+						"caption":"中南医院",
+						"img":"media/images/appx/m (4).png",
+						"href":"/mobile2"
+					},
+					{
+						"caption":"百度地图",
+						"img":"media/images/appx/m (5).png",
+						"href":"/bmap"
+					},
+					{
+						"caption":"二维码生成",
+						"img":"media/images/appx/m (7).png",
+						"href":"/qrcodecreator"
+					},
+					{
+						"caption":"服务评价",
+						"img":"media/images/appx/m (6).png",
+						"href":"/workrate"
+					},
+					{
+						"caption":"PDF处理",
+						"img":"media/images/appx/m (8).png",
+						"href":"/pdf"
+					},
+					{
+						"caption":"扫描二维码",
+						"img":"media/images/appx/m (9).png",
+						"href":"/qrcode"
+					},
+					{
+						"caption":"华容道",
+						"img":"media/images/appx/m (10).png",
+						"href":"/hrd"
+					},
+					{
+						"caption":"考试系统",
+						"img":"media/images/appx/m (11).png",
+						"href":"/driver"
+					},
+					{
+						"caption":"手机商城",
+						"img":"media/images/appx/m (12).png",
+						"href":"/app0"
+					}
+				]
+			},
+			"footer":{
+				"height":60,
+				"fontsize":9,
+				"items":[
+					{
+						"caption":"首页",
+						"img":"media/images/appx/f (1).png",
+						"href":"/onecity"
+					},
+					{
+						"caption":"商城",
+						"img":"media/images/appx/f (2).png",
+						"href":"/onecity"
+					},
+					{
+						"caption":"",
+						"img":"media/images/appx/f (3).png",
+						"href":"/onecity"
+					},
+					{
+						"caption":"消息",
+						"img":"media/images/appx/f (4).png",
+						"href":"/onecity"
+					},
+					{
+						"caption":"我的",
+						"img":"media/images/appx/f (5).png",
+						"href":"/onecity"
+					}
+				]
+			}
+		}
+	]	
+}

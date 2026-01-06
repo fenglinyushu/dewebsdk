@@ -1,0 +1,45 @@
+{
+	"account": "dwHOEFON",
+	"table": "eReimburseAttach",
+	"export": 0,
+	"buttons": 0,
+	"import": 0,
+	"switch": 0,
+	"fields": 
+	[
+		{
+			"name": "aId",
+			"view": 2
+		},
+		{
+			"name": "aReimburseId",
+			"view": 2
+		},
+		{
+			"name": "aName",
+			"caption": "名称",
+			"width": 200
+		},
+		{
+			"name": "aAttach",
+			"caption": "票据",
+			"view": 0,
+			"sort": 1,
+			"width": 60,
+			"type": "image",
+			"imgdir": "media/images/dwERPtim/",
+			"imgtype": 
+			[
+				"jpg",
+				"png",
+				"bmp",
+				"gif"
+			],
+			"imgheight": 40,
+			"imgwidth": 50,
+			"dwstyle": "border-radius:3px;",
+			"preview": 1,
+			"align": "center"
+		}
+	]
+}

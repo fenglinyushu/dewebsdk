@@ -1,0 +1,73 @@
+{
+	"account":"dwERP",
+	"table": "eReceiveUnit",
+	"fields": 
+	[
+		{
+			"name": "rId",
+			"caption": "id",
+			"sort": 1,
+			"width": 60,
+			"type": "auto",
+			"align": "center"
+		},
+		{
+			"name": "rName",
+			"caption": "名称",
+			"sort": 1,
+			"query": 1,
+			"width": 200
+		},
+		{
+			"name": "rNo",
+			"caption": "编码",
+			"sort": 1,
+			"query": 1,
+			"align":"center",
+			"width": 80
+		},
+		{
+			"name": "rContactName",
+			"caption": "联系人",
+			"align": "center",
+			"sort": 1,
+			"width": 90,
+			"query": 1
+		},
+		{
+			"name": "rPhone",
+			"caption": "电话",
+			"sort": 1,
+			"width": 140,
+			"query": 1
+		},
+		{
+			"name": "rEmail",
+			"caption": "邮箱",
+			"sort": 1,
+			"width": 200
+		},
+		{
+			"name": "rAddress",
+			"caption": "地址",
+			"sort": 1,
+			"width": 220,
+			"query": 1
+		},
+		{
+			"name": "rCreateDate",
+			"caption": "创建日期",
+			"type":"date",
+			"align": "center",
+			"sort": 1,
+			"width": 120
+		},
+		{
+			"name": "rRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 150,
+			"query": 1
+		}
+	]
+}

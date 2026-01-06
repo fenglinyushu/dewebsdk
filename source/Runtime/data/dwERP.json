@@ -1,0 +1,28 @@
+{
+	"accountname":"dwERP",
+	"tablename":"eUser",
+	"username":"uName",
+	"password":"uPassword",
+	"id":"uId",
+	
+	"successurl":"/dwERP",
+	"defaultusername":"admin",
+	"defaultpassword":"123456",
+
+	"salt":"uSalt",
+	"logo":"media/images/glogin/logo.jpg",
+	"backgroud":"media/images/glogin/background.jpg",
+	"left":70,
+	"top":40,
+	"caption":"Welcome to dwERP",
+	"captcha":0,
+	"wrongtimes":5,
+	"remember":1,
+	"expire":30,
+	"cookieprefix":"dwe_", 
+	"domain":"delphibbs.com",
+	"key":"dwe@12345",
+	"secret":0,
+	"errormessage":"请输入有效的用户信息！",
+	"disablemessage":"由于多次输入错误，请稍晚些再试！"
+}

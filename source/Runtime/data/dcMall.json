@@ -1,0 +1,120 @@
+{
+	"account":"dwAccess",
+	"table": "dmDemo",
+	"margins":[0,15,5,15],
+	"cardwidth":365,
+	"cardheight":135,
+	"new":0,
+	"edit":0,
+	"delete":0,
+	"cardstyle":"border-radius:8px;background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);",
+	"fields": 
+	[
+		{
+			"name": "did",
+			"view": 2
+		},
+		{
+			"name": "dname",
+			"caption": "图片",
+			"left":15,
+			"top":11,
+			"height":108,
+			"width": 108,
+			"type": "image",
+			"imgdir": "media/images/mall/demo/",
+			"imgtype": ["jpg"],
+			"format":"%s.jpg",
+			"dwstyle":"border-radius:7px;border:solid 1px #ddd;"
+		},
+		{
+			"name": "dCaption",
+			"caption": "名称",
+			"left":140,
+			"top":11,
+			"right": 10,
+			"height":35,
+			"font":{
+				"size" : 13,
+				"bold":1,
+				"color": [25,25,25]
+			},
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "dViews",
+			"caption": "查看",
+			"sort": 1,
+			"left":140,
+			"top":35,
+			"width": 60,
+			"height":20,
+			"font":{
+				"size" : 9,
+				"color": [102,102,102]
+			},
+			"format":"查看 %s",
+			"query": 1
+		},
+		{
+			"name": "dLikes",
+			"caption": "点赞",
+			"sort": 1,
+			"left":200,
+			"top":35,
+			"width": 60,
+			"height":20,
+			"font":{
+				"size" : 9,
+				"color": [102,102,102]
+			},
+			"format":"点赞 %s",
+			"query": 1
+		},
+		{
+			"name": "dOrders",
+			"caption": "下单",
+			"sort": 1,
+			"left":260,
+			"top":35,
+			"width": 60,
+			"height":20,
+			"font":{
+				"size" : 9,
+				"color": [102,102,102]
+			},
+			"format":"下单 %s"
+		},
+		{
+			"name": "dText",
+			"caption": "描述",
+			"left":140,
+			"top":55,
+			"right": 15,
+			"align": "left",
+			"height":36,
+			"dwstyle":"overflow: hidden;white-space: nowrap;text-overflow: ellipsis;",
+			"font":{
+				"size" : 9,
+				"color": [102,102,102]
+			},
+			"query": 1
+		},
+		{
+			"name": "dPrice",
+			"caption": "价格",
+			"sort": 1,
+			"top":90,
+			"right":20,
+			"left": 140,
+			"type": "money",
+			"align": "right",
+			"font":{
+				"color": [255,80,0],
+				"size":8
+			},
+			"format":"￥<a style='font-size:20px;'>%.0f</a>.00"
+		}
+	]
+}

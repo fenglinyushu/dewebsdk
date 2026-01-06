@@ -1,0 +1,87 @@
+{
+	"account": "dwERP",
+	"table": "eGoods",
+	"defaultquerymode": 2,
+	"prefix": "g",
+	"pagesize": 5,
+	"buttons": 0,
+	"fields": 
+	[
+		{
+			"name": "gActive",
+			"caption": "在用",
+			"sort": 1,
+			"width": "80",
+			"type": "boolean",
+			"align": "center",
+			"query": 0,
+			"dbfilter": 1,
+			"list": 
+			[
+				"○",
+				"●"
+			],
+			"datatype": 5
+		},
+		{
+			"name": "gName",
+			"caption": "商品名称",
+			"sort": 1,
+			"query": 1,
+			"width": 150
+		},
+		{
+			"name": "gCode",
+			"caption": "编码",
+			"sort": 1,
+			"width": "80",
+			"type": "string",
+			"query": 1,
+			"fuzzy": 1,
+			"align": "left",
+			"datatype": 24
+		},
+		{
+			"name": "gSpecification",
+			"caption": "规格",
+			"sort": 1,
+			"query": 0,
+			"width": 100
+		},
+		{
+			"name": "gCategoryid",
+			"caption": "类别",
+			"sort": 1,
+			"width": "120",
+			"type": "dbtreepair",
+			"align": "center",
+			"fuzzy": 1,
+			"query": 1,
+			"dbfilter":1,
+			"table": "eCategory",
+			"datafield": "cNo",
+			"viewfield": "cName",
+			"datatype": 3
+		},
+		{
+			"name": "gSupplierId",
+			"caption": "供应商",
+			"sort": 1,
+			"width": "120",
+			"type": "dbcombopair",
+			"dbfilter": 1,
+			"query": 0,
+			"table": "eSupplier",
+			"datafield": "sID",
+			"viewfield": "sName",
+			"datatype": 3
+		},
+		{
+			"name": "gUnit",
+			"caption": "单位",
+			"sort": 1,
+			"align": "center",
+			"width": 80
+		}
+	]
+}

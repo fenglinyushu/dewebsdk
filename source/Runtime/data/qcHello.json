@@ -1,0 +1,156 @@
+{
+	"account": "dwAccess",
+	"table": "dw_Member",
+	"pagesize": 5,
+	"rowheight": 45,
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"defaultquerymode": 1,
+	"switch": 1,
+	"border": 1,
+	"buttons": 1,
+	"margin": 10,
+	"radius": 5,
+	"editwidth": 320,
+	"buttoncaption": 1,
+	"defaulteditmax": 0,
+	"fields": 
+	[
+		{
+			"name": "ID",
+			"width": 50,
+			"type": "auto",
+			"must": 0,
+			"query": 0,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center"
+		},
+		{
+			"name": "AName",
+			"caption": "姓名",
+			"width": 100,
+			"type": "string",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center"
+		},
+		{
+			"name": "ASex",
+			"caption": "性别",
+			"width": 100,
+			"type": "boolean",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center",
+			"list": 
+			[
+				"女",
+				"男"
+			]
+		},
+		{
+			"name": "Province",
+			"caption": "省份",
+			"width": 100,
+			"type": "combo",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center",
+			"list": 
+			[
+				"湖北",
+				"陕西",
+				"广东",
+				"广西",
+				"上海",
+				"江苏",
+				"湖南"
+			]
+		},
+		{
+			"name": "HeadShip",
+			"caption": "职务",
+			"width": 100,
+			"type": "combo",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center",
+			"list": 
+			[
+				"校长",
+				"副校长",
+				"书记",
+				"院长",
+				"副院长",
+				"主任",
+				"科长"
+			]
+		},
+		{
+			"name": "Salary",
+			"caption": "工资",
+			"width": 100,
+			"type": "integer",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center",
+			"min": 0,
+			"max": 100
+		},
+		{
+			"name": "Addr",
+			"caption": "地址",
+			"width": 240,
+			"type": "tree",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left",
+			"options": "[{id:'a',label:'a',children:[{id:'aa',label:'aa'}, {id:'ab',label:'ab'}]}, {id:'b',label:'b'}]"
+		},
+		{
+			"name": "Birthday",
+			"caption": "生日",
+			"width": 100,
+			"type": "date",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left"
+		},
+		{
+			"name": "remark",
+			"caption": "备注",
+			"width": 200,
+			"type": "string",
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left"
+		}
+	]
+}

@@ -1,0 +1,47 @@
+{
+	"account": "dwDeWeb",
+	"table": "dwFriend",
+	"defaulteditmax": 0,
+	"pagesize": 10,
+	"select": 50,
+	"fields": 
+	[
+		{
+			"name": "fId",
+			"view": 2
+		},
+		{
+			"name": "fName",
+			"caption": "公司名称",
+			"query": 1,
+			"sort":1,
+			"width": 250
+		},
+		{
+			"name": "fLogo",
+			"caption": "Logo",
+			"sort":1,
+			"width": 120
+		},
+		{
+			"name": "fContact",
+			"caption": "联系人",
+			"query": 1,
+			"sort":1,
+			"width": 120
+		},
+		{
+			"name": "fPhone",
+			"caption": "联系电话",
+			"query": 1,
+			"sort":1,
+			"width": 120
+		},
+		{
+			"name": "fRemark",
+			"caption": "备注",
+			"width": 120,
+			"query": 1
+		}
+	]
+}

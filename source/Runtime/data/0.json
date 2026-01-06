@@ -1,0 +1,61 @@
+{
+	"account": "dwQBank",
+	"table": "bop_Question",
+	"select": 40,
+	"visiblecol": 1,
+	"import": 1,
+	"oneline": 0,
+	"defaulteditmax": 1,
+	"where":"qType='选择题'",
+	"fields": 
+	[
+		{
+			"name": "qId",
+			"caption": "编号",
+			"type": "auto",
+			"align": "center",
+			"width": 50
+		},
+		{
+			"name": "qTitle",
+			"caption": "题干",
+			"editwidth":720,
+			"sort": 1,
+			"must":1,
+			"width": 240
+		},
+		{
+			"name": "qDifficulty",
+			"caption": "难度",
+			"sort": 1,"must":1,
+			"width": 80,
+			"type": "combo",
+			"align": "center",			
+			"list": ["容易","中等","较难"],
+			"renders":[
+				{
+					"data":"容易",
+					"background":[223, 240, 216],
+					"color":[82, 138, 66],
+					"bold":1
+				},
+				{
+					"data":"中等",
+					"background":[255, 152, 80],
+					"color":[255, 255, 255]
+				},
+				{
+					"data":"较难",
+					"background":[244, 87, 74],
+					"color":[255, 255, 255],
+					"italic":1
+				}
+			]
+		},
+		{
+			"name":"qType",
+			"view":0,
+			"default":"选择题"
+		}
+	]
+}

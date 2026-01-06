@@ -1,0 +1,32 @@
+{
+	"account": "dwGreen",
+	"table": "gServiceDebug",
+	"defaulteditmax": 1,
+	"pagesize": 5,
+	"rowheight": 80,
+	"fields": 
+	[
+		{
+			"name": "sTitle",
+			"caption": "标题",
+			"query": 1,
+			"sort": 1,
+			"width": 250
+		},
+		{
+			"name": "sDetail",
+			"caption": "介绍",
+			"sort": 1,
+			"width": 300,
+			"height": 180,
+			"query": 1
+		},
+		{
+			"name": "sId",
+			"caption": "Id",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		}
+	]
+}

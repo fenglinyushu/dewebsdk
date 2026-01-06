@@ -1,0 +1,102 @@
+{
+   "theme" : {
+      "index" : 0,
+      "items" : [
+         {
+            "name" : "默认",
+            "logobk" : "#222e41",
+            "logofont" : "#FFFFFF",
+            "bannerbk" : "#f5f7fa",
+            "bannerfont" : "#5C5C5C",
+            "menubk" : "#304156",
+            "menuactive" : "#333333",
+            "menuhover" : "#333333",
+            "menuactivefont" : "#FFD04B",
+            "menufont" : "#FFFFFF"
+         },
+         {
+            "name" : "若依",
+            "logobk" : "#127EA2",
+            "logofont" : "#ffffff",
+            "bannerbk" : "#018CB5",
+            "bannerfont" : "#ffffff",
+            "menubk" : "#0A2D4D",
+            "menuactive" : "#088EFD",
+            "menuhover" : "#088EFD",
+            "menufont" : "#ffffff"
+         },
+         {
+            "name" : "腾讯云",
+            "logobk" : "#262F40",
+            "logofont" : "#A1ABB7",
+            "bannerbk" : "#262F3E",
+            "bannerfont" : "#A1ABB7",
+            "menubk" : "#1E222D",
+            "menuactive" : "#2174ff",
+            "menuhover" : "#2174ff",
+            "menufont" : "#A1ABB7"
+         },
+         {
+            "name" : "蓝色清爽",
+            "logobk" : "#4056e0",
+            "logofont" : "#ffffff",
+            "bannerbk" : "#ffffff",
+            "bannerfont" : "#646464",
+            "menubk" : "#5066e0",
+            "menuactive" : "#ffffff",
+            "menuactivefont" : "#888888",
+            "menuhover" : "#dddddd",
+            "menufont" : "#ffffff"
+         },
+         {
+            "name" : "红色激情",
+            "logobk" : "#B81C24",
+            "logofont" : "#FFEE75",
+            "bannerbk" : "#D8162C",
+            "bannerfont" : "#FFEE75",
+            "menubk" : "#F0F0F0",
+            "menuactive" : "#D8162C",
+            "menuactivefont" : "#FFEE75",
+            "menuhover" : "#c8061C",
+            "menufont" : "#333333"
+         },
+         {
+            "name" : "智能商业",
+            "logobk" : "#22223e",
+            "logofont" : "#ffffff",
+            "bannerbk" : "#ffffff",
+            "bannerfont" : "#000000",
+            "menubk" : "#22223e",
+            "menuactive" : "#33334f",
+            "menuactivefont" : "#fff",
+            "menuhover" : "#33334f",
+            "menufont" : "#ffffff"
+         },
+         {
+            "name" : "后台管理",
+            "logobk" : "#525186",
+            "logofont" : "#ffffff",
+            "bannerbk" : "#ffffff",
+            "bannerfont" : "#000000",
+            "menubk" : "#4a4777",
+            "menuactive" : "#595689",
+            "menuactivefont" : "#ffffff",
+            "menuhover" : "#525186",
+            "menufont" : "#ffffff"
+         },
+         {
+            "name" : "bootStrap",
+            "logobk" : "#ffffff",
+            "logofont" : "#878787",
+            "logoborder" : "#E1E1E1",
+            "bannerbk" : "#ffffff",
+            "bannerfont" : "#878787",
+            "menubk" : "#ffffff",
+            "menuactive" : "#ffffff",
+            "menuactivefont" : "#54B1F6",
+            "menuhover" : "#eeeeee",
+            "menufont" : "#878787"
+         }
+      ]
+   }
+}

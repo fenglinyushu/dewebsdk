@@ -1,0 +1,48 @@
+{
+	"account": "dwGreen",
+	"table": "bas_Config",
+	"delete": 0,
+	"new": 0,
+	"export": 0,
+	"where": "cMode=0",
+	"oneline": 1,
+	"fields": 
+	[
+		{
+			"name": "cId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"view": 2,
+			"type": "auto"
+		},
+		{
+			"name": "cTitle",
+			"caption": "配置项",
+			"query": 1,
+			"sort": 1,
+			"readonly": 1,
+			"width": 180
+		},
+		{
+			"name": "cValue0",
+			"caption": "繁体",
+			"width": 250
+		},
+		{
+			"name": "cValue1",
+			"caption": "简体",
+			"width": 250
+		},
+		{
+			"name": "cValue2",
+			"caption": "英文",
+			"width": 250
+		},
+		{
+			"name": "cRemark",
+			"caption": "说明",
+			"width": 100
+		}
+	]
+}

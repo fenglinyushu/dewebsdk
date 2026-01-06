@@ -1,0 +1,31 @@
+{
+	"accountname":"dwDemo",
+	"tablename":"dmUser",
+	"username":"uName",
+	"password":"uPassword",
+	"id":"uid",
+	"secret":0,
+
+	"logo":"media/images/glogin/logo.jpg",
+	"backgroud":"media/images/glogin/background.jpg",
+	"left":70,
+	"top":40,
+	"caption":"Welcome to dwMobile",
+	"captcha":0,
+	"wrongtimes":5,
+	"remember":0,
+	"expire":30,
+	"cookieprefix":"dwm_", 
+	"domain":"delphibbs.com",
+	"key":"dwm@12345",
+	"errormessage":"请输入有效的用户信息！",
+	"disablemessage":"由于多次输入错误，请稍晚些再试！",
+	"successurl":"/dwMobile",
+	"defaultusername":"张云政",
+	"defaultpassword":"123456",
+	"register":{
+		"eanbled":1,
+		"type":"success",
+		"url":"/hello"
+	}
+}

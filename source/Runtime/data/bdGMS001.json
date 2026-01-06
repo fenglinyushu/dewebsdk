@@ -1,0 +1,46 @@
+{
+   "connectionstring" : "Server=127.0.0.1,8829;Database=dwERP;User_Name=sa;Password={593106};DriverID=MSSQL",
+   "image" : "media/images/board/bk051.jpg",
+   "interval" : 5,
+   "caption" : "数据可视化展示平台",
+   "items" : [
+      {
+         "name" : "内容区",
+         "align" : "client",
+         "type" : "panel",
+         "items" : [
+            {
+               "name" : "1111",
+               "width" : "500",
+               "align" : "client",
+               "type" : "bar",
+               "option" : {
+                  "xAxis" : {
+                     "type" : "category",
+                     "data" : [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" ]
+                  },
+                  "yAxis" : {
+                     "type" : "value"
+                  },
+                  "grid" : {
+                     "top" : "10%",
+                     "left" : "3%",
+                     "right" : "10%",
+                     "bottom" : "3%",
+                     "containLabel" : true
+                  },
+                  "series" : [
+                     {
+                        "type" : "bar",
+                        "data" : [ 120, 200, 150, 80, 70, 110, 130 ]
+                     }
+                  ]
+               },
+               "update" : {
+                  "sql" : "SELECT uId,uAge FROM eUser ORDER by uAge"
+               }
+            }
+         ]
+      }
+   ]
+}

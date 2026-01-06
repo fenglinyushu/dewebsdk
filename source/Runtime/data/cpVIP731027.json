@@ -1,0 +1,73 @@
+{
+	"account":"dwAccess",
+	"table": "dw_vip",
+	"pagesize": 10,
+	"rowheight": 45,
+	"defaulteditmax": 0,
+	"defaultquerymode":1,
+	"defaultorder": "orderdate DESC",
+	"fixed":[1,0],
+	"edit": 1,
+	"new":1,
+	"delete":1,
+	"export":0,
+	"switch":0,
+	"buttons":1,
+	"fields": 
+	[
+		{
+			"name": "username",
+			"caption": "用户名",
+			"sort": 1,
+			"width": "350",
+			"query": 1
+		},
+		{
+			"name":"id",
+			"type":"auto",
+			"view":2
+		},
+		{
+			"name": "remain",
+			"caption": "可用数量",
+			"sort": 1,
+			"width": "100",
+			"type": "integer",
+			"align": "center"
+		},
+		{
+			"name": "total",
+			"caption": "总数量",
+			"sort": 1,
+			"width": "100",
+			"type": "integer",
+			"align": "center"
+		},
+		{
+			"name": "orderdate",
+			"caption": "购买时间",
+			"sort": 1,
+			"width": "140",
+			"type": "date",
+			"align": "center",
+			"query": 1
+		},
+		{
+			"name": "expiredate",
+			"caption": "失效时间",
+			"sort": 1,
+			"width": "140",
+			"type": "date",
+			"align": "center",
+			"query": 1
+		},
+		{
+			"name": "vmemo",
+			"caption": "备注",
+			"sort": 1,
+			"width": "240",
+			"align": "left",
+			"query": 1
+		}
+	]
+}

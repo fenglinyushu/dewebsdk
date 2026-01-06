@@ -1,0 +1,189 @@
+{
+	"account": "dwHOEFON",
+	"table": "eContract",
+	"fields": 
+	[
+		{
+			"name": "cId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"		
+		},
+		{
+			"name": "cUserID",
+			"caption": "业务员",
+			"type": "dbcombopair",
+			"sort": 1,
+			"query": 1,
+			"width": 80,
+			"align": "center",
+			"table":"eUser",
+			"datafield":"uId",
+			"viewfield":"uName"
+		},
+		{
+			"name": "cPI_NO",
+			"caption": "PI号",
+			"sort": 1,
+			"query": 1,
+			"width": 120
+		},
+		{
+			"name": "cCustomerId",
+			"caption": "客户",
+			"sort": 1,
+			"query": 1,
+			"width": 80,
+			"align": "center",
+			"type": "dbcombopair",
+			"table":"eCustomer",
+			"datafield":"cId",
+			"viewfield":"cName"
+		},
+		{
+			"name": "cPaymentMethod",
+			"caption": "付款方式",
+			"type":"combo",
+			"align": "center",
+			"sort": 1,
+			"filter": 1,
+			"list": ["TT 15天", "TT 30天", "TT 45天","即期L/C","远期L/C"],
+			"filterlist": ["TT 15天", "TT 30天", "TT 45天","即期L/C","远期L/C"],
+			"width": 110
+		},
+		{
+			"name": "cEntryDate",
+			"caption": "录入日期",
+			"type":"date",
+			"align": "center",
+			"width": 100,
+			"sort": 1
+		},
+		{
+			"name": "cETD",
+			"caption": "交期ETD",
+			"type":"date",
+			"align": "center",
+			"width": 100,
+			"sort": 1
+		},
+		{
+			"name": "cProductId",
+			"caption": "生产工厂",
+			"width": 100,
+			"type": "dbcombopair",
+			"table":"eFactory",
+			"datafield":"fId",
+			"viewfield":"fName",
+			"sort": 1
+		},
+		{
+			"name": "cProductId as a0",
+			"caption": "产品名称",
+			"width": 100,
+			"type": "dbcombopair",
+			"table":"eProduct",
+			"datafield":"pId",
+			"viewfield":"pName",
+			"sort": 1
+		},
+		{
+			"name": "cProductId as a1",
+			"caption": "产品材质",
+			"width": 100,
+			"type": "dbcombopair",
+			"table":"eProduct",
+			"datafield":"pId",
+			"viewfield":"pMaterial",
+			"sort": 1
+		},
+		{
+			"name": "cProductPackage",
+			"caption": "产品包装",
+			"sort": 1,
+			"width": 100,
+			"query": 1
+		},
+		{
+			"name": "cFullInspection",
+			"caption": "全检",
+			"type": "combo",
+			"list":["是","否"],
+			"align": "center",
+			"sort": 1,
+			"dbfilter":1,
+			"width": 90,
+			"query": 1
+		},
+		{
+			"name": "cCommission",
+			"caption": "佣金",
+			"sort": 1,
+			"width": 100,
+			"type": "money",
+			"align": "right"
+		},
+		{
+			"name": "cPriceUnit",
+			"caption": "售价单位",
+			"align": "center",
+			"type": "combo",
+			"list":[ "元",  "美元",  "欧元",  "英镑",  "日元",  "韩元",  "澳元",  "人民币",  "港币",  "新加坡元",  "加元",  "瑞士法郎",  "泰铢",  "新台币"],
+			"sort": 1,
+			"width": 100,
+			"query": 1
+		},
+		{
+			"name": "cProductUnit",
+			"caption": "产品单位",
+			"type": "combo",
+			"align": "center",
+			"list":[ "双",  "个",  "部",  "套",  "台",  "辆",  "支"],
+			"sort": 1,
+			"width": 100,
+			"query": 1
+		},
+		{
+			"name": "cFactoryCost",
+			"caption": "工厂进价",
+			"sort": 1,
+			"width": 100,
+			"type": "money",
+			"align": "right"
+		},
+		{
+			"name": "cSalesPrice",
+			"caption": "销售单价",
+			"sort": 1,
+			"width": 100,
+			"type": "money",
+			"align": "right"
+		},
+		{
+			"name": "cTotalSales",
+			"caption": "销售总价",
+			"sort": 1,
+			"width": 100,
+			"type": "money",
+			"align": "right"
+		},
+		{
+			"name": "cOrderStatus",
+			"caption": "订单状态",
+			"align": "center",
+			"type": "combo",
+			"list":[ "已完结","已投产","等待定金","可特殊先行双"],
+			"sort": 1,
+			"width": 100,
+			"query": 1
+		},
+		{
+			"name": "cRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

@@ -1,0 +1,74 @@
+{
+	"account":"dwERP",
+	"table": "eUser",
+	"margin": 0,
+	"border": 1,
+	"print": 0,
+	"pagesize": 10,
+	"defaultquerymode": 1,
+	"fields": 
+	[
+		{
+			"name": "uName",
+			"caption": "用户名",
+			"query": 1,
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "uRealName",
+			"caption": "姓名",
+			"query": 1,
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "uSex",
+			"type": "boolean",
+			"caption": "性别",
+			"query": 1,
+			"sort": 1,
+			"list": 
+			[
+				"女",
+				"男"
+			],
+			"width": 80
+		},
+		{
+			"name": "uAge",
+			"type": "integer",
+			"caption": "年龄",
+			"query": 1,
+			"sort": 1,
+			"max": 65,
+			"min": 22,
+			"width": 80
+		},
+		{
+			"name": "uDepartment",
+			"caption": "部门",
+			"type": "dbtreepair",
+			"width": 0,
+			"dbfilter":1,
+			"table": "eDepartment",
+			"datafield": "dId",
+			"viewfield": "dName",
+			"listlink":" > "
+		},
+		{
+			"name": "uPhone",
+			"caption": "电话",
+			"sort": 1,
+			"query": 1,
+			"width": 180
+		},
+		{
+			"name": "uRemark",
+			"caption": "备注",
+			"query": 1,
+			"sort": 1,
+			"width": 100
+		}
+	]
+}

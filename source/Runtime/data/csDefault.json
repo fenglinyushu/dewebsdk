@@ -1,0 +1,151 @@
+{
+	"account": "dwFrame",
+
+	"name": "getuserbyuid_sql",
+	"table": "#tempUser",
+	"primary":"uid",
+	"defaultquerymode":2,
+	
+	"params":[
+		{
+			"name":"minuid",
+			"type":"integer",
+			"caption":"最小id",
+			"query":1,	
+			"value":0
+		},
+		{
+			"name":"maxuid",
+			"caption":"最大id",
+			"type":"integer",
+			"query":1,	
+			"value":100
+		},
+		{
+			"name":"key",
+			"caption":"角色",
+			"query":1,	
+			"value":""
+		},
+		{
+			"name":"gender",
+			"caption":"性别",
+			"type":"boolean",
+			"query":1,	
+			"value":true
+		},
+		{
+			"name":"mindate",
+			"type":"datetime",
+			"query":1,	
+			"value":"2005-01-01 12:00:00"
+		}
+	],
+	
+	
+	"deletecols":[3],
+
+	"pagesize": 10,
+	"rowheight": 45,
+	"defaulteditmax": 1,
+	"defaultquerymode": 2,
+	"defaultempty": 0,
+	"searchwidth":100,
+	"switch": 1,
+	"select":40,
+	"deletecols":[12],
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"buttons": 1,
+	"border": 1,
+	"buttoncaption": 2,
+	"fields1": [
+		{
+			"name": "uid as a0",
+			"caption": "序号",
+			"full":0,
+			"width": 60,
+			"type": "index",
+			"align": "center"
+
+		},
+		{
+			"name": "uid",
+			"sort": 1,
+			"width": 60,
+			"type": "auto",
+			"align": "center",
+			"fuzzy": 1,
+			"query": 0,
+			"datatype": 14
+		},
+		{
+			"name": "uname",
+			"caption": "名称",
+			"sort": 1,
+			"query": 0,
+			"width": 100
+		},
+		{
+			"name": "usex",
+			"caption": "性别",
+			"sort": 1,
+			"dbfilter":0,
+			"width": 100,
+			"type": "boolean",
+			"align": "center",
+			"query": 0,
+			"list": [
+				"女",
+				"男"
+			]
+		},
+		{
+			"name": "uage",
+			"caption": "年龄",
+			"type":"int",
+			"sort": 1,
+			"query": 0,
+			"align":"right",
+			"width": 100
+		},
+		{
+			"name": "urole",
+			"caption": "角色",
+			"type": "combo",
+			"align": "center",
+			"dbfilter":1,
+			"list": 
+			[
+				"超级管理员",
+				"管理员",
+				"经理",
+				"业务员"
+			],
+			"sort": 1,
+			"width": 100,
+			"query": 0
+		},
+		{
+			"name": "ulastlive",
+			"caption": "最后登录",
+			"sort": 1,
+			"width": 140,
+			"type": "date",
+			"align": "left",
+			"fuzzy": 1,
+			"query": 0
+		},
+		{
+			"name": "uremark",
+			"caption": "描述",
+			"sort": 1,
+			"width": 100,
+			"type": "memo",
+			"align": "left",
+			"fuzzy": 1,
+			"query": 0
+		}
+	]
+}

@@ -1,0 +1,100 @@
+{
+	"account":"dwDemo",
+	"table": "dmMember",
+	"pagesize": 5,
+	"cardheight": 160,
+	"cardmargins":[10,1,10,9],
+	"cardcolor":[250,250,250],
+	"cardstyle":"background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);border-radius:10px;",
+	"radius": 0,
+	"defaultquerymode": 1,
+	"defaulteditmax": 1,
+	"buttoncaption": 2,
+	"switch": 0,
+	"fields": 
+	[
+		{
+			"type": "string",
+			"name": "mName",
+			"caption": "姓名",
+			"query": 1,
+			"left": 130,
+			"top": 15,
+			"width": 180,
+			"fontname":"华文隶书",
+			"fontsize": 23,
+			"height":26,
+			"fontcolor":[0,128,128],
+			"fontbold": 0,
+			"fontitalic": 0,
+			"fontunderline": 0,
+			"fontstrikeout": 0,
+			"must": 1,
+			"default": "未命名",
+			"sort": 1
+		},
+		{
+			"name": "mRate",
+			"caption": "评价",
+			"type":"rate",
+			"width": 220,
+			"height":22,
+			"sort": 1
+		},
+		{
+			"name": "mSex",
+			"caption": "性别",
+			"type":"boolean",
+			"list":["女","男"],
+			"filter":["女","男"],
+			"width": 100,
+			"sort": 1
+		},
+		{
+			"name": "mHeadship",
+			"query": 1,
+			"caption": "职务",
+			"type":"combo",
+			"list":["主任","销售员","公关员","质检员","技术总监","技术人员"],
+			"width": 100,
+			"filter":["主任","销售员","公关员","质检员","技术总监","技术人员"],
+			"sort": 1
+		},
+		{
+			"name": "mProvince",
+			"type":"dbcombo",
+			"query": 1,
+			"caption": "省份",
+			"width": 100,
+			"filter":["湖北","湖南","陕西","广东","广西","海南"],
+			"sort": 1
+		},
+		{
+			"name": "mSalary",
+			"type": "money",
+			"caption": "工资",
+			"format": "￥%n",
+			"sort":1,
+			"width": 120
+		},
+		{
+			"name": "mAddr",
+			"caption": "地址",
+			"height": 50,
+			"dwstyle": "word-wrap:normal;",
+			"right": 10
+		},
+		{
+			"name": "mPhoto",
+			"caption": "相片",
+			"left": 20,
+			"top": 20,
+			"height": 80,
+			"width": 80,
+			"imgdir": "media/images/mn/",
+			"imgtype":["jpg","png","gif"],
+			"dwstyle": "border-radius:20px;border:solid 2px #fff;",
+			"type": "image"
+		}
+	]
+}

@@ -1,0 +1,64 @@
+{
+   "account" : "dwERP",
+   "table" : "eGoods",
+   "where" : "gId>0",
+   "items" : [
+      {
+         "name" : "全屏",
+         "top" : 10,
+         "width" : 200,
+         "height" : 150,
+         "align" : "client",
+         "type" : "panel",
+         "image" : "media/images/mn/01.jpg",
+         "items" : [
+            {
+               "align" : "top",
+               "height" : 100,
+               "alignment" : "center",
+               "layout" : "center",
+               "margins" : [ 0, 3, 8, 0 ],
+               "type" : "panel",
+               "name" : "p-top-left-top",
+               "items" : [
+                  {
+                     "align" : "client",
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "caption" : "DeWeb可视化数据看板",
+                     "font" : {
+                        "size" : 31,
+                        "color" : [ 17, 228, 241 ],
+                        "bold" : 1
+                     },
+                     "type" : "label"
+                  }
+               ]
+            },
+            {
+               "align" : "client",
+               "height" : 70,
+               "alignment" : "center",
+               "layout" : "center",
+               "margins" : [ 0, 3, 8, 0 ],
+               "type" : "panel",
+               "name" : "p-top-left-top",
+               "items" : [
+                  {
+                     "align" : "client",
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "caption" : "数据显示",
+                     "font" : {
+                        "size" : 31,
+                        "color" : [ 17, 228, 241 ],
+                        "bold" : 1
+                     },
+                     "type" : "label"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

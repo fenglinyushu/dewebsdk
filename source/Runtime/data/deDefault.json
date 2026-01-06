@@ -1,0 +1,110 @@
+{
+	"account":"dwFrame",
+	"table": "dwDepartment",
+	"editwidth":400,
+	"fields": 
+	[
+		{
+			"name": "dId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "dName",
+			"caption":"名称",
+			"must":1,
+			"fullwidth":728
+		},
+		{
+			"name": "dNo",
+			"caption":"部门编码",
+			"readonly":1,
+			"width":100
+		},
+		{
+			"name": "dLeaderId",
+			"caption": "负责人",
+			"type": "dbcombopair",
+			"sort": 1,
+			"align": "center",
+			"table": "dwUser",
+			"datafield": "uId",
+			"viewfield": "uName",
+			"viewdefault":"",
+			"width":200
+		},
+		{
+			"name": "dPhone",
+			"caption":"电话",
+			"width":200
+		},
+		{
+			"name": "dEmail",
+			"caption":"邮箱",
+			"width":200
+		},
+		{
+			"name": "dStatus",
+			"caption": "状态",
+			"type": "combo",
+			"align": "center",
+			"list": 
+			[
+				"正常",
+				"转隶中",
+				"关停"
+			],
+			"query": 1,
+			"width":200
+		},
+		{
+			"name": "dCreatorId",
+			"caption": "创建人",
+			"type": "dbcombopair",
+			"sort": 1,
+			"align": "center",
+			"table": "dwUser",
+			"datafield": "uId",
+			"viewfield": "uName",
+			"viewdefault":"",
+			"width":200
+		},
+		{
+			"name": "dCreateTime",
+			"caption": "创建时间",
+			"type": "date",
+			"align": "center",
+			"width": 200,
+			"sort": 1
+		},
+		{
+			"name": "dUpdatorId",
+			"caption": "修订人",
+			"type": "dbcombopair",
+			"sort": 1,
+			"align": "center",
+			"table": "dwUser",
+			"datafield": "uId",
+			"viewfield": "uName",
+			"viewdefault":"",
+			"width":200
+		},
+		{
+			"name": "dUpdateTime",
+			"caption": "修订时间",
+			"type": "date",
+			"align": "center",
+			"width": 200,
+			"sort": 1
+		},
+		{
+			"name": "dRemark",
+			"caption":"备注",
+			"type":"memo",
+			"fullheight":100,
+			"fullwidth":728
+		}
+	]
+}

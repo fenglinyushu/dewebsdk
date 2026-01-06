@@ -1,0 +1,99 @@
+{
+	"account": "dwFrame",
+	"table":"sys_user",
+	"deletecols":[3],
+	"summary":"SELECT max(uage) as 最大年龄, avg(uage) as 平均年龄 FROM sys_user",
+
+	"pagesize": 10,
+	"pagesizes": "[10,20,30,50]",
+	"rowheight": 45,
+	"defaulteditmax": 1,
+	"defaultquerymode": 2,
+	"defaultempty": 0,
+	"searchwidth":100,
+	"switch": 1,
+	"select":40,
+	"deletecols":[12],
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"buttons": 1,
+	"border": 1,
+	"buttoncaption": 2,
+	"fields": [
+		{
+			"name": "uid as a0",
+			"caption": "index",
+			"full":0,
+			"width": 60,
+			"type": "index",
+			"align": "center"
+
+		},
+		{
+			"name": "uid",
+			"sort": 1,
+			"width": 60,
+			"type": "auto",
+			"align": "center",
+			"fuzzy": 1,
+			"query": 0,
+			"datatype": 14
+		},
+		{
+			"name": "uname",
+			"caption": "name",
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "ugender",
+			"caption": "gender",
+			"sort": 1,
+			"dbfilter":1,
+			"width": 100,
+			"type": "boolean",
+			"align": "center",
+			"query": 1,
+			"list": [
+				"famale",
+				"male"
+			]
+		},
+		{
+			"name": "uage",
+			"caption": "age",
+			"type":"int",
+			"sort": 1,
+			"align":"right",
+			"width": 100
+		},
+		{
+			"name": "urole",
+			"caption": "role",
+			"type": "combo",
+			"align": "center",
+			"dbfilter":1,
+			"list": 
+			[
+				"superamdin",
+				"admin",
+				"user",
+				"guest"
+			],
+			"sort": 1,
+			"width": 100,
+			"query": 1
+		},
+		{
+			"name": "uremark",
+			"caption": "remark",
+			"sort": 1,
+			"width": 100,
+			"type": "memo",
+			"align": "left",
+			"fuzzy": 1,
+			"query": 1
+		}
+	]
+}

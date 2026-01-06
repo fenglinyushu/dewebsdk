@@ -1,0 +1,111 @@
+{
+	"account":"dwGMS",
+	"table": "bop_Test",
+	"margins":[0,10,13,10],	
+	"cardheight":180,
+	"new":1,
+	"edit":1,
+	"delete":1,
+	"totalfirst":1,
+	"mobile":1,
+	"cardstyle":"border-radius:5px;background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);",
+	"fields": 
+	[
+		{
+			"name": "tName",
+			"caption": "名称",
+			"sort": 1,
+			"left":20,
+			"top":10,
+			"height":30,
+			"right": 10,
+			"must":1,
+			"font":{
+				"size" : 20,
+				"color": [0,0,0]
+			},
+			"query": 1
+		},
+		{
+			"name": "tManagerId",
+			"caption": "负责人",
+			"width": 100,
+			"type": "dbcombopair",
+			"table": "sys_User",
+			"datafield": "uId",
+			"viewfield": "uName",
+			"viewdefault":""
+		},
+		{
+			"name": "tGender",
+			"caption": "性别",
+			"type": "combo",
+			"list": 
+			[
+				"男",
+				"女"
+			],
+			"dbfilter": 1,
+			"right": 10,
+			"query": 1
+		},
+		{
+			"name": "tDate",
+			"caption": "日期",
+			"type": "date",
+			"width": 100,
+			"sort": 1
+		},
+		{
+			"name": "tLocation",
+			"caption": "地点",
+			"sort": 1,
+			"right": 10
+		},
+		{
+			"name": "tRemark",
+			"caption": "备注",
+			"sort": 1,
+			"right": 10,
+			"query": 1
+		},
+		{
+			"name": "tCount",
+			"caption": "人数",
+			"format": "生，人数：%s",
+			"top":70,
+			"left":35,
+			"sort": 1,
+			"right": 10,
+			"query": 1
+		},
+		{
+			"name": "tRemark",
+			"caption":"",
+			"type":"button",
+			"dwattr": "type='text' icon='el-icon-user-solid'",
+			"bottom":70,
+			"right":7,
+			"width": 30,
+			"font":{
+				"size" : 16,
+				"color": [192]
+			},
+			"query": 1
+		},
+		{
+			"name": "tRemark",
+			"caption":"",
+			"type":"button",
+			"dwattr": "type='text' icon='el-icon-s-marketing'",
+			"bottom":40,
+			"right":7,
+			"width": 30,
+			"font":{
+				"size" : 16,
+				"color": [192]
+			},
+			"query": 1
+		}
+	]
+}

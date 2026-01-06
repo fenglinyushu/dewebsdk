@@ -1,0 +1,236 @@
+{
+	"color":[240,240,240],
+	"caption" : "费用报销流程",	
+	"items" : [
+		{
+			"type" : "panel",
+			"color":[255,0,0],
+			"border":{
+				"radius" : "50%"
+			},
+			"dwstyle": "box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;",			
+			"top" : 40,
+			"left" : 370,
+			"width" : 60,
+			"height" : 60,
+			"items":[
+				{
+					"caption" : "START",
+					"font":{
+						"color":[255]
+					},
+					"type" : "label",
+					"align":"client",
+					"layout":"center",
+					"alignment":"center",
+					"wrap":1,
+					"color":[238,141,103]
+				}
+			]
+		},
+		{
+			"type" : "arrowdown",
+			"top" : 100,
+			"left" : 390,
+			"width" : 20,
+			"height" : 40,
+			"dwchild":"<polygon points='8,0 12,0 12,33 17,33 10,40 3,33 8,33 8,0' fill='gray' />",
+			"items":[
+			]
+		},
+		{
+			"type" : "panel",
+			"color":[255,255,255],
+			"border":{
+				"radius" : "10px"
+			},
+			"dwstyle": "box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+			"top" : 140,
+			"left" : 280,
+			"width" : 240,
+			"height" : 100,
+			"items":[
+				{
+					"type" : "panel",
+					"align":"top",
+					"color":[238,141,103],
+					"height" : 40,
+					"items":[
+						{
+							"caption" : "财务审核",
+							"font":{
+								"color":[255]
+							},
+							"type" : "label",
+							"align":"client",
+							"layout":"center",
+							"alignment":"center",
+							"wrap":1,
+							"color":[238,141,103]
+						}
+					]
+				},
+				{
+					"caption" : "审核人: &emsp;陈艳",
+					"font":{
+						"size": 17,
+						"color":[0]
+					},
+					"type" : "label",
+					"align":"client",
+					"layout":"center",
+					"alignment":"center",
+					"wrap":1
+				}
+			]
+		},
+		{
+			"type" : "arrowdown",
+			"top" : 240,
+			"left" : 390,
+			"width" : 20,
+			"height" : 40,
+			"dwchild":"<polygon points='8,0 12,0 12,33 17,33 10,40 3,33 8,33 8,0' fill='gray' />",
+			"items":[
+			]
+		},
+		{
+			"type" : "panel",
+			"color":[255,255,255],
+			"border":{
+				"radius" : "10px"
+			},
+			"dwstyle": "box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+			"top" : 280,
+			"left" : 280,
+			"width" : 240,
+			"height" : 100,
+			"items":[
+				{
+					"type" : "panel",
+					"align":"top",
+					"color":[238,141,103],
+					"height" : 40,
+					"items":[
+						{
+							"caption" : "主管审核",
+							"font":{
+								"color":[255]
+							},
+							"type" : "label",
+							"align":"client",
+							"layout":"center",
+							"alignment":"center",
+							"wrap":1,
+							"color":[238,141,103]
+						}
+					]
+				},
+				{
+					"caption" : "审核人: &emsp;张云秋",
+					"font":{
+						"size": 17,
+						"color":[0]
+					},
+					"type" : "label",
+					"align":"client",
+					"layout":"center",
+					"alignment":"center",
+					"wrap":1
+				}
+			]
+		},
+		{
+			"type" : "arrowdown",
+			"top" : 380,
+			"left" : 390,
+			"width" : 20,
+			"height" : 40,
+			"dwchild":"<polygon points='8,0 12,0 12,33 17,33 10,40 3,33 8,33 8,0' fill='gray' />",
+			"items":[
+			]
+		},
+		{
+			"type" : "panel",
+			"color":[255,255,255],
+			"border":{
+				"radius" : "10px"
+			},
+			"dwstyle": "box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+			"top" : 420,
+			"left" : 280,
+			"width" : 240,
+			"height" : 100,
+			"items":[
+				{
+					"type" : "panel",
+					"align":"top",
+					"color":[238,141,103],
+					"height" : 40,
+					"items":[
+						{
+							"caption" : "领导审核",
+							"font":{
+								"color":[255]
+							},
+							"type" : "label",
+							"align":"client",
+							"layout":"center",
+							"alignment":"center",
+							"wrap":1,
+							"color":[238,141,103]
+						}
+					]
+				},
+				{
+					"caption" : "审核人: &emsp;邢一彬",
+					"font":{
+						"size": 17,
+						"color":[0]
+					},
+					"type" : "label",
+					"align":"client",
+					"layout":"center",
+					"alignment":"center",
+					"wrap":1
+				}
+			]
+		},
+		{
+			"type" : "arrowdown",
+			"top" : 520,
+			"left" : 390,
+			"width" : 20,
+			"height" : 40,
+			"dwchild":"<polygon points='8,0 12,0 12,33 17,33 10,40 3,33 8,33 8,0' fill='gray' />",
+			"items":[
+			]
+		},
+		{
+			"type" : "panel",
+			"color":[255,0,0],
+			"border":{
+				"radius" : "50%"
+			},
+			"dwstyle": "box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;",			
+			"top" : 560,
+			"left" : 370,
+			"width" : 60,
+			"height" : 60,
+			"items":[
+				{
+					"caption" : "END",
+					"font":{
+						"color":[255]
+					},
+					"type" : "label",
+					"align":"client",
+					"layout":"center",
+					"alignment":"center",
+					"wrap":1,
+					"color":[238,141,103]
+				}
+			]
+		}
+	]
+}

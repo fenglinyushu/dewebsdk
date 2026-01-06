@@ -1,0 +1,54 @@
+{
+	"account": "dwHOEFON",
+	"table": "eReimburseAttach",
+	"margins":[0,10,13,10],
+	"cardwidth":240,
+	"cardheight":160,
+	"editwidth":360,
+	"editheight":360,
+	"edittop":160,
+	"labelwidth":40,
+	"new":1,
+	"edit":1,
+	"delete":1,
+	"totalfirst":1,
+	"cardstyle":"border-radius:5px;background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);",
+	"fields": 
+	[
+		{
+			"name": "aId",
+			"view": 2
+		},
+		{
+			"name": "aReimburseId",
+			"view": 2
+		},
+		{
+			"name": "aName",
+			"caption": "名称",
+			"width": 200
+		},
+		{
+			"name": "aAttach",
+			"caption": "票据",
+			"view": 0,
+			"sort": 1,
+			"width": 180,
+			"height":100,
+			"type": "image",
+			"imgdir": "media/images/dwERPtim/",
+			"imgtype": 
+			[
+				"jpg",
+				"png",
+				"bmp",
+				"gif"
+			],
+			"imgheight": 100,
+			"imgwidth": 180,
+			"dwstyle": "border-radius:3px;",
+			"preview": 1,
+			"align": "center"
+		}
+	]
+}

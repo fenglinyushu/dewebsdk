@@ -1,0 +1,157 @@
+{
+	"account": "dwQBank",
+	"table": "bop_Question",
+	"select": 140,
+	"visiblecol": 1,
+	"import": 1,
+	"oneline": 0,
+	"defaulteditmax": 1,
+	"defaultorder":"qCreateDateTime DESC",
+	"where":"qType='选择题'",
+	"fields": 
+	[
+		{
+			"name": "qId",
+			"caption": "编号",
+			"type": "auto",
+			"align": "center",
+			"width": 50
+		},
+		{
+			"name": "qCreateDatetime",
+			"caption": "时间",
+			"type": "datetime",
+			"align": "center",
+			"width": 160,
+			"sort": 1,
+			"readonly":1,
+			"default":0
+		},
+		{
+			"name": "qTitle",
+			"caption": "题干",
+			"editwidth":720,
+			"sort": 1,
+			"must":1,
+			"width": 240
+		},
+		{
+			"name": "qDifficulty",
+			"caption": "难度",
+			"sort": 1,"must":1,
+			"width": 65,
+			"type": "combo",
+			"align": "center",			
+			"list": ["容易","中等","较难"],
+			"renders":[
+				{
+					"data":"容易",
+					"background":[192],
+					"color":[0,0,0]
+				},
+				{
+					"data":"中等",
+					"background":[0,0,255],
+					"color":[255]
+				},
+				{
+					"data":"较难",
+					"background":[255,0,0],
+					"color":[255]
+				}
+			]
+		},
+		{
+			"name": "qItemA",
+			"caption": "选项A","must":1,
+			"width": 90
+		},
+		{
+			"name": "qItemB",
+			"caption": "选项B","must":1,
+			"width": 90
+		},
+		{
+			"name": "qItemC",
+			"caption": "选项C","must":1,
+			"width": 90
+		},
+		{
+			"name": "qItemD",
+			"caption": "选项D","must":1,
+			"width": 90
+		},
+		{
+			"name": "qAnswer",
+			"caption": "答案",
+			"sort": 1,"must":1,
+			"width": 65,
+			"type": "combo",
+			"align": "center",
+			"list": ["A","B","C","D"]
+		},
+		{
+			"name": "qChapter",
+			"caption": "章",
+			"sort": 1,"must":1,
+			"width": 65,
+			"type": "combo",
+			"align": "center",
+			"dbfilter": 1,
+			"list": ["一","二","三","四","五","六",""]
+		},
+		{
+			"name": "qSection",
+			"caption": "节",
+			"sort": 1,"must":1,
+			"width": 65,
+			"type": "combo",
+			"align": "center",
+			"dbfilter": 1,
+			"list": ["1","2","3","4","5","6","7","8","9"]
+		},
+		{
+			"name": "qPageNo",
+			"caption": "页码",
+			"sort": 1,"must":1,
+			"width": 65,
+			"type": "integer",
+			"align": "center"
+		},
+		{
+			"name": "qPosition",
+			"caption": "位置",
+			"sort": 1,"must":1,
+			"width": 65,
+			"type": "combo",
+			"align": "center",
+			
+			"list": ["顶部","中上部","中部","中下部","底部"]
+		},
+		{
+			"name": "qMastery",
+			"caption": "目标",
+			"sort": 1,"must":1,
+			"width": 65,
+			"type": "combo",
+			"align": "center",			
+			"list": ["识记","理解","运用"]
+		},
+		{
+			"name": "qRemark",
+			"caption": "备注",
+			"sort": 1
+		},
+		{
+			"name": "qCreatorId",
+			"view":4,
+			"type": "integer",
+			"default":9
+		},
+		{
+			"name":"qType",
+			"view":4,
+			"default":"选择题"
+		}
+	]
+}

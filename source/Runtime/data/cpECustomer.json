@@ -1,0 +1,104 @@
+{
+	"account": "dwHOEFON",
+	"table": "eCustomer",
+	"fields": 
+	[
+		{
+			"name": "cId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"		},
+		{
+			"name": "cName",
+			"caption": "名称",
+			"align": "center",
+			"sort": 1,
+			"query": 1,
+			"width": 80
+		},
+		{
+			"name": "cType",
+			"caption": "类别",
+			"type": "dbcombo",
+			"align": "center",
+			"must": 1,
+			"sort": 1,
+			"dbfilter": 1,
+			"list": 
+			[
+				"普通",
+				"开发中",
+				"稳定",
+				"VIP"
+			],
+			"width": 90
+		},
+		{
+			"name": "cTargetMarket",
+			"caption": "目标市场",
+			"align": "center",
+			"width": 100,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "cAnnualSales",
+			"caption": "年成交量",
+			"type":"money",
+			"align": "right",
+			"width": 100,
+			"sort": 1
+		},
+		{
+			"name": "cLocation",
+			"caption": "城市",
+			"align": "center",
+			"width": 90,
+			"dbfilter":1,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "cContact",
+			"caption": "联系人",
+			"align": "center",
+			"width": 80,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "cPhone",
+			"caption": "电话",
+			"align": "center",
+			"width": 130,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "cJobTitle",
+			"caption": "职务",
+			"align": "center",
+			"width": 80,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "cAddress",
+			"caption": "地址",
+			"width": 150,
+			"sort": 1,
+			"query": 1
+		},
+
+
+
+		{
+			"name": "cRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

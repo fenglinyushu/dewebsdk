@@ -1,0 +1,64 @@
+{
+	"account": "dwHOEFON",
+	"table": "eProduct",
+	"defaulteditmax": 1,
+	"fields": 
+	[
+		{
+			"name": "pId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "pName",
+			"caption": "名称",
+			"query":1,
+			"sort": 1,
+			"must": 1,
+			"width": 140
+		},
+		{
+			"name": "pImage",
+			"caption": "图片",
+			"type": "image",
+			"imgdir": "media/images/dwERPtim/",
+			"imgtype": ["jpg","png","bmp","gif"],
+			"imgheight":35,
+			"imgwidth":40,
+			"preview":1,
+			"width": 50
+		},
+		{
+			"name": "pOrigin",
+			"caption": "产地",
+			"width": 90,
+			"sort": 1,
+			"align": "center",
+			"dbfilter": 1,
+			"query": 1
+		},
+		{
+			"name": "pMaterial",
+			"caption": "材质",
+			"align": "center",
+			"width": 100,
+			"sort": 1
+		},
+		{
+			"name": "pCraftsmanship",
+			"caption": "工艺",
+			"align": "center",
+			"width": 140,
+			"sort": 1
+		},
+		{
+			"name": "pRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

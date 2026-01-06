@@ -1,0 +1,115 @@
+{
+	"account": "dwHOEFON",
+	"defaulteditmax": 0,
+	"table": "eSample",
+	"select": 40,
+	"visiblecol": 1,
+	"deletecols": 
+	[
+		2
+	],
+	"slave": 
+	[
+		{
+			"panel": "PnS",
+			"masterfield": "sId",
+			"slavefield": "aSId"
+		}
+	],
+	"fields": 
+	[
+		{
+			"name": "sId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "sName",
+			"caption": "样单名称",
+			"query": 1,
+			"sort": 1,
+			"must": 1,
+			"width": 240
+		},
+		{
+			"name": "sFollowId",
+			"caption": "跟单业务",
+			"query": 1,
+			"align": "center",
+			"type": "dbcombopair",
+			"table": "(SELECT * FROM eUser WHERE uDepartment='生产部') AS fw",
+			"datafield": "uId",
+			"viewfield": "uName"
+		},
+		{
+			"name": "sStyleNo",
+			"caption": "款号",
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "sCutomerId",
+			"caption": "客户",
+			"query": 1,
+			"align": "center",
+			"type": "dbcombopair",
+			"table": "eCustomer",
+			"datafield": "cId",
+			"viewfield": "cName"
+		},
+		{
+			"name": "sSize",
+			"caption": "尺寸",
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "sRefer",
+			"caption": "参考图片",
+			"type": "image",
+			"imgdir": "media/images/dwERPtim/",
+			"imgtype": 
+			[
+				"jpg",
+				"png",
+				"bmp",
+				"gif"
+			],
+			"imgheight": 35,
+			"imgwidth": 40,
+			"preview": 1,
+			"width": 50
+		},
+		{
+			"name": "sPurpose",
+			"caption": "目的",
+			"type": "combo",
+			"align": "center",
+			"list": 
+			[
+				"PP Sample 产前样","Quality Sample 品质样","Sealed Sample 封样","Promotional Sample 宣传样","Testing Sample 测试样",
+				"Production Sample 大货样"
+            ],
+			"sort": 1,
+			"width": 100,
+			"query": 1
+		},
+		{
+			"name": "sDesigner",
+			"caption": "设计师",
+			"sort": 1,
+			"width": 100
+		},
+
+
+		{
+			"name": "sRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

@@ -1,0 +1,45 @@
+{
+	"account": "dwERP",
+	"defaultquerymode":1,
+	"table": "eInboundOrderDetail",
+	"pagesize":10,
+	"fields": 
+	[
+		{
+			"name": "dGoodsId",
+			"caption": "商品名称",
+			"sort": 1,
+			"width": 120,
+			"query": 1,
+			"dbfilter": 1,
+			"type":"dbcombopair",
+			"table":"eGoods",
+			"datafield":"gId",
+			"viewfield":"gName"
+		},
+		{
+			"name": "dQuantity",
+			"caption": "数量",
+			"sort": 1,
+			"width": 70,
+			"align":"right",
+			"type":"integer"
+		},
+		{
+			"name": "dPrice",
+			"caption": "单价",
+			"sort": 1,
+			"width": 80,
+			"align":"right",
+			"type":"money"
+		},
+		{
+			"name": "dAmount",
+			"caption": "金额",
+			"sort": 1,
+			"width": 80,
+			"align":"right",
+			"type":"money"
+		}
+	]
+}

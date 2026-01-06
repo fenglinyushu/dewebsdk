@@ -1,0 +1,115 @@
+{
+	"account": "dwAccess",
+	"table": "dmDemo",
+	"defaultquerymode": 1,
+	"buttons": 0,
+	"rowheight": 45,
+	"pagesize": 15,
+	"border": 1,
+	"fixed":[1,1],
+	"fields": 
+	[
+		{
+			"name": "dName",
+			"caption": "名称",
+			"sort": 1,
+			"width": 120,
+			"view": 0,
+			"query": 0
+		},
+		{
+			"name": "dText",
+			"caption": "标题",
+			"type": "link",
+			"target": "_blank",
+			"urlfield": "dName",
+			"dwstyle": "text-decoration:none;",
+			"sort": 1,
+			"width": 280,
+			"query": 1
+		},
+		{
+			"name": "dBirthday",
+			"caption": "创建日期",
+			"type": "date",
+			"align":"center",
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "dUpdatetime",
+			"caption": "更新日期",
+			"align":"center",
+			"type": "date",
+			"sort": 1,
+			"width": 100
+		},
+		{
+			"name": "dDiscount",
+			"caption": "价格",
+			"type": "money",
+			"align":"right",
+			"sort": 1,
+			"width": 80
+		},
+		{
+			"name": "dLikes",
+			"caption": "点赞",
+			"type": "Integer",
+			"align":"center",
+			"sort": 1,
+			"width": 70
+		},
+		{
+			"name": "dViews",
+			"caption": "查看",
+			"type": "Integer",
+			"align":"center",
+			"sort": 1,
+			"width": 70
+		},
+		{
+			"name": "dOrders",
+			"caption": "购买",
+			"type": "Integer",
+			"align":"center",
+			"sort": 1,
+			"width": 70
+		},
+		{
+			"name": "dDetail",
+			"caption": "详细",
+			"width": 300,
+			"query": 1
+		},
+		{
+			"name": "dId",
+			"caption": "",
+			"width": 155,
+			"type": "button",
+			"list":[
+				{
+					"caption":"点赞",
+					"type":"primary",
+					"width":45,
+					"dwstyle":"",
+					"dwattr":"",
+					"method":"custom"
+				},
+				{
+					"caption":"留言",
+					"type":"danger",
+					"width":45,
+					"method":"custom"
+				},
+				{
+					"caption":"购买",
+					"type":"success",
+					"width":45,
+					"method":"custom"
+				}
+			]
+
+		}
+	]
+}

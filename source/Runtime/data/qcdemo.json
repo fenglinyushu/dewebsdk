@@ -1,0 +1,146 @@
+{
+	"table": "AJGL",
+	"defaulteditmax": 1,
+	"radius": 0,
+	"border": 0,
+	"margin": 0,
+	"pagesize": 10,
+	"headerbackground": "#f7f7f7",
+	"fields": 
+	[
+		{
+			"name": "AJBH",
+			"must": 1,
+			"sort": 1,
+			"caption": "案件编号"
+		},
+		{
+			"name": "AJMC",
+			"must": 1,
+			"sort": 1,
+			"caption": "案件名称"
+		},
+		{
+			"name": "HSR",
+			"caption": "被取保候\\n审人姓名",
+			"must": 1
+		},
+		{
+			"name": "XJR",
+			"caption": "被行政拘\\n留人姓名",
+			"must": 1
+		},
+		{
+			"type": "date",
+			"name": "CSRQ",
+			"caption": "出生日期",
+			"sort": 1,
+			"must": 1
+		},
+		{
+			"type": "combo",
+			"name": "xb",
+			"caption": "性别",
+			"width": 60,
+			"list": 
+			[
+				"男",
+				"女"
+			]
+		},
+		{
+			"name": "HJDZ",
+			"caption": "户籍地",
+			"width": 120
+		},
+		{
+			"name": "ZZ",
+			"caption": "居住地",
+			"width": 180
+		},
+		{
+			"name": "dwzw",
+			"caption": "单位职务",
+			"width": 100
+		},
+		{
+			"name": "JKRSFZ",
+			"must": 1,
+			"caption": "交款人\\n身份证号",
+			"width": 180
+		},
+		{
+			"name": "AJXZ",
+			"caption": "案件性质",
+			"must": 1,
+			"width": 120
+		},
+		{
+			"name": "SQND",
+			"caption": "收取年度",
+			"width": 80
+		},
+		{
+			"name": "SQBH",
+			"caption": "收取编号",
+			"type": "integer",
+			"width": 80
+		},
+		{
+			"name": "SQWSH",
+			"must": 1,
+			"caption": "法律文书号",
+			"width": 120
+		},
+		{
+			"name": "SQJE",
+			"caption": "收取金额",
+			"type": "money",
+			"must": 1,
+			"width": 90
+		},
+		{
+			"name": "dsyhbh",
+			"caption": "代收银行编号",
+			"width": 120
+		},
+		{
+			"name": "PZR",
+			"caption": "批准人",
+			"width": 120
+		},
+		{
+			"name": "PZSJ",
+			"caption": "批准时间",
+			"must": 1,
+			"type": "date",
+			"width": 120
+		},
+		{
+			"name": "BAR",
+			"caption": "办案人",
+			"width": 120
+		},
+		{
+			"name": "BADW",
+			"caption": "办案单位",
+			"width": 120
+		},
+		{
+			"name": "MSTFR",
+			"caption": "填发人",
+			"width": 120
+		},
+		{
+			"name": "MSTFSJ",
+			"caption": "填发时间",
+			"type": "date",
+			"width": 120
+		},
+		{
+			"name": "BZ",
+			"caption": "备注",
+			"width": 120
+		}
+	]
+}

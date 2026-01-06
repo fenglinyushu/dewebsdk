@@ -1,0 +1,107 @@
+{
+  "table": "dwStockOut",
+  "defaultorder":" ORDER BY odate DESC",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "defaulteditmax":1,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "oNo",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":240,
+      "caption": "单号"
+    },
+    {
+      "name": "oGoodId",
+      "must": 1,
+      "sort": 1,
+	  "width":60,
+      "caption": "ID"
+    },
+    {
+      "name": "oName",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":150,
+      "caption": "名称"
+    },
+    {
+      "name": "oGoodNo",
+      "sort": 1,
+	  "query":1,
+	  "width":120,
+      "caption": "编号"
+    },
+    {
+      "name": "oSpec",
+      "caption": "规格",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "oUnit",
+      "caption": "单位",
+	  "type":"combo",
+	  "list":["个","台","部","套","辆","支","双","只","袋"],
+	  "width":80,
+      "sort": 1
+    },
+    {
+      "name": "oQuantity",
+	  "type":"integer",
+      "caption": "数量",
+      "sort": 1
+    },
+    {
+      "name": "oPrice",
+	  "type":"money",
+      "caption": "价格",
+      "sort": 1
+    },
+    {
+      "name": "oAmount",
+	  "type":"money",
+      "caption": "金额",
+      "sort": 1
+    },
+    {
+      "name": "oDate",
+	  "type":"combo",
+      "caption": "日期",
+      "sort": 1
+    },
+    {
+      "name": "oRequistion",
+      "caption": "领料单位",
+	  "width":80,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "oRequistor",
+      "caption": "领料人",
+	  "width":80,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "oOperator",
+      "caption": "出库人",
+	  "width":80,
+      "sort": 1
+    },
+    {
+      "name": "oRemark",
+      "caption": "备注",
+	  "query":1,
+      "sort": 1
+    }
+  ]
+}

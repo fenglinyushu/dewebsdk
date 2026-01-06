@@ -1,0 +1,83 @@
+{
+	"account": "dwERP",
+	"defaultquerymode":1,
+	"table": "eInboundOrder",
+	"pagesize":10,
+	"fields": 
+	[
+		{
+			"name": "iNo",
+			"caption": "单据编号",
+			"sort": 1,
+			"query": 1,
+			"align":"center",
+			"width": 200
+		},
+		{
+			"name": "iDate",
+			"caption": "日期",
+			"type":"date",
+			"align": "center",
+			"sort": 1,
+			"width": 120,
+			"query": 1
+		},
+		{
+			"name": "iSupplierId",
+			"caption": "供应商",
+			"sort": 1,
+			"width": 120,
+			"query": 1,
+			"dbfilter": 1,
+			"type":"dbcombopair",
+			"table":"eSupplier",
+			"datafield":"sId",
+			"viewfield":"sName"
+		},
+		{
+			"name": "iWareHouseId",
+			"caption": "仓库",
+			"sort": 1,
+			"width": 100,
+			"query": 1,
+			"dbfilter": 1,
+			"table":"eWareHouse",
+			"type":"dbcombopair",
+			"datafield":"wId",
+			"viewfield":"wName"
+		},
+		{
+			"name": "iHandlerId",
+			"caption": "经手人",
+			"sort": 1,
+			"width": 100,
+			"query": 1,
+			"dbfilter": 1,
+			"align": "center",
+			"table":"eUser",
+			"type":"dbcombopair",
+			"datafield":"uId",
+			"viewfield":"uName"
+		},
+		{
+			"name": "iVerifierId",
+			"caption": "核单人",
+			"sort": 1,
+			"width": 100,
+			"query": 1,
+			"dbfilter": 1,
+			"align": "center",
+			"table":"eUser",
+			"type":"dbcombopair",
+			"datafield":"uId",
+			"viewfield":"uName"
+		},
+		{
+			"name": "iRemark",
+			"caption": "备注",
+			"sort": 1,
+			"query": 1,
+			"width": 100
+		}
+	]
+}

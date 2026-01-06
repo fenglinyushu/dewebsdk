@@ -1,0 +1,95 @@
+{
+  "table": "dwCustomer",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "defaulteditmax":1,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "cName",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":150,
+      "caption": "客户名称"
+    },
+    {
+      "name": "cNo",
+      "sort": 1,
+      "caption": "客户编号"
+    },
+    {
+      "name": "cCategory",
+      "caption": "客户类别",
+	  "type":"dbcombo",
+	  "table":"dwCategorycustomer",
+	  "field":"cname",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "cContact",
+      "caption": "联系人",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "cPhone",
+      "caption": "联系电话",
+      "sort": 1
+    },
+    {
+      "name": "cAddress",
+      "caption": "客户地址",
+	  "width":150,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "cBirthday",
+	  "type":"date",
+      "caption": "客户生日",
+      "sort": 1
+    },
+    {
+      "name": "cBank",
+      "caption": "开户银行",
+	  "type":"combo",
+	  "list":["中国工商银行","中国农业银行","中国建设银行","中国银行","交通银行","中国邮政储蓄银行",
+	  "招商银行","兴业银行","中信银行","光大银行","上海银行","北京银行","广州银行","上海农商行","广州农商行","北京农商行"],
+      "sort": 1
+    },
+    {
+      "name": "cAccount",
+      "caption": "银行账号",
+	  "width":200,
+      "sort": 1
+    },
+    {
+      "name": "cSocial",
+      "caption": "社交账号",
+      "sort": 1
+    },
+    {
+      "name": "cEmail",
+      "caption": "邮箱地址",
+	  "width":200,
+      "sort": 1
+    },
+    {
+      "name": "cPoints",
+      "caption": "客户积分",
+	  "type":"integer",
+      "sort": 1
+    },
+    {
+      "name": "cRemark",
+      "caption": "备注",
+	  "query":1,
+      "width": 120
+    }
+  ]
+}

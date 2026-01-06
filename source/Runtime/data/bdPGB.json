@@ -1,0 +1,2459 @@
+{
+   "connectionstring" : "Server=127.0.0.1,8829;Database=dwERP;User_Name=sa;Password={593106};DriverID=MSSQL",
+   "interval" : 3,
+   "caption" : "排缸数据监视表",
+   "color" : [ 2, 44, 92 ],
+   "image" : "media/images/board/bk001.gif",
+   "items" : [
+      {
+         "type" : "panel",
+         "align" : "top",
+         "height" : 60,
+         "items" : [
+            {
+               "margins" : [ 5, 15, 15, 5 ],
+               "align" : "left",
+               "type" : "image",
+               "width" : 50,
+               "image" : "media/images/48/13.png",
+               "fit" : "fill"
+            },
+            {
+               "name" : "标题",
+               "align" : "left",
+               "type" : "label",
+               "width" : 360,
+               "left" : 100,
+               "margins" : [ 6, 3, 3, 0 ],
+               "font" : {
+                  "size" : 25,
+                  "color" : [ 255, 255, 255 ],
+                  "bold" : 1
+               },
+               "caption" : "排缸数据监视表",
+               "layout" : "center",
+               "style" : 9
+            },
+            {
+               "name" : "时间",
+               "align" : "right",
+               "type" : "datetime",
+               "margins" : [ 6, 3, 20, 0 ],
+               "width" : 360,
+               "font" : {
+                  "size" : 14,
+                  "color" : [ 0, 255, 0 ],
+                  "bold" : 1
+               },
+               "format" : "YYYY-MM-DD hh:mm:ss",
+               "alignment" : "right",
+               "layout" : "center"
+            }
+         ],
+         "name" : "标题行",
+         "margins" : [ 3, 30, 30, 10 ],
+         "color1" : [ 3, 46, 91 ]
+      },
+      {
+         "name" : "主显\r\n",
+         "margins" : [ 10, 200, 200, 10 ],
+         "align" : "client",
+         "type" : "panel",
+         "items" : [
+            {
+               "name" : "主显行1",
+               "height" : 90,
+               "align" : "top",
+               "type" : "panel",
+               "margins" : [ 2, 4, 4, 2 ],
+               "items" : [
+                  {
+                     "name" : "行1框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 2, 135, 255 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 30,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "D01浅-2T",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度：1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(1000 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 90,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "燃油：32",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(20 + (RAND() * 80)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "点火：382",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     "name" : "行1框2",
+                     "width" : 200,
+                     "left" : 220,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 2, 135, 255 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 30,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "D02深-2G",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1004",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(1000 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 90,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "燃油:28",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(20 + (RAND() * 80)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "点火:265",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     "name" : "行1框3",
+                     "width" : 200,
+                     "left" : 420,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 2, 135, 255 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 30,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "D03深-2M",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1004",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(1000 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 90,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(20 + (RAND() * 80)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 },
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "燃油:28",
+                                 "type" : "label"
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "点火:265",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     "name" : "行1框4",
+                     "width" : 200,
+                     "left" : 620,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 2, 135, 255 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 30,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "D04浅-2Q",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1004",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(1000 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 90,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(20 + (RAND() * 80)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 },
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "燃油:28",
+                                 "type" : "label"
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "点火:265",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     "name" : "行1框1",
+                     "width" : 200,
+                     "left" : 820,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 2, 135, 255 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 30,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "D05深-2H",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1004",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(1000 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 25,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 90,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(20 + (RAND() * 80)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 },
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "燃油:28",
+                                 "type" : "label"
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 11,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "点火:265",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 800)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "name" : "主显行2",
+               "height" : 180,
+               "align" : "top",
+               "type" : "panel",
+               "margins" : [ 2, 4, 4, 2 ],
+               "top" : 220,
+               "items" : [
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-781",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 0
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-782",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 300
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-783",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 500
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-784",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 700
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-785",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 900
+                  }
+               ]
+            },
+            {
+               "name" : "主显行2",
+               "height" : 180,
+               "align" : "top",
+               "type" : "panel",
+               "margins" : [ 2, 4, 4, 2 ],
+               "top" : 220,
+               "items" : [
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-621",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 0
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-622",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 300
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-623",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 500
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-624",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 700
+                  },
+                  {
+                     "name" : "框1",
+                     "width" : 200,
+                     "margins" : [ 2, 4, 4, 2 ],
+                     "border" : {
+                        "size" : 1,
+                        "color" : [ 23, 139, 255 ],
+                        "radius" : "2px",
+                        "style" : "solid"
+                     },
+                     "font" : {
+                        "size" : 9,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "align" : "left",
+                     "type" : "panel",
+                     "color" : [ 5, 112, 190 ],
+                     "items" : [
+                        {
+                           "name" : "第二行 左 标题",
+                           "align" : "top",
+                           "height" : 60,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "caption" : "A30234-625",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 255, 255, 255 ],
+                              "bold" : 1
+                           },
+                           "type" : "label"
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 90,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "压力：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "压力：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "温度:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "温度：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "点火：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "点火：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "燃油:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "燃油：%s"
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "height" : 35,
+                           "type" : "panel",
+                           "align" : "top",
+                           "top" : 50,
+                           "items" : [
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "left",
+                                 "margins" : [ 0, 10, 0, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "caption" : "缸温：212",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(100 + (RAND() * 500)) AS RandomValue",
+                                    "format" : "缸温：%s"
+                                 }
+                              },
+                              {
+                                 "name" : "第二行 左 标题",
+                                 "align" : "client",
+                                 "margins" : [ 0, 0, 10, 0 ],
+                                 "font" : {
+                                    "size" : 13,
+                                    "color" : [ 255, 255, 255 ],
+                                    "bold" : 1
+                                 },
+                                 "width" : 80,
+                                 "alignment" : "right",
+                                 "layout" : "center",
+                                 "caption" : "排气:1314",
+                                 "type" : "label",
+                                 "update" : {
+                                    "sql" : "SELECT FLOOR(200 + (RAND() * 300)) AS RandomValue",
+                                    "format" : "排气：%s"
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "left" : 900
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

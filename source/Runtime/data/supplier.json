@@ -1,0 +1,77 @@
+{
+  "table": "sys_supplier",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "defaulteditmax":1,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "sname",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":150,
+      "caption": "客户名称"
+    },
+    {
+      "name": "sno",
+      "sort": 1,
+      "caption": "客户编号"
+    },
+    {
+      "name": "scontact",
+      "caption": "联系人",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "sphone",
+      "caption": "联系电话",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "saddress",
+      "caption": "客户地址",
+	  "width":150,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "sbank",
+      "caption": "开户银行",
+	  "width":150,
+	  "type":"combo",
+	  "list":["中国工商银行","中国农业银行","中国建设银行","中国银行","交通银行","中国邮政储蓄银行",
+	  "招商银行","兴业银行","中信银行","光大银行","上海银行","北京银行","广州银行","上海农商行","广州农商行","北京农商行"],
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "saccount",
+      "caption": "银行账号",
+	  "width":200,
+      "sort": 1
+    },
+    {
+      "name": "ssocial",
+      "caption": "社交账号",
+      "sort": 1
+    },
+    {
+      "name": "semail",
+      "caption": "邮箱地址",
+	  "width":200,
+      "sort": 1
+    },
+    {
+      "name": "sremark",
+      "caption": "备注",
+	  "query":1,
+      "width": 120
+    }
+  ]
+}

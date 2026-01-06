@@ -1,0 +1,216 @@
+{
+	"_m_": "root",
+	"items": [
+		{
+			"_m_": "panel",
+			"caption": "top",
+			"type": "panel",
+			"image": "media/images/boardtitle/bg2.png",
+			"left": 0,
+			"right": 0,
+			"top": 0,
+			"bottom": 0,
+			"width": 0,
+			"height": 120,
+			"dwstyle": "",
+			"dwattr": "",
+			"align": "top",
+			"items": [
+				{
+					"_m_": "label",
+					"caption": "WincomWeb综合监视系统",
+					"type": "label",
+					"dwstyle": "",
+					"dwattr": "",
+					"align": "top",
+					"alignment": "center",
+					"layout": "center",
+					"items": [],
+					"font": {
+						"name": "Segoe UI",
+						"size": 36,
+						"color": [
+							255,
+							255,
+							255
+						],
+						"b": 1,
+						"i": 0,
+						"u": 0,
+						"s": 0
+					},
+					"height": 60,
+					"name": "",
+					"akleft": false,
+					"aktop": false,
+					"akright": false,
+					"akbottom": false,
+					"alignwithmargins": false,
+					"sql": "SELECT TOP 1 '【' + [所属项目] + '】' AS 随机项目 FROM [物理数据] ORDER BY NEWID()",
+					"visible": true
+				},
+				{
+					"_m_": "panel",
+					"caption": "panel",
+					"type": "panel",
+					"name": "",
+					"image": "",
+					"top": 55,
+					"bottom": 0,
+					"width": 800,
+					"height": 50,
+					"dwstyle": "",
+					"dwattr": "",
+					"align": "",
+					"items": [
+						{
+							"_m_": "label",
+							"caption": "项目概况",
+							"type": "label",
+							"name": "XMGK",
+							"left": 9999,
+							"right": 0,
+							"top": 0,
+							"bottom": 0,
+							"width": 140,
+							"height": 25,
+							"color": [
+								15,
+								67,
+								142
+							],
+							"dwstyle": "box-sizing: border-box;border-radius:5px;border:solid 2px #468;transform: skew(20deg);",
+							"dwattr": "",
+							"font": {
+								"name": "Tahoma",
+								"size": 10,
+								"color": [
+									255,
+									255,
+									255
+								],
+								"b": 0,
+								"i": 0,
+								"u": 0,
+								"s": 0
+							},
+							"align": "left",
+							"alignment": "center",
+							"layout": "center",
+							"items": [],
+							"akleft": false,
+							"aktop": false,
+							"akright": false,
+							"akbottom": false,
+							"alignwithmargins": true,
+							"margins-left": 10,
+							"margins-right": 10,
+							"margins-bottom": 20
+						},
+						{
+							"_m_": "label",
+							"caption": "历史数据",
+							"type": "label",
+							"name": "LSSJ",
+							"left": 9999,
+							"right": 0,
+							"top": 0,
+							"bottom": 0,
+							"width": 140,
+							"height": 25,
+							"color": [
+								15,
+								67,
+								142
+							],
+							"dwstyle": "box-sizing: border-box;border-radius:5px;border:solid 2px #468;transform: skew(20deg);",
+							"dwattr": "",
+							"font": {
+								"name": "Tahoma",
+								"size": 10,
+								"color": [
+									255,
+									255,
+									255
+								],
+								"b": 1,
+								"i": 1,
+								"u": 0,
+								"s": 0
+							},
+							"align": "left",
+							"alignment": "center",
+							"layout": "center",
+							"items": [],
+							"akleft": false,
+							"aktop": false,
+							"akright": false,
+							"akbottom": false,
+							"alignwithmargins": true,
+							"margins-left": 10,
+							"margins-right": 10,
+							"margins-bottom": 10,
+							"margins-top": 10,
+							"sql": ""
+						}
+					],
+					"left": 100,
+					"akleft": false,
+					"aktop": false,
+					"akright": false,
+					"akbottom": false,
+					"alignwithmargins": false,
+					"hidden": false,
+					"borderhidden": false,
+					"background": "",
+					"font": {
+						"name": "Consolas",
+						"size": 10,
+						"color": [
+							255,
+							255,
+							255
+						],
+						"b": 0,
+						"i": 0,
+						"u": 0,
+						"s": 0
+					}
+				}
+			],
+			"name": "",
+			"akleft": false,
+			"aktop": false,
+			"akright": false,
+			"akbottom": false,
+			"alignwithmargins": false,
+			"hidden": false,
+			"borderhidden": false,
+			"background": "",
+			"font": {
+				"name": "Consolas",
+				"size": 10,
+				"color": [
+					0,
+					0,
+					0
+				],
+				"b": 0,
+				"i": 0,
+				"u": 0,
+				"s": 0
+			},
+			"visible": true,
+			"sql": ""
+		}
+	],
+	"caption": "WincomWeb综合监视系统",
+	"connectionstring": "Server=127.0.0.1,8829;Database=BieHe;User_Name=sa;Password={593106};DriverID=MSSQL",
+	"prefix": "",
+	"image": "media/images/board/bk003.jpg",
+	"color": [
+		200,
+		200,
+		200
+	]
+}

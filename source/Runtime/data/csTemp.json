@@ -1,0 +1,149 @@
+{
+	"account": "dwFrame",
+
+	"name": "GetUserByUid",
+	"table": "#tempUser",
+	"primary":"uId",
+	"defaultquerymode":2,
+	
+	"params":[
+		{
+			"name":"minUId",
+			"type":"integer",
+			"caption":"最小id",
+			"query":1,	
+			"value":0
+		},
+		{
+			"name":"maxUId",
+			"caption":"最大id",
+			"type":"integer",
+			"query":1,	
+			"value":50
+		},
+		{
+			"name":"key",
+			"query":1,	
+			"value":"理"
+		},
+		{
+			"name":"sex",
+			"type":"boolean",
+			"query":1,	
+			"value":false
+		},
+		{
+			"name":"minDate",
+			"type":"datetime",
+			"query":1,	
+			"value":"2050-01-01"
+		}
+	],
+	
+	
+	"deletecols":[3],
+
+	"pagesize": 10,
+	"rowheight": 45,
+	"defaulteditmax": 1,
+	"defaultquerymode": 2,
+	"defaultempty": 0,
+	"searchwidth":100,
+	"switch": 1,
+	"select":40,
+	"deletecols":[12],
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"buttons": 1,
+	"border": 1,
+	"buttoncaption": 2,
+	"fields": [
+		{
+			"name": "uId as a0",
+			"caption": "序号",
+			"full":0,
+			"width": 60,
+			"type": "index",
+			"align": "center"
+
+		},
+		{
+			"name": "uId",
+			"sort": 1,
+			"width": 60,
+			"type": "auto",
+			"align": "center",
+			"fuzzy": 1,
+			"query": 0,
+			"datatype": 14
+		},
+		{
+			"name": "uName",
+			"caption": "名称",
+			"sort": 1,
+			"query": 1,
+			"width": 100
+		},
+		{
+			"name": "uSex",
+			"caption": "性别",
+			"sort": 1,
+			"dbfilter":0,
+			"width": 100,
+			"type": "boolean",
+			"align": "center",
+			"query": 1,
+			"list": [
+				"女",
+				"男"
+			]
+		},
+		{
+			"name": "uAge",
+			"caption": "年龄",
+			"type":"int",
+			"sort": 1,
+			"query": 1,
+			"align":"right",
+			"width": 100
+		},
+		{
+			"name": "uRole",
+			"caption": "角色",
+			"type": "combo",
+			"align": "center",
+			"dbfilter":1,
+			"list": 
+			[
+				"超级管理员",
+				"管理员",
+				"经理",
+				"业务员"
+			],
+			"sort": 1,
+			"width": 100,
+			"query": 1
+		},
+		{
+			"name": "uLastlive",
+			"caption": "最后登录",
+			"sort": 1,
+			"width": 140,
+			"type": "date",
+			"align": "left",
+			"fuzzy": 1,
+			"query": 1
+		},
+		{
+			"name": "uRemark",
+			"caption": "描述",
+			"sort": 1,
+			"width": 100,
+			"type": "memo",
+			"align": "left",
+			"fuzzy": 1,
+			"query": 1
+		}
+	]
+}

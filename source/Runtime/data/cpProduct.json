@@ -1,0 +1,128 @@
+{
+	"account": "dwGreen",
+	"table": "gProduct",
+	"defaulteditmax": 1,
+	"fields": 
+	[
+		{
+			"name": "pId",
+			"caption": "Id",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "pName",
+			"caption": "名称",
+			"query":1,
+			"sort": 1,
+			"width": 140
+		},
+		{
+			"name": "pNo",
+			"caption": "编号",
+			"query":1,
+			"sort": 1,
+			"width": 140
+		},
+		{
+			"name": "pPrice",
+			"type": "money",
+			"caption": "价格",
+			"sort": 1,
+			"width": 100,
+			"align": "right"
+		},
+		{
+			"name": "pImage0",
+			"caption": "图片1",
+			"type": "image",
+			"imgdir": "media/images/green/",
+			"imgtype": ["jpg","png","gif"],
+			"imgheight":35,
+			"imgwidth":40,
+			"preview":0,
+			"width": 50
+		},
+		{
+			"name": "pImage1",
+			"caption": "图片2",
+			"type": "image",
+			"imgdir": "media/images/green/",
+			"imgtype": ["jpg","png","gif"],
+			"imgheight":35,
+			"imgwidth":40,
+			"preview":0,
+			"width": 50
+		},
+		{
+			"name": "pImage2",
+			"caption": "图片3",
+			"type": "image",
+			"imgdir": "media/images/green/",
+			"imgtype": ["jpg","png","gif"],
+			"imgheight":35,
+			"imgwidth":40,
+			"preview":0,
+			"width": 50
+		},
+		{
+			"name": "pImage3",
+			"caption": "图片4",
+			"type": "image",
+			"imgdir": "media/images/green/",
+			"imgtype": ["jpg","png","gif"],
+			"imgheight":35,
+			"imgwidth":40,
+			"preview":0,
+			"width": 50
+		},
+		{
+			"name": "pImage4",
+			"caption": "图片5",
+			"type": "image",
+			"imgdir": "media/images/green/",
+			"imgtype": ["jpg","png","gif"],
+			"imgheight":35,
+			"imgwidth":40,
+			"preview":0,
+			"width": 50
+		},
+		{
+			"name": "pImage5",
+			"caption": "图片6",
+			"type": "image",
+			"imgdir": "media/images/green/",
+			"imgtype": ["jpg","png","gif"],
+			"imgheight":35,
+			"imgwidth":40,
+			"preview":0,
+			"width": 50
+		},
+		{
+			"name": "pDetail",
+			"type": "memo",
+			"caption": "特点",
+			"sort": 1,
+			"width": 200,
+			"height":130,
+			"query": 1
+		},
+		{
+			"name": "pUse",
+			"type": "memo",
+			"caption": "用途",
+			"sort": 1,
+			"width": 200,
+			"height":175,
+			"query": 1
+		},
+		{
+			"name": "pDate",
+			"caption": "日期",
+			"type": "date",
+			"width": 100,
+			"sort": 1
+		}
+	]
+}

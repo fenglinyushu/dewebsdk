@@ -1,0 +1,91 @@
+{
+	"account": "dwHOEFON",
+	"table": "eFactory",
+	"defaulteditmax": 1,
+	"fields": 
+	[
+		{
+			"name": "fId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "fName",
+			"caption": "名称",
+			"query":1,
+			"sort": 1,
+			"must": 1,
+			"width": 100
+		},
+		{
+			"name": "fProduct",
+			"caption": "主要产品",
+			"query":1,
+			"align": "center",
+			"sort": 1,
+			"dbfilter": 1,
+			"width": 120
+		},
+		{
+			"name": "fMarket",
+			"caption": "主要市场",
+			"width": 100,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "fAnnualCapacity",
+			"caption": "年产能",
+			"align": "right",
+			"width": 80,
+			"sort": 1
+		},
+		{
+			"name": "fBrand",
+			"caption": "品牌",
+			"align": "center",
+			"width": 90,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "fContact",
+			"caption": "联系人",
+			"width": 80,
+			"align": "center",
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "fPhone",
+			"caption": "电话",
+			"align": "center",
+			"width": 140,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "fJobTitle",
+			"caption": "职务",
+			"width": 100,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "fAddress",
+			"caption": "地址",
+			"width": 160,
+			"sort": 1,
+			"query": 1
+		},
+		{
+			"name": "fRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

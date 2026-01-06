@@ -1,0 +1,40 @@
+{
+	"account": "dwERP",
+	"table": "tTest",
+	"defaulteditmax": 0,
+	"select":60,
+	"fields": 
+	[
+		{
+			"name": "tId",
+			"view": 2
+		},
+		{
+			"name": "tName",
+			"caption": "考试名称",
+			"type": "memo",
+			"height": 80,
+			"must": 1,
+			"sort": 1,
+			"unique": 1,
+			"width": 400
+		},
+		{
+			"name": "tCreateTime",
+			"caption": "创建时间",
+			"type": "date",
+			"align": "center",
+			"readonly": 1,
+			"width": 140
+		},
+		{
+			"name": "tSingleCount",
+			"caption": "单选数量",
+			"type": "integer",
+			"align": "center",
+			"min": 0,
+			"sort": 1,
+			"width": 100
+		}
+	]
+}

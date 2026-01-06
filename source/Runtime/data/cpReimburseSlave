@@ -1,0 +1,72 @@
+{
+	"account": "dwHOEFON",
+	"table": "eReimburseDetail",
+	"defaultorder":"dOrder",
+	"master": 
+	{
+		"panel": "Pn1",
+		"masterfield": "rId",
+		"slavefield": "dReimburseId"
+	},
+	"fields": 
+	[
+		{
+			"name": "dId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "dName",
+			"caption": "名称",
+			"query": 1,
+			"sort": 1,
+			"must": 1,
+			"width": 240
+		},
+		{
+			"name": "dOrder",
+			"caption": "序号",
+			"type":"integer",
+			"align":"center",
+			"width": 100
+		},
+		{
+			"name": "dApprover",
+			"caption": "审批人",
+			"query": 1,
+			"width": 100
+		},
+		{
+			"name": "dApprovDate",
+			"caption": "审批时间",
+			"sort": 1,
+			"width": 140,
+			"type": "datetime",
+			"align": "center"
+		},
+		{
+			"name": "dApprov",
+			"caption": "结果",
+			"sort": 1,
+			"width": 100,
+			"type": "combo",
+			"query": 1,
+			"dbfilter":1,
+			"align": "center",
+			"list": [
+				"",
+				"通过",
+				"驳回"
+			]
+		},
+		{
+			"name": "dRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 80,
+			"query": 1
+		}
+	]
+}

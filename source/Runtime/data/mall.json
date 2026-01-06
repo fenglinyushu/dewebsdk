@@ -1,0 +1,26 @@
+{
+	"accountname":"dwAccess",
+	"tablename":"dw_User",
+	"username":"UserName",
+	"password":"psd",
+	"secret":1,
+	"salt":"Salt",
+	"id":"uId",
+	
+	"successurl":"/mall",
+
+	"logo":"media/images/glogin/logo.jpg",
+	"backgroud":"media/images/glogin/background.jpg",
+	"left":70,
+	"top":40,
+	"caption":"Welcome to DelphiBBS mall",
+	"captcha":0,
+	"wrongtimes":5,
+	"remember":1,
+	"expire":30,
+	"cookieprefix":"dm_", 
+	"domain":"delphibbs.com",
+	"key":"dwf@12345",
+	"errormessage":"请输入有效的用户信息！",
+	"disablemessage":"由于多次输入错误，请稍晚些再试！"
+}

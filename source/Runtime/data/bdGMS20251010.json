@@ -1,0 +1,946 @@
+{
+   "connectionstring" : "Server=127.0.0.1,8829;Database=dwERP;User_Name=sa;Password={593106};DriverID=MSSQL",
+   "image" : "media/images/board/bk051.jpg",
+   "interval" : 5,
+   "caption" : "国家体质健康大数据可视化展示平台",
+   "items" : [
+      {
+         "none" : "第一行:标题+时钟",
+         "top" : 200,
+         "height" : 90,
+         "margins" : [ 3, 30, 30, 10 ],
+         "align" : "top",
+         "type" : "panel",
+         "items" : [
+            {
+               "align" : "client",
+               "margins" : [ 0, 3, 8, 0 ],
+               "type" : "panel",
+               "name" : "p-top-left-top",
+               "none" : "标题",
+               "height" : 70,
+               "alignment" : "center",
+               "layout" : "center",
+               "image" : "media/images/bdv/head_bg51.png",
+               "items" : [
+                  {
+                     "align" : "client",
+                     "font" : {
+                        "size" : 32,
+                        "color" : [ 255, 255, 255 ],
+                        "bold" : 1
+                     },
+                     "type" : "label",
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "caption" : "贵阳市观山湖区外国语实验中学",
+                     "margins" : [ 15, 230, 30, 0 ]
+                  },
+                  {
+                     "none" : "时间显示",
+                     "width" : 200,
+                     "align" : "right",
+                     "type" : "datetime",
+                     "margins" : [ 30, 3, 3, 3 ],
+                     "font" : {
+                        "size" : 14,
+                        "color" : [ 255, 255, 255 ],
+                        "bold" : 0
+                     },
+                     "alignment" : "left",
+                     "layout" : "center"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name" : "内容区",
+         "align" : "client",
+         "type" : "panel",
+         "items" : [
+            {
+               "name" : "第一列",
+               "width" : 400,
+               "height" : 150,
+               "margins" : [ 3, 3, 3, 1 ],
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "left",
+               "type" : "panel",
+               "items" : [
+                  {
+                     "align" : "top",
+                     "height" : 400,
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "type" : "panel",
+                     "font" : {
+                        "size" : 17,
+                        "color" : [ 200, 200, 200 ]
+                     },
+                     "color" : [ 1, 7, 42 ],
+                     "margins" : [ 0, 3, 3, 0 ],
+                     "border" : {
+                        "size" : 2,
+                        "color" : [ 23, 139, 165 ],
+                        "style" : "solid",
+                        "side" : [ 1, 0, 0, 0 ]
+                     },
+                     "name" : "p-top-left-top",
+                     "none" : "各班优良率排名",
+                     "items" : [
+                        {
+                           "align" : "top",
+                           "type" : "label",
+                           "height" : 18,
+                           "alignment" : "left",
+                           "layout" : "center",
+                           "font" : {
+                              "size" : 10,
+                              "color" : [ 200, 200, 200 ]
+                           },
+                           "caption" : "&nbsp;&nbsp;&nbsp;各班优良率排名",
+                           "margins" : [ 5, 10, 3, 5 ],
+                           "border" : {
+                              "size" : 4,
+                              "color" : [ 73, 188, 247 ],
+                              "style" : "solid",
+                              "side" : [ 0, 1, 0, 0 ]
+                           }
+                        },
+                        {
+                           "name" : "第二行-横柱图",
+                           "width" : 300,
+                           "height" : 150,
+                           "margins" : [ 3, 3, 3, 1 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "client",
+                           "type" : "echarts",
+                           "option" : {
+                              "xAxis" : {
+                                 "type" : "value",
+                                 "boundaryGap" : [ 0, 0.01 ],
+                                 "splitLine" : {
+                                    "show" : false
+                                 }
+                              },
+                              "yAxis" : {
+                                 "type" : "category",
+                                 "data" : [
+                                    "初一一班",
+                                    "初一二班",
+                                    "初一三班",
+                                    "初二一班",
+                                    "初二二班",
+                                    "初二三班",
+                                    "初三一班",
+                                    "初三二班",
+                                    "初三三班"
+                                 ]
+                              },
+                              "series" : [
+                                 {
+                                    "name" : "2011",
+                                    "type" : "bar",
+                                    "data" : [ 183, 239, 294, 170, 270, 230, 330, 327, 268 ]
+                                 }
+                              ],
+                              "grid" : {
+                                 "top" : "3%",
+                                 "left" : "3%",
+                                 "right" : "10%",
+                                 "bottom" : "3%",
+                                 "containLabel" : true
+                              },
+                              "legend" : {
+                                 "show" : false
+                              }
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     "align" : "client",
+                     "height" : 400,
+                     "type" : "panel",
+                     "none" : "项目优良率",
+                     "margins" : [ 0, 3, 3, 0 ],
+                     "name" : "p-top-left-top",
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "font" : {
+                        "size" : 17,
+                        "color" : [ 200, 200, 200 ]
+                     },
+                     "color" : [ 1, 7, 42 ],
+                     "border" : {
+                        "size" : 2,
+                        "color" : [ 23, 139, 165 ],
+                        "style" : "solid",
+                        "side" : [ 1, 0, 0, 0 ]
+                     },
+                     "items" : [
+                        {
+                           "align" : "top",
+                           "type" : "label",
+                           "alignment" : "left",
+                           "layout" : "center",
+                           "caption" : "&nbsp;&nbsp;&nbsp;项目优良率",
+                           "margins" : [ 5, 10, 3, 5 ],
+                           "border" : {
+                              "size" : 4,
+                              "color" : [ 73, 188, 247 ],
+                              "style" : "solid",
+                              "side" : [ 0, 1, 0, 0 ]
+                           },
+                           "height" : 18,
+                           "font" : {
+                              "size" : 10,
+                              "color" : [ 200, 200, 200 ]
+                           }
+                        },
+                        {
+                           "name" : "轮播表",
+                           "type" : "stringgrid",
+                           "align" : "client",
+                           "margins" : [ 10, 10, 10, 10 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "cells" : [
+                              [ "姓名", "年龄", "特长" ],
+                              [ "王小雨", "18", "羽毛球" ],
+                              [ "张明芳", "22", "音乐" ],
+                              [ "王小呢", "32", "舞蹈" ],
+                              [ "张小芳", "26", "跳水" ],
+                              [ "王明芳", "22", "音乐" ],
+                              [ "张小呢", "32", "舞蹈" ],
+                              [ "李小芳", "26", "跳水" ],
+                              [ "马雨", "38", "羽球" ],
+                              [ "赵小雨", "32", "跑步" ],
+                              [ "刘江涛", "32", "跑步" ],
+                              [ "张云政", "32", "音乐" ],
+                              [ "马付出", "32", "跑步" ],
+                              [ "李艳", "32", "街舞" ]
+                           ],
+                           "colwidths" : [ 120, "80", "140" ],
+                           "rownum" : "8",
+                           "update" : {
+                              "sql" : "SELECT uName,uAge,uRole FROM eUser "
+                           }
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "name" : "第二列",
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "client",
+               "type" : "panel",
+               "items" : [
+                  {
+                     "align" : "client",
+                     "type" : "panel",
+                     "name" : "P-top-left-client",
+                     "margins" : [ 10, 0, 0, 10 ],
+                     "font" : {
+                        "size" : 25,
+                        "color" : [ 255, 255, 255 ]
+                     },
+                     "items" : [
+                        {
+                           "name" : "左",
+                           "width" : 360,
+                           "height" : 150,
+                           "margins" : [ 3, 0, 3, 1 ],
+                           "font" : {
+                              "size" : 19,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "align" : "top",
+                           "type" : "panel",
+                           "style" : 0,
+                           "none" : "总体情况",
+                           "items" : [
+                              {
+                                 "align" : "client",
+                                 "alignment" : "center",
+                                 "layout" : "center",
+                                 "type" : "panel",
+                                 "margins" : [ 0, 3, 3, 0 ],
+                                 "style" : 0,
+                                 "width" : 200,
+                                 "items" : [
+                                    {
+                                       "align" : "top",
+                                       "alignment" : "left",
+                                       "layout" : "center",
+                                       "caption" : "总体情况（单位：人）",
+                                       "style" : 0,
+                                       "font" : {
+                                          "size" : 14,
+                                          "color" : [ 17, 228, 241 ]
+                                       },
+                                       "margins" : [ 0, 3, 3, 0 ],
+                                       "height" : 40,
+                                       "type" : "label",
+                                       "width" : 55,
+                                       "left" : 99999
+                                    },
+                                    {
+                                       "align" : "client",
+                                       "font" : {
+                                          "size" : 40,
+                                          "color" : [ 254, 240, 0 ],
+                                          "bold" : 1
+                                       },
+                                       "alignment" : "center",
+                                       "layout" : "center",
+                                       "caption" : "1272",
+                                       "margins" : [ 0, 3, 3, 0 ],
+                                       "type" : "label"
+                                    }
+                                 ]
+                              },
+                              {
+                                 "name" : "第一行-中-下-右",
+                                 "width" : 120,
+                                 "left" : "9999",
+                                 "margins" : [ 3, 3, 3, 1 ],
+                                 "font" : {
+                                    "size" : 9,
+                                    "color" : [ 255, 255, 255 ]
+                                 },
+                                 "align" : "right",
+                                 "type" : "echarts",
+                                 "option" : {
+                                    "title" : {
+                                       "text" : "{a|优良率}\\n{b|占比68%}",
+                                       "left" : "center",
+                                       "top" : "center",
+                                       "textStyle" : {
+                                          "fontSize" : 30,
+                                          "fontWeight" : "normal",
+                                          "color" : "#333",
+                                          "rich" : {
+                                             "a" : {
+                                                "fontSize" : 14,
+                                                "color" : "#fff"
+                                             },
+                                             "b" : {
+                                                "fontSize" : 14,
+                                                "color" : "#6B7289"
+                                             }
+                                          }
+                                       }
+                                    },
+                                    "series" : [
+                                       {
+                                          "name" : "数据",
+                                          "type" : "pie",
+                                          "data" : [
+                                             {
+                                                "value" : 750,
+                                                "name" : "A"
+                                             },
+                                             {
+                                                "value" : 250,
+                                                "name" : "B"
+                                             }
+                                          ],
+                                          "radius" : [ "70%", "80%" ],
+                                          "label" : {
+                                             "show" : false
+                                          },
+                                          "emphasis" : {
+                                             "label" : {
+                                                "show" : true
+                                             }
+                                          }
+                                       }
+                                    ]
+                                 }
+                              },
+                              {
+                                 "name" : "第一行-中-下-右",
+                                 "width" : 120,
+                                 "left" : "9999",
+                                 "margins" : [ 3, 3, 3, 1 ],
+                                 "font" : {
+                                    "size" : 9,
+                                    "color" : [ 255, 255, 255 ]
+                                 },
+                                 "align" : "right",
+                                 "type" : "echarts",
+                                 "option" : {
+                                    "title" : {
+                                       "text" : "{a|优秀率}\\n{b|占比68%}",
+                                       "left" : "center",
+                                       "top" : "center",
+                                       "textStyle" : {
+                                          "fontSize" : 40,
+                                          "fontWeight" : "normal",
+                                          "color" : "#333",
+                                          "rich" : {
+                                             "a" : {
+                                                "fontSize" : 14,
+                                                "color" : "#fff"
+                                             },
+                                             "b" : {
+                                                "fontSize" : 14,
+                                                "color" : "#6B7289"
+                                             }
+                                          }
+                                       }
+                                    },
+                                    "series" : [
+                                       {
+                                          "name" : "数据",
+                                          "type" : "pie",
+                                          "data" : [
+                                             {
+                                                "value" : 750,
+                                                "name" : "A"
+                                             },
+                                             {
+                                                "value" : 250,
+                                                "name" : "B"
+                                             }
+                                          ],
+                                          "radius" : [ "70%", "80%" ],
+                                          "label" : {
+                                             "show" : false
+                                          },
+                                          "emphasis" : {
+                                             "label" : {
+                                                "show" : true
+                                             }
+                                          }
+                                       }
+                                    ]
+                                 }
+                              },
+                              {
+                                 "name" : "第一行-中-下-右",
+                                 "width" : 120,
+                                 "left" : "9999",
+                                 "margins" : [ 3, 3, 3, 1 ],
+                                 "font" : {
+                                    "size" : 9,
+                                    "color" : [ 255, 255, 255 ]
+                                 },
+                                 "align" : "right",
+                                 "type" : "echarts",
+                                 "option" : {
+                                    "title" : {
+                                       "text" : "{a|良好率}\\n{b|占比68%}",
+                                       "left" : "center",
+                                       "top" : "center",
+                                       "textStyle" : {
+                                          "fontSize" : 40,
+                                          "fontWeight" : "normal",
+                                          "color" : "#333",
+                                          "rich" : {
+                                             "a" : {
+                                                "fontSize" : 14,
+                                                "color" : "#fff"
+                                             },
+                                             "b" : {
+                                                "fontSize" : 14,
+                                                "color" : "#6B7289"
+                                             }
+                                          }
+                                       }
+                                    },
+                                    "series" : [
+                                       {
+                                          "name" : "数据",
+                                          "type" : "pie",
+                                          "data" : [
+                                             {
+                                                "value" : 750,
+                                                "name" : "A"
+                                             },
+                                             {
+                                                "value" : 250,
+                                                "name" : "B"
+                                             }
+                                          ],
+                                          "radius" : [ "70%", "80%" ],
+                                          "label" : {
+                                             "show" : false
+                                          },
+                                          "emphasis" : {
+                                             "label" : {
+                                                "show" : true
+                                             }
+                                          }
+                                       }
+                                    ]
+                                 }
+                              },
+                              {
+                                 "name" : "第一行-中-下-右",
+                                 "left" : "9999",
+                                 "width" : 120,
+                                 "margins" : [ 3, 3, 3, 1 ],
+                                 "font" : {
+                                    "size" : 9,
+                                    "color" : [ 255, 255, 255 ]
+                                 },
+                                 "align" : "right",
+                                 "type" : "echarts",
+                                 "option" : {
+                                    "title" : {
+                                       "text" : "{a|及格率}\\n{b|占比68%}",
+                                       "left" : "center",
+                                       "top" : "center",
+                                       "textStyle" : {
+                                          "fontSize" : 40,
+                                          "fontWeight" : "normal",
+                                          "color" : "#333",
+                                          "rich" : {
+                                             "a" : {
+                                                "fontSize" : 14,
+                                                "color" : "#fff"
+                                             },
+                                             "b" : {
+                                                "fontSize" : 14,
+                                                "color" : "#6B7289"
+                                             }
+                                          }
+                                       }
+                                    },
+                                    "series" : [
+                                       {
+                                          "name" : "数据",
+                                          "type" : "pie",
+                                          "data" : [
+                                             {
+                                                "value" : 750,
+                                                "name" : "A"
+                                             },
+                                             {
+                                                "value" : 250,
+                                                "name" : "B"
+                                             }
+                                          ],
+                                          "radius" : [ "70%", "80%" ],
+                                          "label" : {
+                                             "show" : false
+                                          },
+                                          "emphasis" : {
+                                             "label" : {
+                                                "show" : true
+                                             }
+                                          }
+                                       }
+                                    ]
+                                 }
+                              },
+                              {
+                                 "name" : "第一行-中-下-右",
+                                 "width" : 120,
+                                 "margins" : [ 3, 3, 3, 1 ],
+                                 "font" : {
+                                    "size" : 9,
+                                    "color" : [ 255, 255, 255 ]
+                                 },
+                                 "align" : "right",
+                                 "type" : "echarts",
+                                 "option" : {
+                                    "title" : {
+                                       "text" : "{a|不及格率}\\n{b|占比68%}",
+                                       "left" : "center",
+                                       "top" : "center",
+                                       "textStyle" : {
+                                          "fontSize" : 14,
+                                          "fontWeight" : "normal",
+                                          "color" : "#fff",
+                                          "rich" : {
+                                             "a" : {
+                                                "color" : "#fff"
+                                             },
+                                             "b" : {
+                                                "color" : "#6B7289"
+                                             }
+                                          }
+                                       }
+                                    },
+                                    "series" : [
+                                       {
+                                          "name" : "数据",
+                                          "type" : "pie",
+                                          "data" : [
+                                             {
+                                                "value" : 750,
+                                                "name" : "A"
+                                             },
+                                             {
+                                                "value" : 250,
+                                                "name" : "B"
+                                             }
+                                          ],
+                                          "radius" : [ "70%", "80%" ],
+                                          "label" : {
+                                             "show" : false
+                                          },
+                                          "emphasis" : {
+                                             "label" : {
+                                                "show" : true
+                                             }
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 "left" : "9999"
+                              }
+                           ]
+                        },
+                        {
+                           "align" : "top",
+                           "height" : 200,
+                           "top" : 9999,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "type" : "panel",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 200, 200, 200 ]
+                           },
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 2,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "name" : "p-top-left-top",
+                           "none" : "各班男女优良率",
+                           "items" : [
+                              {
+                                 "align" : "top",
+                                 "type" : "label",
+                                 "height" : 18,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "font" : {
+                                    "size" : 10,
+                                    "color" : [ 200, 200, 200 ]
+                                 },
+                                 "caption" : "&nbsp;&nbsp;&nbsp;各班男女优良率",
+                                 "margins" : [ 5, 10, 3, 5 ],
+                                 "border" : {
+                                    "size" : 4,
+                                    "color" : [ 73, 188, 247 ],
+                                    "style" : "solid",
+                                    "side" : [ 0, 1, 0, 0 ]
+                                 }
+                              },
+                              {
+                                 "name" : "1111",
+                                 "width" : "500",
+                                 "font" : {
+                                    "size" : 9,
+                                    "color" : [ 255, 255, 255 ]
+                                 },
+                                 "align" : "client",
+                                 "type" : "echarts",
+                                 "option" : {
+                                    "xAxis" : {
+                                       "type" : "category",
+                                       "data" : [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" ]
+                                    },
+                                    "yAxis" : {
+                                       "type" : "value"
+                                    },
+                                    "grid" : {
+                                       "top" : "10%",
+                                       "left" : "3%",
+                                       "right" : "10%",
+                                       "bottom" : "3%",
+                                       "containLabel" : true
+                                    },
+                                    "series" : [
+                                       {
+                                          "type" : "bar",
+                                          "data" : [ 120, 200, 150, 80, 70, 110, 130 ]
+                                       }
+                                    ]
+                                 }
+                              }
+                           ]
+                        },
+                        {
+                           "align" : "left",
+                           "height" : 300,
+                           "top" : 9999,
+                           "alignment" : "center",
+                           "layout" : "center",
+                           "type" : "panel",
+                           "font" : {
+                              "size" : 17,
+                              "color" : [ 200, 200, 200 ]
+                           },
+                           "margins" : [ 0, 3, 3, 0 ],
+                           "border" : {
+                              "size" : 2,
+                              "color" : [ 23, 139, 165 ],
+                              "style" : "solid",
+                              "side" : [ 1, 0, 0, 0 ]
+                           },
+                           "name" : "p-top-left-top",
+                           "none" : "各班不及格人数",
+                           "items" : [
+                              {
+                                 "align" : "top",
+                                 "type" : "label",
+                                 "height" : 18,
+                                 "alignment" : "left",
+                                 "layout" : "center",
+                                 "font" : {
+                                    "size" : 10,
+                                    "color" : [ 200, 200, 200 ]
+                                 },
+                                 "caption" : "&nbsp;&nbsp;&nbsp;各班不及格人数",
+                                 "margins" : [ 5, 10, 3, 5 ],
+                                 "border" : {
+                                    "size" : 4,
+                                    "color" : [ 73, 188, 247 ],
+                                    "style" : "solid",
+                                    "side" : [ 0, 1, 0, 0 ]
+                                 }
+                              },
+                              {
+                                 "name" : "第二行-横柱图",
+                                 "width" : 400,
+                                 "height" : 150,
+                                 "margins" : [ 3, 3, 3, 1 ],
+                                 "font" : {
+                                    "size" : 9,
+                                    "color" : [ 255, 255, 255 ]
+                                 },
+                                 "align" : "client",
+                                 "type" : "echarts",
+                                 "option" : {
+                                    "yAxis" : {
+                                       "type" : "value",
+                                       "boundaryGap" : [ 0, 0.01 ],
+                                       "splitLine" : {
+                                          "show" : false
+                                       }
+                                    },
+                                    "xAxis" : {
+                                       "type" : "category",
+                                       "data" : [
+                                          "初一一班",
+                                          "初一二班",
+                                          "初一三班",
+                                          "初二一班",
+                                          "初二二班",
+                                          "初二三班",
+                                          "初三一班",
+                                          "初三二班",
+                                          "初三三班"
+                                       ]
+                                    },
+                                    "series" : [
+                                       {
+                                          "name" : "2011",
+                                          "type" : "bar",
+                                          "data" : [ 183, 239, 294, 170, 270, 230, 330, 327, 268 ]
+                                       }
+                                    ],
+                                    "grid" : {
+                                       "top" : "3%",
+                                       "left" : "3%",
+                                       "right" : "10%",
+                                       "bottom" : "3%",
+                                       "containLabel" : true
+                                    },
+                                    "legend" : {
+                                       "show" : false
+                                    }
+                                 }
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "name" : "第三列",
+               "width" : 400,
+               "height" : 150,
+               "margins" : [ 3, 3, 3, 1 ],
+               "font" : {
+                  "size" : 9,
+                  "color" : [ 255, 255, 255 ]
+               },
+               "align" : "right",
+               "type" : "panel",
+               "items" : [
+                  {
+                     "align" : "top",
+                     "height" : 400,
+                     "type" : "panel",
+                     "none" : "各班不及格姓名：",
+                     "margins" : [ 0, 3, 3, 0 ],
+                     "name" : "p-top-left-top",
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "font" : {
+                        "size" : 17,
+                        "color" : [ 200, 200, 200 ]
+                     },
+                     "color" : [ 1, 7, 42 ],
+                     "border" : {
+                        "size" : 2,
+                        "color" : [ 23, 139, 165 ],
+                        "style" : "solid",
+                        "side" : [ 1, 0, 0, 0 ]
+                     },
+                     "items" : [
+                        {
+                           "align" : "top",
+                           "type" : "label",
+                           "alignment" : "left",
+                           "layout" : "center",
+                           "caption" : "&nbsp;&nbsp;&nbsp;各班不及格姓名：",
+                           "margins" : [ 5, 10, 3, 5 ],
+                           "border" : {
+                              "size" : 4,
+                              "color" : [ 73, 188, 247 ],
+                              "style" : "solid",
+                              "side" : [ 0, 1, 0, 0 ]
+                           },
+                           "height" : 18,
+                           "font" : {
+                              "size" : 10,
+                              "color" : [ 200, 200, 200 ]
+                           }
+                        },
+                        {
+                           "name" : "轮播表",
+                           "type" : "stringgrid",
+                           "align" : "client",
+                           "margins" : [ 10, 10, 10, 10 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "cells" : [
+                              [ "姓名", "年龄", "特长" ],
+                              [ "王小雨", "18", "羽毛球" ],
+                              [ "张明芳", "22", "音乐" ],
+                              [ "王小呢", "32", "舞蹈" ],
+                              [ "张小芳", "26", "跳水" ],
+                              [ "王明芳", "22", "音乐" ],
+                              [ "张小呢", "32", "舞蹈" ],
+                              [ "李小芳", "26", "跳水" ],
+                              [ "马雨", "38", "羽球" ],
+                              [ "赵小雨", "32", "跑步" ],
+                              [ "刘江涛", "32", "跑步" ],
+                              [ "张云政", "32", "音乐" ],
+                              [ "马付出", "32", "跑步" ],
+                              [ "李艳", "32", "街舞" ]
+                           ],
+                           "colwidths" : [ 120, "80", "140" ],
+                           "rownum" : "8",
+                           "update" : {
+                              "sql" : "SELECT uName,uAge,uRole FROM eUser "
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     "align" : "client",
+                     "height" : 400,
+                     "type" : "panel",
+                     "none" : "有附加分的班级统计",
+                     "margins" : [ 0, 3, 3, 0 ],
+                     "name" : "p-top-left-top",
+                     "alignment" : "center",
+                     "layout" : "center",
+                     "font" : {
+                        "size" : 17,
+                        "color" : [ 200, 200, 200 ]
+                     },
+                     "color" : [ 1, 7, 42 ],
+                     "border" : {
+                        "size" : 2,
+                        "color" : [ 23, 139, 165 ],
+                        "style" : "solid",
+                        "side" : [ 1, 0, 0, 0 ]
+                     },
+                     "items" : [
+                        {
+                           "align" : "top",
+                           "type" : "label",
+                           "alignment" : "left",
+                           "layout" : "center",
+                           "caption" : "&nbsp;&nbsp;&nbsp;有附加分的班级统计",
+                           "margins" : [ 5, 10, 3, 5 ],
+                           "border" : {
+                              "size" : 4,
+                              "color" : [ 73, 188, 247 ],
+                              "style" : "solid",
+                              "side" : [ 0, 1, 0, 0 ]
+                           },
+                           "height" : 18,
+                           "font" : {
+                              "size" : 10,
+                              "color" : [ 200, 200, 200 ]
+                           }
+                        },
+                        {
+                           "name" : "轮播表",
+                           "type" : "stringgrid",
+                           "align" : "client",
+                           "margins" : [ 10, 10, 10, 10 ],
+                           "font" : {
+                              "size" : 9,
+                              "color" : [ 255, 255, 255 ]
+                           },
+                           "cells" : [
+                              [ "姓名", "年龄", "特长" ],
+                              [ "王小雨", "18", "羽毛球" ],
+                              [ "张明芳", "22", "音乐" ],
+                              [ "王小呢", "32", "舞蹈" ],
+                              [ "张小芳", "26", "跳水" ],
+                              [ "王明芳", "22", "音乐" ],
+                              [ "张小呢", "32", "舞蹈" ],
+                              [ "李小芳", "26", "跳水" ],
+                              [ "马雨", "38", "羽球" ],
+                              [ "赵小雨", "32", "跑步" ],
+                              [ "刘江涛", "32", "跑步" ],
+                              [ "张云政", "32", "音乐" ],
+                              [ "马付出", "32", "跑步" ],
+                              [ "李艳", "32", "街舞" ]
+                           ],
+                           "colwidths" : [ 120, "80", "140" ],
+                           "rownum" : "8",
+                           "update" : {
+                              "sql" : "SELECT uName,uAge,uRole FROM eUser "
+                           }
+                        }
+                     ]
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

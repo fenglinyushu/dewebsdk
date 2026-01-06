@@ -1,0 +1,100 @@
+{
+  "table": "dwStockIn",
+  "defaultorder":" ORDER BY idate DESC",
+  "radius": 0,
+  "border": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "defaulteditmax":1,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "iNo",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":240,
+      "caption": "单号"
+    },
+    {
+      "name": "iGoodId",
+      "must": 1,
+      "sort": 1,
+	  "width":60,
+      "caption": "ID"
+    },
+    {
+      "name": "iName",
+      "must": 1,
+      "sort": 1,
+	  "query":1,
+	  "width":150,
+      "caption": "名称"
+    },
+    {
+      "name": "iGoodNo",
+      "sort": 1,
+	  "query":1,
+	  "width":120,
+      "caption": "编号"
+    },
+    {
+      "name": "iSpec",
+      "caption": "规格",
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "iUnit",
+      "caption": "单位",
+	  "type":"combo",
+	  "list":["个","台","部","套","辆","支","双","只","袋"],
+	  "width":80,
+      "sort": 1
+    },
+    {
+      "name": "iQuantity",
+	  "type":"integer",
+      "caption": "数量",
+      "sort": 1
+    },
+    {
+      "name": "iPrice",
+	  "type":"money",
+      "caption": "价格",
+      "sort": 1
+    },
+    {
+      "name": "iAmount",
+	  "type":"money",
+      "caption": "金额",
+      "sort": 1
+    },
+    {
+      "name": "iDate",
+	  "type":"combo",
+      "caption": "日期",
+      "sort": 1
+    },
+    {
+      "name": "iSupplier",
+      "caption": "供应商",
+	  "width":80,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "iOperator",
+      "caption": "入库人",
+	  "width":80,
+      "sort": 1
+    },
+    {
+      "name": "iRemark",
+      "caption": "备注",
+	  "query":1,
+      "sort": 1
+    }
+  ]
+}

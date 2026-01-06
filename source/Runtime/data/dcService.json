@@ -1,0 +1,99 @@
+{
+  "account": "dwGreen",
+  "table": "gService",
+  "defaultorder": "sDate DESC",
+  "margins": [
+    10,
+    10,
+    20,
+    10
+  ],
+  "hover": 3,
+  "prefix": "z",
+  "cardwidth": 353,
+  "cardheight": 240,
+  "defaultquerymode": 0,
+  "buttons": 0,
+  "new": 0,
+  "edit": 0,
+  "delete": 0,
+  "totalfirst": 1,
+  "pagesize": 6,
+  "cardstyle": "background-color:#fff;overflow:hidden;border-radius:8px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+  "fields": [
+    {
+      "name": "sId",
+      "view": 2
+    },
+    {
+      "name": "sImage",
+      "caption": "图片",
+      "top": 25,
+      "left": 25,
+      "height": 96,
+      "width": 96,
+      "type": "image",
+      "dwstyle": "border-radius:8px;",
+      "imgdir": "media/images/green/",
+      "imgtype": [
+        "jpg",
+        "png",
+        "jpeg"
+      ]
+    },
+    {
+      "name": "sTitle",
+      "caption": "标题",
+      "left": 145,
+      "right": 25,
+      "top": 20,
+      "height": 25,
+      "wrap": 1,
+      "dwstyle": "display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;",
+      "font": {
+        "size": 15,
+        "color": [
+          26,
+          58,
+          101
+        ]
+      }
+    },
+    {
+      "name": "sDetail",
+      "caption": "内容",
+      "left": 145,
+      "right": 25,
+      "top": 60,
+      "height": 75,
+      "wrap": 1,
+      "dwstyle": "display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;",
+      "font": {
+        "size": 11,
+        "color": [
+          140
+        ]
+      }
+    },
+    {
+      "name": "pRemark",
+      "type": "button",
+      "caption": "了解更多",
+      "left": 114,
+      "width": 125,
+      "top": 160,
+      "height": 50,
+      "dwstyle": "border-radius:30px;background-color:#e74c3c;border:0",
+      "font": {
+        "size": 13,
+        "color": [
+          255
+        ]
+      }
+    },
+    {
+      "name": "sDate",
+      "view": 2
+    }
+  ]
+}

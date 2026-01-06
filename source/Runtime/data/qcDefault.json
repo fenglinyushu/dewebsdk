@@ -1,0 +1,414 @@
+{
+	"account": "dwAccess",
+	"table": "qcGoods",
+	"pagesize": 10,
+	"rowheight": 45,
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"defaultquerymode": 1,
+	"switch": 1,
+	"border": 1,
+	"buttons": 1,
+	"margin": 10,
+	"radius": 5,
+	"editwidth": 320,
+	"buttoncaption": 1,
+	"defaulteditmax": 0,
+	"fields": 
+	[
+		{
+			"name": "",
+			"width": 50,
+			"type": "check",
+			"align": "center"
+		},
+		{
+			"name": "id",
+			"width": 100,
+			"type": "string",
+			"view": 2,
+			"must": 0,
+			"query": 0,
+			"sort": 0,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left"
+		},
+		{
+			"name": "goodsname",
+			"caption": "货品名称",
+			"width": 120,
+			"type": "string",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left"
+		},
+		{
+			"name": "photo",
+			"caption": "图片",
+			"width": 80,
+			"type": "image",
+			"align": "center",
+			"preview":0,
+			"dwstyle":"border-radius:3px;",
+			"dwattr":"fit='cover'",
+			"imgdir":"media/images/quickcrud/",
+			"imgtype":["jpg","png","gif"]
+		},
+		{
+			"name": "goodscode",
+			"caption": "编码",
+			"width": 100,
+			"type": "string",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left"
+		},
+		{
+			"name": "provider",
+			"caption": "供应商",
+			"width": 180,
+			"type": "combo",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left",
+			"list": 
+			[
+				"华为管业",
+				"华美科技",
+				"西安迈华科技信息有限公司",
+				"宗哲电器"
+			],
+			"filter": 1,
+			"filterlist": 
+			[
+				"襄阳奥的斯",
+				"宗哲电器",
+				"沈阳金德日化公司",
+				"华为管业",
+				"西安迈华科技信息有限公司"
+			]
+		},
+		{
+			"name": "Spec",
+			"caption": "规格",
+			"width": 100,
+			"type": "string",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center"
+		},
+		{
+			"name": "gclass",
+			"caption": "类别",
+			"width": 100,
+			"type": "string",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center"
+		},
+		{
+			"name": "Unit",
+			"width": 100,
+			"type": "combo",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center",
+			"list": 
+			[
+				"个",
+				"部",
+				"台",
+				"套"
+			]
+		},
+		{
+			"name": "InPrice",
+			"caption": "进价",
+			"width": 100,
+			"type": "money",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "right",
+			"min": 0,
+			"max": 100
+		},
+		{
+			"name": "Price",
+			"caption": "价格",
+			"width": 100,
+			"type": "money",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "right",
+			"min": 0,
+			"max": 100
+		},
+		{
+			"name": "UpdateTime",
+			"caption": "更新日期",
+			"width": 100,
+			"type": "date",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "center"
+		},
+		{
+			"name": "description",
+			"caption": "备注",
+			"width": 100,
+			"type": "string",
+			"view": 0,
+			"must": 0,
+			"query": 1,
+			"sort": 1,
+			"readonly": 0,
+			"unique": 0,
+			"align": "left"
+		}
+	],
+	"slave0": 
+	[
+		{
+			"caption": "扩展属性",
+			"table": "qcGoodsEx",
+			"imageindex": 0,
+			"masterfield": "id",
+			"slavefield": "gid",
+			"fields": 
+			[
+				{
+					"name": "",
+					"width": 50,
+					"type": "check",
+					"align": "center"
+				},
+				{
+					"name": "gid",
+					"width": 150,
+					"type": "auto",
+					"view": 2,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left"
+				},
+				{
+					"name": "photo",
+					"caption": "图片",
+					"width": 80,
+					"type": "image",
+					"align": "center",
+					"preview":1,
+					"imgdir":"media/images/quickcrud/",
+					"imgtype":["jpg","png","gif"]
+				},
+				{
+					"name": "Title",
+					"caption": "属性名称",
+					"width": 100,
+					"type": "string",
+					"view": 0,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "center"
+				},
+				{
+					"name": "Type",
+					"caption": "类型",
+					"width": 150,
+					"type": "string",
+					"view": 0,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "center",
+					"filter": 1,
+					"filterlist": 
+					[
+						"1",
+						"4",
+						"5",
+						"6"
+					]
+				},
+				{
+					"name": "[Value]",
+					"caption": "数值",
+					"width": 200,
+					"type": "string",
+					"view": 0,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left"
+				}
+			]
+		},
+		{
+			"caption": "入库情况",
+			"table": "qcInport",
+			"imageindex": 0,
+			"masterfield": "id",
+			"slavefield": "gid",
+			"fields": 
+			[
+				{
+					"name": "",
+					"width": 50,
+					"type": "check",
+					"align": "center"
+				},
+				{
+					"name": "gid",
+					"width": 100,
+					"type": "integer",
+					"view": 2,
+					"must": 0,
+					"query": 0,
+					"sort": 0,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left"
+				},
+				{
+					"name": "[no]",
+					"width": 100,
+					"type": "string",
+					"view": 0,
+					"must": 0,
+					"query": 0,
+					"sort": 0,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left"
+				},
+				{
+					"name": "photo",
+					"caption": "图片",
+					"width": 80,
+					"type": "image",
+					"align": "center",
+					"preview":1,
+					"imgdir":"media/images/quickcrud/",
+					"imgtype":["jpg","png","gif"]
+				},
+				{
+					"name": "provider",
+					"caption": "供应商",
+					"width": 250,
+					"type": "string",
+					"view": 0,
+					"must": 0,
+					"query": 0,
+					"sort": 0,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left"
+				},
+				{
+					"name": "phone",
+					"caption": "联系电话",
+					"width": 120,
+					"type": "string",
+					"view": 0,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left"
+				},
+				{
+					"name": "price",
+					"caption": "价格",
+					"width": 100,
+					"type": "money",
+					"view": 0,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left",
+					"min": 0,
+					"max": 100
+				},
+				{
+					"name": "num",
+					"caption": "数量",
+					"width": 100,
+					"type": "integer",
+					"view": 0,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left",
+					"min": 0,
+					"max": 100
+				},
+				{
+					"name": "amount",
+					"caption": "金额",
+					"width": 150,
+					"type": "money",
+					"view": 0,
+					"must": 0,
+					"query": 1,
+					"sort": 1,
+					"readonly": 0,
+					"unique": 0,
+					"align": "left"
+				}
+			]
+		}
+	]
+}

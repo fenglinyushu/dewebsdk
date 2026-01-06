@@ -1,0 +1,142 @@
+{
+	"account": "dwHOEFON",
+	"table": "eOutProduct",
+	"readonly": 1,
+	"defaulteditmax": 1,
+	"defaultquerymode": 2,
+	"visiblecol": 1,
+	"select": 40,
+	"deletecols": 
+	[
+		2,
+		5
+	],
+	"fields": 
+	[
+		{
+			"name": "pId",
+			"caption": "编号",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "pPI_NO",
+			"caption": "PI号",
+			"sort": 1,
+			"query": 1,
+			"dbfilter": 1,
+			"width": 140
+		},
+		{
+			"name": "pCustomerName",
+			"caption": "客户名称",
+			"sort": 1,"view":3,
+			"query": 1,
+			"dbfilter": 1,
+			"width": 160
+		},
+		{
+			"name": "pProductName",
+			"caption": "产品名称",
+			"sort": 1,"view":3,
+			"query": 1,
+			"dbfilter": 1,
+			"width": 160
+		},
+		{
+			"name": "pFactoryName",
+			"caption": "工厂名称",
+			"sort": 1,"view":3,
+			"query": 1,
+			"dbfilter": 1,
+			"width": 160
+		},
+		{
+			"name": "pProductQuantity",
+			"caption": "产品数量",
+			"sort": 1,
+			"width": 100,
+			"type": "integer",
+			"align": "right"
+		},
+		{
+			"name": "pFactoryAmount",
+			"caption": "工厂金额",
+			"sort": 1,
+			"width": "120",
+			"type": "float",
+			"format": "￥%n",
+			"align": "right"
+		},
+		{
+			"name": "pContractAmount",
+			"caption": "合同金额",
+			"sort": 1,
+			"width": "120",
+			"type": "float",
+			"format": "￥%n",
+			"align": "right"
+		},
+		{
+			"name": "pTaxed",
+			"caption": "含税",
+			"type": "boolean",
+			"width": 80,
+			"sort": 1,"dbfilter": 1,
+			"align": "center",
+			"default": "是",
+			"list": 
+			[
+				"否",
+				"是"
+			]
+		},
+		{
+			"name": "pOutUserName",
+			"caption": "业务员",
+			"sort": 1,
+			"view": 3,
+			"query": 1,
+			"width": 100,
+			"dbfilter": 1,
+			"align": "center"
+		},
+		{
+			"name": "pProductionSupervisorName",
+			"caption": "生产主管",
+			"sort": 1,
+			"view": 3,
+			"query": 1,
+			"width": 120,
+			"dbfilter": 1,
+			"align": "center"
+		},
+		{
+			"name": "pFollowName",
+			"caption": "跟单业务",
+			"sort": 1,
+			"view": 3,
+			"query": 1,
+			"width": 120,
+			"dbfilter": 1,
+			"align": "center"
+		},
+		{
+			"name": "pOutDateTime",
+			"caption": "出货日期",
+			"type": "date",
+			"align": "center",
+			"dbfilter": 1,
+			"width": 120,
+			"query": 1,
+			"sort": 1
+		},
+		{
+			"name": "pTransportMode",
+			"caption": "运输方式",
+			"sort": 1,"dbfilter": 1,
+			"width": 100
+		}
+	]
+}

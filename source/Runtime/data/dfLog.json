@@ -1,0 +1,44 @@
+{
+  "table": "dwLog",
+  "defaultorder":" ORDER BY lDate DESC",
+  "radius": 0,
+  "border": 0,
+  "edit": 0,
+  "print": 0,
+  "margin": 0,
+  "pagesize": 8,
+  "headerbackground": "#f7f7f7",
+  "fields": [
+    {
+      "name": "lUserName",
+      "sort": 1,
+	  "query":1,
+      "caption": "用户名"
+    },
+    {
+      "name": "lMode",
+      "sort": 1,
+	  "query":1,
+      "caption": "操作"
+    },
+    {
+      "name": "lDate",
+      "caption": "时间",
+      "width": 160,
+      "sort": 1
+    },
+    {
+      "name": "lCanvasId",
+      "caption": "登录设备",
+      "width": 300,
+	  "query":1,
+      "sort": 1
+    },
+    {
+      "name": "lremark",
+      "caption": "备注",
+	  "query":1,
+      "width": 120
+    }
+  ]
+}

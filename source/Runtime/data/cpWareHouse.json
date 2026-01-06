@@ -1,0 +1,75 @@
+{
+	"account":"dwERP",
+	"table": "eWareHouse",
+	"fields": 
+	[
+		{
+			"name": "wId",
+			"caption": "id",
+			"sort": 1,
+			"width": 60,
+			"type": "auto",
+			"align": "center"
+		},
+		{
+			"name": "wActive",
+			"caption": "在用",
+			"sort": 1,
+			"width": 100,
+			"type": "boolean",
+			"align": "center",
+			"caption": "gActive",
+			"query": 1,
+			"dbfilter":1,
+			"list":["○","●"]
+		},
+		{
+			"name": "wName",
+			"caption": "名称",
+			"sort": 1,
+			"query": 1,
+			"dbfilter": 1
+		},
+		{
+			"name": "wLocation",
+			"caption": "位置",
+			"sort": 1,
+			"width": 200,
+			"query": 1
+		},
+		{
+			"name": "wManager",
+			"caption": "负责人",
+			"sort": 1,
+			"align": "center",
+			"width": 100,
+			"dbfilter":1,
+			"query": 1
+		},
+		{
+			"name": "wCapacity",
+			"caption": "容积",
+			"sort": 1,
+			"width": 100,
+			"type": "integer",
+			"align": "right",
+			"query": 0
+		},
+		{
+			"name": "wAvailableSpace",
+			"caption": "可用空间",
+			"sort": 1,
+			"width": 140,
+			"type": "integer",
+			"align": "right",
+			"query": 0
+		},
+		{
+			"name": "wRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 200,
+			"query": 1
+		}
+	]
+}

@@ -1,0 +1,124 @@
+{
+	"account": "dwGreen",
+	"table": "gService",
+	"defaulteditmax": 1,
+	"pagesize": 5,
+	"rowheight": 80,
+	"fields": 
+	[
+		{
+			"name": "sId",
+			"caption": "Id",
+			"align": "center",
+			"width": 60,
+			"type": "auto"
+		},
+		{
+			"name": "sTitle0",
+			"caption": "繁体标题",
+			"query": 1,
+			"sort": 1,
+			"width": 250
+		},
+		{
+			"name": "sTitle1",
+			"caption": "简体标题",
+			"query": 1,
+			"sort": 1,
+			"width": 250
+		},
+		{
+			"name": "sTitle2",
+			"caption": "英文标题",
+			"query": 1,
+			"sort": 1,
+			"width": 250
+		},
+		{
+			"name": "sImage",
+			"caption": "图片",
+			"type": "image",
+			"imgdir": "media/images/green/",
+			"imgtype": 
+			[
+				"jpg",
+				"png",
+				"gif"
+			],
+			"hint": "推荐 96 × 96",
+			"imgheight": 70,
+			"imgwidth": 80,
+			"preview": 1,
+			"width": 90
+		},
+		{
+			"name": "sNo",
+			"caption": "编号",
+			"query": 1,
+			"sort": 1,
+			"width": 140
+		},
+		{
+			"name": "sDate",
+			"caption": "日期",
+			"type": "date",
+			"align": "center",
+			"width": 100,
+			"sort": 1
+		},
+		{
+			"name": "sDetail0",
+			"type": "memo",
+			"caption": "繁体介绍",
+			"sort": 1,
+			"width": 200,
+			"height": 180,
+			"query": 1
+		},
+		{
+			"name": "sDetail1",
+			"type": "memo",
+			"caption": "简体介绍",
+			"sort": 1,
+			"width": 200,
+			"height": 180,
+			"query": 1
+		},
+		{
+			"name": "sDetail2",
+			"type": "memo",
+			"caption": "英文介绍",
+			"sort": 1,
+			"width": 200,
+			"height": 180,
+			"query": 1
+		},
+		{
+			"name": "sData0",
+			"type": "memo",
+			"caption": "繁体内容",
+			"sort": 1,
+			"width": 200,
+			"height": 180,
+			"query": 1
+		},
+		{
+			"name": "sData1",
+			"type": "memo",
+			"caption": "简体内容",
+			"sort": 1,
+			"width": 200,
+			"height": 180,
+			"query": 1
+		},
+		{
+			"name": "sData2",
+			"type": "memo",
+			"caption": "英文内容",
+			"sort": 1,
+			"width": 200,
+			"height": 180,
+			"query": 1
+		}
+	]
+}

@@ -1,0 +1,50 @@
+{
+	"caption": "详细参数",
+	"table": "dwf_goodsex",
+	"imageindex": 58,
+	"masterfield": "id",
+	"defaultquerymode":0,
+	"slavefield": "gid",
+	"where": "id>15",
+	"edit": 1,
+	"new": 1,
+	"delete": 1,
+	"print": 0,
+	"fields": [{
+		"name": "id",
+		"caption": "id",
+		"width": 80,
+		"align": "center",
+		"sort": 1,
+		"type": "auto"
+	}, {
+		"name": "gid",
+		"caption": "货品ID",
+		"align": "left",
+		"must": 1,
+		"query": 1,
+		"type": "integer",
+		"width": 80
+	}, {
+		"name": "title",
+		"caption": "属性名称",
+		"width": 120,
+		"query": 1,
+		"unique": 1,
+		"default": "新属性",
+		"must": 1
+	}, {
+		"name": "value",
+		"caption": "属性值",
+		"readonly": 1,
+		"query": 1,
+		"width": 180,
+		"default": "新值",
+		"must": 1
+	}],
+	"master": {
+		"panel": "PMaster",
+		"masterfield": "id",
+		"slavefield": "gid"
+	}
+}

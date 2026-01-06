@@ -1,0 +1,132 @@
+{
+	"account":"dwERP",
+	"table": "eSupplier",
+	"fields": 
+	[
+		{
+			"name": "sId",
+			"caption": "id",
+			"sort": 1,
+			"width": 60,
+			"type": "auto",
+			"align": "center"
+		},
+		{
+			"name": "sName",
+			"caption": "名称",
+			"sort": 1,
+			"query": 1,
+			"width": 120,
+			"dbfilter": 1
+		},
+		{
+			"name": "sContactName",
+			"caption": "联系人",
+			"align": "center",
+			"sort": 1,
+			"width": 90,
+			"query": 1
+		},
+		{
+			"name": "sContactTitle",
+			"caption": "职务",
+			"align": "center",
+			"sort": 1,
+			"width": 90,
+			"dbfilter":1
+		},
+		{
+			"name": "sPhone",
+			"caption": "电话",
+			"align": "center",
+			"sort": 1,
+			"width": 120,
+			"query": 1
+		},
+		{
+			"name": "sEmail",
+			"caption": "邮箱",
+			"sort": 1,
+			"width": 200
+		},
+		{
+			"name": "sWebsite",
+			"caption": "网址",
+			"sort": 1,
+			"width": 180
+		},
+		{
+			"name": "sCountry",
+			"caption": "国家",
+			"align": "center",
+			"sort": 1,
+			"width": 80
+		},
+		{
+			"name": "sProvince",
+			"caption": "省",
+			"type":"combo",
+			"align": "center",
+			"sort": 1,
+			"width": 80,
+			"dbfilter":1,
+			"list":[
+				"北京市",
+				"天津市",
+				"上海市",
+				"重庆市",
+				"河北省",
+				"山西省",
+				"辽宁省",
+				"吉林省",
+				"黑龙江省",
+				"江苏省",
+				"浙江省",
+				"安徽省",
+				"福建省",
+				"江西省",
+				"山东省",
+				"河南省",
+				"湖北省",
+				"湖南省",
+				"广东省",
+				"海南省",
+				"四川省",
+				"贵州省",
+				"云南省",
+				"陕西省",
+				"甘肃省",
+				"青海省",
+				"台湾省",
+				"内蒙古自治区",
+				"广西壮族自治区",
+				"西藏自治区",
+				"宁夏回族自治区",
+				"新疆维吾尔自治区",
+				"香港特别行政区",
+				"澳门特别行政区"
+			]
+		},
+		{
+			"name": "sAddress",
+			"caption": "地址",
+			"sort": 1,
+			"width": 200,
+			"query": 1
+		},
+		{
+			"name": "sPostalCode",
+			"caption": "邮编",
+			"align": "center",
+			"sort": 1,
+			"width": 80
+		},
+		{
+			"name": "sRemark",
+			"caption": "备注",
+			"sort": 1,
+			"width": 150,
+			"query": 1
+		}
+	]
+}

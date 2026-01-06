@@ -1,0 +1,74 @@
+{
+	"account": "dwERP",
+	"table": "dDocument",
+	"defaultquerymode": 1,
+	"buttons": 1,
+	"rowheight":35,
+	"pagesize":15,
+	"border": 1,
+	"fixed": 
+	[
+		0,
+		2
+	],
+	"fields": 
+	[
+		{
+			"name": "dId",
+			"caption": "id",
+			"sort": 1,
+			"width": 60,
+			"view":0,
+			"type": "auto",
+			"align": "center"
+		},
+		{
+			"name": "dCreateTime",
+			"type":"datetime",
+			"caption": "时间",
+			"sort": 1,
+			"align": "center",
+			"width": 240,
+			"view": 0,
+			"query": 0
+		},
+		{
+			"name": "dCaption",
+			"type":"link",
+			"target":"_blank",
+			"urlfield":"dUrl",
+			"dwstyle":"text-decoration:none;",
+			"caption": "标题",
+			"sort": 1,
+			"width": 600,
+			"query": 1
+		},
+		{
+			"name": "dUrl",
+			"caption": "链接",
+			"sort": 1,
+			"width": 300,
+			"view": 1,
+			"query": 0
+		},
+		{
+			"name": "dViews",
+			"caption": "浏览",
+			"type": "integer",
+			"align": "center",
+			"sort": 1,
+			"width": 70
+		},
+		{
+			"name": "dType",
+			"caption": "来源",
+			"type": "combo",
+			"sort": 1,
+			"width": 120,
+			"align": "center",
+			"query": 1,
+			"dbfilter": 1,
+			"list":["官网","今日头条","哔哩哔哩","其他"]
+		}
+	]
+}
