@@ -36,7 +36,8 @@ begin
         //<Get Data
         Result  := Result + 'data:[';
         for iRow := 0 to RowCount-1 do begin
-            Result  := Result + Format('{name:"%s",value:%d},',[Cells[0,iRow],StrToIntDef(Cells[1,iRow],-1)]);
+            //Result  := Result + Format('{name:"%s",value:%d},',[Cells[0,iRow],StrToIntDef(Cells[1,iRow],-1)]);
+            Result  := Result + Format('{name:"%s",value:%f},',[Cells[0,iRow],StrToFloatDef(Cells[1,iRow],-1)]);
         end;
         Delete(Result,Length(Result),1);
         Result  := Result + ']';

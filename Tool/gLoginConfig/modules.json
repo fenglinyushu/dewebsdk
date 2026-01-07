@@ -1,0 +1,152 @@
+{
+   "author" : "fenglinyushu",
+   "caption" : "gLogin Config",
+   "items" : [
+      {
+         "_m_" : "root",
+         "caption" : "root",
+         "mode" : "only child",
+         "child" : [],
+         "allowsibling" : [],
+         "allowchild" : [ ],
+         "property" : [
+			{
+               "_m_" : "accountname",
+               "type" : "string",
+			   "hint":"账套名称，请与DeWebServer的账套管理相同"
+            },
+			{
+               "_m_" : "tablename",
+               "type" : "string",
+			   "hint":"用户表名称"
+            },
+			{
+               "_m_" : "username",
+               "type" : "string",
+			   "hint":"用户名 - 字段名称，建议不要使用name"
+            },
+			{
+               "_m_" : "password",
+               "type" : "string",
+			   "hint":"密码字段名称,建议不要使用password"
+            },
+            {
+               "_m_" : "remember",
+               "type" : "integer",
+			   "default":1,
+			   "hint":"是否记住登录信息，以便下次自动登录.1-是,0-否"
+            },
+            {
+               "_m_" : "listuser",
+               "type" : "integer",
+			   "default":0,
+			   "hint":"登录时是否下拉用户名列表，1-是，0-否"
+            },
+
+            {
+               "_m_" : "logo",
+               "type" : "string",
+			   "hint":"logo 图"
+            },
+            {
+               "_m_" : "backgroud",
+               "type" : "string",
+			   "hint":"电脑端登录时的背景图, 移动端不需要"
+            },
+            {
+               "_m_" : "left",
+               "type" : "integer",
+			   "default":60,
+			   "hint":"电脑端登录时登录框中心点的左边距， 百分比"
+            },
+            {
+               "_m_" : "top",
+               "type" : "integer",
+			   "default":40,
+			   "hint":"电脑端登录时登录框中心点的上边距， 百分比"
+            },
+            {
+               "_m_" : "caption",
+               "type" : "string",
+			   "default":"Welcome to login",
+			   "hint":"页面标题"
+            },
+            {
+               "_m_" : "captcha",
+               "type" : "integer",
+			   "hint":"是否使用验证码,1-是,0-否"
+            },
+            {
+               "_m_" : "wrongtimes",
+               "type" : "integer",
+			   "default":5,
+			   "hint":"允许错误次数，默认为5次，输错5次后禁止输入3分钟。如果为0，则允许无限次。"
+            },
+            {
+               "_m_" : "expire",
+               "type" : "integer",
+			   "default":30,
+			   "hint":"登录信息有效期，单位：天"
+            },
+			{
+               "_m_" : "salt",
+               "type" : "string",
+			   "hint":"SALT字段名称，仅采用密文时有效"
+            },
+			{
+               "_m_" : "id",
+               "type" : "string",
+			   "hint":"用户唯一标识字段名称"
+            },
+			{
+               "_m_" : "cookieprefix",
+               "type" : "string",
+			   "hint":"cookie的前缀，过程中用到多个前缀,注意不要和其他系统重复"
+            },
+			{
+               "_m_" : "domain",
+               "type" : "string",
+			   "hint":"域名， 比如： delphibbs.com"
+            },
+			{
+               "_m_" : "key",
+               "type" : "string",
+			   "hint":"对COOKIE信息进行加密的密钥"
+            },
+            {
+               "_m_" : "secret",
+               "type" : "integer",
+			   "default":1,
+			   "hint":"数据库中保存用户密码时是否使用MD5加密方式，1表示加密，0：表示明文"
+            },
+			
+			
+			{
+               "_m_" : "errorhint",
+               "type" : "string",
+			   "hint":"用户输错登录信息时的提示"
+            },
+			{
+               "_m_" : "disablehint",
+               "type" : "string",
+			   "hint":"用户多次输错登录信息时的提示(禁止3分钟)"
+            },
+			{
+               "_m_" : "successurl",
+               "type" : "string",
+			   "hint":"登录信息正常时跳转的URL"
+            },
+			{
+               "_m_" : "defaultusername",
+               "type" : "string",
+			   "hint":"登录窗体中默认的用户名"
+            },
+			{
+               "_m_" : "defaultpassword",
+               "type" : "string",
+			   "hint":"登录窗体中默认的密码"
+            }
+         ]
+      }
+   ]
+}

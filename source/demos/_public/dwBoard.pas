@@ -357,6 +357,30 @@ begin
                 //设置重绘
                 ShowHint    := True;
             end;
+        end else if sType = 'datav_ranking' then begin
+            //------------ stringgrid ----------------------------------------------------------------------------------
+            oSGrid  := TStringGrid(oForm.FindComponent(sName));
+            with oSGrid do begin
+                AFQUpdate.Open(dwGetStr(joItem,'sql'));
+
+
+                //重新设置表格的行列数
+                RowCount    := AFQUpdate.RecordCount + 1;
+                ColCount    := AFQUpdate.FieldCount;
+
+                //重写标题
+                for iCol := 0 to AFQUpdate.FieldCount - 1 do begin
+                    Cells[iCol,0]   := AFQUpdate.Fields[iCol].FieldName;
+                end;
+
+                //更新数据
+                for iRow := 1 to AFQUpdate.RecordCount do begin
+                    AFQUpdate.RecNo := iRow;
+                    for iCol := 0 to ColCount-1 do begin
+                        Cells[iCol,iRow]    := AFQUpdate.Fields[iCol].AsString;
+                    end;
+                end;
+            end;
         end else if sType = 'datav_water' then begin
             //------------ bar   ---------------------------------------------------------------------------------------
             oShape  := TShape(oForm.FindComponent(sName));
@@ -1369,6 +1393,88 @@ begin
                 if joItem.Exists('dwstyle') then begin
                     dwSetProp(oShape,'dwstyle',dwGetStr(joItem,'dwstyle',''));
                 end;
+
+            end;
+        end else if sType = 'datav_ranking' then begin
+            //------------ 排名轮播表 ----------------------------------------------------------------------------------
+            oSGrid  := TStringGrid.Create(oForm);
+            with oSGrid do begin
+                Parent      := AParent;
+
+                //如果指定了名称,则按指定名称;否则自动生成名称
+                if dwGetStr(joItem,'name') = '' then begin
+                    Name    := 'BD'+IntToStr(ACount);
+                end else begin
+                    Name    := dwGetStr(joItem,'name');
+                end;
+
+                HelpKeyword := 'dvranking';
+                Color       := clNone;
+
+                //
+                bdSetAlign(oSGrid,joItem);
+
+                //设置ltwm
+                bdSetBase(oSGrid,joItem);
+
+                //
+                bdSetFont(oSGrid,joItem);
+
+                //
+                bdSetBorder(oSGrid,joItem);
+
+                //
+                bdSetMargins(oSGrid,joItem);
+
+                //额外的样式
+                if joItem.Exists('dwstyle') then begin
+                    dwSetProp(oSGrid,'dwstyle',dwGetStr(joItem,'dwstyle',''));
+                end;
+
+                //colwidths
+                if joItem.Exists('colwidths') then begin
+                    joTemp  := _json(joItem.colwidths);
+                    if joTemp <> unassigned then begin
+                        for iCol := 0 to joTemp._Count - 1 do begin
+                            ColWidths[iCol] := joTemp._(iCol);
+                        end;
+                    end;
+                end;
+
+                //
+                joHint  := dwJson(Hint);
+
+                //rowNum	表行数	Number	---	5
+                joHint.rowNum       := dwGetInt(joItem,'rownum',5);
+
+                //waitTime	轮播时间间隔(ms)	Number	---	2000
+                joHint.waitTime     := dwGetInt(joItem,'waittime',2000);
+
+                //carousel	轮播方式	String	'single'|'page'	'single'
+                joHint.carousel	    := dwGetStr(joItem,'carousel','single');
+
+                //unit	数值单位	String	---	''
+                joHint.unit	        := dwGetStr(joItem,'unit','') ;
+
+                //sort	自动排序	Boolean	---	true
+                joHint.sort         := dwGetBoolean(joItem,'sort',true);
+
+                //
+                if joItem.exists('cells') then begin
+                    RowCount    := joItem.cells._Count;
+                    ColCount    := joItem.cells._(0)._Count;
+
+                    //写数据
+                    for iRow := 0 to RowCount - 1 do begin
+                        for iCol := 0 to ColCount - 1 do begin
+                            Cells[iCol,iRow]    := joItem.cells._(iRow)._(iCol);
+                        end;
+                    end;
+
+
+                end;
+                //
+                Hint    := joHint;
 
             end;
         end else if sType = 'datav_water' then begin

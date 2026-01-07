@@ -1,7 +1,7 @@
 {
-	"account": "dwFrame",
+	"account": "dwMSSQL",
 
-	"name": "getuserbyuid_sql",
+	"name": "getuserbyuid",
 	"table": "#tempUser",
 	"primary":"uid",
 	"defaultquerymode":2,
@@ -28,7 +28,7 @@
 			"value":""
 		},
 		{
-			"name":"gender",
+			"name":"sex",
 			"caption":"性别",
 			"type":"boolean",
 			"query":1,	
@@ -60,7 +60,7 @@
 	"buttons": 1,
 	"border": 1,
 	"buttoncaption": 2,
-	"fields1": [
+	"fields": [
 		{
 			"name": "uid as a0",
 			"caption": "序号",

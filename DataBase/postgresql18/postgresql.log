@@ -804,3 +804,42 @@
 2026-01-05 22:52:17.490 CST [15524] 日志:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.113 s, sync=0.003 s, total=0.134 s; sync files=1, longest=0.003 s, average=0.003 s; distance=7 kB, estimate=2515 kB; lsn=0/2CE0F80, redo lsn=0/2CE0F28
 2026-01-05 22:54:56.634 CST [12660] 鏃ュ織:  鏃犳硶浠庡鎴风鑾峰緱鏁版嵁: An existing connection was forcibly closed by the remote host.
 	
+2026-01-06 09:44:04.754 CST [6072] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-06 09:44:04.760 CST [6072] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-06 09:44:04.760 CST [6072] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-06 09:44:04.940 CST [16800] 日志:  数据库系统中断；上一次的启动时间是在2026-01-05 22:52:17 CST
+2026-01-06 09:44:05.623 CST [16800] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-06 09:44:05.630 CST [16800] 日志:  redo 在 0/2CE0F28 开始
+2026-01-06 09:44:05.630 CST [16800] 日志:  invalid record length at 0/2CE1030: expected at least 24, got 0
+2026-01-06 09:44:05.630 CST [16800] 日志:  redo done at 0/2CE0FF8 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-06 09:44:05.638 CST [14376] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-06 09:44:05.652 CST [14376] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.003 s, total=0.018 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/2CE1030, redo lsn=0/2CE1030
+2026-01-06 09:44:05.659 CST [6072] 日志:  数据库系统准备接受连接
+2026-01-06 09:49:05.664 CST [14376] 日志:  checkpoint starting: time
+2026-01-06 09:49:06.047 CST [14376] 日志:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.340 s, sync=0.012 s, total=0.384 s; sync files=4, longest=0.004 s, average=0.003 s; distance=7 kB, estimate=7 kB; lsn=0/2CE2F30, redo lsn=0/2CE2EA0
+2026-01-06 14:44:56.389 CST [16152] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-06 14:44:56.396 CST [16152] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-06 14:44:56.397 CST [16152] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-06 14:44:56.545 CST [14852] 日志:  数据库系统中断；上一次的启动时间是在2026-01-06 09:49:06 CST
+2026-01-06 14:44:57.068 CST [14852] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-06 14:44:57.076 CST [14852] 日志:  redo 在 0/2CE2EA0 开始
+2026-01-06 14:44:57.077 CST [14852] 日志:  invalid record length at 0/2CE2FE0: expected at least 24, got 0
+2026-01-06 14:44:57.077 CST [14852] 日志:  redo done at 0/2CE2FA8 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-06 14:44:57.085 CST [13140] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-06 14:44:57.110 CST [13140] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.006 s, total=0.031 s; sync files=2, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=0 kB; lsn=0/2CE2FE0, redo lsn=0/2CE2FE0
+2026-01-06 14:44:57.119 CST [16152] 日志:  数据库系统准备接受连接
+2026-01-07 10:34:01.801 CST [16152] 日志:  client backend (PID 16668) 被异常 0xC000013A 终止
+2026-01-07 10:34:01.801 CST [16152] 详细信息:  失败进程:DEALLOCATE "2STM"正在运行
+2026-01-07 10:34:01.801 CST [16152] 提示:  关于对16进制值的描述， 参见C语言的引用文件 "ntstatus.h" 
+2026-01-07 10:34:01.802 CST [16152] 日志:  中断任何其它已激活的服务器进程
+^C2026-01-07 10:40:03.212 CST [14828] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-07 10:40:03.218 CST [14828] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-07 10:40:03.218 CST [14828] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-07 10:40:03.384 CST [15412] 日志:  数据库系统中断；上一次的启动时间是在2026-01-06 14:44:57 CST
+2026-01-07 10:40:03.861 CST [15412] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-07 10:40:03.869 CST [15412] 日志:  redo 在 0/2CE3058 开始
+2026-01-07 10:40:03.869 CST [15412] 日志:  invalid record length at 0/2CE3090: expected at least 24, got 0
+2026-01-07 10:40:03.869 CST [15412] 日志:  redo done at 0/2CE3058 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-07 10:40:03.881 CST [18856] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-07 10:40:03.910 CST [18856] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.007 s, total=0.037 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/2CE3090, redo lsn=0/2CE3090
+2026-01-07 10:40:03.919 CST [14828] 日志:  数据库系统准备接受连接

@@ -7585,6 +7585,19 @@ var
     //
     tM,tM1,tM2  : TMethod;
 begin
+    //<
+    oForm       := nil;
+    oP          := nil;
+    oPIn        := nil;
+    oL          := nil;
+    oE          := nil;
+    oM          := nil;
+    oI          := nil;
+    oB          := nil;
+    oDT         := nil;
+    oCB         := nil;
+    oHint       := nil;
+    //>
 
 	//取得前缀备用,默认为空
 	sPrefix     := dwGetStr(AConfig,'prefix','');
@@ -9201,6 +9214,22 @@ var
     //用于指定事件
     tM          : TMethod;
 begin
+    //< set all object to nil at first
+    oForm       := nil;
+    oForm1      := nil;
+    oPEr        := nil;
+    oPET        := nil;
+    oBEL        := nil;
+    oBEM        := nil;
+    oBEC        := nil;
+    oPES        := nil;
+    oBEK        := nil;
+    oBEA        := nil;
+    oSB         := nil;
+    oFC         := nil;
+    oCK_Batch   := nil;
+    //>
+
 	//取得Form备用
 	oForm   := TForm(APanel.Owner);
 
@@ -10219,7 +10248,7 @@ begin
         //<-----
         //求总数
         oFDQuery.FetchOptions.RecsSkip  := 0;
-        oFDQuery.FetchOptions.RecsMax   := -1;
+        oFDQuery.FetchOptions.RecsMax   := 999;
 
         //<打开存储过程
         oFDQuery.Close;
@@ -10651,7 +10680,30 @@ var
     end;
 
 begin
-
+    //< set all object to nil at first
+    oForm       := nil;
+    oBtnMargins := nil;
+    oPQy        := nil;
+    oFQy        := nil;
+    oPQF        := nil;
+    oPQm        := nil;
+    oPBs        := nil;
+    oBQm        := nil;
+    oBFz        := nil;
+    oBQy        := nil;
+    oBQR        := nil;
+    //
+    oBNw        := nil;
+    oBEt        := nil;
+    oBDe        := nil;
+    oBEx        := nil;
+    oBIm        := nil;
+    oBFd        := nil;
+    //
+    oEKw        := nil;
+    oTbP        := nil;
+    oSgD        := nil;
+    //>
 
     //默认返回值
     Result  := 0;

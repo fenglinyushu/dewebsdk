@@ -29,9 +29,8 @@
 #
 
 # Delphi compiler-generated binaries (safe to delete)
-
-
 /source/demos/_RemoveTemp/
+/source/demosOnline/
 
 # DeWeb Applications
 /source/runtime/apps/*
