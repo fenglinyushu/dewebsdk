@@ -45,7 +45,7 @@
 /DataBase/LitesQL2008/MSSQL/*.dll
 /DataBase/LitesQL2008/MSSQL/DATA/BieHe*.*
 /DataBase/LitesQL2008/MSSQL/DATA/dwERP*.*
-/DataBase/LitesQL2008/MSSQL/DATA/FreeWind.*
+/DataBase/LitesQL2008/MSSQL/DATA/FreeWind*.*
 /DataBase/LitesQL2008/MSSQL/DATA/GMS*.*
 /DataBase/LitesQL2008/MSSQL/DATA/Green*.*
 /DataBase/LitesQL2008/MSSQL/DATA/HOEFON*.*
