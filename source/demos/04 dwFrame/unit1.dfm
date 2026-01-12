@@ -183,7 +183,7 @@ object Form1: TForm1
           Left = 5
           Top = 4
           Width = 69
-          Height = 20
+          Height = 17
           Hint = '{"dwstyle":"user-select: none;"}'
           Margins.Left = 5
           Margins.Top = 4
@@ -198,6 +198,7 @@ object Form1: TForm1
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 20
         end
       end
     end
@@ -9763,17 +9764,17 @@ object Form1: TForm1
         OnClick = DataBaseHello1Click
       end
       object N3: TMenuItem
-        Caption = 'FullScreen(Mobile)'
+        Caption = 'FullScreen'
         ImageIndex = 126
         OnClick = N3Click
       end
       object N4: TMenuItem
-        Caption = 'HideTitle(Mobile)'
+        Caption = 'HideTitle'
         ImageIndex = 70
         OnClick = N4Click
       end
       object N5: TMenuItem
-        Caption = 'HideNav(Mobile)'
+        Caption = 'HideNav'
         ImageIndex = 128
         OnClick = N5Click
       end

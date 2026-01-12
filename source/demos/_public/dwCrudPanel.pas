@@ -2613,20 +2613,66 @@ var
 
     //
     function _ProcessFormat(AValue:String):String;  //处理可能存在的format
+    var
+        jjFData : Variant;
+        jjList  : Variant;
+        ssField : String;
+        ssFVal  : String;
+        ssFmt   : string;
+        ddVal   : Double;
+        iiItem  : Integer;
     begin
         //默认返回输入值
         Result  := AValue;
 
         //处理可能存在的format
         if AConfig.Exists('format') then begin
-            if Pos('n',AConfig.format) > 0 then begin
-                Result  := Format(AConfig.format,[StrToFloatDef(Result,0)]);
-            end else if Pos('d',AConfig.format) > 0 then begin
-                Result  := Format(AConfig.format,[StrToIntDef(Result,0)]);
-            end else if Pos('f',AConfig.format) > 0 then begin
-                Result  := Format(AConfig.format,[StrToFloatDef(Result,0)]);
+            //取得format
+            ssFmt   := AConfig.format;
+
+            //
+            if ssFmt = 'field' then begin  //根据字段, 动态设置显示样式
+                ssFmt   := '%s';
+                if AConfig.Exists('formatdata') then begin
+                    jjFData := AConfig.formatdata;
+                    if jjFData.Exists('field') and jjFData.Exists('list') then begin
+                        //取得标识字段名称
+                        ssField := jjFData.field;
+                        //取得对比列表
+                        jjList  := jjFData.list;
+                        //默认format
+                        ssFmt   := jjList._(0)._(0);
+                        //取得标识字段的值
+                        ssFVal  := TFDQuery(AField.DataSet).FieldByName(ssField).AsString;
+                        //取得format
+                        for iiItem := 1 to jjList._Count - 1 do begin
+                            if jjList._(iiItem)._(0) = ssFVal then begin
+                                ssFmt   := jjList._(iiItem)._(1);
+                                break;
+                            end;
+                        end;
+                    end;
+                end;
+            end;
+
+            //
+            if ssFmt = 'seconds' then begin
+                ddVal   := abs(StrToFloatDef(Result,0));
+                if ddVal > 3600 then begin
+                    Result  := Format('%dh%.2d''%.2d"',[Trunc(ddVal/360),Trunc(ddVal) div 60, Trunc(ddVal) mod 60]);
+                end else if ddVal > 60 then begin
+                    Result  := Format('%.2d''%.2d"',[Trunc(ddVal) div 60, Trunc(ddVal) mod 60]);
+                end else begin
+                    Result  := Format('%.2f"',[ddVal]);
+                end;
+            end else if Pos('n',ssFmt) > 0 then begin
+                Result  := Format(ssFmt,[StrToFloatDef(Result,0)]);
+            end else if Pos('d',ssFmt) > 0 then begin
+                Result  := Format(ssFmt,[StrToIntDef(Result,0)]);
+            end else if Pos('f',ssFmt) > 0 then begin
+                Result  := Format(ssFmt,[StrToFloatDef(Result,0)]);
             end else begin
-                Result  := Format(AConfig.format,[Result]);
+                Result  := Format(ssFmt,[Result]);
             end;
         end;
     end;
@@ -3859,6 +3905,7 @@ end;
 function  cpSetFieldByName(APanel:TPanel;AName,AAttr:String;AValue:Variant):Integer;
 var
     joConfig    : Variant;
+    joField     : variant;
     iField      : Integer;
 begin
     Result  := 0;
@@ -3871,12 +3918,17 @@ begin
         if joConfig.Exists('fields') then begin
             //
             for iField := 0 to joConfig.fields._Count - 1 do begin
-                if LowerCase(dwGetStr(joConfig.fields._(iField),'name')) = LowerCase(AName) then begin
-                    //
-                    joConfig.fields._(iField).Delete(AAttr);
-                    joConfig.fields._(iField).Add(AAttr,AValue);
+                //
+                joField := joConfig.fields._(iField);
+                //
+                if LowerCase(dwGetStr(joField,'name')) = LowerCase(AName) then begin
+                    //删除原属性
+                    joField.Delete(AAttr);
 
-                    //取得前缀备用,默认为空
+                    //添加新属性
+                    DocVariantData(joField).AddValue(AAttr,AValue);
+
+                    //反写到 Hint
                     APanel.Hint     := joConfig;
 
                     //

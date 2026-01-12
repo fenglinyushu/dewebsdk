@@ -1,2 +1,0 @@
-start nginx.exe
-EXIT

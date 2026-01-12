@@ -63,6 +63,36 @@
         <Projects Include="20 DBCard\DBCardDemo.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="21 gBoard_GeneralKanban\gBoard.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="22 gCrudPanelStoredProc\gCrudPanelSP.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="23 gCrudPanel\gCrudPanel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="24 gDBCard\gDBCard.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="25 gDBEditor\gDBEditor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="26 CardPanelTurn\CardPanelTurn.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="27 captcha\captcha.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="28 Cesium\Cesium.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="29 Comm\Comm.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="30 dwdirect_WebAPI\dwdirect.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -251,14 +281,104 @@
     <Target Name="DBCardDemo:Make">
         <MSBuild Projects="20 DBCard\DBCardDemo.dproj" Targets="Make"/>
     </Target>
+    <Target Name="gBoard">
+        <MSBuild Projects="21 gBoard_GeneralKanban\gBoard.dproj"/>
+    </Target>
+    <Target Name="gBoard:Clean">
+        <MSBuild Projects="21 gBoard_GeneralKanban\gBoard.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="gBoard:Make">
+        <MSBuild Projects="21 gBoard_GeneralKanban\gBoard.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="gCrudPanelSP">
+        <MSBuild Projects="22 gCrudPanelStoredProc\gCrudPanelSP.dproj"/>
+    </Target>
+    <Target Name="gCrudPanelSP:Clean">
+        <MSBuild Projects="22 gCrudPanelStoredProc\gCrudPanelSP.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="gCrudPanelSP:Make">
+        <MSBuild Projects="22 gCrudPanelStoredProc\gCrudPanelSP.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="gCrudPanel">
+        <MSBuild Projects="23 gCrudPanel\gCrudPanel.dproj"/>
+    </Target>
+    <Target Name="gCrudPanel:Clean">
+        <MSBuild Projects="23 gCrudPanel\gCrudPanel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="gCrudPanel:Make">
+        <MSBuild Projects="23 gCrudPanel\gCrudPanel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="gDBCard">
+        <MSBuild Projects="24 gDBCard\gDBCard.dproj"/>
+    </Target>
+    <Target Name="gDBCard:Clean">
+        <MSBuild Projects="24 gDBCard\gDBCard.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="gDBCard:Make">
+        <MSBuild Projects="24 gDBCard\gDBCard.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="gDBEditor">
+        <MSBuild Projects="25 gDBEditor\gDBEditor.dproj"/>
+    </Target>
+    <Target Name="gDBEditor:Clean">
+        <MSBuild Projects="25 gDBEditor\gDBEditor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="gDBEditor:Make">
+        <MSBuild Projects="25 gDBEditor\gDBEditor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CardPanelTurn">
+        <MSBuild Projects="26 CardPanelTurn\CardPanelTurn.dproj"/>
+    </Target>
+    <Target Name="CardPanelTurn:Clean">
+        <MSBuild Projects="26 CardPanelTurn\CardPanelTurn.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CardPanelTurn:Make">
+        <MSBuild Projects="26 CardPanelTurn\CardPanelTurn.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="captcha">
+        <MSBuild Projects="27 captcha\captcha.dproj"/>
+    </Target>
+    <Target Name="captcha:Clean">
+        <MSBuild Projects="27 captcha\captcha.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="captcha:Make">
+        <MSBuild Projects="27 captcha\captcha.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Cesium">
+        <MSBuild Projects="28 Cesium\Cesium.dproj"/>
+    </Target>
+    <Target Name="Cesium:Clean">
+        <MSBuild Projects="28 Cesium\Cesium.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Cesium:Make">
+        <MSBuild Projects="28 Cesium\Cesium.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Comm">
+        <MSBuild Projects="29 Comm\Comm.dproj"/>
+    </Target>
+    <Target Name="Comm:Clean">
+        <MSBuild Projects="29 Comm\Comm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Comm:Make">
+        <MSBuild Projects="29 Comm\Comm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dwdirect">
+        <MSBuild Projects="30 dwdirect_WebAPI\dwdirect.dproj"/>
+    </Target>
+    <Target Name="dwdirect:Clean">
+        <MSBuild Projects="30 dwdirect_WebAPI\dwdirect.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dwdirect:Make">
+        <MSBuild Projects="30 dwdirect_WebAPI\dwdirect.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="hello;dbhello;glogin;dwFrame;Amap;badge;bdv001;bdv002;echarts;button;dwUpload;carousel;carouselcard;Cascader;CoolLabel;coupon;CrudPanel;CrudPanelMS;CrudPanelSet;DBCardDemo"/>
+        <CallTarget Targets="hello;dbhello;glogin;dwFrame;Amap;badge;bdv001;bdv002;echarts;button;dwUpload;carousel;carouselcard;Cascader;CoolLabel;coupon;CrudPanel;CrudPanelMS;CrudPanelSet;DBCardDemo;gBoard;gCrudPanelSP;gCrudPanel;gDBCard;gDBEditor;CardPanelTurn;captcha;Cesium;Comm;dwdirect"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="hello:Clean;dbhello:Clean;glogin:Clean;dwFrame:Clean;Amap:Clean;badge:Clean;bdv001:Clean;bdv002:Clean;echarts:Clean;button:Clean;dwUpload:Clean;carousel:Clean;carouselcard:Clean;Cascader:Clean;CoolLabel:Clean;coupon:Clean;CrudPanel:Clean;CrudPanelMS:Clean;CrudPanelSet:Clean;DBCardDemo:Clean"/>
+        <CallTarget Targets="hello:Clean;dbhello:Clean;glogin:Clean;dwFrame:Clean;Amap:Clean;badge:Clean;bdv001:Clean;bdv002:Clean;echarts:Clean;button:Clean;dwUpload:Clean;carousel:Clean;carouselcard:Clean;Cascader:Clean;CoolLabel:Clean;coupon:Clean;CrudPanel:Clean;CrudPanelMS:Clean;CrudPanelSet:Clean;DBCardDemo:Clean;gBoard:Clean;gCrudPanelSP:Clean;gCrudPanel:Clean;gDBCard:Clean;gDBEditor:Clean;CardPanelTurn:Clean;captcha:Clean;Cesium:Clean;Comm:Clean;dwdirect:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="hello:Make;dbhello:Make;glogin:Make;dwFrame:Make;Amap:Make;badge:Make;bdv001:Make;bdv002:Make;echarts:Make;button:Make;dwUpload:Make;carousel:Make;carouselcard:Make;Cascader:Make;CoolLabel:Make;coupon:Make;CrudPanel:Make;CrudPanelMS:Make;CrudPanelSet:Make;DBCardDemo:Make"/>
+        <CallTarget Targets="hello:Make;dbhello:Make;glogin:Make;dwFrame:Make;Amap:Make;badge:Make;bdv001:Make;bdv002:Make;echarts:Make;button:Make;dwUpload:Make;carousel:Make;carouselcard:Make;Cascader:Make;CoolLabel:Make;coupon:Make;CrudPanel:Make;CrudPanelMS:Make;CrudPanelSet:Make;DBCardDemo:Make;gBoard:Make;gCrudPanelSP:Make;gCrudPanel:Make;gDBCard:Make;gDBEditor:Make;CardPanelTurn:Make;captcha:Make;Cesium:Make;Comm:Make;dwdirect:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

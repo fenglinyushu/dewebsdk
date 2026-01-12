@@ -33,29 +33,29 @@ object Form_dem_CrudNormal: TForm_dem_CrudNormal
     Width = 931
     Height = 499
     Hint = 
-      '{"account":"dwFrame","deletecols":[3,4],"batch":0,"import":0,"ex' +
-      'port":1,"rowheight":40,"select":40,"pagesize":10,"table":"bop_co' +
-      'ntract","visiblecol":1,"defaultorder":"cid DESC","dwstyle":"user' +
-      '-select: text;","fields":[{"name":"cid","caption":"'#32534#21495'","align":"' +
-      'center","width":50,"type":"auto"},{"name":"cUserID","caption":"'#19994 +
-      #21153#21592'","type":"dbcombopair","sort":1,"view":3,"readonly":1,"query":' +
-      '1,"width":100,"dbfilter":1,"align":"center","table":"sys_user","' +
-      'datafield":"uid","viewfield":"uname"},{"name":"cProductionSuperv' +
-      'isorId","caption":"'#29983#20135#20027#31649'","type":"dbcombopair","sort":1,"query":1' +
-      ',"width":120,"dbfilter":1,"align":"center","table":"sys_user","d' +
-      'atafield":"uId","viewfield":"uName","viewdefault":"-"},{"name":"' +
-      'cPI_NO","caption":"PI'#21495'","sort":1,"query":1,"view":3,"width":160}' +
-      ',{"name":"cOrderStatus","caption":"'#35746#21333#29366#24577'","align":"center","dbfil' +
-      'ter":1,"type":"combo","list":["'#24050#23436#32467'","'#24050#25237#20135'","'#31561#24453#23450#37329'","'#21487#29305#27530#20808#34892'","'#24322#24120#29366#24577'"]' +
-      ',"default":"'#31561#24453#23450#37329'","sort":1,"width":120,"query":1},{"name":"cDeta' +
-      'il","caption":"'#20135#21697#28165#21333'","sort":1,"query":1,"view":2,"width":150},{"' +
-      'name":"cCustomerId","caption":"'#23458#25143'","sort":1,"dbfilter":1,"width"' +
-      ':160,"type":"dbcombopair","table":"dic_customer","datafield":"cI' +
-      'd","viewfield":"cName"},{"name":"cEntryDate","caption":"'#24405#20837#26085#26399'","t' +
-      'ype":"date","align":"center","width":100,"sort":1},{"name":"cETD' +
-      '","caption":"'#20132#26399'ETD","type":"date","align":"center","width":100,"' +
-      'sort":1},{"name":"cRemark","caption":"'#22791#27880'","sort":1,"width":70,"q' +
-      'uery":1}]}'
+      '{"account":"dwFrame","deletecols":[3,4],"pagesizes":"[10, 20, 30' +
+      ', 40]","batch":0,"import":0,"export":1,"rowheight":40,"select":4' +
+      '0,"pagesize":10,"table":"bop_contract","visiblecol":1,"defaultor' +
+      'der":"cid DESC","dwstyle":"user-select: text;","fields":[{"name"' +
+      ':"cid","caption":"'#32534#21495'","align":"center","width":50,"type":"auto"}' +
+      ',{"name":"cUserID","caption":"'#19994#21153#21592'","type":"dbcombopair","sort":1' +
+      ',"view":3,"readonly":1,"query":1,"width":100,"dbfilter":1,"align' +
+      '":"center","table":"sys_user","datafield":"uid","viewfield":"una' +
+      'me"},{"name":"cProductionSupervisorId","caption":"'#29983#20135#20027#31649'","type":"' +
+      'dbcombopair","sort":1,"query":1,"width":120,"dbfilter":1,"align"' +
+      ':"center","table":"sys_user","datafield":"uId","viewfield":"uNam' +
+      'e","viewdefault":"-"},{"name":"cPI_NO","caption":"PI'#21495'","sort":1,' +
+      '"query":1,"view":3,"width":160},{"name":"cOrderStatus","caption"' +
+      ':"'#35746#21333#29366#24577'","align":"center","dbfilter":1,"type":"combo","list":["'#24050#23436 +
+      #32467'","'#24050#25237#20135'","'#31561#24453#23450#37329'","'#21487#29305#27530#20808#34892'","'#24322#24120#29366#24577'"],"default":"'#31561#24453#23450#37329'","sort":1,"width' +
+      '":120,"query":1},{"name":"cDetail","caption":"'#20135#21697#28165#21333'","sort":1,"qu' +
+      'ery":1,"view":2,"width":150},{"name":"cCustomerId","caption":"'#23458#25143 +
+      '","sort":1,"dbfilter":1,"width":160,"type":"dbcombopair","table"' +
+      ':"dic_customer","datafield":"cId","viewfield":"cName"},{"name":"' +
+      'cEntryDate","caption":"'#24405#20837#26085#26399'","type":"date","align":"center","wid' +
+      'th":100,"sort":1},{"name":"cETD","caption":"'#20132#26399'ETD","type":"date"' +
+      ',"align":"center","width":100,"sort":1},{"name":"cRemark","capti' +
+      'on":"'#22791#27880'","sort":1,"width":70,"query":1}]}'
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Pn1'

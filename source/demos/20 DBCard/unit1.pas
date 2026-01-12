@@ -32,7 +32,7 @@ type
   TForm1 = class(TForm)
     FDConnection1: TFDConnection;
     Panel1: TPanel;
-    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
+    FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
   private

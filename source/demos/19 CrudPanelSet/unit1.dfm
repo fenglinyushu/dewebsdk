@@ -211,7 +211,6 @@ object Form1: TForm1
       Caption = #35774#32622#21333#20803#26684#22797#26434#26684#24335
       TabOrder = 11
       OnClick = Bt12Click
-      ExplicitLeft = 0
     end
     object Bt13: TButton
       AlignWithMargins = True
@@ -232,8 +231,8 @@ object Form1: TForm1
     Left = 168
     Top = 96
   end
-  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
     Left = 168
-    Top = 152
+    Top = 210
   end
 end

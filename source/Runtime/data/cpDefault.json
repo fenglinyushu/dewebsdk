@@ -1,9 +1,8 @@
 {
-	"account": "dwFrame",
+	"account": "dwDemo",
 	"table":"sys_user",
 	"deletecols":[3],
 	"summary":"SELECT max(uage) as 最大年龄, avg(uage) as 平均年龄 FROM sys_user",
-
 	"pagesize": 10,
 	"pagesizes": "[10,20,30,50]",
 	"rowheight": 45,
@@ -47,7 +46,7 @@
 			"width": 100
 		},
 		{
-			"name": "ugender",
+			"name": "usex",
 			"caption": "gender",
 			"sort": 1,
 			"dbfilter":1,

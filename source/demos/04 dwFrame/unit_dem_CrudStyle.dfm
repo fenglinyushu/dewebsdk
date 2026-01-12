@@ -48,7 +48,7 @@ object Form_dem_CrudStyle: TForm_dem_CrudStyle
       'te","align":"center","width":100,"sort":1},{"name":"cETD","capti' +
       'on":"'#20132#26399'ETD","type":"date","align":"center","width":100,"sort":1}' +
       ',{"name":"cRemark","caption":"'#22791#27880'","sort":1,"width":70,"query":1}' +
-      ']}'
+      ',{"name":"cId","view":2}]}'
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite

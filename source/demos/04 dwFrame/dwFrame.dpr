@@ -29,7 +29,8 @@ uses
   unit_dem_CrudMSS in 'unit_dem_CrudMSS.pas' {Form_dem_CrudMSS},
   unit_dem_CrudAuto in 'unit_dem_CrudAuto.pas' {Form_dem_CrudAuto},
   unit_sys_User in 'unit_sys_User.pas' {Form_sys_User},
-  unit_dem_CrudNormal in 'unit_dem_CrudNormal.pas' {Form_dem_CrudNormal};
+  unit_dem_CrudNormal in 'unit_dem_CrudNormal.pas' {Form_dem_CrudNormal},
+  unit_dem_CrudStyle in 'unit_dem_CrudStyle.pas' {Form_dem_CrudStyle};
 
 {$R *.res}
 

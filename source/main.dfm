@@ -2686,7 +2686,7 @@ object MainForm: TMainForm
     Top = 51
     Width = 784
     Height = 390
-    ActivePage = TabSheet_Apps
+    ActivePage = TabSheet_Account
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

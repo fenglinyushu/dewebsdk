@@ -16,7 +16,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Phys.MSAccDef, FireDAC.Phys.ODBCBase,
   FireDAC.Phys.MSAcc, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Phys.PGDef, FireDAC.Phys.PG;
+  FireDAC.Comp.DataSet, FireDAC.Phys.PGDef, FireDAC.Phys.PG, FireDAC.Phys.MSSQLDef, FireDAC.Phys.MSSQL;
 type
     TForm1 = class(TForm)
     PMaster: TPanel;
@@ -26,8 +26,8 @@ type
     Im: TImage;
     PClient: TPanel;
     Memo1: TMemo;
+    FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
     Button1: TButton;
-    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure PMasterDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);

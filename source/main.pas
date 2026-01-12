@@ -6,6 +6,9 @@
 
 
 {
+2026-01-08
+    1 Translate some string to English
+
 2026-01-04
     1 Fixed a bug when no DBAccount
 
@@ -314,7 +317,7 @@ var
     {$IFDEF _STD}
         gsTitle     : string = 'DeWeb Standard v2.2.20250701'; //用于显示系统版本
     {$ELSE}
-        gsTitle     : string = 'DeWebServer v20260104'; //用于显示系统版本
+        gsTitle     : string = 'DeWebServer v20260108'; //用于显示系统版本
     {$ENDIF}
 
     goSSEs          : array of TDWHttpConnection;
@@ -1520,7 +1523,7 @@ begin
         with StringGrid_Account do begin
             Cells[0,iDataBase+1]    := '  '+IntToStr(iDataBase);
             Cells[1,iDataBase+1]    := joDataBase.name;
-            Cells[2,iDataBase+1]    := dwIIF(oFDConn.Connected,'   已连接','  连接失败');
+            Cells[2,iDataBase+1]    := dwIIF(oFDConn.Connected,' Connected','  False');
             Cells[3,iDataBase+1]    := joDataBase.string;
             Cells[4,iDataBase+1]    := joDataBase.remark;
         end;
@@ -1538,7 +1541,7 @@ begin
     //
     iRow        := StringGrid_Account.Row;
     iDataBase   := iRow - 1;
-    if MessageDlg('确定要删除账套 “'+StringGrid_Account.Cells[1,iRow]+'” 吗？',mtConfirmation,[mbOK,mbCancel],0)=mrOK then begin
+    if MessageDlg('Are you sure delete "'+StringGrid_Account.Cells[1,iRow]+'" ?',mtConfirmation,[mbOK,mbCancel],0)=mrOK then begin
         //从配置JSON对象中删除
         gjoConfig.database.Delete(iDataBase);
 
@@ -1593,18 +1596,18 @@ begin
     if gjoConfig.database._Count >= iRow then begin
         joDataBase  := gjoConfig.database._(iRow-1);
     end else begin
-        ShowMessage('配置信息错误！');
+        ShowMessage('Config Error！');
         Exit;
     end;
 
     //显示当前
     with Form_Account do begin
         Tag                 := iRow;
-        Caption             := '编辑账套信息';
+        Caption             := 'Edit Account Infomation';
         Edit_Name.Text      := joDataBase.name;
         if joDataBase.Exists('secret') then begin
             if  (joDataBase.secret=1) then begin
-                ShowMessage('由于安全原因，加密账套不可编辑！只能删除后重新创建');
+                ShowMessage('Due to security reasons, the encrypted account cannot be edited! It can only be deleted and recreated.');
                 Exit;
             end else begin
                 Memo_String.Text    := joDataBase.string;
@@ -1655,7 +1658,7 @@ begin
             with StringGrid_Account do begin
                 Cells[0,iDataBase+1]    := '  '+IntToStr(iDataBase);
                 Cells[1,iDataBase+1]    := joDataBase.name;
-                Cells[2,iDataBase+1]    := dwIIF(oFDConn.Connected,'   已连接','  连接失败');
+                Cells[2,iDataBase+1]    := dwIIF(oFDConn.Connected,'   Connected','  False');
                 Cells[3,iDataBase+1]    := joDataBase.string;
                 Cells[4,iDataBase+1]    := joDataBase.remark;
             end;
@@ -1677,7 +1680,7 @@ begin
         SpeedButton_Stop.Enabled      := not SpeedButton_Start.Enabled;
         SpinEdit_Port.Enabled    := SpeedButton_Start.Enabled;
     end else begin
-        ShowMessage('启动失败! 请检查端口是否被占用!');
+        ShowMessage('Startup failed! Please check if the port is occupied!');
     end;
 
 end;
@@ -2376,11 +2379,11 @@ begin
 
         //此处将数据库连接信息写到表格中
         with StringGrid_Account do begin
-            Cells[0,0]      := '序号';
-            Cells[1,0]      := '             账套名称';
-            Cells[2,0]      := '  连接状态';
-            Cells[3,0]      := '            连接字符串';
-            Cells[4,0]      := '      备注';
+            Cells[0,0]      := 'index';
+            Cells[1,0]      := '       Account Name';
+            Cells[2,0]      := '  Status';
+            Cells[3,0]      := '        Connect String';
+            Cells[4,0]      := '     Remark';
             //
             ColWidths[0]    := 50;
             ColWidths[1]    := 200;
@@ -2398,7 +2401,7 @@ begin
             with StringGrid_Account do begin
                 Cells[0,iDataBase+1]    := '  '+IntToStr(iDataBase);
                 Cells[1,iDataBase+1]    := joDataBase.name;
-                Cells[2,iDataBase+1]    := dwIIF(oFDConn.Connected,'   已连接','  连接失败');
+                Cells[2,iDataBase+1]    := dwIIF(oFDConn.Connected,'   Connected','  False');
                 Cells[3,iDataBase+1]    := joDataBase.string;
                 Cells[4,iDataBase+1]    := joDataBase.remark;
             end;
@@ -2502,6 +2505,8 @@ var
     iDWVcl    : Integer;
     iForm     : Integer;
     oForm     : TForm;
+    //save app handle,and free
+    hInst   : THandle;
 begin
     //
     Timer_Manager.Enabled            := False;
@@ -2513,8 +2518,18 @@ begin
 
         //只检查网页应用窗体 , 网页应用对象的ScreenSnap=True
         if oForm.ScreenSnap then begin
+
+            //save app handle,and free
+            hInst   := oForm.HelpContext;
+
             //
             FreeAndNil(oForm);
+
+            //save app handle,and free
+            if hInst > 0 then begin
+                AddDebugMsg(Format('[FreeLibrary for release app] : %d ',[hInst]));
+                FreeLibrary(hInst);
+            end;
         end;
     end;
 

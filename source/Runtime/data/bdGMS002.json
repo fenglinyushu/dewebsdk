@@ -179,7 +179,7 @@
 			"items": [
 				{
 					"_m_": "panel",
-					"caption": "left",
+					"caption": "左",
 					"type": "panel",
 					"visible": true,
 					"name": "",
@@ -333,10 +333,10 @@
 											"akbottom": false,
 											"alignwithmargins": true,
 											"margins-bottom": 20,
-											"margins-left": 20,
-											"margins-right": 20,
-											"margins-top": 60,
-											"sql": "select 预警名称,预警值 FROM 预警记录",
+											"margins-left": 30,
+											"margins-right": 30,
+											"margins-top": 70,
+											"sql": "SELECT sClassName,   CAST(SUM(CASE WHEN sScore >= 80 THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS DECIMAL(10,2)) AS 优良率 FROM sys_student GROUP BY sClassName ORDER BY 优良率 DESC;",
 											"rownum": 9,
 											"waittime": 3000,
 											"carousel": "single",
@@ -396,7 +396,7 @@
 							"items": [
 								{
 									"_m_": "label",
-									"caption": "&nbsp;&nbsp;&nbsp;项目优良率",
+									"caption": "项目优良率",
 									"type": "label",
 									"visible": false,
 									"name": "",
@@ -457,16 +457,17 @@
 									"akbottom": false,
 									"alignwithmargins": true,
 									"margins-bottom": 20,
-									"margins-left": 20,
-									"margins-right": 20,
-									"margins-top": 60,
-									"sql": "select 预警名称,预警值 FROM 预警记录",
+									"margins-left": 30,
+									"margins-right": 30,
+									"margins-top": 70,
+									"sql": "SELECT t.项目,CAST(100.0*SUM(CASE WHEN s.score>=80 THEN 1 ELSE 0 END)/COUNT(*) AS DECIMAL(10,2)) 优良率 FROM (VALUES('肺活量','sScore102'),('50米跑','sScore103'),('坐位体前屈','sScore104'),('立定跳远','sScore105'),('800米跑','sScore106'),('1000米跑','sScore107'),('一分钟仰卧起坐','sScore108'),('引体向上','sScore109'),('一分钟跳绳','sScore110'),('50米X8往返跑','sScore111'),('BMI','sScore112'))t(项目,字段)CROSS APPLY(SELECT CASE t.字段 WHEN 'sScore102' THEN sScore102 WHEN 'sScore103' THEN sScore103 WHEN 'sScore104' THEN sScore104 WHEN 'sScore105' THEN sScore105 WHEN 'sScore106' THEN sScore106 WHEN 'sScore107' THEN sScore107 WHEN 'sScore108' THEN sScore108 WHEN 'sScore109' THEN sScore109 WHEN 'sScore110' THEN sScore110 WHEN 'sScore111' THEN sScore111 WHEN 'sScore112' THEN sScore112 END score FROM sys_student WHERE CASE t.字段 WHEN 'sScore102' THEN sScore102 WHEN 'sScore103' THEN sScore103 WHEN 'sScore104' THEN sScore104 WHEN 'sScore105' THEN sScore105 WHEN 'sScore106' THEN sScore106 WHEN 'sScore107' THEN sScore107 WHEN 'sScore108' THEN sScore108 WHEN 'sScore109' THEN sScore109 WHEN 'sScore110' THEN sScore110 WHEN 'sScore111' THEN sScore111 WHEN 'sScore112' THEN sScore112 END IS NOT NULL)s GROUP BY t.项目 ORDER BY 优良率 DESC",
 									"rownum": 9,
 									"waittime": 3000,
 									"carousel": "single",
 									"unit": "",
 									"sort": true,
-									"valueformatter": ""
+									"valueformatter": "",
+									"items": []
 								}
 							]
 						}
@@ -474,7 +475,7 @@
 				},
 				{
 					"_m_": "panel",
-					"caption": "client",
+					"caption": "中",
 					"type": "panel",
 					"visible": true,
 					"name": "",
@@ -688,7 +689,7 @@
 											"margins-left": 30,
 											"margins-right": 30,
 											"margins-top": 0,
-											"sql": "",
+											"sql": "SELECT Count(*) FROM sys_Student",
 											"items": []
 										}
 									]
@@ -804,8 +805,8 @@
 											"margins-left": 0,
 											"margins-right": 0,
 											"margins-top": 0,
-											"sql": "",
-											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//de__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    name: dwdata[0],\r\n    title: {\r\n      offsetCenter: ['0%', '-20%']\r\n    },\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '20%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
+											"sql": "SELECT ROUND((CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM sys_student)) * 100, 0) AS PercentageAbove90 FROM sys_student WHERE sScore >= 90;",
+											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//dw__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    name: dwdata[0],\r\n    title: {\r\n      offsetCenter: ['0%', '-20%']\r\n    },\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '20%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
 											"items": []
 										}
 									]
@@ -857,7 +858,7 @@
 									"items": [
 										{
 											"_m_": "label",
-											"caption": "总体情况2",
+											"caption": "良好率",
 											"type": "label",
 											"visible": true,
 											"name": "",
@@ -1274,7 +1275,7 @@
 									"margins-left": 0,
 									"margins-right": 0,
 									"margins-top": 0,
-									"sql": "SELECT top 10 id,信号强度,设备温度 FROM 物理数据 ORDER BY NEWID()",
+									"sql": "",
 									"option": "dwdata = [\r\n//dw__start\r\n  ['OpenAI', 'Sora'],\r\n  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],\r\n  [320, 332, 301, 334, 390, 330, 320],\r\n  [120, 232, 201, 234, 290, 230, 280]\r\n//dw__end\r\n];\r\n\r\n\r\noption = {\r\n  tooltip: {\r\n    trigger: 'axis',\r\n    axisPointer: {\r\n      type: 'shadow'\r\n    }\r\n  },\r\n  legend: {\r\n    orient: 'horizontal', // 水平排列\r\n    align: 'auto', // 自动对齐\r\n    top: '0%', // 设置在顶部\r\n    left: 'center', // 设置水平居中\r\n    data: dwdata[0],\r\n    textStyle: {\r\n      color: '#eee'\r\n    }\r\n  },\r\n  yAxis: {\r\n    type: 'value',\r\n    boundaryGap: [0, 0.01]\r\n  },\r\n  xAxis: {\r\n    type: 'category',\r\n    data: dwdata[1]\r\n  },\r\n  series: dwdata[0].map((name, index) => ({\r\n    name: name,\r\n    type: 'bar',\r\n    data: dwdata[index + 2] // 跳过前两个元素（名称数组和Y轴数据）\r\n  }))\r\n};",
 									"items": []
 								}
@@ -1391,7 +1392,7 @@
 									"margins-left": 0,
 									"margins-right": 0,
 									"margins-top": 0,
-									"sql": "SELECT top 10 id,信号强度,设备温度 FROM 物理数据 ORDER BY NEWID()",
+									"sql": "",
 									"option": "dwdata = [\r\n//dw__start\r\n  ['OpenAI', 'Sora'],\r\n  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],\r\n  [320, 332, 301, 334, 390, 330, 320],\r\n  [120, 232, 201, 234, 290, 230, 280]\r\n//dw__end\r\n];\r\noption = {\r\n  tooltip: {\r\n    trigger: 'axis'\r\n  },\r\n  legend: {\r\n    orient: 'horizontal', // 水平排列\r\n    align: 'auto', // 自动对齐\r\n    top: '0%', // 设置在顶部\r\n    left: 'center', // 设置水平居中\r\n    data: dwdata[0],\r\n    textStyle: {\r\n      color: '#fff'\r\n    }\r\n  },\r\n  grid: {\r\n    left: '3%',\r\n    right: '4%',\r\n    bottom: '3%',\r\n    containLabel: true\r\n  },\r\n  xAxis: {\r\n    type: 'category',\r\n    boundaryGap: false,\r\n    data: dwdata[1]\r\n  },\r\n  yAxis: {\r\n    splitLine: {\r\n      show: false // 隐藏水平的分隔线\r\n    },\r\n    type: 'value'\r\n  },\r\n  series: [\r\n    {\r\n      name: dwdata[0][0],\r\n      type: 'line',\r\n      data: dwdata[2]\r\n    },\r\n    {\r\n      name: dwdata[0][1],\r\n      type: 'line',\r\n      data: dwdata[3]\r\n    }\r\n  ]\r\n};\r\n",
 									"items": []
 								}
@@ -1401,7 +1402,7 @@
 				},
 				{
 					"_m_": "panel",
-					"caption": "right",
+					"caption": "右",
 					"type": "panel",
 					"visible": true,
 					"name": "",
@@ -1446,7 +1447,7 @@
 					"items": [
 						{
 							"_m_": "panel",
-							"caption": "项目优良率",
+							"caption": "班级不及格统计",
 							"type": "panel",
 							"visible": true,
 							"name": "",
@@ -1491,7 +1492,7 @@
 							"items": [
 								{
 									"_m_": "label",
-									"caption": "&nbsp;&nbsp;&nbsp;各班不及格姓名",
+									"caption": "班级不及格统计",
 									"type": "label",
 									"visible": false,
 									"name": "",
@@ -1555,7 +1556,7 @@
 									"margins-left": 10,
 									"margins-right": 10,
 									"margins-top": 10,
-									"sql": "select 预警名称 as 不及格姓名 FROM 预警记录",
+									"sql": "",
 									"colwidths": "[300]",
 									"rowheights": "",
 									"rownum": 8,
@@ -1588,7 +1589,7 @@
 						},
 						{
 							"_m_": "panel",
-							"caption": "附加分班级",
+							"caption": "班级附加分统计",
 							"type": "panel",
 							"visible": true,
 							"name": "",
@@ -1633,7 +1634,7 @@
 							"items": [
 								{
 									"_m_": "label",
-									"caption": "&nbsp;&nbsp;&nbsp;有附加分的班级统计",
+									"caption": "班级附加分统计",
 									"type": "label",
 									"visible": false,
 									"name": "",
@@ -1697,7 +1698,7 @@
 									"margins-left": 10,
 									"margins-right": 10,
 									"margins-top": 10,
-									"sql": "select 预警类型 as 附加分班级 FROM 预警记录",
+									"sql": "",
 									"colwidths": "[300]",
 									"rowheights": "",
 									"rownum": 8,
@@ -1734,7 +1735,7 @@
 		}
 	],
 	"caption": "国家体质健康管理平台",
-	"connectionstring": "Server=127.0.0.1,8829;Database=BieHe;User_Name=sa;Password={593106};DriverID=MSSQL",
+	"connectionstring": "Server=127.0.0.1,8829;Database=dwDemo;User_Name=sa;Password={593106};DriverID=MSSQL",
 	"prefix": "",
 	"image": "media/images/board/bk003.jpg",
 	"color": [

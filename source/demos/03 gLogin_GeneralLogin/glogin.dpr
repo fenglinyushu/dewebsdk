@@ -170,7 +170,7 @@ begin
 
         //
         if not FileExists(sDir+'Data/'+sName+'.json') then begin
-            gsError := '配置文件不存在! '+sDir+'Data/'+sName+'.json';
+            gsError := 'Config file not exists! '#13+stringReplace(sDir,'\','/',[rfReplaceAll])+'Data/'+sName+'.json';
         end else begin
             //读取配置文件到JSON对象
             dwBase.dwLoadFromJson(Form1.gjoConfig,sDir+'Data/'+sName+'.json');
@@ -178,7 +178,7 @@ begin
 
         if gsError = '' then begin
             if (gjoConfig = unassigned) OR (String(gjoConfig) = 'null') then begin
-                gsError := '配置文件格式不符合JSON规范! '+sDir+'Data/'+sName+'.json';
+                gsError := 'Config file is not JSON! '#13+stringReplace(sDir,'\','/',[rfReplaceAll])+'Data/'+sName+'.json';
             end;
         end;
 

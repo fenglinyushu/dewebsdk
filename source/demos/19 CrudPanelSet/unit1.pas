@@ -45,7 +45,7 @@ type
     Bt11: TButton;
     Bt12: TButton;
     Bt13: TButton;
-    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
+    FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure Bt1Click(Sender: TObject);

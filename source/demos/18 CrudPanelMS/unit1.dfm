@@ -21,7 +21,6 @@ object Form1: TForm1
     Width = 963
     Height = 50
     HelpType = htKeyword
-    HelpKeyword = 'simple'
     Align = alTop
     BevelOuter = bvNone
     Color = 16742167
@@ -239,8 +238,8 @@ object Form1: TForm1
     Left = 104
     Top = 128
   end
-  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
-    Left = 104
-    Top = 186
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    Left = 96
+    Top = 290
   end
 end

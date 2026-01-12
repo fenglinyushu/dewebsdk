@@ -12,25 +12,33 @@
 	"database": 
 	[
 		{
-			"name": "dwFrame",
-			"string": "Database=postgres;User_Name=postgres;Password=postgres;DriverID=PG",
-			"remark": "",
-			"params": [],
-			"secret": 0,
-			"enabled": 1
-		},
-		{
 			"name": "dwDemo",
 			"secret": 0,
-			"string": "Database=demo;User_Name=postgres;Password=postgres;DriverID=PG",
+			"string": "Server={127.0.0.1,8829};Database=dwDemo;User_Name=sa;Password=593106;DriverID=MSSQL",
 			"enabled": 1,
 			"remark": "",
 			"params": []
 		},
 		{
-			"name": "dwMSSQL",
+			"name": "dwFrame",
 			"secret": 0,
 			"string": "Server={127.0.0.1,8829};Database=dwFrame;User_Name=sa;Password=593106;DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		},
+		{
+			"name": "dwGMS",
+			"secret": 0,
+			"string": "Server={127.0.0.1,8829};Database=GMS;User_Name=sa;Password=593106;DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		},
+		{
+			"name": "dwDeWeb",
+			"secret": 0,
+			"string": "Server={127.0.0.1,8829};Database=dwDeWeb;User_Name=sa;Password=593106;DriverID=MSSQL",
 			"enabled": 1,
 			"remark": "",
 			"params": []

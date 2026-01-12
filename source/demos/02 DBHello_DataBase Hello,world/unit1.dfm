@@ -117,7 +117,7 @@ object Form1: TForm1
     Left = 72
     Top = 432
   end
-  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
     Left = 72
     Top = 376
   end

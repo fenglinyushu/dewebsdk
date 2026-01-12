@@ -11,7 +11,8 @@ uses
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Phys.MSAccDef, FireDAC.Phys.ODBCBase, FireDAC.Phys.MSAcc,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.PGDef, FireDAC.Phys.PG;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.PGDef, FireDAC.Phys.PG, FireDAC.Phys.MSSQLDef,
+  FireDAC.Phys.MSSQL;
 type
   TForm1 = class(TForm)
     SC: TScrollBox;
@@ -37,7 +38,7 @@ type
     Panel1: TPanel;
     CB_Amount: TComboBox;
     Label1: TLabel;
-    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
+    FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);

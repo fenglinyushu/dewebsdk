@@ -340,8 +340,8 @@ object Form1: TForm1
     Left = 96
     Top = 216
   end
-  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
     Left = 96
-    Top = 282
+    Top = 290
   end
 end

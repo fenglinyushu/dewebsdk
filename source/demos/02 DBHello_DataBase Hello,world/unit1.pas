@@ -22,7 +22,7 @@ uses
     FireDAC.Phys.MSAccDef, FireDAC.Phys.MSAcc, FireDAC.Phys, FireDAC.Phys.ODBCBase, FireDAC.Phys.ODBC,
     Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Imaging.pngimage,
   FireDAC.Phys.PGDef, FireDAC.Phys.PG, FireDAC.UI.Intf, FireDAC.Stan.Def,
-  FireDAC.Stan.Pool, FireDAC.VCLUI.Wait;
+  FireDAC.Stan.Pool, FireDAC.VCLUI.Wait, FireDAC.Phys.MSSQLDef, FireDAC.Phys.MSSQL;
 
 type
   TForm1 = class(TForm)
@@ -34,7 +34,7 @@ type
     BtNext: TButton;
     Label1: TLabel;
     FDConnection1: TFDConnection;
-    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
+    FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
     procedure FormShow(Sender: TObject);
     procedure BtPrevClick(Sender: TObject);
     procedure BtNextClick(Sender: TObject);

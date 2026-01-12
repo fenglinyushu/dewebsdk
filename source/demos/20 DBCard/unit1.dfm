@@ -44,7 +44,6 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = -8
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -52,8 +51,8 @@ object Form1: TForm1
     Left = 168
     Top = 96
   end
-  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
     Left = 168
-    Top = 160
+    Top = 153
   end
 end

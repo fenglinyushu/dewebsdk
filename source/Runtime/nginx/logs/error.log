@@ -1,5 +1,0 @@
-2025/11/18 20:23:27 [notice] 12296#8000: signal process started
-2025/11/18 20:23:27 [error] 12296#8000: CreateFile() "E:\Work\00 DeWeb64\source\Runtime\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2025/11/18 20:27:26 [notice] 10444#6024: signal process started
-2025/11/18 20:29:59 [notice] 22012#14840: signal process started
-2025/11/18 20:33:07 [notice] 7724#4688: signal process started

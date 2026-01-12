@@ -843,3 +843,40 @@
 2026-01-07 10:40:03.881 CST [18856] 日志:  checkpoint starting: end-of-recovery immediate wait
 2026-01-07 10:40:03.910 CST [18856] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.007 s, total=0.037 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/2CE3090, redo lsn=0/2CE3090
 2026-01-07 10:40:03.919 CST [14828] 日志:  数据库系统准备接受连接
+2026-01-07 11:51:49.296 CST [14828] 日志:  WAL写入进程 (PID 15952) 被异常 0x40010004 终止
+2026-01-07 11:51:49.296 CST [14828] 提示:  关于对16进制值的描述， 参见C语言的引用文件 "ntstatus.h" 
+2026-01-07 11:51:49.378 CST [14828] 日志:  中断任何其它已激活的服务器进程
+2026-01-07 11:51:49.381 CST [14828] 日志:  所有的服务器进程被中止; 重新初始化
+2026-01-07 11:51:49.573 CST [14828] 日志:  启动进程 (PID 5204) 被异常 0xC0000142 终止
+2026-01-07 11:51:49.573 CST [14828] 提示:  关于对16进制值的描述， 参见C语言的引用文件 "ntstatus.h" 
+2026-01-07 11:51:49.573 CST [14828] 日志:  由于启动进程失败, 终止启动
+2026-01-07 11:51:49.577 CST [14828] 日志:  数据库系统已关闭
+2026-01-08 17:37:14.592 CST [2960] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-08 17:37:14.598 CST [2960] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-08 17:37:14.598 CST [2960] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-08 17:37:14.768 CST [16980] 日志:  数据库系统中断；上一次的启动时间是在2026-01-07 10:40:03 CST
+2026-01-08 17:37:16.063 CST [16980] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-08 17:37:16.084 CST [16980] 日志:  redo 在 0/2CE3108 开始
+2026-01-08 17:37:16.087 CST [16980] 日志:  invalid record length at 0/2CE3140: expected at least 24, got 0
+2026-01-08 17:37:16.087 CST [16980] 日志:  redo done at 0/2CE3108 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-08 17:37:16.105 CST [17452] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-08 17:37:16.138 CST [17452] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.007 s, total=0.040 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/2CE3140, redo lsn=0/2CE3140
+2026-01-08 17:37:16.150 CST [2960] 日志:  数据库系统准备接受连接
+2026-01-08 17:48:34.210 CST [2960] 日志:  后台工作进程 "logical replication launcher" (PID 16620) 被异常 0xC000013A 终止
+2026-01-08 17:48:34.210 CST [2960] 提示:  关于对16进制值的描述， 参见C语言的引用文件 "ntstatus.h" 
+2026-01-08 17:48:34.210 CST [2960] 日志:  中断任何其它已激活的服务器进程
+^C2026-01-08 19:24:42.046 CST [9316] 日志:  正在启动 PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit
+2026-01-08 19:24:42.052 CST [9316] 日志:  正在监听IPv6地址"::1"，端口 5432
+2026-01-08 19:24:42.052 CST [9316] 日志:  正在监听IPv4地址"127.0.0.1"，端口 5432
+2026-01-08 19:24:42.233 CST [8352] 日志:  数据库系统中断；上一次的启动时间是在2026-01-08 17:37:16 CST
+2026-01-08 19:24:42.781 CST [8352] 日志:  数据库系统没有正确的关闭; 处于自动恢复状态中
+2026-01-08 19:24:42.792 CST [8352] 日志:  redo 在 0/2CE31B8 开始
+2026-01-08 19:24:42.792 CST [8352] 日志:  invalid record length at 0/2CE31F0: expected at least 24, got 0
+2026-01-08 19:24:42.792 CST [8352] 日志:  redo done at 0/2CE31B8 system usage: CPU:用户：0.00 s，系统：0.00 s，已用时间：0.00 s
+2026-01-08 19:24:42.802 CST [18372] 日志:  checkpoint starting: end-of-recovery immediate wait
+2026-01-08 19:24:42.829 CST [18372] 日志:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.007 s, total=0.034 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/2CE31F0, redo lsn=0/2CE31F0
+2026-01-08 19:24:42.839 CST [9316] 日志:  数据库系统准备接受连接
+2026-01-08 20:19:22.106 CST [9316] 日志:  后台工作进程 "logical replication launcher" (PID 12048) 被异常 0xC000013A 终止
+2026-01-08 20:19:22.106 CST [9316] 提示:  关于对16进制值的描述， 参见C语言的引用文件 "ntstatus.h" 
+2026-01-08 20:19:22.106 CST [9316] 日志:  中断任何其它已激活的服务器进程
+^C

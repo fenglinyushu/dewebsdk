@@ -32,6 +32,28 @@
 /source/demos/_RemoveTemp/
 /source/demosOnline/
 
+
+# DeWeb DataBase
+/DataBase/postresql18/
+/DataBase/LitesQL2008/*.exe
+/DataBase/LitesQL2008/MSSQL/Binn/
+/DataBase/LitesQL2008/MSSQL/FTData/
+/DataBase/LitesQL2008/MSSQL/Install/
+/DataBase/LitesQL2008/MSSQL/FTData/
+/DataBase/LitesQL2008/MSSQL/isqlw/
+/DataBase/LitesQL2008/MSSQL/LOG/
+/DataBase/LitesQL2008/MSSQL/*.dll
+/DataBase/LitesQL2008/MSSQL/DATA/BieHe*.*
+/DataBase/LitesQL2008/MSSQL/DATA/dwERP*.*
+/DataBase/LitesQL2008/MSSQL/DATA/FreeWind.*
+/DataBase/LitesQL2008/MSSQL/DATA/GMS*.*
+/DataBase/LitesQL2008/MSSQL/DATA/Green*.*
+/DataBase/LitesQL2008/MSSQL/DATA/HOEFON*.*
+/DataBase/LitesQL2008/MSSQL/DATA/qBank*.*
+/DataBase/LitesQL2008/MSSQL/DATA/Score*.*
+/DataBase/LitesQL2008/MSSQL/DATA/StoreManagement*.*
+
+
 # DeWeb Applications
 /source/runtime/apps/*
 /source/runtime/vcls/*
@@ -42,6 +64,7 @@
 *.cfg
 *.hpp
 *.dcu
+*.rsm
 *Resource.rc
 
 # Delphi local files (user-specific info)

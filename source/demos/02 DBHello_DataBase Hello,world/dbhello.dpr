@@ -28,18 +28,8 @@ begin
     //
     Form1          := TForm1.Create(nil);
 
-
-    //<---- 此处用于给当前应用指定 DeWebServer.exe 的“账套管理”中设置的数据库连接
-    //可以采用以下两种方式之一：根据序号dwGetCliHandleByID 或 根据名称 dwGetCliHandleByName
-    //需要在uses中引用dwBase. 注意保持uses中ShareMem是第一个引用
-
-    //根据 id (序号，0开始) 获取数据库连接
-    //Form1.FDConnection1.SharedCliHandle   := dwGetCliHandleByID(AParams,0);
-
     //根据 Name (不区分大小写) 获取数据库连接
-    Form1.FDConnection1.SharedCliHandle   := dwGetCliHandleByName(AParams,'dwFrame');
-    //----->
-
+    Form1.FDConnection1.SharedCliHandle   := dwGetCliHandleByName(AParams,'dwDemo');
 
     Result         := Form1;
 end;

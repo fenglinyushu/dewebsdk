@@ -214,6 +214,10 @@
             <Form>Form_dem_CrudNormal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="unit_dem_CrudStyle.pas">
+            <Form>Form_dem_CrudStyle</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
