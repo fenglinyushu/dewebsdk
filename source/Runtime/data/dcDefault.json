@@ -1,6 +1,6 @@
 {
-	"account":"dwERP",
-	"table": "eGoods",
+	"account":"dwDemo",
+	"table": "dwGoods",
 	"edittop":50,
 	"editheight":640,
 	"margins":[0,10,13,10],
@@ -10,7 +10,6 @@
 	"edit":1,
 	"delete":1,
 	"totalfirst":1,
-	"defaultorder":"ginprice desc",
 	"cardstyle":"border-radius:5px;background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);",
 	"fields": 
 	[

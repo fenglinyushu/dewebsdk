@@ -44,6 +44,8 @@
 /DataBase/LitesQL2008/MSSQL/LOG/
 /DataBase/LitesQL2008/MSSQL/*.dll
 /DataBase/LitesQL2008/MSSQL/DATA/BieHe*.*
+/DataBase/LitesQL2008/MSSQL/DATA/DeWeb*.*
+/DataBase/LitesQL2008/MSSQL/DATA/dwAccess*.*
 /DataBase/LitesQL2008/MSSQL/DATA/dwERP*.*
 /DataBase/LitesQL2008/MSSQL/DATA/FreeWind*.*
 /DataBase/LitesQL2008/MSSQL/DATA/GMS*.*
@@ -78,6 +80,7 @@
 # Delphi history and backups
 __history/
 __recovery/
+__RemoveTemp/
 win32
 win64
 *.~*

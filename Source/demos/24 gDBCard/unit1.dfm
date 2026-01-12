@@ -94,4 +94,8 @@ object Form1: TForm1
     Left = 168
     Top = 392
   end
+  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+    Left = 168
+    Top = 446
+  end
 end

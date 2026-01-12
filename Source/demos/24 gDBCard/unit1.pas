@@ -26,7 +26,7 @@ uses
     FireDAC.Phys.ODBCBase, FireDAC.Phys.ODBC, FireDAC.Comp.Client, FireDAC.Comp.DataSet,
     Vcl.Imaging.pngimage, FireDAC.Phys.MSSQLDef, FireDAC.Phys.MSSQL, FireDAC.Phys.MySQLDef, FireDAC.Stan.ExprFuncs,
     FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Phys.SQLiteDef, FireDAC.Phys.OracleDef, FireDAC.Phys.Oracle,
-    FireDAC.Phys.SQLite, FireDAC.Phys.MySQL;
+    FireDAC.Phys.SQLite, FireDAC.Phys.MySQL, FireDAC.Phys.PGDef, FireDAC.Phys.PG;
 
 type
   TForm1 = class(TForm)
@@ -40,6 +40,7 @@ type
     LaInfo: TLabel;
     Panel1: TPanel;
     Button2: TButton;
+    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure Panel1DragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
