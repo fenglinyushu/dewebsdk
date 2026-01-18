@@ -5,7 +5,7 @@
 用于通过一个panel完成卡片式crud模块
 
 ### 2025-10-25
-1. 增加了 dcSetNameValu 函数, 设置配置的属性 设置name的value
+1. 增加了 dcSetNameValue 函数, 设置配置的属性 设置name的value
 
 ### 2025-09-01
 1. 增加了在无新增和无编辑情况下, 不创建编辑框,以加快速度.  dcCreateEditorPanel
@@ -165,6 +165,9 @@ const
     dcstFloat   : set of TFieldType = [ftFloat, ftCurrency, ftBCD, ftExtended, ftSingle];
 
 implementation
+
+type
+    TdwEndDock  = procedure (Sender, Target: TObject; X, Y: Integer) of object;
 
 
 //设置name的value
@@ -3812,38 +3815,102 @@ end;
 Procedure PCsEndDock(Self: TObject; Sender, Target: TObject; X, Y: Integer);
 var
     oForm       : TForm;
-    oDBCard  : TPanel;
+    oDBCard     : TPanel;
+    oPCs        : TPanel;   //panel of cards
+    oPCb        : TPanel;   //panel card bottom
+    oPFirst     : TPanel;   //the firest panel card
+    oPLast      : TPanel;   //the last panel card
+
+    //
+    iFirstCId   : integer;  //first card index in viewport
+    iCardH      : Integer;
+    iCardHFull  : Integer;
+    iUpdate     : Integer;  //the diff count when to update
+
 
     //
     sPrefix     : String;
     //
     joConfig    : Variant;
 begin
-    //此处主要处理按钮列的事件
+    //::::::::::
+    //此处为主要处理滚动的事件
+    //根据滚动位置, 动态刷新
+    //如果向下滚动,
+    //最后一个卡片pLast的位置和视窗顶部pBottom的差值, 如果pLast-pBottom<CardHeight, 则刷新
+    //如果向上滚动,
+    //第一个卡片p1的位置和视窗顶部pTop的差值, 如果pTop-p1<CardHeight, 则刷新
+    //::::::::::
 
-    //取得列、行和按钮序号
-    //iCol        := X mod 1000;
-    //iRow        := Y;
-    //iButtonID   := X div 1000;
-    //
-
-    //取得源crud panel
+    //get source crud panel
     oDBCard  := dcGetDBCard(TControl(Sender));
 
-    //
+    //get the config json
     joConfig    := dcGetConfig(oDBCard);
 
-	//取得前缀备用,默认为空
+	//get crud autocreate component's prefix
 	sPrefix     := dwGetStr(joConfig,'prefix','');
 
-    //取得各控件
+    //get current form
     oForm       := TForm(oDBCard.Owner);
 
-    if Y = 0 then begin
-        dwMessage('top','success',oForm);
-    end else if Y = 9 then begin
-        dwMessage('bottom','success',oForm);
+    //get components
+    oPCs        := TPanel(oForm.FindComponent(sPrefix+'PCs'));          //多数据卡片的容器面板
+    oPCb        := TPanel(oForm.FindComponent(sPrefix+'PCb'));          //bottom panel card
+    oPFirst     := TPanel(oForm.FindComponent(sPrefix+'PCd0'));          //first panel card
+    oPLast      := TPanel(oForm.FindComponent(sPrefix+'PCd'+IntToStr(joConfig.pagesize-1)));    //last panel card
+
+    //oFQM        := TFDQuery(oDBCard.FindComponent(sPrefix+'FQMain'));    //主表数据库
+    //oEKw        := TEdit(oForm.FindComponent(sPrefix+'EKw'));           //查询关键字
+    //oBQy        := TButton(oForm.FindComponent(sPrefix+'BQy'));         //查询按钮
+    //oFQy        := TFlowPanel(oForm.FindComponent(sPrefix+'FQy'));      //分字段查询字段的流式布局容器面板
+    //oFPs        := TFlowPanel(oForm.FindComponent(sPrefix+'FPs'));      //面板容器
+    //oTbP        := TTrackbar(oForm.FindComponent(sPrefix+'TbP'));       //分页栏
+
+    //card height
+    iCardH      := dwGetInt(joConfig,'cardheight',200);
+    iCardHFull  := iCardH + joConfig.margins._(0) + joConfig.margins._(3);
+
+    //the diff count when to update
+    iUpdate     := Ceil(joConfig.pagesize / 5);
+
+    //save scroll positon in oPCb.tag
+    if oPCb <> nil then begin
+        if Y = 0 then begin
+            oPCb.Tag    := 0;   //最顶部
+            //刷新显示
+            dcUpdate(oDBCard);
+            //dwRunJS('console.log("top");',oForm);
+        end else if Y = 9 then begin
+            oPCb.Tag    := X;   //最底部
+            //刷新显示
+            dcUpdate(oDBCard);
+            //dwRunJS('console.log("bottom");',oForm);
+        end else begin
+            oPCb.Tag    := X*Y;
+            //
+            if Y = 1 then begin
+                //最后一个卡片pLast的位置和视窗顶部pBottom的差值, 如果pLast-pBottom<CardHeight, 则刷新
+                if oPLast.Top - iCardHFull * iUpdate < X + oPCs.Height then begin
+                    //刷新显示
+                    dcUpdate(oDBCard);
+                    //dwRunJS('console.log("last-----");',oForm);
+                end;
+            end else if Y = -1  then begin
+                //第一个卡片p1的位置和视窗顶部pTop的差值, 如果pTop-p1<CardHeight, 则刷新
+                if oPFirst.Top + iCardHFull * iUpdate > X - iCardH then begin
+                    //刷新显示
+                    dcUpdate(oDBCard);
+                    //dwRunJS('console.log("first+++++");',oForm);
+                end;
+            end;
+        end;
     end;
+
+
+    //sPrefix := Format('X=%d,Y=%d',[X,Y]);
+    //dwRunJS('console.log("'+sPrefix+'");',oForm);
+
 end;
 
 
@@ -3936,7 +4003,9 @@ begin
     oPFi.Tag        := 1;
 
     //
-    oTbP.Position   := 0;
+    if oTbP <> nil then begin
+        oTbP.Position   := 0;
+    end;
 
     //
     dcUpdate(oDBCard,'');
@@ -4383,8 +4452,6 @@ begin
 end;
 
 procedure dcCreateField(APanel:TPanel;AWidth:Integer;ASuffix:String;AConfig,AField:Variant;AP_Content:TPanel;const AMobile:Boolean=False);
-type
-    TdwEndDock  = procedure (Sender, Target: TObject; X, Y: Integer) of object;
 var
     oForm       : TForm;
     oP          : TPanel;
@@ -6019,6 +6086,14 @@ var
     iRecord     : Integer;
     iItem       : Integer;
     iList       : Integer;
+    iCardH      : Integer;
+    iCardHFull  : integer;
+    iCurCount   : Integer;
+    iFirstRec   : Integer;
+    iFirstPos   : Integer;
+    iRecCount   : Integer;
+    iTemp       : Integer;
+
     //
     sFields     : string;
     sWhere      : string;
@@ -6043,6 +6118,7 @@ var
     oFPs        : TFlowPanel;
     oPCs        : TPanel;               //多个数据卡片的容器面板, 其tag为当前页码, 从0始
     oPCd        : TPanel;               //数据卡片
+    oPCb        : TPanel;               //最底部的仅用于占位的数据卡片
     oTbP        : TTrackBar;            //分页栏
     oE_Query    : TEdit;
     oDT_Start   : TDateTimePicker;    //起始日期，DateTimePicker_Start
@@ -6063,6 +6139,30 @@ var
     oClick      : Procedure(Sender:TObject) of Object;
 
 begin
+    //<set object to nil at first
+    oForm       := nil;
+    oFQM        := nil;
+    oEKw        := nil;
+    oFQy        := nil;
+    oPQF        := nil;
+    oFPs        := nil;
+    oPCs        := nil;
+    oPCd        := nil;
+    oPCb        := nil;
+    oTbP        := nil;
+    oE_Query    := nil;
+    oDT_Start   := nil;
+    oDT_End     := nil;
+    oCBQy       := nil;
+    oBQy        := nil;
+    oComp       := nil;
+    oBtn        := nil;
+    oChk        := nil;
+    oImg        := nil;
+    oLbl        := nil;
+    oMasterPanel:= nil;
+    oFQMaster   := nil;
+    //>
 
     //取得JSON配置
     joConfig    := dcGetConfig(APanel);
@@ -6072,6 +6172,7 @@ begin
 
 	//取得Form备用
 	oForm       := TForm(APanel.Owner);
+
 
     //取得字段名称列表，备用，返回值为sFields, 如：id,Name,age
     sFields     := dcGetFields(joConfig.fields);
@@ -6083,6 +6184,7 @@ begin
     oFQy        := TFlowPanel(oForm.FindComponent(sPrefix+'FQy'));      //分字段查询字段的流式布局容器面板
     oFPs        := TFlowPanel(oForm.FindComponent(sPrefix+'FPs'));      //面板容器
     oPCs        := TPanel(oForm.FindComponent(sPrefix+'PCs'));          //多数据卡片的容器面板
+    oPCb        := TPanel(oForm.FindComponent(sPrefix+'PCb'));          //bottom panel card
     oTbP        := TTrackbar(oForm.FindComponent(sPrefix+'TbP'));       //分页栏
 
     //数据库类型
@@ -6427,35 +6529,87 @@ begin
 
     //计算总数量, 以更新分页栏
     oFQM.Close;
-    oFQM.SQL.Text   := 'SELECT Count(*) FROM '+joConfig.table+' '+sWhere;
+    oFQM.SQL.Text   := 'SELECT Count(*) as F0 FROM '+joConfig.table+' '+sWhere;
     oFQM.FetchOptions.RecsSkip  := 0;
     oFQM.FetchOptions.RecsMax   := -1;
     oFQM.Open;
-    oTbP.Max        := oFQM.Fields[0].AsInteger;
+    iRecCount   := oFQM.Fields[0].AsInteger;
 
-    //如果仅有1页，则不显示分页栏
-    if dwGetInt(joConfig,'hidewhensingle',1) = 1 then begin
-        oTbP.Visible    := (oTbP.Max / oTbP.PageSize) > 1;
+    if joConfig.mobile <> 1 then begin
+        oTbP.Max    := oFQM.Fields[0].AsInteger;
+
+        //如果仅有1页，则不显示分页栏
+        if dwGetInt(joConfig,'hidewhensingle',1) = 1 then begin
+            oTbP.Visible    := (oTbP.Max / oTbP.PageSize) > 1;
+        end else begin
+            oTbP.Visible    := True;
+        end;
+    end;
+
+    //card height
+    iCardH      := dwGetInt(joConfig,'cardheight',200);
+    iCardHFull  := iCardH + joConfig.margins._(0) + joConfig.margins._(3);
+
+    //set the bottom panel card.
+    if oPCb <> nil then begin
+        oPCb.Top    := joConfig.margins._(3) + iRecCount * iCardHFull;
+    end;
+
+    //当前显示数量
+    iCurCount  := Min(iRecCount,joConfig.pagesize);
+
+    //
+    if joConfig.mobile = 1 then begin
+        case oPCb.Tag of
+            0 : begin
+                 //最顶部显示
+                 iFirstRec  := 0;
+            end;
+        else
+            if (oPCb.Tag > 0) and (oPCb.Tag <> 9) then begin      //scroll down
+                //第一个卡片位于顶部
+                iFirstRec   := (oPCb.Tag - joConfig.margins._(3)) div iCardHFull;
+                //
+                iTemp       := joConfig.pagesize;// - Ceil((oPCs.Height - joConfig.margins._(3)) / iCardHFull);
+                iFirstRec   := Min(iFirstRec,iRecCount - iTemp );
+
+                //dwRunJS('console.log("'+IntToStr(iFirstRec)+'+++");',oForm);
+
+            end else begin  //scrol up
+                //最后一个卡片位于底部
+                iFirstRec   := 1 + (abs(oPCb.Tag) - joConfig.margins._(3)) div iCardHFull - (joConfig.pagesize - Floor(oPCs.Height - joConfig.margins._(3)) div iCardHFull);
+                //dwRunJS('console.log("'+IntToStr(iFirstRec)+'---");',oForm);
+            end;
+
+        end;
     end else begin
-        oTbP.Visible    := True;
+        iFirstRec   := oTbP.Position * joConfig.pagesize;
     end;
 
     //打开数据表
     oFQM.Close;
     oFQM.SQL.Text   := 'SELECT '+ sFields+' FROM '+joConfig.table+' '+sWhere+' '+dwGetOrder(APanel);
-    oFQM.FetchOptions.RecsSkip  := joConfig.pagesize * oTbP.Position;    //oTbP.Position为当前页码
-    oFQM.FetchOptions.RecsMax   := joConfig.pagesize;
+    oFQM.FetchOptions.RecsSkip  := iFirstRec;
+    oFQM.FetchOptions.RecsMax   := iCurCount;
     oFQM.Open;
 
     //绘制数据卡片
     for iItem := 0 to joConfig.pagesize - 1 do begin
-        if iItem < oFQM.RecordCount then begin
+        if iItem < iCurCount then begin
+            //set RecNo
             oFQM.RecNo      := iItem + 1;
-            //当前卡片
+
+            //get panel card
             oPCd            := TPanel(oForm.FindComponent(sPrefix+'PCd'+IntToStr(iItem)));
+
+            //set visible
             oPCd.Visible    := True;
-            oPCd.Top        := 10000;
-            oPCd.DesignInfo := oFQM.RecNo;  //当每个卡片对应的RecNo保存在 DesignInfo 中
+
+            //set top
+            oPCd.Top        :=  joConfig.margins._(3) + (iFirstRec + iItem) * iCardHFull;
+
+            //save RecNo to panelcard's DesignInfo
+            oPCd.DesignInfo := oFQM.RecNo;
 
             //
             for iField := 0 to joConfig.fields._Count - 1 do begin
@@ -6513,26 +6667,10 @@ begin
         end;
     end;
 
+
     //控制滚动条到顶部
-    if joConfig.mobile = 1 then begin
-        if oFPs <> nil then begin
-            dwRunJS('document.getElementById("'+dwFullName(oFPs)+'").scrollTop = 0;',oForm);
-        end else begin
-            dwRunJS('document.getElementById("'+dwFullName(oPCs)+'").scrollTop = 0;',oForm);
-            //强制刷新, 以解决未自动出现滚动条的bug
-            sText   := dwFullName(oPCs);
-            dwRunJS(
-                'const div = document.getElementById('''+sText+''');'
-                +'div.style.display = ''none'';'
-                +'div.offsetHeight; '
-                +'div.style.display = ''block'';',
-                oForm
-            );
-        end;
-    end else begin
-        if oFPs <> nil then begin
-            dwRunJS('document.getElementById("'+dwFullName(oFPs)+'").scrollTop = 0;',oForm);
-        end;
+    if oFPs <> nil then begin
+        dwRunJS('document.getElementById("'+dwFullName(oFPs)+'").scrollTop = 0;',oForm);
     end;
 
     // dcDataScroll 事件
@@ -6603,6 +6741,8 @@ var
     iFieldId    : Integer;      //每个字段JSON对应的数据表字段index
     iTop        : Integer;
     iHover      : Integer;      //用于配置当mouseenter时当前卡片高度上升的值. 如果为0,则不激活mouseenter/事件
+    iCardH      : Integer;      //card height
+    iCardHFull  : Integer;      //card full height = card height + card margins.top + margins.bottom
     //
     joField     : variant;
     joSort      : Variant;      //用于排序的字段数组
@@ -6678,23 +6818,21 @@ begin
             APanel.HelpContext  := 31028;
 
             //取得form备用
-            oForm   := TForm(APanel.Owner);
+            oForm       := TForm(APanel.Owner);
 
             //取得配置json
             joConfig    := dcGetConfig(APanel);
 
             //保存是否移动端标志
-            joConfig.mobile := dwIIFi(AMobile,1,0);
+            if not joConfig.Exists('mobile') then begin
+                joConfig.mobile := dwIIFi(AMobile,1,0);
+
+                //反写回Hint
+                APanel.Hint     := joConfig;
+            end;
 
             //取得前缀备用,默认为空
             sPrefix     := dwGetStr(joConfig,'prefix','');
-
-            //如果不是JSON格式，则退出
-            if joConfig = unassigned then begin
-                Result  := -201;
-                dwMessage('Error when DBCard : '+IntToStr(Result),'error',oForm);
-                Exit;
-            end;
 
             //配置 oFQMain 的连接
             oFQMain       := TFDQuery(APanel.FindComponent(sPrefix+'FQMain'));
@@ -6704,6 +6842,7 @@ begin
                 oFQMain             := TFDQuery.Create(APanel);
                 oFQMain.Name        := sPrefix + 'FQMain';
                 oFQMain.Connection  := AConnection;
+                oFQMain.FetchOptions.RecordCountMode    := cmTotal;
             end;
 
             //得到字段名列表
@@ -6717,6 +6856,7 @@ begin
                 oFQTemp               := TFDQuery.Create(APanel);
                 oFQTemp.Name          := sPrefix+'FQTemp';
                 oFQTemp.Connection    := AConnection;
+                oFQTemp.FetchOptions.RecordCountMode    := cmTotal;
             end;
 
             //<如果没有定义字段，则自动生成全部字段
@@ -7201,7 +7341,7 @@ begin
                     OnChange        := TNotifyEvent(tM);
                 end;
 
-                //功能按钮面板 ： PBs : panel buttons ===========================================================================
+                //功能按钮面板 ： PBs : panel buttons ==================================================================
                 oPBs  := TPanel.Create(oForm);
                 with oPBs do begin
                     Parent          := APanel;
@@ -7339,7 +7479,7 @@ begin
         if Result = 0 then begin
             try
                 //所有卡片的父容器 =====================================================================================
-                if dwGetInt(joConfig,'cardwidth',0)>0 then begin
+                if joConfig.mobile = 0 then begin
                     oFPs    := TFlowPanel.Create(oForm);
                     with oFPs do begin
                         Parent          := APanel;
@@ -7371,7 +7511,14 @@ begin
                         end else begin
                             Color       := APanel.Color;
                         end;
+                        Helpkeyword     := 'scroll';
+                        helpContext     := 100;
                         Hint            := '{"dwstyle":"overflow-y:auto;overflow-x:hidden;"}';
+
+                        //
+                        tM.Code         := @PCsEndDock;
+                        tM.Data         := Pointer(325); // 随便取的数
+                        OnEndDock       := TdwEndDock(tM);
                     end;
                 end;
 
@@ -7383,46 +7530,57 @@ begin
                     sCardStyle  := 'this.style.cssText  = '''+sCardStyle+''';';
                 end;
 
-                //
+                //鼠标移入时, 卡片移动量
                 iHover  := dwGetInt(joConfig,'hover');
+
+                //card height
+                iCardH      := dwGetInt(joConfig,'cardheight',200);
+                iCardHFull  := iCardH + joConfig.margins._(0) + joConfig.margins._(3);
 
                 //创建多个数据卡片======================================================================================
                 for iItem := 0 to joConfig.pagesize - 1 do begin
                     oPCd    := TPanel.Create(oForm);
                     with oPCd do begin
-                        if oFPs <> nil then begin
-                            Parent          := oFPs;
+
+                        //set parent component
+                        if joConfig.mobile =1 then begin
+                            Parent      := oPCs;
+                            //
+                            Top         := joConfig.margins._(3) + iCardHFull * iItem;
+                            Width       := oPCs.Width - joConfig.margins._(1) - joConfig.margins._(2) ;
+                            Left        := joConfig.margins._(1);
+                            //
+                            Anchors     := [akLeft, akTop, akRight];
                         end else begin
-                            Parent          := oPCs;
+                            Parent          := oFPs;
+
+                            //宽度为设定的cardwidth
+                            Width       := dwGetInt(joConfig,'cardwidth',200);
+
+                            //
+                            AlignWithMargins:= True;
+                            Margins.Bottom  := joConfig.margins._(0);
+                            Margins.Left    := joConfig.margins._(1);
+                            Margins.Right   := joConfig.margins._(2);
+                            Margins.Top     := joConfig.margins._(3);
                         end;
 
-                        //
+                        //set card color
                         if joConfig.Exists('cardcolor') then begin
                             Color       := dwGetColorFromJson(joConfig.cardcolor,clWhite);
                         end else begin
                             Color       := APanel.Color;
                         end;
 
-                        //
+                        //save index to Tag
                         Tag             := iItem;   //保存位置
-                        Name            := sPrefix + 'PCd'+IntToStr(iItem);
-                        BevelOuter      := bvNone;
-                        Height          := dwGetInt(joConfig,'cardheight',200);
-                        Top             := 900*iItem;   //保证新生成的在最底部
 
-                        if oFPs <> nil then begin
-                            //宽度为设定的cardwidth
-                            Width       := dwGetInt(joConfig,'cardwidth',0);
-                        end else begin
-                            Align       := alTop;
-                        end;
+                        //Name
+                        Name            := sPrefix + 'PCd'+IntToStr(iItem);
 
                         //
-                        AlignWithMargins:= True;
-                        Margins.Bottom  := joConfig.margins._(0);
-                        Margins.Left    := joConfig.margins._(1);
-                        Margins.Right   := joConfig.margins._(2);
-                        Margins.Top     := joConfig.margins._(3);
+                        BevelOuter      := bvNone;
+                        Height          := iCardH;
 
                         //
                         Hint            :=
@@ -7606,37 +7764,56 @@ begin
                         end;
                     end;
                 end;
+
+                //创建最底部的卡片, 仅用于占位==========================================================================
+                if oPCs <> nil then begin
+                    oPCd    := TPanel.Create(oForm);
+                    with oPCd do begin
+                        Parent          := oPCs;
+
+                        //Name
+                        Name            := sPrefix + 'PCb';     //pancel card bottom
+                        Left            := 0;
+                        Width           := 5;
+                        Height          := 5;
+                        //Color           := clBlue;  //only for debug
+                    end;
+                end;
+
+
                 //分页       ===============================================================================================
-                oTbP    := TTrackBar.Create(oForm);
-                with oTbP do begin
-                    Parent          := APanel;
-                    Name            := sPrefix + 'TbP';
-                    Align           := alBottom;
-                    HelpKeyword     := 'page';
-                    Height          := 35;
-                    PageSize        := joConfig.pagesize;
-                    if dwGetInt(joConfig,'totalfirst',0)=1 then begin
-                        Hint            := '{"dwattr":"small :pager-count=5 background layout=\"total, ->, prev, pager, next\""}';
-                    end else begin
-                        Hint            := '{"dwattr":"small :pager-count=5 background layout=\"prev, pager, next, ->, total\""}';
+                if joConfig.mobile <> 1 then begin
+                    oTbP    := TTrackBar.Create(oForm);
+                    with oTbP do begin
+                        Parent          := APanel;
+                        Name            := sPrefix + 'TbP';
+                        Align           := alBottom;
+                        HelpKeyword     := 'page';
+                        Height          := 35;
+                        PageSize        := joConfig.pagesize;
+                        if dwGetInt(joConfig,'totalfirst',0)=1 then begin
+                            Hint            := '{"dwattr":"small :pager-count=5 background layout=\"total, ->, prev, pager, next\""}';
+                        end else begin
+                            Hint            := '{"dwattr":"small :pager-count=5 background layout=\"prev, pager, next, ->, total\""}';
+                        end;
+                        //
+                        AlignWithMargins:= True;
+                        Margins.Top     := 5;
+                        Margins.Bottom  := 0;
+                        Margins.Left    := 0;
+                        Margins.Right   := 0;
+
+                        //
+                        tM.Code         := @TbPChange;
+                        tM.Data         := Pointer(325); // 随便取的数
+                        OnChange        := TNotifyEvent(tM);
+
+                        //移动端处理
+                        if AMobile then begin
+                            Hint            := '{"dwattr":"background layout=\"prev, next, ->, total\"","dwstyle":"background:#fff;"}';
+                        end;
+
                     end;
-                    //
-                    AlignWithMargins:= True;
-                    Margins.Top     := 5;
-                    Margins.Bottom  := 0;
-                    Margins.Left    := 0;
-                    Margins.Right   := 0;
-
-                    //
-                    tM.Code         := @TbPChange;
-                    tM.Data         := Pointer(325); // 随便取的数
-                    OnChange        := TNotifyEvent(tM);
-
-                    //移动端处理
-                    if AMobile then begin
-                        Hint            := '{"dwattr":"background layout=\"prev, next, ->, total\"","dwstyle":"background:#fff;"}';
-                    end;
-
                 end;
             except
                 //异常时调试使用

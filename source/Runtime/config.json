@@ -26,6 +26,22 @@
 			"enabled": 1,
 			"remark": "",
 			"params": []
+		},
+		{
+			"name": "dwGMS",
+			"secret": 0,
+			"string": "Server={127.0.0.1,8829};Database=GMS;User_Name=sa;Password=593106;DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
+		},
+		{
+			"name": "dwGMS",
+			"secret": 0,
+			"string": "Server={127.0.0.1,8829};Database=GMS;User_Name=sa;Password=593106;DriverID=MSSQL",
+			"enabled": 1,
+			"remark": "",
+			"params": []
 		}
 	]
 }

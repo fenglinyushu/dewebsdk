@@ -3,7 +3,7 @@
 	"items": [
 		{
 			"_m_": "panel",
-			"caption": "panel",
+			"caption": "标题栏",
 			"type": "panel",
 			"visible": true,
 			"name": "",
@@ -134,7 +134,7 @@
 		},
 		{
 			"_m_": "panel",
-			"caption": "panel",
+			"caption": "数据栏",
 			"type": "panel",
 			"visible": true,
 			"name": "",
@@ -336,7 +336,7 @@
 											"margins-left": 30,
 											"margins-right": 30,
 											"margins-top": 70,
-											"sql": "SELECT sClassName,   CAST(SUM(CASE WHEN sScore >= 80 THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS DECIMAL(10,2)) AS 优良率 FROM sys_student GROUP BY sClassName ORDER BY 优良率 DESC;",
+											"sql": "SELECT sClassName,   CAST(SUM(CASE WHEN sScore >= 80 THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS DECIMAL(10,2)) AS 优良率 FROM sys_student GROUP BY sClassName ORDER BY 优良率 DESC",
 											"rownum": 9,
 											"waittime": 3000,
 											"carousel": "single",
@@ -520,7 +520,7 @@
 					"items": [
 						{
 							"_m_": "panel",
-							"caption": "中上",
+							"caption": "综合信息",
 							"type": "panel",
 							"visible": true,
 							"name": "bbb",
@@ -689,7 +689,7 @@
 											"margins-left": 30,
 											"margins-right": 30,
 											"margins-top": 0,
-											"sql": "SELECT Count(*) FROM sys_Student",
+											"sql": "SELECT Count(*) as A FROM sys_Student",
 											"items": []
 										}
 									]
@@ -805,8 +805,8 @@
 											"margins-left": 0,
 											"margins-right": 0,
 											"margins-top": 0,
-											"sql": "SELECT ROUND((CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM sys_student)) * 100, 0) AS PercentageAbove90 FROM sys_student WHERE sScore >= 90;",
-											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//dw__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    name: dwdata[0],\r\n    title: {\r\n      offsetCenter: ['0%', '-20%']\r\n    },\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '20%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
+											"sql": "SELECT ROUND((CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM sys_student)) * 100, 0) AS 优 FROM sys_student WHERE sScore >= 90",
+											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//dw__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '0%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
 											"items": []
 										}
 									]
@@ -922,8 +922,8 @@
 											"margins-left": 0,
 											"margins-right": 0,
 											"margins-top": 0,
-											"sql": "",
-											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//de__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    name: dwdata[0],\r\n    title: {\r\n      offsetCenter: ['0%', '-20%']\r\n    },\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '20%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
+											"sql": "SELECT ROUND((CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM sys_student)) * 100, 0) AS 良 FROM sys_student WHERE sScore >= 80",
+											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//dw__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '0%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
 											"items": []
 										}
 									]
@@ -1039,8 +1039,8 @@
 											"margins-left": 0,
 											"margins-right": 0,
 											"margins-top": 0,
-											"sql": "",
-											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//de__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    name: dwdata[0],\r\n    title: {\r\n      offsetCenter: ['0%', '-20%']\r\n    },\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '20%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
+											"sql": "SELECT ROUND((CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM sys_student)) * 100, 0) AS 及格 FROM sys_student WHERE sScore >= 60",
+											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//dw__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '0%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
 											"items": []
 										}
 									]
@@ -1156,8 +1156,8 @@
 											"margins-left": 0,
 											"margins-right": 0,
 											"margins-top": 0,
-											"sql": "",
-											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//de__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    name: dwdata[0],\r\n    title: {\r\n      offsetCenter: ['0%', '-20%']\r\n    },\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '20%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
+											"sql": "SELECT ROUND((CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(*) FROM sys_student)) * 100, 0) AS NONE FROM sys_student WHERE sScore < 60",
+											"option": "dwdata = [\r\n//dw__start\r\n  'Perfect',\r\n  20\r\n//dw__end\r\n  ];\r\n  \r\ngaugeData = [\r\n  {\r\n    value: dwdata[1],\r\n    detail: {\r\n      valueAnimation: true,\r\n      offsetCenter: ['0%', '0%']\r\n    }\r\n  },\r\n];\r\noption = {\r\n  series: [\r\n    {\r\n      type: 'gauge',\r\n      startAngle: 90,\r\n      endAngle: -270,\r\n      pointer: {\r\n        show: false\r\n      },\r\n      progress: {\r\n        show: true,\r\n        overlap: false,\r\n        roundCap: true,\r\n        clip: false,\r\n        itemStyle: {\r\n          borderWidth: 1,\r\n          borderColor: '#464646'\r\n        }\r\n      },\r\n      axisLine: {\r\n        lineStyle: {\r\n          width: 10\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n        distance: 0,\r\n        length: 10\r\n      },\r\n      axisTick: {\r\n        show: false\r\n      },\r\n      axisLabel: {\r\n        show: false,\r\n        distance: 50\r\n      },\r\n      data: gaugeData,\r\n      title: {\r\n        color:'#ddd',\r\n        fontSize: 14\r\n      },\r\n      detail: {\r\n        width: 50,\r\n        height: 14,\r\n        fontSize: 18,\r\n        color: 'inherit',\r\n        borderColor: 'inherit',\r\n        borderRadius: 20,\r\n        borderWidth: 0,\r\n        formatter: '{value}%'\r\n      }\r\n    }\r\n  ]\r\n};\r\n",
 											"items": []
 										}
 									]
@@ -1166,7 +1166,7 @@
 						},
 						{
 							"_m_": "panel",
-							"caption": "center",
+							"caption": "班级男女优良率",
 							"type": "panel",
 							"visible": true,
 							"name": "",
@@ -1211,7 +1211,7 @@
 							"items": [
 								{
 									"_m_": "label",
-									"caption": "总体情况1",
+									"caption": "班级男女优良率",
 									"type": "label",
 									"visible": true,
 									"name": "",
@@ -1283,7 +1283,7 @@
 						},
 						{
 							"_m_": "panel",
-							"caption": "bottom",
+							"caption": "班级不及格人数",
 							"type": "panel",
 							"visible": true,
 							"name": "",
@@ -1328,7 +1328,7 @@
 							"items": [
 								{
 									"_m_": "label",
-									"caption": "总体情况2",
+									"caption": "班级不及格人数",
 									"type": "label",
 									"visible": true,
 									"name": "",
@@ -1392,7 +1392,7 @@
 									"margins-left": 0,
 									"margins-right": 0,
 									"margins-top": 0,
-									"sql": "",
+									"sql": "SELECT sClassName as 班级,COUNT(*) AS 人数 FROM sys_student WHERE sScore < 60 GROUP BY sClassName ORDER BY sClassName ",
 									"option": "dwdata = [\r\n//dw__start\r\n  ['OpenAI', 'Sora'],\r\n  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],\r\n  [320, 332, 301, 334, 390, 330, 320],\r\n  [120, 232, 201, 234, 290, 230, 280]\r\n//dw__end\r\n];\r\noption = {\r\n  tooltip: {\r\n    trigger: 'axis'\r\n  },\r\n  legend: {\r\n    orient: 'horizontal', // 水平排列\r\n    align: 'auto', // 自动对齐\r\n    top: '0%', // 设置在顶部\r\n    left: 'center', // 设置水平居中\r\n    data: dwdata[0],\r\n    textStyle: {\r\n      color: '#fff'\r\n    }\r\n  },\r\n  grid: {\r\n    left: '3%',\r\n    right: '4%',\r\n    bottom: '3%',\r\n    containLabel: true\r\n  },\r\n  xAxis: {\r\n    type: 'category',\r\n    boundaryGap: false,\r\n    data: dwdata[1]\r\n  },\r\n  yAxis: {\r\n    splitLine: {\r\n      show: false // 隐藏水平的分隔线\r\n    },\r\n    type: 'value'\r\n  },\r\n  series: [\r\n    {\r\n      name: dwdata[0][0],\r\n      type: 'line',\r\n      data: dwdata[2]\r\n    },\r\n    {\r\n      name: dwdata[0][1],\r\n      type: 'line',\r\n      data: dwdata[3]\r\n    }\r\n  ]\r\n};\r\n",
 									"items": []
 								}
@@ -1407,7 +1407,7 @@
 					"visible": true,
 					"name": "",
 					"image": "",
-					"style": 10,
+					"style": 0,
 					"left": 0,
 					"right": 0,
 					"top": 0,
@@ -1447,12 +1447,12 @@
 					"items": [
 						{
 							"_m_": "panel",
-							"caption": "班级不及格统计",
+							"caption": "不及格情况",
 							"type": "panel",
 							"visible": true,
 							"name": "",
 							"image": "",
-							"style": 0,
+							"style": 11,
 							"left": 0,
 							"right": 0,
 							"top": 9999,
@@ -1471,8 +1471,8 @@
 							"margins-left": 0,
 							"margins-right": 0,
 							"margins-top": 0,
-							"titlewidth": 250,
-							"hidden": false,
+							"titlewidth": 180,
+							"hidden": true,
 							"borderhidden": false,
 							"background": "#00f",
 							"font": {
@@ -1492,7 +1492,7 @@
 							"items": [
 								{
 									"_m_": "label",
-									"caption": "班级不及格统计",
+									"caption": "不及格情况",
 									"type": "label",
 									"visible": false,
 									"name": "",
@@ -1552,12 +1552,12 @@
 									"akright": false,
 									"akbottom": false,
 									"alignwithmargins": true,
-									"margins-bottom": 0,
-									"margins-left": 10,
-									"margins-right": 10,
-									"margins-top": 10,
-									"sql": "",
-									"colwidths": "[300]",
+									"margins-bottom": 20,
+									"margins-left": 20,
+									"margins-right": 20,
+									"margins-top": 60,
+									"sql": "SELECT sName as 姓名,Round(sScore,1) as 分数 FROM sys_Student WHERE sScore<60 ORDER BY sScore",
+									"colwidths": "[60,100,100]",
 									"rowheights": "",
 									"rownum": 8,
 									"headerbgc": [
@@ -1577,8 +1577,8 @@
 									],
 									"waittime": 3000,
 									"headerheight": 35,
-									"colaligns": "[\"center\"]",
-									"index": false,
+									"colaligns": "[\"center\",\"center\",\"center\"]",
+									"index": true,
 									"indexheader": "",
 									"carousel": "single",
 									"hoverpause": false,
@@ -1594,7 +1594,7 @@
 							"visible": true,
 							"name": "",
 							"image": "",
-							"style": 0,
+							"style": 11,
 							"left": 0,
 							"right": 0,
 							"top": 9999,
@@ -1613,8 +1613,8 @@
 							"margins-left": 0,
 							"margins-right": 0,
 							"margins-top": 0,
-							"titlewidth": 250,
-							"hidden": false,
+							"titlewidth": 180,
+							"hidden": true,
 							"borderhidden": false,
 							"background": "#00f",
 							"font": {
@@ -1694,12 +1694,12 @@
 									"akright": false,
 									"akbottom": false,
 									"alignwithmargins": true,
-									"margins-bottom": 0,
-									"margins-left": 10,
-									"margins-right": 10,
-									"margins-top": 10,
-									"sql": "",
-									"colwidths": "[300]",
+									"margins-bottom": 20,
+									"margins-left": 20,
+									"margins-right": 20,
+									"margins-top": 60,
+									"sql": "SELECT sClassName as 班级,COUNT(*) AS 人数 FROM sys_student WHERE sScore > 100 GROUP BY sClassName ORDER BY COUNT(*) DESC",
+									"colwidths": "[60,150,60]",
 									"rowheights": "",
 									"rownum": 8,
 									"headerbgc": [
@@ -1719,8 +1719,8 @@
 									],
 									"waittime": 3000,
 									"headerheight": 35,
-									"colaligns": "[\"center\"]",
-									"index": false,
+									"colaligns": "[\"center\",\"center\",\"center\"]",
+									"index": true,
 									"indexheader": "",
 									"carousel": "single",
 									"hoverpause": false,
@@ -1735,7 +1735,7 @@
 		}
 	],
 	"caption": "国家体质健康管理平台",
-	"connectionstring": "Server=127.0.0.1,8829;Database=dwDemo;User_Name=sa;Password={593106};DriverID=MSSQL",
+	"connectionstring": "Server=127.0.0.1,8829;Database=GMS;User_Name=sa;Password={593106};DriverID=MSSQL",
 	"prefix": "",
 	"image": "media/images/board/bk003.jpg",
 	"color": [

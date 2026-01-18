@@ -1,32 +1,10 @@
 {
-	"account": "dwGreen",
-	"table": "gServiceDebug",
+	"account": "dwGMS",
+	"table": "(SELECT TOP (1000) [tId],[tName],[tDate],[tLocation],[tManager],[tGradeNum],[tClassNum],[tGender],[tItemName],[tItemUnit],[tFinished],[tCount],[tStatus],[tRoster],[tRemark],[tCreatorId],[tManagerId] FROM [GMS].[dbo].[bop_Test] WHERE [tRemark] = '2026初三期末') as Aaa",
 	"defaulteditmax": 1,
 	"pagesize": 5,
 	"rowheight": 80,
 	"fields": 
 	[
-		{
-			"name": "sTitle",
-			"caption": "标题",
-			"query": 1,
-			"sort": 1,
-			"width": 250
-		},
-		{
-			"name": "sDetail",
-			"caption": "介绍",
-			"sort": 1,
-			"width": 300,
-			"height": 180,
-			"query": 1
-		},
-		{
-			"name": "sId",
-			"caption": "Id",
-			"align": "center",
-			"width": 60,
-			"type": "auto"
-		}
 	]
 }

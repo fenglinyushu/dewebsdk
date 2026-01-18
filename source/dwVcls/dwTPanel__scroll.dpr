@@ -1,5 +1,15 @@
 ﻿library dwTPanel__scroll;
 
+{
+    能自动触发滚动事件的TPanel
+    -
+    当事件滚动结束200ms后自动触发OnEndDock 事件
+    其中X, Y为
+    Y 为方向 ,1 向下, -1 向上  ,0 到顶部, 9到底部
+    X 为滚动值
+}
+
+
 uses
      ShareMem,
 
@@ -198,69 +208,82 @@ end;
 //取得Mounted
 function dwGetMounted(ACtrl:TComponent):String;StdCall;
 var
-    joRes   : Variant;
-    sCode   : string;
-    sFull   : string;
+    iTimeOut    : Integer;
+    joRes       : Variant;
+    sCode       : string;
+    sFull       : string;
 begin
     //生成返回值数组
     joRes   := _Json('[]');
+
     //
     sFull   := dwFullName(ACtrl);
+
+
     //
     with TPanel(ACtrl) do begin
+
+        //定时器时间间隔
+        iTimeout    := 200;
+        if HelpContext > 0 then begin
+            iTimeOut    := HelpContext;
+        end;
+
         sCode   :=
-        'let %s__stt = 0;        //初始滚动位置'#13#10
-        +'let %s__cur = 0;        //当前滚动位置'#13#10
-        +'let %s__tmr = null;     //时钟控件'#13#10
-        +'document.getElementById(''%s'').addEventListener("scroll", function() {'#13#10
-        +'    clearTimeout(%s__tmr);'#13#10
-        +'    %s__cur = %s.scrollTop;     //保存当前位置'#13#10
-        +'    %s__tmr = setTimeout(%s__ise, %d); //创建时钟控件'#13#10
-        +'});'#13#10
-        +''#13#10
-        +'//以下定时检查是否停止，如果已停止，则激活onenddock'#13#10
-        +'function %s__ise() {'#13#10
-        +'    //console.log(''down....'',%s__stt,%s__cur);'#13#10
-        +'    if (%s__cur == %s.scrollTop) {'#13#10
-        +'        //console.log(''滚动结束了'');'#13#10
-        +'        if (Math.abs(%s__cur - %s__stt) >= %d ) {'#13#10
-        +'            if (%s.scrollTop + %s.clientHeight >= %s.scrollHeight-3){'#13#10
-        +'                //console.log(''bottom.......'');'#13#10
-        +'                axios.post('#13#10
-        +'                    ''/deweb/post'','#13#10
-        +'                    ''{"m":"event","i":''+_this.clientid+'',"e":"onenddockbottom","c":"%s","v":"''+%s.scrollTop+''"}'''#13#10
-        +'                    ,{headers:{shuntflag:0}}'#13#10
-        +'                )'#13#10
-        +'                .then(resp =>{_this.procResp(resp.data);});'#13#10
-        +'            } else if (%s.scrollTop == 0){'#13#10
-        +'                //console.log(''Top.........'');'#13#10
-        +'                axios.post('#13#10
-        +'                    ''/deweb/post'','#13#10
-        +'                    ''{"m":"event","i":''+_this.clientid+'',"e":"onenddocktop","c":"%s","v":"0"}'''#13#10
-        +'                    ,{headers:{shuntflag:0}}'#13#10
-        +'                )'#13#10
-        +'                .then(resp =>{_this.procResp(resp.data);});'#13#10
-        +'            } else {'#13#10
-        +''#13#10
-        +'                var _val = %s.scrollTop;'#13#10
-        +'                if (%s__stt > %s.scrollTop) {'#13#10
-        +'                    _val = -1*_val;'#13#10
-        +'                }'#13#10
-        +'                //console.log(_val);'#13#10
-        +'                axios.post('#13#10
-        +'                    ''/deweb/post'','#13#10
-        +'                    ''{"m":"event","i":''+_this.clientid+'',"e":"onenddock","c":"%s","v":"''+_val+''"}'''#13#10
-        +'                    ,{headers:{shuntflag:0}}'#13#10
-        +'                )'#13#10
-        +'                .then(resp =>{_this.procResp(resp.data);});'#13#10
-        +'                %s__stt = %s.scrollTop;'#13#10
-        +'            }'#13#10
-        +'            clearTimeout(%s__tmr);'#13#10
-        +'        }'#13#10
-        +'    }'#13#10
-        +'};';
+        '''
+        let %s__stt = 0;        //初始滚动位置
+        let %s__cur = 0;        //当前滚动位置
+        let %s__tmr = null;     //时钟控件
+        document.getElementById('%s').addEventListener("scroll", function() {
+            clearTimeout(%s__tmr);
+            %s__cur = %s.scrollTop;     //保存当前位置
+            %s__tmr = setTimeout(%s__ise, %d); //创建时钟控件
+        });
+
+        //以下定时检查是否停止，如果已停止，则激活onenddock
+        function %s__ise() {
+            //console.log('down....',%s__stt,%s__cur);
+            if (%s__cur == %s.scrollTop) {
+                //console.log('滚动结束了');
+                if (Math.abs(%s__cur - %s__stt) >= %d ) {
+                    if (%s.scrollTop + %s.clientHeight >= %s.scrollHeight-3){
+                        //console.log('bottom.......');
+                        axios.post(
+                            '/deweb/post',
+                            '{"m":"event","i":'+_this.clientid+',"e":"onenddockbottom","c":"%s","v":"'+%s.scrollTop+'"}'
+                            ,{headers:{shuntflag:0}}
+                        )
+                        .then(resp =>{_this.procResp(resp.data);});
+                    } else if (%s.scrollTop == 0){
+                        //console.log('Top.........');
+                        axios.post(
+                            '/deweb/post',
+                            '{"m":"event","i":'+_this.clientid+',"e":"onenddocktop","c":"%s","v":"0"}'
+                            ,{headers:{shuntflag:0}}
+                        )
+                        .then(resp =>{_this.procResp(resp.data);});
+                    } else {
+
+                        var _val = %s.scrollTop;
+                        if (%s__stt > %s.scrollTop) {
+                            _val = -1*_val;
+                        }
+                        //console.log(_val);
+                        axios.post(
+                            '/deweb/post',
+                            '{"m":"event","i":'+_this.clientid+',"e":"onenddock","c":"%s","v":"'+_val+'"}'
+                            ,{headers:{shuntflag:0}}
+                        )
+                        .then(resp =>{_this.procResp(resp.data);});
+                        %s__stt = %s.scrollTop;
+                    }
+                    clearTimeout(%s__tmr);
+                }
+            }
+        };
+        ''';
         sCode   := Format(sCode,[
-                sFull,sFull,sFull,sFull,sFull,  sFull,sFull,sFull,sFull,200,
+                sFull,sFull,sFull,sFull,sFull,  sFull,sFull,sFull,sFull,iTimeout,
                 sFull,sFull,sFull,sFull,sFull,  sFull,sFull,  HelpContext,
                 sFull,sFull,sFull,sFull,sFull,  sFull,sFull,sFull,sFull,sFull,
                 sFull,sFull,sFull,sFull]);

@@ -1,0 +1,107 @@
+object Form1: TForm1
+  Left = 191
+  Top = 60
+  HelpType = htKeyword
+  BorderStyle = bsNone
+  Caption = 'DeWeb'
+  ClientHeight = 603
+  ClientWidth = 400
+  Color = clWhite
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = #24494#36719#38597#40657
+  Font.Style = []
+  OnCreate = FormCreate
+  OnMouseUp = FormMouseUp
+  TextHeight = 20
+  object Panel1: TPanel
+    Left = 0
+    Top = 50
+    Width = 400
+    Height = 553
+    Hint = '{"dwstyle":"overflow-y:auto;"}'
+    HelpKeyword = 'scroll'
+    HelpContext = 100
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'Panel1'
+    TabOrder = 0
+    OnEndDock = Panel1EndDock
+    DesignSize = (
+      400
+      553)
+    object PDemo: TPanel
+      AlignWithMargins = True
+      Left = 15
+      Top = 10
+      Width = 370
+      Height = 90
+      Hint = '{"radius":"5px"}'
+      Margins.Left = 15
+      Margins.Top = 10
+      Margins.Right = 15
+      Margins.Bottom = 0
+      Anchors = [akLeft, akTop, akRight]
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 0
+      object LDemo: TLabel
+        AlignWithMargins = True
+        Left = 20
+        Top = 3
+        Width = 330
+        Height = 84
+        Margins.Left = 20
+        Margins.Right = 20
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'LDemo'
+        Layout = tlCenter
+        ExplicitWidth = 52
+        ExplicitHeight = 20
+      end
+    end
+  end
+  object PMTitle: TPanel
+    Left = 0
+    Top = 0
+    Width = 400
+    Height = 50
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 16359209
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 1
+    object LTitle: TLabel
+      AlignWithMargins = True
+      Left = 20
+      Top = 10
+      Width = 360
+      Height = 30
+      Margins.Left = 20
+      Margins.Top = 10
+      Margins.Right = 20
+      Margins.Bottom = 10
+      Align = alClient
+      Alignment = taCenter
+      Caption = #26080#23613#24490#29615'...'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -20
+      Font.Name = #24494#36719#38597#40657
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+      ExplicitWidth = 95
+      ExplicitHeight = 27
+    end
+  end
+end

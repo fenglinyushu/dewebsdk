@@ -1,0 +1,146 @@
+{
+	"account":"dwDemo",
+	"table": "dwGoods",
+	"edittop":50,
+	"editheight":640,
+	"margins":[0,10,13,10],
+	
+	"cardheight":155,
+	"new":1,
+	"edit":1,
+	"delete":1,
+	"totalfirst":1,
+	"cardstyle":"border-radius:5px;background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);",
+	"fields": 
+	[
+		{
+			"name": "gPhoto",
+			"caption": "图片",
+			"sort": 1,
+			"left":20,
+			"top":20,
+			"height":100,
+			"width": 100,
+			"type": "image",
+			"imgdir": "media/system/demo/",
+			"imgtype": ["jpg","png","bmp","gif"],
+			"dwstyle":"border-radius:5px;border:solid 1px #ddd;",
+			"query": 1,
+			"align": "center"
+		},
+		{
+			"name": "gId",
+			"top" : 25,
+			"left": 140,
+			"width": 20,
+			"height":20,
+			"align": "center",
+			"dwstyle":"border:solid 1px #ddd;border-radius:50%;line-height:20px;",
+			"font":{
+				"size" : 7
+			},
+			"type": "totalindex"
+		},
+		{
+			"name": "gName",
+			"caption": "名称",
+			"left":190,
+			"top":20,
+			"width": 100,
+			"height":35,
+			"font":{
+				"size" : 20,
+				"color": [0,0,0]
+			},
+			"sort": 1,
+			"query": 1,
+			"align": "center",
+			"filterlist": 
+			[
+				"苹果",
+				"酸奶",
+				"日杂",
+				"洗发水",
+				"牛奶"
+			]
+		},
+		{
+			"name": "gActive",
+			"caption": "",
+			"top":25,
+			"left":170,
+			"width": 70,
+			"type": "check",
+			"align": "center",
+			"query": 0,
+			"datatype": 14
+		},
+		{
+			"name": "gGrade",
+			"caption": "品质",
+			"sort": 1,
+			"left":140,
+			"width":60,
+			"type": "combopair",
+			"query": 1,
+			"dbfilter":1,
+			"list":[["A","卓越"],["B","优质"],["C","良好"],["D","合格"],["E","劣质"]]
+		},
+		{
+			"name": "gBrand",
+			"caption": "品牌",
+			"sort": 1,
+			"left":140,
+			"width": 100
+		},
+		{
+			"name": "gQuantity",
+			"caption": "数量",
+			"sort": 1,
+			"left":140,
+			"width": 100,
+			"type": "integer",
+			"query": 0
+		},
+		{
+			"name": "gInPrice",
+			"caption": "进价",
+			"sort": 1,
+			"top":100,
+			"right":40,
+			"width": 140,
+			"type": "money",
+			"align": "right",
+			"font":{
+				"color": [255,0,0]
+			},
+			"format":"进价：￥%n"
+		},
+		{
+			"name": "gDescription",
+			"caption": "描述",
+			"sort": 1,
+			"left":140,
+			"width": 240,
+			"type": "memo",
+			"align": "left",
+			"height":100,
+			"query": 1
+		},
+		{
+			"name": "gDescription as btn0",
+			"type": "button",
+			"caption": "",
+			"dwattr":"type='text' icon='el-icon-phone'",
+			"font":{
+				"size":17,
+				"color": [200]
+			},
+			"top":76,
+			"right":11,
+			"width": 20,
+			"height":20,
+			"query": 1
+		}
+	]
+}

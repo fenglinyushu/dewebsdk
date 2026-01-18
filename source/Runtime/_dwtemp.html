@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Delphi Web Framework</title>
+<title>DeWeb</title>
 </head>
 <body  style="top:0px;background-color:#FFFFFF;">
 <div id="_loading" style="background-color:#fff;z-index:990;display: flex;justify-content: center;left:0;top:0;height:100%;width:100%;position:absolute;">
@@ -22,159 +22,106 @@
 <link rel="stylesheet" type="text/css" href="dist/_deweb/deweb.css" />
 <!--[style_start]-->
 <script src="dist/_zepto/zepto.min.js"></script>
-<script src="dist/_treeselect/vue-treeselect.umd.min.js"></script>
-<link rel="stylesheet" href="dist/_treeselect/vue-treeselect.min.css">
-<script>Vue.component('treeselect', VueTreeselect.Treeselect)</script>
-<style id="sm__bk">.el-menu-item.is-active {background-color: #333A40 !important;}</style>
-<style id="sm__hover">.el-submenu__title:hover{background-color: #434A50 !important;} .el-menu-item:hover { background-color: #434A50 !important;}</style>
 <!--[style_end]-->
 <!--[app_start]-->
-<div id="app" class="dwnocusor" style="position:absolute;overflow:hidden;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_2__wid,height:Form1_2__hei}" >
+<div id="app" class="dwnocusor" style="position:absolute;overflow-x:hidden;overflow-y:auto;left:0;top:0;right:0;bottom:0;margin: 0 auto;background-color:#FFFFFF" :style="{width:Form1_3__wid,height:Form1_3__hei}" >
 <div id="__dwloading" style="border-radius:10px;overflow:hidden;position:absolute;width:100px;height:100px;top:50%;left:50%;transform: translate(-50%,-50%);z-index:50;pointer-events:none;" v-loading="dwloading" :element-loading-text="dwloading__cap"></div>
 <iframe id="id_iframe" name="upload_iframe" style="display:none;"></iframe>
 <label style="cursor: pointer;display: block;width:0px;"><input id="deweb__inp" type="FILE" name="file" placeholder="please upload" :accept="dw_upload__acc" style="display:none;cursor:pointer;" @change=dwInputSubmit(clientid,dw_upload__dir) ></input></label>
-<div id="pc">
-<div id="pt">
-<div id="lt">Delphi Web Framework</div>
-<el-button id="be"></el-button>
-<el-button id="btthm">theme</el-button>
-<el-button id="btlogout">Logout</el-button>
-<el-badge class="item" id="pnb" :value="pnb__cap" :type="pnb__typ" v-show="pnb__vis" :style="{left:pnb__lef,top:pnb__top,width:pnb__wid,height:pnb__hei}" style="position:absolute;">
-<div id="lauser">superadmin</div>
-</el-badge>
+<div id="panel1" ref="panel1" v-show="panel1__vis" :disabled="panel1__dis" :style="{left:panel1__lef,top:panel1__top,width:panel1__wid,height:panel1__hei}" style="position:absolute;backgroundColor:#F0F0F0;overflow-y:auto;">
+<div id="pdemo1">
+<div id="ldemo1">1</div>
 </div>
-<el-tabs id="cp" ref="cp__ref" v-show="cp__vis" :disabled="cp__dis" v-model="cp__apg"type="border-card" :style="{left:cp__lef,top:cp__top,width:cp__wid,height:cp__hei}" style="position:absolute;font-size:14px;    border-top: solid 1px #e1e1e1;box-sizing: border-box;" @tab-click="cp__tabclick($event)" @edit="function(targetName,action){var data = new String(targetName+','+action);dwevent(this.$event,'CP',data,'onenddock','594264')}">
-<el-tab-pane name="ts_tform_sys_home" style="">
-<span slot="label"><i class="el-icon-s-home"></i> {{ts_tform_sys_home__cap}}</span>
-</el-tab-pane>
-<div :style="{width:cp__wid,height:cp__hei}" style="position:absolute;left:0px;top:0px;">
-<el-main id="ts_tform_sys_home" v-show="cp__apg=='ts_tform_sys_home'" :disabled="ts_tform_sys_home__dis" :style="{backgroundColor:ts_tform_sys_home__col,left:ts_tform_sys_home__lef,top:ts_tform_sys_home__top,width:ts_tform_sys_home__wid,height:ts_tform_sys_home__hei}" style="position:absolute;overflow:hidden;">
-<el-main id="f_16" v-show="f_16__vis" :style="{backgroundColor:f_16__col,left:f_16__lef,top:f_16__top,width:f_16__wid,height:f_16__hei}" style="position:relative;overflow:hidden;">
-<div id="f_16__p0">
-<div id="f_16__p0c">
-<div id="f_16__lawelcome">Hi! superadmin!</div>
-<div id="f_16__laintra"><b>dwFrame</b> <br>Delphi Web Framework</div>
+<div id="pdemo2">
+<div id="ldemo2">2</div>
 </div>
-<div id="f_16__p0l">
-<el-image id="f_16__imavatar" :src="f_16__imavatar__src" fit="cover" v-show="f_16__imavatar__vis" :disabled="f_16__imavatar__dis" :style="{left:f_16__imavatar__lef,top:f_16__imavatar__top,width:f_16__imavatar__wid,height:f_16__imavatar__hei}" style="position:absolute;border-radius:50%;border:solid 2px #ddd;">
-</el-image>
-<div id="f_16__larole">superadmin</div>
+<div id="pdemo3">
+<div id="ldemo3">3</div>
+</div>
+<div id="pdemo4">
+<div id="ldemo4">4</div>
+</div>
+<div id="pdemo5">
+<div id="ldemo5">5</div>
+</div>
+<div id="pdemo6">
+<div id="ldemo6">6</div>
+</div>
+<div id="pdemo7">
+<div id="ldemo7">7</div>
+</div>
+<div id="pdemo8">
+<div id="ldemo8">8</div>
+</div>
+<div id="pdemo9">
+<div id="ldemo9">9</div>
+</div>
+<div id="pdemo10">
+<div id="ldemo10">10</div>
+</div>
+<div id="pdemo11">
+<div id="ldemo11">11</div>
+</div>
+<div id="pdemo12">
+<div id="ldemo12">12</div>
+</div>
+<div id="pdemo13">
+<div id="ldemo13">13</div>
+</div>
+<div id="pdemo14">
+<div id="ldemo14">14</div>
+</div>
+<div id="pdemo15">
+<div id="ldemo15">15</div>
+</div>
+<div id="pdemo16">
+<div id="ldemo16">16</div>
+</div>
+<div id="pdemo17">
+<div id="ldemo17">17</div>
+</div>
+<div id="pdemo18">
+<div id="ldemo18">18</div>
+</div>
+<div id="pdemo19">
+<div id="ldemo19">19</div>
+</div>
+<div id="pdemo20">
+<div id="ldemo20">20</div>
+</div>
+<div id="pdemo21">
+<div id="ldemo21">21</div>
+</div>
+<div id="pdemo22">
+<div id="ldemo22">22</div>
+</div>
+<div id="pdemo23">
+<div id="ldemo23">23</div>
+</div>
+<div id="pdemo24">
+<div id="ldemo24">24</div>
+</div>
+<div id="pdemo25">
+<div id="ldemo25">25</div>
+</div>
+<div id="pdemo26">
+<div id="ldemo26">26</div>
+</div>
+<div id="pdemo27">
+<div id="ldemo27">27</div>
+</div>
+<div id="pdemo28">
+<div id="ldemo28">28</div>
+</div>
+<div id="pdemo29">
+<div id="ldemo29">29</div>
+</div>
+<div id="pdemo30">
+<div id="ldemo30">30</div>
 </div>
 </div>
-<el-main id="f_16__fp1" v-show="f_16__fp1__vis" :disabled="f_16__fp1__dis" :style="{backgroundColor:f_16__fp1__col,color:f_16__fp1__fcl,'font-size':f_16__fp1__fsz,'font-family':f_16__fp1__ffm,'font-weight':f_16__fp1__fwg,'font-style':f_16__fp1__fsl,'text-decoration':f_16__fp1__ftd,transform:'rotateZ({f_16__fp1__rtz}deg)',left:f_16__fp1__lef,top:f_16__fp1__top,width:f_16__fp1__wid,height:f_16__fp1__hei}" style="position:absolute;overflow:hidden;">
-<el-main id="f_16__pnm0" v-show="f_16__pnm0__vis" :disabled="f_16__pnm0__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm0__col,color:f_16__pnm0__fcl,'font-size':f_16__pnm0__fsz,'font-family':f_16__pnm0__ffm,'font-weight':f_16__pnm0__fwg,'font-style':f_16__pnm0__fsl,'text-decoration':f_16__pnm0__ftd,left:f_16__pnm0__lef,top:f_16__pnm0__top,width:f_16__pnm0__wid,height:f_16__pnm0__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM0','0','onclick','397572')">
-<div v-html="f_16__pnm0__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm0__lbt,height:f_16__pnm0__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm0__cap}}</div>
-<el-image :src="f_16__pnm0__src" fit="none" :style="{left:0,top:f_16__pnm0__imt,height:f_16__pnm0__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm0__wid,height:f_16__pnm0__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM0','0','onclick','397572')"></div>
-</el-main>
-<el-main id="f_16__pnm1" v-show="f_16__pnm1__vis" :disabled="f_16__pnm1__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm1__col,color:f_16__pnm1__fcl,'font-size':f_16__pnm1__fsz,'font-family':f_16__pnm1__ffm,'font-weight':f_16__pnm1__fwg,'font-style':f_16__pnm1__fsl,'text-decoration':f_16__pnm1__ftd,left:f_16__pnm1__lef,top:f_16__pnm1__top,width:f_16__pnm1__wid,height:f_16__pnm1__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM1','0','onclick','397572')">
-<div v-html="f_16__pnm1__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm1__lbt,height:f_16__pnm1__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm1__cap}}</div>
-<el-image :src="f_16__pnm1__src" fit="none" :style="{left:0,top:f_16__pnm1__imt,height:f_16__pnm1__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm1__wid,height:f_16__pnm1__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM1','0','onclick','397572')"></div>
-</el-main>
-<el-main id="f_16__pnm2" v-show="f_16__pnm2__vis" :disabled="f_16__pnm2__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm2__col,color:f_16__pnm2__fcl,'font-size':f_16__pnm2__fsz,'font-family':f_16__pnm2__ffm,'font-weight':f_16__pnm2__fwg,'font-style':f_16__pnm2__fsl,'text-decoration':f_16__pnm2__ftd,left:f_16__pnm2__lef,top:f_16__pnm2__top,width:f_16__pnm2__wid,height:f_16__pnm2__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM2','0','onclick','397572')">
-<div v-html="f_16__pnm2__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm2__lbt,height:f_16__pnm2__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm2__cap}}</div>
-<el-image :src="f_16__pnm2__src" fit="none" :style="{left:0,top:f_16__pnm2__imt,height:f_16__pnm2__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm2__wid,height:f_16__pnm2__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM2','0','onclick','397572')"></div>
-</el-main>
-<el-main id="f_16__pnm3" v-show="f_16__pnm3__vis" :disabled="f_16__pnm3__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm3__col,color:f_16__pnm3__fcl,'font-size':f_16__pnm3__fsz,'font-family':f_16__pnm3__ffm,'font-weight':f_16__pnm3__fwg,'font-style':f_16__pnm3__fsl,'text-decoration':f_16__pnm3__ftd,left:f_16__pnm3__lef,top:f_16__pnm3__top,width:f_16__pnm3__wid,height:f_16__pnm3__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM3','0','onclick','397572')">
-<div v-html="f_16__pnm3__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm3__lbt,height:f_16__pnm3__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm3__cap}}</div>
-<el-image :src="f_16__pnm3__src" fit="none" :style="{left:0,top:f_16__pnm3__imt,height:f_16__pnm3__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm3__wid,height:f_16__pnm3__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM3','0','onclick','397572')"></div>
-</el-main>
-<el-main id="f_16__pnm4" v-show="f_16__pnm4__vis" :disabled="f_16__pnm4__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm4__col,color:f_16__pnm4__fcl,'font-size':f_16__pnm4__fsz,'font-family':f_16__pnm4__ffm,'font-weight':f_16__pnm4__fwg,'font-style':f_16__pnm4__fsl,'text-decoration':f_16__pnm4__ftd,left:f_16__pnm4__lef,top:f_16__pnm4__top,width:f_16__pnm4__wid,height:f_16__pnm4__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM4','0','onclick','397572')">
-<div v-html="f_16__pnm4__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm4__lbt,height:f_16__pnm4__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm4__cap}}</div>
-<el-image :src="f_16__pnm4__src" fit="none" :style="{left:0,top:f_16__pnm4__imt,height:f_16__pnm4__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm4__wid,height:f_16__pnm4__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM4','0','onclick','397572')"></div>
-</el-main>
-<el-main id="f_16__pnm5" v-show="f_16__pnm5__vis" :disabled="f_16__pnm5__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm5__col,color:f_16__pnm5__fcl,'font-size':f_16__pnm5__fsz,'font-family':f_16__pnm5__ffm,'font-weight':f_16__pnm5__fwg,'font-style':f_16__pnm5__fsl,'text-decoration':f_16__pnm5__ftd,left:f_16__pnm5__lef,top:f_16__pnm5__top,width:f_16__pnm5__wid,height:f_16__pnm5__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM5','0','onclick','397572')">
-<div v-html="f_16__pnm5__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm5__lbt,height:f_16__pnm5__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm5__cap}}</div>
-<el-image :src="f_16__pnm5__src" fit="none" :style="{left:0,top:f_16__pnm5__imt,height:f_16__pnm5__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm5__wid,height:f_16__pnm5__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM5','0','onclick','397572')"></div>
-</el-main>
-<el-main id="f_16__pnm6" v-show="f_16__pnm6__vis" :disabled="f_16__pnm6__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm6__col,color:f_16__pnm6__fcl,'font-size':f_16__pnm6__fsz,'font-family':f_16__pnm6__ffm,'font-weight':f_16__pnm6__fwg,'font-style':f_16__pnm6__fsl,'text-decoration':f_16__pnm6__ftd,left:f_16__pnm6__lef,top:f_16__pnm6__top,width:f_16__pnm6__wid,height:f_16__pnm6__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM6','0','onclick','397572')">
-<div v-html="f_16__pnm6__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm6__lbt,height:f_16__pnm6__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm6__cap}}</div>
-<el-image :src="f_16__pnm6__src" fit="none" :style="{left:0,top:f_16__pnm6__imt,height:f_16__pnm6__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm6__wid,height:f_16__pnm6__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM6','0','onclick','397572')"></div>
-</el-main>
-<el-main id="f_16__pnm7" v-show="f_16__pnm7__vis" :disabled="f_16__pnm7__dis" onmouseover="this.style.backgroundColor='#edeaea'; this.style.color='#2c3e50'" onmouseout="this.style.backgroundColor='white'; this.style.color='#808080'" :style="{backgroundColor:f_16__pnm7__col,color:f_16__pnm7__fcl,'font-size':f_16__pnm7__fsz,'font-family':f_16__pnm7__ffm,'font-weight':f_16__pnm7__fwg,'font-style':f_16__pnm7__fsl,'text-decoration':f_16__pnm7__ftd,left:f_16__pnm7__lef,top:f_16__pnm7__top,width:f_16__pnm7__wid,height:f_16__pnm7__hei}" style="position:absolute;overflow:hidden;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:5px;border:solid 1px #eee;cursor: pointer;" @click.native="dwevent($event,'PnM7','0','onclick','397572')">
-<div v-html="f_16__pnm7__cap" class="dwdisselect" :style="{left:0,top:f_16__pnm7__lbt,height:f_16__pnm7__lbh}" style="position:absolute;backgroundColor:transparent;overflow:hidden;width:100%;text-align:center;">{{f_16__pnm7__cap}}</div>
-<el-image :src="f_16__pnm7__src" fit="none" :style="{left:0,top:f_16__pnm7__imt,height:f_16__pnm7__imh}" style="position:absolute;width:100%;"></el-image>
-<div :style="{width:f_16__pnm7__wid,height:f_16__pnm7__hei}" style="position:absolute;caret-color: transparent;backgroundColor:transparent,cursor: pointer;" @click="dwevent($event,'PnM7','0','onclick','397572')"></div>
-</el-main>
-</el-main>
-<el-main id="f_16__fp2" v-show="f_16__fp2__vis" :disabled="f_16__fp2__dis" :style="{backgroundColor:f_16__fp2__col,color:f_16__fp2__fcl,'font-size':f_16__fp2__fsz,'font-family':f_16__fp2__ffm,'font-weight':f_16__fp2__fwg,'font-style':f_16__fp2__fsl,'text-decoration':f_16__fp2__ftd,transform:'rotateZ({f_16__fp2__rtz}deg)',left:f_16__fp2__lef,top:f_16__fp2__top,width:f_16__fp2__wid,height:f_16__fp2__hei}" style="position:absolute;overflow:hidden;">
-<div id="f_16__pnd0">
-<div id="f_16__lat0">Data</div>
-<div id="f_16__lav0">2312</div>
-</div>
-<div id="f_16__pnd1">
-<div id="f_16__lat1">Value</div>
-<div id="f_16__lav1">3,206.00</div>
-</div>
-<div id="f_16__pnd2">
-<div id="f_16__lat2">Summary</div>
-<div id="f_16__lav2">283,216.00</div>
-</div>
-</el-main>
-</el-main>
-</el-main>
-</div>
-</el-tabs>
-</div>
-<div id="pl">
-<div unique-opened v-show="sm__vis" :disabled="sm__dis" :style='{left:sm__lef,top:sm__top,width:sm__wid,height:sm__hei,background:sm__bgc}' style="position:absolute;background:#314157;">
-<el-scrollbar style="height:100%;width:100%">
-<el-menu id="sm" :default-active="sm__act" :default-openeds="sm__opd" class="el-menu-demo" :background-color="sm__bgc" :text-color="sm__txc" :active-text-color="sm__atc" :collapse="sm__cps" :collapse-transition="false" unique-opened style="left:0;top:0;width:99%;height:100%;30px" @select=";dwevent($event,'sm','val','onclick','594264')">
-<el-menu-item v-show="mihome__vis" :disabled="mihome__dis" index="0"><i class="el-icon-s-home"></i><span slot="title">Home</span></el-menu-item>
-<el-submenu v-show="demo1__vis" :disabled="demo1__dis" index="1"><template slot="title">
-<i class="el-icon-s-opportunity"></i>
-<span>Demo</span></template>
-<el-menu-item index="1-0" v-show="hello1__vis" :disabled="hello1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-tickets"></i><span slot="title">Hello</span></el-menu-item>
-<el-menu-item index="1-1" v-show="databasehello1__vis" :disabled="databasehello1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-coin"></i><span slot="title">DBHello</span></el-menu-item>
-<el-menu-item index="1-2" v-show="n3__vis" :disabled="n3__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-monitor"></i><span slot="title">FullScreen(Mobile)</span></el-menu-item>
-<el-menu-item index="1-3" v-show="n4__vis" :disabled="n4__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-s-check"></i><span slot="title">HideTitle(Mobile)</span></el-menu-item>
-<el-menu-item index="1-4" v-show="n5__vis" :disabled="n5__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-mobile"></i><span slot="title">HideNav(Mobile)</span></el-menu-item>
-</el-submenu>
-<el-submenu v-show="crud1__vis" :disabled="crud1__dis" index="2"><template slot="title">
-<i class="el-icon-s-promotion"></i>
-<span>Crud</span></template>
-<el-menu-item index="2-0" v-show="crud2__vis" :disabled="crud2__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-monitor"></i><span slot="title">Normal</span></el-menu-item>
-<el-menu-item index="2-1" v-show="auto1__vis" :disabled="auto1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-s-promotion"></i><span slot="title">Auto</span></el-menu-item>
-<el-menu-item index="2-2" v-show="masterslave1__vis" :disabled="masterslave1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-receiving"></i><span slot="title">Main-Sub</span></el-menu-item>
-<el-menu-item index="2-3" v-show="mainsubsub1__vis" :disabled="mainsubsub1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-film"></i><span slot="title">Main-Sub-Sub</span></el-menu-item>
-<el-menu-item index="2-4" v-show="custombutton1__vis" :disabled="custombutton1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-mouse"></i><span slot="title">CustomButton</span></el-menu-item>
-<el-menu-item index="2-5" v-show="cellstyle1__vis" :disabled="cellstyle1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-coordinate"></i><span slot="title">CustomStyle</span></el-menu-item>
-</el-submenu>
-<el-submenu v-show="base1__vis" :disabled="base1__dis" index="3"><template slot="title">
-<i class="el-icon-menu"></i>
-<span>System</span></template>
-<el-menu-item index="3-0" v-show="user1__vis" :disabled="user1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-user-solid"></i><span slot="title">User</span></el-menu-item>
-<el-menu-item index="3-1" v-show="n7__vis" :disabled="n7__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-news"></i><span slot="title">Role</span></el-menu-item>
-<el-menu-item index="3-2" v-show="department1__vis" :disabled="department1__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-takeaway-box"></i><span slot="title">Department</span></el-menu-item>
-<el-menu-item index="3-3" v-show="mu3__vis" :disabled="mu3__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-receiving"></i><span slot="title">Password</span></el-menu-item>
-<el-menu-item index="3-4" v-show="n36__vis" :disabled="n36__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-date"></i><span slot="title">Log</span></el-menu-item>
-<el-menu-item index="3-5" v-show="n16__vis" :disabled="n16__dis" style="min-height:50px;line-height:45px;"><i class="el-icon-thumb"></i><span slot="title">QuickButton</span></el-menu-item>
-</el-submenu>
-<el-menu-item v-show="n1__vis" :disabled="n1__dis" index="4"><i class="el-icon-circle-close"></i><span slot="title">Me</span></el-menu-item>
-
-</el-menu>
-</el-scrollbar>
-</div>
-<div id="ll">.D.W.F.</div>
-</div>
-<div id="pnh__cfm" v-show="pnh__vis" style="position:fixed;left:0;top:0;right:0;bottom:0;background: rgba(0,0,0,0);z-index:9;" @click="pnh__bkclick()"></div><el-main id="pnh" v-show="pnh__vis" :disabled="pnh__dis" :style="{backgroundColor:pnh__col,color:pnh__fcl,'font-size':pnh__fsz,'font-family':pnh__ffm,'font-weight':pnh__fwg,'font-style':pnh__fsl,'text-decoration':pnh__ftd,transform:'rotateZ({pnh__rtz}deg)',left:pnh__lef,top:pnh__top,width:pnh__wid,height:pnh__hei}" style="position:absolute;overflow:hidden;z-index:10;margin: 0 auto;border-radius: 2px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius:3px;">
-<el-button id="bt0">默认</el-button>
-<el-button id="bt1">若依</el-button>
-<el-button id="bt2">腾讯云</el-button>
-<el-button id="bt3">蓝色清爽</el-button>
-<el-button id="bt4">红色激情</el-button>
-<el-button id="bt5">智能商业</el-button>
-<el-button id="bt6">后台管理</el-button>
-<el-button id="bt7">bootStrap</el-button>
-</el-main>
-<div id="pnlogout__cfm" v-show="pnlogout__vis" style="position:fixed;left:0;top:0;right:0;bottom:0;background: rgba(0,0,0,0.5);z-index:9;"><el-main id="pnlogout" v-show="pnlogout__vis" :disabled="pnlogout__dis" :style="{backgroundColor:pnlogout__col,color:pnlogout__fcl,'font-size':pnlogout__fsz,'font-family':pnlogout__ffm,'font-weight':pnlogout__fwg,'font-style':pnlogout__fsl,'text-decoration':pnlogout__ftd,top:pnlogout__top,width:pnlogout__wid,height:pnlogout__hei}" style="position:relative;overflow:hidden;margin: 0 auto;border-radius:10px;border-radius:8px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;"><a v-html=pnlogout__cap style="display: flex; align-items: center;height:130px;width:80%;padding-left: 10%;"></a><el-button style="border:0;border-top:solid 1px #DCDFE6;border-right:solid 1px #DCDFE6;border-radius:0;left:0;bottom:0;height:50px;width:50%;" @click="pnlogout__cancelclick">{{pnlogout__can}}</el-button><el-button type="primary" style="border:0;border-top:solid 1px #DCDFE6;border-radius:0;left:50%;bottom:0;height:50px;width:50%;" @click="pnlogout__okclick">{{pnlogout__ok}}</el-button>
-</el-main>
+<div id="pmtitle">
+<div id="ltitle">无尽循环...</div>
 </div>
 <el-dialog :title="input_query_caption" :visible.sync="input_query_visible" >
 <el-form style="width:90%;padding-left:5%;">
@@ -251,314 +198,18 @@ el: '#app',
 /*[data_start]*/data: function () {
 return {
 image_preview_list:[],
-name:"Form1_2",
-Form1_2__top:"1px",
-Form1_2__wid:"1200px",
-Form1_2__hei:"789px",
-pnb__lef:"748px",
-pnb__top:"10px",
-pnb__wid:"101px",
-pnb__hei:"24px",
-pnb__vis:true,
-pnb__cap:"",
-pnb__typ:"danger",
-f_16__imavatar__lef:"20px",
-f_16__imavatar__top:"20px",
-f_16__imavatar__wid:"60px",
-f_16__imavatar__hei:"60px",
-f_16__imavatar__vis:true,
-f_16__imavatar__dis:false,
-f_16__imavatar__src:"media/system/dwFrame/head/0.jpg",
-f_16__pnm0__lef:"10px",
-f_16__pnm0__top:"10px",
-f_16__pnm0__wid:"102px",
-f_16__pnm0__hei:"90px",
-f_16__pnm0__vis:true,
-f_16__pnm0__dis:false,
-f_16__pnm0__imt:"16px",
-f_16__pnm0__imh:"45px",
-f_16__pnm0__lbt:"61px",
-f_16__pnm0__lbh:"26px",
-f_16__pnm0__src:"media/images/32/a (15).png",
-f_16__pnm0__cap:"Hello",
-f_16__pnm0__col:"RGB(255,255,255,1.0)",
-f_16__pnm0__fcl:"#808080",
-f_16__pnm0__fsz:"13px",
-f_16__pnm0__ffm:"思源黑体 CN",
-f_16__pnm0__fwg:"normal",
-f_16__pnm0__fsl:"normal",
-f_16__pnm0__ftd:"none",
-f_16__pnm1__lef:"132px",
-f_16__pnm1__top:"10px",
-f_16__pnm1__wid:"102px",
-f_16__pnm1__hei:"90px",
-f_16__pnm1__vis:true,
-f_16__pnm1__dis:false,
-f_16__pnm1__imt:"16px",
-f_16__pnm1__imh:"45px",
-f_16__pnm1__lbt:"61px",
-f_16__pnm1__lbh:"26px",
-f_16__pnm1__src:"media/images/32/a (68).png",
-f_16__pnm1__cap:"DBHello",
-f_16__pnm1__col:"RGB(255,255,255,1.0)",
-f_16__pnm1__fcl:"#808080",
-f_16__pnm1__fsz:"13px",
-f_16__pnm1__ffm:"思源黑体 CN",
-f_16__pnm1__fwg:"normal",
-f_16__pnm1__fsl:"normal",
-f_16__pnm1__ftd:"none",
-f_16__pnm2__lef:"254px",
-f_16__pnm2__top:"10px",
-f_16__pnm2__wid:"102px",
-f_16__pnm2__hei:"90px",
-f_16__pnm2__vis:true,
-f_16__pnm2__dis:false,
-f_16__pnm2__imt:"16px",
-f_16__pnm2__imh:"45px",
-f_16__pnm2__lbt:"61px",
-f_16__pnm2__lbh:"26px",
-f_16__pnm2__src:"media/images/32/a (26).png",
-f_16__pnm2__cap:"FullScreen",
-f_16__pnm2__col:"RGB(255,255,255,1.0)",
-f_16__pnm2__fcl:"#808080",
-f_16__pnm2__fsz:"13px",
-f_16__pnm2__ffm:"思源黑体 CN",
-f_16__pnm2__fwg:"normal",
-f_16__pnm2__fsl:"normal",
-f_16__pnm2__ftd:"none",
-f_16__pnm3__lef:"376px",
-f_16__pnm3__top:"10px",
-f_16__pnm3__wid:"102px",
-f_16__pnm3__hei:"90px",
-f_16__pnm3__vis:true,
-f_16__pnm3__dis:false,
-f_16__pnm3__imt:"16px",
-f_16__pnm3__imh:"45px",
-f_16__pnm3__lbt:"61px",
-f_16__pnm3__lbh:"26px",
-f_16__pnm3__src:"media/images/32/a (70).png",
-f_16__pnm3__cap:"HideTitle",
-f_16__pnm3__col:"RGB(255,255,255,1.0)",
-f_16__pnm3__fcl:"#808080",
-f_16__pnm3__fsz:"13px",
-f_16__pnm3__ffm:"思源黑体 CN",
-f_16__pnm3__fwg:"normal",
-f_16__pnm3__fsl:"normal",
-f_16__pnm3__ftd:"none",
-f_16__pnm4__lef:"498px",
-f_16__pnm4__top:"10px",
-f_16__pnm4__wid:"102px",
-f_16__pnm4__hei:"90px",
-f_16__pnm4__vis:true,
-f_16__pnm4__dis:false,
-f_16__pnm4__imt:"16px",
-f_16__pnm4__imh:"45px",
-f_16__pnm4__lbt:"61px",
-f_16__pnm4__lbh:"26px",
-f_16__pnm4__src:"media/images/32/a (28).png",
-f_16__pnm4__cap:"HideNav",
-f_16__pnm4__col:"RGB(255,255,255,1.0)",
-f_16__pnm4__fcl:"#808080",
-f_16__pnm4__fsz:"13px",
-f_16__pnm4__ffm:"思源黑体 CN",
-f_16__pnm4__fwg:"normal",
-f_16__pnm4__fsl:"normal",
-f_16__pnm4__ftd:"none",
-f_16__pnm5__lef:"620px",
-f_16__pnm5__top:"10px",
-f_16__pnm5__wid:"102px",
-f_16__pnm5__hei:"90px",
-f_16__pnm5__vis:true,
-f_16__pnm5__dis:false,
-f_16__pnm5__imt:"16px",
-f_16__pnm5__imh:"45px",
-f_16__pnm5__lbt:"61px",
-f_16__pnm5__lbh:"26px",
-f_16__pnm5__src:"media/images/32/a (26).png",
-f_16__pnm5__cap:"Normal",
-f_16__pnm5__col:"RGB(255,255,255,1.0)",
-f_16__pnm5__fcl:"#808080",
-f_16__pnm5__fsz:"13px",
-f_16__pnm5__ffm:"思源黑体 CN",
-f_16__pnm5__fwg:"normal",
-f_16__pnm5__fsl:"normal",
-f_16__pnm5__ftd:"none",
-f_16__pnm6__lef:"742px",
-f_16__pnm6__top:"10px",
-f_16__pnm6__wid:"102px",
-f_16__pnm6__hei:"90px",
-f_16__pnm6__vis:true,
-f_16__pnm6__dis:false,
-f_16__pnm6__imt:"16px",
-f_16__pnm6__imh:"45px",
-f_16__pnm6__lbt:"61px",
-f_16__pnm6__lbh:"26px",
-f_16__pnm6__src:"media/images/32/a (55).png",
-f_16__pnm6__cap:"Auto",
-f_16__pnm6__col:"RGB(255,255,255,1.0)",
-f_16__pnm6__fcl:"#808080",
-f_16__pnm6__fsz:"13px",
-f_16__pnm6__ffm:"思源黑体 CN",
-f_16__pnm6__fwg:"normal",
-f_16__pnm6__fsl:"normal",
-f_16__pnm6__ftd:"none",
-f_16__pnm7__lef:"864px",
-f_16__pnm7__top:"10px",
-f_16__pnm7__wid:"105px",
-f_16__pnm7__hei:"90px",
-f_16__pnm7__vis:true,
-f_16__pnm7__dis:false,
-f_16__pnm7__imt:"16px",
-f_16__pnm7__imh:"45px",
-f_16__pnm7__lbt:"61px",
-f_16__pnm7__lbh:"26px",
-f_16__pnm7__src:"media/images/32/a (45).png",
-f_16__pnm7__cap:"Main-Sub",
-f_16__pnm7__col:"RGB(255,255,255,1.0)",
-f_16__pnm7__fcl:"#808080",
-f_16__pnm7__fsz:"13px",
-f_16__pnm7__ffm:"思源黑体 CN",
-f_16__pnm7__fwg:"normal",
-f_16__pnm7__fsl:"normal",
-f_16__pnm7__ftd:"none",
-f_16__fp1__lef:"10px",
-f_16__fp1__top:"160px",
-f_16__fp1__wid:"980px",
-f_16__fp1__hei:"110px",
-f_16__fp1__vis:true,
-f_16__fp1__dis:false,
-f_16__fp1__col:"rgba(0,0,0,0)",
-f_16__fp1__rtz:30,
-f_16__fp1__fcl:"#808080",
-f_16__fp1__fsz:"13px",
-f_16__fp1__ffm:"思源黑体 CN",
-f_16__fp1__fwg:"normal",
-f_16__fp1__fsl:"normal",
-f_16__fp1__ftd:"none",
-f_16__fp2__lef:"10px",
-f_16__fp2__top:"275px",
-f_16__fp2__wid:"980px",
-f_16__fp2__hei:"130px",
-f_16__fp2__vis:true,
-f_16__fp2__dis:false,
-f_16__fp2__col:"rgba(0,0,0,0)",
-f_16__fp2__rtz:30,
-f_16__fp2__fcl:"#000000",
-f_16__fp2__fsz:"15px",
-f_16__fp2__ffm:"思源黑体 CN",
-f_16__fp2__fwg:"normal",
-f_16__fp2__fsl:"normal",
-f_16__fp2__ftd:"none",
-f_16__lef:"0px",
-f_16__top:"0px",
-f_16__wid:"1000px",
-f_16__hei:"709px",
-f_16__vis:true,
-f_16__col:"RGB(255,255,255,1.0)",
-ts_tform_sys_home__lef:"0px",
-ts_tform_sys_home__top:"0px",
-ts_tform_sys_home__wid:"1000px",
-ts_tform_sys_home__hei:"709px",
-ts_tform_sys_home__vis:true,
-ts_tform_sys_home__dis:false,
-ts_tform_sys_home__col:"RGB(240,240,240,1.0)",
-ts_tform_sys_home__cap:"HOME",
-cp__lef:"0px",
-cp__top:"40px",
-cp__wid:"1000px",
-cp__hei:"749px",
-cp__vis:true,
-cp__dis:false,
-cp__apg:"ts_tform_sys_home",
-sm__lef:"0px",
-sm__top:"41px",
-sm__wid:"200px",
-sm__hei:"748px",
-sm__vis:true,
-sm__dis:false,
-sm__cps:false,
-sm__bgc:"#314157",
-sm__txc:"#FFFFFF",
-sm__atc:"#ffd04b",
-sm__act:"0",
-sm__opd:[],
-mihome__vis:true,
-mihome__dis:false,
-demo1__vis:true,
-demo1__dis:false,
-hello1__vis:true,
-hello1__dis:false,
-databasehello1__vis:true,
-databasehello1__dis:false,
-n3__vis:true,
-n3__dis:false,
-n4__vis:true,
-n4__dis:false,
-n5__vis:true,
-n5__dis:false,
-crud1__vis:true,
-crud1__dis:false,
-crud2__vis:true,
-crud2__dis:false,
-auto1__vis:true,
-auto1__dis:false,
-masterslave1__vis:true,
-masterslave1__dis:false,
-mainsubsub1__vis:true,
-mainsubsub1__dis:false,
-custombutton1__vis:true,
-custombutton1__dis:false,
-cellstyle1__vis:true,
-cellstyle1__dis:false,
-base1__vis:true,
-base1__dis:false,
-user1__vis:true,
-user1__dis:false,
-n7__vis:true,
-n7__dis:false,
-department1__vis:true,
-department1__dis:false,
-mu3__vis:true,
-mu3__dis:false,
-n36__vis:true,
-n36__dis:false,
-n16__vis:true,
-n16__dis:false,
-n1__vis:true,
-n1__dis:false,
-pnh__lef:"1007px",
-pnh__top:"46px",
-pnh__wid:"185px",
-pnh__hei:"244px",
-pnh__vis:false,
-pnh__dis:false,
-pnh__col:"RGB(222,222,222,1.0)",
-pnh__rtz:30,
-pnh__fcl:"#000000",
-pnh__fsz:"15px",
-pnh__ffm:"PingFang",
-pnh__fwg:"normal",
-pnh__fsl:"normal",
-pnh__ftd:"none",
-pnlogout__lef:"816px",
-pnlogout__top:"200px",
-pnlogout__wid:"320px",
-pnlogout__hei:"180px",
-pnlogout__vis:false,
-pnlogout__dis:false,
-pnlogout__col:"RGB(255,255,255,1.0)",
-pnlogout__cap:"Are you sure you want to log out?",
-pnlogout__can:"Cancel",
-pnlogout__ok:"OK",
-pnlogout__fcl:"#808080",
-pnlogout__fsz:"14px",
-pnlogout__ffm:"微软雅黑",
-pnlogout__fwg:"normal",
-pnlogout__fsl:"normal",
-pnlogout__ftd:"none",
-ts__dis:false,
-ts__int:60000,
-ts__val:0,
+name:"Form1_3",
+Form1_3__top:"0px",
+Form1_3__wid:"400px",
+Form1_3__hei:"603px",
+panel1__lef:"0px",
+panel1__top:"50px",
+panel1__wid:"400px",
+panel1__hei:"553px",
+panel1__vis:true,
+panel1__dis:false,
+panel1__typ:"",
+panel1__ost:0,
 input_query_visible:false,
 input_query_caption:"Input Query",
 input_query_inputname:"new",
@@ -571,7 +222,7 @@ input_query_visible:false,
 version__istrial:false,
 dw_upload__acc:'',
 dw_upload__dir:'',
-clientid:594264,
+clientid:1445092,
 dw_upload__formhandle:0,
 dwloading:false,
 dwloading__cap:"loading ...",
@@ -581,7 +232,7 @@ shuntflag:0
 /*[mounted_start]*/mounted() {
 var me = this;
 window._this = this;
-axios.post('/deweb/post','{"m":"onmouseup","i":594264,"os":'+getOs()+',"canvasid":"'+getCanvasId()+'","fullurl":"'+escape(window.location.href)+'","ua":"'+navigator.userAgent+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"bodywidth":'+document.body.clientWidth+',"bodyheight":'+document.body.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"screenwidth":'+window.screen.width+',"screenheight":'+window.screen.height+',"availwidth":'+window.screen.availWidth+',"availheight":'+window.screen.availHeight+',"devicepixelratio":'+window.devicePixelRatio+',"orientation":"'+window.orientation+'"}',{headers:{shuntflag:0}})
+axios.post('/deweb/post','{"m":"onmouseup","i":1445092,"os":'+getOs()+',"canvasid":"'+getCanvasId()+'","fullurl":"'+escape(window.location.href)+'","ua":"'+navigator.userAgent+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"bodywidth":'+document.body.clientWidth+',"bodyheight":'+document.body.clientHeight+',"innerwidth":'+window.innerWidth+',"innerheight":'+window.innerHeight+',"screenwidth":'+window.screen.width+',"screenheight":'+window.screen.height+',"availwidth":'+window.screen.availWidth+',"availheight":'+window.screen.availHeight+',"devicepixelratio":'+window.devicePixelRatio+',"orientation":"'+window.orientation+'"}',{headers:{shuntflag:0}})
 .then(function (resp) {
     try {
         document.getElementById("_loading").style.display = "none";        if (resp.data.m == "update"){
@@ -589,14 +240,7 @@ axios.post('/deweb/post','{"m":"onmouseup","i":594264,"os":'+getOs()+',"canvasid
               stemp = stemp.replace(/this\./g, 'window._this\.');
               stemp = stemp.replace(/let _temp = this;/g, 'let _temp = window._this;');
               try{eval(stemp)} catch (error){console.log("error when eval(stemp):"+stemp)};
-              setTimeout(function(){
-                  axios.post('/deweb/post','{"m":"mounted","i":594264}')
-                  .then(
-                      resp =>{
-                          window._this.procResp(resp.data);
-                      }
-                  );
-              },10);} else if (resp.data.m == "recreate"){
+} else if (resp.data.m == "recreate"){
 document.write(resp.data.o);
 } else {console.log("resp.data error!");};
 } catch (error) {;
@@ -607,87 +251,149 @@ document.write(resp.data.o);
 console.log(" errro when onmouseup",error); document.getElementById("_loading").style.display = "none";
 });
 window.addEventListener('beforeunload', e => this.beforeunloadHandler(e));
-$("#lt").css({'font-family': '微软雅黑','font-size': '17px','font-weight': 'normal','font-style': 'normal','color': '#404040','text-decoration': 'normal','text-align': "left","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '66px','top': '3px','width': '575px','height': '34px'});
-$("#be span").html(``);
-$("#be").css({'font-family': '微软雅黑','font-size': '20px','font-weight': 'normal','font-style': 'normal','color': '#808080','text-decoration': 'normal','display': "block",'position': 'absolute','left': '0px','top': '0px','width': '46px','height': '40px'});
-$("#be").removeClass("el-button--primary").removeClass("el-button--success").removeClass("el-button--warning").removeClass("el-button--danger").removeClass("el-button--info").removeClass("el-button--text").addClass("el-button--text");
-$("#be").find("i:first-child").remove();var $leftIcon = $("<i>").addClass("el-icon-s-unfold").css("margin", "0 0px");$("#be").prepend($leftIcon);
-$("#be").on("click", function() {me.dwevent("","be","0","onclick","594264");});
-$("#btthm span").html(`theme`);
-$("#btthm").css({'font-family': '微软雅黑','font-size': '14px','font-weight': 'normal','font-style': 'normal','color': '#808080','text-decoration': 'normal','display': "block",'position': 'absolute','left': '930px','top': '10px','width': '60px','height': '24px'});
-$("#btthm").removeClass("el-button--primary").removeClass("el-button--success").removeClass("el-button--warning").removeClass("el-button--danger").removeClass("el-button--info").removeClass("el-button--text").addClass("el-button--text");
-$("#btthm").on("click", function() {me.dwevent("","btthm","0","onclick","594264");});
-$("#btlogout span").html(`Logout`);
-$("#btlogout").css({'font-family': '微软雅黑','font-size': '14px','font-weight': 'normal','font-style': 'normal','color': '#808080','text-decoration': 'normal','display': "block",'position': 'absolute','left': '869px','top': '10px','width': '60px','height': '24px'});
-$("#btlogout").removeClass("el-button--primary").removeClass("el-button--success").removeClass("el-button--warning").removeClass("el-button--danger").removeClass("el-button--info").removeClass("el-button--text").addClass("el-button--text");
-$("#btlogout").on("click", function() {me.dwevent("","btlogout","0","onclick","594264");});
-$("#lauser").css({'font-family': '微软雅黑','font-size': '14px','font-weight': 'normal','font-style': 'normal','color': '#808080','text-decoration': 'normal','text-align': "right","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '5px','top': '4px','width': '86px','height': '17px'});
-var curStyle = $("#lauser").attr('style');$("#lauser").attr("style", curStyle+"user-select: none;");
-$("#pt").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#F5F7FA','left': '0px','top': '0px','width': '1000px','height': '40px'});
-$("#f_16__lawelcome").css({'font-family': '思源黑体 CN','font-size': '18px','font-weight': 'normal','font-style': 'normal','color': '#FFFFFF','text-decoration': 'normal','text-align': "left","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '10px','top': '10px','width': '840px','height': '29px'});
-$("#f_16__laintra").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#FFFFFF','text-decoration': 'normal','text-align': "left",'position': 'absolute','left': '10px','top': '49px','width': '840px','height': '46px'});
-$("#f_16__p0c").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': 'rgba(0,0,0,0)','left': '100px','top': '0px','width': '860px','height': '130px'});
-$("#f_16__larole").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#FFFFFF','text-decoration': 'normal','text-align': "center",'position': 'absolute','left': '0px','top': '90px','width': '100px','height': '40px'});
-$("#f_16__p0l").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': 'rgba(0,0,0,0)','left': '0px','top': '0px','width': '100px','height': '130px'});
-$("#f_16__p0").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#F0F0F0','left': '20px','top': '20px','width': '960px','height': '130px'});
-$("#f_16__p0").css('border-radius', "7px");
-var curStyle = $("#f_16__p0").attr('style');$("#f_16__p0").attr("style", curStyle+"background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);");
-$("#f_16__lat0").css({'font-family': '思源黑体 CN','font-size': '14px','font-weight': 'bold','font-style': 'normal','color': '#C8C8C8','text-decoration': 'normal','text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '5px','width': '266px','height': '41px'});
-$("#f_16__lav0").css({'font-family': '思源黑体 CN','font-size': '14px','font-weight': 'bold','font-style': 'normal','color': '#C8C8C8','text-decoration': 'normal','text-align': "center",'position': 'absolute','left': '10px','top': '46px','width': '286px','height': '61px'});
-$("#f_16__pnd0").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#424B4F','left': '10px','top': '10px','width': '306px','height': '110px'});
-$("#f_16__pnd0").css('border-radius', "5px");
-$("#f_16__lat1").css({'font-family': '思源黑体 CN','font-size': '14px','font-weight': 'bold','font-style': 'normal','color': '#C8C8C8','text-decoration': 'normal','text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '0px','top': '5px','width': '306px','height': '41px'});
-$("#f_16__lav1").css({'font-family': '思源黑体 CN','font-size': '14px','font-weight': 'bold','font-style': 'normal','color': '#C8C8C8','text-decoration': 'normal','text-align': "center",'position': 'absolute','left': '10px','top': '46px','width': '286px','height': '61px'});
-$("#f_16__pnd1").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#785799','left': '336px','top': '10px','width': '306px','height': '110px'});
-$("#f_16__pnd1").css('border-radius', "5px");
-$("#f_16__lat2").css({'font-family': '思源黑体 CN','font-size': '14px','font-weight': 'bold','font-style': 'normal','color': '#C8C8C8','text-decoration': 'normal','text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '0px','top': '5px','width': '307px','height': '41px'});
-$("#f_16__lav2").css({'font-family': '思源黑体 CN','font-size': '14px','font-weight': 'bold','font-style': 'normal','color': '#C8C8C8','text-decoration': 'normal','text-align': "center",'position': 'absolute','left': '0px','top': '46px','width': '307px','height': '61px'});
-$("#f_16__pnd2").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#1786AA','left': '662px','top': '10px','width': '307px','height': '110px'});
-$("#f_16__pnd2").css('border-radius', "5px");
-this.$nextTick(() => {
+$("#ldemo1").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo1").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '10px','width': '370px','height': '90px'});
+$("#pdemo1").css('border-radius', "5px");
+$("#ldemo2").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo2").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '110px','width': '370px','height': '90px'});
+$("#pdemo2").css('border-radius', "5px");
+$("#ldemo3").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo3").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '210px','width': '370px','height': '90px'});
+$("#pdemo3").css('border-radius', "5px");
+$("#ldemo4").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo4").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '310px','width': '370px','height': '90px'});
+$("#pdemo4").css('border-radius', "5px");
+$("#ldemo5").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo5").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '410px','width': '370px','height': '90px'});
+$("#pdemo5").css('border-radius', "5px");
+$("#ldemo6").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo6").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '510px','width': '370px','height': '90px'});
+$("#pdemo6").css('border-radius', "5px");
+$("#ldemo7").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo7").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '610px','width': '370px','height': '90px'});
+$("#pdemo7").css('border-radius', "5px");
+$("#ldemo8").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo8").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '710px','width': '370px','height': '90px'});
+$("#pdemo8").css('border-radius', "5px");
+$("#ldemo9").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo9").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '810px','width': '370px','height': '90px'});
+$("#pdemo9").css('border-radius', "5px");
+$("#ldemo10").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo10").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '910px','width': '370px','height': '90px'});
+$("#pdemo10").css('border-radius', "5px");
+$("#ldemo11").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo11").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1010px','width': '370px','height': '90px'});
+$("#pdemo11").css('border-radius', "5px");
+$("#ldemo12").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo12").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1110px','width': '370px','height': '90px'});
+$("#pdemo12").css('border-radius', "5px");
+$("#ldemo13").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo13").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1210px','width': '370px','height': '90px'});
+$("#pdemo13").css('border-radius', "5px");
+$("#ldemo14").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo14").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1310px','width': '370px','height': '90px'});
+$("#pdemo14").css('border-radius', "5px");
+$("#ldemo15").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo15").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1410px','width': '370px','height': '90px'});
+$("#pdemo15").css('border-radius', "5px");
+$("#ldemo16").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo16").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1510px','width': '370px','height': '90px'});
+$("#pdemo16").css('border-radius', "5px");
+$("#ldemo17").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo17").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1610px','width': '370px','height': '90px'});
+$("#pdemo17").css('border-radius', "5px");
+$("#ldemo18").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo18").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1710px','width': '370px','height': '90px'});
+$("#pdemo18").css('border-radius', "5px");
+$("#ldemo19").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo19").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1810px','width': '370px','height': '90px'});
+$("#pdemo19").css('border-radius', "5px");
+$("#ldemo20").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo20").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '1910px','width': '370px','height': '90px'});
+$("#pdemo20").css('border-radius', "5px");
+$("#ldemo21").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo21").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2010px','width': '370px','height': '90px'});
+$("#pdemo21").css('border-radius', "5px");
+$("#ldemo22").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo22").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2110px','width': '370px','height': '90px'});
+$("#pdemo22").css('border-radius', "5px");
+$("#ldemo23").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo23").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2210px','width': '370px','height': '90px'});
+$("#pdemo23").css('border-radius', "5px");
+$("#ldemo24").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo24").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2310px','width': '370px','height': '90px'});
+$("#pdemo24").css('border-radius', "5px");
+$("#ldemo25").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo25").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2410px','width': '370px','height': '90px'});
+$("#pdemo25").css('border-radius', "5px");
+$("#ldemo26").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo26").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2510px','width': '370px','height': '90px'});
+$("#pdemo26").css('border-radius', "5px");
+$("#ldemo27").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo27").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2610px','width': '370px','height': '90px'});
+$("#pdemo27").css('border-radius', "5px");
+$("#ldemo28").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo28").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2710px','width': '370px','height': '90px'});
+$("#pdemo28").css('border-radius', "5px");
+$("#ldemo29").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo29").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2810px','width': '370px','height': '90px'});
+$("#pdemo29").css('border-radius', "5px");
+$("#ldemo30").css({'text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '3px','width': '330px','height': '84px'});
+$("#pdemo30").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '15px','top': '2910px','width': '370px','height': '90px'});
+$("#pdemo30").css('border-radius', "5px");
+let panel1__stt = 0;        //初始滚动位置
+let panel1__cur = 0;        //当前滚动位置
+let panel1__tmr = null;     //时钟控件
+document.getElementById('panel1').addEventListener("scroll", function() {
+    clearTimeout(panel1__tmr);
+    panel1__cur = panel1.scrollTop;     //保存当前位置
+    panel1__tmr = setTimeout(panel1__ise, 200); //创建时钟控件
 });
-$("#pc").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#FFFFFF','left': '200px','top': '0px','width': '1000px','height': '789px'});
-var curStyle = $("#pc").attr('style');$("#pc").attr("style", curStyle+"text-align:left;");
-$("#ll").css({'font-family': 'Verdana','font-size': '20px','font-weight': 'bold','font-style': 'italic','color': '#FFFFFF','text-decoration': 'normal','text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute',"background-color": "#314157",'left': '0px','top': '0px','width': '200px','height': '41px'});
-$("#pl").css({'display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#314157','left': '0px','top': '0px','width': '200px','height': '789px'});
-var curStyle = $("#pl").attr('style');$("#pl").attr("style", curStyle+"z-index:1;border-right:solid 1px #ddd;");
-$("#bt0 span").html(`默认`);
-$("#bt0").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '0px','width': '165px','height': '40px'});
-var curStyle = $("#bt0").attr('style');$("#bt0").attr("style", curStyle+"background-color: #304156; color: #FFFFFF;");
-$("#bt0").on("click", function() {me.dwevent("","bt0","0","onclick","594264");});
-$("#bt1 span").html(`若依`);
-$("#bt1").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '100px','width': '165px','height': '40px'});
-var curStyle = $("#bt1").attr('style');$("#bt1").attr("style", curStyle+"background-color: #0A2D4D; color: #ffffff;");
-$("#bt1").on("click", function() {me.dwevent("","bt1","0","onclick","594264");});
-$("#bt2 span").html(`腾讯云`);
-$("#bt2").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '200px','width': '165px','height': '40px'});
-var curStyle = $("#bt2").attr('style');$("#bt2").attr("style", curStyle+"background-color: #1E222D; color: #A1ABB7;");
-$("#bt2").on("click", function() {me.dwevent("","bt2","0","onclick","594264");});
-$("#bt3 span").html(`蓝色清爽`);
-$("#bt3").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '300px','width': '165px','height': '40px'});
-var curStyle = $("#bt3").attr('style');$("#bt3").attr("style", curStyle+"background-color: #5066e0; color: #ffffff;");
-$("#bt3").on("click", function() {me.dwevent("","bt3","0","onclick","594264");});
-$("#bt4 span").html(`红色激情`);
-$("#bt4").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '400px','width': '165px','height': '40px'});
-var curStyle = $("#bt4").attr('style');$("#bt4").attr("style", curStyle+"background-color: #F0F0F0; color: #333333;");
-$("#bt4").on("click", function() {me.dwevent("","bt4","0","onclick","594264");});
-$("#bt5 span").html(`智能商业`);
-$("#bt5").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '500px','width': '165px','height': '40px'});
-var curStyle = $("#bt5").attr('style');$("#bt5").attr("style", curStyle+"background-color: #22223e; color: #ffffff;");
-$("#bt5").on("click", function() {me.dwevent("","bt5","0","onclick","594264");});
-$("#bt6 span").html(`后台管理`);
-$("#bt6").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '600px','width': '165px','height': '40px'});
-var curStyle = $("#bt6").attr('style');$("#bt6").attr("style", curStyle+"background-color: #4a4777; color: #ffffff;");
-$("#bt6").on("click", function() {me.dwevent("","bt6","0","onclick","594264");});
-$("#bt7 span").html(`bootStrap`);
-$("#bt7").css({'font-family': '思源黑体 CN','font-size': '15px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'position': 'absolute','left': '8px','top': '700px','width': '165px','height': '40px'});
-var curStyle = $("#bt7").attr('style');$("#bt7").attr("style", curStyle+"background-color: #ffffff; color: #878787;");
-$("#bt7").on("click", function() {me.dwevent("","bt7","0","onclick","594264");});
-window._this.ts__val = window.setInterval(function() {
-axios.post('/deweb/post','{"m":"event","i":594264,"c":"ts"}',{headers:{shuntflag:0}})
-.then(resp =>{window._this.procResp(resp.data);})
-}, 60000);
-window.onpopstate  = function(event) {axios.post('/deweb/post','{"m":"popstate","i":594264}').then(resp =>{window._this.procResp(resp.data)})};
+
+//以下定时检查是否停止，如果已停止，则激活onenddock
+function panel1__ise() {
+    //console.log('down....',panel1__stt,panel1__cur);
+    if (panel1__cur == panel1.scrollTop) {
+        //console.log('滚动结束了');
+        if (Math.abs(panel1__cur - panel1__stt) >= 100 ) {
+            if (panel1.scrollTop + panel1.clientHeight >= panel1.scrollHeight-3){
+                //console.log('bottom.......');
+                axios.post(
+                    '/deweb/post',
+                    '{"m":"event","i":'+_this.clientid+',"e":"onenddockbottom","c":"panel1","v":"'+panel1.scrollTop+'"}'
+                    ,{headers:{shuntflag:0}}
+                )
+                .then(resp =>{_this.procResp(resp.data);});
+            } else if (panel1.scrollTop == 0){
+                //console.log('Top.........');
+                axios.post(
+                    '/deweb/post',
+                    '{"m":"event","i":'+_this.clientid+',"e":"onenddocktop","c":"panel1","v":"0"}'
+                    ,{headers:{shuntflag:0}}
+                )
+                .then(resp =>{_this.procResp(resp.data);});
+            } else {
+
+                var _val = panel1.scrollTop;
+                if (panel1__stt > panel1.scrollTop) {
+                    _val = -1*_val;
+                }
+                //console.log(_val);
+                axios.post(
+                    '/deweb/post',
+                    '{"m":"event","i":'+_this.clientid+',"e":"onenddock","c":"panel1","v":"'+_val+'"}'
+                    ,{headers:{shuntflag:0}}
+                )
+                .then(resp =>{_this.procResp(resp.data);});
+                panel1__stt = panel1.scrollTop;
+            }'
+            clearTimeout(panel1__tmr);
+        }
+    }
+};
+$("#ltitle").css({'font-family': '微软雅黑','font-size': '18px','font-weight': 'normal','font-style': 'normal','color': '#FFFFFF','text-decoration': 'normal','text-align': "center","justify-content": "center","flex-direction": "column","display": "flex",'position': 'absolute','left': '20px','top': '10px','width': '360px','height': '30px'});
+$("#pmtitle").css({'overflow': "hidden",'font-family': '宋体','font-size': '12px','font-weight': 'normal','font-style': 'normal','color': '#000000','text-decoration': 'normal','display': "block",'pointer-events': "auto",'position': 'absolute','background-color': '#299FF9','left': '0px','top': '0px','width': '400px','height': '50px'});
+window.onpopstate  = function(event) {axios.post('/deweb/post','{"m":"popstate","i":1445092}').then(resp =>{window._this.procResp(resp.data)})};
 window.addEventListener(
 "resize" ,
 function() {
@@ -712,17 +418,17 @@ else if (isPhone){return 3;}
 else if (isTablet){return 4;} 
 else {return 0;}
                         };
-axios.post('/deweb/post','{"m":"event","i":594264,"c":"_screen","os":'+getOs()+',"canvasid":"'+getCanvasId()+'","fullurl":"'+escape(window.location.href)+'","ua":"'+navigator.userAgent+'","orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+innerWidth+',"innerheight":'+innerHeight+',"availwidth":'+screen.availWidth+',"availheight":'+screen.availHeight+',"bodywidth":'+document.body.clientWidth+',"bodyheight":'+document.body.clientHeight+',"devicepixelratio":'+devicePixelRatio+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:0}})
+axios.post('/deweb/post','{"m":"event","i":1445092,"c":"_screen","os":'+getOs()+',"canvasid":"'+getCanvasId()+'","fullurl":"'+escape(window.location.href)+'","ua":"'+navigator.userAgent+'","orientation":"'+window.orientation+'","clientwidth":'+document.documentElement.clientWidth+',"clientheight":'+document.documentElement.clientHeight+',"innerwidth":'+innerWidth+',"innerheight":'+innerHeight+',"availwidth":'+screen.availWidth+',"availheight":'+screen.availHeight+',"bodywidth":'+document.body.clientWidth+',"bodyheight":'+document.body.clientHeight+',"devicepixelratio":'+devicePixelRatio+',"width":'+screen.width+',"height":'+screen.height+'}',{headers:{shuntflag:0}})
 .then(resp =>{window._this.procResp(resp.data)});
 target.resizeFlag = null;
 }, 100);
 },
 false
 );
-let Form1_2hearttimer = window.setInterval(function() {
-axios.post('/deweb/post','{"m":"heart","i":594264}',{headers:{shuntflag:0}})
+let Form1_3hearttimer = window.setInterval(function() {
+axios.post('/deweb/post','{"m":"heart","i":1445092}',{headers:{shuntflag:0}})
 .then(resp =>{window._this.procResp(resp.data)})
-.catch((error) =>{window._this.dwnotify("Info","Network is disconnected!");clearInterval(Form1_2hearttimer);});
+.catch((error) =>{window._this.dwnotify("Info","Network is disconnected!");clearInterval(Form1_3hearttimer);});
 }, 300000);
 },/*[mounted_end]*/
 /*[methods_start]*/methods: {
@@ -745,26 +451,14 @@ const property = column['property'];
 return row[property] === value;
 },
 dwInputSubmit (fid,destdir) {
-let that = this;let config = {};if (this.dw_upload__formhandle > 0) {fid = this.dw_upload__formhandle; this.dw_upload__formhandle = 0;config = {headers: {'Content-Type': 'multipart/form-data','clientid': fid,'destdir': destdir,'shuntflag': 0}};} else {;config = {headers: {'Content-Type': 'multipart/form-data','clientid': '594264','destdir': destdir,'shuntflag': 0}};};var sstart = '';for (let i = 0; i < document.getElementById("deweb__inp").files.length; i++) {let formData = new FormData();formData.append('file', document.getElementById("deweb__inp").files[i]);if ( i == 0 ) {sstart = '{"m":"event","i":"'+fid+'","c":"Form1_2","e":"onstartdock","v":"__start__"}';axios.post('/deweb/post',sstart, config).then(resp =>{that.procResp(resp.data)});};axios.post('/upload', formData, config).then(function (res) {if ( i == document.getElementById("deweb__inp").files.length-1 ) {var sget = '{"m":"event","i":"'+fid+'","c":"Form1_2","e":"onenddock","v":"__success__"}';axios.post('/deweb/post',sget, config).then(resp =>{that.procResp(resp.data)});document.getElementById("deweb__inp").value = null;};});};
+let that = this;let config = {};if (this.dw_upload__formhandle > 0) {fid = this.dw_upload__formhandle; this.dw_upload__formhandle = 0;config = {headers: {'Content-Type': 'multipart/form-data','clientid': fid,'destdir': destdir,'shuntflag': 0}};} else {;config = {headers: {'Content-Type': 'multipart/form-data','clientid': '1445092','destdir': destdir,'shuntflag': 0}};};var sstart = '';for (let i = 0; i < document.getElementById("deweb__inp").files.length; i++) {let formData = new FormData();formData.append('file', document.getElementById("deweb__inp").files[i]);if ( i == 0 ) {sstart = '{"m":"event","i":"'+fid+'","c":"Form1_3","e":"onstartdock","v":"__start__"}';axios.post('/deweb/post',sstart, config).then(resp =>{that.procResp(resp.data)});};axios.post('/upload', formData, config).then(function (res) {if ( i == document.getElementById("deweb__inp").files.length-1 ) {var sget = '{"m":"event","i":"'+fid+'","c":"Form1_3","e":"onenddock","v":"__success__"}';axios.post('/deweb/post',sget, config).then(resp =>{that.procResp(resp.data)});document.getElementById("deweb__inp").value = null;};});};
 },
 beforeunloadHandler (e) {
 e = e || window.event
 if (e) {
-axios.post('/deweb/post','{"m":"onbeforeunload","i":594264}',{headers:{shuntflag:0}})
+axios.post('/deweb/post','{"m":"onbeforeunload","i":1445092}',{headers:{shuntflag:0}})
 }
 },
-f_16__pnm0__hrf(val){window.location.href = val;},
-f_16__pnm1__hrf(val){window.location.href = val;},
-f_16__pnm2__hrf(val){window.location.href = val;},
-f_16__pnm3__hrf(val){window.location.href = val;},
-f_16__pnm4__hrf(val){window.location.href = val;},
-f_16__pnm5__hrf(val){window.location.href = val;},
-f_16__pnm6__hrf(val){window.location.href = val;},
-f_16__pnm7__hrf(val){window.location.href = val;},
-cp__tabclick(e) {this.dwevent("","cp",e.index,"ontabclick",594264);},
-pnh__bkclick(e){pnh__vis = false;this.dwevent(null,"PnH","",'onbkclick','594264');},
-pnlogout__cancelclick() {_this.pnlogout__vis = false;var jo={};jo.m="event";jo.c="pnlogout";jo.i=594264;jo.v="0";jo.e="onexit";axios.post('/deweb/post',escape(JSON.stringify(jo)),{headers:{shuntflag:2051}}).then(resp =>{this.procResp(resp.data)});},
-pnlogout__okclick() {_this.pnlogout__vis = false;var jo={};jo.m="event";jo.c="pnlogout";jo.i=594264;jo.v="0";jo.e="onenter";axios.post('/deweb/post',escape(JSON.stringify(jo)),{headers:{shuntflag:2051}}).then(resp =>{this.procResp(resp.data)});},
 dwnotify(caption,text) {this.$notify.warning({ title: caption, message: text, duration: 0,showClose: false });},
 dwexecute(code) {
 eval(code);

@@ -7,6 +7,9 @@
 
 ##更新说明：
 ------------------------------------------------------------------------------------------------------------------------
+### 2026-01-15
+1. fix
+
 ### 2025-03-27
 1. 开始本模块
 *)
@@ -766,43 +769,64 @@ begin
                 ....
                 *)
 
+                if AFQUpdate.FieldCount = 1 then begin
+                    //先写入字段名列表
+                    sTemp   :=  '''' + AFQUpdate.Fields[0].FieldName +''',';
+                    if Lowercase(sTemp)='''none'',' then begin
+                        Lines.Insert(iStart + 1,''''',');
+                    end else begin
+                        Lines.Insert(iStart + 1,sTemp);
+                    end;
 
-                //先写入字段名列表
-                sTemp   := '[';
-                for iCol := 1 to AFQUpdate.FieldCount - 1 do begin
-                    sTemp   := sTemp + '''' + AFQUpdate.Fields[iCol].FieldName +''','
-                end;
-                Delete(sTemp, Length(sTemp), 1);
-                sTemp   := sTemp + '],';
-                Lines.Insert(iStart + 1,sTemp);
+                    //写入新数据
+                    AFQUpdate.First;
+                    while not AFQUpdate.Eof do begin
+                        sTemp   := FloatToStr(AFQUpdate.Fields[0].AsFloat);
+                        AFQUpdate.Next;
+                        if AFQUpdate.Eof then begin
+                            Lines.Insert(iStart + 1 + AFQUpdate.RecNo ,sTemp);
+                        end else begin
+                            Lines.Insert(iStart + 1 + AFQUpdate.RecNo ,sTemp+',');
+                        end;
+                    end;
+                end else begin
+                    //先写入字段名列表
+                    sTemp   := '[';
+                    for iCol := 1 to AFQUpdate.FieldCount - 1 do begin
+                        sTemp   := sTemp + '''' + AFQUpdate.Fields[iCol].FieldName +''','
+                    end;
+                    Delete(sTemp, Length(sTemp), 1);
+                    sTemp   := sTemp + '],';
+                    Lines.Insert(iStart + 1,sTemp);
 
-                //写第一个字段的值,即横坐标
-                sTemp   := '[';
-                AFQUpdate.First;
-                while not AFQUpdate.Eof do begin
-                    sTemp   := sTemp + '''' + AFQUpdate.Fields[0].AsString +''',';
-                    AFQUpdate.Next;
-                end;
-                Delete(sTemp, Length(sTemp), 1);
-                sTemp   := sTemp + '],';
-                Lines.Insert(iStart + 2,sTemp);
-
-
-                //写入新数据
-                for iCol := 1 to AFQUpdate.FieldCount - 1 do begin
+                    //写第一个字段的值,即横坐标
                     sTemp   := '[';
                     AFQUpdate.First;
                     while not AFQUpdate.Eof do begin
-                        sTemp   := sTemp + FloatToStr(AFQUpdate.Fields[iCol].AsFloat) +',';
+                        sTemp   := sTemp + '''' + AFQUpdate.Fields[0].AsString +''',';
                         AFQUpdate.Next;
                     end;
                     Delete(sTemp, Length(sTemp), 1);
-                    sTemp   := sTemp + ']';
-                    if iCol < AFQUpdate.FieldCount - 1 then begin
-                        sTemp   := sTemp + ',';
+                    sTemp   := sTemp + '],';
+                    Lines.Insert(iStart + 2,sTemp);
+
+
+                    //写入新数据
+                    for iCol := 1 to AFQUpdate.FieldCount - 1 do begin
+                        sTemp   := '[';
+                        AFQUpdate.First;
+                        while not AFQUpdate.Eof do begin
+                            sTemp   := sTemp + FloatToStr(AFQUpdate.Fields[iCol].AsFloat) +',';
+                            AFQUpdate.Next;
+                        end;
+                        Delete(sTemp, Length(sTemp), 1);
+                        sTemp   := sTemp + ']';
+                        if iCol < AFQUpdate.FieldCount - 1 then begin
+                            sTemp   := sTemp + ',';
+                        end;
+                        //
+                        Lines.Insert(iStart + 2 + iCol ,sTemp);
                     end;
-                    //
-                    Lines.Insert(iStart + 2 + iCol ,sTemp);
                 end;
 
                 //设置重绘
@@ -2146,7 +2170,15 @@ begin
 
                 //colwidths
                 if joItem.Exists('colwidths') then begin
+                    //
                     joTemp  := _json(joItem.colwidths);
+
+                    //自动设置列数
+                    if ColCount < joTemp._Count  then begin
+                        ColCount    := joTemp._Count;
+                    end;
+
+                    //
                     if joTemp <> unassigned then begin
                         for iCol := 0 to joTemp._Count - 1 do begin
                             ColWidths[iCol] := joTemp._(iCol);
@@ -2323,6 +2355,7 @@ begin
             oFQUpdate             := TFDQuery.Create(APanel);
             oFQUpdate.Name        := sPrefix + 'FQUpdate';
             oFQUpdate.Connection  := AConnection;
+            oFQUpdate.FetchOptions.RecordCountMode  := cmTotal;
         end;
 
         //背景图片
